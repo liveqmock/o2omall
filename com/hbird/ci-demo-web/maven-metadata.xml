@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
   <groupId>com.hbird</groupId>
-  <artifactId>ci-demo-core</artifactId>
+  <artifactId>ci-demo-web</artifactId>
   <versioning>
     <versions>
       <version>1.0.0.0-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20141217123248</lastUpdated>
+    <lastUpdated>20141217123309</lastUpdated>
   </versioning>
 </metadata>
