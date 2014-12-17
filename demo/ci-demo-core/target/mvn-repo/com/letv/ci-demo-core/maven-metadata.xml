@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.letv</groupId>
+  <artifactId>ci-demo-core</artifactId>
+  <versioning>
+    <versions>
+      <version>1.0.0.0-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20141212090621</lastUpdated>
+  </versioning>
+</metadata>
