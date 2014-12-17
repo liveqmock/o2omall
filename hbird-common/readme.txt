@@ -1,12 +1,7 @@
-1.hbird-common��飺hbird-common�ﻮ��Ϊ����δ���Ĺ�����Jar���ṩ�����ࡢ���桢������ȡ���ݿ��װ�ȵȻ��ܣ��������κε���ϵͳҵ���޹أ������ṩ�����ϵͳ�Լ�����ϵͳ��
-2.��ĿĿǰ��ư���������Ŀ��
-  hbird-common-sdk ����API��:�ṩREST���񷢲��������������Ļ���
-  hbird-common-utils  ����������
-  hbird-common-cache ����ͨ�û��棨Ŀǰ�Լ����AOPʵ�ֻ��档��
-  hbird-common-dbs ������ݿ��װ
-  hbird-common-web ����Web
-  hbird-common-schedule �����������
-  �������չ�����������Ŀ��
-3.��Ŀ���뷽ʽ��
-  �������ɡ����š�Э����ԭ�򣬻�ӭ��λ����룬�ύ�������������ܡ���Ч�ʵĴ��룬��ͬ���������ơ�
-  ���ñ���ֱ���ύ�����еĴ��뵽��Ŀ��SVN�С�
+项目目前设计包含如下子项目：
+  letv-common-sdk 公共API类:提供REST服务发布及服务调用所需的基础类
+  letv-common-proxy 公共API类:提供REST客户端调用所需的基础类
+  letv-common-utils  公共辅助类
+  letv-common-dao 公共数据库封装
+  letv-common-manager 公共数据库封装
+  letv-common-web 公共Web
