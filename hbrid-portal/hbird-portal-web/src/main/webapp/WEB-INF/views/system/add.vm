@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+		<script src="#springUrl('')/static/js/fuelux/fuelux.spinner.min.js"></script>
+        <script language="javascript">
+            $(function() {
+				$('#addForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+						name: {required: true, maxlength:20}
+					},
+			
+					messages: {
+						name: { required: "请输入业务系统名称", maxlength:jQuery.format("系统名称不能大于{0}个字 符")}
+					}
+				});
+				
+				$('#priority').ace_spinner({value:10,min:1,max:100,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/system");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#addForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/system/add',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/system"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>业务系统&nbsp;&gt;&nbsp;新增
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="addForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-3 control-label no-padding-right" for="name">业务系统名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="name" id="name" class="col-xs-12 col-sm-12" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-offset-1 col-sm-3 control-label no-padding-right" for="priority">优先级</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="priority" id="priority" class="col-xs-12 col-sm-12 input-mini" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-offset-1 col-sm-3 control-label no-padding-right" for="remark">备注</label>
+                                    <div class="col-sm-4">
+                                        <textarea class="form-control limited" name="remark" id="remark" maxlength="80"></textarea>
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

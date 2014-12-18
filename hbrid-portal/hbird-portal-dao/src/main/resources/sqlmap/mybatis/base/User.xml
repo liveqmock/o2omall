@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="User">
+
+    <resultMap id="UserMap" type="User">
+    	<result column="ID" property="id" jdbcType="DECIMAL"/>
+    	<result column="NAME" property="name" jdbcType="VARCHAR"/>
+    	<result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+    	<result column="CN_NAME" property="cnName" jdbcType="VARCHAR"/>
+    	<result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+    	<result column="PHONE_NO" property="phoneNo" jdbcType="VARCHAR"/>
+    	<result column="JOB_TITLE" property="jobTitle" jdbcType="VARCHAR"/>
+    	<result column="STATUS" property="status" jdbcType="DECIMAL"/>
+    	<result column="USER_TYPE" property="userType" jdbcType="DECIMAL"/>
+    	<!--  
+    	<result column="DEP_ID" property="depId" jdbcType="DECIMAL"/>
+    	-->
+    	
+    	<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+    	<result column="CREATE_USER" property="createUser" jdbcType="VARCHAR"/>
+    	<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+    	<result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR"/>
+    	<result column="YN" property="yn" jdbcType="DECIMAL"/>
+    	<result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+    	<result column="CODE" property="code" jdbcType="VARCHAR"/>
+    	<result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP"/>
+   		<!-- 关联部门表 -->
+    	<association property="dep" column="DEP_ID"  
+            javaType="Dep" resultMap="joinDepResult" />  
+    </resultMap>
+    
+    <!-- 关联部门表需要的列 -->  
+    <resultMap type="Dep" id="joinDepResult">  
+        <id property="id" column="DEP_ID" />  
+        <result property="name" column="DEP_NAME" />  
+    </resultMap>  
+   
+    <sql id="userColumns">
+    	ID,NAME,PASSWORD,CN_NAME,EMAIL,PHONE_NO,JOB_TITLE,STATUS,USER_TYPE,DEP_ID,CREATE_TIME,CREATE_USER,UPDATE_TIME,UPDATE_USER,YN,REMARK,CODE,LAST_MODIFY_TIME
+    </sql>
+     <!-- 获取用户部门信息 -->
+     <sql id="userDepColumns">
+    	u.ID,u.NAME,u.PASSWORD,u.CN_NAME,u.EMAIL,u.PHONE_NO,u.JOB_TITLE,u.STATUS,u.USER_TYPE,u.CREATE_TIME,u.CREATE_USER,u.UPDATE_TIME,u.UPDATE_USER,u.YN,u.REMARK,u.CODE,u.LAST_MODIFY_TIME,d.ID as DEP_ID,d.NAME as DEP_NAME
+    </sql>
+     <sql id="userUsedColumns">
+    	NAME,PASSWORD,CN_NAME,EMAIL,PHONE_NO,JOB_TITLE,STATUS,USER_TYPE,DEP_ID,CREATE_TIME,CREATE_USER,UPDATE_TIME,UPDATE_USER,YN,REMARK,CODE,LAST_MODIFY_TIME
+    </sql>
+
+    <!-- 创建信息 -->
+    <insert id="insert" parameterType="User">
+        insert into p_user(<include refid="userUsedColumns"/>)
+        values(#{name},#{password},#{cnName},#{email},#{phoneNo},#{jobTitle},#{status},#{userType},#{depId},now(),#{createUser},now(),#{updateUser},#{yn},#{remark},#{code},#{lastModifyTime})
+    </insert>
+
+    <!-- 修改信息 -->
+    <update id="update" parameterType="User">
+        <if test="_parameter != null">
+            <if test="id != null and id > 0">
+                update p_user set
+		        <if test="name != null and name != ''">
+                	NAME = #{name,jdbcType=VARCHAR},
+		        </if>
+		        <if test="password != null and password != ''">
+                	PASSWORD = #{password,jdbcType=VARCHAR},
+		        </if>
+		        <if test="cnName != null and cnName != ''">
+                	CN_NAME = #{cnName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="email != null and email != ''">
+                	EMAIL = #{email,jdbcType=VARCHAR},
+		        </if>
+		        <if test="phoneNo != null and phoneNo != ''">
+                	PHONE_NO = #{phoneNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="jobTitle != null and jobTitle != ''">
+                	JOB_TITLE = #{jobTitle,jdbcType=VARCHAR},
+		        </if>
+		        <if test="status != null and status != ''">
+                	STATUS = #{status,jdbcType=DECIMAL},
+		        </if>
+		        <if test="userType != null and userType != ''">
+                	USER_TYPE = #{userType,jdbcType=DECIMAL},
+		        </if>
+		        <if test="depId != null and depId != ''">
+                	DEP_ID = #{depId,jdbcType=DECIMAL},
+		        </if>
+		        <if test="updateUser != null and updateUser != ''">
+                	UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+		        </if>
+		        <if test="remark != null and remark != ''">
+                	REMARK = #{remark,jdbcType=VARCHAR},
+		        </if>
+		        <if test="code != null and code != ''">
+                	CODE = #{code,jdbcType=VARCHAR},
+		        </if>
+		        <if test="lastModifyTime != null">
+                	LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+		        </if>
+                	update_time = now()
+                where id = #{id}
+            </if>
+        </if>
+    </update>
+    
+    <!-- 根据员工登录账号更新员工信息 -->
+    <update id="updateByName" parameterType="User">
+    	<if test="_parameter != null">
+            update p_user set
+	        <if test="password != null and password != ''">
+               	PASSWORD = #{password,jdbcType=VARCHAR},
+	        </if>
+	        <if test="cnName != null and cnName != ''">
+               	CN_NAME = #{cnName,jdbcType=VARCHAR},
+	        </if>
+	        <if test="email != null and email != ''">
+               	EMAIL = #{email,jdbcType=VARCHAR},
+	        </if>
+	        <if test="phoneNo != null and phoneNo != ''">
+               	PHONE_NO = #{phoneNo,jdbcType=VARCHAR},
+	        </if>
+	        <if test="jobTitle != null and jobTitle != ''">
+               	JOB_TITLE = #{jobTitle,jdbcType=VARCHAR},
+	        </if>
+	        <if test="status != null and status != ''">
+               	STATUS = #{status,jdbcType=DECIMAL},
+	        </if>
+	        <if test="userType != null and userType != ''">
+               	USER_TYPE = #{userType,jdbcType=DECIMAL},
+	        </if>
+	        <if test="depId != null and depId != ''">
+               	DEP_ID = #{depId,jdbcType=DECIMAL},
+	        </if>
+	        <if test="updateUser != null and updateUser != ''">
+               	UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+	        </if>
+	        <if test="remark != null and remark != ''">
+               	REMARK = #{remark,jdbcType=VARCHAR},
+	        </if>
+	        <if test="code != null and code != ''">
+               	CODE = #{code,jdbcType=VARCHAR},
+	        </if>
+	        <if test="lastModifyTime != null">
+               	LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+	        </if>
+               	update_time = now()
+               where NAME = #{name} AND yn = 0
+         </if>
+    </update>
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="getUserById" resultMap="UserMap" parameterType="java.lang.Long">
+        <if test="_parameter != null">
+            select <include refid="userDepColumns"/> from p_user u left join p_dep d on u.dep_id=d.id
+            where u.id = #{_parameter} and u.yn = 0
+        </if>
+    </select>
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="getUserByName" resultMap="UserMap" parameterType="java.lang.String">
+        select <include refid="userDepColumns"/> from p_user u left join p_dep d on u.dep_id=d.id
+        where u.name = #{_parameter} AND u.yn = 0 ORDER BY u.id DESC limit 1
+    </select>
+    
+    <!-- 根据查询Bean获取数据集合，不带翻页 -->
+    <select id="queryUserList" resultMap="UserMap"
+            parameterType="com.hbird.portal.domain.query.UserQuery">
+        select <include refid="userDepColumns"/> from p_user u left join p_dep d on u.dep_id=d.id where <include refid="queryUserDepListWhere"/>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，翻页 -->
+    <select id="queryUserDepListWhere" resultMap="UserMap"
+            parameterType="com.hbird.portal.domain.query.UserQuery">
+        select <include refid="userDepColumns"/> from p_user u left join p_dep d on u.dep_id=d.id where <include refid="queryUserDepListWhere"/>
+        order by create_time desc 
+        limit #{startIndex},#{pageSize};
+    </select>
+
+    <!-- 根据查询Bean获取集合总数 -->
+    <select id="queryUserCount" resultType="java.lang.Integer"
+            parameterType="com.hbird.portal.domain.query.UserQuery">
+        select count(1) from p_user u left join p_dep d on u.dep_id=d.id where <include refid="queryUserDepListWhere"/>
+    </select>
+
+    <!-- 删除信息 -->
+    <update id="deleteUserById" parameterType="java.lang.Long">
+        <if test="_parameter != null and _parameter > 0">
+            update p_user set yn = 1 where id = #{_parameter}
+        </if>
+    </update>
+
+    <!-- 常用的查询Where条件 -->
+    <sql id="queryUserListWhere">
+    	yn = 0 and status =1
+        <if test="name != null and name != ''">
+            and NAME like concat('%',#{name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="password != null and password != ''">
+            and PASSWORD like concat('%',#{password,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="cnName != null and cnName != ''">
+            and CN_NAME like concat('%',#{cnName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="email != null and email != ''">
+            and EMAIL like concat('%',#{email,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="phoneNo != null and phoneNo != ''">
+            and PHONE_NO like concat('%',#{phoneNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="jobTitle != null and jobTitle != ''">
+            and JOB_TITLE like concat('%',#{jobTitle,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="createUser != null and createUser != ''">
+            and CREATE_USER like concat('%',#{createUser,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="updateUser != null and updateUser != ''">
+            and UPDATE_USER like concat('%',#{updateUser,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="remark != null and remark != ''">
+            and REMARK like concat('%',#{remark,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="code != null and code != ''">
+            and CODE like concat('%',#{code,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="startTime != null and startTime != ''">
+            and create_time <![CDATA[>=]]> str_to_date(#{startTime},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and create_time<![CDATA[<=]]> str_to_date(#{endTime},'%Y-%m-%d %H:%i:%s')
+        </if>
+    </sql>
+    
+     <!-- 常用的查询Where条件 -->
+    <sql id="queryUserDepListWhere">
+    	u.yn = 0 and u.status =1
+        <if test="name != null and name != ''">
+            and u.NAME like concat('%',#{name,jdbcType=VARCHAR},'%')
+        </if>
+       
+        <if test="cnName != null and cnName != ''">
+            and u.CN_NAME like concat('%',#{cnName,jdbcType=VARCHAR},'%')
+        </if>
+       
+        <if test="jobTitle != null and jobTitle != ''">
+            and u.JOB_TITLE like concat('%',#{jobTitle,jdbcType=VARCHAR},'%')
+        </if>
+       
+        <if test="code != null and code != ''">
+            and u.CODE like concat('%',#{code,jdbcType=VARCHAR},'%')
+        </if>
+         <if test="depname != null and depname != ''">
+            and d.NAME like concat('%',#{depname,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="startTime != null and startTime != ''">
+            and create_time <![CDATA[>=]]> str_to_date(#{startTime},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and create_time<![CDATA[<=]]> str_to_date(#{endTime},'%Y-%m-%d %H:%i:%s')
+        </if>
+    </sql>
+</mapper>

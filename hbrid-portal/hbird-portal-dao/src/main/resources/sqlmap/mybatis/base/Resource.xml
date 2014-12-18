@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.hbird.portal.dao.impl.ResourceDaoImpl">
+    <resultMap id="ResourceMap" type="Resource">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="SYS_CODE" property="sysCode" jdbcType="VARCHAR" />
+		<result column="TYPE" property="type" jdbcType="DECIMAL" />
+		<result column="CODE" property="code" jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="URL" property="url" jdbcType="VARCHAR" />
+		<result column="IS_CLICK" property="isClick" jdbcType="DECIMAL" />
+		<result column="PARENT_ID" property="parentId" jdbcType="DECIMAL" />
+		<result column="HAS_CHILD" property="hasChild" jdbcType="DECIMAL" />
+		<result column="LEVEL" property="level" jdbcType="DECIMAL" />
+		<result column="PRIORITY" property="priority" jdbcType="DECIMAL" />
+		<result column="ICON" property="icon" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+		<result column="YN" property="yn" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <sql id="resourceColumns">
+    	ID,SYS_CODE,TYPE,CODE,NAME,URL,IS_CLICK,PARENT_ID,HAS_CHILD,LEVEL,PRIORITY,ICON,REMARK,CREATE_TIME,CREATE_USER,UPDATE_TIME,UPDATE_USER,YN
+    </sql>
+    
+     <sql id="resourceUsedColumns">
+    	SYS_CODE,TYPE,CODE,NAME,URL,IS_CLICK,PARENT_ID,HAS_CHILD,LEVEL,PRIORITY,ICON,REMARK,CREATE_TIME,CREATE_USER,UPDATE_TIME,UPDATE_USER,YN
+    </sql>
+
+    <!-- 创建信息 -->
+    <insert id="insert" parameterType="Resource" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO p_resource(<include refid="resourceUsedColumns"/>) 
+        VALUES (#{sysCode},#{type},#{code},#{name},#{url},#{isClick},#{parentId},#{hasChild},#{level},#{priority},#{icon},#{remark},now(),#{createUser},now(),#{updateUser},0)
+	</insert>
+	
+    <!-- 修改信息 -->
+    <update id="update" parameterType="Resource">
+        <if test="_parameter != null">
+            <if test="id != null and id > 0">
+                update p_resource set
+		        <if test="sysCode != null and sysCode != ''">
+                	SYS_CODE = #{sysCode,jdbcType=VARCHAR},
+		        </if>
+		        <if test="type != null and type != ''">
+                	TYPE = #{type,jdbcType=DECIMAL},
+		        </if>
+		        <if test="code != null and code != ''">
+                	CODE = #{code,jdbcType=VARCHAR},
+		        </if>
+		        <if test="name != null and name != ''">
+                	NAME = #{name,jdbcType=VARCHAR},
+		        </if>
+		        <if test="url != null and url != ''">
+                	URL = #{url,jdbcType=VARCHAR},
+		        </if>
+		        <if test="isClick != null and isClick != ''">
+                	IS_CLICK = #{isClick,jdbcType=DECIMAL},
+		        </if>
+		        <if test="parentId != null and parentId != ''">
+                	PARENT_ID = #{parentId,jdbcType=DECIMAL},
+		        </if>
+		        <if test="hasChild != null and hasChild != ''">
+                	HAS_CHILD = #{hasChild,jdbcType=DECIMAL},
+		        </if>
+		        <if test="level != null and level != ''">
+                	LEVEL = #{level,jdbcType=DECIMAL},
+		        </if>
+		        <if test="priority != null and priority != ''">
+                	PRIORITY = #{priority,jdbcType=DECIMAL},
+		        </if>
+		        <if test="icon != null and icon != ''">
+                	ICON = #{icon,jdbcType=VARCHAR},
+		        </if>
+		        <if test="remark != null and remark != ''">
+                	REMARK = #{remark,jdbcType=VARCHAR},
+		        </if>
+		        <if test="updateUser != null and updateUser != ''">
+                	UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+		        </if>
+                	update_time = now()
+                where id = #{id}
+            </if>
+        </if>
+    </update>
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="getResourceById" resultMap="ResourceMap" parameterType="java.lang.Long">
+        <if test="_parameter != null">
+            select <include refid="resourceColumns"/> from p_resource
+            where id = #{_parameter} and yn = 0
+        </if>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，不带翻页 -->
+    <select id="queryResourceList" resultMap="ResourceMap"
+            parameterType="com.hbird.portal.domain.query.ResourceQuery">
+        select <include refid="resourceColumns"/> from p_resource 
+        where <include refid="queryResourceListWhere"/>
+        order by PARENT_ID
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，翻页 -->
+    <select id="queryResourceListWithPage" resultMap="ResourceMap"
+            parameterType="com.hbird.portal.domain.query.ResourceQuery">
+        select <include refid="resourceColumns"/> from p_resource where <include refid="queryResourceListWhere"/>
+        order by create_time desc 
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 根据查询Bean查询-判断是否存在 -->
+    <select id="exist" resultType="java.lang.Integer" parameterType="Resource">
+        select count(1) from p_resource where yn = 0 and TYPE = #{type,jdbcType=DECIMAL} 
+        	and URL = #{url,jdbcType=VARCHAR} and NAME = #{name,jdbcType=VARCHAR} and PARENT_ID = #{parentId,jdbcType=DECIMAL}
+        	and LEVEL = #{level,jdbcType=DECIMAL}
+    </select>
+
+    <!-- 根据查询Bean获取集合总数 -->
+    <select id="queryResourceCount" resultType="java.lang.Integer"
+            parameterType="com.hbird.portal.domain.query.ResourceQuery">
+        select count(1) from p_resource where <include refid="queryResourceListWhere"/>
+    </select>
+
+    <!-- 给角色分配资源时，依据角色ID查询资源信息 -->
+    <select id="queryResourceTree" resultMap="ResourceMap" parameterType="java.lang.Long">
+        SELECT r.id,r.name,r.url,r.parent_id, CASE  WHEN rr.id IS NULL THEN 0 ELSE 1 END yn
+		FROM p_resource r
+		LEFT JOIN p_role_res rr ON rr.res_id = r.id AND rr.yn=0 AND rr.role_id=#{roleId}
+		WHERE r.yn=0
+    </select>
+
+    <!-- 删除信息-逻辑删除 -->
+    <update id="delete" parameterType="Resource">
+		update p_resource 
+		set yn = 1, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
+		where yn=0 
+		<if test="id != null">
+        	and ID = #{id,jdbcType=DECIMAL}
+        </if>
+		<if test="parentId != null">
+        	and PARENT_ID = #{parentId,jdbcType=DECIMAL}
+        </if>
+    </update>
+
+    <!-- 常用的查询Where条件 -->
+    <sql id="queryResourceListWhere">
+    	yn = 0
+        <if test="id != null">
+        	and ID = #{id,jdbcType=DECIMAL}
+        </if>
+        <if test="sysCode != null and sysCode != ''">
+        	and SYS_CODE = #{sysCode,jdbcType=VARCHAR}
+        </if>
+        <if test="type != null">
+        	and TYPE = #{type,jdbcType=DECIMAL}
+        </if>
+        <if test="code != null and code != ''">
+        	and CODE = #{code,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null and name != ''">
+        	and NAME = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="url != null and url != ''">
+        	and URL = #{url,jdbcType=VARCHAR}
+        </if>
+        <if test="isClick != null">
+        	and IS_CLICK = #{isClick,jdbcType=DECIMAL}
+        </if>
+        <if test="parentId != null">
+        	and PARENT_ID = #{parentId,jdbcType=DECIMAL}
+        </if>
+        <if test="hasChild != null">
+        	and HAS_CHILD = #{hasChild,jdbcType=DECIMAL}
+        </if>
+        <if test="level != null">
+        	and LEVEL = #{level,jdbcType=DECIMAL}
+        </if>
+        <if test="priority != null">
+        	and PRIORITY = #{priority,jdbcType=DECIMAL}
+        </if>
+        <if test="icon != null and icon != ''">
+        	and ICON = #{icon,jdbcType=VARCHAR}
+        </if>
+        <if test="remark != null and remark != ''">
+        	and REMARK = #{remark,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createUser != null and createUser != ''">
+        	and CREATE_USER = #{createUser,jdbcType=VARCHAR}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+        	and UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateUser != null and updateUser != ''">
+        	and UPDATE_USER = #{updateUser,jdbcType=VARCHAR}
+        </if>
+    </sql>
+</mapper>
