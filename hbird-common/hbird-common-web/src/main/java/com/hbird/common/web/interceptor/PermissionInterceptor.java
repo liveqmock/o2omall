@@ -27,7 +27,7 @@ import com.hbird.portal.sdk.request.PermissionCheckRequest;
  * @see com.hbird.common.web.context.UserContext
  * @see com.hbird.common.web.annotation.Permission
  * 
- * @author lz
+ * @author ljz
  * 
  */
 public class PermissionInterceptor extends AbstractHandlerInterceptorAdapter {

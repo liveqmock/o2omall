@@ -14,7 +14,7 @@ import com.hbird.common.utils.DateHelper;
 /**
  * java日期对象经过Jackson库转换成JSON日期格式化自定义类
  * 
- * @author lz
+ * @author ljz
  */
 public class CustomerDateSerializer extends JsonSerializer<Date> {
 

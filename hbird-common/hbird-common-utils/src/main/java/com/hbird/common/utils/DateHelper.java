@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * 日期助手类，实现：日期加减计算、日期与字符串互相转换。
  * 
- * @author lz
+ * @author ljz
  * 
  */
 public class DateHelper {

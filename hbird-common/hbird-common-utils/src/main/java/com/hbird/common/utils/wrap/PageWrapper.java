@@ -8,11 +8,11 @@ import com.hbird.common.utils.page.PageUtil;
 /**
  * 支持数据分页的包装类
  * 
- * @author lz
+ * @author ljz
  * 
  */
 /**
- * @author lz
+ * @author ljz
  * 
  * @param <T>
  */

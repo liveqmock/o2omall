@@ -11,7 +11,7 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 /**
  * 自定义PropertyPlaceholderConfigurer返回properties内容
  * 
- * @author lz
+ * @author ljz
  */
 public class CustomizedPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 

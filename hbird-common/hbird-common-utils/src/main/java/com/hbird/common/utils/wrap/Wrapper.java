@@ -9,7 +9,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  * 
  * @param <T>
  *            the generic type
- * @author lz
+ * @author ljz
  */
 public class Wrapper<T> implements Serializable {
 
@@ -178,7 +178,7 @@ public class Wrapper<T> implements Serializable {
      * 
      * @return code=200,true;否则 false.
      */
-    @JsonIgnore  
+    @JsonIgnore
     public boolean isSuccess() {
         return Wrapper.SUCCESS_CODE == this.code;
     }

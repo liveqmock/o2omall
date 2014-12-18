@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
  * Static functions to simplifiy common {@link java.security.MessageDigest} tasks
  * <p/>
  * 
- * User: gaohongjing DateTime: 2014-4-14 16:58:29 Version：1.0
+ * User: ljz DateTime: 2014-4-14 16:58:29 Version：1.0
  */
 public class MD5Util {
 

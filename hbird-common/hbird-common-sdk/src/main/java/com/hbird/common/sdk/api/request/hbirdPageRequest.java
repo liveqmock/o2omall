@@ -8,10 +8,10 @@ import com.hbird.common.utils.page.PageUtil;
 /**
  * 基本请求对象,支持分页
  * 
- * @author lz
+ * @author ljz
  * 
  */
-public class hbirdPageRequest extends hbirdRequest {
+public class HbirdPageRequest extends HbirdRequest {
 
     /**
      * 
@@ -24,14 +24,14 @@ public class hbirdPageRequest extends hbirdRequest {
     /**
      * 
      */
-    public hbirdPageRequest() {
+    public HbirdPageRequest() {
         super();
     }
 
     /**
      * @param pageUtil
      */
-    public hbirdPageRequest(PageUtil pageUtil) {
+    public HbirdPageRequest(PageUtil pageUtil) {
         super();
         this.pageUtil = pageUtil;
     }

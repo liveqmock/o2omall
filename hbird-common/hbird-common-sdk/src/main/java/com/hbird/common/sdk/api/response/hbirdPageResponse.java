@@ -8,10 +8,10 @@ import com.hbird.common.utils.page.PageUtil;
 /**
  * 基本返回对象：支持分页
  * 
- * @author lz
+ * @author ljz
  * 
  */
-public class hbirdPageResponse<T> extends hbirdResponse<T> {
+public class HbirdPageResponse<T> extends HbirdResponse<T> {
 
     /**
      * 
@@ -24,7 +24,7 @@ public class hbirdPageResponse<T> extends hbirdResponse<T> {
     /**
      * 
      */
-    public hbirdPageResponse() {
+    public HbirdPageResponse() {
         super();
     }
 
@@ -32,7 +32,7 @@ public class hbirdPageResponse<T> extends hbirdResponse<T> {
      * @param code
      * @param message
      */
-    public hbirdPageResponse(int code, String message) {
+    public HbirdPageResponse(int code, String message) {
         super(code, message);
     }
 
@@ -41,7 +41,7 @@ public class hbirdPageResponse<T> extends hbirdResponse<T> {
      * @param message
      * @param result
      */
-    public hbirdPageResponse(int code, String message, T result) {
+    public HbirdPageResponse(int code, String message, T result) {
         super(code, message, result);
     }
 
@@ -51,7 +51,7 @@ public class hbirdPageResponse<T> extends hbirdResponse<T> {
      * @param result
      * @param pageUtil
      */
-    public hbirdPageResponse(int code, String message, T result, PageUtil pageUtil) {
+    public HbirdPageResponse(int code, String message, T result, PageUtil pageUtil) {
         super(code, message, result);
         this.pageUtil = pageUtil;
     }
@@ -59,7 +59,7 @@ public class hbirdPageResponse<T> extends hbirdResponse<T> {
     /**
      * @param result
      */
-    public hbirdPageResponse(T result) {
+    public HbirdPageResponse(T result) {
         super(result);
     }
 
@@ -67,7 +67,7 @@ public class hbirdPageResponse<T> extends hbirdResponse<T> {
      * @param result
      * @param pageUtil
      */
-    public hbirdPageResponse(T result, PageUtil pageUtil) {
+    public HbirdPageResponse(T result, PageUtil pageUtil) {
         super(result);
         this.pageUtil = pageUtil;
     }

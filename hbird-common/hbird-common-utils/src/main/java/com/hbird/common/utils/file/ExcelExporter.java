@@ -22,7 +22,7 @@ import com.hbird.common.utils.DateHelper;
 /**
  * The Excel Exporter to export data to excel.
  * 
- * @author lz
+ * @author ljz
  * @version 2014-12-14 上午10:12:41
  */
 public class ExcelExporter {

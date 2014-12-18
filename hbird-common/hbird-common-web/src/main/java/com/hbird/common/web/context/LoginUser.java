@@ -9,7 +9,7 @@ import com.hbird.common.utils.serialize.JsonHelper;
 /**
  * 登录用户信息
  * 
- * @author lz
+ * @author ljz
  * @version 2014-11-28 下午4:31:16
  */
 public class LoginUser implements Serializable {

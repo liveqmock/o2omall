@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 分页记录 User: gaohongjing Date: 2014-4-3 Time: 17:42:28
+ * 分页记录 User: ljz Date: 2014-4-3 Time: 17:42:28
  */
 public class PaginatedArrayList<T> {
     /**
@@ -96,7 +96,7 @@ public class PaginatedArrayList<T> {
         this.pageSize = pageSize;
         repaginate();
     }
-    
+
     /**
      * 带当前页和页大小的构造方法
      * 

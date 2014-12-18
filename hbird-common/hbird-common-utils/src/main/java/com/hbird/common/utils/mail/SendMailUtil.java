@@ -17,8 +17,8 @@ import org.apache.log4j.Logger;
 import com.hbird.common.utils.DateHelper;
 
 /**
- * @author zhaohengchong
- * @email zhaohengchong@hbird.com
+ * @author zhc
+ * @email zhc@hbird.com
  * @version 2014年5月7日 下午3:00:43
  */
 public class SendMailUtil {
@@ -29,7 +29,7 @@ public class SendMailUtil {
     private static final String MAIL_TRANSPORT_PROTOCOL = "smtp";
     private static final String MAIL_HOST = "mail.hbird.com";
 
-    private static final String USERNAME = "lszxit";
+    private static final String USERNAME = "user";
     private static final String PASSWORD = "1qaz@WSX";
 
     private static final String FROM_MAIL_DOMAIN = "@hbird.com";
@@ -38,9 +38,9 @@ public class SendMailUtil {
     public static void main(String[] args) {
         String orderId = "1234567890";
         String context = "【订单下传失败报警】订单号:【" + orderId + "】。报警级别:【ERROR】,报警时间:【" + DateHelper.getCurrentDateStr(null)
-                + "】,报警内容:【订单库房ID为0或为空】。【乐视】";
+                + "】,报警内容:【订单库房ID为0或为空】。";
         try {
-            sendMail("【报警】订单下传邮件报警", context, "zhaohengchong@hbird.com,zhaohengchong@hbird.com");
+            sendMail("【报警】订单下传邮件报警", context, "zhc@hbird.com,zhc@hbird.com");
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
@@ -90,13 +90,13 @@ public class SendMailUtil {
             String password, String title, String context, String contextType, String formMailAddress,
             String sendMailAddress) throws Exception {
         log.debug("发送邮件开始");
-        
+
         try {
             if (StringUtils.isBlank(title) || StringUtils.isBlank(context) || StringUtils.isBlank(sendMailAddress)) {
                 log.error("发送邮件必要参数为空，不发送");
                 return;
             }
-            
+
             Properties props = setProps(mailSmtpAuth, protocol, mailHost);
             if (StringUtils.isBlank(username)) {
                 username = USERNAME;
@@ -110,12 +110,12 @@ public class SendMailUtil {
             if (StringUtils.isBlank(contextType)) {
                 contextType = CONTEXT_TYPE;
             }
-            
+
             Session session = Session.getInstance(props, new MyAuthenticator(username, password));
             if (log.isDebugEnabled()) {
                 session.setDebug(Boolean.TRUE);
             }
-            
+
             Message msg = new MimeMessage(session);
             msg.setFrom(new InternetAddress(formMailAddress));
             msg.setSubject(title);

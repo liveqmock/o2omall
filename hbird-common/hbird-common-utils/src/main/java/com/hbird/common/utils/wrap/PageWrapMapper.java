@@ -5,7 +5,7 @@ import com.hbird.common.utils.page.PageUtil;
 /**
  * 分页包装辅助类.
  * 
- * @author lz
+ * @author ljz
  */
 public class PageWrapMapper {
 

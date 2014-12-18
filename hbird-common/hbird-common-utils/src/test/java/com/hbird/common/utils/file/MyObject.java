@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author lz
+ * @author ljz
  * @version 2014-12-13 下午5:10:07
  */
 public class MyObject implements Serializable {

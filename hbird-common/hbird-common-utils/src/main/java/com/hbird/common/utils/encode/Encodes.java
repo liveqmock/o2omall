@@ -22,7 +22,7 @@ import com.hbird.common.utils.exception.Exceptions;
  * 3.Commons-Lang的xml/html escape<br />
  * 4.JDK提供的URLEncoder
  * 
- * @author lz
+ * @author ljz
  */
 public class Encodes {
 

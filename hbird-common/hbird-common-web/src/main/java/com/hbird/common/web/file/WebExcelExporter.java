@@ -14,7 +14,7 @@ import com.hbird.common.utils.file.FileUtils;
 /**
  * The Web Excel Exporter to export data to excel.
  * 
- * @author lz
+ * @author ljz
  * @version 2014-12-14 下午4:26:28
  */
 public class WebExcelExporter {

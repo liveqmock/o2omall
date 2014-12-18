@@ -8,7 +8,7 @@ import com.hbird.common.utils.StringUtil;
 /**
  * Number助手类
  * 
- * @author lz
+ * @author ljz
  * @version 2014-8-8 16:19:30
  */
 public class NumberHelper {

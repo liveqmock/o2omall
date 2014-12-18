@@ -14,7 +14,7 @@ import com.hbird.common.utils.file.FileUtils;
 /**
  * 导出Excel助手类
  * 
- * @author lz
+ * @author ljz
  * @version 2014-8-18 下午8:35:17
  */
 public class ExcelExportUtils {
@@ -46,7 +46,8 @@ public class ExcelExportUtils {
             String[] fieldNames, HttpServletRequest request, HttpServletResponse response)
             throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException,
             IOException {
-        return ExcelExportUtils.exportExcelFile(fileName, sheetName, cellNames, dataList, fieldNames, null, request, response);
+        return ExcelExportUtils.exportExcelFile(fileName, sheetName, cellNames, dataList, fieldNames, null, request,
+                response);
     }
 
     /**
@@ -81,11 +82,11 @@ public class ExcelExportUtils {
         Assert.notNull(fileName, "fileName must be not null");
         Assert.notNull(request, "request must be not null");
         Assert.notNull(response, "response must be not null");
-        
+
         response.setContentType("application/vnd.ms-excel");
         String encodeFileName = FileUtils.encodeFilename(fileName, request.getHeader("user-agent"));
         response.setHeader("Content-Disposition", "attachment;filename=" + encodeFileName);
-        ExcelUtils.exportFile(sheetName, cellNames, dataList, fieldNames,cellTypes, response.getOutputStream());
+        ExcelUtils.exportFile(sheetName, cellNames, dataList, fieldNames, cellTypes, response.getOutputStream());
         return encodeFileName;
     }
 }

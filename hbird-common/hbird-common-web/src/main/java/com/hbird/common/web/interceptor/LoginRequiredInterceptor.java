@@ -22,7 +22,7 @@ import com.hbird.common.web.url.UrlBuilders;
  * 
  * @see com.hbird.common.web.context.UserContext
  * 
- * @author lz
+ * @author ljz
  * 
  */
 public class LoginRequiredInterceptor extends AbstractHandlerInterceptorAdapter {

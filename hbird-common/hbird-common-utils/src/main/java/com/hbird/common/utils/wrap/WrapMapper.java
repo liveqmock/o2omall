@@ -3,7 +3,7 @@ package com.hbird.common.utils.wrap;
 /**
  * 包装辅助类.
  * 
- * @author lz
+ * @author ljz
  */
 public class WrapMapper {
 

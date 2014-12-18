@@ -3,7 +3,7 @@
  */
 package com.hbird.common.sdk.api.response;
 
-import com.hbird.common.sdk.api.hbirdObject;
+import com.hbird.common.sdk.api.HbirdObject;
 import com.hbird.common.utils.wrap.Wrapper;
 
 /**
@@ -11,10 +11,10 @@ import com.hbird.common.utils.wrap.Wrapper;
  * 
  * @param <T>
  *            DTO对象
- * @author lz
+ * @author ljz
  * 
  */
-public class hbirdResponse<T> extends Wrapper<T> implements hbirdObject {
+public class HbirdResponse<T> extends Wrapper<T> implements HbirdObject {
 
     /**
      * 
@@ -24,7 +24,7 @@ public class hbirdResponse<T> extends Wrapper<T> implements hbirdObject {
     /**
      * 
      */
-    public hbirdResponse() {
+    public HbirdResponse() {
         super();
     }
 
@@ -33,7 +33,7 @@ public class hbirdResponse<T> extends Wrapper<T> implements hbirdObject {
      * @param message
      * @param result
      */
-    public hbirdResponse(int code, String message, T result) {
+    public HbirdResponse(int code, String message, T result) {
         super(code, message, result);
     }
 
@@ -41,14 +41,14 @@ public class hbirdResponse<T> extends Wrapper<T> implements hbirdObject {
      * @param code
      * @param message
      */
-    public hbirdResponse(int code, String message) {
+    public HbirdResponse(int code, String message) {
         super(code, message);
     }
 
     /**
      * @param result
      */
-    public hbirdResponse(T result) {
+    public HbirdResponse(T result) {
         super();
         super.setResult(result);
     }

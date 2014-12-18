@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.springframework.util.Assert;
 
 /**
- * @author lz
+ * @author ljz
  * 
  */
 public class JsonHelperTestCase {

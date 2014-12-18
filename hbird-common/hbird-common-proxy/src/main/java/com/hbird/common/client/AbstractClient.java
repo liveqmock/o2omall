@@ -7,14 +7,14 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
 
-import com.hbird.common.sdk.api.response.hbirdPageResponse;
-import com.hbird.common.sdk.api.response.hbirdResponse;
+import com.hbird.common.sdk.api.response.HbirdPageResponse;
+import com.hbird.common.sdk.api.response.HbirdResponse;
 import com.hbird.common.utils.page.PageUtil;
 
 /**
  * 抽象rest服务客户端实现类，使用默认的RestTemplate实现，支持配置服务地址和超时时间
  * 
- * @author lz
+ * @author ljz
  * @see org.springframework.web.client.RestTemplate
  * @see org.springframework.http.client.SimpleClientHttpRequestFactory
  */
@@ -139,7 +139,7 @@ public abstract class AbstractClient implements InitializingBean {
      * @return
      * @see com.hbird.common.utils.wrap.Wrapper#isSuccess
      */
-    public <T> boolean isSuccess(hbirdResponse<T> response) {
+    public <T> boolean isSuccess(HbirdResponse<T> response) {
         return null != response && response.isSuccess();
     }
 
@@ -150,7 +150,7 @@ public abstract class AbstractClient implements InitializingBean {
      * @return
      * @see com.hbird.common.utils.wrap.Wrapper#getResult
      */
-    public <T> T getResult(hbirdResponse<T> response) {
+    public <T> T getResult(HbirdResponse<T> response) {
         if (this.isSuccess(response)) {
             return response.getResult();
         }
@@ -162,9 +162,9 @@ public abstract class AbstractClient implements InitializingBean {
      * 
      * @param response
      * @return
-     * @see com.hbird.common.sdk.api.response.hbirdPageResponse#getPageUtil
+     * @see com.hbird.common.sdk.api.response.HbirdPageResponse#getPageUtil
      */
-    public <T> PageUtil getPageUtil(hbirdPageResponse<T> response) {
+    public <T> PageUtil getPageUtil(HbirdPageResponse<T> response) {
         if (this.isSuccess(response)) {
             return response.getPageUtil();
         }

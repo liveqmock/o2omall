@@ -8,11 +8,11 @@ import com.hbird.common.utils.encode.Encodes;
 /**
  * 文件助手类
  * 
- * @author lz
+ * @author ljz
  * @version 2014-8-18 下午8:41:47
  */
 public class FileUtils {
-    
+
     /**
      * 下载文件时，针对不同浏览器，进行附件名的编码
      * 

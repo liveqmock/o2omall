@@ -12,7 +12,7 @@ import org.springframework.util.Assert;
 /**
  * ExcelExporterTest
  * 
- * @author lz
+ * @author ljz
  * @version 2014-12-13 下午5:07:13
  */
 public class ExcelExporterTest {

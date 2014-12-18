@@ -26,7 +26,7 @@ import com.hbird.common.utils.DateHelper;
  * 封装不同的输出风格, 使用不同的builder函数创建实例。<br/>
  * 简单进行json与Object转化，请参考JsonHelper。
  * 
- * @author lz
+ * @author ljz
  */
 public class JsonMapper {
 
@@ -54,9 +54,9 @@ public class JsonMapper {
         mapper.configure(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         // 输出的设置日期格式
         mapper.setDateFormat(new SimpleDateFormat(DateHelper.DATE_TIME_FORMAT));
-        //空值转换
-        mapper.configure(DeserializationConfig.Feature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true) ; 
-        
+        // 空值转换
+        mapper.configure(DeserializationConfig.Feature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
+
     }
 
     /**

@@ -21,7 +21,7 @@ import com.hbird.common.utils.DateHelper;
 /**
  * Excel助手类
  * 
- * @author lz
+ * @author ljz
  * @version 2014-8-18 下午8:26:56
  */
 public class ExcelUtils {
@@ -54,7 +54,7 @@ public class ExcelUtils {
         Assert.notNull(cellNames, "cellNames must be not null");
         Assert.notNull(fieldNames, "fieldNames must be not null");
         Assert.isTrue(cellNames.length == fieldNames.length, "cellNames.length must be equal to fieldNames.length  ");
-        
+
         if (ArrayUtils.isNotEmpty(cellTypes)) {
             Assert.isTrue(cellTypes.length == fieldNames.length,
                     "cellTypes.length must be equal to fieldNames.length  ");
@@ -64,7 +64,7 @@ public class ExcelUtils {
                 cellTypes[i] = Cell.CELL_TYPE_STRING;
             }
         }
-        
+
         Assert.notEmpty(dataList, "dataList must be not empty");
         Assert.notNull(outputStream, "outputStream must be not null");
 

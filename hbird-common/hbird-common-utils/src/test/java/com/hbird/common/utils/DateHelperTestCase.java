@@ -13,7 +13,7 @@ import com.hbird.common.utils.DateHelper;
 /**
  * the DateHelperTestCase class
  * 
- * @author lz
+ * @author ljz
  * 
  */
 public class DateHelperTestCase {

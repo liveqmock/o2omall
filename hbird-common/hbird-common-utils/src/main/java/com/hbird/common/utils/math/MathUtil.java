@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 /**
  * 数学相关的算法：支持double的加减乘除
  * 
- * @author zhaohengchong
- * @email zhaohengchong@hbird.com
+ * @author zhc
+ * @email zhc@hbird.com
  * @version 2014-7-15 下午03:38:56
  */
 public class MathUtil {

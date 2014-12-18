@@ -20,7 +20,7 @@ import com.hbird.common.web.context.UserContext;
  * @see com.hbird.common.web.context.LoginUser
  * @see com.hbird.common.web.context.UserContext
  * 
- * @author lz
+ * @author ljz
  * 
  */
 public class LoginCookieInterceptor extends AbstractHandlerInterceptorAdapter {

@@ -8,9 +8,9 @@ import java.io.Serializable;
 /**
  * 基本API对象
  * 
- * @author lz
+ * @author ljz
  * 
  */
-public interface hbirdObject extends Serializable {
+public interface HbirdObject extends Serializable {
 
 }

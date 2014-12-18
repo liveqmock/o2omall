@@ -8,11 +8,10 @@ import org.slf4j.LoggerFactory;
 
 import com.hbird.common.utils.cookie.CookieUtils;
 
-
 /**
  * 在Cookie中保存登录的用户信息的助手类
  * 
- * @author lz
+ * @author ljz
  * 
  */
 public class LoginUserUtils {

@@ -18,7 +18,7 @@ import org.apache.commons.lang.StringUtils;
 /**
  * UrlBuilder, thread safe
  * 
- * @author lz
+ * @author ljz
  */
 public class UrlBuilder {
     private final URL base;

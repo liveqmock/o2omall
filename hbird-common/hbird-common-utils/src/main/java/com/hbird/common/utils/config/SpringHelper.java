@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContextAware;
 /**
  * 自定义Spring辅助类，实现ApplicationContextAware，获取BeanFactory中的定义的对象和ApplicationContext
  * 
- * @author lz
+ * @author ljz
  * 
  * @see org.springframework.context.ApplicationContextAware
  */

@@ -12,7 +12,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * 读取配置文件.properties中的值
  * 
- * @author lz
+ * @author ljz
  * 
  */
 public final class PropertiesHelper {

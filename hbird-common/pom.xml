@@ -4,7 +4,7 @@
 	<groupId>com.hbird.common</groupId>
 	<artifactId>hbird-common</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.0.8</version>
+	<version>2.0.0.0</version>
 	<name>hbird-common</name>
 
 	<modules>
@@ -17,7 +17,7 @@
 	</modules>
 
 	<properties>
-		<hbird-portal-sdk.version>1.0.0.3</hbird-portal-sdk.version>
+		<hbird-portal-sdk.version>1.0.0.1</hbird-portal-sdk.version>
 		<spring.version>3.1.0.RELEASE</spring.version>
 		<ojdbc14.version>10.2.0.4</ojdbc14.version>
 		<mysql.version>5.1.12</mysql.version>
@@ -64,13 +64,8 @@
 
 		<resteasy-spring.version>2.2.2.GA</resteasy-spring.version>
 		<jsr311-api.version>1.1.1</jsr311-api.version>
-		<poi.version>3.7</poi.version>
+		<poi.version>3.10.1</poi.version>
 	</properties>
-
-	<scm>
-		<connection>scm:svn:http://svn.hbird.cn/hbirdshop/code/develop/brd/framework/hbird-common/tags/hbird-common-1.0.0.8</connection>
-		<developerConnection>scm:svn:http://svn.hbird.cn/hbirdshop/code/develop/brd/framework/hbird-common/tags/hbird-common-1.0.0.8</developerConnection>
-	</scm>
 
 	<dependencyManagement>
 		<dependencies>
@@ -457,25 +452,10 @@
 			<!-- Redis End -->
 
 			<!-- Excel util jar -->
-			<!-- <dependency>
-				<groupId>org.apache.poi</groupId>
-				<artifactId>poi</artifactId>
-				<version>${poi.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>commons-logging</groupId>
-						<artifactId>commons-logging</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>log4j</groupId>
-						<artifactId>log4j</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency> -->
 			<dependency>
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi-ooxml</artifactId>
-				<version>3.10.1</version>
+				<version>${poi.version}</version>
 			</dependency>
 			<!-- Excel util jar -->
 
@@ -487,17 +467,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<distributionManagement>
-		<repository>
-			<id>hbird-mall-release</id>
-			<url>http://maven.hbird.cn/nexus/content/repositories/lemall-Release/</url>
-		</repository>
-		<snapshotRepository>
-			<id>hbird-mall-snapshot</id>
-			<url>http://maven.hbird.cn/nexus/content/repositories/lemall-Snapshot/</url>
-		</snapshotRepository>
-	</distributionManagement>
 
 	<build>
 		<plugins>
@@ -583,17 +552,9 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.0-beta-7</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-					<tagBase>http://svn.hbird.cn/hbirdshop/code/develop/brd/framework/hbird-common/tags/</tagBase>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
+	
 	<reporting>
 		<plugins>
 			<plugin>

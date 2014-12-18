@@ -7,7 +7,7 @@ import org.springframework.util.Assert;
  * UserContext:在上下文保存登录的用户信息类 <br/>
  * 
  * @see LoginUser
- * @author lz
+ * @author ljz
  * 
  */
 public class UserContext {

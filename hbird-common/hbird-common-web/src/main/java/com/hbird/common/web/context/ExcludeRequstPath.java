@@ -5,7 +5,7 @@ import org.apache.commons.lang.StringUtils;
 /**
  * 检查字符串是否包含字符
  * 
- * @author lz
+ * @author ljz
  * 
  */
 public class ExcludeRequstPath {

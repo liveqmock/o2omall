@@ -3,7 +3,7 @@ package com.hbird.common.utils;
 /**
  * TODO
  * <p/>
- * User: gaohongjing Date: 2014-4-17 Time: 下午03:43:38 Version: 1.0
+ * User: ljz Date: 2014-4-17 Time: 下午03:43:38 Version: 1.0
  */
 public class StringUtil {
     /** 点号 */

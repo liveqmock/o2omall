@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Safe predefined url builders container.
  * 
- * @author lz
+ * @author ljz
  */
 public class UrlBuilders {
     private final Map<String, UrlBuilder> urlBuilders;

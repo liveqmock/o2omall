@@ -13,7 +13,7 @@ import com.hbird.common.utils.encode.Encodes;
  * Cookie助手类，提供cookie的读取和写入
  * 
  * @see javax.servlet.http.Cookie
- * @author lz
+ * @author ljz
  * 
  */
 public class CookieUtils {

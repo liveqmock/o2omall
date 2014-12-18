@@ -6,7 +6,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.dao.DataAccessException;
 
 /**
- * MyBatis 基础DAO 封装 User: gaohongjing Date: 2014-4-4 Time: 11:16:59
+ * MyBatis 基础DAO 封装 User: ljz Date: 2014-4-4 Time: 11:16:59
  */
 public abstract class BaseDao<T extends Object> extends SqlSessionDaoSupport {
 

@@ -5,7 +5,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 /**
  * 抽象的拦截器：定义排除路径
  * 
- * @author lz
+ * @author ljz
  * @version 2014-12-2 下午6:03:09
  */
 public abstract class AbstractHandlerInterceptorAdapter extends HandlerInterceptorAdapter {

@@ -3,15 +3,15 @@
  */
 package com.hbird.common.sdk.api.request;
 
-import com.hbird.common.sdk.api.hbirdObject;
+import com.hbird.common.sdk.api.HbirdObject;
 
 /**
  * 基本请求对象
  * 
- * @author lz
+ * @author ljz
  * 
  */
-public class hbirdRequest implements hbirdObject {
+public class HbirdRequest implements HbirdObject {
 
     /**
      * 
@@ -21,7 +21,7 @@ public class hbirdRequest implements hbirdObject {
     /**
     * 
     */
-    public hbirdRequest() {
+    public HbirdRequest() {
     }
 
 }

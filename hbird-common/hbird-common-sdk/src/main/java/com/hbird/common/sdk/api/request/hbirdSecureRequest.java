@@ -1,25 +1,20 @@
 package com.hbird.common.sdk.api.request;
 
+import com.hbird.common.utils.security.SignatureUtil;
+import com.hbird.common.utils.serialize.JsonHelper;
+
 /**
  * 安全请求对象
  * 
- * @author lz
+ * @author ljz
  * @version 2014-8-15 上午9:39:45
  */
-public class hbirdSecureRequest<T> extends hbirdRequest {
+public class HbirdSecureRequest<T> extends HbirdRequest {
     private static final long serialVersionUID = 1L;
     /**
-     * 调用名称编码
+     * 调用方的秘钥
      */
-    private String partner;
-    /**
-     * 加密方式
-     */
-    private String sign_type;
-    /**
-     * 接口调用方法
-     */
-    private String service;
+    private String key;
     /**
      * 安全验证码
      */
@@ -30,48 +25,37 @@ public class hbirdSecureRequest<T> extends hbirdRequest {
     private T content;
 
     /**
-     * @return the partner
+     * 
      */
-    public String getPartner() {
-        return partner;
+    public HbirdSecureRequest() {
+        super();
     }
 
     /**
-     * @param partner
-     *            the partner to set
+     * @param key
+     * @param content
      */
-    public void setPartner(String partner) {
-        this.partner = partner;
+    public HbirdSecureRequest(String key, T content) {
+        this();
+        this.key = key;
+        this.content = content;
+        String signature = SignatureUtil.generateSign(JsonHelper.toJson(content), key);
+        setSign(signature);
     }
 
     /**
-     * @return the sign_type
+     * @return the key
      */
-    public String getSign_type() {
-        return sign_type;
+    public String getKey() {
+        return key;
     }
 
     /**
-     * @param sign_type
-     *            the sign_type to set
+     * @param key
+     *            the key to set
      */
-    public void setSign_type(String sign_type) {
-        this.sign_type = sign_type;
-    }
-
-    /**
-     * @return the service
-     */
-    public String getService() {
-        return service;
-    }
-
-    /**
-     * @param service
-     *            the service to set
-     */
-    public void setService(String service) {
-        this.service = service;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     /**

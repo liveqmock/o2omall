@@ -10,7 +10,7 @@ import org.codehaus.jackson.type.JavaType;
  * 
  * @see JsonMapper
  * 
- * @author lz
+ * @author ljz
  */
 public class JsonHelper {
 

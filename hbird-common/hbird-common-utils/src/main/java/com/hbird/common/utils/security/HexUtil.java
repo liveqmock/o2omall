@@ -1,8 +1,8 @@
 package com.hbird.common.utils.security;
 
 /**
- * This class provides convenient functions to convert hex string to byte array and vice versa. User: gaohongjing
- * DateTime: 2014-04-14 16:59:44 Version：1.0
+ * This class provides convenient functions to convert hex string to byte array and vice versa. User: ljz DateTime:
+ * 2014-04-14 16:59:44 Version：1.0
  */
 public class HexUtil {
 

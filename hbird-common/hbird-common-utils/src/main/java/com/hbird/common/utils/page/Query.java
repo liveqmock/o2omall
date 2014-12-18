@@ -1,7 +1,7 @@
 package com.hbird.common.utils.page;
 
 /**
- * 公共查询类 User: gaohongjing DateTime: 2014-4-4 下午08:03:35 Version: 1.0
+ * 公共查询类 User: ljz DateTime: 2014-4-4 下午08:03:35 Version: 1.0
  */
 public class Query {
 
@@ -22,10 +22,10 @@ public class Query {
 
     /** 开始记录（Mysql） */
     private int startIndex;
-    /**当前页*/
+    /** 当前页 */
     private int page;
-    /**每页记录数*/
-    private int rows;	
+    /** 每页记录数 */
+    private int rows;
 
     public int getStartIndex() {
         if (startIndex == 0 && getStartRow() > 0) {
@@ -93,20 +93,20 @@ public class Query {
         this.endRow = endRow;
     }
 
-	public int getPage() {
+    public int getPage() {
         return (page == 0) ? 1 : page;
-	}
+    }
 
-	public void setPage(int page) {
-		this.page = page;
-	}
+    public void setPage(int page) {
+        this.page = page;
+    }
 
-	public int getRows() {
-		return rows;
-	}
+    public int getRows() {
+        return rows;
+    }
 
-	public void setRows(int rows) {
-		this.rows = rows;
-	}
-    
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+
 }

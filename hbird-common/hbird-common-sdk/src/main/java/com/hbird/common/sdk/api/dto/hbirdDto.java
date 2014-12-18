@@ -3,15 +3,15 @@
  */
 package com.hbird.common.sdk.api.dto;
 
-import com.hbird.common.sdk.api.hbirdObject;
+import com.hbird.common.sdk.api.HbirdObject;
 
 /**
  * 基本DTO对象：作为返回对象的一部分
  * 
- * @author lz
+ * @author ljz
  * 
  */
-public class hbirdDto implements hbirdObject {
+public class HbirdDto implements HbirdObject {
 
     /**
      * 
@@ -21,7 +21,7 @@ public class hbirdDto implements hbirdObject {
     /**
      * 
      */
-    public hbirdDto() {
+    public HbirdDto() {
     }
 
 }

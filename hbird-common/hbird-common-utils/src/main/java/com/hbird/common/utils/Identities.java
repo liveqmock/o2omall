@@ -8,7 +8,7 @@ import org.apache.commons.lang.StringUtils;
 /**
  * 封装各种生成唯一性ID算法的工具类.
  * 
- * @author lz
+ * @author ljz
  */
 public class Identities {
 
@@ -75,7 +75,7 @@ public class Identities {
      * @param placeHoder
      *            数字长度不够时，填充的值
      * @return 固定长度的编号
-     * @author gaohongjing
+     * @author ljz
      */
     public static String generateCode(String prefixStr, Long id, int length, String placeHoder) {
         if (null == id) {
