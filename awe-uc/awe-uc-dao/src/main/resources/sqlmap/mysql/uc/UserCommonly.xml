@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.awe.uc.dao.impl.UserCommonlyDaoImpl">
+    <resultMap id="UserCommonlyMap" type="UserCommonly">
+		<result column="id" property="id" jdbcType="DECIMAL" />
+		<result column="User_UserName" property="userUsername" jdbcType="VARCHAR" />
+		<result column="User_Password" property="userPassword" jdbcType="VARCHAR" />
+		<result column="User_Email" property="userEmail" jdbcType="VARCHAR" />
+		<result column="User_Name" property="userName" jdbcType="VARCHAR" />
+		<result column="User_Mobile" property="userMobile" jdbcType="VARCHAR" />
+		<result column="User_Validated" property="userValidated" jdbcType="DECIMAL" />
+		<result column="User_Login" property="userLogin" jdbcType="DECIMAL" />
+		<result column="User_LastLoginIp" property="userLastloginip" jdbcType="VARCHAR" />
+		<result column="User_LastLoginTime" property="userLastlogintime" jdbcType="TIMESTAMP" />
+		<result column="Create_Name" property="createName" jdbcType="VARCHAR" />
+		<result column="Update_Name" property="updateName" jdbcType="VARCHAR" />
+		<result column="Create_Time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="Update_Time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="yn" property="yn" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <sql id="userCommonlyColumns">
+    	id,User_UserName,User_Password,User_Email,User_Name,User_Mobile,User_Validated,User_Login,User_LastLoginIp,User_LastLoginTime,Create_Name,Update_Name,Create_Time,Update_Time,yn
+    </sql>
+    
+     <sql id="userCommonlyUsedColumns">
+    	User_UserName,User_Password,User_Email,User_Name,User_Mobile,User_Validated,User_Login,User_LastLoginIp,User_LastLoginTime,Create_Name,Update_Name,Create_Time,Update_Time,yn
+    </sql>
+
+    <!-- 创建信息 -->
+    <insert id="insert" parameterType="UserCommonly" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user_commonly(<include refid="userCommonlyUsedColumns"/>) 
+        VALUES (#{userUsername},#{userPassword},#{userEmail},#{userName},#{userMobile},#{userValidated},#{userLogin},#{userLastloginip},#{userLastlogintime},#{createName},#{updateName},#{createTime},#{updateTime},#{yn})
+	</insert>
+	
+    <!-- 修改信息 -->
+    <update id="update" parameterType="UserCommonly">
+        <if test="_parameter != null">
+            <if test="id != null and id > 0">
+                update user_commonly set
+		        <if test="userUsername != null and userUsername != ''">
+                	User_UserName = #{userUsername,jdbcType=VARCHAR},
+		        </if>
+		        <if test="userPassword != null and userPassword != ''">
+                	User_Password = #{userPassword,jdbcType=VARCHAR},
+		        </if>
+		        <if test="userEmail != null and userEmail != ''">
+                	User_Email = #{userEmail,jdbcType=VARCHAR},
+		        </if>
+		        <if test="userName != null and userName != ''">
+                	User_Name = #{userName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="userMobile != null and userMobile != ''">
+                	User_Mobile = #{userMobile,jdbcType=VARCHAR},
+		        </if>
+		        <if test="userValidated != null and userValidated != ''">
+                	User_Validated = #{userValidated,jdbcType=DECIMAL},
+		        </if>
+		        <if test="userLogin != null and userLogin != ''">
+                	User_Login = #{userLogin,jdbcType=DECIMAL},
+		        </if>
+		        <if test="userLastloginip != null and userLastloginip != ''">
+                	User_LastLoginIp = #{userLastloginip,jdbcType=VARCHAR},
+		        </if>
+		        <if test="userLastlogintime != null and userLastlogintime != ''">
+                	User_LastLoginTime = #{userLastlogintime,jdbcType=TIMESTAMP},
+		        </if>
+		        <if test="createName != null and createName != ''">
+                	Create_Name = #{createName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="updateName != null and updateName != ''">
+                	Update_Name = #{updateName,jdbcType=VARCHAR},
+		        </if>
+                	update_time = now()
+                where id = #{id}
+            </if>
+        </if>
+    </update>
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="getUserCommonlyById" resultMap="UserCommonlyMap" parameterType="java.lang.Long">
+        <if test="_parameter != null">
+            select <include refid="userCommonlyColumns"/> from user_commonly
+            where id = #{_parameter} and yn = 1
+        </if>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，不带翻页 -->
+    <select id="queryUserCommonlyList" resultMap="UserCommonlyMap"
+            parameterType="com.awe.uc.domain.query.UserCommonlyQuery">
+        select <include refid="userCommonlyColumns"/> from user_commonly where <include refid="queryUserCommonlyListWhere"/>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，翻页 -->
+    <select id="queryUserCommonlyListWithPage" resultMap="UserCommonlyMap"
+            parameterType="com.awe.uc.domain.query.UserCommonlyQuery">
+        select <include refid="userCommonlyColumns"/> from user_commonly where <include refid="queryUserCommonlyListWhere"/>
+        order by create_time desc 
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 根据查询Bean查询-判断是否存在 -->
+    <select id="exist" resultType="java.lang.Integer" parameterType="UserCommonly">
+        select count(1) from user_commonly where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据查询Bean获取集合总数 -->
+    <select id="queryUserCommonlyCount" resultType="java.lang.Integer"
+            parameterType="com.awe.uc.domain.query.UserCommonlyQuery">
+        select count(1) from user_commonly where <include refid="queryUserCommonlyListWhere"/>
+    </select>
+
+    <!-- 删除信息-逻辑删除 -->
+    <update id="delete" parameterType="UserCommonly">
+		update user_commonly 
+		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
+		where id = #{id}
+    </update>
+
+    <!-- 常用的查询Where条件 -->
+    <sql id="queryUserCommonlyListWhere">
+    	yn = 1
+        <if test="id != null and id != ''">
+        	and id = #{id,jdbcType=DECIMAL}
+        </if>
+        <if test="userUsername != null and userUsername != ''">
+        	and User_UserName = #{userUsername,jdbcType=VARCHAR}
+        </if>
+        <if test="userPassword != null and userPassword != ''">
+        	and User_Password = #{userPassword,jdbcType=VARCHAR}
+        </if>
+        <if test="userEmail != null and userEmail != ''">
+        	and User_Email = #{userEmail,jdbcType=VARCHAR}
+        </if>
+        <if test="userName != null and userName != ''">
+        	and User_Name = #{userName,jdbcType=VARCHAR}
+        </if>
+        <if test="userMobile != null and userMobile != ''">
+        	and User_Mobile = #{userMobile,jdbcType=VARCHAR}
+        </if>
+        <if test="userValidated != null and userValidated != ''">
+        	and User_Validated = #{userValidated,jdbcType=DECIMAL}
+        </if>
+        <if test="userLogin != null and userLogin != ''">
+        	and User_Login = #{userLogin,jdbcType=DECIMAL}
+        </if>
+        <if test="userLastloginip != null and userLastloginip != ''">
+        	and User_LastLoginIp = #{userLastloginip,jdbcType=VARCHAR}
+        </if>
+        <if test="userLastlogintime != null and userLastlogintime != ''">
+        	and User_LastLoginTime = #{userLastlogintime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createName != null and createName != ''">
+        	and Create_Name = #{createName,jdbcType=VARCHAR}
+        </if>
+        <if test="updateName != null and updateName != ''">
+        	and Update_Name = #{updateName,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and Create_Time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+        	and Update_Time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="yn != null and yn != ''">
+        	and yn = #{yn,jdbcType=DECIMAL}
+        </if>
+    </sql>
+</mapper>

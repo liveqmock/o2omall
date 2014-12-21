@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.awe.uc.dao.impl.AreaDaoImpl">
+    <resultMap id="AreaMap" type="Area">
+		<result column="id" property="id" jdbcType="DECIMAL" />
+		<result column="p_code" property="pCode" jdbcType="VARCHAR" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="leval" property="leval" jdbcType="DECIMAL" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="create_name" property="createName" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_name" property="updateName" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="yn" property="yn" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <sql id="areaColumns">
+    	id,p_code,code,leval,name,create_name,create_time,update_name,update_time,yn
+    </sql>
+    
+     <sql id="areaUsedColumns">
+    	p_code,code,leval,name,create_name,create_time,update_name,update_time,yn
+    </sql>
+
+    <!-- 创建信息 -->
+    <insert id="insert" parameterType="Area" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO area(<include refid="areaUsedColumns"/>) 
+        VALUES (#{pCode},#{code},#{leval},#{name},#{createName},#{createTime},#{updateName},#{updateTime},#{yn})
+	</insert>
+	
+    <!-- 修改信息 -->
+    <update id="update" parameterType="Area">
+        <if test="_parameter != null">
+            <if test="id != null and id > 0">
+                update area set
+		        <if test="pCode != null and pCode != ''">
+                	p_code = #{pCode,jdbcType=VARCHAR},
+		        </if>
+		        <if test="code != null and code != ''">
+                	code = #{code,jdbcType=VARCHAR},
+		        </if>
+		        <if test="leval != null and leval != ''">
+                	leval = #{leval,jdbcType=DECIMAL},
+		        </if>
+		        <if test="name != null and name != ''">
+                	name = #{name,jdbcType=VARCHAR},
+		        </if>
+		        <if test="createName != null and createName != ''">
+                	create_name = #{createName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="updateName != null and updateName != ''">
+                	update_name = #{updateName,jdbcType=VARCHAR},
+		        </if>
+                	update_time = now()
+                where id = #{id}
+            </if>
+        </if>
+    </update>
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="getAreaById" resultMap="AreaMap" parameterType="java.lang.Long">
+        <if test="_parameter != null">
+            select <include refid="areaColumns"/> from area
+            where id = #{_parameter} and yn = 1
+        </if>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，不带翻页 -->
+    <select id="queryAreaList" resultMap="AreaMap"
+            parameterType="com.awe.uc.domain.query.AreaQuery">
+        select <include refid="areaColumns"/> from area where <include refid="queryAreaListWhere"/>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，翻页 -->
+    <select id="queryAreaListWithPage" resultMap="AreaMap"
+            parameterType="com.awe.uc.domain.query.AreaQuery">
+        select <include refid="areaColumns"/> from area where <include refid="queryAreaListWhere"/>
+        order by create_time desc 
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 根据查询Bean查询-判断是否存在 -->
+    <select id="exist" resultType="java.lang.Integer" parameterType="Area">
+        select count(1) from area where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据查询Bean获取集合总数 -->
+    <select id="queryAreaCount" resultType="java.lang.Integer"
+            parameterType="com.awe.uc.domain.query.AreaQuery">
+        select count(1) from area where <include refid="queryAreaListWhere"/>
+    </select>
+
+    <!-- 删除信息-逻辑删除 -->
+    <update id="delete" parameterType="Area">
+		update area 
+		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
+		where id = #{id}
+    </update>
+
+    <!-- 常用的查询Where条件 -->
+    <sql id="queryAreaListWhere">
+    	yn = 1
+        <if test="id != null and id != ''">
+        	and id = #{id,jdbcType=DECIMAL}
+        </if>
+        <if test="pCode != null and pCode != ''">
+        	and p_code = #{pCode,jdbcType=VARCHAR}
+        </if>
+        <if test="code != null and code != ''">
+        	and code = #{code,jdbcType=VARCHAR}
+        </if>
+        <if test="leval != null and leval != ''">
+        	and leval = #{leval,jdbcType=DECIMAL}
+        </if>
+        <if test="name != null and name != ''">
+        	and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="createName != null and createName != ''">
+        	and create_name = #{createName,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateName != null and updateName != ''">
+        	and update_name = #{updateName,jdbcType=VARCHAR}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="yn != null and yn != ''">
+        	and yn = #{yn,jdbcType=DECIMAL}
+        </if>
+    </sql>
+</mapper>

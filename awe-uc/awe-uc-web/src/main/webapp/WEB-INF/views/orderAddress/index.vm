@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        #parse("/layout/head.vm")
+		<script language="javascript"> 
+			$(function() {
+				$("#btn-query").click(function() {
+        			pageSubmit(1);
+   				});
+				$("#btn-add").click(function() {
+        			window.location.href=("$basePath/orderAddress/addForward");
+   				});
+			});
+        	// 提交分页查询
+        	function pageSubmit(pageNoParam) {
+                $("#curPage").val(pageNoParam);
+            	$("#queryForm").attr("action", "$basePath/orderAddress");
+                $("#queryForm").attr("method", "POST");
+                $("#queryForm").submit();
+        	}
+        	
+        	function toUpdate(parameterId){
+        		window.location.href=("$basePath/orderAddress/updateForward?id="+parameterId);
+        	}
+        	
+        	function toDelete(parameterId){
+        		MyPopWindow.ExecuteDelete("$basePath/orderAddress/delete",{ id : parameterId });
+        	}
+        	
+        </script>
+	</head>
+    <body>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-search green"></i>收货地址表查询
+                        </h5>
+                        <div class="widget-toolbar">
+                            <a href="#" data-action="collapse">
+                                <i class="1 icon-chevron-up bigger-100"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #f5f5f5;padding:5px;">
+                            <form class="form-horizontal" role="form" id="queryForm">
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="userNo">用户ID</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="userNo" id="userNo" class="col-xs-10 col-sm-8" value="$!query.userNo"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="addName">收货人姓名</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="addName" id="addName" class="col-xs-10 col-sm-8" value="$!query.addName"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="addProvinceName">省份名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="addProvinceName" id="addProvinceName" class="col-xs-10 col-sm-8" value="$!query.addProvinceName"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="addProvinceNo">省份编码</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="addProvinceNo" id="addProvinceNo" class="col-xs-10 col-sm-8" value="$!query.addProvinceNo"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="addCityName">市名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="addCityName" id="addCityName" class="col-xs-10 col-sm-8" value="$!query.addCityName"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="addCityNo">市编号</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="addCityNo" id="addCityNo" class="col-xs-10 col-sm-8" value="$!query.addCityNo"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="addAreaName">区名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="addAreaName" id="addAreaName" class="col-xs-10 col-sm-8" value="$!query.addAreaName"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="addAreaNo">区编码</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="addAreaNo" id="addAreaNo" class="col-xs-10 col-sm-8" value="$!query.addAreaNo"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="addAddress">详细地址</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="addAddress" id="addAddress" class="col-xs-10 col-sm-8" value="$!query.addAddress"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="addMobile">移动电话</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="addMobile" id="addMobile" class="col-xs-10 col-sm-8" value="$!query.addMobile"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="addTelephone">固定电话</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="addTelephone" id="addTelephone" class="col-xs-10 col-sm-8" value="$!query.addTelephone"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="addEmail">电子邮件</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="addEmail" id="addEmail" class="col-xs-10 col-sm-8" value="$!query.addEmail"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="addZipcode">邮编</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="addZipcode" id="addZipcode" class="col-xs-10 col-sm-8" value="$!query.addZipcode"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="createName">创建人</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="createName" id="createName" class="col-xs-10 col-sm-8" value="$!query.createName"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="updateName">修改人</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="updateName" id="updateName" class="col-xs-10 col-sm-8" value="$!query.updateName"/>
+                                    </div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-4 col-sm-offset-8">
+    									#parse("/layout/page.vm")
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-query"><i class="icon-search"></i>查询</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-add"><i class="icon-plus"></i>新增</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div class="col-xs-12 col-sm-12 table-responsive">
+                <table class="table table-striped table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr>
+							<th class="center">自增</th>
+							<th class="center">用户ID</th>
+							<th class="center">收货人姓名</th>
+							<th class="center">省份名称</th>
+							<th class="center">省份编码</th>
+							<th class="center">市名称</th>
+							<th class="center">市编号</th>
+							<th class="center">区名称</th>
+							<th class="center">区编码</th>
+							<th class="center">详细地址</th>
+							<th class="center">移动电话</th>
+							<th class="center">固定电话</th>
+							<th class="center">电子邮件</th>
+							<th class="center">邮编</th>
+							<th class="center">创建人</th>
+							<th class="center">修改人</th>
+							<th class="center">创建时间</th>
+    						<th class="center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        #foreach( $item in $dataList)
+                            <tr>
+                                <td>$!item.id</td>
+                                <td>$!item.userNo</td>
+                                <td>$!item.addName</td>
+                                <td>$!item.addProvinceName</td>
+                                <td>$!item.addProvinceNo</td>
+                                <td>$!item.addCityName</td>
+                                <td>$!item.addCityNo</td>
+                                <td>$!item.addAreaName</td>
+                                <td>$!item.addAreaNo</td>
+                                <td>$!item.addAddress</td>
+                                <td>$!item.addMobile</td>
+                                <td>$!item.addTelephone</td>
+                                <td>$!item.addEmail</td>
+                                <td>$!item.addZipcode</td>
+                                <td>$!item.createName</td>
+                                <td>$!item.updateName</td>
+                                <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.createTime)</td>
+                                <td>
+									<a href="javascript:void(0)" onclick="toDetail($!item.id);" data-toggle="modal"><i class="icon-list">详情</i></a>
+									<a href="javascript:void(0)" onclick="toUpdate($!item.id)"><i class="icon-pencil pink">修改</i></a>
+									<a href="javascript:void(0)" onclick="toDelete($!item.id)"><i class="icon-remove red">删除</i></a>
+								</td>
+                            </tr>
+                        #end
+                    </tbody>
+                </table>
+				#pageBarPost($page.totalRow $page.curPage $page.totalPage)
+			</div>
+        </div>
+		#parse("/orderAddress/detailModal.vm")
+    </body>
+</html>
