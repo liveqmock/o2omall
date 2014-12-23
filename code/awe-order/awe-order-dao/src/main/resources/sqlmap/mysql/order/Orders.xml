@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.awe.order.dao.impl.OrdersDaoImpl">
+    <resultMap id="OrdersMap" type="Orders">
+		<result column="id" property="id" jdbcType="DECIMAL" />
+		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+		<result column="order_type" property="orderType" jdbcType="DECIMAL" />
+		<result column="user_id" property="userId" jdbcType="DECIMAL" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="order_name" property="orderName" jdbcType="VARCHAR" />
+		<result column="consignee_name" property="consigneeName" jdbcType="VARCHAR" />
+		<result column="consignee_phone" property="consigneePhone" jdbcType="VARCHAR" />
+		<result column="telephone" property="telephone" jdbcType="VARCHAR" />
+		<result column="emil" property="emil" jdbcType="VARCHAR" />
+		<result column="zip_code" property="zipCode" jdbcType="VARCHAR" />
+		<result column="pay_name" property="payName" jdbcType="VARCHAR" />
+		<result column="order_date" property="orderDate" jdbcType="DECIMAL" />
+		<result column="is_tal_sure" property="isTalSure" jdbcType="DECIMAL" />
+		<result column="pay_way" property="payWay" jdbcType="DECIMAL" />
+		<result column="pay_type" property="payType" jdbcType="DECIMAL" />
+		<result column="is_invoice" property="isInvoice" jdbcType="DECIMAL" />
+		<result column="invoice_type" property="invoiceType" jdbcType="DECIMAL" />
+		<result column="invoice_title" property="invoiceTitle" jdbcType="DECIMAL" />
+		<result column="invoice_content" property="invoiceContent" jdbcType="DECIMAL" />
+		<result column="order_status" property="orderStatus" jdbcType="DECIMAL" />
+		<result column="comm_amount" property="commAmount" jdbcType="DECIMAL" />
+		<result column="ret_cash" property="retCash" jdbcType="DECIMAL" />
+		<result column="expenses" property="expenses" jdbcType="DECIMAL" />
+		<result column="amount_pay" property="amountPay" jdbcType="DECIMAL" />
+		<result column="parent_order_no" property="parentOrderNo" jdbcType="VARCHAR" />
+		<result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+		<result column="province_no" property="provinceNo" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="city_no" property="cityNo" jdbcType="VARCHAR" />
+		<result column="county_name" property="countyName" jdbcType="VARCHAR" />
+		<result column="county_no" property="countyNo" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="create_name" property="createName" jdbcType="VARCHAR" />
+		<result column="Integral" property="integral" jdbcType="DECIMAL" />
+		<result column="update_name" property="updateName" jdbcType="VARCHAR" />
+		<result column="yn" property="yn" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <sql id="ordersColumns">
+    	id,order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,remark,create_time,update_time,create_name,Integral,update_name,yn
+    </sql>
+    
+     <sql id="ordersUsedColumns">
+    	order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,remark,create_time,update_time,create_name,Integral,update_name,yn
+    </sql>
+
+    <!-- 创建信息 -->
+    <insert id="insert" parameterType="Orders" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO orders(<include refid="ordersUsedColumns"/>) 
+        VALUES (#{orderNo},#{orderType},#{userId},#{userName},#{orderName},#{consigneeName},#{consigneePhone},#{telephone},#{emil},#{zipCode},#{payName},#{orderDate},#{isTalSure},#{payWay},#{payType},#{isInvoice},#{invoiceType},#{invoiceTitle},#{invoiceContent},#{orderStatus},#{commAmount},#{retCash},#{expenses},#{amountPay},#{parentOrderNo},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{payTime},#{remark},#{createTime},#{updateTime},#{createName},#{integral},#{updateName},#{yn})
+	</insert>
+	
+    <!-- 修改信息 -->
+    <update id="update" parameterType="Orders">
+        <if test="_parameter != null">
+            <if test="id != null and id > 0">
+                update orders set
+		        <if test="orderNo != null and orderNo != ''">
+                	order_no = #{orderNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="orderType != null and orderType != ''">
+                	order_type = #{orderType,jdbcType=DECIMAL},
+		        </if>
+		        <if test="userId != null and userId != ''">
+                	user_id = #{userId,jdbcType=DECIMAL},
+		        </if>
+		        <if test="userName != null and userName != ''">
+                	user_name = #{userName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="orderName != null and orderName != ''">
+                	order_name = #{orderName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="consigneeName != null and consigneeName != ''">
+                	consignee_name = #{consigneeName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="consigneePhone != null and consigneePhone != ''">
+                	consignee_phone = #{consigneePhone,jdbcType=VARCHAR},
+		        </if>
+		        <if test="telephone != null and telephone != ''">
+                	telephone = #{telephone,jdbcType=VARCHAR},
+		        </if>
+		        <if test="emil != null and emil != ''">
+                	emil = #{emil,jdbcType=VARCHAR},
+		        </if>
+		        <if test="zipCode != null and zipCode != ''">
+                	zip_code = #{zipCode,jdbcType=VARCHAR},
+		        </if>
+		        <if test="payName != null and payName != ''">
+                	pay_name = #{payName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="orderDate != null and orderDate != ''">
+                	order_date = #{orderDate,jdbcType=DECIMAL},
+		        </if>
+		        <if test="isTalSure != null and isTalSure != ''">
+                	is_tal_sure = #{isTalSure,jdbcType=DECIMAL},
+		        </if>
+		        <if test="payWay != null and payWay != ''">
+                	pay_way = #{payWay,jdbcType=DECIMAL},
+		        </if>
+		        <if test="payType != null and payType != ''">
+                	pay_type = #{payType,jdbcType=DECIMAL},
+		        </if>
+		        <if test="isInvoice != null and isInvoice != ''">
+                	is_invoice = #{isInvoice,jdbcType=DECIMAL},
+		        </if>
+		        <if test="invoiceType != null and invoiceType != ''">
+                	invoice_type = #{invoiceType,jdbcType=DECIMAL},
+		        </if>
+		        <if test="invoiceTitle != null and invoiceTitle != ''">
+                	invoice_title = #{invoiceTitle,jdbcType=DECIMAL},
+		        </if>
+		        <if test="invoiceContent != null and invoiceContent != ''">
+                	invoice_content = #{invoiceContent,jdbcType=DECIMAL},
+		        </if>
+		        <if test="orderStatus != null and orderStatus != ''">
+                	order_status = #{orderStatus,jdbcType=DECIMAL},
+		        </if>
+		        <if test="commAmount != null and commAmount != ''">
+                	comm_amount = #{commAmount,jdbcType=DECIMAL},
+		        </if>
+		        <if test="retCash != null and retCash != ''">
+                	ret_cash = #{retCash,jdbcType=DECIMAL},
+		        </if>
+		        <if test="expenses != null and expenses != ''">
+                	expenses = #{expenses,jdbcType=DECIMAL},
+		        </if>
+		        <if test="amountPay != null and amountPay != ''">
+                	amount_pay = #{amountPay,jdbcType=DECIMAL},
+		        </if>
+		        <if test="parentOrderNo != null and parentOrderNo != ''">
+                	parent_order_no = #{parentOrderNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="provinceName != null and provinceName != ''">
+                	province_name = #{provinceName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="provinceNo != null and provinceNo != ''">
+                	province_no = #{provinceNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="cityName != null and cityName != ''">
+                	city_name = #{cityName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="cityNo != null and cityNo != ''">
+                	city_no = #{cityNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="countyName != null and countyName != ''">
+                	county_name = #{countyName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="countyNo != null and countyNo != ''">
+                	county_no = #{countyNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="address != null and address != ''">
+                	address = #{address,jdbcType=VARCHAR},
+		        </if>
+		        <if test="payTime != null and payTime != ''">
+                	pay_time = #{payTime,jdbcType=TIMESTAMP},
+		        </if>
+		        <if test="remark != null and remark != ''">
+                	remark = #{remark,jdbcType=VARCHAR},
+		        </if>
+		        <if test="createName != null and createName != ''">
+                	create_name = #{createName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="integral != null and integral != ''">
+                	Integral = #{integral,jdbcType=DECIMAL},
+		        </if>
+		        <if test="updateName != null and updateName != ''">
+                	update_name = #{updateName,jdbcType=VARCHAR},
+		        </if>
+                	update_time = now()
+                where id = #{id}
+            </if>
+        </if>
+    </update>
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="getOrdersById" resultMap="OrdersMap" parameterType="java.lang.Long">
+        <if test="_parameter != null">
+            select <include refid="ordersColumns"/> from orders
+            where id = #{_parameter} and yn = 1
+        </if>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，不带翻页 -->
+    <select id="queryOrdersList" resultMap="OrdersMap"
+            parameterType="com.awe.order.domain.query.OrdersQuery">
+        select <include refid="ordersColumns"/> from orders where <include refid="queryOrdersListWhere"/>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，翻页 -->
+    <select id="queryOrdersListWithPage" resultMap="OrdersMap"
+            parameterType="com.awe.order.domain.query.OrdersQuery">
+        select <include refid="ordersColumns"/> from orders where <include refid="queryOrdersListWhere"/>
+        order by create_time desc 
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 根据查询Bean查询-判断是否存在 -->
+    <select id="exist" resultType="java.lang.Integer" parameterType="Orders">
+        select count(1) from orders where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据查询Bean获取集合总数 -->
+    <select id="queryOrdersCount" resultType="java.lang.Integer"
+            parameterType="com.awe.order.domain.query.OrdersQuery">
+        select count(1) from orders where <include refid="queryOrdersListWhere"/>
+    </select>
+
+    <!-- 删除信息-逻辑删除 -->
+    <update id="delete" parameterType="Orders">
+		update orders 
+		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
+		where id = #{id}
+    </update>
+
+    <!-- 常用的查询Where条件 -->
+    <sql id="queryOrdersListWhere">
+    	yn = 1
+        <if test="id != null and id != ''">
+        	and id = #{id,jdbcType=DECIMAL}
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+        	and order_no = #{orderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="orderType != null and orderType != ''">
+        	and order_type = #{orderType,jdbcType=DECIMAL}
+        </if>
+        <if test="userId != null and userId != ''">
+        	and user_id = #{userId,jdbcType=DECIMAL}
+        </if>
+        <if test="userName != null and userName != ''">
+        	and user_name = #{userName,jdbcType=VARCHAR}
+        </if>
+        <if test="orderName != null and orderName != ''">
+        	and order_name = #{orderName,jdbcType=VARCHAR}
+        </if>
+        <if test="consigneeName != null and consigneeName != ''">
+        	and consignee_name = #{consigneeName,jdbcType=VARCHAR}
+        </if>
+        <if test="consigneePhone != null and consigneePhone != ''">
+        	and consignee_phone = #{consigneePhone,jdbcType=VARCHAR}
+        </if>
+        <if test="telephone != null and telephone != ''">
+        	and telephone = #{telephone,jdbcType=VARCHAR}
+        </if>
+        <if test="emil != null and emil != ''">
+        	and emil = #{emil,jdbcType=VARCHAR}
+        </if>
+        <if test="zipCode != null and zipCode != ''">
+        	and zip_code = #{zipCode,jdbcType=VARCHAR}
+        </if>
+        <if test="payName != null and payName != ''">
+        	and pay_name = #{payName,jdbcType=VARCHAR}
+        </if>
+        <if test="orderDate != null and orderDate != ''">
+        	and order_date = #{orderDate,jdbcType=DECIMAL}
+        </if>
+        <if test="isTalSure != null and isTalSure != ''">
+        	and is_tal_sure = #{isTalSure,jdbcType=DECIMAL}
+        </if>
+        <if test="payWay != null and payWay != ''">
+        	and pay_way = #{payWay,jdbcType=DECIMAL}
+        </if>
+        <if test="payType != null and payType != ''">
+        	and pay_type = #{payType,jdbcType=DECIMAL}
+        </if>
+        <if test="isInvoice != null and isInvoice != ''">
+        	and is_invoice = #{isInvoice,jdbcType=DECIMAL}
+        </if>
+        <if test="invoiceType != null and invoiceType != ''">
+        	and invoice_type = #{invoiceType,jdbcType=DECIMAL}
+        </if>
+        <if test="invoiceTitle != null and invoiceTitle != ''">
+        	and invoice_title = #{invoiceTitle,jdbcType=DECIMAL}
+        </if>
+        <if test="invoiceContent != null and invoiceContent != ''">
+        	and invoice_content = #{invoiceContent,jdbcType=DECIMAL}
+        </if>
+        <if test="orderStatus != null and orderStatus != ''">
+        	and order_status = #{orderStatus,jdbcType=DECIMAL}
+        </if>
+        <if test="commAmount != null and commAmount != ''">
+        	and comm_amount = #{commAmount,jdbcType=DECIMAL}
+        </if>
+        <if test="retCash != null and retCash != ''">
+        	and ret_cash = #{retCash,jdbcType=DECIMAL}
+        </if>
+        <if test="expenses != null and expenses != ''">
+        	and expenses = #{expenses,jdbcType=DECIMAL}
+        </if>
+        <if test="amountPay != null and amountPay != ''">
+        	and amount_pay = #{amountPay,jdbcType=DECIMAL}
+        </if>
+        <if test="parentOrderNo != null and parentOrderNo != ''">
+        	and parent_order_no = #{parentOrderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="provinceName != null and provinceName != ''">
+        	and province_name = #{provinceName,jdbcType=VARCHAR}
+        </if>
+        <if test="provinceNo != null and provinceNo != ''">
+        	and province_no = #{provinceNo,jdbcType=VARCHAR}
+        </if>
+        <if test="cityName != null and cityName != ''">
+        	and city_name = #{cityName,jdbcType=VARCHAR}
+        </if>
+        <if test="cityNo != null and cityNo != ''">
+        	and city_no = #{cityNo,jdbcType=VARCHAR}
+        </if>
+        <if test="countyName != null and countyName != ''">
+        	and county_name = #{countyName,jdbcType=VARCHAR}
+        </if>
+        <if test="countyNo != null and countyNo != ''">
+        	and county_no = #{countyNo,jdbcType=VARCHAR}
+        </if>
+        <if test="address != null and address != ''">
+        	and address = #{address,jdbcType=VARCHAR}
+        </if>
+        <if test="payTime != null and payTime != ''">
+        	and pay_time = #{payTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="remark != null and remark != ''">
+        	and remark = #{remark,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createName != null and createName != ''">
+        	and create_name = #{createName,jdbcType=VARCHAR}
+        </if>
+        <if test="integral != null and integral != ''">
+        	and Integral = #{integral,jdbcType=DECIMAL}
+        </if>
+        <if test="updateName != null and updateName != ''">
+        	and update_name = #{updateName,jdbcType=VARCHAR}
+        </if>
+        <if test="yn != null and yn != ''">
+        	and yn = #{yn,jdbcType=DECIMAL}
+        </if>
+    </sql>
+</mapper>

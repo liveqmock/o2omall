@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#updateForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												serviceNo: {required: true},
+						orderNo: {required: true},
+						refundAmount: {required: true},
+						accountNo: {required: true},
+						accountName: {required: true},
+						refundDate: {required: true},
+						createUserId: {required: true},
+						updateUserId: {required: true},
+						returnExchangeId: {required: true}
+					},
+			
+					messages: {
+						serviceNo: { required: "请输入售后单号"},
+						orderNo: { required: "请输入订单号"},
+						refundAmount: { required: "请输入退款金额"},
+						accountNo: { required: "请输入退款账号"},
+						accountName: { required: "请输入退款账户"},
+						refundDate: { required: "请输入发起退款日期"},
+						createUserId: { required: "请输入创建人id"},
+						updateUserId: { required: "请输入更新人id"},
+						returnExchangeId: { required: "请输入主表id"}
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/refund");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#updateForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/refund/update',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/refund"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>退款表&nbsp;&gt;&nbsp;修改
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="updateForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="serviceNo">售后单号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="serviceNo" id="serviceNo" class="col-xs-12 col-sm-12" value="$!refund.serviceNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderNo">订单号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="orderNo" id="orderNo" class="col-xs-12 col-sm-12" value="$!refund.orderNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="refundAmount">退款金额</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="refundAmount" id="refundAmount" class="col-xs-12 col-sm-12" value="$!refund.refundAmount" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="accountNo">退款账号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="accountNo" id="accountNo" class="col-xs-12 col-sm-12" value="$!refund.accountNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="accountName">退款账户</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="accountName" id="accountName" class="col-xs-12 col-sm-12" value="$!refund.accountName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="refundDate">发起退款日期</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="refundDate" id="refundDate" class="col-xs-12 col-sm-12" value="$!refund.refundDate" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="createUserId">创建人id</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="createUserId" id="createUserId" class="col-xs-12 col-sm-12" value="$!refund.createUserId" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="updateUserId">更新人id</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="updateUserId" id="updateUserId" class="col-xs-12 col-sm-12" value="$!refund.updateUserId" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="returnExchangeId">主表id</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="returnExchangeId" id="returnExchangeId" class="col-xs-12 col-sm-12" value="$!refund.returnExchangeId" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<input type="hidden" name="id" id="id" value="$!refund.id" />
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

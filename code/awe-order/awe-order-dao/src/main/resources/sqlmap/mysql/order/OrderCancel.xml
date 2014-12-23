@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.awe.order.dao.impl.OrderCancelDaoImpl">
+    <resultMap id="OrderCancelMap" type="OrderCancel">
+		<result column="id" property="id" jdbcType="DECIMAL" />
+		<result column="refund" property="refund" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="DECIMAL" />
+		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+		<result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
+		<result column="cancel_reason" property="cancelReason" jdbcType="VARCHAR" />
+		<result column="cancel_type" property="cancelType" jdbcType="DECIMAL" />
+		<result column="current_audit_name" property="currentAuditName" jdbcType="VARCHAR" />
+		<result column="current_audit_no" property="currentAuditNo" jdbcType="VARCHAR" />
+		<result column="is_auditing" property="isAuditing" jdbcType="DECIMAL" />
+		<result column="auditing_time" property="auditingTime" jdbcType="TIMESTAMP" />
+		<result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="is_refund" property="isRefund" jdbcType="DECIMAL" />
+		<result column="create_name" property="createName" jdbcType="VARCHAR" />
+		<result column="update_name" property="updateName" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="yn" property="yn" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <sql id="orderCancelColumns">
+    	id,refund,status,order_no,refund_amount,cancel_reason,cancel_type,current_audit_name,current_audit_no,is_auditing,auditing_time,finish_time,remark,is_refund,create_name,update_name,create_time,update_time,yn
+    </sql>
+    
+     <sql id="orderCancelUsedColumns">
+    	refund,status,order_no,refund_amount,cancel_reason,cancel_type,current_audit_name,current_audit_no,is_auditing,auditing_time,finish_time,remark,is_refund,create_name,update_name,create_time,update_time,yn
+    </sql>
+
+    <!-- 创建信息 -->
+    <insert id="insert" parameterType="OrderCancel" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO order_cancel(<include refid="orderCancelUsedColumns"/>) 
+        VALUES (#{refund},#{status},#{orderNo},#{refundAmount},#{cancelReason},#{cancelType},#{currentAuditName},#{currentAuditNo},#{isAuditing},#{auditingTime},#{finishTime},#{remark},#{isRefund},#{createName},#{updateName},#{createTime},#{updateTime},#{yn})
+	</insert>
+	
+    <!-- 修改信息 -->
+    <update id="update" parameterType="OrderCancel">
+        <if test="_parameter != null">
+            <if test="id != null and id > 0">
+                update order_cancel set
+		        <if test="refund != null and refund != ''">
+                	refund = #{refund,jdbcType=VARCHAR},
+		        </if>
+		        <if test="status != null and status != ''">
+                	status = #{status,jdbcType=DECIMAL},
+		        </if>
+		        <if test="orderNo != null and orderNo != ''">
+                	order_no = #{orderNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="refundAmount != null and refundAmount != ''">
+                	refund_amount = #{refundAmount,jdbcType=DECIMAL},
+		        </if>
+		        <if test="cancelReason != null and cancelReason != ''">
+                	cancel_reason = #{cancelReason,jdbcType=VARCHAR},
+		        </if>
+		        <if test="cancelType != null and cancelType != ''">
+                	cancel_type = #{cancelType,jdbcType=DECIMAL},
+		        </if>
+		        <if test="currentAuditName != null and currentAuditName != ''">
+                	current_audit_name = #{currentAuditName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="currentAuditNo != null and currentAuditNo != ''">
+                	current_audit_no = #{currentAuditNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="isAuditing != null and isAuditing != ''">
+                	is_auditing = #{isAuditing,jdbcType=DECIMAL},
+		        </if>
+		        <if test="auditingTime != null and auditingTime != ''">
+                	auditing_time = #{auditingTime,jdbcType=TIMESTAMP},
+		        </if>
+		        <if test="finishTime != null and finishTime != ''">
+                	finish_time = #{finishTime,jdbcType=TIMESTAMP},
+		        </if>
+		        <if test="remark != null and remark != ''">
+                	remark = #{remark,jdbcType=VARCHAR},
+		        </if>
+		        <if test="isRefund != null and isRefund != ''">
+                	is_refund = #{isRefund,jdbcType=DECIMAL},
+		        </if>
+		        <if test="createName != null and createName != ''">
+                	create_name = #{createName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="updateName != null and updateName != ''">
+                	update_name = #{updateName,jdbcType=VARCHAR},
+		        </if>
+                	update_time = now()
+                where id = #{id}
+            </if>
+        </if>
+    </update>
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="getOrderCancelById" resultMap="OrderCancelMap" parameterType="java.lang.Long">
+        <if test="_parameter != null">
+            select <include refid="orderCancelColumns"/> from order_cancel
+            where id = #{_parameter} and yn = 1
+        </if>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，不带翻页 -->
+    <select id="queryOrderCancelList" resultMap="OrderCancelMap"
+            parameterType="com.awe.order.domain.query.OrderCancelQuery">
+        select <include refid="orderCancelColumns"/> from order_cancel where <include refid="queryOrderCancelListWhere"/>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，翻页 -->
+    <select id="queryOrderCancelListWithPage" resultMap="OrderCancelMap"
+            parameterType="com.awe.order.domain.query.OrderCancelQuery">
+        select <include refid="orderCancelColumns"/> from order_cancel where <include refid="queryOrderCancelListWhere"/>
+        order by create_time desc 
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 根据查询Bean查询-判断是否存在 -->
+    <select id="exist" resultType="java.lang.Integer" parameterType="OrderCancel">
+        select count(1) from order_cancel where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据查询Bean获取集合总数 -->
+    <select id="queryOrderCancelCount" resultType="java.lang.Integer"
+            parameterType="com.awe.order.domain.query.OrderCancelQuery">
+        select count(1) from order_cancel where <include refid="queryOrderCancelListWhere"/>
+    </select>
+
+    <!-- 删除信息-逻辑删除 -->
+    <update id="delete" parameterType="OrderCancel">
+		update order_cancel 
+		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
+		where id = #{id}
+    </update>
+
+    <!-- 常用的查询Where条件 -->
+    <sql id="queryOrderCancelListWhere">
+    	yn = 1
+        <if test="id != null and id != ''">
+        	and id = #{id,jdbcType=DECIMAL}
+        </if>
+        <if test="refund != null and refund != ''">
+        	and refund = #{refund,jdbcType=VARCHAR}
+        </if>
+        <if test="status != null and status != ''">
+        	and status = #{status,jdbcType=DECIMAL}
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+        	and order_no = #{orderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="refundAmount != null and refundAmount != ''">
+        	and refund_amount = #{refundAmount,jdbcType=DECIMAL}
+        </if>
+        <if test="cancelReason != null and cancelReason != ''">
+        	and cancel_reason = #{cancelReason,jdbcType=VARCHAR}
+        </if>
+        <if test="cancelType != null and cancelType != ''">
+        	and cancel_type = #{cancelType,jdbcType=DECIMAL}
+        </if>
+        <if test="currentAuditName != null and currentAuditName != ''">
+        	and current_audit_name = #{currentAuditName,jdbcType=VARCHAR}
+        </if>
+        <if test="currentAuditNo != null and currentAuditNo != ''">
+        	and current_audit_no = #{currentAuditNo,jdbcType=VARCHAR}
+        </if>
+        <if test="isAuditing != null and isAuditing != ''">
+        	and is_auditing = #{isAuditing,jdbcType=DECIMAL}
+        </if>
+        <if test="auditingTime != null and auditingTime != ''">
+        	and auditing_time = #{auditingTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="finishTime != null and finishTime != ''">
+        	and finish_time = #{finishTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="remark != null and remark != ''">
+        	and remark = #{remark,jdbcType=VARCHAR}
+        </if>
+        <if test="isRefund != null and isRefund != ''">
+        	and is_refund = #{isRefund,jdbcType=DECIMAL}
+        </if>
+        <if test="createName != null and createName != ''">
+        	and create_name = #{createName,jdbcType=VARCHAR}
+        </if>
+        <if test="updateName != null and updateName != ''">
+        	and update_name = #{updateName,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="yn != null and yn != ''">
+        	and yn = #{yn,jdbcType=DECIMAL}
+        </if>
+    </sql>
+</mapper>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#updateForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												orderNo: {required: true},
+						skuNo: {required: true},
+						productNo: {required: true},
+						count: {required: true},
+						skuName: {required: true},
+						imgUrl: {required: true},
+						discount: {required: true},
+						skuPrice: {required: true},
+						finalPrice: {required: true},
+						createName: {required: true},
+						updateName: {required: true},
+					},
+			
+					messages: {
+						orderNo: { required: "请输入订单编码"},
+						skuNo: { required: "请输入sku编码"},
+						productNo: { required: "请输入商品编号"},
+						count: { required: "请输入商品个数"},
+						skuName: { required: "请输入商品名称"},
+						imgUrl: { required: "请输入商品主图"},
+						discount: { required: "请输入商品优惠价"},
+						skuPrice: { required: "请输入商品单价"},
+						finalPrice: { required: "请输入优惠后价格"},
+						createName: { required: "请输入创建人"},
+						updateName: { required: "请输入修改人"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/ordersItems");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#updateForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/ordersItems/update',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/ordersItems"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>订单明细&nbsp;&gt;&nbsp;修改
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="updateForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderNo">订单编码</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="orderNo" id="orderNo" class="col-xs-12 col-sm-12" value="$!ordersItems.orderNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="skuNo">sku编码</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="skuNo" id="skuNo" class="col-xs-12 col-sm-12" value="$!ordersItems.skuNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="productNo">商品编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="productNo" id="productNo" class="col-xs-12 col-sm-12" value="$!ordersItems.productNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="count">商品个数</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="count" id="count" class="col-xs-12 col-sm-12" value="$!ordersItems.count" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="skuName">商品名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="skuName" id="skuName" class="col-xs-12 col-sm-12" value="$!ordersItems.skuName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="imgUrl">商品主图</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="imgUrl" id="imgUrl" class="col-xs-12 col-sm-12" value="$!ordersItems.imgUrl" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="discount">商品优惠价</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="discount" id="discount" class="col-xs-12 col-sm-12" value="$!ordersItems.discount" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="skuPrice">商品单价</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="skuPrice" id="skuPrice" class="col-xs-12 col-sm-12" value="$!ordersItems.skuPrice" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="finalPrice">优惠后价格</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="finalPrice" id="finalPrice" class="col-xs-12 col-sm-12" value="$!ordersItems.finalPrice" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="createName">创建人</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="createName" id="createName" class="col-xs-12 col-sm-12" value="$!ordersItems.createName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="updateName">修改人</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="updateName" id="updateName" class="col-xs-12 col-sm-12" value="$!ordersItems.updateName" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<input type="hidden" name="id" id="id" value="$!ordersItems.id" />
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

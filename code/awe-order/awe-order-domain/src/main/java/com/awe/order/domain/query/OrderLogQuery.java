@@ -1,0 +1,238 @@
+package com.awe.order.domain.query;
+
+import java.util.Date;
+
+import com.hbird.common.utils.page.Query;
+
+/**
+ * OrderLogQuery：订单日志查询类
+ * 
+ * @author ljz
+ * @version 2014-12-23 10:06:35
+ * 
+ */
+public class OrderLogQuery extends Query {
+    
+    /** 自增id */
+	private Long id; 
+    /** 订单编号 */
+	private String orderNo; 
+    /** 订单状态 */
+	private Integer status; 
+    /** 状态名称 */
+	private String statusName; 
+    /** 订单描述 */
+	private String description; 
+    /** 100:前台显示;200后台显示 */
+	private Integer logType; 
+    /** 创建时间 */
+	private Date createTime; 
+    /** 创建人 */
+	private String createName; 
+    /** 是否有效 */
+	private Integer yn; 
+    /** 开始时间 */
+    private Date startTime; 
+    /** 结束时间 */
+    private Date endTime; 
+    
+    /**
+     * get 自增id
+     * 
+     * @return the id
+     */
+    public Long getId(){
+        return id;
+    }
+        
+    /**
+     * set 自增id
+     * 
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    /**
+     * get 订单编号
+     * 
+     * @return the orderNo
+     */
+    public String getOrderNo(){
+        return orderNo;
+    }
+        
+    /**
+     * set 订单编号
+     * 
+     * @param orderNo the orderNo to set
+     */
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+    
+    /**
+     * get 订单状态
+     * 
+     * @return the status
+     */
+    public Integer getStatus(){
+        return status;
+    }
+        
+    /**
+     * set 订单状态
+     * 
+     * @param status the status to set
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+    
+    /**
+     * get 状态名称
+     * 
+     * @return the statusName
+     */
+    public String getStatusName(){
+        return statusName;
+    }
+        
+    /**
+     * set 状态名称
+     * 
+     * @param statusName the statusName to set
+     */
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+    
+    /**
+     * get 订单描述
+     * 
+     * @return the description
+     */
+    public String getDescription(){
+        return description;
+    }
+        
+    /**
+     * set 订单描述
+     * 
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    /**
+     * get 100:前台显示;200后台显示
+     * 
+     * @return the logType
+     */
+    public Integer getLogType(){
+        return logType;
+    }
+        
+    /**
+     * set 100:前台显示;200后台显示
+     * 
+     * @param logType the logType to set
+     */
+    public void setLogType(Integer logType) {
+        this.logType = logType;
+    }
+    
+    /**
+     * get 创建时间
+     * 
+     * @return the createTime
+     */
+    public Date getCreateTime(){
+        return createTime;
+    }
+        
+    /**
+     * set 创建时间
+     * 
+     * @param createTime the createTime to set
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+    
+    /**
+     * get 创建人
+     * 
+     * @return the createName
+     */
+    public String getCreateName(){
+        return createName;
+    }
+        
+    /**
+     * set 创建人
+     * 
+     * @param createName the createName to set
+     */
+    public void setCreateName(String createName) {
+        this.createName = createName;
+    }
+    
+    /**
+     * get 是否有效
+     * 
+     * @return the yn
+     */
+    public Integer getYn(){
+        return yn;
+    }
+        
+    /**
+     * set 是否有效
+     * 
+     * @param yn the yn to set
+     */
+    public void setYn(Integer yn) {
+        this.yn = yn;
+    }
+
+    /**
+     * get 开始时间
+     * 
+     * @return the startTime
+     */
+    public Date getStartTime() {
+        return startTime;
+    }
+    
+    /**
+     * set 开始时间
+     * 
+     * @param startTime
+     *            the startTime to set
+     */
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+    
+    /**
+     * get 结束时间
+     * 
+     * @return the endTime
+     */
+    public Date getEndTime() {
+        return endTime;
+    }
+    
+    /**
+     * set 结束时间
+     * 
+     * @param endTime
+     *            the endTime to set
+     */
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+}

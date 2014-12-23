@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#addForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												userId: {required: true},
+						cnname: {required: true},
+						sex: {required: true},
+						nickname: {required: true},
+						email: {required: true},
+						emailValidated: {required: true},
+						birthday: {required: true},
+						constellation: {required: true},
+						userPhoto: {required: true},
+						description: {required: true},
+						provinceName: {required: true},
+						provinceNo: {required: true},
+						cityName: {required: true},
+						cityNo: {required: true},
+						countyName: {required: true},
+						countyNo: {required: true},
+						address: {required: true},
+						mobile: {required: true},
+						phone: {required: true},
+						safeQuestion: {required: true},
+						safeAnswer: {required: true},
+						qq: {required: true},
+						grade: {required: true},
+						payPassword: {required: true},
+						score: {required: true},
+					},
+			
+					messages: {
+						userId: { required: "请输入用户ID"},
+						cnname: { required: "请输入姓名"},
+						sex: { required: "请输入性别"},
+						nickname: { required: "请输入昵称"},
+						email: { required: "请输入邮箱"},
+						emailValidated: { required: "请输入用户是否验证邮箱"},
+						birthday: { required: "请输入生日"},
+						constellation: { required: "请输入星座"},
+						userPhoto: { required: "请输入用户头像"},
+						description: { required: "请输入自我介绍"},
+						provinceName: { required: "请输入地区-省份-名称"},
+						provinceNo: { required: "请输入地区-省份-编号"},
+						cityName: { required: "请输入地区-市-名称"},
+						cityNo: { required: "请输入地区-市-编号"},
+						countyName: { required: "请输入地区-县-名称"},
+						countyNo: { required: "请输入地区-县-编号"},
+						address: { required: "请输入联系地址"},
+						mobile: { required: "请输入移动电话"},
+						phone: { required: "请输入固定电话"},
+						safeQuestion: { required: "请输入安全问题"},
+						safeAnswer: { required: "请输入安全问题答案"},
+						qq: { required: "请输入QQ"},
+						grade: { required: "请输入会员等级"},
+						payPassword: { required: "请输入支付密码"},
+						score: { required: "请输入我的剩余积分"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/userProfile");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#addForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/userProfile/add',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/userProfile"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>用户基本信息&nbsp;&gt;&nbsp;新增
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="addForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="userId">用户ID</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="userId" id="userId" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cnname">姓名</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cnname" id="cnname" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="sex">性别</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="sex" id="sex" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="nickname">昵称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="nickname" id="nickname" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="email">邮箱</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="email" id="email" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="emailValidated">用户是否验证邮箱</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="emailValidated" id="emailValidated" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="birthday">生日</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="birthday" id="birthday" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="constellation">星座</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="constellation" id="constellation" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="userPhoto">用户头像</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="userPhoto" id="userPhoto" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="description">自我介绍</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="description" id="description" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceName">地区-省份-名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="provinceName" id="provinceName" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceNo">地区-省份-编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="provinceNo" id="provinceNo" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityName">地区-市-名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cityName" id="cityName" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityNo">地区-市-编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cityNo" id="cityNo" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="countyName">地区-县-名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="countyName" id="countyName" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="countyNo">地区-县-编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="countyNo" id="countyNo" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="address">联系地址</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="address" id="address" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="mobile">移动电话</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="mobile" id="mobile" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="phone">固定电话</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="phone" id="phone" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="safeQuestion">安全问题</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="safeQuestion" id="safeQuestion" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="safeAnswer">安全问题答案</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="safeAnswer" id="safeAnswer" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="qq">QQ</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="qq" id="qq" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="grade">会员等级</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="grade" id="grade" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="payPassword">支付密码</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="payPassword" id="payPassword" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="score">我的剩余积分</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="score" id="score" class="col-xs-12 col-sm-12" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

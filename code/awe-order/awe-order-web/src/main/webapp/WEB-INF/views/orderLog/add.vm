@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#addForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												orderNo: {required: true},
+						status: {required: true},
+						statusName: {required: true},
+						description: {required: true},
+						logType: {required: true},
+						createName: {required: true},
+					},
+			
+					messages: {
+						orderNo: { required: "请输入订单编号"},
+						status: { required: "请输入订单状态"},
+						statusName: { required: "请输入状态名称"},
+						description: { required: "请输入描述"},
+						logType: { required: "请输入日志类型"},
+						createName: { required: "请输入创建人"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/orderLog");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#addForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/orderLog/add',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/orderLog"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>订单日志&nbsp;&gt;&nbsp;新增
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="addForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderNo">订单编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="orderNo" id="orderNo" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="status">订单状态</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="status" id="status" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="statusName">状态名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="statusName" id="statusName" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="description">描述</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="description" id="description" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="logType">日志类型</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="logType" id="logType" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="createName">创建人</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="createName" id="createName" class="col-xs-12 col-sm-12" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

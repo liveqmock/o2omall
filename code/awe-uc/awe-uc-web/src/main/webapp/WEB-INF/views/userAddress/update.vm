@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#updateForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												userId: {required: true},
+						name: {required: true},
+						provinceName: {required: true},
+						provinceNo: {required: true},
+						cityName: {required: true},
+						cityNo: {required: true},
+						countyName: {required: true},
+						countyNo: {required: true},
+						address: {required: true},
+						mobile: {required: true},
+						phone: {required: true},
+						email: {required: true},
+						zipcode: {required: true},
+					},
+			
+					messages: {
+						userId: { required: "请输入用户ID"},
+						name: { required: "请输入收货人姓名"},
+						provinceName: { required: "请输入省份名称"},
+						provinceNo: { required: "请输入省份编码"},
+						cityName: { required: "请输入市名称"},
+						cityNo: { required: "请输入市编号"},
+						countyName: { required: "请输入县名称"},
+						countyNo: { required: "请输入县编码"},
+						address: { required: "请输入详细地址"},
+						mobile: { required: "请输入移动电话"},
+						phone: { required: "请输入固定电话"},
+						email: { required: "请输入电子邮件"},
+						zipcode: { required: "请输入邮编"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/userAddress");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#updateForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/userAddress/update',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/userAddress"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>收货地址&nbsp;&gt;&nbsp;修改
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="updateForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="userId">用户ID</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="userId" id="userId" class="col-xs-12 col-sm-12" value="$!userAddress.userId" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="name">收货人姓名</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="name" id="name" class="col-xs-12 col-sm-12" value="$!userAddress.name" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceName">省份名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="provinceName" id="provinceName" class="col-xs-12 col-sm-12" value="$!userAddress.provinceName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceNo">省份编码</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="provinceNo" id="provinceNo" class="col-xs-12 col-sm-12" value="$!userAddress.provinceNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityName">市名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cityName" id="cityName" class="col-xs-12 col-sm-12" value="$!userAddress.cityName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityNo">市编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cityNo" id="cityNo" class="col-xs-12 col-sm-12" value="$!userAddress.cityNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="countyName">县名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="countyName" id="countyName" class="col-xs-12 col-sm-12" value="$!userAddress.countyName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="countyNo">县编码</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="countyNo" id="countyNo" class="col-xs-12 col-sm-12" value="$!userAddress.countyNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="address">详细地址</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="address" id="address" class="col-xs-12 col-sm-12" value="$!userAddress.address" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="mobile">移动电话</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="mobile" id="mobile" class="col-xs-12 col-sm-12" value="$!userAddress.mobile" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="phone">固定电话</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="phone" id="phone" class="col-xs-12 col-sm-12" value="$!userAddress.phone" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="email">电子邮件</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="email" id="email" class="col-xs-12 col-sm-12" value="$!userAddress.email" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="zipcode">邮编</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="zipcode" id="zipcode" class="col-xs-12 col-sm-12" value="$!userAddress.zipcode" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<input type="hidden" name="id" id="id" value="$!userAddress.id" />
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

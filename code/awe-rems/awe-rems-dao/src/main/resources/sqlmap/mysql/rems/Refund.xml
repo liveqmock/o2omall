@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.awe.rems.dao.impl.RefundDaoImpl">
+    <resultMap id="RefundMap" type="Refund">
+		<result column="id" property="id" jdbcType="DECIMAL" />
+		<result column="service_no" property="serviceNo" jdbcType="VARCHAR" />
+		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+		<result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
+		<result column="account_no" property="accountNo" jdbcType="VARCHAR" />
+		<result column="account_name" property="accountName" jdbcType="VARCHAR" />
+		<result column="refund_date" property="refundDate" jdbcType="TIMESTAMP" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="create_user_id" property="createUserId" jdbcType="DECIMAL" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_user_id" property="updateUserId" jdbcType="DECIMAL" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+		<result column="yn" property="yn" jdbcType="DECIMAL" />
+		<result column="return_exchange_id" property="returnExchangeId" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <sql id="refundColumns">
+    	id,service_no,order_no,refund_amount,account_no,account_name,refund_date,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn,return_exchange_id
+    </sql>
+    
+     <sql id="refundUsedColumns">
+    	service_no,order_no,refund_amount,account_no,account_name,refund_date,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn,return_exchange_id
+    </sql>
+
+    <!-- 创建信息 -->
+    <insert id="insert" parameterType="Refund" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO refund(<include refid="refundUsedColumns"/>) 
+        VALUES (#{serviceNo},#{orderNo},#{refundAmount},#{accountNo},#{accountName},#{refundDate},#{createTime},#{updateTime},#{createUserId},#{createUser},#{updateUserId},#{updateUser},#{yn},#{returnExchangeId})
+	</insert>
+	
+    <!-- 修改信息 -->
+    <update id="update" parameterType="Refund">
+        <if test="_parameter != null">
+            <if test="id != null and id > 0">
+                update refund set
+		        <if test="serviceNo != null and serviceNo != ''">
+                	service_no = #{serviceNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="orderNo != null and orderNo != ''">
+                	order_no = #{orderNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="refundAmount != null and refundAmount != ''">
+                	refund_amount = #{refundAmount,jdbcType=DECIMAL},
+		        </if>
+		        <if test="accountNo != null and accountNo != ''">
+                	account_no = #{accountNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="accountName != null and accountName != ''">
+                	account_name = #{accountName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="refundDate != null and refundDate != ''">
+                	refund_date = #{refundDate,jdbcType=TIMESTAMP},
+		        </if>
+		        <if test="createUserId != null and createUserId != ''">
+                	create_user_id = #{createUserId,jdbcType=DECIMAL},
+		        </if>
+		        <if test="updateUserId != null and updateUserId != ''">
+                	update_user_id = #{updateUserId,jdbcType=DECIMAL},
+		        </if>
+		        <if test="updateUser != null and updateUser != ''">
+                	update_user = #{updateUser,jdbcType=VARCHAR},
+		        </if>
+		        <if test="returnExchangeId != null and returnExchangeId != ''">
+                	return_exchange_id = #{returnExchangeId,jdbcType=DECIMAL},
+		        </if>
+                	update_time = now()
+                where id = #{id}
+            </if>
+        </if>
+    </update>
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="getRefundById" resultMap="RefundMap" parameterType="java.lang.Long">
+        <if test="_parameter != null">
+            select <include refid="refundColumns"/> from refund
+            where id = #{_parameter} and yn = 1
+        </if>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，不带翻页 -->
+    <select id="queryRefundList" resultMap="RefundMap"
+            parameterType="com.awe.rems.domain.query.RefundQuery">
+        select <include refid="refundColumns"/> from refund where <include refid="queryRefundListWhere"/>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，翻页 -->
+    <select id="queryRefundListWithPage" resultMap="RefundMap"
+            parameterType="com.awe.rems.domain.query.RefundQuery">
+        select <include refid="refundColumns"/> from refund where <include refid="queryRefundListWhere"/>
+        order by create_time desc 
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 根据查询Bean查询-判断是否存在 -->
+    <select id="exist" resultType="java.lang.Integer" parameterType="Refund">
+        select count(1) from refund where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据查询Bean获取集合总数 -->
+    <select id="queryRefundCount" resultType="java.lang.Integer"
+            parameterType="com.awe.rems.domain.query.RefundQuery">
+        select count(1) from refund where <include refid="queryRefundListWhere"/>
+    </select>
+
+    <!-- 删除信息-逻辑删除 -->
+    <update id="delete" parameterType="Refund">
+		update refund 
+		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
+		where id = #{id}
+    </update>
+
+    <!-- 常用的查询Where条件 -->
+    <sql id="queryRefundListWhere">
+    	yn = 1
+        <if test="id != null and id != ''">
+        	and id = #{id,jdbcType=DECIMAL}
+        </if>
+        <if test="serviceNo != null and serviceNo != ''">
+        	and service_no = #{serviceNo,jdbcType=VARCHAR}
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+        	and order_no = #{orderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="refundAmount != null and refundAmount != ''">
+        	and refund_amount = #{refundAmount,jdbcType=DECIMAL}
+        </if>
+        <if test="accountNo != null and accountNo != ''">
+        	and account_no = #{accountNo,jdbcType=VARCHAR}
+        </if>
+        <if test="accountName != null and accountName != ''">
+        	and account_name = #{accountName,jdbcType=VARCHAR}
+        </if>
+        <if test="refundDate != null and refundDate != ''">
+        	and refund_date = #{refundDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createUserId != null and createUserId != ''">
+        	and create_user_id = #{createUserId,jdbcType=DECIMAL}
+        </if>
+        <if test="createUser != null and createUser != ''">
+        	and create_user = #{createUser,jdbcType=VARCHAR}
+        </if>
+        <if test="updateUserId != null and updateUserId != ''">
+        	and update_user_id = #{updateUserId,jdbcType=DECIMAL}
+        </if>
+        <if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
+        </if>
+        <if test="yn != null and yn != ''">
+        	and yn = #{yn,jdbcType=DECIMAL}
+        </if>
+        <if test="returnExchangeId != null and returnExchangeId != ''">
+        	and return_exchange_id = #{returnExchangeId,jdbcType=DECIMAL}
+        </if>
+    </sql>
+</mapper>

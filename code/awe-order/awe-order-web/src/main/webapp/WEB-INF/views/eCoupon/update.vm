@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#updateForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												orderNo: {required: true},
+						voucherNo: {required: true},
+						type: {required: true},
+						status: {required: true},
+						effectiveTime: {required: true},
+						generateTime: {required: true},
+						deadline: {required: true},
+						createName: {required: true},
+						updateName: {required: true},
+					},
+			
+					messages: {
+						orderNo: { required: "请输入订单号"},
+						voucherNo: { required: "请输入券号"},
+						type: { required: "请输入类型"},
+						status: { required: "请输入状态"},
+						effectiveTime: { required: "请输入有效期"},
+						generateTime: { required: "请输入生成时间"},
+						deadline: { required: "请输入截止日期"},
+						createName: { required: "请输入创建人"},
+						updateName: { required: "请输入修改人"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/eCoupon");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#updateForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/eCoupon/update',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/eCoupon"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>电子券&nbsp;&gt;&nbsp;修改
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="updateForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderNo">订单号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="orderNo" id="orderNo" class="col-xs-12 col-sm-12" value="$!eCoupon.orderNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="voucherNo">券号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="voucherNo" id="voucherNo" class="col-xs-12 col-sm-12" value="$!eCoupon.voucherNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="type">类型</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="type" id="type" class="col-xs-12 col-sm-12" value="$!eCoupon.type" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="status">状态</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="status" id="status" class="col-xs-12 col-sm-12" value="$!eCoupon.status" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="effectiveTime">有效期</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="effectiveTime" id="effectiveTime" class="col-xs-12 col-sm-12" value="$!eCoupon.effectiveTime" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="generateTime">生成时间</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="generateTime" id="generateTime" class="col-xs-12 col-sm-12" value="$!eCoupon.generateTime" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="deadline">截止日期</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="deadline" id="deadline" class="col-xs-12 col-sm-12" value="$!eCoupon.deadline" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="createName">创建人</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="createName" id="createName" class="col-xs-12 col-sm-12" value="$!eCoupon.createName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="updateName">修改人</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="updateName" id="updateName" class="col-xs-12 col-sm-12" value="$!eCoupon.updateName" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<input type="hidden" name="id" id="id" value="$!eCoupon.id" />
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

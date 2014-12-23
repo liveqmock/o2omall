@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#updateForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												channelNo: {required: true},
+						channelName: {required: true},
+						channelCategoryNo: {required: true},
+						channelCategoryName: {required: true},
+						isDefault: {required: true},
+						priority: {required: true},
+						createUserId: {required: true},
+						updateUserId: {required: true},
+					},
+			
+					messages: {
+						channelNo: { required: "请输入通道编号"},
+						channelName: { required: "请输入通道名称"},
+						channelCategoryNo: { required: "请输入通道分类编号"},
+						channelCategoryName: { required: "请输入通道分类名称"},
+						isDefault: { required: "请输入是否默认"},
+						priority: { required: "请输入优先级"},
+						createUserId: { required: "请输入创建人id"},
+						updateUserId: { required: "请输入更新人id"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/channel");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#updateForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/channel/update',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/channel"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>支付通道&nbsp;&gt;&nbsp;修改
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="updateForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="channelNo">通道编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="channelNo" id="channelNo" class="col-xs-12 col-sm-12" value="$!channel.channelNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="channelName">通道名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="channelName" id="channelName" class="col-xs-12 col-sm-12" value="$!channel.channelName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="channelCategoryNo">通道分类编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="channelCategoryNo" id="channelCategoryNo" class="col-xs-12 col-sm-12" value="$!channel.channelCategoryNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="channelCategoryName">通道分类名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="channelCategoryName" id="channelCategoryName" class="col-xs-12 col-sm-12" value="$!channel.channelCategoryName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="isDefault">是否默认</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="isDefault" id="isDefault" class="col-xs-12 col-sm-12" value="$!channel.isDefault" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="priority">优先级</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="priority" id="priority" class="col-xs-12 col-sm-12" value="$!channel.priority" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="createUserId">创建人id</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="createUserId" id="createUserId" class="col-xs-12 col-sm-12" value="$!channel.createUserId" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="updateUserId">更新人id</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="updateUserId" id="updateUserId" class="col-xs-12 col-sm-12" value="$!channel.updateUserId" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<input type="hidden" name="id" id="id" value="$!channel.id" />
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

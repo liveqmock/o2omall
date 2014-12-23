@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.awe.uc.dao.impl.UserAccountDaoImpl">
+    <resultMap id="UserAccountMap" type="UserAccount">
+		<result column="id" property="id" jdbcType="DECIMAL" />
+		<result column="userName" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="login_times" property="loginTimes" jdbcType="DECIMAL" />
+		<result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR" />
+		<result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="yn" property="yn" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <sql id="userAccountColumns">
+    	id,userName,password,login_times,last_login_ip,last_login_time,create_user,update_user,create_time,update_time,yn
+    </sql>
+    
+     <sql id="userAccountUsedColumns">
+    	userName,password,login_times,last_login_ip,last_login_time,create_user,update_user,create_time,update_time,yn
+    </sql>
+
+    <!-- 创建信息 -->
+    <insert id="insert" parameterType="UserAccount" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user_account(<include refid="userAccountUsedColumns"/>) 
+        VALUES (#{username},#{password},#{loginTimes},#{lastLoginIp},#{lastLoginTime},#{createUser},#{updateUser},#{createTime},#{updateTime},#{yn})
+	</insert>
+	
+    <!-- 修改信息 -->
+    <update id="update" parameterType="UserAccount">
+        <if test="_parameter != null">
+            <if test="id != null and id > 0">
+                update user_account set
+		        <if test="username != null and username != ''">
+                	userName = #{username,jdbcType=VARCHAR},
+		        </if>
+		        <if test="password != null and password != ''">
+                	password = #{password,jdbcType=VARCHAR},
+		        </if>
+		        <if test="loginTimes != null and loginTimes != ''">
+                	login_times = #{loginTimes,jdbcType=DECIMAL},
+		        </if>
+		        <if test="lastLoginIp != null and lastLoginIp != ''">
+                	last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+		        </if>
+		        <if test="lastLoginTime != null and lastLoginTime != ''">
+                	last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+		        </if>
+		        <if test="updateUser != null and updateUser != ''">
+                	update_user = #{updateUser,jdbcType=VARCHAR},
+		        </if>
+                	update_time = now()
+                where id = #{id}
+            </if>
+        </if>
+    </update>
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="getUserAccountById" resultMap="UserAccountMap" parameterType="java.lang.Long">
+        <if test="_parameter != null">
+            select <include refid="userAccountColumns"/> from user_account
+            where id = #{_parameter} and yn = 1
+        </if>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，不带翻页 -->
+    <select id="queryUserAccountList" resultMap="UserAccountMap"
+            parameterType="com.awe.uc.domain.query.UserAccountQuery">
+        select <include refid="userAccountColumns"/> from user_account where <include refid="queryUserAccountListWhere"/>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，翻页 -->
+    <select id="queryUserAccountListWithPage" resultMap="UserAccountMap"
+            parameterType="com.awe.uc.domain.query.UserAccountQuery">
+        select <include refid="userAccountColumns"/> from user_account where <include refid="queryUserAccountListWhere"/>
+        order by create_time desc 
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 根据查询Bean查询-判断是否存在 -->
+    <select id="exist" resultType="java.lang.Integer" parameterType="UserAccount">
+        select count(1) from user_account where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据查询Bean获取集合总数 -->
+    <select id="queryUserAccountCount" resultType="java.lang.Integer"
+            parameterType="com.awe.uc.domain.query.UserAccountQuery">
+        select count(1) from user_account where <include refid="queryUserAccountListWhere"/>
+    </select>
+
+    <!-- 删除信息-逻辑删除 -->
+    <update id="delete" parameterType="UserAccount">
+		update user_account 
+		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
+		where id = #{id}
+    </update>
+
+    <!-- 常用的查询Where条件 -->
+    <sql id="queryUserAccountListWhere">
+    	yn = 1
+        <if test="id != null and id != ''">
+        	and id = #{id,jdbcType=DECIMAL}
+        </if>
+        <if test="username != null and username != ''">
+        	and userName = #{username,jdbcType=VARCHAR}
+        </if>
+        <if test="password != null and password != ''">
+        	and password = #{password,jdbcType=VARCHAR}
+        </if>
+        <if test="loginTimes != null and loginTimes != ''">
+        	and login_times = #{loginTimes,jdbcType=DECIMAL}
+        </if>
+        <if test="lastLoginIp != null and lastLoginIp != ''">
+        	and last_login_ip = #{lastLoginIp,jdbcType=VARCHAR}
+        </if>
+        <if test="lastLoginTime != null and lastLoginTime != ''">
+        	and last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createUser != null and createUser != ''">
+        	and create_user = #{createUser,jdbcType=VARCHAR}
+        </if>
+        <if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="yn != null and yn != ''">
+        	and yn = #{yn,jdbcType=DECIMAL}
+        </if>
+    </sql>
+</mapper>

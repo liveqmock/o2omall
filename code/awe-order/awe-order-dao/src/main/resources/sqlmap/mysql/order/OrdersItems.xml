@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.awe.order.dao.impl.OrdersItemsDaoImpl">
+    <resultMap id="OrdersItemsMap" type="OrdersItems">
+		<result column="id" property="id" jdbcType="DECIMAL" />
+		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+		<result column="sku_no" property="skuNo" jdbcType="VARCHAR" />
+		<result column="product_no" property="productNo" jdbcType="VARCHAR" />
+		<result column="count" property="count" jdbcType="DECIMAL" />
+		<result column="sku_name" property="skuName" jdbcType="VARCHAR" />
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+		<result column="discount" property="discount" jdbcType="DECIMAL" />
+		<result column="sku_price" property="skuPrice" jdbcType="DECIMAL" />
+		<result column="final_price" property="finalPrice" jdbcType="DECIMAL" />
+		<result column="create_name" property="createName" jdbcType="VARCHAR" />
+		<result column="update_name" property="updateName" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="yn" property="yn" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <sql id="ordersItemsColumns">
+    	id,order_no,sku_no,product_no,count,sku_name,img_url,discount,sku_price,final_price,create_name,update_name,create_time,update_time,yn
+    </sql>
+    
+     <sql id="ordersItemsUsedColumns">
+    	order_no,sku_no,product_no,count,sku_name,img_url,discount,sku_price,final_price,create_name,update_name,create_time,update_time,yn
+    </sql>
+
+    <!-- 创建信息 -->
+    <insert id="insert" parameterType="OrdersItems" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO orders_items(<include refid="ordersItemsUsedColumns"/>) 
+        VALUES (#{orderNo},#{skuNo},#{productNo},#{count},#{skuName},#{imgUrl},#{discount},#{skuPrice},#{finalPrice},#{createName},#{updateName},#{createTime},#{updateTime},#{yn})
+	</insert>
+	
+    <!-- 修改信息 -->
+    <update id="update" parameterType="OrdersItems">
+        <if test="_parameter != null">
+            <if test="id != null and id > 0">
+                update orders_items set
+		        <if test="orderNo != null and orderNo != ''">
+                	order_no = #{orderNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="skuNo != null and skuNo != ''">
+                	sku_no = #{skuNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="productNo != null and productNo != ''">
+                	product_no = #{productNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="count != null and count != ''">
+                	count = #{count,jdbcType=DECIMAL},
+		        </if>
+		        <if test="skuName != null and skuName != ''">
+                	sku_name = #{skuName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="imgUrl != null and imgUrl != ''">
+                	img_url = #{imgUrl,jdbcType=VARCHAR},
+		        </if>
+		        <if test="discount != null and discount != ''">
+                	discount = #{discount,jdbcType=DECIMAL},
+		        </if>
+		        <if test="skuPrice != null and skuPrice != ''">
+                	sku_price = #{skuPrice,jdbcType=DECIMAL},
+		        </if>
+		        <if test="finalPrice != null and finalPrice != ''">
+                	final_price = #{finalPrice,jdbcType=DECIMAL},
+		        </if>
+		        <if test="createName != null and createName != ''">
+                	create_name = #{createName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="updateName != null and updateName != ''">
+                	update_name = #{updateName,jdbcType=VARCHAR},
+		        </if>
+                	update_time = now()
+                where id = #{id}
+            </if>
+        </if>
+    </update>
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="getOrdersItemsById" resultMap="OrdersItemsMap" parameterType="java.lang.Long">
+        <if test="_parameter != null">
+            select <include refid="ordersItemsColumns"/> from orders_items
+            where id = #{_parameter} and yn = 1
+        </if>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，不带翻页 -->
+    <select id="queryOrdersItemsList" resultMap="OrdersItemsMap"
+            parameterType="com.awe.order.domain.query.OrdersItemsQuery">
+        select <include refid="ordersItemsColumns"/> from orders_items where <include refid="queryOrdersItemsListWhere"/>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，翻页 -->
+    <select id="queryOrdersItemsListWithPage" resultMap="OrdersItemsMap"
+            parameterType="com.awe.order.domain.query.OrdersItemsQuery">
+        select <include refid="ordersItemsColumns"/> from orders_items where <include refid="queryOrdersItemsListWhere"/>
+        order by create_time desc 
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 根据查询Bean查询-判断是否存在 -->
+    <select id="exist" resultType="java.lang.Integer" parameterType="OrdersItems">
+        select count(1) from orders_items where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据查询Bean获取集合总数 -->
+    <select id="queryOrdersItemsCount" resultType="java.lang.Integer"
+            parameterType="com.awe.order.domain.query.OrdersItemsQuery">
+        select count(1) from orders_items where <include refid="queryOrdersItemsListWhere"/>
+    </select>
+
+    <!-- 删除信息-逻辑删除 -->
+    <update id="delete" parameterType="OrdersItems">
+		update orders_items 
+		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
+		where id = #{id}
+    </update>
+
+    <!-- 常用的查询Where条件 -->
+    <sql id="queryOrdersItemsListWhere">
+    	yn = 1
+        <if test="id != null and id != ''">
+        	and id = #{id,jdbcType=DECIMAL}
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+        	and order_no = #{orderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="skuNo != null and skuNo != ''">
+        	and sku_no = #{skuNo,jdbcType=VARCHAR}
+        </if>
+        <if test="productNo != null and productNo != ''">
+        	and product_no = #{productNo,jdbcType=VARCHAR}
+        </if>
+        <if test="count != null and count != ''">
+        	and count = #{count,jdbcType=DECIMAL}
+        </if>
+        <if test="skuName != null and skuName != ''">
+        	and sku_name = #{skuName,jdbcType=VARCHAR}
+        </if>
+        <if test="imgUrl != null and imgUrl != ''">
+        	and img_url = #{imgUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="discount != null and discount != ''">
+        	and discount = #{discount,jdbcType=DECIMAL}
+        </if>
+        <if test="skuPrice != null and skuPrice != ''">
+        	and sku_price = #{skuPrice,jdbcType=DECIMAL}
+        </if>
+        <if test="finalPrice != null and finalPrice != ''">
+        	and final_price = #{finalPrice,jdbcType=DECIMAL}
+        </if>
+        <if test="createName != null and createName != ''">
+        	and create_name = #{createName,jdbcType=VARCHAR}
+        </if>
+        <if test="updateName != null and updateName != ''">
+        	and update_name = #{updateName,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="yn != null and yn != ''">
+        	and yn = #{yn,jdbcType=DECIMAL}
+        </if>
+    </sql>
+</mapper>

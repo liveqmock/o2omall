@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#addForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												refund: {required: true},
+						status: {required: true},
+						orderNo: {required: true},
+						refundAmount: {required: true},
+						cancelReason: {required: true},
+						cancelType: {required: true},
+						currentAuditName: {required: true},
+						currentAuditNo: {required: true},
+						isAuditing: {required: true},
+						auditingTime: {required: true},
+						finishTime: {required: true},
+						remark: {required: true},
+						isRefund: {required: true},
+						createName: {required: true},
+						updateName: {required: true},
+					},
+			
+					messages: {
+						refund: { required: "请输入退款单号"},
+						status: { required: "请输入退款单状态"},
+						orderNo: { required: "请输入订单编号"},
+						refundAmount: { required: "请输入退款金额"},
+						cancelReason: { required: "请输入取消原因"},
+						cancelType: { required: "请输入取消类型"},
+						currentAuditName: { required: "请输入审核人姓名"},
+						currentAuditNo: { required: "请输入审核人编码"},
+						isAuditing: { required: "请输入是否审核通过"},
+						auditingTime: { required: "请输入审核时间"},
+						finishTime: { required: "请输入退款完成时间"},
+						remark: { required: "请输入审核意见"},
+						isRefund: { required: "请输入是否需要退款"},
+						createName: { required: "请输入创建人姓名"},
+						updateName: { required: "请输入修改人姓名"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/orderCancel");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#addForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/orderCancel/add',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/orderCancel"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>订单取消&nbsp;&gt;&nbsp;新增
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="addForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="refund">退款单号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="refund" id="refund" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="status">退款单状态</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="status" id="status" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderNo">订单编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="orderNo" id="orderNo" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="refundAmount">退款金额</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="refundAmount" id="refundAmount" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cancelReason">取消原因</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cancelReason" id="cancelReason" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cancelType">取消类型</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cancelType" id="cancelType" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="currentAuditName">审核人姓名</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="currentAuditName" id="currentAuditName" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="currentAuditNo">审核人编码</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="currentAuditNo" id="currentAuditNo" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="isAuditing">是否审核通过</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="isAuditing" id="isAuditing" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="auditingTime">审核时间</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="auditingTime" id="auditingTime" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="finishTime">退款完成时间</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="finishTime" id="finishTime" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="remark">审核意见</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="remark" id="remark" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="isRefund">是否需要退款</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="isRefund" id="isRefund" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="createName">创建人姓名</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="createName" id="createName" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="updateName">修改人姓名</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="updateName" id="updateName" class="col-xs-12 col-sm-12" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

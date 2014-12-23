@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.awe.pay.dao.impl.TradeRefundFailDaoImpl">
+    <resultMap id="TradeRefundFailMap" type="TradeRefundFail">
+		<result column="id" property="id" jdbcType="DECIMAL" />
+		<result column="order_no" property="orderNo" jdbcType="DECIMAL" />
+		<result column="pay_type" property="payType" jdbcType="DECIMAL" />
+		<result column="status" property="status" jdbcType="DECIMAL" />
+		<result column="execute_count" property="executeCount" jdbcType="DECIMAL" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+		<result column="yn" property="yn" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <sql id="tradeRefundFailColumns">
+    	id,order_no,pay_type,status,execute_count,create_time,update_time,create_user,update_user,yn
+    </sql>
+    
+     <sql id="tradeRefundFailUsedColumns">
+    	order_no,pay_type,status,execute_count,create_time,update_time,create_user,update_user,yn
+    </sql>
+
+    <!-- 创建信息 -->
+    <insert id="insert" parameterType="TradeRefundFail" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO trade_refund_fail(<include refid="tradeRefundFailUsedColumns"/>) 
+        VALUES (#{orderNo},#{payType},#{status},#{executeCount},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+	</insert>
+	
+    <!-- 修改信息 -->
+    <update id="update" parameterType="TradeRefundFail">
+        <if test="_parameter != null">
+            <if test="id != null and id > 0">
+                update trade_refund_fail set
+		        <if test="orderNo != null and orderNo != ''">
+                	order_no = #{orderNo,jdbcType=DECIMAL},
+		        </if>
+		        <if test="payType != null and payType != ''">
+                	pay_type = #{payType,jdbcType=DECIMAL},
+		        </if>
+		        <if test="status != null and status != ''">
+                	status = #{status,jdbcType=DECIMAL},
+		        </if>
+		        <if test="executeCount != null and executeCount != ''">
+                	execute_count = #{executeCount,jdbcType=DECIMAL},
+		        </if>
+		        <if test="updateUser != null and updateUser != ''">
+                	update_user = #{updateUser,jdbcType=VARCHAR},
+		        </if>
+                	update_time = now()
+                where id = #{id}
+            </if>
+        </if>
+    </update>
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="getTradeRefundFailById" resultMap="TradeRefundFailMap" parameterType="java.lang.Long">
+        <if test="_parameter != null">
+            select <include refid="tradeRefundFailColumns"/> from trade_refund_fail
+            where id = #{_parameter} and yn = 1
+        </if>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，不带翻页 -->
+    <select id="queryTradeRefundFailList" resultMap="TradeRefundFailMap"
+            parameterType="com.awe.pay.domain.query.TradeRefundFailQuery">
+        select <include refid="tradeRefundFailColumns"/> from trade_refund_fail where <include refid="queryTradeRefundFailListWhere"/>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，翻页 -->
+    <select id="queryTradeRefundFailListWithPage" resultMap="TradeRefundFailMap"
+            parameterType="com.awe.pay.domain.query.TradeRefundFailQuery">
+        select <include refid="tradeRefundFailColumns"/> from trade_refund_fail where <include refid="queryTradeRefundFailListWhere"/>
+        order by create_time desc 
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 根据查询Bean查询-判断是否存在 -->
+    <select id="exist" resultType="java.lang.Integer" parameterType="TradeRefundFail">
+        select count(1) from trade_refund_fail where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据查询Bean获取集合总数 -->
+    <select id="queryTradeRefundFailCount" resultType="java.lang.Integer"
+            parameterType="com.awe.pay.domain.query.TradeRefundFailQuery">
+        select count(1) from trade_refund_fail where <include refid="queryTradeRefundFailListWhere"/>
+    </select>
+
+    <!-- 删除信息-逻辑删除 -->
+    <update id="delete" parameterType="TradeRefundFail">
+		update trade_refund_fail 
+		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
+		where id = #{id}
+    </update>
+
+    <!-- 常用的查询Where条件 -->
+    <sql id="queryTradeRefundFailListWhere">
+    	yn = 1
+        <if test="id != null and id != ''">
+        	and id = #{id,jdbcType=DECIMAL}
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+        	and order_no = #{orderNo,jdbcType=DECIMAL}
+        </if>
+        <if test="payType != null and payType != ''">
+        	and pay_type = #{payType,jdbcType=DECIMAL}
+        </if>
+        <if test="status != null and status != ''">
+        	and status = #{status,jdbcType=DECIMAL}
+        </if>
+        <if test="executeCount != null and executeCount != ''">
+        	and execute_count = #{executeCount,jdbcType=DECIMAL}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createUser != null and createUser != ''">
+        	and create_user = #{createUser,jdbcType=VARCHAR}
+        </if>
+        <if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
+        </if>
+        <if test="yn != null and yn != ''">
+        	and yn = #{yn,jdbcType=DECIMAL}
+        </if>
+    </sql>
+</mapper>

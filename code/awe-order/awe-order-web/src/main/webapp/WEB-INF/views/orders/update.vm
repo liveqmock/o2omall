@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#updateForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												orderNo: {required: true},
+						orderType: {required: true},
+						userId: {required: true},
+						userName: {required: true},
+						orderName: {required: true},
+						consigneeName: {required: true},
+						consigneePhone: {required: true},
+						telephone: {required: true},
+						emil: {required: true},
+						zipCode: {required: true},
+						payName: {required: true},
+						orderDate: {required: true},
+						isTalSure: {required: true},
+						payWay: {required: true},
+						payType: {required: true},
+						isInvoice: {required: true},
+						invoiceType: {required: true},
+						invoiceTitle: {required: true},
+						invoiceContent: {required: true},
+						orderStatus: {required: true},
+						commAmount: {required: true},
+						retCash: {required: true},
+						expenses: {required: true},
+						amountPay: {required: true},
+						parentOrderNo: {required: true},
+						provinceName: {required: true},
+						provinceNo: {required: true},
+						cityName: {required: true},
+						cityNo: {required: true},
+						countyName: {required: true},
+						countyNo: {required: true},
+						address: {required: true},
+						payTime: {required: true},
+						remark: {required: true},
+						createName: {required: true},
+						integral: {required: true},
+						updateName: {required: true},
+					},
+			
+					messages: {
+						orderNo: { required: "请输入订单编号"},
+						orderType: { required: "请输入订单类型"},
+						userId: { required: "请输入下单用户ID"},
+						userName: { required: "请输入下单用户账号"},
+						orderName: { required: "请输入下单姓名"},
+						consigneeName: { required: "请输入收货人姓名"},
+						consigneePhone: { required: "请输入收货人手机号"},
+						telephone: { required: "请输入固定电话"},
+						emil: { required: "请输入邮箱"},
+						zipCode: { required: "请输入邮编"},
+						payName: { required: "请输入支付名称"},
+						orderDate: { required: "请输入送货日期"},
+						isTalSure: { required: "请输入是否送货前电话确定"},
+						payWay: { required: "请输入付款方式"},
+						payType: { required: "请输入付款类型"},
+						isInvoice: { required: "请输入是否要发票"},
+						invoiceType: { required: "请输入发票类型"},
+						invoiceTitle: { required: "请输入发票抬头"},
+						invoiceContent: { required: "请输入发票内容"},
+						orderStatus: { required: "请输入订单状态"},
+						commAmount: { required: "请输入总商品金额"},
+						retCash: { required: "请输入返现"},
+						expenses: { required: "请输入运费"},
+						amountPay: { required: "请输入应付总额"},
+						parentOrderNo: { required: "请输入父订单编号"},
+						provinceName: { required: "请输入省份名称"},
+						provinceNo: { required: "请输入省份编号"},
+						cityName: { required: "请输入市名称"},
+						cityNo: { required: "请输入市编号"},
+						countyName: { required: "请输入县名称"},
+						countyNo: { required: "请输入省编号"},
+						address: { required: "请输入送货地址"},
+						payTime: { required: "请输入支付时间"},
+						remark: { required: "请输入订单备注"},
+						createName: { required: "请输入创建人"},
+						integral: { required: "请输入积分"},
+						updateName: { required: "请输入修改人"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/orders");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#updateForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/orders/update',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/orders"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>订单&nbsp;&gt;&nbsp;修改
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="updateForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderNo">订单编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="orderNo" id="orderNo" class="col-xs-12 col-sm-12" value="$!orders.orderNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderType">订单类型</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="orderType" id="orderType" class="col-xs-12 col-sm-12" value="$!orders.orderType" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="userId">下单用户ID</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="userId" id="userId" class="col-xs-12 col-sm-12" value="$!orders.userId" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="userName">下单用户账号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="userName" id="userName" class="col-xs-12 col-sm-12" value="$!orders.userName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderName">下单姓名</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="orderName" id="orderName" class="col-xs-12 col-sm-12" value="$!orders.orderName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="consigneeName">收货人姓名</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="consigneeName" id="consigneeName" class="col-xs-12 col-sm-12" value="$!orders.consigneeName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="consigneePhone">收货人手机号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="consigneePhone" id="consigneePhone" class="col-xs-12 col-sm-12" value="$!orders.consigneePhone" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="telephone">固定电话</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="telephone" id="telephone" class="col-xs-12 col-sm-12" value="$!orders.telephone" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="emil">邮箱</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="emil" id="emil" class="col-xs-12 col-sm-12" value="$!orders.emil" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="zipCode">邮编</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="zipCode" id="zipCode" class="col-xs-12 col-sm-12" value="$!orders.zipCode" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="payName">支付名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="payName" id="payName" class="col-xs-12 col-sm-12" value="$!orders.payName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderDate">送货日期</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="orderDate" id="orderDate" class="col-xs-12 col-sm-12" value="$!orders.orderDate" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="isTalSure">是否送货前电话确定</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="isTalSure" id="isTalSure" class="col-xs-12 col-sm-12" value="$!orders.isTalSure" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="payWay">付款方式</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="payWay" id="payWay" class="col-xs-12 col-sm-12" value="$!orders.payWay" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="payType">付款类型</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="payType" id="payType" class="col-xs-12 col-sm-12" value="$!orders.payType" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="isInvoice">是否要发票</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="isInvoice" id="isInvoice" class="col-xs-12 col-sm-12" value="$!orders.isInvoice" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="invoiceType">发票类型</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="invoiceType" id="invoiceType" class="col-xs-12 col-sm-12" value="$!orders.invoiceType" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="invoiceTitle">发票抬头</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="invoiceTitle" id="invoiceTitle" class="col-xs-12 col-sm-12" value="$!orders.invoiceTitle" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="invoiceContent">发票内容</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="invoiceContent" id="invoiceContent" class="col-xs-12 col-sm-12" value="$!orders.invoiceContent" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderStatus">订单状态</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="orderStatus" id="orderStatus" class="col-xs-12 col-sm-12" value="$!orders.orderStatus" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="commAmount">总商品金额</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="commAmount" id="commAmount" class="col-xs-12 col-sm-12" value="$!orders.commAmount" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="retCash">返现</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="retCash" id="retCash" class="col-xs-12 col-sm-12" value="$!orders.retCash" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="expenses">运费</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="expenses" id="expenses" class="col-xs-12 col-sm-12" value="$!orders.expenses" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="amountPay">应付总额</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="amountPay" id="amountPay" class="col-xs-12 col-sm-12" value="$!orders.amountPay" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="parentOrderNo">父订单编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="parentOrderNo" id="parentOrderNo" class="col-xs-12 col-sm-12" value="$!orders.parentOrderNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceName">省份名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="provinceName" id="provinceName" class="col-xs-12 col-sm-12" value="$!orders.provinceName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceNo">省份编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="provinceNo" id="provinceNo" class="col-xs-12 col-sm-12" value="$!orders.provinceNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityName">市名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cityName" id="cityName" class="col-xs-12 col-sm-12" value="$!orders.cityName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityNo">市编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cityNo" id="cityNo" class="col-xs-12 col-sm-12" value="$!orders.cityNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="countyName">县名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="countyName" id="countyName" class="col-xs-12 col-sm-12" value="$!orders.countyName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="countyNo">省编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="countyNo" id="countyNo" class="col-xs-12 col-sm-12" value="$!orders.countyNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="address">送货地址</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="address" id="address" class="col-xs-12 col-sm-12" value="$!orders.address" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="payTime">支付时间</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="payTime" id="payTime" class="col-xs-12 col-sm-12" value="$!orders.payTime" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="remark">订单备注</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="remark" id="remark" class="col-xs-12 col-sm-12" value="$!orders.remark" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="createName">创建人</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="createName" id="createName" class="col-xs-12 col-sm-12" value="$!orders.createName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="integral">积分</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="integral" id="integral" class="col-xs-12 col-sm-12" value="$!orders.integral" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="updateName">修改人</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="updateName" id="updateName" class="col-xs-12 col-sm-12" value="$!orders.updateName" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<input type="hidden" name="id" id="id" value="$!orders.id" />
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>
