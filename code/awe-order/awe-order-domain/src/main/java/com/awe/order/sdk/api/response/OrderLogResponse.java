@@ -8,7 +8,7 @@ import com.awe.order.sdk.api.response.dto.OrderLogResponseDto;
  * 提供rest接口时方法的返回对象
  * 
  * @author ljz
- * @version 2014-12-23 10:06:36
+ * @version 2014-12-23 10:58:06
  * 
  */
 public class OrderLogResponse extends HbirdResponse<OrderLogResponseDto> {

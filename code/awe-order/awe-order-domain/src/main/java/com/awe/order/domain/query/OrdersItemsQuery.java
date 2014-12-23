@@ -8,7 +8,7 @@ import com.hbird.common.utils.page.Query;
  * OrdersItemsQuery：订单明细查询类
  * 
  * @author ljz
- * @version 2014-12-23 10:06:35
+ * @version 2014-12-23 10:58:06
  * 
  */
 public class OrdersItemsQuery extends Query {
@@ -34,9 +34,9 @@ public class OrdersItemsQuery extends Query {
     /** 优惠后价格 */
 	private Double finalPrice; 
     /** 创建人 */
-	private String createName; 
+	private String createUser; 
     /** 修改人 */
-	private String updateName; 
+	private String updateUser; 
     /** 创建时间 */
 	private Date createTime; 
     /** 修改时间 */
@@ -231,37 +231,37 @@ public class OrdersItemsQuery extends Query {
     /**
      * get 创建人
      * 
-     * @return the createName
+     * @return the createUser
      */
-    public String getCreateName(){
-        return createName;
+    public String getCreateUser(){
+        return createUser;
     }
         
     /**
      * set 创建人
      * 
-     * @param createName the createName to set
+     * @param createUser the createUser to set
      */
-    public void setCreateName(String createName) {
-        this.createName = createName;
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
     }
     
     /**
      * get 修改人
      * 
-     * @return the updateName
+     * @return the updateUser
      */
-    public String getUpdateName(){
-        return updateName;
+    public String getUpdateUser(){
+        return updateUser;
     }
         
     /**
      * set 修改人
      * 
-     * @param updateName the updateName to set
+     * @param updateUser the updateUser to set
      */
-    public void setUpdateName(String updateName) {
-        this.updateName = updateName;
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
     }
     
     /**

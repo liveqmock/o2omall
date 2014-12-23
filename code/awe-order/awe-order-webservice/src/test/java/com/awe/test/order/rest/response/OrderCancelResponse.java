@@ -8,7 +8,7 @@ import com.awe.test.order.rest.response.dto.OrderCancelResponseDto;
  * 提供rest接口时方法的返回对象
  * 
  * @author ljz
- * @version 2014-12-23 10:06:38
+ * @version 2014-12-23 10:58:09
  * 
  */
 public class OrderCancelResponse extends HbirdResponse<OrderCancelResponseDto> {

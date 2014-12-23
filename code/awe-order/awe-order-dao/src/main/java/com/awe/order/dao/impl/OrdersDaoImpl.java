@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  * 对'订单'表进行基本的操作
  * 
  * @author ljz
- * @version 2014-12-23 10:06:35
+ * @version 2014-12-23 10:58:05
  * 
  */
 @Repository

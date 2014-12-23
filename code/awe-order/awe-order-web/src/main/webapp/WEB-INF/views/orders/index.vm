@@ -179,21 +179,13 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="payTime" id="payTime" class="col-xs-10 col-sm-8" value="$!query.payTime"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="remark">订单备注</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="remark" id="remark" class="col-xs-10 col-sm-8" value="$!query.remark"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="createName">创建人</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="createName" id="createName" class="col-xs-10 col-sm-8" value="$!query.createName"/>
-                                    </div>
 									<label class="col-sm-1 control-label no-padding-right" for="integral">积分</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="integral" id="integral" class="col-xs-10 col-sm-8" value="$!query.integral"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="updateName">修改人</label>
+									<label class="col-sm-1 control-label no-padding-right" for="remark">订单备注</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="updateName" id="updateName" class="col-xs-10 col-sm-8" value="$!query.updateName"/>
+                                        <input type="text" name="remark" id="remark" class="col-xs-10 col-sm-8" value="$!query.remark"/>
                                     </div>
 								</div>
 								<div class="form-group">
@@ -249,11 +241,10 @@
 							<th class="center">省编号</th>
 							<th class="center">送货地址</th>
 							<th class="center">支付时间</th>
+							<th class="center">积分</th>
 							<th class="center">订单备注</th>
 							<th class="center">创建时间</th>
 							<th class="center">创建人</th>
-							<th class="center">积分</th>
-							<th class="center">修改人</th>
     						<th class="center">操作</th>
                         </tr>
                     </thead>
@@ -294,11 +285,10 @@
                                 <td>$!item.countyNo</td>
                                 <td>$!item.address</td>
                                 <td>$!item.payTime</td>
+                                <td>$!item.integral</td>
                                 <td>$!item.remark</td>
                                 <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.createTime)</td>
-                                <td>$!item.createName</td>
-                                <td>$!item.integral</td>
-                                <td>$!item.updateName</td>
+                                <td>$!item.createUser</td>
                                 <td>
 									<a href="javascript:void(0)" onclick="toDetail($!item.id);" data-toggle="modal"><i class="icon-list">详情</i></a>
 									<a href="javascript:void(0)" onclick="toUpdate($!item.id)"><i class="icon-pencil pink">修改</i></a>

@@ -8,7 +8,7 @@ import com.hbird.common.utils.page.Query;
  * OrderCancelQuery：订单取消查询类
  * 
  * @author ljz
- * @version 2014-12-23 10:06:35
+ * @version 2014-12-23 10:58:06
  * 
  */
 public class OrderCancelQuery extends Query {
@@ -42,9 +42,9 @@ public class OrderCancelQuery extends Query {
     /** 0:不需要;1需要 */
 	private Integer isRefund; 
     /** 创建人姓名 */
-	private String createName; 
+	private String createUser; 
     /** 修改人姓名 */
-	private String updateName; 
+	private String updateUser; 
     /** 创建时间 */
 	private Date createTime; 
     /** 修改时间 */
@@ -311,37 +311,37 @@ public class OrderCancelQuery extends Query {
     /**
      * get 创建人姓名
      * 
-     * @return the createName
+     * @return the createUser
      */
-    public String getCreateName(){
-        return createName;
+    public String getCreateUser(){
+        return createUser;
     }
         
     /**
      * set 创建人姓名
      * 
-     * @param createName the createName to set
+     * @param createUser the createUser to set
      */
-    public void setCreateName(String createName) {
-        this.createName = createName;
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
     }
     
     /**
      * get 修改人姓名
      * 
-     * @return the updateName
+     * @return the updateUser
      */
-    public String getUpdateName(){
-        return updateName;
+    public String getUpdateUser(){
+        return updateUser;
     }
         
     /**
      * set 修改人姓名
      * 
-     * @param updateName the updateName to set
+     * @param updateUser the updateUser to set
      */
-    public void setUpdateName(String updateName) {
-        this.updateName = updateName;
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
     }
     
     /**

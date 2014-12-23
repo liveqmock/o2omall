@@ -28,7 +28,7 @@ import com.awe.order.service.OrdersItemsService;
  * 订单明细REST服务：提供有关订单明细的接口
  * 
  * @author ljz
- * @version 2014-12-23 10:06:37
+ * @version 2014-12-23 10:58:09
  * 
  */
 @Component

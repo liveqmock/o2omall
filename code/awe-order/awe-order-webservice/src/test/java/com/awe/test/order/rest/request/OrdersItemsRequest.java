@@ -7,7 +7,7 @@ import com.awe.test.order.rest.request.dto.OrdersItemsRequestDto;
  * OrdersItemsRequest：订单明细请求参数
  * 
  * @author ljz
- * @version 2014-12-23 10:06:38
+ * @version 2014-12-23 10:58:09
  * 
  */
 public class OrdersItemsRequest extends HbirdSecureRequest<OrdersItemsRequestDto> {

@@ -18,7 +18,7 @@ import com.awe.test.base.TestConstants;
  * OrdersService单元测试
  * 
  * @author ljz
- * @version 2014-12-23 10:06:37
+ * @version 2014-12-23 10:58:09
  * 
  */
 public class OrdersServiceTestCase extends BaseTransactionTestCase {

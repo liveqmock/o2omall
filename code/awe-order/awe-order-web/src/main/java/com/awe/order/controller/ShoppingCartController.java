@@ -26,7 +26,7 @@ import com.hbird.common.utils.wrap.Wrapper;
  * ShoppingCartController ：购物车控制器
  * 
  * @author ljz
- * @version 2014-12-23 10:06:36
+ * @version 2014-12-23 10:58:07
 */
 @Controller
 @RequestMapping("shoppingCart")

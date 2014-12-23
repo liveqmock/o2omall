@@ -13,10 +13,8 @@
 						type: {required: true},
 						status: {required: true},
 						effectiveTime: {required: true},
+						deadLine: {required: true},
 						generateTime: {required: true},
-						deadline: {required: true},
-						createName: {required: true},
-						updateName: {required: true},
 					},
 			
 					messages: {
@@ -25,10 +23,8 @@
 						type: { required: "请输入类型"},
 						status: { required: "请输入状态"},
 						effectiveTime: { required: "请输入有效期"},
+						deadLine: { required: "请输入截止日期"},
 						generateTime: { required: "请输入生成时间"},
-						deadline: { required: "请输入截止日期"},
-						createName: { required: "请输入创建人"},
-						updateName: { required: "请输入修改人"},
 					}
 				});
 				
@@ -82,21 +78,13 @@
                                     <div class="col-sm-4">
                                         <input type="text" name="effectiveTime" id="effectiveTime" class="col-xs-12 col-sm-12" value="$!eCoupon.effectiveTime" />
                                     </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="deadLine">截止日期</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="deadLine" id="deadLine" class="col-xs-12 col-sm-12" value="$!eCoupon.deadLine" />
+                                    </div>
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="generateTime">生成时间</label>
                                     <div class="col-sm-4">
                                         <input type="text" name="generateTime" id="generateTime" class="col-xs-12 col-sm-12" value="$!eCoupon.generateTime" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="deadline">截止日期</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="deadline" id="deadline" class="col-xs-12 col-sm-12" value="$!eCoupon.deadline" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="createName">创建人</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="createName" id="createName" class="col-xs-12 col-sm-12" value="$!eCoupon.createName" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="updateName">修改人</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="updateName" id="updateName" class="col-xs-12 col-sm-12" value="$!eCoupon.updateName" />
                                     </div>
                                 </div>
 								<div class="form-group">

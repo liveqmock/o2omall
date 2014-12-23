@@ -21,8 +21,6 @@
 						finishTime: {required: true},
 						remark: {required: true},
 						isRefund: {required: true},
-						createName: {required: true},
-						updateName: {required: true},
 					},
 			
 					messages: {
@@ -39,8 +37,6 @@
 						finishTime: { required: "请输入退款完成时间"},
 						remark: { required: "请输入审核意见"},
 						isRefund: { required: "请输入是否需要退款"},
-						createName: { required: "请输入创建人姓名"},
-						updateName: { required: "请输入修改人姓名"},
 					}
 				});
 				
@@ -125,14 +121,6 @@
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="isRefund">是否需要退款</label>
                                     <div class="col-sm-4">
                                         <input type="text" name="isRefund" id="isRefund" class="col-xs-12 col-sm-12" value="$!orderCancel.isRefund" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="createName">创建人姓名</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="createName" id="createName" class="col-xs-12 col-sm-12" value="$!orderCancel.createName" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="updateName">修改人姓名</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="updateName" id="updateName" class="col-xs-12 col-sm-12" value="$!orderCancel.updateName" />
                                     </div>
                                 </div>
 								<div class="form-group">

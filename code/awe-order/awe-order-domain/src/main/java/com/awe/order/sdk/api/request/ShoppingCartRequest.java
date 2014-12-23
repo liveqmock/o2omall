@@ -7,7 +7,7 @@ import com.awe.order.sdk.api.request.dto.ShoppingCartRequestDto;
  * ShoppingCartRequest：购物车请求参数
  * 
  * @author ljz
- * @version 2014-12-23 10:06:35
+ * @version 2014-12-23 10:58:06
  * 
  */
 public class ShoppingCartRequest extends HbirdSecureRequest<ShoppingCartRequestDto> {

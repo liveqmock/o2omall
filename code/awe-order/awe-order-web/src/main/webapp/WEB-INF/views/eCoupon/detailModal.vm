@@ -28,19 +28,19 @@
 							<th class="center" style='width:25%;'>有效期</th><td id="r_effectiveTime" style='width:25%;'></td>
 						</tr>
 						<tr>
+							<th class="center" style='width:25%;'>截止日期</th><td id="r_deadLine" style='width:25%;'></td>
+						</tr>
+						<tr>
 							<th class="center" style='width:25%;'>生成时间</th><td id="r_generateTime" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>截止日期</th><td id="r_deadline" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>创建人</th><td id="r_createName" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>创建人</th><td id="r_createUser" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>创建时间</th><td id="r_createTime" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>修改人</th><td id="r_updateName" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>修改人</th><td id="r_updateUser" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>修改时间</th><td id="r_updateTime" style='width:25%;'></td>
@@ -75,11 +75,11 @@
     				$("#r_type").text(r.type==null?"":r.type);
     				$("#r_status").text(r.status==null?"":r.status);
     				$("#r_effectiveTime").text(r.effectiveTime==null?"":r.effectiveTime);
+    				$("#r_deadLine").text(r.deadLine==null?"":r.deadLine);
     				$("#r_generateTime").text(r.generateTime==null?"":r.generateTime);
-    				$("#r_deadline").text(r.deadline==null?"":r.deadline);
-    				$("#r_createName").text(r.createName==null?"":r.createName);
+    				$("#r_createUser").text(r.createUser==null?"":r.createUser);
     				$("#r_createTime").text(r.createTime==null?"":r.createTime);
-    				$("#r_updateName").text(r.updateName==null?"":r.updateName);
+    				$("#r_updateUser").text(r.updateUser==null?"":r.updateUser);
     				$("#r_updateTime").text(r.updateTime==null?"":r.updateTime);
     				$("#r_yn").text(r.yn==null?"":r.yn);
     			} else {

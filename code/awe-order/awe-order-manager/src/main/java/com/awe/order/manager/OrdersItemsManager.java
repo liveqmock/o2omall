@@ -9,7 +9,7 @@ import com.hbird.common.utils.page.PageUtil;
  * OrdersItemsManager接口
  * 
  * @author ljz
- * @version 2014-12-23 10:06:36
+ * @version 2014-12-23 10:58:06
  * 
  */
 public interface OrdersItemsManager {

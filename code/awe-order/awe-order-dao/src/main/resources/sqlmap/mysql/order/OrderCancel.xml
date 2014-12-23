@@ -17,25 +17,25 @@
 		<result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
 		<result column="remark" property="remark" jdbcType="VARCHAR" />
 		<result column="is_refund" property="isRefund" jdbcType="DECIMAL" />
-		<result column="create_name" property="createName" jdbcType="VARCHAR" />
-		<result column="update_name" property="updateName" jdbcType="VARCHAR" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 		<result column="yn" property="yn" jdbcType="DECIMAL" />
     </resultMap>
     
     <sql id="orderCancelColumns">
-    	id,refund,status,order_no,refund_amount,cancel_reason,cancel_type,current_audit_name,current_audit_no,is_auditing,auditing_time,finish_time,remark,is_refund,create_name,update_name,create_time,update_time,yn
+    	id,refund,status,order_no,refund_amount,cancel_reason,cancel_type,current_audit_name,current_audit_no,is_auditing,auditing_time,finish_time,remark,is_refund,create_user,update_user,create_time,update_time,yn
     </sql>
     
      <sql id="orderCancelUsedColumns">
-    	refund,status,order_no,refund_amount,cancel_reason,cancel_type,current_audit_name,current_audit_no,is_auditing,auditing_time,finish_time,remark,is_refund,create_name,update_name,create_time,update_time,yn
+    	refund,status,order_no,refund_amount,cancel_reason,cancel_type,current_audit_name,current_audit_no,is_auditing,auditing_time,finish_time,remark,is_refund,create_user,update_user,create_time,update_time,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="OrderCancel" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO order_cancel(<include refid="orderCancelUsedColumns"/>) 
-        VALUES (#{refund},#{status},#{orderNo},#{refundAmount},#{cancelReason},#{cancelType},#{currentAuditName},#{currentAuditNo},#{isAuditing},#{auditingTime},#{finishTime},#{remark},#{isRefund},#{createName},#{updateName},#{createTime},#{updateTime},#{yn})
+        VALUES (#{refund},#{status},#{orderNo},#{refundAmount},#{cancelReason},#{cancelType},#{currentAuditName},#{currentAuditNo},#{isAuditing},#{auditingTime},#{finishTime},#{remark},#{isRefund},#{createUser},#{updateUser},#{createTime},#{updateTime},#{yn})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -82,11 +82,8 @@
 		        <if test="isRefund != null and isRefund != ''">
                 	is_refund = #{isRefund,jdbcType=DECIMAL},
 		        </if>
-		        <if test="createName != null and createName != ''">
-                	create_name = #{createName,jdbcType=VARCHAR},
-		        </if>
-		        <if test="updateName != null and updateName != ''">
-                	update_name = #{updateName,jdbcType=VARCHAR},
+		        <if test="updateUser != null and updateUser != ''">
+                	update_user = #{updateUser,jdbcType=VARCHAR},
 		        </if>
                 	update_time = now()
                 where id = #{id}
@@ -179,11 +176,11 @@
         <if test="isRefund != null and isRefund != ''">
         	and is_refund = #{isRefund,jdbcType=DECIMAL}
         </if>
-        <if test="createName != null and createName != ''">
-        	and create_name = #{createName,jdbcType=VARCHAR}
+        <if test="createUser != null and createUser != ''">
+        	and create_user = #{createUser,jdbcType=VARCHAR}
         </if>
-        <if test="updateName != null and updateName != ''">
-        	and update_name = #{updateName,jdbcType=VARCHAR}
+        <if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
         </if>
         <if test="createTime != null and createTime != ''">
         	and create_time = #{createTime,jdbcType=TIMESTAMP}

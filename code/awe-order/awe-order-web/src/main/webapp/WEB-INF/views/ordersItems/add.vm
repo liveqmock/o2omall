@@ -17,8 +17,6 @@
 						discount: {required: true},
 						skuPrice: {required: true},
 						finalPrice: {required: true},
-						createName: {required: true},
-						updateName: {required: true},
 					},
 			
 					messages: {
@@ -31,8 +29,6 @@
 						discount: { required: "请输入商品优惠价"},
 						skuPrice: { required: "请输入商品单价"},
 						finalPrice: { required: "请输入优惠后价格"},
-						createName: { required: "请输入创建人"},
-						updateName: { required: "请输入修改人"},
 					}
 				});
 				
@@ -101,14 +97,6 @@
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="finalPrice">优惠后价格</label>
                                     <div class="col-sm-4">
                                         <input type="text" name="finalPrice" id="finalPrice" class="col-xs-12 col-sm-12" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="createName">创建人</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="createName" id="createName" class="col-xs-12 col-sm-12" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="updateName">修改人</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="updateName" id="updateName" class="col-xs-12 col-sm-12" />
                                     </div>
                                 </div>
 								<div class="form-group">
