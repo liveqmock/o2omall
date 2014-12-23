@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    #parse("/layout/head.vm")
+    <link rel="stylesheet" href="#springUrl('')/static/images/zTreeStyle/zTreeStyle.css" />
+    #*<link rel="stylesheet" href="#springUrl('')/static/css/zTreeStyle.css" />*#
+    <script src="#springUrl('')/static/js/jquery.ztree.all-3.5.min.js"></script>
+    <script src="#springUrl('')/static/js/jquery.ztree.core-3.5.min.js"></script>
+    <script src="#springUrl('')/static/js/jquery.ztree.excheck-3.5.min.js"></script>
+    <script src="#springUrl('')/static/js/jquery.ztree.exedit-3.5.min.js"></script>
+</head>
+<body>
+      <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-search green"></i>角色查询
+                        </h5>
+                        <div class="widget-toolbar">
+                            <a href="#" data-action="collapse">
+                                <i class="1 icon-chevron-up bigger-100"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #f5f5f5;padding:5px;">
+                           <form class="form-horizontal" role="form" id="searchSystemForm">
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label no-padding-right" for="form-field-1">角色名称</label>
+
+                                    <div class="col-sm-3">
+                                        <input type="text" name="name" id="name" placeholder="角色名称"  class="col-xs-10 col-sm-8" />
+                                    </div>
+
+                                    <label class="col-sm-1 control-label no-padding-right" for="form-field-1">角色描述</label>
+
+                                    <div class="col-sm-3">
+                                        <input type="text" name="remark" id="remark" placeholder="角色描述" class="col-xs-10 col-sm-8" />
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="searchRole"><i class="icon-search"></i>查询</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="reset"><i class="icon-undo"></i>重置</button>
+                                    </div>
+                                </div>
+                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12" style="margin-top:10px;">
+                <table id="crud"></table>
+                <div id="pcrud"></div>
+            </div>
+      </div><!-- /.row -->
+
+      <div id="role-resource-modal-form" class="modal" tabindex="-1">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="blue bigger">资源分配</h4>
+                  </div>
+
+                  <div class="modal-body overflow-visible">
+                      <h5 id="role_info" class="green"></h5>
+                      <input type="hidden" id="role_id" />
+                          <div class="row">
+                              <h5 id="resource_info">资源信息:</h5>
+                              <div id="treeData" class="ztree"></div>
+                          </div>
+                  </div>
+
+                  <div class="modal-footer">
+                      <button class="btn btn-sm btn-primary" id="role-resource-submit-btn">
+                          <i class="icon-ok"></i>提交
+                      </button>
+                      <button class="btn btn-sm" data-dismiss="modal">
+                          <i class="icon-remove"></i>取消
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <script type="text/javascript">
+    jQuery("#crud").jqGrid({
+        url:window.basePath+"/role/queryRoleList",
+        datatype: "json",
+        mtype: 'POST',
+        shrinkToFit:true,
+        autowidth:true,
+        width:'100%',
+        height:'100%',
+        colNames:['权限','编号','角色编码','角色名称','备注', '创建时间', '创建人'],
+        colModel:[
+            {name:'myac1',index:'', width:60, fixed:true },
+            {name:'id',index:'id', width:100, hidden:true,editable:true,sorttype:'int'},
+            {name:'code',index:'code', width:120, editable: false},
+            {name:'name',index:'name', width:180, editable: true,editoptions:{size:"25",maxlength:"300"},editrules:{required:true,custom:true,custom_func:valName},formoptions:{elmsuffix:"<span style=\"color:red\">*</span>"}},
+            {name:'remark',index:'remark', width:200, editable: true, edittype:"textarea", editoptions:{rows:"3",cols:"23"}},
+            {name:'createTime',index:'createTime', width:180,sortable:false, editable:false, sorttype:"date"},
+            {name:'createUser',index:'createUser', width:180, editable: false, editoptions:{size:"10",maxlength:"25"}}
+        ],
+        rowNum:10,
+        rowTotal: 50,
+        rowList:[10,20,30],
+        pager: '#pcrud',
+        sortname: 'id',
+        viewrecords: true,
+        sortorder: "desc",
+        //caption:"角色列表" ,
+        altRows: true,
+        multiselect: true,
+        multiboxonly: true,
+        jsonReader:{
+            root:"result",
+            total:"totalpages",
+            page:"currpage",
+            records:"totalrecords",
+            repeatitems:false
+        },
+        loadComplete : function() {
+            var dataIds = $(this).jqGrid("getDataIDs");
+            for (i in dataIds) {
+                var rowData = $(this).jqGrid("getRowData", dataIds[i]);
+                var view = "<i class='icon-hand-right green'></i><a href='#role-resource-modal-form' role='button' class='blue' data-toggle='modal' onclick=\"showResource('"
+                        + dataIds[i]+"','"+rowData.name+"','"+rowData.cnName + "');\">分配</a>";
+                var id="tr[id='" + dataIds[i] + "'] td[aria-describedby=crud_myac1]";
+                $(id).html(view+$(id).html());
+            }
+
+
+            var table = this;
+            setTimeout(function(){
+                styleCheckbox(table);
+
+                updateActionIcons(table);
+                updatePagerIcons(table);
+                enableTooltips(table);
+            }, 0);
+        },
+        editurl: window.basePath+"/role/save"
+    }).navGrid('#pcrud',{
+                edit:true,
+                editicon : 'icon-pencil blue',
+                add:true,
+                addicon : 'icon-plus-sign purple',
+                del:true,
+                delicon : 'icon-trash red',
+                delfunc : function (rowid) {
+                    if(!confirm("您是否确认删除？")){
+                        return;
+                    }
+                    var rowids=$("#crud").jqGrid("getGridParam", "selarrrow");
+                    if (rowids.length > 0) {
+                        jQuery.ajax({
+                            type: "POST",
+                            url: window.basePath+"/role/save",
+                            dataType : 'json',
+                            data: "ids=" + rowids + "&oper=del",
+                            success: function(data){
+                                $("#crud").trigger("reloadGrid");
+                            },
+                            error : function(data) {
+                                alert("删除失败！");
+                            }
+                        });
+                    }
+                },
+
+                search:false,
+                searchicon : 'icon-search orange',
+                refresh:true,
+                refreshicon : 'icon-refresh green'
+                //view: true,
+                //viewicon : 'icon-zoom-in grey'
+            },
+            {closeAfterEdit : true},
+            {closeAfterAdd : true}
+    );
+    function valName(value, colname){
+        var rowId=$("#crud").jqGrid("getGridParam", "selrow");
+        var rowData = $("#crud").jqGrid('getRowData',rowId);
+        var roleName= rowData.name;
+        var len;
+        if(rowId!=null){
+            if(roleName!=value){
+                jQuery.ajax({
+                    type: "POST",
+                    async:false,
+                    url: window.basePath+"/role/queryRoles",
+                    dataType : 'json',
+                    data: "name=" + value,
+                    success: function(data){
+                        if(data!=null && data.code==200){
+                            var roleList=data.result;
+                            if(roleList!=null && roleList.length>0){
+                                len=0;
+                            }
+                        }
+                    },
+                    error : function(data) {
+                        alert("校验角色名称失败！");
+                    }
+                });
+            }
+        }else{
+            jQuery.ajax({
+                type: "POST",
+                async:false,
+                url: window.basePath+"/role/queryRoles",
+                dataType : 'json',
+                data: "name=" + value,
+                success: function(data){
+                    if(data!=null && data.code==200){
+                        var roleList=data.result;
+                        if(roleList!=null && roleList.length>0){
+                            len=0;
+                        }
+                    }
+                },
+                error : function(data) {
+                    alert("校验角色名称失败！");
+                }
+            });
+        }
+
+        if (len==0)
+            return [false,"角色名称【"+value+"】已经存在！"];
+        else
+            return [true,""];
+    }
+
+    $("#searchRole").click(function () {
+        $("#crud").jqGrid("setGridParam",
+                {postData: {
+                    name: $("#name").val(),
+                    remark: $("#remark").val()
+                }}
+        ).trigger("reloadGrid",[{page:1}]);
+    });
+
+    function showResource(id,name){
+        $("#role_id").val(id);
+        $("#role_info").html("角色："+name);
+        loadTree();
+    }
+    function loadTree(){
+        var setting = {
+            check: {
+                enable: true,
+                //chkboxType: { "Y" : "", "N" : "" },
+                checked: true
+
+            },
+            data: {
+                simpleData: {
+                    enable: true,
+                    idKey: "id",
+                    pIdKey: "parentId",
+                    rootPId: 0
+                }
+            }
+        };
+
+        jQuery.ajax({
+            type:"POST",
+            async:false,
+            url:basePath + "/resource/queryResourceTree",
+            data:{"roleId":$("#role_id").val()},
+            success:function(data){
+                var resList=data.result;
+                if(resList==null || resList.length==0){
+                    return;
+                } else {
+                    jQuery.fn.zTree.init(jQuery("#treeData"), setting, resList);
+                    var treeObj = $.fn.zTree.getZTreeObj("treeData");
+                    //treeObj.expandAll(true);
+                    var length=resList.length;
+                    for(var i=0;i<length;i++){
+                        if(resList[i].yn == 1){
+                            var id=resList[i].id;
+                            var node = treeObj.getNodeByParam("id",id);
+                            treeObj.checkNode(node, true, false);
+                        }
+                    }
+                }
+            }
+        });
+
+    }
+    //提交
+    $('#role-resource-submit-btn').click(function() {
+        var roleId= $("#role_id").val();
+        var zTree = jQuery.fn.zTree.getZTreeObj("treeData");
+        nodes = zTree.getCheckedNodes(true);
+        //被选中的资源id
+        var info = "";
+        for (var i = 0; i < nodes.length; i++) {
+            // 如果i+1等于选项长度则取值后添加空字符串，否则为逗号
+            info = (info + nodes[i].id) + (((i + 1)== nodes.length) ? '':',');
+        }
+        jQuery.ajax({
+            type: "POST",
+            url: basePath + "/resourceRole/saveRoleResources",
+            dataType : 'json',
+            data: "roleId="+roleId+"&resIds="+info ,
+            success: function(data){
+                if(data!=null && data.code==200){
+                    alert("操作成功");
+                    $('#role-resource-modal-form').modal('hide')
+                }else{
+                    alert("操作失败");
+                }
+            },
+            error : function(data) {
+                alert("操作失败");
+            }
+        });
+    });
+    $(document).ready(function () {
+        jQuery("#crud").jqGrid('navGrid','#pcrud',{});
+    });
+
+</script>
+
+
+</body>
+</html>

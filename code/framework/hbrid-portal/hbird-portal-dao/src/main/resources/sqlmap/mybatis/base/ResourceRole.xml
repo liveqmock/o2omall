@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="ResourceRole">
+
+    <resultMap id="ResourceRoleMap" type="ResourceRole">
+        <result column="ID" property="id" jdbcType="DECIMAL"/>
+        <result column="ROLE_ID" property="roleId" jdbcType="DECIMAL"/>
+        <result column="RES_ID" property="resId" jdbcType="DECIMAL"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="YN" property="yn" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <sql id="resourceRoleColumns">
+    	RES_ID,ROLE_ID,REMARK,CREATE_TIME,CREATE_USER,UPDATE_TIME,UPDATE_USER,YN
+    </sql>
+
+    <insert id="insert" parameterType="ResourceRole">
+        insert into p_role_res (<include refid="resourceRoleColumns"/>)
+        values(#{resId},#{roleId},#{remark},now(),#{createUser},now(),#{updateUser},0)
+    </insert>
+    <update id="deleteResourceRole" parameterType="ResourceRole">
+        update p_role_res set yn = 1, update_user = #{updateUser},update_time=now()
+        where yn=0
+        <if test="resId != null and resId > 0">
+            and res_id = #{resId}
+        </if>
+        <if test="roleId != null and roleId > 0">
+            and role_id = #{roleId}
+        </if>
+    </update> 
+    <!-- 根据角色获取已经分配的资源 -->
+    <select id="queryResourceRoleList" resultMap="ResourceRoleMap" parameterType="java.lang.Long">
+        <if test="_parameter != null">
+            select <include refid="resourceRoleColumns"/> from p_role_res
+            where yn=0 and role_id = #{_parameter}
+        </if>
+    </select>
+    
+    <!-- 根据角色ID集合查询拥有资源列表 -->
+    <select id="queryResourceListByRoleIds" resultMap="ResourceRoleMap" parameterType="ResourceRoleQuery">
+        <if test="_parameter != null">
+            select <include refid="resourceRoleColumns"/> from p_role_res
+            where yn=0 and role_id IN
+                <foreach item="item" index="index" collection="roleIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+        </if>
+    </select>
+</mapper>

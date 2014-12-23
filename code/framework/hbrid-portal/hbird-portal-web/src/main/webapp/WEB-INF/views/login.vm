@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		#parse("/layout/head.vm")
+		<script src="#springUrl('')/static/js/inner/login.js?v=1"></script>
+	</head>
+	<body class="login-layout" style="background-color:#EBECEE;">
+		<div class="main-container">
+			<div class="space-10"></div>
+
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<img src="#springUrl('')/static/avatars/logo.png" />
+					<h2>欢迎登录<span class="red">商城ERP系统</span></h2>
+				
+					<div class="position-relative">
+						<div id="login-box" class="login-box visible widget-box no-border" style="background-color:rgb(232, 232, 232);">
+							<div class="widget-body">
+								<div class="widget-main">
+									<div class="row">
+										<div class="col-sm-5 col-sm-offset-1 col-md-4 col-md-offset-1 hidden-xs">
+											<script type="text/javascript">document.write(getRandomPicNode());</script>
+										</div>
+										<div class="col-xs-12 col-sm-5 col-sm-offset-1 col-md-4 col-md-offset-1 ">
+											<div class="space-30"></div>	
+											#if(${login_msg})
+												<h5 class="red clearfix">${login_msg}</h5>
+												<div class="space-10"></div>
+											#end								
+											<form action="#springUrl('')/loginSys" method="post">
+												<input type="hidden" name="forwardUrl" id="forwardUrl" value="$!forwardUrl"/>
+												<fieldset>
+													<label class="block clearfix">用户名
+        												<span class="block input-icon input-icon-right">
+        													<input type="text" class="form-control" name="name" value="$!{name}" required/>
+        													<i class="icon-user"></i>
+        												</span>
+        											</label>
+
+        											<label class="block clearfix">密码
+        												<span class="block input-icon input-icon-right">
+        													<input type="password" class="form-control" name="password" required />
+        													<i class="icon-lock"></i>
+        												</span>
+        											</label>
+        
+        											<div class="clearfix">
+        												<label class="inline">
+        													<input type="checkbox" class="ace" />
+        													<span class="lbl"> 记住我</span>
+        												</label>
+        
+        												<button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
+        													<i class="icon-key"></i>
+        													登录
+        												</button>
+        											</div>
+        
+        											<div class="space-40"></div>
+        										</fieldset>
+											</form> 
+										</div>
+									</div><!-- ./row -->
+								</div>
+							</div>
+						</div><!-- ./login-box -->
+					</div>
+				</div>
+			</div><!-- ./row -->
+		</div><!-- /.main-container -->
+	</body>
+</html>

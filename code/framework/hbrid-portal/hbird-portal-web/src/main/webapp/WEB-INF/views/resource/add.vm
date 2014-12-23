@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+		<script src="#springUrl('')/static/js/fuelux/fuelux.spinner.min.js"></script>
+		<script src="#springUrl('')/static/js/inner/resource.js"></script>
+
+        <script language="javascript">
+            $(function() {
+				$('#addForm').validate(formValidate);
+				
+				$("#level").change(function(){
+					levelChanged(0);
+				});
+				
+				$("#icon").change(function(){
+					var icon= $("#icon").val();
+					$("#icon-show").attr("class",icon);
+				});
+				
+				$('#priority').ace_spinner({value:10,min:1,max:100,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/resource");
+				});
+				$("#btn-submit").click(submitAddResource);
+				loadSystems(0);
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>资源&nbsp;&gt;&nbsp;新增
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="addForm">
+								<input type="hidden" name="type" id="type" value="1"/>
+								<input type="hidden" name="isClick" id="isClick" value="0"/>
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="sysCode">业务系统</label>
+                                    <div class="col-sm-6">
+										<select name="sysCode" id="sysCode" class="col-xs-12 col-sm-12">
+                                        </select>
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="level">菜单层级</label>
+                                    <div class="col-sm-6">
+                                        <select name="level" id="level" class="col-xs-12 col-sm-12">
+											#foreach($key in ${levels.keySet()})
+                            					<option value="$key">${levels.get($key)}</option>
+											#end
+                                        </select>
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="parentId">父资源</label>
+                                    <div class="col-sm-6">
+										<select name="parentId" id="parentId" class="col-xs-12 col-sm-12">
+											<option value="0">根节点资源(虚拟)</option>
+                                        </select>
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="name">资源名称</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="name" id="name" class="col-xs-12 col-sm-12" />
+                                    </div>
+                                </div>
+								<div class="form-group" id="div-url" style="display:none;">
+									<label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="url" id="label-url">资源URL</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="url" id="url" class="col-xs-12 col-sm-12" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="priority">优先级</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" name="priority" id="priority" class="col-xs-12 col-sm-12 input-mini"/>
+                                    </div>
+                                    <div class="col-sm-3"><span class='red'>提示:数值小，排序靠前</span></div>
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="icon">图标</label>
+                                    <div class="col-sm-4">
+                                        <select name="icon" id="icon" class="col-xs-12 col-sm-12">
+											#foreach( $icon in $icons)
+												<option value="$!icon">$!icon</option>
+											#end
+                                        </select>
+                                    </div>
+									 <div class="col-sm-2">
+                                        <span id="icon-show" class="${icons.get(0)}"></span>
+                                     </div>
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="remark">备注</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="remark" id="remark" class="col-xs-12 col-sm-12" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<title>无访问权限页面</title>
+		#parse("/layout/head.vm")
+	</head>
+	<body>
+		<div class="center">
+			<h2 class="alert alert-danger">
+				无访问权限
+				<hr>
+				<div class="alert alert-warning">
+					抱歉，当前登录用户【$!user】无访问资源【$!resource】的权限！
+					<br />
+				</div>
+			</h2>
+        </div>
+	</body>
+</html>

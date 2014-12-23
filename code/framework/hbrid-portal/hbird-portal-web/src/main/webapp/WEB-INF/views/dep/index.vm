@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		#parse("/layout/head.vm")
+		<script src="#springUrl('')/static/js/inner/dep.js?v=12"></script>
+	</head>
+	<body>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12">
+				<div class="widget-box">
+					<div class="widget-header">
+      					<h5 class="lighter">
+      	  					<i class="icon-search green"></i>
+      	  					部门信息查询
+      	  				</h5>
+      					<div class="widget-toolbar">
+							<a href="#" data-action="collapse">
+								<i class="1 icon-chevron-up bigger-100"></i>
+							</a>
+						</div>
+    				</div>
+					<div class="widget-body">
+						<div class="widget-main" style="background-color: #f5f5f5;padding:5px;">
+            				<form class="form-horizontal" role="form" id="queryDepForm">
+          						<div class="form-group">
+          							<label class="col-sm-1 control-label no-padding-right" for="code">部门编号</label>
+    		                      	<div class="col-sm-3">
+    		                        	<input type="text" id="code" name="code" placeholder="部门编号" class="col-xs-10 col-sm-8" />
+    		                      	</div>
+    		                   
+    		                      	<label class="col-sm-1 control-label no-padding-right" for="name">部门名称</label>
+    		                      	<div class="col-sm-3">
+    		                        	<input type="text" id="name" name="name" placeholder="部门名称" class="col-xs-10 col-sm-8" />
+    		                      	</div>
+    								<!--
+    		                      	<label class="col-sm-1 control-label no-padding-right" for="effect">是否有效</label>
+    		                      	<div class="col-sm-3">
+    		                        	<input type="text" id="effect" name="effect" placeholder="是否有效" class="col-xs-10 col-sm-8" />
+    		                      	</div>
+									-->
+									<div class="col-sm-3 col-sm-offset-1">
+              							<button class="btn btn-info btn-sm" id="searchBtn" type="button"><i class="icon-search"></i>查询</button>
+              							&nbsp; &nbsp;
+              							<button class="btn btn-sm" type="reset"><i class="icon-undo"></i>重置</button>
+            						</div>
+    							</div>
+								<!--
+								<div class="form-group">
+    								<label class="col-sm-1 control-label no-padding-right" for="startTime">开始时间</label>
+									<div class="col-sm-3">
+										<input type="text" id="startTime" name="startTime" value="$!startTime" class="col-xs-10 col-sm-8 form_datetime" />
+									</div>
+       
+									<label class="col-sm-1 control-label no-padding-right" for="endTime">结束时间</label>
+									<div class="col-sm-3">
+										<input type="text" id="endTime" name="endTime" value="$!endTime" class="col-xs-10 col-sm-8 form_datetime" />
+									</div>
+									<script type="text/javascript">
+										setDateTimePicker("form_datetime");
+									</script>
+          						</div>
+								-->
+        					</form>	 
+          				</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12" style="margin-top:10px;">
+          		<table id="depQueryTable"></table>
+				<div id="depQueryPager"></div>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</body>
+</html>

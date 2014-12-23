@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		#parse("/layout/head.vm")
+		<script src="#springUrl('')/static/js/inner/user.js?timeStamp=12345"></script>
+	</head>
+	<body>
+		<div class="row">							
+			<div class="col-xs-12 col-sm-12">
+				<div class="widget-box">
+					<div class="widget-header">
+      					<h5 class="lighter">
+      	  					<i class="icon-search green"></i>
+      	  					用户信息查询
+      	  				</h5>
+      					<div class="widget-toolbar">
+							<a href="#" data-action="collapse">
+								<i class="1 icon-chevron-up bigger-100"></i>
+							</a>
+						</div>
+    				</div>
+					<div class="widget-body">
+						<div class="widget-main" style="background-color: #f5f5f5;padding:5px;">
+            				<form class="form-horizontal" role="form">
+              					<div class="form-group">
+          							<label class="col-sm-2 control-label no-padding-right" for="name">账号</label>
+    		                      	<div class="col-sm-4">
+    		                        	<input type="text" id="name" name="name" placeholder="账号" class="col-xs-10 col-sm-8" />
+    		                      	</div>
+									
+          							<label class="col-sm-2 control-label no-padding-right" for="code">编号</label>
+    		                      	<div class="col-sm-4">
+    		                        	<input type="text" id="code" name="code" placeholder="编号" class="col-xs-10 col-sm-8" />
+    		                      	</div>
+        		                </div>
+        		                <div class="form-group">
+          							<label class="col-sm-2 control-label no-padding-right" for="name">部门名称</label>
+    		                      	<div class="col-sm-4">
+    		                        	<input type="text" id="depname" name="depname" placeholder="部门名称" class="col-xs-10 col-sm-8" />
+    		                      	</div>
+									
+          							<label class="col-sm-2 control-label no-padding-right" for="code">岗位</label>
+    		                      	<div class="col-sm-4">
+    		                        	<input type="text" id="jobTitle" name="jobTitle" placeholder="岗位" class="col-xs-10 col-sm-8" />
+    		                      	</div>
+        		                </div>
+								<div class="form-group">
+    		                      	<label class="col-sm-2 control-label no-padding-right" for="cnName">姓名</label>
+    		                      	<div class="col-sm-4">
+    		                        	<input type="text" id="cnName" name="cnName" placeholder="姓名" class="col-xs-10 col-sm-8" />
+    		                      	</div>
+    								<div class="col-sm-4 col-sm-offset-2">
+              							<button class="btn btn-info btn-sm" id="searchBtn" type="button"><i class="icon-search"></i>查询</button>&nbsp; &nbsp;
+              							<button class="btn btn-sm" type="reset"><i class="icon-undo"></i>重置</button>&nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" data-toggle="modal" data-target="#user-add-modal-form"><i class="icon-plus"></i>添加</button>
+            						</div>
+        						</div>	
+        					</form>	 
+          				</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-12" style="margin-top:10px;">
+          		<table id="userQueryTable"></table>
+				<div id="userQueryPager"></div>
+			</div>
+
+		</div><!-- /.row -->
+		
+    	<div id="user-role-modal-form" class="modal" tabindex="-1">
+    		<div class="modal-dialog">
+    			<div class="modal-content">
+    				<div class="modal-header">
+    					<button type="button" class="close" data-dismiss="modal">&times;</button>
+    					<h4 class="blue bigger">分配角色给用户</h4>
+    				</div>
+    
+    				<div class="modal-body overflow-visible">
+						<h5 id="role_user_info" class="green"></h4>
+						<input type="hidden" id="role_user_id" />
+						<input type="hidden" id="userIds" />
+    					<div class="row">
+							<div class="col-sm-4">
+								<h5>可用角色：</h5>
+								<select multiple="multiple" id="select1" style="width:120px;height:200px;">
+								</select>
+                            </div>
+                            <div class="col-sm-4">
+                                <p>&nbsp; &nbsp;</p>
+								<p>&nbsp; &nbsp;</p>
+                                <p><button id="add" class="btn btn-info btn-xs">添加选中&nbsp;&gt;&gt;</button></p>
+                                <p><button id="remove" class="btn btn-info btn-xs">&lt;&lt;&nbsp;删除选中</button></p>
+                                <p>&nbsp; &nbsp;</p>
+                                <p><button id="add_all" class="btn btn-success btn-xs">全部添加&nbsp;&gt;&gt;</button></p>
+                                <p><button id="remove_all" class="btn btn-success btn-xs">&lt;&lt;&nbsp;全部删除</button></p>
+                            </div>
+                            <div class="col-sm-4">
+								<h5>已选角色：</h5>
+								<select multiple="multiple" id="select2" style="width: 120px;height:200px;">
+								</select>
+                            </div>
+                         </div>
+    				</div>
+    
+    				<div class="modal-footer">
+    					<button class="btn btn-sm btn-primary" id="user-role-submit-btn">
+    						<i class="icon-ok"></i>提交
+    					</button>
+    					<button class="btn btn-sm" data-dismiss="modal">
+    						<i class="icon-remove"></i>取消
+    					</button>
+    				</div>
+    			</div>
+    		</div>
+    	</div> 
+		
+    	
+    	<div id="user-add-modal-form" class="modal" tabindex="-1">
+    		<div class="modal-dialog">
+    			<div class="modal-content">
+    				<div class="modal-header">
+    					<button type="button" class="close" data-dismiss="modal">&times;</button>
+    					<h4 class="blue bigger">添加用户</h4>
+    				</div>
+    
+    				<div class="modal-body overflow-visible">
+    					<div class="row">
+							<div class="col-sm-12">
+								<form class="form-horizontal" role="form" id="user_add_form" name="user_add_form">
+									<input type="hidden" id="oper" name="oper" value="add" />
+									<input type="hidden" id="userType" name="userType" value="2" />
+                    				<div class="form-group">
+                    					<label for="name" class="col-sm-2 control-label">账号</label>
+                    					<div class="col-sm-4">
+											<input class="form-control" type="text" name="name" />
+                                            <span class="blue">*账号必须唯一</span>
+										</div>
+                    					<label for="code" class="col-sm-2 control-label">编号</label>
+                    					<div class="col-sm-4">
+											<input class="form-control" type="text" name="code" />
+										</div>
+                    				</div>
+                    				<div class="form-group">
+                    					<label for="password" class="col-sm-2 control-label">密码</label>
+                    					<div class="col-sm-4">
+											<input class="col-sm-8 form-control" type="password" name="password" id="password"/>
+										</div>
+                    					<label for="password2" class="col-sm-2 control-label">确认密码</label>
+                    					<div class="col-sm-4">
+											<input class="col-sm-8 form-control" type="password" name="password2" id="password2" />
+										</div>
+                    				</div>
+                    				<div class="form-group">
+                    					<label for="cnName" class="col-sm-2 control-label">姓名</label>
+                    					<div class="col-sm-4">
+											<input class="form-control" type="text" name="cnName" />
+										</div>
+                    					<label for="email" class="col-sm-2 control-label">邮箱</label>
+                    					<div class="col-sm-4">
+                    						<input class="form-control" type="email" name="email" />
+                    					</div>
+                    				</div>
+                    				<div class="form-group">
+                    					<label for="phoneNo" class="col-sm-2 control-label">联系方式</label>
+                    					<div class="col-sm-4">
+                    						<input class="form-control" type="text" name="phoneNo" />
+                    					</div>
+                    					<label for="jobTitle"  class="col-sm-2 control-label">岗位</label>
+                    					<div class="col-sm-4">
+                    						<input class="form-control" type="text" name="jobTitle" />
+                    					</div>
+                    				</div>
+                    				<div class="form-group">
+                    					<label for="status" class="col-sm-2 control-label">状态</label>
+                    					<div class="col-sm-4">
+                    						<select name="status" class="form-control" >
+												<option value="1">在职</option>
+												<option value="2">离职</option>						
+											</select>
+                    					</div>
+                    					<label for="remark" class="col-sm-2 control-label">备注</label>
+                    					<div class="col-sm-4">
+                    						<textarea class="form-control limited" name="remark" maxlength="50"></textarea>
+                    					</div>
+                    				</div>
+                    			</form>
+
+                            </div>
+                         </div>
+    				</div>
+    
+    				<div class="modal-footer">
+    					<button class="btn btn-sm btn-primary" id="user-add-submit-btn">
+    						<i class="icon-ok"></i>提交
+    					</button>
+    					<button class="btn btn-sm" data-dismiss="modal">
+    						<i class="icon-remove"></i>取消
+    					</button>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+		
+		<script type="text/javascript">
+            $(function(){
+    	
+                //移到右边
+                $('#add').click(function() {
+                //获取选中的选项，删除并追加给对方
+                    $('#select1 option:selected').appendTo('#select2');
+                });
+                //移到左边
+                $('#remove').click(function() {
+                    $('#select2 option:selected').appendTo('#select1');
+                });
+                //全部移到右边
+                $('#add_all').click(function() {
+                    //获取全部的选项,删除并追加给对方
+                    $('#select1 option').appendTo('#select2');
+                });
+                //全部移到左边
+                $('#remove_all').click(function() {
+                    $('#select2 option').appendTo('#select1');
+                });
+                //双击选项
+                $('#select1').dblclick(function(){ //绑定双击事件
+                    //获取全部的选项,删除并追加给对方
+                    $("option:selected",this).appendTo('#select2'); //追加给对方
+                });
+                //双击选项
+                $('#select2').dblclick(function(){
+                   $("option:selected",this).appendTo('#select1');
+                });
+            	
+            	//提交
+            	$('#user-role-submit-btn').click(function() {
+                    var uId=$("#role_user_id").val();
+                    var userIds=$("#userIds").val();
+            		var items = $("#select2 option");
+            		var info = "";
+            
+                    for (var i = 0; i < items.length; i++) {
+                         // 如果i+1等于选项长度则取值后添加空字符串，否则为逗号
+                         info = (info + items[i].value) + (((i + 1)== items.length) ? '':','); 
+                    }
+            		if(uId!=null&&uId!=''){
+            			jQuery.ajax({
+            			type: "POST",
+            			url: basePath + "/userRole/save",
+            			dataType : 'json',
+            			data: "userId="+uId+"&roleIds="+info ,
+            			success: function(data){
+            				if(data == null){
+								alert("操作失败");
+							} else if(data.code==200){
+            					alert("操作成功");
+            					$('#user-role-modal-form').modal('hide');
+							} else {
+            					alert(data.message);
+            				}
+            			},
+            			error : function(data) {
+							if(data == null){
+								alert("操作失败");
+							} else {
+            					alert(data.message);
+							}
+            			}
+            			});
+            		}else{
+            			jQuery.ajax({
+            			type: "POST",
+            			url: basePath + "/userRole/saves",
+            			dataType : 'json',
+            			data: "userIds="+userIds+"&roleIds="+info ,
+            			success: function(data){
+            				if(data == null){
+								alert("操作失败");
+							} else if(data.code==200){
+            					alert("操作成功");
+            					$('#user-role-modal-form').modal('hide');
+							} else {
+            					alert(data.message);
+            				}
+            			},
+            			error : function(data) {
+							if(data == null){
+								alert("操作失败");
+							} else {
+            					alert(data.message);
+							}
+            			}
+            			});
+            		
+            		}
+            		
+                });
+				
+				$('#user_add_form').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+						name: {
+							required: true
+						},
+						code: {
+							required: true,
+						},
+						password: {
+							required: true,
+							minlength: 5
+						},
+						password2: {
+							required: true,
+							minlength: 5,
+							equalTo: "#password"
+						},
+						cnName: {
+							required: true
+						},
+						email: {
+							required: true,
+							email:true
+						},
+						phoneNo: {
+							required: true,
+							phone:true
+						}
+					},
+			
+					messages: {
+						name: {
+							required: "请输入账号"
+						},
+						code: {
+							required: "请输入编号"
+						},
+						password: {
+							required: "请输入密码",
+							minlength: "请输入至少5个字符的密码"
+						},
+						password2: {
+							required: "请输入确认密码",
+							minlength: "请输入至少5个字符的密码",
+							equalTo: "确认密码和密码不一致"
+						},
+						cnName: {
+							required: "请输入姓名"
+						},
+						email: {
+							required: "请输入邮箱",
+							email:"请输入正确的邮箱地址"
+						},
+						phoneNo: {
+							required: "请输入联系方式",
+							phone:"请输入正确的手机号或固定电话"
+						}
+					}
+				});
+
+            	
+            	$("#user-add-submit-btn").click(function() {
+					var form = $("#user_add_form");
+					if(form.valid()==false){
+						return;
+					}
+            		jQuery.ajax({
+            			type: "POST",
+            			url: basePath + "/user/add",
+            			dataType : 'json',
+            			data: form.serialize(),
+            			success: function(data){
+							if(data == null){
+								alert("操作失败");
+							} else if(data.code==200){
+            					alert("操作成功");
+            					$('#user-add-modal-form').modal('hide');
+								$('#user_add_form')[0].reset();
+								$("#userQueryTable").trigger("reloadGrid"); 
+							} else{
+            					alert(data.message);
+            				}
+            			},
+            			error : function(data) {
+            				if(data == null){
+								alert("操作失败");
+							} else {
+            					alert(data.message);
+							}
+            			}
+            		});
+                });
+    			
+            });
+		</script>
+    </body>
+</html>
