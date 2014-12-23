@@ -6,13 +6,13 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
+import com.awe.test.base.BaseTransactionTestCase;
+import com.awe.test.base.TestConstants;
 import com.awe.uc.domain.Area;
 import com.awe.uc.domain.query.AreaQuery;
 import com.awe.uc.service.AreaService;
 import com.awe.uc.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
-import com.awe.test.base.BaseTransactionTestCase;
-import com.awe.test.base.TestConstants;
 
 /**
  * AreaService单元测试
@@ -39,10 +39,10 @@ public class AreaServiceTestCase extends BaseTransactionTestCase {
     public void testInsert() {
         Assert.notNull(areaService);
         Area area = new Area();
-        String parentCode = null; //TODO 初始化
-        area.setParentCode(parentCode);
-        String code = null; //TODO 初始化
-        area.setCode(code);
+        area.setParentCode("0");
+        area.setCode("2");
+        area.setName("上海");
+        area.setLeval(1);
         area.setCreateUser(TestConstants.UER_NAME);
         boolean result = areaService.insert(area);
         Assert.isTrue(result);
@@ -55,10 +55,10 @@ public class AreaServiceTestCase extends BaseTransactionTestCase {
     public void testInsertFailure() {
         Assert.notNull(areaService);
         Area area = new Area();
-        String parentCode = null; //TODO 初始化// 已经存在的
-        area.setParentCode(parentCode);
-        String code = null; //TODO 初始化// 已经存在的
-        area.setCode(code);
+        area.setParentCode("0");
+        area.setCode("1");
+        area.setName("北京");
+        area.setLeval(1);
         area.setCreateUser(TestConstants.UER_NAME);
         ExistedException ex = null;
         try {
@@ -78,10 +78,6 @@ public class AreaServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(areaService);
         Area area = new Area();
         area.setId(TEST_DEFAULT_EXIST_ID);
-        String parentCode = null; //TODO 初始化
-        area.setParentCode(parentCode);
-        String code = null; //TODO 初始化
-        area.setCode(code);
         area.setUpdateUser(TestConstants.UER_NAME);
         boolean result = areaService.delete(area);
         Assert.isTrue(result);
@@ -95,10 +91,6 @@ public class AreaServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(areaService);
         Area area = new Area();
         area.setId(TEST_NOT_EXIST_ID);// 不存在的ID
-        String parentCode = null; //TODO 初始化
-        area.setParentCode(parentCode);
-        String code = null; //TODO 初始化
-        area.setCode(code);
         area.setUpdateUser(TestConstants.UER_NAME);
         boolean result = areaService.delete(area);
         Assert.isTrue(!result);
@@ -112,10 +104,7 @@ public class AreaServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(areaService);
         Area area = new Area();
         area.setId(TEST_DEFAULT_EXIST_ID);
-        String parentCode = null; //TODO 初始化
-        area.setParentCode(parentCode);
-        String code = null; //TODO 初始化
-        area.setCode(code);
+        area.setCode("2");
         area.setUpdateUser(TestConstants.UER_NAME);
         boolean result = areaService.update(area);
         Assert.isTrue(result);
@@ -129,10 +118,7 @@ public class AreaServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(areaService);
         Area area = new Area();
         area.setId(TEST_NOT_EXIST_ID);// 不存在的ID
-        String parentCode = null; //TODO 初始化
-        area.setParentCode(parentCode);
-        String code = null; //TODO 初始化
-        area.setCode(code);
+        area.setCode("2");
         area.setUpdateUser(TestConstants.UER_NAME);
         boolean result = areaService.update(area);
         Assert.isTrue(!result);
@@ -179,10 +165,6 @@ public class AreaServiceTestCase extends BaseTransactionTestCase {
     public void testQueryList() {
         Assert.notNull(areaService);
         AreaQuery queryBean = new AreaQuery();
-        String parentCode = null; //TODO 初始化
-        queryBean.setParentCode(parentCode);
-        String code = null; //TODO 初始化
-        queryBean.setCode(code);
         List<Area> list = areaService.queryAreaList(queryBean);
         Assert.notEmpty(list);
         logger.info("list size = " + list.size());
