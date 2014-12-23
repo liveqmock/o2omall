@@ -7,7 +7,7 @@ import com.awe.order.sdk.request.dto.OrderCancelRequestDto;
  * OrderCancelRequest：订单取消请求参数
  * 
  * @author ljz
- * @version 2014-12-23 10:06:38
+ * @version 2014-12-23 10:58:10
  * 
  */
 public class OrderCancelRequest extends HbirdSecureRequest<OrderCancelRequestDto> {

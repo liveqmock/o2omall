@@ -7,7 +7,7 @@ import com.awe.order.sdk.api.request.dto.OrdersItemsRequestDto;
  * OrdersItemsRequest：订单明细请求参数
  * 
  * @author ljz
- * @version 2014-12-23 10:06:35
+ * @version 2014-12-23 10:58:06
  * 
  */
 public class OrdersItemsRequest extends HbirdSecureRequest<OrdersItemsRequestDto> {

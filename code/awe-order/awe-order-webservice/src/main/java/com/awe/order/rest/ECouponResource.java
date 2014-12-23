@@ -28,7 +28,7 @@ import com.hbird.common.utils.wrap.Wrapper;
  * 电子券REST服务：提供有关电子券的接口
  * 
  * @author ljz
- * @version 2014-12-23 10:06:37
+ * @version 2014-12-23 10:58:09
  * 
  */
 @Component

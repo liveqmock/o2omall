@@ -12,8 +12,6 @@
 						skuNo: {required: true},
 						skuCount: {required: true},
 						status: {required: true},
-						createName: {required: true},
-						updateName: {required: true},
 					},
 			
 					messages: {
@@ -21,8 +19,6 @@
 						skuNo: { required: "请输入商品编号"},
 						skuCount: { required: "请输入商品数量"},
 						status: { required: "请输入状态"},
-						createName: { required: "请输入创建人"},
-						updateName: { required: "请输入修改人"},
 					}
 				});
 				
@@ -71,14 +67,6 @@
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="status">状态</label>
                                     <div class="col-sm-4">
                                         <input type="text" name="status" id="status" class="col-xs-12 col-sm-12" value="$!shoppingCart.status" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="createName">创建人</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="createName" id="createName" class="col-xs-12 col-sm-12" value="$!shoppingCart.createName" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="updateName">修改人</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="updateName" id="updateName" class="col-xs-12 col-sm-12" value="$!shoppingCart.updateName" />
                                     </div>
                                 </div>
 								<div class="form-group">

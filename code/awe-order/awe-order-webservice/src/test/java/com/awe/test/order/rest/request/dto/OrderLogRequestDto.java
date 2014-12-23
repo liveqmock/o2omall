@@ -7,7 +7,7 @@ import java.util.Date;
  * OrderLogRequestDto：订单日志请求参数
  * 
  * @author ljz
- * @version 2014-12-23 10:06:38
+ * @version 2014-12-23 10:58:09
  * 
  */
 public class OrderLogRequestDto extends HbirdDto {
@@ -30,7 +30,11 @@ public class OrderLogRequestDto extends HbirdDto {
     /** 创建时间 */
     private Date createTime; 
     /** 创建人 */
-    private String createName; 
+    private String createUser; 
+    /** 修改时间 */
+    private Date updateTime; 
+    /** 修改人 */
+    private String updateUser; 
     /** 是否有效 */
     private Integer yn; 
     
@@ -163,19 +167,55 @@ public class OrderLogRequestDto extends HbirdDto {
     /**
      * get 创建人
      * 
-     * @return the createName
+     * @return the createUser
      */
-    public String getCreateName(){
-        return createName;
+    public String getCreateUser(){
+        return createUser;
     }
         
     /**
      * set 创建人
      * 
-     * @param createName the createName to set
+     * @param createUser the createUser to set
      */
-    public void setCreateName(String createName) {
-        this.createName = createName;
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+    
+    /**
+     * get 修改时间
+     * 
+     * @return the updateTime
+     */
+    public Date getUpdateTime(){
+        return updateTime;
+    }
+        
+    /**
+     * set 修改时间
+     * 
+     * @param updateTime the updateTime to set
+     */
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+    
+    /**
+     * get 修改人
+     * 
+     * @return the updateUser
+     */
+    public String getUpdateUser(){
+        return updateUser;
+    }
+        
+    /**
+     * set 修改人
+     * 
+     * @param updateUser the updateUser to set
+     */
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
     }
     
     /**

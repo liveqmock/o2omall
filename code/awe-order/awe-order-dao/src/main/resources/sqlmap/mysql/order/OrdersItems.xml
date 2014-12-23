@@ -13,25 +13,25 @@
 		<result column="discount" property="discount" jdbcType="DECIMAL" />
 		<result column="sku_price" property="skuPrice" jdbcType="DECIMAL" />
 		<result column="final_price" property="finalPrice" jdbcType="DECIMAL" />
-		<result column="create_name" property="createName" jdbcType="VARCHAR" />
-		<result column="update_name" property="updateName" jdbcType="VARCHAR" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 		<result column="yn" property="yn" jdbcType="DECIMAL" />
     </resultMap>
     
     <sql id="ordersItemsColumns">
-    	id,order_no,sku_no,product_no,count,sku_name,img_url,discount,sku_price,final_price,create_name,update_name,create_time,update_time,yn
+    	id,order_no,sku_no,product_no,count,sku_name,img_url,discount,sku_price,final_price,create_user,update_user,create_time,update_time,yn
     </sql>
     
      <sql id="ordersItemsUsedColumns">
-    	order_no,sku_no,product_no,count,sku_name,img_url,discount,sku_price,final_price,create_name,update_name,create_time,update_time,yn
+    	order_no,sku_no,product_no,count,sku_name,img_url,discount,sku_price,final_price,create_user,update_user,create_time,update_time,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="OrdersItems" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO orders_items(<include refid="ordersItemsUsedColumns"/>) 
-        VALUES (#{orderNo},#{skuNo},#{productNo},#{count},#{skuName},#{imgUrl},#{discount},#{skuPrice},#{finalPrice},#{createName},#{updateName},#{createTime},#{updateTime},#{yn})
+        VALUES (#{orderNo},#{skuNo},#{productNo},#{count},#{skuName},#{imgUrl},#{discount},#{skuPrice},#{finalPrice},#{createUser},#{updateUser},#{createTime},#{updateTime},#{yn})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -66,11 +66,8 @@
 		        <if test="finalPrice != null and finalPrice != ''">
                 	final_price = #{finalPrice,jdbcType=DECIMAL},
 		        </if>
-		        <if test="createName != null and createName != ''">
-                	create_name = #{createName,jdbcType=VARCHAR},
-		        </if>
-		        <if test="updateName != null and updateName != ''">
-                	update_name = #{updateName,jdbcType=VARCHAR},
+		        <if test="updateUser != null and updateUser != ''">
+                	update_user = #{updateUser,jdbcType=VARCHAR},
 		        </if>
                 	update_time = now()
                 where id = #{id}
@@ -151,11 +148,11 @@
         <if test="finalPrice != null and finalPrice != ''">
         	and final_price = #{finalPrice,jdbcType=DECIMAL}
         </if>
-        <if test="createName != null and createName != ''">
-        	and create_name = #{createName,jdbcType=VARCHAR}
+        <if test="createUser != null and createUser != ''">
+        	and create_user = #{createUser,jdbcType=VARCHAR}
         </if>
-        <if test="updateName != null and updateName != ''">
-        	and update_name = #{updateName,jdbcType=VARCHAR}
+        <if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
         </if>
         <if test="createTime != null and createTime != ''">
         	and create_time = #{createTime,jdbcType=TIMESTAMP}

@@ -52,10 +52,10 @@
 							<th class="center" style='width:25%;'>是否需要退款</th><td id="r_isRefund" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>创建人姓名</th><td id="r_createName" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>创建人姓名</th><td id="r_createUser" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>修改人姓名</th><td id="r_updateName" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>修改人姓名</th><td id="r_updateUser" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>创建时间</th><td id="r_createTime" style='width:25%;'></td>
@@ -101,8 +101,8 @@
     				$("#r_finishTime").text(r.finishTime==null?"":r.finishTime);
     				$("#r_remark").text(r.remark==null?"":r.remark);
     				$("#r_isRefund").text(r.isRefund==null?"":r.isRefund);
-    				$("#r_createName").text(r.createName==null?"":r.createName);
-    				$("#r_updateName").text(r.updateName==null?"":r.updateName);
+    				$("#r_createUser").text(r.createUser==null?"":r.createUser);
+    				$("#r_updateUser").text(r.updateUser==null?"":r.updateUser);
     				$("#r_createTime").text(r.createTime==null?"":r.createTime);
     				$("#r_updateTime").text(r.updateTime==null?"":r.updateTime);
     				$("#r_yn").text(r.yn==null?"":r.yn);

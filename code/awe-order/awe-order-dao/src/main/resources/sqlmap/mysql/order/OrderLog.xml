@@ -10,22 +10,24 @@
 		<result column="description" property="description" jdbcType="VARCHAR" />
 		<result column="log_type" property="logType" jdbcType="DECIMAL" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-		<result column="create_name" property="createName" jdbcType="VARCHAR" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
 		<result column="yn" property="yn" jdbcType="DECIMAL" />
     </resultMap>
     
     <sql id="orderLogColumns">
-    	id,order_no,status,status_name,description,log_type,create_time,create_name,yn
+    	id,order_no,status,status_name,description,log_type,create_time,create_user,update_time,update_user,yn
     </sql>
     
      <sql id="orderLogUsedColumns">
-    	order_no,status,status_name,description,log_type,create_time,create_name,yn
+    	order_no,status,status_name,description,log_type,create_time,create_user,update_time,update_user,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="OrderLog" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO order_log(<include refid="orderLogUsedColumns"/>) 
-        VALUES (#{orderNo},#{status},#{statusName},#{description},#{logType},#{createTime},#{createName},#{yn})
+        VALUES (#{orderNo},#{status},#{statusName},#{description},#{logType},#{createTime},#{createUser},#{updateTime},#{updateUser},#{yn})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -48,8 +50,8 @@
 		        <if test="logType != null and logType != ''">
                 	log_type = #{logType,jdbcType=DECIMAL},
 		        </if>
-		        <if test="createName != null and createName != ''">
-                	create_name = #{createName,jdbcType=VARCHAR},
+		        <if test="updateUser != null and updateUser != ''">
+                	update_user = #{updateUser,jdbcType=VARCHAR},
 		        </if>
                 	update_time = now()
                 where id = #{id}
@@ -121,8 +123,14 @@
         <if test="createTime != null and createTime != ''">
         	and create_time = #{createTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="createName != null and createName != ''">
-        	and create_name = #{createName,jdbcType=VARCHAR}
+        <if test="createUser != null and createUser != ''">
+        	and create_user = #{createUser,jdbcType=VARCHAR}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
         </if>
         <if test="yn != null and yn != ''">
         	and yn = #{yn,jdbcType=DECIMAL}

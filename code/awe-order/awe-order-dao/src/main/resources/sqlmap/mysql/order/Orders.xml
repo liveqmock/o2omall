@@ -37,27 +37,27 @@
 		<result column="county_no" property="countyNo" jdbcType="VARCHAR" />
 		<result column="address" property="address" jdbcType="VARCHAR" />
 		<result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+		<result column="Integral" property="integral" jdbcType="DECIMAL" />
 		<result column="remark" property="remark" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-		<result column="create_name" property="createName" jdbcType="VARCHAR" />
-		<result column="Integral" property="integral" jdbcType="DECIMAL" />
-		<result column="update_name" property="updateName" jdbcType="VARCHAR" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
 		<result column="yn" property="yn" jdbcType="DECIMAL" />
     </resultMap>
     
     <sql id="ordersColumns">
-    	id,order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,remark,create_time,update_time,create_name,Integral,update_name,yn
+    	id,order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,Integral,remark,create_time,update_time,create_user,update_user,yn
     </sql>
     
      <sql id="ordersUsedColumns">
-    	order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,remark,create_time,update_time,create_name,Integral,update_name,yn
+    	order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,Integral,remark,create_time,update_time,create_user,update_user,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="Orders" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO orders(<include refid="ordersUsedColumns"/>) 
-        VALUES (#{orderNo},#{orderType},#{userId},#{userName},#{orderName},#{consigneeName},#{consigneePhone},#{telephone},#{emil},#{zipCode},#{payName},#{orderDate},#{isTalSure},#{payWay},#{payType},#{isInvoice},#{invoiceType},#{invoiceTitle},#{invoiceContent},#{orderStatus},#{commAmount},#{retCash},#{expenses},#{amountPay},#{parentOrderNo},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{payTime},#{remark},#{createTime},#{updateTime},#{createName},#{integral},#{updateName},#{yn})
+        VALUES (#{orderNo},#{orderType},#{userId},#{userName},#{orderName},#{consigneeName},#{consigneePhone},#{telephone},#{emil},#{zipCode},#{payName},#{orderDate},#{isTalSure},#{payWay},#{payType},#{isInvoice},#{invoiceType},#{invoiceTitle},#{invoiceContent},#{orderStatus},#{commAmount},#{retCash},#{expenses},#{amountPay},#{parentOrderNo},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{payTime},#{integral},#{remark},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -164,17 +164,14 @@
 		        <if test="payTime != null and payTime != ''">
                 	pay_time = #{payTime,jdbcType=TIMESTAMP},
 		        </if>
-		        <if test="remark != null and remark != ''">
-                	remark = #{remark,jdbcType=VARCHAR},
-		        </if>
-		        <if test="createName != null and createName != ''">
-                	create_name = #{createName,jdbcType=VARCHAR},
-		        </if>
 		        <if test="integral != null and integral != ''">
                 	Integral = #{integral,jdbcType=DECIMAL},
 		        </if>
-		        <if test="updateName != null and updateName != ''">
-                	update_name = #{updateName,jdbcType=VARCHAR},
+		        <if test="remark != null and remark != ''">
+                	remark = #{remark,jdbcType=VARCHAR},
+		        </if>
+		        <if test="updateUser != null and updateUser != ''">
+                	update_user = #{updateUser,jdbcType=VARCHAR},
 		        </if>
                 	update_time = now()
                 where id = #{id}
@@ -327,6 +324,9 @@
         <if test="payTime != null and payTime != ''">
         	and pay_time = #{payTime,jdbcType=TIMESTAMP}
         </if>
+        <if test="integral != null and integral != ''">
+        	and Integral = #{integral,jdbcType=DECIMAL}
+        </if>
         <if test="remark != null and remark != ''">
         	and remark = #{remark,jdbcType=VARCHAR}
         </if>
@@ -336,14 +336,11 @@
         <if test="updateTime != null and updateTime != ''">
         	and update_time = #{updateTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="createName != null and createName != ''">
-        	and create_name = #{createName,jdbcType=VARCHAR}
+        <if test="createUser != null and createUser != ''">
+        	and create_user = #{createUser,jdbcType=VARCHAR}
         </if>
-        <if test="integral != null and integral != ''">
-        	and Integral = #{integral,jdbcType=DECIMAL}
-        </if>
-        <if test="updateName != null and updateName != ''">
-        	and update_name = #{updateName,jdbcType=VARCHAR}
+        <if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
         </if>
         <if test="yn != null and yn != ''">
         	and yn = #{yn,jdbcType=DECIMAL}

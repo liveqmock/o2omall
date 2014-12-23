@@ -7,7 +7,7 @@ import com.awe.order.sdk.request.dto.ECouponRequestDto;
  * ECouponRequest：电子券请求参数
  * 
  * @author ljz
- * @version 2014-12-23 10:06:38
+ * @version 2014-12-23 10:58:10
  * 
  */
 public class ECouponRequest extends HbirdSecureRequest<ECouponRequestDto> {

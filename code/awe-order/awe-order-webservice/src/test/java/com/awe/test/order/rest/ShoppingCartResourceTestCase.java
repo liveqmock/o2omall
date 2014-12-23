@@ -14,7 +14,7 @@ import com.awe.test.order.rest.Urls;
  * ShoppingCartResource单元测试
  * 
  * @author ljz
- * @version 2014-12-23 10:06:38
+ * @version 2014-12-23 10:58:09
  * 
  */
 public class ShoppingCartResourceTestCase extends AbstractClient {

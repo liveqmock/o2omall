@@ -40,10 +40,10 @@
 							<th class="center" style='width:25%;'>优惠后价格</th><td id="r_finalPrice" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>创建人</th><td id="r_createName" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>创建人</th><td id="r_createUser" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>修改人</th><td id="r_updateName" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>修改人</th><td id="r_updateUser" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>创建时间</th><td id="r_createTime" style='width:25%;'></td>
@@ -85,8 +85,8 @@
     				$("#r_discount").text(r.discount==null?"":r.discount);
     				$("#r_skuPrice").text(r.skuPrice==null?"":r.skuPrice);
     				$("#r_finalPrice").text(r.finalPrice==null?"":r.finalPrice);
-    				$("#r_createName").text(r.createName==null?"":r.createName);
-    				$("#r_updateName").text(r.updateName==null?"":r.updateName);
+    				$("#r_createUser").text(r.createUser==null?"":r.createUser);
+    				$("#r_updateUser").text(r.updateUser==null?"":r.updateUser);
     				$("#r_createTime").text(r.createTime==null?"":r.createTime);
     				$("#r_updateTime").text(r.updateTime==null?"":r.updateTime);
     				$("#r_yn").text(r.yn==null?"":r.yn);

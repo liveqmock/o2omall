@@ -8,7 +8,7 @@ import com.hbird.common.utils.page.Query;
  * OrdersQuery：订单查询类
  * 
  * @author ljz
- * @version 2014-12-23 10:06:35
+ * @version 2014-12-23 10:58:06
  * 
  */
 public class OrdersQuery extends Query {
@@ -85,6 +85,8 @@ public class OrdersQuery extends Query {
 	private String address; 
     /** 支付时间 */
 	private Date payTime; 
+    /** 积分 */
+	private Integer integral; 
     /** 订单备注 */
 	private String remark; 
     /** 创建时间 */
@@ -92,11 +94,9 @@ public class OrdersQuery extends Query {
     /** 修改时间 */
 	private Date updateTime; 
     /** 创建人 */
-	private String createName; 
-    /** 积分 */
-	private Integer integral; 
+	private String createUser; 
     /** 修改人 */
-	private String updateName; 
+	private String updateUser; 
     /** 0:无效;1有效 */
 	private Integer yn; 
     /** 开始时间 */
@@ -725,6 +725,24 @@ public class OrdersQuery extends Query {
     }
     
     /**
+     * get 积分
+     * 
+     * @return the integral
+     */
+    public Integer getIntegral(){
+        return integral;
+    }
+        
+    /**
+     * set 积分
+     * 
+     * @param integral the integral to set
+     */
+    public void setIntegral(Integer integral) {
+        this.integral = integral;
+    }
+    
+    /**
      * get 订单备注
      * 
      * @return the remark
@@ -781,55 +799,37 @@ public class OrdersQuery extends Query {
     /**
      * get 创建人
      * 
-     * @return the createName
+     * @return the createUser
      */
-    public String getCreateName(){
-        return createName;
+    public String getCreateUser(){
+        return createUser;
     }
         
     /**
      * set 创建人
      * 
-     * @param createName the createName to set
+     * @param createUser the createUser to set
      */
-    public void setCreateName(String createName) {
-        this.createName = createName;
-    }
-    
-    /**
-     * get 积分
-     * 
-     * @return the integral
-     */
-    public Integer getIntegral(){
-        return integral;
-    }
-        
-    /**
-     * set 积分
-     * 
-     * @param integral the integral to set
-     */
-    public void setIntegral(Integer integral) {
-        this.integral = integral;
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
     }
     
     /**
      * get 修改人
      * 
-     * @return the updateName
+     * @return the updateUser
      */
-    public String getUpdateName(){
-        return updateName;
+    public String getUpdateUser(){
+        return updateUser;
     }
         
     /**
      * set 修改人
      * 
-     * @param updateName the updateName to set
+     * @param updateUser the updateUser to set
      */
-    public void setUpdateName(String updateName) {
-        this.updateName = updateName;
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
     }
     
     /**

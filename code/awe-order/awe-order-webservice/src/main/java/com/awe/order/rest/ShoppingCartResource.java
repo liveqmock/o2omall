@@ -28,7 +28,7 @@ import com.awe.order.service.ShoppingCartService;
  * 购物车REST服务：提供有关购物车的接口
  * 
  * @author ljz
- * @version 2014-12-23 10:06:37
+ * @version 2014-12-23 10:58:09
  * 
  */
 @Component

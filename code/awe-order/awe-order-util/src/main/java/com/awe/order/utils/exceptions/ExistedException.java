@@ -4,7 +4,7 @@ package com.awe.order.utils.exceptions;
  * 记录已存在异常 ：多用于添加数据时验证唯一
  * 
  * @author ljz
- * @version 2014-12-23 10:06:36
+ * @version 2014-12-23 10:58:06
  * 
  */
 public class ExistedException extends RuntimeException {

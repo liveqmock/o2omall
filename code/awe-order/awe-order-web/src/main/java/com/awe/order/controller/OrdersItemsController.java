@@ -26,7 +26,7 @@ import com.hbird.common.utils.wrap.Wrapper;
  * OrdersItemsController ：订单明细控制器
  * 
  * @author ljz
- * @version 2014-12-23 10:06:36
+ * @version 2014-12-23 10:58:07
 */
 @Controller
 @RequestMapping("ordersItems")

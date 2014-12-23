@@ -28,7 +28,7 @@ import com.awe.order.service.OrderCancelService;
  * 订单取消REST服务：提供有关订单取消的接口
  * 
  * @author ljz
- * @version 2014-12-23 10:06:37
+ * @version 2014-12-23 10:58:09
  * 
  */
 @Component

@@ -9,27 +9,27 @@
 		<result column="type" property="type" jdbcType="DECIMAL" />
 		<result column="status" property="status" jdbcType="DECIMAL" />
 		<result column="effective_time" property="effectiveTime" jdbcType="TIMESTAMP" />
+		<result column="dead_line" property="deadLine" jdbcType="TIMESTAMP" />
 		<result column="generate_time" property="generateTime" jdbcType="TIMESTAMP" />
-		<result column="deadline" property="deadline" jdbcType="TIMESTAMP" />
-		<result column="create_name" property="createName" jdbcType="VARCHAR" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-		<result column="update_name" property="updateName" jdbcType="VARCHAR" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
 		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 		<result column="yn" property="yn" jdbcType="DECIMAL" />
     </resultMap>
     
     <sql id="eCouponColumns">
-    	id,order_no,voucher_no,type,status,effective_time,generate_time,deadline,create_name,create_time,update_name,update_time,yn
+    	id,order_no,voucher_no,type,status,effective_time,dead_line,generate_time,create_user,create_time,update_user,update_time,yn
     </sql>
     
      <sql id="eCouponUsedColumns">
-    	order_no,voucher_no,type,status,effective_time,generate_time,deadline,create_name,create_time,update_name,update_time,yn
+    	order_no,voucher_no,type,status,effective_time,dead_line,generate_time,create_user,create_time,update_user,update_time,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="ECoupon" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO e_coupon(<include refid="eCouponUsedColumns"/>) 
-        VALUES (#{orderNo},#{voucherNo},#{type},#{status},#{effectiveTime},#{generateTime},#{deadline},#{createName},#{createTime},#{updateName},#{updateTime},#{yn})
+        VALUES (#{orderNo},#{voucherNo},#{type},#{status},#{effectiveTime},#{deadLine},#{generateTime},#{createUser},#{createTime},#{updateUser},#{updateTime},#{yn})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -52,17 +52,14 @@
 		        <if test="effectiveTime != null and effectiveTime != ''">
                 	effective_time = #{effectiveTime,jdbcType=TIMESTAMP},
 		        </if>
+		        <if test="deadLine != null and deadLine != ''">
+                	dead_line = #{deadLine,jdbcType=TIMESTAMP},
+		        </if>
 		        <if test="generateTime != null and generateTime != ''">
                 	generate_time = #{generateTime,jdbcType=TIMESTAMP},
 		        </if>
-		        <if test="deadline != null and deadline != ''">
-                	deadline = #{deadline,jdbcType=TIMESTAMP},
-		        </if>
-		        <if test="createName != null and createName != ''">
-                	create_name = #{createName,jdbcType=VARCHAR},
-		        </if>
-		        <if test="updateName != null and updateName != ''">
-                	update_name = #{updateName,jdbcType=VARCHAR},
+		        <if test="updateUser != null and updateUser != ''">
+                	update_user = #{updateUser,jdbcType=VARCHAR},
 		        </if>
                 	update_time = now()
                 where id = #{id}
@@ -131,20 +128,20 @@
         <if test="effectiveTime != null and effectiveTime != ''">
         	and effective_time = #{effectiveTime,jdbcType=TIMESTAMP}
         </if>
+        <if test="deadLine != null and deadLine != ''">
+        	and dead_line = #{deadLine,jdbcType=TIMESTAMP}
+        </if>
         <if test="generateTime != null and generateTime != ''">
         	and generate_time = #{generateTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="deadline != null and deadline != ''">
-        	and deadline = #{deadline,jdbcType=TIMESTAMP}
-        </if>
-        <if test="createName != null and createName != ''">
-        	and create_name = #{createName,jdbcType=VARCHAR}
+        <if test="createUser != null and createUser != ''">
+        	and create_user = #{createUser,jdbcType=VARCHAR}
         </if>
         <if test="createTime != null and createTime != ''">
         	and create_time = #{createTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="updateName != null and updateName != ''">
-        	and update_name = #{updateName,jdbcType=VARCHAR}
+        <if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
         </if>
         <if test="updateTime != null and updateTime != ''">
         	and update_time = #{updateTime,jdbcType=TIMESTAMP}

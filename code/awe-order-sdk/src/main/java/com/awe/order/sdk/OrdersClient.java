@@ -13,7 +13,7 @@ import com.awe.order.sdk.response.dto.OrdersResponseDto;
  * 订单服务的客户端
  * 
  * @author ljz
- * @version 2014-12-23 10:06:38
+ * @version 2014-12-23 10:58:10
  * 
  */
 public class OrdersClient extends AbstractClient {

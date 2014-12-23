@@ -7,7 +7,7 @@ import java.util.Date;
  * ECouponRequestDto：电子券请求参数
  * 
  * @author ljz
- * @version 2014-12-23 10:06:38
+ * @version 2014-12-23 10:58:09
  * 
  */
 public class ECouponRequestDto extends HbirdDto {
@@ -27,16 +27,16 @@ public class ECouponRequestDto extends HbirdDto {
     private Integer status; 
     /** 有效期 */
     private Date effectiveTime; 
+    /** 截止日期 */
+    private Date deadLine; 
     /** 生成时间 */
     private Date generateTime; 
-    /** 截止日期 */
-    private Date deadline; 
     /** 创建人 */
-    private String createName; 
+    private String createUser; 
     /** 创建时间 */
     private Date createTime; 
     /** 修改人 */
-    private String updateName; 
+    private String updateUser; 
     /** 修改时间 */
     private Date updateTime; 
     /** 0:无效;1:有效 */
@@ -151,6 +151,24 @@ public class ECouponRequestDto extends HbirdDto {
     }
     
     /**
+     * get 截止日期
+     * 
+     * @return the deadLine
+     */
+    public Date getDeadLine(){
+        return deadLine;
+    }
+        
+    /**
+     * set 截止日期
+     * 
+     * @param deadLine the deadLine to set
+     */
+    public void setDeadLine(Date deadLine) {
+        this.deadLine = deadLine;
+    }
+    
+    /**
      * get 生成时间
      * 
      * @return the generateTime
@@ -169,39 +187,21 @@ public class ECouponRequestDto extends HbirdDto {
     }
     
     /**
-     * get 截止日期
-     * 
-     * @return the deadline
-     */
-    public Date getDeadline(){
-        return deadline;
-    }
-        
-    /**
-     * set 截止日期
-     * 
-     * @param deadline the deadline to set
-     */
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
-    
-    /**
      * get 创建人
      * 
-     * @return the createName
+     * @return the createUser
      */
-    public String getCreateName(){
-        return createName;
+    public String getCreateUser(){
+        return createUser;
     }
         
     /**
      * set 创建人
      * 
-     * @param createName the createName to set
+     * @param createUser the createUser to set
      */
-    public void setCreateName(String createName) {
-        this.createName = createName;
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
     }
     
     /**
@@ -225,19 +225,19 @@ public class ECouponRequestDto extends HbirdDto {
     /**
      * get 修改人
      * 
-     * @return the updateName
+     * @return the updateUser
      */
-    public String getUpdateName(){
-        return updateName;
+    public String getUpdateUser(){
+        return updateUser;
     }
         
     /**
      * set 修改人
      * 
-     * @param updateName the updateName to set
+     * @param updateUser the updateUser to set
      */
-    public void setUpdateName(String updateName) {
-        this.updateName = updateName;
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
     }
     
     /**

@@ -112,6 +112,9 @@
 							<th class="center" style='width:25%;'>支付时间</th><td id="r_payTime" style='width:25%;'></td>
 						</tr>
 						<tr>
+							<th class="center" style='width:25%;'>积分</th><td id="r_integral" style='width:25%;'></td>
+						</tr>
+						<tr>
 							<th class="center" style='width:25%;'>订单备注</th><td id="r_remark" style='width:25%;'></td>
 						</tr>
 						<tr>
@@ -121,13 +124,10 @@
 							<th class="center" style='width:25%;'>修改时间</th><td id="r_updateTime" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>创建人</th><td id="r_createName" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>创建人</th><td id="r_createUser" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>积分</th><td id="r_integral" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>修改人</th><td id="r_updateName" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>修改人</th><td id="r_updateUser" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>是否有效</th><td id="r_yn" style='width:25%;'></td>
@@ -187,12 +187,12 @@
     				$("#r_countyNo").text(r.countyNo==null?"":r.countyNo);
     				$("#r_address").text(r.address==null?"":r.address);
     				$("#r_payTime").text(r.payTime==null?"":r.payTime);
+    				$("#r_integral").text(r.integral==null?"":r.integral);
     				$("#r_remark").text(r.remark==null?"":r.remark);
     				$("#r_createTime").text(r.createTime==null?"":r.createTime);
     				$("#r_updateTime").text(r.updateTime==null?"":r.updateTime);
-    				$("#r_createName").text(r.createName==null?"":r.createName);
-    				$("#r_integral").text(r.integral==null?"":r.integral);
-    				$("#r_updateName").text(r.updateName==null?"":r.updateName);
+    				$("#r_createUser").text(r.createUser==null?"":r.createUser);
+    				$("#r_updateUser").text(r.updateUser==null?"":r.updateUser);
     				$("#r_yn").text(r.yn==null?"":r.yn);
     			} else {
     				alert("获取详情失败");
