@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="myOrdersModal" tabindex="-1" role="dialog" aria-labelledby="myOrdersModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -11,122 +11,82 @@
 					<tbody>
 						<tr>
 							<th class="center" style='width:25%;'>自增id</th><td id="r_id" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>订单编号</th><td id="r_orderNo" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>订单类型</th><td id="r_orderType" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>下单用户ID</th><td id="r_userId" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>下单用户账号</th><td id="r_userName" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>下单姓名</th><td id="r_orderName" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>收货人姓名</th><td id="r_consigneeName" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>收货人手机号</th><td id="r_consigneePhone" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>固定电话</th><td id="r_telephone" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>邮箱</th><td id="r_emil" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>邮编</th><td id="r_zipCode" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>支付名称</th><td id="r_payName" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>送货日期</th><td id="r_orderDate" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>是否送货前电话确定</th><td id="r_isTalSure" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>付款方式</th><td id="r_payWay" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>付款类型</th><td id="r_payType" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>是否要发票</th><td id="r_isInvoice" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>发票类型</th><td id="r_invoiceType" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>发票抬头</th><td id="r_invoiceTitle" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>发票内容</th><td id="r_invoiceContent" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>订单状态</th><td id="r_orderStatus" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>总商品金额</th><td id="r_commAmount" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>返现</th><td id="r_retCash" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>运费</th><td id="r_expenses" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>应付总额</th><td id="r_amountPay" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>父订单编号</th><td id="r_parentOrderNo" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>省份名称</th><td id="r_provinceName" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>省份编号</th><td id="r_provinceNo" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>市名称</th><td id="r_cityName" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>市编号</th><td id="r_cityNo" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>县名称</th><td id="r_countyName" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>省编号</th><td id="r_countyNo" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>送货地址</th><td id="r_address" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>支付时间</th><td id="r_payTime" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>积分</th><td id="r_integral" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>订单备注</th><td id="r_remark" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>创建时间</th><td id="r_createTime" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>修改时间</th><td id="r_updateTime" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>创建人</th><td id="r_createUser" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>修改人</th><td id="r_updateUser" style='width:25%;'></td>
 						</tr>
 						<tr>
