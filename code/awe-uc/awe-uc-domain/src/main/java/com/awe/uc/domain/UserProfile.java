@@ -6,7 +6,7 @@ import java.util.Date;
  * UserProfile：用户基本信息实体类
  * 
  * @author ljz
- * @version 2014-12-23 10:06:46
+ * @version 2014-12-23 15:38:39
  * 
  */
 public class UserProfile implements java.io.Serializable {
@@ -19,7 +19,7 @@ public class UserProfile implements java.io.Serializable {
     /** 用户ID */
     private Long userId; 
     /** 姓名 */
-    private String cnname; 
+    private String cnName; 
     /** 性别 */
     private Integer sex; 
     /** 昵称 */
@@ -116,19 +116,19 @@ public class UserProfile implements java.io.Serializable {
     /**
      * get 姓名
      * 
-     * @return the cnname
+     * @return the cnName
      */
-    public String getCnname(){
-        return cnname;
+    public String getCnName(){
+        return cnName;
     }
         
     /**
      * set 姓名
      * 
-     * @param cnname the cnname to set
+     * @param cnName the cnName to set
      */
-    public void setCnname(String cnname) {
-        this.cnname = cnname;
+    public void setCnName(String cnName) {
+        this.cnName = cnName;
     }
     
     /**

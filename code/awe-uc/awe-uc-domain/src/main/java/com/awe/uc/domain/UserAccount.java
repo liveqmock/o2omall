@@ -6,7 +6,7 @@ import java.util.Date;
  * UserAccount：用户账号实体类
  * 
  * @author ljz
- * @version 2014-12-23 10:06:46
+ * @version 2014-12-23 15:38:39
  * 
  */
 public class UserAccount implements java.io.Serializable {

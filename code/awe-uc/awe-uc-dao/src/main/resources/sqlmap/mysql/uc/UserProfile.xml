@@ -5,7 +5,7 @@
     <resultMap id="UserProfileMap" type="UserProfile">
 		<result column="id" property="id" jdbcType="DECIMAL" />
 		<result column="user_id" property="userId" jdbcType="DECIMAL" />
-		<result column="cnName" property="cnname" jdbcType="VARCHAR" />
+		<result column="cn_name" property="cnName" jdbcType="VARCHAR" />
 		<result column="sex" property="sex" jdbcType="DECIMAL" />
 		<result column="nickname" property="nickname" jdbcType="VARCHAR" />
 		<result column="email" property="email" jdbcType="VARCHAR" />
@@ -37,17 +37,17 @@
     </resultMap>
     
     <sql id="userProfileColumns">
-    	id,user_id,cnName,sex,nickname,email,email_validated,birthday,constellation,user_photo,description,province_name,province_no,city_name,city_no,county_name,county_no,address,mobile,phone,safe_question,safe_answer,qq,grade,pay_password,score,create_time,update_time,create_user,update_user,yn
+    	id,user_id,cn_name,sex,nickname,email,email_validated,birthday,constellation,user_photo,description,province_name,province_no,city_name,city_no,county_name,county_no,address,mobile,phone,safe_question,safe_answer,qq,grade,pay_password,score,create_time,update_time,create_user,update_user,yn
     </sql>
     
      <sql id="userProfileUsedColumns">
-    	user_id,cnName,sex,nickname,email,email_validated,birthday,constellation,user_photo,description,province_name,province_no,city_name,city_no,county_name,county_no,address,mobile,phone,safe_question,safe_answer,qq,grade,pay_password,score,create_time,update_time,create_user,update_user,yn
+    	user_id,cn_name,sex,nickname,email,email_validated,birthday,constellation,user_photo,description,province_name,province_no,city_name,city_no,county_name,county_no,address,mobile,phone,safe_question,safe_answer,qq,grade,pay_password,score,create_time,update_time,create_user,update_user,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="UserProfile" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user_profile(<include refid="userProfileUsedColumns"/>) 
-        VALUES (#{userId},#{cnname},#{sex},#{nickname},#{email},#{emailValidated},#{birthday},#{constellation},#{userPhoto},#{description},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{mobile},#{phone},#{safeQuestion},#{safeAnswer},#{qq},#{grade},#{payPassword},#{score},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+        VALUES (#{userId},#{cnName},#{sex},#{nickname},#{email},#{emailValidated},#{birthday},#{constellation},#{userPhoto},#{description},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{mobile},#{phone},#{safeQuestion},#{safeAnswer},#{qq},#{grade},#{payPassword},#{score},now(),now(),#{createUser},#{updateUser},1)
 	</insert>
 	
     <!-- 修改信息 -->
@@ -55,13 +55,13 @@
         <if test="_parameter != null">
             <if test="id != null and id > 0">
                 update user_profile set
-		        <if test="userId != null and userId != ''">
+		        <if test="userId != null">
                 	user_id = #{userId,jdbcType=DECIMAL},
 		        </if>
-		        <if test="cnname != null and cnname != ''">
-                	cnName = #{cnname,jdbcType=VARCHAR},
+		        <if test="cnName != null and cnName != ''">
+                	cn_name = #{cnName,jdbcType=VARCHAR},
 		        </if>
-		        <if test="sex != null and sex != ''">
+		        <if test="sex != null">
                 	sex = #{sex,jdbcType=DECIMAL},
 		        </if>
 		        <if test="nickname != null and nickname != ''">
@@ -70,7 +70,7 @@
 		        <if test="email != null and email != ''">
                 	email = #{email,jdbcType=VARCHAR},
 		        </if>
-		        <if test="emailValidated != null and emailValidated != ''">
+		        <if test="emailValidated != null">
                 	email_validated = #{emailValidated,jdbcType=DECIMAL},
 		        </if>
 		        <if test="birthday != null and birthday != ''">
@@ -121,13 +121,13 @@
 		        <if test="qq != null and qq != ''">
                 	qq = #{qq,jdbcType=VARCHAR},
 		        </if>
-		        <if test="grade != null and grade != ''">
+		        <if test="grade != null">
                 	grade = #{grade,jdbcType=DECIMAL},
 		        </if>
 		        <if test="payPassword != null and payPassword != ''">
                 	pay_password = #{payPassword,jdbcType=VARCHAR},
 		        </if>
-		        <if test="score != null and score != ''">
+		        <if test="score != null">
                 	score = #{score,jdbcType=DECIMAL},
 		        </if>
 		        <if test="updateUser != null and updateUser != ''">
@@ -163,7 +163,7 @@
 
     <!-- 根据查询Bean查询-判断是否存在 -->
     <select id="exist" resultType="java.lang.Integer" parameterType="UserProfile">
-        select count(1) from user_profile where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+        select count(1) from user_profile where yn = 1 and user_id = #{userId,jdbcType=DECIMAL}
     </select>
 
     <!-- 根据查询Bean获取集合总数 -->
@@ -182,16 +182,16 @@
     <!-- 常用的查询Where条件 -->
     <sql id="queryUserProfileListWhere">
     	yn = 1
-        <if test="id != null and id != ''">
+        <if test="id != null">
         	and id = #{id,jdbcType=DECIMAL}
         </if>
-        <if test="userId != null and userId != ''">
+        <if test="userId != null">
         	and user_id = #{userId,jdbcType=DECIMAL}
         </if>
-        <if test="cnname != null and cnname != ''">
-        	and cnName = #{cnname,jdbcType=VARCHAR}
+        <if test="cnName != null and cnName != ''">
+        	and cn_name = #{cnName,jdbcType=VARCHAR}
         </if>
-        <if test="sex != null and sex != ''">
+        <if test="sex != null">
         	and sex = #{sex,jdbcType=DECIMAL}
         </if>
         <if test="nickname != null and nickname != ''">
@@ -200,7 +200,7 @@
         <if test="email != null and email != ''">
         	and email = #{email,jdbcType=VARCHAR}
         </if>
-        <if test="emailValidated != null and emailValidated != ''">
+        <if test="emailValidated != null">
         	and email_validated = #{emailValidated,jdbcType=DECIMAL}
         </if>
         <if test="birthday != null and birthday != ''">
@@ -251,13 +251,13 @@
         <if test="qq != null and qq != ''">
         	and qq = #{qq,jdbcType=VARCHAR}
         </if>
-        <if test="grade != null and grade != ''">
+        <if test="grade != null">
         	and grade = #{grade,jdbcType=DECIMAL}
         </if>
         <if test="payPassword != null and payPassword != ''">
         	and pay_password = #{payPassword,jdbcType=VARCHAR}
         </if>
-        <if test="score != null and score != ''">
+        <if test="score != null">
         	and score = #{score,jdbcType=DECIMAL}
         </if>
         <if test="createTime != null and createTime != ''">
@@ -271,9 +271,6 @@
         </if>
         <if test="updateUser != null and updateUser != ''">
         	and update_user = #{updateUser,jdbcType=VARCHAR}
-        </if>
-        <if test="yn != null and yn != ''">
-        	and yn = #{yn,jdbcType=DECIMAL}
         </if>
     </sql>
 </mapper>

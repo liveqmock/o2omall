@@ -7,7 +7,7 @@ import com.awe.test.uc.rest.request.dto.UserAddressRequestDto;
  * UserAddressRequest：收货地址请求参数
  * 
  * @author ljz
- * @version 2014-12-23 10:06:48
+ * @version 2014-12-23 15:38:41
  * 
  */
 public class UserAddressRequest extends HbirdSecureRequest<UserAddressRequestDto> {

@@ -543,9 +543,9 @@
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://dev-ip:3306/uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
-				<database.jdbc.username>username</database.jdbc.username>
-				<database.jdbc.password>password</database.jdbc.password>
+				<database.jdbc.url>jdbc:mysql://10.154.252.107:3306/awe_uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
+				<database.jdbc.username>awe</database.jdbc.username>
+				<database.jdbc.password>awe123456</database.jdbc.password>
 
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>
@@ -565,9 +565,9 @@
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://dev-ip:3306/uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
-				<database.jdbc.username>username</database.jdbc.username>
-				<database.jdbc.password>password</database.jdbc.password>
+				<database.jdbc.url>jdbc:mysql://10.154.252.107:3306/awe_uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
+				<database.jdbc.username>awe</database.jdbc.username>
+				<database.jdbc.password>awe123456</database.jdbc.password>
 
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>
@@ -587,9 +587,9 @@
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://test-ip:3306/uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
-				<database.jdbc.username>username</database.jdbc.username>
-				<database.jdbc.password>password</database.jdbc.password>
+				<database.jdbc.url>jdbc:mysql://10.154.252.107:3306/awe_uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
+				<database.jdbc.username>awe</database.jdbc.username>
+				<database.jdbc.password>awe123456</database.jdbc.password>
 
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>
@@ -609,9 +609,9 @@
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://release-ip:3306/uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
-				<database.jdbc.username>username</database.jdbc.username>
-				<database.jdbc.password>password</database.jdbc.password>
+				<database.jdbc.url>jdbc:mysql://10.154.252.107:3306/awe_uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
+				<database.jdbc.username>awe</database.jdbc.username>
+				<database.jdbc.password>awe123456</database.jdbc.password>
 
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>

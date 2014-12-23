@@ -4,7 +4,7 @@
 <mapper namespace="com.awe.uc.dao.impl.UserAccountDaoImpl">
     <resultMap id="UserAccountMap" type="UserAccount">
 		<result column="id" property="id" jdbcType="DECIMAL" />
-		<result column="userName" property="username" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
 		<result column="password" property="password" jdbcType="VARCHAR" />
 		<result column="login_times" property="loginTimes" jdbcType="DECIMAL" />
 		<result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR" />
@@ -17,17 +17,17 @@
     </resultMap>
     
     <sql id="userAccountColumns">
-    	id,userName,password,login_times,last_login_ip,last_login_time,create_user,update_user,create_time,update_time,yn
+    	id,username,password,login_times,last_login_ip,last_login_time,create_user,update_user,create_time,update_time,yn
     </sql>
     
      <sql id="userAccountUsedColumns">
-    	userName,password,login_times,last_login_ip,last_login_time,create_user,update_user,create_time,update_time,yn
+    	username,password,login_times,last_login_ip,last_login_time,create_user,update_user,create_time,update_time,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="UserAccount" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user_account(<include refid="userAccountUsedColumns"/>) 
-        VALUES (#{username},#{password},#{loginTimes},#{lastLoginIp},#{lastLoginTime},#{createUser},#{updateUser},#{createTime},#{updateTime},#{yn})
+        VALUES (#{username},#{password},#{loginTimes},#{lastLoginIp},#{lastLoginTime},#{createUser},#{updateUser},now(),now(),1)
 	</insert>
 	
     <!-- 修改信息 -->
@@ -36,12 +36,12 @@
             <if test="id != null and id > 0">
                 update user_account set
 		        <if test="username != null and username != ''">
-                	userName = #{username,jdbcType=VARCHAR},
+                	username = #{username,jdbcType=VARCHAR},
 		        </if>
 		        <if test="password != null and password != ''">
                 	password = #{password,jdbcType=VARCHAR},
 		        </if>
-		        <if test="loginTimes != null and loginTimes != ''">
+		        <if test="loginTimes != null">
                 	login_times = #{loginTimes,jdbcType=DECIMAL},
 		        </if>
 		        <if test="lastLoginIp != null and lastLoginIp != ''">
@@ -83,7 +83,7 @@
 
     <!-- 根据查询Bean查询-判断是否存在 -->
     <select id="exist" resultType="java.lang.Integer" parameterType="UserAccount">
-        select count(1) from user_account where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+        select count(1) from user_account where yn = 1 and username = #{username,jdbcType=VARCHAR}
     </select>
 
     <!-- 根据查询Bean获取集合总数 -->
@@ -102,16 +102,16 @@
     <!-- 常用的查询Where条件 -->
     <sql id="queryUserAccountListWhere">
     	yn = 1
-        <if test="id != null and id != ''">
+        <if test="id != null">
         	and id = #{id,jdbcType=DECIMAL}
         </if>
         <if test="username != null and username != ''">
-        	and userName = #{username,jdbcType=VARCHAR}
+        	and username = #{username,jdbcType=VARCHAR}
         </if>
         <if test="password != null and password != ''">
         	and password = #{password,jdbcType=VARCHAR}
         </if>
-        <if test="loginTimes != null and loginTimes != ''">
+        <if test="loginTimes != null">
         	and login_times = #{loginTimes,jdbcType=DECIMAL}
         </if>
         <if test="lastLoginIp != null and lastLoginIp != ''">
@@ -131,9 +131,6 @@
         </if>
         <if test="updateTime != null and updateTime != ''">
         	and update_time = #{updateTime,jdbcType=TIMESTAMP}
-        </if>
-        <if test="yn != null and yn != ''">
-        	and yn = #{yn,jdbcType=DECIMAL}
         </if>
     </sql>
 </mapper>

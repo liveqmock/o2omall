@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  * 对'用户基本信息'表进行基本的操作
  * 
  * @author ljz
- * @version 2014-12-23 10:06:46
+ * @version 2014-12-23 15:38:38
  * 
  */
 @Repository

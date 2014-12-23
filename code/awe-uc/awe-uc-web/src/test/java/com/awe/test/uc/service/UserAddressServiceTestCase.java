@@ -18,7 +18,7 @@ import com.awe.test.base.TestConstants;
  * UserAddressService单元测试
  * 
  * @author ljz
- * @version 2014-12-23 10:06:48
+ * @version 2014-12-23 15:38:41
  * 
  */
 public class UserAddressServiceTestCase extends BaseTransactionTestCase {

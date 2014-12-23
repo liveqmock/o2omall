@@ -9,7 +9,7 @@ import com.awe.uc.domain.query.UserAccountQuery;
  * 对'用户账号'表进行基本的操作
  * 
  * @author ljz
- * @version 2014-12-23 10:06:46
+ * @version 2014-12-23 15:38:38
  * 
  */
 public interface UserAccountDao {

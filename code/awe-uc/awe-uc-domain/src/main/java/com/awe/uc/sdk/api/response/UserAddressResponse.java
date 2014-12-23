@@ -8,7 +8,7 @@ import com.awe.uc.sdk.api.response.dto.UserAddressResponseDto;
  * 提供rest接口时方法的返回对象
  * 
  * @author ljz
- * @version 2014-12-23 10:06:46
+ * @version 2014-12-23 15:38:39
  * 
  */
 public class UserAddressResponse extends HbirdResponse<UserAddressResponseDto> {

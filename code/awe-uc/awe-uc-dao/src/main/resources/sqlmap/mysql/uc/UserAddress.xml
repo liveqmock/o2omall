@@ -35,7 +35,7 @@
     <!-- 创建信息 -->
     <insert id="insert" parameterType="UserAddress" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user_address(<include refid="userAddressUsedColumns"/>) 
-        VALUES (#{userId},#{name},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{mobile},#{phone},#{email},#{zipcode},#{createUser},#{updateUser},#{createTime},#{updateTime},#{yn})
+        VALUES (#{userId},#{name},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{mobile},#{phone},#{email},#{zipcode},#{createUser},#{updateUser},now(),now(),1)
 	</insert>
 	
     <!-- 修改信息 -->
@@ -115,7 +115,9 @@
 
     <!-- 根据查询Bean查询-判断是否存在 -->
     <select id="exist" resultType="java.lang.Integer" parameterType="UserAddress">
-        select count(1) from user_address where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+        select count(1) from user_address where yn = 1 and user_id = #{userId,jdbcType=DECIMAL} and name = #{name,jdbcType=VARCHAR}
+        	and province_no = #{provinceNo,jdbcType=VARCHAR} and city_no = #{cityNo,jdbcType=VARCHAR} 
+        	and county_no = #{countyNo,jdbcType=VARCHAR} and address = #{address,jdbcType=VARCHAR}
     </select>
 
     <!-- 根据查询Bean获取集合总数 -->
@@ -134,7 +136,7 @@
     <!-- 常用的查询Where条件 -->
     <sql id="queryUserAddressListWhere">
     	yn = 1
-        <if test="id != null and id != ''">
+        <if test="id != null">
         	and id = #{id,jdbcType=DECIMAL}
         </if>
         <if test="userId != null and userId != ''">
@@ -187,9 +189,6 @@
         </if>
         <if test="updateTime != null and updateTime != ''">
         	and update_time = #{updateTime,jdbcType=TIMESTAMP}
-        </if>
-        <if test="yn != null and yn != ''">
-        	and yn = #{yn,jdbcType=DECIMAL}
         </if>
     </sql>
 </mapper>

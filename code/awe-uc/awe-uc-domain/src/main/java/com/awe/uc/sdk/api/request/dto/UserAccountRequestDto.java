@@ -7,7 +7,7 @@ import java.util.Date;
  * UserAccountRequestDto：用户账号请求参数
  * 
  * @author ljz
- * @version 2014-12-23 10:06:46
+ * @version 2014-12-23 15:38:39
  * 
  */
 public class UserAccountRequestDto extends HbirdDto {

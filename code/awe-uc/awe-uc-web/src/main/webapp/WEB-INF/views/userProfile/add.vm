@@ -9,7 +9,7 @@
 					errorClass:"red",
 					rules: {
 												userId: {required: true},
-						cnname: {required: true},
+						cnName: {required: true},
 						sex: {required: true},
 						nickname: {required: true},
 						email: {required: true},
@@ -37,7 +37,7 @@
 			
 					messages: {
 						userId: { required: "请输入用户ID"},
-						cnname: { required: "请输入姓名"},
+						cnName: { required: "请输入姓名"},
 						sex: { required: "请输入性别"},
 						nickname: { required: "请输入昵称"},
 						email: { required: "请输入邮箱"},
@@ -98,9 +98,9 @@
                                     <div class="col-sm-4">
                                         <input type="text" name="userId" id="userId" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cnname">姓名</label>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cnName">姓名</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="cnname" id="cnname" class="col-xs-12 col-sm-12" />
+                                        <input type="text" name="cnName" id="cnName" class="col-xs-12 col-sm-12" />
                                     </div>
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="sex">性别</label>
                                     <div class="col-sm-4">

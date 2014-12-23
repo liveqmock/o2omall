@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * AreaManager接口的实现类
  * 
  * @author ljz
- * @version 2014-12-23 10:06:46
+ * @version 2014-12-23 15:38:39
  * 
  */
 @Component

@@ -8,7 +8,7 @@ import java.util.Date;
  * 提供rest接口时方法的返回对象
  * 
  * @author ljz
- * @version 2014-12-23 10:06:48
+ * @version 2014-12-23 15:38:41
  * 
  */
 public class UserProfileResponseDto extends HbirdDto {
@@ -21,7 +21,7 @@ public class UserProfileResponseDto extends HbirdDto {
     /** 用户ID */
     private Long userId; 
     /** 姓名 */
-    private String cnname; 
+    private String cnName; 
     /** 性别 */
     private Integer sex; 
     /** 昵称 */
@@ -118,19 +118,19 @@ public class UserProfileResponseDto extends HbirdDto {
     /**
      * get 姓名
      * 
-     * @return the cnname
+     * @return the cnName
      */
-    public String getCnname(){
-        return cnname;
+    public String getCnName(){
+        return cnName;
     }
         
     /**
      * set 姓名
      * 
-     * @param cnname the cnname to set
+     * @param cnName the cnName to set
      */
-    public void setCnname(String cnname) {
-        this.cnname = cnname;
+    public void setCnName(String cnName) {
+        this.cnName = cnName;
     }
     
     /**

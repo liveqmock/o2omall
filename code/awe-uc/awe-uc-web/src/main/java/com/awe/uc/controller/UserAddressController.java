@@ -26,7 +26,7 @@ import com.hbird.common.utils.wrap.Wrapper;
  * UserAddressController ：收货地址控制器
  * 
  * @author ljz
- * @version 2014-12-23 10:06:46
+ * @version 2014-12-23 15:38:39
 */
 @Controller
 @RequestMapping("userAddress")

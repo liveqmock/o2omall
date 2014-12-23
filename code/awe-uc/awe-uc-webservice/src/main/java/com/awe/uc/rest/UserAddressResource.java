@@ -28,7 +28,7 @@ import com.awe.uc.service.UserAddressService;
  * 收货地址REST服务：提供有关收货地址的接口
  * 
  * @author ljz
- * @version 2014-12-23 10:06:48
+ * @version 2014-12-23 15:38:41
  * 
  */
 @Component

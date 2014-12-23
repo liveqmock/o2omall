@@ -51,9 +51,9 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="userId" id="userId" class="col-xs-10 col-sm-8" value="$!query.userId"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="cnname">姓名</label>
+									<label class="col-sm-1 control-label no-padding-right" for="cnName">姓名</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="cnname" id="cnname" class="col-xs-10 col-sm-8" value="$!query.cnname"/>
+                                        <input type="text" name="cnName" id="cnName" class="col-xs-10 col-sm-8" value="$!query.cnName"/>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="sex">性别</label>
                                     <div class="col-sm-3">
@@ -203,7 +203,7 @@
                             <tr>
                                 <td>$!item.id</td>
                                 <td>$!item.userId</td>
-                                <td>$!item.cnname</td>
+                                <td>$!item.cnName</td>
                                 <td>$!item.sex</td>
                                 <td>$!item.nickname</td>
                                 <td>$!item.email</td>

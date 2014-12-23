@@ -10,7 +10,7 @@ import com.hbird.common.utils.page.PageUtil;
  * UserAddressService接口
  * 
  * @author ljz
- * @version 2014-12-23 10:06:46
+ * @version 2014-12-23 15:38:39
  * 
  */
 public interface UserAddressService {

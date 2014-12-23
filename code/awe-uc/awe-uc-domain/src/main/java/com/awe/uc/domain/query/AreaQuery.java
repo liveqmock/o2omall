@@ -8,7 +8,7 @@ import com.hbird.common.utils.page.Query;
  * AreaQuery：三级地址查询类
  * 
  * @author ljz
- * @version 2014-12-23 10:06:46
+ * @version 2014-12-23 15:38:39
  * 
  */
 public class AreaQuery extends Query {

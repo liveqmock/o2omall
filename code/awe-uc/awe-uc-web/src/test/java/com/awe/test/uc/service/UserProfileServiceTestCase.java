@@ -18,7 +18,7 @@ import com.awe.test.base.TestConstants;
  * UserProfileService单元测试
  * 
  * @author ljz
- * @version 2014-12-23 10:06:48
+ * @version 2014-12-23 15:38:41
  * 
  */
 public class UserProfileServiceTestCase extends BaseTransactionTestCase {
@@ -41,8 +41,8 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
         UserProfile userProfile = new UserProfile();
         Long userId = null; //TODO 初始化
         userProfile.setUserId(userId);
-        String cnname = null; //TODO 初始化
-        userProfile.setCnname(cnname);
+        String cnName = null; //TODO 初始化
+        userProfile.setCnName(cnName);
         userProfile.setCreateUser(TestConstants.UER_NAME);
         boolean result = userProfileService.insert(userProfile);
         Assert.isTrue(result);
@@ -57,8 +57,8 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
         UserProfile userProfile = new UserProfile();
         Long userId = null; //TODO 初始化// 已经存在的
         userProfile.setUserId(userId);
-        String cnname = null; //TODO 初始化// 已经存在的
-        userProfile.setCnname(cnname);
+        String cnName = null; //TODO 初始化// 已经存在的
+        userProfile.setCnName(cnName);
         userProfile.setCreateUser(TestConstants.UER_NAME);
         ExistedException ex = null;
         try {
@@ -80,8 +80,8 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
         userProfile.setId(TEST_DEFAULT_EXIST_ID);
         Long userId = null; //TODO 初始化
         userProfile.setUserId(userId);
-        String cnname = null; //TODO 初始化
-        userProfile.setCnname(cnname);
+        String cnName = null; //TODO 初始化
+        userProfile.setCnName(cnName);
         userProfile.setUpdateUser(TestConstants.UER_NAME);
         boolean result = userProfileService.delete(userProfile);
         Assert.isTrue(result);
@@ -97,8 +97,8 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
         userProfile.setId(TEST_NOT_EXIST_ID);// 不存在的ID
         Long userId = null; //TODO 初始化
         userProfile.setUserId(userId);
-        String cnname = null; //TODO 初始化
-        userProfile.setCnname(cnname);
+        String cnName = null; //TODO 初始化
+        userProfile.setCnName(cnName);
         userProfile.setUpdateUser(TestConstants.UER_NAME);
         boolean result = userProfileService.delete(userProfile);
         Assert.isTrue(!result);
@@ -114,8 +114,8 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
         userProfile.setId(TEST_DEFAULT_EXIST_ID);
         Long userId = null; //TODO 初始化
         userProfile.setUserId(userId);
-        String cnname = null; //TODO 初始化
-        userProfile.setCnname(cnname);
+        String cnName = null; //TODO 初始化
+        userProfile.setCnName(cnName);
         userProfile.setUpdateUser(TestConstants.UER_NAME);
         boolean result = userProfileService.update(userProfile);
         Assert.isTrue(result);
@@ -131,8 +131,8 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
         userProfile.setId(TEST_NOT_EXIST_ID);// 不存在的ID
         Long userId = null; //TODO 初始化
         userProfile.setUserId(userId);
-        String cnname = null; //TODO 初始化
-        userProfile.setCnname(cnname);
+        String cnName = null; //TODO 初始化
+        userProfile.setCnName(cnName);
         userProfile.setUpdateUser(TestConstants.UER_NAME);
         boolean result = userProfileService.update(userProfile);
         Assert.isTrue(!result);
@@ -181,8 +181,8 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
         UserProfileQuery queryBean = new UserProfileQuery();
         Long userId = null; //TODO 初始化
         queryBean.setUserId(userId);
-        String cnname = null; //TODO 初始化
-        queryBean.setCnname(cnname);
+        String cnName = null; //TODO 初始化
+        queryBean.setCnName(cnName);
         List<UserProfile> list = userProfileService.queryUserProfileList(queryBean);
         Assert.notEmpty(list);
         logger.info("list size = " + list.size());

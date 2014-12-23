@@ -16,7 +16,7 @@
 							<th class="center" style='width:25%;'>用户ID</th><td id="r_userId" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>姓名</th><td id="r_cnname" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>姓名</th><td id="r_cnName" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>性别</th><td id="r_sex" style='width:25%;'></td>
@@ -125,7 +125,7 @@
     				var r = data.result;
     				$("#r_id").text(r.id==null?"":r.id);
     				$("#r_userId").text(r.userId==null?"":r.userId);
-    				$("#r_cnname").text(r.cnname==null?"":r.cnname);
+    				$("#r_cnName").text(r.cnName==null?"":r.cnName);
     				$("#r_sex").text(r.sex==null?"":r.sex);
     				$("#r_nickname").text(r.nickname==null?"":r.nickname);
     				$("#r_email").text(r.email==null?"":r.email);

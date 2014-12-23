@@ -7,7 +7,7 @@ import com.awe.uc.sdk.api.request.dto.AreaRequestDto;
  * AreaRequest：三级地址请求参数
  * 
  * @author ljz
- * @version 2014-12-23 10:06:46
+ * @version 2014-12-23 15:38:39
  * 
  */
 public class AreaRequest extends HbirdSecureRequest<AreaRequestDto> {
