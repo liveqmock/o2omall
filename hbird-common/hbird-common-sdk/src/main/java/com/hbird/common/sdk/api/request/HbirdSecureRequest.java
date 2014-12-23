@@ -88,4 +88,13 @@ public class HbirdSecureRequest<T> extends HbirdRequest {
         this.content = content;
     }
 
+    /**
+     * 校验签名
+     * 
+     * @return 通过true；不通过false
+     */
+    public boolean checkSign() {
+        return SignatureUtil.checkSign(JsonHelper.toJson(content), key, sign);
+    }
+
 }

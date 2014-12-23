@@ -85,7 +85,7 @@ public class WrapMapper {
     }
 
     /**
-     * Wrap ERROR. code=100
+     * Wrap ILLEGAL_ARGUMENT. code=100
      * 
      * @param <E>
      *            the element type
@@ -93,17 +93,6 @@ public class WrapMapper {
      */
     public static <E> Wrapper<E> illegalArgument() {
         return wrap(Wrapper.ILLEGAL_ARGUMENT_CODE_, Wrapper.ILLEGAL_ARGUMENT_MESSAGE);
-    }
-
-    /**
-     * Wrap ERROR. code=500
-     * 
-     * @param <E>
-     *            the element type
-     * @return the wrapper< e>
-     */
-    public static <E> Wrapper<E> error() {
-        return wrap(Wrapper.ERROR_CODE, Wrapper.ERROR_MESSAGE);
     }
 
     /**
@@ -115,5 +104,27 @@ public class WrapMapper {
      */
     public static <E> Wrapper<E> ok() {
         return new Wrapper<E>();
+    }
+
+    /**
+     * Wrap FORBIDDEN. code=403
+     * 
+     * @param <E>
+     *            the element type
+     * @return the wrapper< e>
+     */
+    public static <E> Wrapper<E> forbidden() {
+        return wrap(Wrapper.FORBIDDEN_CODE, Wrapper.FORBIDDEN_MESSAGE);
+    }
+
+    /**
+     * Wrap ERROR. code=500
+     * 
+     * @param <E>
+     *            the element type
+     * @return the wrapper< e>
+     */
+    public static <E> Wrapper<E> error() {
+        return wrap(Wrapper.ERROR_CODE, Wrapper.ERROR_MESSAGE);
     }
 }
