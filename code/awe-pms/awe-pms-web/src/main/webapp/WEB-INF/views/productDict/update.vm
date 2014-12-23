@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#updateForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												type: {required: true},
+						attr: {required: true},
+						value: {required: true},
+						remark: {required: true},
+					},
+			
+					messages: {
+						type: { required: "请输入类型"},
+						attr: { required: "请输入属性"},
+						value: { required: "请输入值"},
+						remark: { required: "请输入备注"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/productDict");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#updateForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/productDict/update',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/productDict"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>配置表&nbsp;&gt;&nbsp;修改
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="updateForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="type">类型</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="type" id="type" class="col-xs-12 col-sm-12" value="$!productDict.type" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="attr">属性</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="attr" id="attr" class="col-xs-12 col-sm-12" value="$!productDict.attr" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="value">值</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="value" id="value" class="col-xs-12 col-sm-12" value="$!productDict.value" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="remark">备注</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="remark" id="remark" class="col-xs-12 col-sm-12" value="$!productDict.remark" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<input type="hidden" name="id" id="id" value="$!productDict.id" />
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

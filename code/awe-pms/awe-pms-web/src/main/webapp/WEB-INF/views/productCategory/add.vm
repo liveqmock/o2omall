@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#addForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												fid: {required: true},
+						name: {required: true},
+						enName: {required: true},
+						keyword: {required: true},
+						remark: {required: true},
+						level: {required: true},
+						priority: {required: true},
+					},
+			
+					messages: {
+						fid: { required: "请输入父ID"},
+						name: { required: "请输入类目名称"},
+						enName: { required: "请输入类目英文名称"},
+						keyword: { required: "请输入关键字"},
+						remark: { required: "请输入描述"},
+						level: { required: "请输入级别"},
+						priority: { required: "请输入优先级"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/productCategory");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#addForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/productCategory/add',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/productCategory"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>商品类别&nbsp;&gt;&nbsp;新增
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="addForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="fid">父ID</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="fid" id="fid" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="name">类目名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="name" id="name" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="enName">类目英文名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="enName" id="enName" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="keyword">关键字</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="keyword" id="keyword" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="remark">描述</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="remark" id="remark" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="level">级别</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="level" id="level" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="priority">优先级</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="priority" id="priority" class="col-xs-12 col-sm-12" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

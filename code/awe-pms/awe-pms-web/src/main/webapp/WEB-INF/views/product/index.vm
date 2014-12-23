@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        #parse("/layout/head.vm")
+		<script language="javascript"> 
+			$(function() {
+				$("#btn-query").click(function() {
+        			pageSubmit(1);
+   				});
+				$("#btn-add").click(function() {
+        			window.location.href=("$basePath/product/addForward");
+   				});
+			});
+        	// 提交分页查询
+        	function pageSubmit(pageNoParam) {
+                $("#curPage").val(pageNoParam);
+            	$("#queryForm").attr("action", "$basePath/product");
+                $("#queryForm").attr("method", "POST");
+                $("#queryForm").submit();
+        	}
+        	
+        	function toUpdate(parameterId){
+        		window.location.href=("$basePath/product/updateForward?id="+parameterId);
+        	}
+        	
+        	function toDelete(parameterId){
+        		MyPopWindow.ExecuteDelete("$basePath/product/delete",{ id : parameterId });
+        	}
+        	
+        </script>
+	</head>
+    <body>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-search green"></i>商品信息查询
+                        </h5>
+                        <div class="widget-toolbar">
+                            <a href="#" data-action="collapse">
+                                <i class="1 icon-chevron-up bigger-100"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #f5f5f5;padding:5px;">
+                            <form class="form-horizontal" role="form" id="queryForm">
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="productNo">商品编号</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="productNo" id="productNo" class="col-xs-10 col-sm-8" value="$!query.productNo"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="productName">商品名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="productName" id="productName" class="col-xs-10 col-sm-8" value="$!query.productName"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="enName">商品英文名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="enName" id="enName" class="col-xs-10 col-sm-8" value="$!query.enName"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="keyword">关键字</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="keyword" id="keyword" class="col-xs-10 col-sm-8" value="$!query.keyword"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="categoryOneId">一级分类</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="categoryOneId" id="categoryOneId" class="col-xs-10 col-sm-8" value="$!query.categoryOneId"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="categoryOne">一级分类名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="categoryOne" id="categoryOne" class="col-xs-10 col-sm-8" value="$!query.categoryOne"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="categoryTwoId">二级分类</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="categoryTwoId" id="categoryTwoId" class="col-xs-10 col-sm-8" value="$!query.categoryTwoId"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="categoryTwo">二级分类名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="categoryTwo" id="categoryTwo" class="col-xs-10 col-sm-8" value="$!query.categoryTwo"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="categoryThreeId">三级分类</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="categoryThreeId" id="categoryThreeId" class="col-xs-10 col-sm-8" value="$!query.categoryThreeId"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="categoryThree">三级分类名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="categoryThree" id="categoryThree" class="col-xs-10 col-sm-8" value="$!query.categoryThree"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="skuAttrName">商品SKU属性值</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="skuAttrName" id="skuAttrName" class="col-xs-10 col-sm-8" value="$!query.skuAttrName"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="score">商品评分</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="score" id="score" class="col-xs-10 col-sm-8" value="$!query.score"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="level">推荐级别</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="level" id="level" class="col-xs-10 col-sm-8" value="$!query.level"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="brandCode">品牌编号</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="brandCode" id="brandCode" class="col-xs-10 col-sm-8" value="$!query.brandCode"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="brandName">品牌名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="brandName" id="brandName" class="col-xs-10 col-sm-8" value="$!query.brandName"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="type">商品类型（国内、进口）</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="type" id="type" class="col-xs-10 col-sm-8" value="$!query.type"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="typeName">商品类型名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="typeName" id="typeName" class="col-xs-10 col-sm-8" value="$!query.typeName"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="mode">经营模式（自营。。）</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="mode" id="mode" class="col-xs-10 col-sm-8" value="$!query.mode"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="modeName">经营模式名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="modeName" id="modeName" class="col-xs-10 col-sm-8" value="$!query.modeName"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="businessNo">商家编号</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="businessNo" id="businessNo" class="col-xs-10 col-sm-8" value="$!query.businessNo"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="businessName">商家名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="businessName" id="businessName" class="col-xs-10 col-sm-8" value="$!query.businessName"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="method">食用方式</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="method" id="method" class="col-xs-10 col-sm-8" value="$!query.method"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="originPlace">商品产地</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="originPlace" id="originPlace" class="col-xs-10 col-sm-8" value="$!query.originPlace"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="saleTimeStart">商品上架时间</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="saleTimeStart" id="saleTimeStart" class="col-xs-10 col-sm-8" value="$!query.saleTimeStart"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="applicableCrowd">适用人群</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="applicableCrowd" id="applicableCrowd" class="col-xs-10 col-sm-8" value="$!query.applicableCrowd"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="applicableAge">适用年龄</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="applicableAge" id="applicableAge" class="col-xs-10 col-sm-8" value="$!query.applicableAge"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="features">特点</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="features" id="features" class="col-xs-10 col-sm-8" value="$!query.features"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="describe">商品描述</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="describe" id="describe" class="col-xs-10 col-sm-8" value="$!query.describe"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="introduce">介绍</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="introduce" id="introduce" class="col-xs-10 col-sm-8" value="$!query.introduce"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="service">服务（配送信息等）</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="service" id="service" class="col-xs-10 col-sm-8" value="$!query.service"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="weight">商品净重</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="weight" id="weight" class="col-xs-10 col-sm-8" value="$!query.weight"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="grossWeight">毛重</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="grossWeight" id="grossWeight" class="col-xs-10 col-sm-8" value="$!query.grossWeight"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="length">长</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="length" id="length" class="col-xs-10 col-sm-8" value="$!query.length"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="width">宽</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="width" id="width" class="col-xs-10 col-sm-8" value="$!query.width"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="height">高</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="height" id="height" class="col-xs-10 col-sm-8" value="$!query.height"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="diameter">直径</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="diameter" id="diameter" class="col-xs-10 col-sm-8" value="$!query.diameter"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="packType">包装类型（桶装等）</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="packType" id="packType" class="col-xs-10 col-sm-8" value="$!query.packType"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="packLength">包装长</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="packLength" id="packLength" class="col-xs-10 col-sm-8" value="$!query.packLength"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="packWidth">包装宽</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="packWidth" id="packWidth" class="col-xs-10 col-sm-8" value="$!query.packWidth"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="packHeight">包装高</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="packHeight" id="packHeight" class="col-xs-10 col-sm-8" value="$!query.packHeight"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="supportReturn">是否支持退货</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="supportReturn" id="supportReturn" class="col-xs-10 col-sm-8" value="$!query.supportReturn"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="distribution">配送信息</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="distribution" id="distribution" class="col-xs-10 col-sm-8" value="$!query.distribution"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="freightFree">是否免运费</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="freightFree" id="freightFree" class="col-xs-10 col-sm-8" value="$!query.freightFree"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="material">材质</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="material" id="material" class="col-xs-10 col-sm-8" value="$!query.material"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="packingList">包装清单</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="packingList" id="packingList" class="col-xs-10 col-sm-8" value="$!query.packingList"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="saleGuarantee">售后保障</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="saleGuarantee" id="saleGuarantee" class="col-xs-10 col-sm-8" value="$!query.saleGuarantee"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="kindlyReminder">温馨提示</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="kindlyReminder" id="kindlyReminder" class="col-xs-10 col-sm-8" value="$!query.kindlyReminder"/>
+                                    </div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-4 col-sm-offset-8">
+    									#parse("/layout/page.vm")
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-query"><i class="icon-search"></i>查询</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-add"><i class="icon-plus"></i>新增</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div class="col-xs-12 col-sm-12 table-responsive">
+                <table class="table table-striped table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr>
+							<th class="center">主键</th>
+							<th class="center">商品编号</th>
+							<th class="center">商品名称</th>
+							<th class="center">商品英文名称</th>
+							<th class="center">关键字</th>
+							<th class="center">一级分类</th>
+							<th class="center">一级分类名称</th>
+							<th class="center">二级分类</th>
+							<th class="center">二级分类名称</th>
+							<th class="center">三级分类</th>
+							<th class="center">三级分类名称</th>
+							<th class="center">商品SKU属性值</th>
+							<th class="center">商品评分</th>
+							<th class="center">推荐级别</th>
+							<th class="center">品牌编号</th>
+							<th class="center">品牌名称</th>
+							<th class="center">商品类型（国内、进口）</th>
+							<th class="center">商品类型名称</th>
+							<th class="center">经营模式（自营。。）</th>
+							<th class="center">经营模式名称</th>
+							<th class="center">商家编号</th>
+							<th class="center">商家名称</th>
+							<th class="center">食用方式</th>
+							<th class="center">商品产地</th>
+							<th class="center">商品上架时间</th>
+							<th class="center">适用人群</th>
+							<th class="center">适用年龄</th>
+							<th class="center">特点</th>
+							<th class="center">商品描述</th>
+							<th class="center">介绍</th>
+							<th class="center">服务（配送信息等）</th>
+							<th class="center">商品净重</th>
+							<th class="center">毛重</th>
+							<th class="center">长</th>
+							<th class="center">宽</th>
+							<th class="center">高</th>
+							<th class="center">直径</th>
+							<th class="center">包装类型（桶装等）</th>
+							<th class="center">包装长</th>
+							<th class="center">包装宽</th>
+							<th class="center">包装高</th>
+							<th class="center">是否支持退货</th>
+							<th class="center">配送信息</th>
+							<th class="center">是否免运费</th>
+							<th class="center">材质</th>
+							<th class="center">包装清单</th>
+							<th class="center">售后保障</th>
+							<th class="center">温馨提示</th>
+							<th class="center">创建时间</th>
+							<th class="center">创建人</th>
+    						<th class="center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        #foreach( $item in $dataList)
+                            <tr>
+                                <td>$!item.id</td>
+                                <td>$!item.productNo</td>
+                                <td>$!item.productName</td>
+                                <td>$!item.enName</td>
+                                <td>$!item.keyword</td>
+                                <td>$!item.categoryOneId</td>
+                                <td>$!item.categoryOne</td>
+                                <td>$!item.categoryTwoId</td>
+                                <td>$!item.categoryTwo</td>
+                                <td>$!item.categoryThreeId</td>
+                                <td>$!item.categoryThree</td>
+                                <td>$!item.skuAttrName</td>
+                                <td>$!item.score</td>
+                                <td>$!item.level</td>
+                                <td>$!item.brandCode</td>
+                                <td>$!item.brandName</td>
+                                <td>$!item.type</td>
+                                <td>$!item.typeName</td>
+                                <td>$!item.mode</td>
+                                <td>$!item.modeName</td>
+                                <td>$!item.businessNo</td>
+                                <td>$!item.businessName</td>
+                                <td>$!item.method</td>
+                                <td>$!item.originPlace</td>
+                                <td>$!item.saleTimeStart</td>
+                                <td>$!item.applicableCrowd</td>
+                                <td>$!item.applicableAge</td>
+                                <td>$!item.features</td>
+                                <td>$!item.describe</td>
+                                <td>$!item.introduce</td>
+                                <td>$!item.service</td>
+                                <td>$!item.weight</td>
+                                <td>$!item.grossWeight</td>
+                                <td>$!item.length</td>
+                                <td>$!item.width</td>
+                                <td>$!item.height</td>
+                                <td>$!item.diameter</td>
+                                <td>$!item.packType</td>
+                                <td>$!item.packLength</td>
+                                <td>$!item.packWidth</td>
+                                <td>$!item.packHeight</td>
+                                <td>$!item.supportReturn</td>
+                                <td>$!item.distribution</td>
+                                <td>$!item.freightFree</td>
+                                <td>$!item.material</td>
+                                <td>$!item.packingList</td>
+                                <td>$!item.saleGuarantee</td>
+                                <td>$!item.kindlyReminder</td>
+                                <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.createTime)</td>
+                                <td>$!item.createUser</td>
+                                <td>
+									<a href="javascript:void(0)" onclick="toDetail($!item.id);" data-toggle="modal"><i class="icon-list">详情</i></a>
+									<a href="javascript:void(0)" onclick="toUpdate($!item.id)"><i class="icon-pencil pink">修改</i></a>
+									<a href="javascript:void(0)" onclick="toDelete($!item.id)"><i class="icon-remove red">删除</i></a>
+								</td>
+                            </tr>
+                        #end
+                    </tbody>
+                </table>
+				#pageBarPost($page.totalRow $page.curPage $page.totalPage)
+			</div>
+        </div>
+		#parse("/product/detailModal.vm")
+    </body>
+</html>

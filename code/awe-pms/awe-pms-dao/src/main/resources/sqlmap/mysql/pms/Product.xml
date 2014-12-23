@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.awe.pms.dao.impl.ProductDaoImpl">
+    <resultMap id="ProductMap" type="Product">
+		<result column="id" property="id" jdbcType="DECIMAL" />
+		<result column="product_no" property="productNo" jdbcType="VARCHAR" />
+		<result column="product_name" property="productName" jdbcType="VARCHAR" />
+		<result column="en_name" property="enName" jdbcType="VARCHAR" />
+		<result column="keyword" property="keyword" jdbcType="VARCHAR" />
+		<result column="category_one_id" property="categoryOneId" jdbcType="DECIMAL" />
+		<result column="category_one" property="categoryOne" jdbcType="VARCHAR" />
+		<result column="category_two_id" property="categoryTwoId" jdbcType="DECIMAL" />
+		<result column="category_two" property="categoryTwo" jdbcType="VARCHAR" />
+		<result column="category_three_id" property="categoryThreeId" jdbcType="DECIMAL" />
+		<result column="category_three" property="categoryThree" jdbcType="VARCHAR" />
+		<result column="sku_attr_name" property="skuAttrName" jdbcType="VARCHAR" />
+		<result column="score" property="score" jdbcType="VARCHAR" />
+		<result column="level" property="level" jdbcType="DECIMAL" />
+		<result column="brand_code" property="brandCode" jdbcType="VARCHAR" />
+		<result column="brand_name" property="brandName" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="DECIMAL" />
+		<result column="type_name" property="typeName" jdbcType="VARCHAR" />
+		<result column="mode" property="mode" jdbcType="DECIMAL" />
+		<result column="mode_name" property="modeName" jdbcType="VARCHAR" />
+		<result column="business_no" property="businessNo" jdbcType="VARCHAR" />
+		<result column="business_name" property="businessName" jdbcType="VARCHAR" />
+		<result column="method" property="method" jdbcType="DECIMAL" />
+		<result column="origin_place" property="originPlace" jdbcType="VARCHAR" />
+		<result column="sale_time_start" property="saleTimeStart" jdbcType="TIMESTAMP" />
+		<result column="applicable_crowd" property="applicableCrowd" jdbcType="VARCHAR" />
+		<result column="applicable_age" property="applicableAge" jdbcType="VARCHAR" />
+		<result column="features" property="features" jdbcType="VARCHAR" />
+		<result column="describe" property="describe" jdbcType="VARCHAR" />
+		<result column="introduce" property="introduce" jdbcType="VARCHAR" />
+		<result column="service" property="service" jdbcType="VARCHAR" />
+		<result column="weight" property="weight" jdbcType="DECIMAL" />
+		<result column="gross_weight" property="grossWeight" jdbcType="DECIMAL" />
+		<result column="length" property="length" jdbcType="DECIMAL" />
+		<result column="width" property="width" jdbcType="DECIMAL" />
+		<result column="height" property="height" jdbcType="DECIMAL" />
+		<result column="diameter" property="diameter" jdbcType="DECIMAL" />
+		<result column="pack_type" property="packType" jdbcType="DECIMAL" />
+		<result column="pack_length" property="packLength" jdbcType="DECIMAL" />
+		<result column="pack_width" property="packWidth" jdbcType="DECIMAL" />
+		<result column="pack_height" property="packHeight" jdbcType="DECIMAL" />
+		<result column="support_return" property="supportReturn" jdbcType="DECIMAL" />
+		<result column="distribution" property="distribution" jdbcType="VARCHAR" />
+		<result column="freight_free" property="freightFree" jdbcType="DECIMAL" />
+		<result column="material" property="material" jdbcType="VARCHAR" />
+		<result column="packing_list" property="packingList" jdbcType="VARCHAR" />
+		<result column="sale_guarantee" property="saleGuarantee" jdbcType="VARCHAR" />
+		<result column="kindly_reminder" property="kindlyReminder" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+		<result column="yn" property="yn" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <sql id="productColumns">
+    	id,product_no,product_name,en_name,keyword,category_one_id,category_one,category_two_id,category_two,category_three_id,category_three,sku_attr_name,score,level,brand_code,brand_name,type,type_name,mode,mode_name,business_no,business_name,method,origin_place,sale_time_start,applicable_crowd,applicable_age,features,describe,introduce,service,weight,gross_weight,length,width,height,diameter,pack_type,pack_length,pack_width,pack_height,support_return,distribution,freight_free,material,packing_list,sale_guarantee,kindly_reminder,create_time,update_time,create_user,update_user,yn
+    </sql>
+    
+     <sql id="productUsedColumns">
+    	product_no,product_name,en_name,keyword,category_one_id,category_one,category_two_id,category_two,category_three_id,category_three,sku_attr_name,score,level,brand_code,brand_name,type,type_name,mode,mode_name,business_no,business_name,method,origin_place,sale_time_start,applicable_crowd,applicable_age,features,describe,introduce,service,weight,gross_weight,length,width,height,diameter,pack_type,pack_length,pack_width,pack_height,support_return,distribution,freight_free,material,packing_list,sale_guarantee,kindly_reminder,create_time,update_time,create_user,update_user,yn
+    </sql>
+
+    <!-- 创建信息 -->
+    <insert id="insert" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO product(<include refid="productUsedColumns"/>) 
+        VALUES (#{productNo},#{productName},#{enName},#{keyword},#{categoryOneId},#{categoryOne},#{categoryTwoId},#{categoryTwo},#{categoryThreeId},#{categoryThree},#{skuAttrName},#{score},#{level},#{brandCode},#{brandName},#{type},#{typeName},#{mode},#{modeName},#{businessNo},#{businessName},#{method},#{originPlace},#{saleTimeStart},#{applicableCrowd},#{applicableAge},#{features},#{describe},#{introduce},#{service},#{weight},#{grossWeight},#{length},#{width},#{height},#{diameter},#{packType},#{packLength},#{packWidth},#{packHeight},#{supportReturn},#{distribution},#{freightFree},#{material},#{packingList},#{saleGuarantee},#{kindlyReminder},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+	</insert>
+	
+    <!-- 修改信息 -->
+    <update id="update" parameterType="Product">
+        <if test="_parameter != null">
+            <if test="id != null and id > 0">
+                update product set
+		        <if test="productNo != null and productNo != ''">
+                	product_no = #{productNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="productName != null and productName != ''">
+                	product_name = #{productName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="enName != null and enName != ''">
+                	en_name = #{enName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="keyword != null and keyword != ''">
+                	keyword = #{keyword,jdbcType=VARCHAR},
+		        </if>
+		        <if test="categoryOneId != null and categoryOneId != ''">
+                	category_one_id = #{categoryOneId,jdbcType=DECIMAL},
+		        </if>
+		        <if test="categoryOne != null and categoryOne != ''">
+                	category_one = #{categoryOne,jdbcType=VARCHAR},
+		        </if>
+		        <if test="categoryTwoId != null and categoryTwoId != ''">
+                	category_two_id = #{categoryTwoId,jdbcType=DECIMAL},
+		        </if>
+		        <if test="categoryTwo != null and categoryTwo != ''">
+                	category_two = #{categoryTwo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="categoryThreeId != null and categoryThreeId != ''">
+                	category_three_id = #{categoryThreeId,jdbcType=DECIMAL},
+		        </if>
+		        <if test="categoryThree != null and categoryThree != ''">
+                	category_three = #{categoryThree,jdbcType=VARCHAR},
+		        </if>
+		        <if test="skuAttrName != null and skuAttrName != ''">
+                	sku_attr_name = #{skuAttrName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="score != null and score != ''">
+                	score = #{score,jdbcType=VARCHAR},
+		        </if>
+		        <if test="level != null and level != ''">
+                	level = #{level,jdbcType=DECIMAL},
+		        </if>
+		        <if test="brandCode != null and brandCode != ''">
+                	brand_code = #{brandCode,jdbcType=VARCHAR},
+		        </if>
+		        <if test="brandName != null and brandName != ''">
+                	brand_name = #{brandName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="type != null and type != ''">
+                	type = #{type,jdbcType=DECIMAL},
+		        </if>
+		        <if test="typeName != null and typeName != ''">
+                	type_name = #{typeName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="mode != null and mode != ''">
+                	mode = #{mode,jdbcType=DECIMAL},
+		        </if>
+		        <if test="modeName != null and modeName != ''">
+                	mode_name = #{modeName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="businessNo != null and businessNo != ''">
+                	business_no = #{businessNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="businessName != null and businessName != ''">
+                	business_name = #{businessName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="method != null and method != ''">
+                	method = #{method,jdbcType=DECIMAL},
+		        </if>
+		        <if test="originPlace != null and originPlace != ''">
+                	origin_place = #{originPlace,jdbcType=VARCHAR},
+		        </if>
+		        <if test="saleTimeStart != null and saleTimeStart != ''">
+                	sale_time_start = #{saleTimeStart,jdbcType=TIMESTAMP},
+		        </if>
+		        <if test="applicableCrowd != null and applicableCrowd != ''">
+                	applicable_crowd = #{applicableCrowd,jdbcType=VARCHAR},
+		        </if>
+		        <if test="applicableAge != null and applicableAge != ''">
+                	applicable_age = #{applicableAge,jdbcType=VARCHAR},
+		        </if>
+		        <if test="features != null and features != ''">
+                	features = #{features,jdbcType=VARCHAR},
+		        </if>
+		        <if test="describe != null and describe != ''">
+                	describe = #{describe,jdbcType=VARCHAR},
+		        </if>
+		        <if test="introduce != null and introduce != ''">
+                	introduce = #{introduce,jdbcType=VARCHAR},
+		        </if>
+		        <if test="service != null and service != ''">
+                	service = #{service,jdbcType=VARCHAR},
+		        </if>
+		        <if test="weight != null and weight != ''">
+                	weight = #{weight,jdbcType=DECIMAL},
+		        </if>
+		        <if test="grossWeight != null and grossWeight != ''">
+                	gross_weight = #{grossWeight,jdbcType=DECIMAL},
+		        </if>
+		        <if test="length != null and length != ''">
+                	length = #{length,jdbcType=DECIMAL},
+		        </if>
+		        <if test="width != null and width != ''">
+                	width = #{width,jdbcType=DECIMAL},
+		        </if>
+		        <if test="height != null and height != ''">
+                	height = #{height,jdbcType=DECIMAL},
+		        </if>
+		        <if test="diameter != null and diameter != ''">
+                	diameter = #{diameter,jdbcType=DECIMAL},
+		        </if>
+		        <if test="packType != null and packType != ''">
+                	pack_type = #{packType,jdbcType=DECIMAL},
+		        </if>
+		        <if test="packLength != null and packLength != ''">
+                	pack_length = #{packLength,jdbcType=DECIMAL},
+		        </if>
+		        <if test="packWidth != null and packWidth != ''">
+                	pack_width = #{packWidth,jdbcType=DECIMAL},
+		        </if>
+		        <if test="packHeight != null and packHeight != ''">
+                	pack_height = #{packHeight,jdbcType=DECIMAL},
+		        </if>
+		        <if test="supportReturn != null and supportReturn != ''">
+                	support_return = #{supportReturn,jdbcType=DECIMAL},
+		        </if>
+		        <if test="distribution != null and distribution != ''">
+                	distribution = #{distribution,jdbcType=VARCHAR},
+		        </if>
+		        <if test="freightFree != null and freightFree != ''">
+                	freight_free = #{freightFree,jdbcType=DECIMAL},
+		        </if>
+		        <if test="material != null and material != ''">
+                	material = #{material,jdbcType=VARCHAR},
+		        </if>
+		        <if test="packingList != null and packingList != ''">
+                	packing_list = #{packingList,jdbcType=VARCHAR},
+		        </if>
+		        <if test="saleGuarantee != null and saleGuarantee != ''">
+                	sale_guarantee = #{saleGuarantee,jdbcType=VARCHAR},
+		        </if>
+		        <if test="kindlyReminder != null and kindlyReminder != ''">
+                	kindly_reminder = #{kindlyReminder,jdbcType=VARCHAR},
+		        </if>
+		        <if test="updateUser != null and updateUser != ''">
+                	update_user = #{updateUser,jdbcType=VARCHAR},
+		        </if>
+                	update_time = now()
+                where id = #{id}
+            </if>
+        </if>
+    </update>
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="getProductById" resultMap="ProductMap" parameterType="java.lang.Long">
+        <if test="_parameter != null">
+            select <include refid="productColumns"/> from product
+            where id = #{_parameter} and yn = 1
+        </if>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，不带翻页 -->
+    <select id="queryProductList" resultMap="ProductMap"
+            parameterType="com.awe.pms.domain.query.ProductQuery">
+        select <include refid="productColumns"/> from product where <include refid="queryProductListWhere"/>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，翻页 -->
+    <select id="queryProductListWithPage" resultMap="ProductMap"
+            parameterType="com.awe.pms.domain.query.ProductQuery">
+        select <include refid="productColumns"/> from product where <include refid="queryProductListWhere"/>
+        order by create_time desc 
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 根据查询Bean查询-判断是否存在 -->
+    <select id="exist" resultType="java.lang.Integer" parameterType="Product">
+        select count(1) from product where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据查询Bean获取集合总数 -->
+    <select id="queryProductCount" resultType="java.lang.Integer"
+            parameterType="com.awe.pms.domain.query.ProductQuery">
+        select count(1) from product where <include refid="queryProductListWhere"/>
+    </select>
+
+    <!-- 删除信息-逻辑删除 -->
+    <update id="delete" parameterType="Product">
+		update product 
+		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
+		where id = #{id}
+    </update>
+
+    <!-- 常用的查询Where条件 -->
+    <sql id="queryProductListWhere">
+    	yn = 1
+        <if test="id != null and id != ''">
+        	and id = #{id,jdbcType=DECIMAL}
+        </if>
+        <if test="productNo != null and productNo != ''">
+        	and product_no = #{productNo,jdbcType=VARCHAR}
+        </if>
+        <if test="productName != null and productName != ''">
+        	and product_name = #{productName,jdbcType=VARCHAR}
+        </if>
+        <if test="enName != null and enName != ''">
+        	and en_name = #{enName,jdbcType=VARCHAR}
+        </if>
+        <if test="keyword != null and keyword != ''">
+        	and keyword = #{keyword,jdbcType=VARCHAR}
+        </if>
+        <if test="categoryOneId != null and categoryOneId != ''">
+        	and category_one_id = #{categoryOneId,jdbcType=DECIMAL}
+        </if>
+        <if test="categoryOne != null and categoryOne != ''">
+        	and category_one = #{categoryOne,jdbcType=VARCHAR}
+        </if>
+        <if test="categoryTwoId != null and categoryTwoId != ''">
+        	and category_two_id = #{categoryTwoId,jdbcType=DECIMAL}
+        </if>
+        <if test="categoryTwo != null and categoryTwo != ''">
+        	and category_two = #{categoryTwo,jdbcType=VARCHAR}
+        </if>
+        <if test="categoryThreeId != null and categoryThreeId != ''">
+        	and category_three_id = #{categoryThreeId,jdbcType=DECIMAL}
+        </if>
+        <if test="categoryThree != null and categoryThree != ''">
+        	and category_three = #{categoryThree,jdbcType=VARCHAR}
+        </if>
+        <if test="skuAttrName != null and skuAttrName != ''">
+        	and sku_attr_name = #{skuAttrName,jdbcType=VARCHAR}
+        </if>
+        <if test="score != null and score != ''">
+        	and score = #{score,jdbcType=VARCHAR}
+        </if>
+        <if test="level != null and level != ''">
+        	and level = #{level,jdbcType=DECIMAL}
+        </if>
+        <if test="brandCode != null and brandCode != ''">
+        	and brand_code = #{brandCode,jdbcType=VARCHAR}
+        </if>
+        <if test="brandName != null and brandName != ''">
+        	and brand_name = #{brandName,jdbcType=VARCHAR}
+        </if>
+        <if test="type != null and type != ''">
+        	and type = #{type,jdbcType=DECIMAL}
+        </if>
+        <if test="typeName != null and typeName != ''">
+        	and type_name = #{typeName,jdbcType=VARCHAR}
+        </if>
+        <if test="mode != null and mode != ''">
+        	and mode = #{mode,jdbcType=DECIMAL}
+        </if>
+        <if test="modeName != null and modeName != ''">
+        	and mode_name = #{modeName,jdbcType=VARCHAR}
+        </if>
+        <if test="businessNo != null and businessNo != ''">
+        	and business_no = #{businessNo,jdbcType=VARCHAR}
+        </if>
+        <if test="businessName != null and businessName != ''">
+        	and business_name = #{businessName,jdbcType=VARCHAR}
+        </if>
+        <if test="method != null and method != ''">
+        	and method = #{method,jdbcType=DECIMAL}
+        </if>
+        <if test="originPlace != null and originPlace != ''">
+        	and origin_place = #{originPlace,jdbcType=VARCHAR}
+        </if>
+        <if test="saleTimeStart != null and saleTimeStart != ''">
+        	and sale_time_start = #{saleTimeStart,jdbcType=TIMESTAMP}
+        </if>
+        <if test="applicableCrowd != null and applicableCrowd != ''">
+        	and applicable_crowd = #{applicableCrowd,jdbcType=VARCHAR}
+        </if>
+        <if test="applicableAge != null and applicableAge != ''">
+        	and applicable_age = #{applicableAge,jdbcType=VARCHAR}
+        </if>
+        <if test="features != null and features != ''">
+        	and features = #{features,jdbcType=VARCHAR}
+        </if>
+        <if test="describe != null and describe != ''">
+        	and describe = #{describe,jdbcType=VARCHAR}
+        </if>
+        <if test="introduce != null and introduce != ''">
+        	and introduce = #{introduce,jdbcType=VARCHAR}
+        </if>
+        <if test="service != null and service != ''">
+        	and service = #{service,jdbcType=VARCHAR}
+        </if>
+        <if test="weight != null and weight != ''">
+        	and weight = #{weight,jdbcType=DECIMAL}
+        </if>
+        <if test="grossWeight != null and grossWeight != ''">
+        	and gross_weight = #{grossWeight,jdbcType=DECIMAL}
+        </if>
+        <if test="length != null and length != ''">
+        	and length = #{length,jdbcType=DECIMAL}
+        </if>
+        <if test="width != null and width != ''">
+        	and width = #{width,jdbcType=DECIMAL}
+        </if>
+        <if test="height != null and height != ''">
+        	and height = #{height,jdbcType=DECIMAL}
+        </if>
+        <if test="diameter != null and diameter != ''">
+        	and diameter = #{diameter,jdbcType=DECIMAL}
+        </if>
+        <if test="packType != null and packType != ''">
+        	and pack_type = #{packType,jdbcType=DECIMAL}
+        </if>
+        <if test="packLength != null and packLength != ''">
+        	and pack_length = #{packLength,jdbcType=DECIMAL}
+        </if>
+        <if test="packWidth != null and packWidth != ''">
+        	and pack_width = #{packWidth,jdbcType=DECIMAL}
+        </if>
+        <if test="packHeight != null and packHeight != ''">
+        	and pack_height = #{packHeight,jdbcType=DECIMAL}
+        </if>
+        <if test="supportReturn != null and supportReturn != ''">
+        	and support_return = #{supportReturn,jdbcType=DECIMAL}
+        </if>
+        <if test="distribution != null and distribution != ''">
+        	and distribution = #{distribution,jdbcType=VARCHAR}
+        </if>
+        <if test="freightFree != null and freightFree != ''">
+        	and freight_free = #{freightFree,jdbcType=DECIMAL}
+        </if>
+        <if test="material != null and material != ''">
+        	and material = #{material,jdbcType=VARCHAR}
+        </if>
+        <if test="packingList != null and packingList != ''">
+        	and packing_list = #{packingList,jdbcType=VARCHAR}
+        </if>
+        <if test="saleGuarantee != null and saleGuarantee != ''">
+        	and sale_guarantee = #{saleGuarantee,jdbcType=VARCHAR}
+        </if>
+        <if test="kindlyReminder != null and kindlyReminder != ''">
+        	and kindly_reminder = #{kindlyReminder,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createUser != null and createUser != ''">
+        	and create_user = #{createUser,jdbcType=VARCHAR}
+        </if>
+        <if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
+        </if>
+        <if test="yn != null and yn != ''">
+        	and yn = #{yn,jdbcType=DECIMAL}
+        </if>
+    </sql>
+</mapper>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.awe.pms.dao.impl.SkuImagesDaoImpl">
+    <resultMap id="SkuImagesMap" type="SkuImages">
+		<result column="id" property="id" jdbcType="DECIMAL" />
+		<result column="sku_no" property="skuNo" jdbcType="VARCHAR" />
+		<result column="img_type" property="imgType" jdbcType="DECIMAL" />
+		<result column="img_path" property="imgPath" jdbcType="VARCHAR" />
+		<result column="is_primary_path" property="isPrimaryPath" jdbcType="DECIMAL" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="priority" property="priority" jdbcType="DECIMAL" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+		<result column="yn" property="yn" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <sql id="skuImagesColumns">
+    	id,sku_no,img_type,img_path,is_primary_path,remark,priority,create_time,update_time,create_user,update_user,yn
+    </sql>
+    
+     <sql id="skuImagesUsedColumns">
+    	sku_no,img_type,img_path,is_primary_path,remark,priority,create_time,update_time,create_user,update_user,yn
+    </sql>
+
+    <!-- 创建信息 -->
+    <insert id="insert" parameterType="SkuImages" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sku_images(<include refid="skuImagesUsedColumns"/>) 
+        VALUES (#{skuNo},#{imgType},#{imgPath},#{isPrimaryPath},#{remark},#{priority},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+	</insert>
+	
+    <!-- 修改信息 -->
+    <update id="update" parameterType="SkuImages">
+        <if test="_parameter != null">
+            <if test="id != null and id > 0">
+                update sku_images set
+		        <if test="skuNo != null and skuNo != ''">
+                	sku_no = #{skuNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="imgType != null and imgType != ''">
+                	img_type = #{imgType,jdbcType=DECIMAL},
+		        </if>
+		        <if test="imgPath != null and imgPath != ''">
+                	img_path = #{imgPath,jdbcType=VARCHAR},
+		        </if>
+		        <if test="isPrimaryPath != null and isPrimaryPath != ''">
+                	is_primary_path = #{isPrimaryPath,jdbcType=DECIMAL},
+		        </if>
+		        <if test="remark != null and remark != ''">
+                	remark = #{remark,jdbcType=VARCHAR},
+		        </if>
+		        <if test="priority != null and priority != ''">
+                	priority = #{priority,jdbcType=DECIMAL},
+		        </if>
+		        <if test="updateUser != null and updateUser != ''">
+                	update_user = #{updateUser,jdbcType=VARCHAR},
+		        </if>
+                	update_time = now()
+                where id = #{id}
+            </if>
+        </if>
+    </update>
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="getSkuImagesById" resultMap="SkuImagesMap" parameterType="java.lang.Long">
+        <if test="_parameter != null">
+            select <include refid="skuImagesColumns"/> from sku_images
+            where id = #{_parameter} and yn = 1
+        </if>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，不带翻页 -->
+    <select id="querySkuImagesList" resultMap="SkuImagesMap"
+            parameterType="com.awe.pms.domain.query.SkuImagesQuery">
+        select <include refid="skuImagesColumns"/> from sku_images where <include refid="querySkuImagesListWhere"/>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，翻页 -->
+    <select id="querySkuImagesListWithPage" resultMap="SkuImagesMap"
+            parameterType="com.awe.pms.domain.query.SkuImagesQuery">
+        select <include refid="skuImagesColumns"/> from sku_images where <include refid="querySkuImagesListWhere"/>
+        order by create_time desc 
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 根据查询Bean查询-判断是否存在 -->
+    <select id="exist" resultType="java.lang.Integer" parameterType="SkuImages">
+        select count(1) from sku_images where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据查询Bean获取集合总数 -->
+    <select id="querySkuImagesCount" resultType="java.lang.Integer"
+            parameterType="com.awe.pms.domain.query.SkuImagesQuery">
+        select count(1) from sku_images where <include refid="querySkuImagesListWhere"/>
+    </select>
+
+    <!-- 删除信息-逻辑删除 -->
+    <update id="delete" parameterType="SkuImages">
+		update sku_images 
+		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
+		where id = #{id}
+    </update>
+
+    <!-- 常用的查询Where条件 -->
+    <sql id="querySkuImagesListWhere">
+    	yn = 1
+        <if test="id != null and id != ''">
+        	and id = #{id,jdbcType=DECIMAL}
+        </if>
+        <if test="skuNo != null and skuNo != ''">
+        	and sku_no = #{skuNo,jdbcType=VARCHAR}
+        </if>
+        <if test="imgType != null and imgType != ''">
+        	and img_type = #{imgType,jdbcType=DECIMAL}
+        </if>
+        <if test="imgPath != null and imgPath != ''">
+        	and img_path = #{imgPath,jdbcType=VARCHAR}
+        </if>
+        <if test="isPrimaryPath != null and isPrimaryPath != ''">
+        	and is_primary_path = #{isPrimaryPath,jdbcType=DECIMAL}
+        </if>
+        <if test="remark != null and remark != ''">
+        	and remark = #{remark,jdbcType=VARCHAR}
+        </if>
+        <if test="priority != null and priority != ''">
+        	and priority = #{priority,jdbcType=DECIMAL}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createUser != null and createUser != ''">
+        	and create_user = #{createUser,jdbcType=VARCHAR}
+        </if>
+        <if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
+        </if>
+        <if test="yn != null and yn != ''">
+        	and yn = #{yn,jdbcType=DECIMAL}
+        </if>
+    </sql>
+</mapper>

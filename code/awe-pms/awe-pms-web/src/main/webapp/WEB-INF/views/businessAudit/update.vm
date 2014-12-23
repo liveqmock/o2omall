@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#updateForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												businessNo: {required: true},
+						businessName: {required: true},
+						operator: {required: true},
+						operateTime: {required: true},
+						checkResult: {required: true},
+						remark: {required: true},
+					},
+			
+					messages: {
+						businessNo: { required: "请输入商家编号"},
+						businessName: { required: "请输入商家名称"},
+						operator: { required: "请输入操作人"},
+						operateTime: { required: "请输入操作时间"},
+						checkResult: { required: "请输入审核结果"},
+						remark: { required: "请输入审核描述"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/businessAudit");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#updateForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/businessAudit/update',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/businessAudit"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>审核商家流水表&nbsp;&gt;&nbsp;修改
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="updateForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="businessNo">商家编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="businessNo" id="businessNo" class="col-xs-12 col-sm-12" value="$!businessAudit.businessNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="businessName">商家名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="businessName" id="businessName" class="col-xs-12 col-sm-12" value="$!businessAudit.businessName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="operator">操作人</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="operator" id="operator" class="col-xs-12 col-sm-12" value="$!businessAudit.operator" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="operateTime">操作时间</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="operateTime" id="operateTime" class="col-xs-12 col-sm-12" value="$!businessAudit.operateTime" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="checkResult">审核结果</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="checkResult" id="checkResult" class="col-xs-12 col-sm-12" value="$!businessAudit.checkResult" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="remark">审核描述</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="remark" id="remark" class="col-xs-12 col-sm-12" value="$!businessAudit.remark" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<input type="hidden" name="id" id="id" value="$!businessAudit.id" />
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

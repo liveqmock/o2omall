@@ -1,0 +1,177 @@
+<!-- Modal -->
+<div class="modal fade" id="myBusinessInfoModal" tabindex="-1" role="dialog" aria-labelledby="myBusinessInfoModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myBusinessInfoModalLabel">商家信息详情</h4>
+			</div>
+			<div class="modal-body"> 
+				<table class="table table-striped table-bordered table-condensed table-hover">
+					<tbody>
+						<tr>
+							<th class="center" style='width:25%;'>主键</th><td id="r_id" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>商家编号</th><td id="r_businessNo" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>商家名称</th><td id="r_businessName" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>商家英文名称</th><td id="r_enName" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>名称缩写</th><td id="r_businessAbbr" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>国家</th><td id="r_country" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>公司</th><td id="r_company" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>地址</th><td id="r_address" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>邮编</th><td id="r_postCode" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>联系人</th><td id="r_contactor" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>联系人电话</th><td id="r_telePhone" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>手机</th><td id="r_mobilePhone" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>商家类别</th><td id="r_bussSort" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>描述</th><td id="r_describe" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>备注</th><td id="r_remark" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>审核状态</th><td id="r_checkStatus" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>是否有证件</th><td id="r_hasCard" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>法定人身份证（图片地址）</th><td id="r_legalPerson" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>公司注册信息（扫描件）</th><td id="r_companyRegister" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>入驻时间</th><td id="r_enterTime" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>入驻年限</th><td id="r_enterYear" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>有效合同开始时间</th><td id="r_contractTimeStart" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>有效合同结束时间</th><td id="r_contractTimeEnd" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>商家级别</th><td id="r_level" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>保证金</th><td id="r_earnestMoney" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>信用等级</th><td id="r_creditLevel" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>信用额度</th><td id="r_creditLimit" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>优先级</th><td id="r_priority" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>创建时间</th><td id="r_createTime" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>修改时间</th><td id="r_updateTime" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>创建人</th><td id="r_createUser" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>修改人</th><td id="r_updateUser" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>是否有效</th><td id="r_yn" style='width:25%;'></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script language="javascript">         	
+    function toDetail(parameterId){
+		$("#tab_online_tbody").html("");
+		$("#tab_config_tbody").html("");
+		$("#tab_log_tbody").html("");
+    	jQuery.ajax({
+    		type: "GET",
+    		url: basePath + "/businessInfo/detail",
+    		dataType : 'json',
+    		data: "id=" + parameterId,
+    		
+    		success: function(data){
+    			if(data!=null && data.code==200 && data.result!=null){
+    				var r = data.result;
+    				$("#r_id").text(r.id==null?"":r.id);
+    				$("#r_businessNo").text(r.businessNo==null?"":r.businessNo);
+    				$("#r_businessName").text(r.businessName==null?"":r.businessName);
+    				$("#r_enName").text(r.enName==null?"":r.enName);
+    				$("#r_businessAbbr").text(r.businessAbbr==null?"":r.businessAbbr);
+    				$("#r_country").text(r.country==null?"":r.country);
+    				$("#r_company").text(r.company==null?"":r.company);
+    				$("#r_address").text(r.address==null?"":r.address);
+    				$("#r_postCode").text(r.postCode==null?"":r.postCode);
+    				$("#r_contactor").text(r.contactor==null?"":r.contactor);
+    				$("#r_telePhone").text(r.telePhone==null?"":r.telePhone);
+    				$("#r_mobilePhone").text(r.mobilePhone==null?"":r.mobilePhone);
+    				$("#r_bussSort").text(r.bussSort==null?"":r.bussSort);
+    				$("#r_describe").text(r.describe==null?"":r.describe);
+    				$("#r_remark").text(r.remark==null?"":r.remark);
+    				$("#r_checkStatus").text(r.checkStatus==null?"":r.checkStatus);
+    				$("#r_hasCard").text(r.hasCard==null?"":r.hasCard);
+    				$("#r_legalPerson").text(r.legalPerson==null?"":r.legalPerson);
+    				$("#r_companyRegister").text(r.companyRegister==null?"":r.companyRegister);
+    				$("#r_enterTime").text(r.enterTime==null?"":r.enterTime);
+    				$("#r_enterYear").text(r.enterYear==null?"":r.enterYear);
+    				$("#r_contractTimeStart").text(r.contractTimeStart==null?"":r.contractTimeStart);
+    				$("#r_contractTimeEnd").text(r.contractTimeEnd==null?"":r.contractTimeEnd);
+    				$("#r_level").text(r.level==null?"":r.level);
+    				$("#r_earnestMoney").text(r.earnestMoney==null?"":r.earnestMoney);
+    				$("#r_creditLevel").text(r.creditLevel==null?"":r.creditLevel);
+    				$("#r_creditLimit").text(r.creditLimit==null?"":r.creditLimit);
+    				$("#r_priority").text(r.priority==null?"":r.priority);
+    				$("#r_createTime").text(r.createTime==null?"":r.createTime);
+    				$("#r_updateTime").text(r.updateTime==null?"":r.updateTime);
+    				$("#r_createUser").text(r.createUser==null?"":r.createUser);
+    				$("#r_updateUser").text(r.updateUser==null?"":r.updateUser);
+    				$("#r_yn").text(r.yn==null?"":r.yn);
+    			} else {
+    				alert("获取详情失败");
+    			}
+    		},
+    		
+    		error : function(data) {
+    			alert("获取详情出现异常");
+    		}
+    	});
+		
+    	$('#myBusinessInfoModal').modal('show');
+    }
+</script>

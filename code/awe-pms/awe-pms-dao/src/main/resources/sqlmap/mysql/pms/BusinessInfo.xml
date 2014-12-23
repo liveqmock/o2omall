@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.awe.pms.dao.impl.BusinessInfoDaoImpl">
+    <resultMap id="BusinessInfoMap" type="BusinessInfo">
+		<result column="id" property="id" jdbcType="DECIMAL" />
+		<result column="business_no" property="businessNo" jdbcType="VARCHAR" />
+		<result column="business_name" property="businessName" jdbcType="VARCHAR" />
+		<result column="en_name" property="enName" jdbcType="VARCHAR" />
+		<result column="business_abbr" property="businessAbbr" jdbcType="VARCHAR" />
+		<result column="country" property="country" jdbcType="VARCHAR" />
+		<result column="company" property="company" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="post_code" property="postCode" jdbcType="VARCHAR" />
+		<result column="contactor" property="contactor" jdbcType="VARCHAR" />
+		<result column="tele_phone" property="telePhone" jdbcType="VARCHAR" />
+		<result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
+		<result column="buss_sort" property="bussSort" jdbcType="DECIMAL" />
+		<result column="describe" property="describe" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="check_status" property="checkStatus" jdbcType="DECIMAL" />
+		<result column="has_card" property="hasCard" jdbcType="DECIMAL" />
+		<result column="legal_person" property="legalPerson" jdbcType="VARCHAR" />
+		<result column="company_register" property="companyRegister" jdbcType="VARCHAR" />
+		<result column="enter_time" property="enterTime" jdbcType="TIMESTAMP" />
+		<result column="enter_year" property="enterYear" jdbcType="TIMESTAMP" />
+		<result column="contract_time_start" property="contractTimeStart" jdbcType="TIMESTAMP" />
+		<result column="contract_time_end" property="contractTimeEnd" jdbcType="TIMESTAMP" />
+		<result column="level" property="level" jdbcType="DECIMAL" />
+		<result column="earnest_money" property="earnestMoney" jdbcType="DECIMAL" />
+		<result column="credit_level" property="creditLevel" jdbcType="DECIMAL" />
+		<result column="credit_limit" property="creditLimit" jdbcType="DECIMAL" />
+		<result column="priority" property="priority" jdbcType="DECIMAL" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+		<result column="yn" property="yn" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <sql id="businessInfoColumns">
+    	id,business_no,business_name,en_name,business_abbr,country,company,address,post_code,contactor,tele_phone,mobile_phone,buss_sort,describe,remark,check_status,has_card,legal_person,company_register,enter_time,enter_year,contract_time_start,contract_time_end,level,earnest_money,credit_level,credit_limit,priority,create_time,update_time,create_user,update_user,yn
+    </sql>
+    
+     <sql id="businessInfoUsedColumns">
+    	business_no,business_name,en_name,business_abbr,country,company,address,post_code,contactor,tele_phone,mobile_phone,buss_sort,describe,remark,check_status,has_card,legal_person,company_register,enter_time,enter_year,contract_time_start,contract_time_end,level,earnest_money,credit_level,credit_limit,priority,create_time,update_time,create_user,update_user,yn
+    </sql>
+
+    <!-- 创建信息 -->
+    <insert id="insert" parameterType="BusinessInfo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO business_info(<include refid="businessInfoUsedColumns"/>) 
+        VALUES (#{businessNo},#{businessName},#{enName},#{businessAbbr},#{country},#{company},#{address},#{postCode},#{contactor},#{telePhone},#{mobilePhone},#{bussSort},#{describe},#{remark},#{checkStatus},#{hasCard},#{legalPerson},#{companyRegister},#{enterTime},#{enterYear},#{contractTimeStart},#{contractTimeEnd},#{level},#{earnestMoney},#{creditLevel},#{creditLimit},#{priority},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+	</insert>
+	
+    <!-- 修改信息 -->
+    <update id="update" parameterType="BusinessInfo">
+        <if test="_parameter != null">
+            <if test="id != null and id > 0">
+                update business_info set
+		        <if test="businessNo != null and businessNo != ''">
+                	business_no = #{businessNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="businessName != null and businessName != ''">
+                	business_name = #{businessName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="enName != null and enName != ''">
+                	en_name = #{enName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="businessAbbr != null and businessAbbr != ''">
+                	business_abbr = #{businessAbbr,jdbcType=VARCHAR},
+		        </if>
+		        <if test="country != null and country != ''">
+                	country = #{country,jdbcType=VARCHAR},
+		        </if>
+		        <if test="company != null and company != ''">
+                	company = #{company,jdbcType=VARCHAR},
+		        </if>
+		        <if test="address != null and address != ''">
+                	address = #{address,jdbcType=VARCHAR},
+		        </if>
+		        <if test="postCode != null and postCode != ''">
+                	post_code = #{postCode,jdbcType=VARCHAR},
+		        </if>
+		        <if test="contactor != null and contactor != ''">
+                	contactor = #{contactor,jdbcType=VARCHAR},
+		        </if>
+		        <if test="telePhone != null and telePhone != ''">
+                	tele_phone = #{telePhone,jdbcType=VARCHAR},
+		        </if>
+		        <if test="mobilePhone != null and mobilePhone != ''">
+                	mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+		        </if>
+		        <if test="bussSort != null and bussSort != ''">
+                	buss_sort = #{bussSort,jdbcType=DECIMAL},
+		        </if>
+		        <if test="describe != null and describe != ''">
+                	describe = #{describe,jdbcType=VARCHAR},
+		        </if>
+		        <if test="remark != null and remark != ''">
+                	remark = #{remark,jdbcType=VARCHAR},
+		        </if>
+		        <if test="checkStatus != null and checkStatus != ''">
+                	check_status = #{checkStatus,jdbcType=DECIMAL},
+		        </if>
+		        <if test="hasCard != null and hasCard != ''">
+                	has_card = #{hasCard,jdbcType=DECIMAL},
+		        </if>
+		        <if test="legalPerson != null and legalPerson != ''">
+                	legal_person = #{legalPerson,jdbcType=VARCHAR},
+		        </if>
+		        <if test="companyRegister != null and companyRegister != ''">
+                	company_register = #{companyRegister,jdbcType=VARCHAR},
+		        </if>
+		        <if test="enterTime != null and enterTime != ''">
+                	enter_time = #{enterTime,jdbcType=TIMESTAMP},
+		        </if>
+		        <if test="enterYear != null and enterYear != ''">
+                	enter_year = #{enterYear,jdbcType=TIMESTAMP},
+		        </if>
+		        <if test="contractTimeStart != null and contractTimeStart != ''">
+                	contract_time_start = #{contractTimeStart,jdbcType=TIMESTAMP},
+		        </if>
+		        <if test="contractTimeEnd != null and contractTimeEnd != ''">
+                	contract_time_end = #{contractTimeEnd,jdbcType=TIMESTAMP},
+		        </if>
+		        <if test="level != null and level != ''">
+                	level = #{level,jdbcType=DECIMAL},
+		        </if>
+		        <if test="earnestMoney != null and earnestMoney != ''">
+                	earnest_money = #{earnestMoney,jdbcType=DECIMAL},
+		        </if>
+		        <if test="creditLevel != null and creditLevel != ''">
+                	credit_level = #{creditLevel,jdbcType=DECIMAL},
+		        </if>
+		        <if test="creditLimit != null and creditLimit != ''">
+                	credit_limit = #{creditLimit,jdbcType=DECIMAL},
+		        </if>
+		        <if test="priority != null and priority != ''">
+                	priority = #{priority,jdbcType=DECIMAL},
+		        </if>
+		        <if test="updateUser != null and updateUser != ''">
+                	update_user = #{updateUser,jdbcType=VARCHAR},
+		        </if>
+                	update_time = now()
+                where id = #{id}
+            </if>
+        </if>
+    </update>
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="getBusinessInfoById" resultMap="BusinessInfoMap" parameterType="java.lang.Long">
+        <if test="_parameter != null">
+            select <include refid="businessInfoColumns"/> from business_info
+            where id = #{_parameter} and yn = 1
+        </if>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，不带翻页 -->
+    <select id="queryBusinessInfoList" resultMap="BusinessInfoMap"
+            parameterType="com.awe.pms.domain.query.BusinessInfoQuery">
+        select <include refid="businessInfoColumns"/> from business_info where <include refid="queryBusinessInfoListWhere"/>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，翻页 -->
+    <select id="queryBusinessInfoListWithPage" resultMap="BusinessInfoMap"
+            parameterType="com.awe.pms.domain.query.BusinessInfoQuery">
+        select <include refid="businessInfoColumns"/> from business_info where <include refid="queryBusinessInfoListWhere"/>
+        order by create_time desc 
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 根据查询Bean查询-判断是否存在 -->
+    <select id="exist" resultType="java.lang.Integer" parameterType="BusinessInfo">
+        select count(1) from business_info where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据查询Bean获取集合总数 -->
+    <select id="queryBusinessInfoCount" resultType="java.lang.Integer"
+            parameterType="com.awe.pms.domain.query.BusinessInfoQuery">
+        select count(1) from business_info where <include refid="queryBusinessInfoListWhere"/>
+    </select>
+
+    <!-- 删除信息-逻辑删除 -->
+    <update id="delete" parameterType="BusinessInfo">
+		update business_info 
+		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
+		where id = #{id}
+    </update>
+
+    <!-- 常用的查询Where条件 -->
+    <sql id="queryBusinessInfoListWhere">
+    	yn = 1
+        <if test="id != null and id != ''">
+        	and id = #{id,jdbcType=DECIMAL}
+        </if>
+        <if test="businessNo != null and businessNo != ''">
+        	and business_no = #{businessNo,jdbcType=VARCHAR}
+        </if>
+        <if test="businessName != null and businessName != ''">
+        	and business_name = #{businessName,jdbcType=VARCHAR}
+        </if>
+        <if test="enName != null and enName != ''">
+        	and en_name = #{enName,jdbcType=VARCHAR}
+        </if>
+        <if test="businessAbbr != null and businessAbbr != ''">
+        	and business_abbr = #{businessAbbr,jdbcType=VARCHAR}
+        </if>
+        <if test="country != null and country != ''">
+        	and country = #{country,jdbcType=VARCHAR}
+        </if>
+        <if test="company != null and company != ''">
+        	and company = #{company,jdbcType=VARCHAR}
+        </if>
+        <if test="address != null and address != ''">
+        	and address = #{address,jdbcType=VARCHAR}
+        </if>
+        <if test="postCode != null and postCode != ''">
+        	and post_code = #{postCode,jdbcType=VARCHAR}
+        </if>
+        <if test="contactor != null and contactor != ''">
+        	and contactor = #{contactor,jdbcType=VARCHAR}
+        </if>
+        <if test="telePhone != null and telePhone != ''">
+        	and tele_phone = #{telePhone,jdbcType=VARCHAR}
+        </if>
+        <if test="mobilePhone != null and mobilePhone != ''">
+        	and mobile_phone = #{mobilePhone,jdbcType=VARCHAR}
+        </if>
+        <if test="bussSort != null and bussSort != ''">
+        	and buss_sort = #{bussSort,jdbcType=DECIMAL}
+        </if>
+        <if test="describe != null and describe != ''">
+        	and describe = #{describe,jdbcType=VARCHAR}
+        </if>
+        <if test="remark != null and remark != ''">
+        	and remark = #{remark,jdbcType=VARCHAR}
+        </if>
+        <if test="checkStatus != null and checkStatus != ''">
+        	and check_status = #{checkStatus,jdbcType=DECIMAL}
+        </if>
+        <if test="hasCard != null and hasCard != ''">
+        	and has_card = #{hasCard,jdbcType=DECIMAL}
+        </if>
+        <if test="legalPerson != null and legalPerson != ''">
+        	and legal_person = #{legalPerson,jdbcType=VARCHAR}
+        </if>
+        <if test="companyRegister != null and companyRegister != ''">
+        	and company_register = #{companyRegister,jdbcType=VARCHAR}
+        </if>
+        <if test="enterTime != null and enterTime != ''">
+        	and enter_time = #{enterTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="enterYear != null and enterYear != ''">
+        	and enter_year = #{enterYear,jdbcType=TIMESTAMP}
+        </if>
+        <if test="contractTimeStart != null and contractTimeStart != ''">
+        	and contract_time_start = #{contractTimeStart,jdbcType=TIMESTAMP}
+        </if>
+        <if test="contractTimeEnd != null and contractTimeEnd != ''">
+        	and contract_time_end = #{contractTimeEnd,jdbcType=TIMESTAMP}
+        </if>
+        <if test="level != null and level != ''">
+        	and level = #{level,jdbcType=DECIMAL}
+        </if>
+        <if test="earnestMoney != null and earnestMoney != ''">
+        	and earnest_money = #{earnestMoney,jdbcType=DECIMAL}
+        </if>
+        <if test="creditLevel != null and creditLevel != ''">
+        	and credit_level = #{creditLevel,jdbcType=DECIMAL}
+        </if>
+        <if test="creditLimit != null and creditLimit != ''">
+        	and credit_limit = #{creditLimit,jdbcType=DECIMAL}
+        </if>
+        <if test="priority != null and priority != ''">
+        	and priority = #{priority,jdbcType=DECIMAL}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createUser != null and createUser != ''">
+        	and create_user = #{createUser,jdbcType=VARCHAR}
+        </if>
+        <if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
+        </if>
+        <if test="yn != null and yn != ''">
+        	and yn = #{yn,jdbcType=DECIMAL}
+        </if>
+    </sql>
+</mapper>

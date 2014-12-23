@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#updateForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												skuNo: {required: true},
+						imgType: {required: true},
+						imgPath: {required: true},
+						isPrimaryPath: {required: true},
+						remark: {required: true},
+						priority: {required: true},
+					},
+			
+					messages: {
+						skuNo: { required: "请输入sku编号"},
+						imgType: { required: "请输入图片类型"},
+						imgPath: { required: "请输入图片路径"},
+						isPrimaryPath: { required: "请输入是否主图"},
+						remark: { required: "请输入描述"},
+						priority: { required: "请输入优先级"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/skuImages");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#updateForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/skuImages/update',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/skuImages"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>sku图片&nbsp;&gt;&nbsp;修改
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="updateForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="skuNo">sku编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="skuNo" id="skuNo" class="col-xs-12 col-sm-12" value="$!skuImages.skuNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="imgType">图片类型</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="imgType" id="imgType" class="col-xs-12 col-sm-12" value="$!skuImages.imgType" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="imgPath">图片路径</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="imgPath" id="imgPath" class="col-xs-12 col-sm-12" value="$!skuImages.imgPath" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="isPrimaryPath">是否主图</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="isPrimaryPath" id="isPrimaryPath" class="col-xs-12 col-sm-12" value="$!skuImages.isPrimaryPath" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="remark">描述</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="remark" id="remark" class="col-xs-12 col-sm-12" value="$!skuImages.remark" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="priority">优先级</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="priority" id="priority" class="col-xs-12 col-sm-12" value="$!skuImages.priority" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<input type="hidden" name="id" id="id" value="$!skuImages.id" />
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

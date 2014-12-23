@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#updateForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												businessNo: {required: true},
+						businessName: {required: true},
+						enName: {required: true},
+						businessAbbr: {required: true},
+						country: {required: true},
+						company: {required: true},
+						address: {required: true},
+						postCode: {required: true},
+						contactor: {required: true},
+						telePhone: {required: true},
+						mobilePhone: {required: true},
+						bussSort: {required: true},
+						describe: {required: true},
+						remark: {required: true},
+						checkStatus: {required: true},
+						hasCard: {required: true},
+						legalPerson: {required: true},
+						companyRegister: {required: true},
+						enterTime: {required: true},
+						enterYear: {required: true},
+						contractTimeStart: {required: true},
+						contractTimeEnd: {required: true},
+						level: {required: true},
+						earnestMoney: {required: true},
+						creditLevel: {required: true},
+						creditLimit: {required: true},
+						priority: {required: true},
+					},
+			
+					messages: {
+						businessNo: { required: "请输入商家编号"},
+						businessName: { required: "请输入商家名称"},
+						enName: { required: "请输入商家英文名称"},
+						businessAbbr: { required: "请输入名称缩写"},
+						country: { required: "请输入国家"},
+						company: { required: "请输入公司"},
+						address: { required: "请输入地址"},
+						postCode: { required: "请输入邮编"},
+						contactor: { required: "请输入联系人"},
+						telePhone: { required: "请输入联系人电话"},
+						mobilePhone: { required: "请输入手机"},
+						bussSort: { required: "请输入商家类别"},
+						describe: { required: "请输入描述"},
+						remark: { required: "请输入备注"},
+						checkStatus: { required: "请输入审核状态"},
+						hasCard: { required: "请输入是否有证件"},
+						legalPerson: { required: "请输入法定人身份证（图片地址）"},
+						companyRegister: { required: "请输入公司注册信息（扫描件）"},
+						enterTime: { required: "请输入入驻时间"},
+						enterYear: { required: "请输入入驻年限"},
+						contractTimeStart: { required: "请输入有效合同开始时间"},
+						contractTimeEnd: { required: "请输入有效合同结束时间"},
+						level: { required: "请输入商家级别"},
+						earnestMoney: { required: "请输入保证金"},
+						creditLevel: { required: "请输入信用等级"},
+						creditLimit: { required: "请输入信用额度"},
+						priority: { required: "请输入优先级"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/businessInfo");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#updateForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/businessInfo/update',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/businessInfo"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>商家信息&nbsp;&gt;&nbsp;修改
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="updateForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="businessNo">商家编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="businessNo" id="businessNo" class="col-xs-12 col-sm-12" value="$!businessInfo.businessNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="businessName">商家名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="businessName" id="businessName" class="col-xs-12 col-sm-12" value="$!businessInfo.businessName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="enName">商家英文名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="enName" id="enName" class="col-xs-12 col-sm-12" value="$!businessInfo.enName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="businessAbbr">名称缩写</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="businessAbbr" id="businessAbbr" class="col-xs-12 col-sm-12" value="$!businessInfo.businessAbbr" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="country">国家</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="country" id="country" class="col-xs-12 col-sm-12" value="$!businessInfo.country" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="company">公司</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="company" id="company" class="col-xs-12 col-sm-12" value="$!businessInfo.company" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="address">地址</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="address" id="address" class="col-xs-12 col-sm-12" value="$!businessInfo.address" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="postCode">邮编</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="postCode" id="postCode" class="col-xs-12 col-sm-12" value="$!businessInfo.postCode" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="contactor">联系人</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="contactor" id="contactor" class="col-xs-12 col-sm-12" value="$!businessInfo.contactor" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="telePhone">联系人电话</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="telePhone" id="telePhone" class="col-xs-12 col-sm-12" value="$!businessInfo.telePhone" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="mobilePhone">手机</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="mobilePhone" id="mobilePhone" class="col-xs-12 col-sm-12" value="$!businessInfo.mobilePhone" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="bussSort">商家类别</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="bussSort" id="bussSort" class="col-xs-12 col-sm-12" value="$!businessInfo.bussSort" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="describe">描述</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="describe" id="describe" class="col-xs-12 col-sm-12" value="$!businessInfo.describe" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="remark">备注</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="remark" id="remark" class="col-xs-12 col-sm-12" value="$!businessInfo.remark" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="checkStatus">审核状态</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="checkStatus" id="checkStatus" class="col-xs-12 col-sm-12" value="$!businessInfo.checkStatus" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="hasCard">是否有证件</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="hasCard" id="hasCard" class="col-xs-12 col-sm-12" value="$!businessInfo.hasCard" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="legalPerson">法定人身份证（图片地址）</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="legalPerson" id="legalPerson" class="col-xs-12 col-sm-12" value="$!businessInfo.legalPerson" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="companyRegister">公司注册信息（扫描件）</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="companyRegister" id="companyRegister" class="col-xs-12 col-sm-12" value="$!businessInfo.companyRegister" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="enterTime">入驻时间</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="enterTime" id="enterTime" class="col-xs-12 col-sm-12" value="$!businessInfo.enterTime" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="enterYear">入驻年限</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="enterYear" id="enterYear" class="col-xs-12 col-sm-12" value="$!businessInfo.enterYear" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="contractTimeStart">有效合同开始时间</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="contractTimeStart" id="contractTimeStart" class="col-xs-12 col-sm-12" value="$!businessInfo.contractTimeStart" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="contractTimeEnd">有效合同结束时间</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="contractTimeEnd" id="contractTimeEnd" class="col-xs-12 col-sm-12" value="$!businessInfo.contractTimeEnd" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="level">商家级别</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="level" id="level" class="col-xs-12 col-sm-12" value="$!businessInfo.level" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="earnestMoney">保证金</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="earnestMoney" id="earnestMoney" class="col-xs-12 col-sm-12" value="$!businessInfo.earnestMoney" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="creditLevel">信用等级</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="creditLevel" id="creditLevel" class="col-xs-12 col-sm-12" value="$!businessInfo.creditLevel" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="creditLimit">信用额度</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="creditLimit" id="creditLimit" class="col-xs-12 col-sm-12" value="$!businessInfo.creditLimit" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="priority">优先级</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="priority" id="priority" class="col-xs-12 col-sm-12" value="$!businessInfo.priority" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<input type="hidden" name="id" id="id" value="$!businessInfo.id" />
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>
