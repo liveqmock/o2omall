@@ -8,7 +8,7 @@
 					errorElement:"em",
 					errorClass:"red",
 					rules: {
-												orderNo: {required: true},
+						orderNo: {required: true},
 						orderType: {required: true},
 						userId: {required: true},
 						userName: {required: true},

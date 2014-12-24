@@ -113,145 +113,179 @@
                     <div class="widget-body">
                         <div class="widget-main" style="background-color: #fff;padding:5px;">
                             <form class="form-horizontal" role="form" id="addForm">
+								
                                 <div class="form-group">
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderNo">订单编号</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="orderNo">订单编号</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="orderNo" id="orderNo" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderType">订单类型</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="orderType">订单类型</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="orderType" id="orderType" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="userId">下单用户ID</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="userId">下单用户ID</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="userId" id="userId" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="userName">下单用户账号</label>
-                                    <div class="col-sm-4">
+                                </div>
+								
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="userName">下单用户账号</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="userName" id="userName" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderName">下单姓名</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="orderName">下单姓名</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="orderName" id="orderName" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="consigneeName">收货人姓名</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="consigneeName">收货人姓名</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="consigneeName" id="consigneeName" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="consigneePhone">收货人手机号</label>
-                                    <div class="col-sm-4">
+                                </div>	
+									
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="consigneePhone">收货人手机号</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="consigneePhone" id="consigneePhone" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="telephone">固定电话</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="telephone">固定电话</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="telephone" id="telephone" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="emil">邮箱</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="emil">邮箱</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="emil" id="emil" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="zipCode">邮编</label>
-                                    <div class="col-sm-4">
+                                </div>	
+									
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="zipCode">邮编</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="zipCode" id="zipCode" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="payName">支付名称</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="payName">支付名称</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="payName" id="payName" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderDate">送货日期</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="orderDate">送货日期</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="orderDate" id="orderDate" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="isTalSure">是否送货前电话确定</label>
-                                    <div class="col-sm-4">
+                                </div>
+									
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="isTalSure">是否送货前电话确定</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="isTalSure" id="isTalSure" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="payWay">付款方式</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="payWay">付款方式</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="payWay" id="payWay" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="payType">付款类型</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="payType">付款类型</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="payType" id="payType" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="isInvoice">是否要发票</label>
-                                    <div class="col-sm-4">
+                                </div>	
+									
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="isInvoice">是否要发票</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="isInvoice" id="isInvoice" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="invoiceType">发票类型</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="invoiceType">发票类型</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="invoiceType" id="invoiceType" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="invoiceTitle">发票抬头</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="invoiceTitle">发票抬头</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="invoiceTitle" id="invoiceTitle" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="invoiceContent">发票内容</label>
-                                    <div class="col-sm-4">
+                                </div>
+								
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="invoiceContent">发票内容</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="invoiceContent" id="invoiceContent" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderStatus">订单状态</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="orderStatus">订单状态</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="orderStatus" id="orderStatus" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="commAmount">总商品金额</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="commAmount">总商品金额</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="commAmount" id="commAmount" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="retCash">返现</label>
-                                    <div class="col-sm-4">
+                                </div>
+									
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="retCash">返现</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="retCash" id="retCash" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="expenses">运费</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="expenses">运费</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="expenses" id="expenses" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="amountPay">应付总额</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="amountPay">应付总额</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="amountPay" id="amountPay" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="parentOrderNo">父订单编号</label>
-                                    <div class="col-sm-4">
+                                </div>
+								
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="parentOrderNo">父订单编号</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="parentOrderNo" id="parentOrderNo" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceName">省份名称</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="provinceName">省份名称</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="provinceName" id="provinceName" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceNo">省份编号</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="provinceNo">省份编号</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="provinceNo" id="provinceNo" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityName">市名称</label>
-                                    <div class="col-sm-4">
+                                </div>
+								
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="cityName">市名称</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="cityName" id="cityName" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityNo">市编号</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="cityNo">市编号</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="cityNo" id="cityNo" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="countyName">县名称</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="countyName">县名称</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="countyName" id="countyName" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="countyNo">省编号</label>
-                                    <div class="col-sm-4">
+                                </div>
+								
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="countyNo">省编号</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="countyNo" id="countyNo" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="address">送货地址</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="address">送货地址</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="address" id="address" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="payTime">支付时间</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="payTime">支付时间</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="payTime" id="payTime" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="integral">积分</label>
-                                    <div class="col-sm-4">
+                                </div>
+								
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="integral">积分</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="integral" id="integral" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="remark">订单备注</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-1 control-label no-padding-right" for="remark">订单备注</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="remark" id="remark" class="col-xs-12 col-sm-12" />
                                     </div>
                                 </div>
