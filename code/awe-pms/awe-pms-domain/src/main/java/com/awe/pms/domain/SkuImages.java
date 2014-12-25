@@ -6,7 +6,7 @@ import java.util.Date;
  * SkuImages：sku图片实体类
  * 
  * @author ljz
- * @version 2014-12-23 10:20:57
+ * @version 2014-12-25 9:31:53
  * 
  */
 public class SkuImages implements java.io.Serializable {

@@ -8,7 +8,7 @@ import java.util.Date;
  * 提供rest接口时方法的返回对象
  * 
  * @author ljz
- * @version 2014-12-23 10:21:00
+ * @version 2014-12-25 9:31:58
  * 
  */
 public class ProductDictResponseDto extends HbirdDto {

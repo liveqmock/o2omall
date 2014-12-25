@@ -9,7 +9,7 @@ import com.awe.pms.domain.query.BusinessAuditQuery;
  * 对'审核商家流水表'表进行基本的操作
  * 
  * @author ljz
- * @version 2014-12-23 10:20:57
+ * @version 2014-12-25 9:31:53
  * 
  */
 public interface BusinessAuditDao {

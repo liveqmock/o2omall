@@ -7,7 +7,7 @@ import java.util.Date;
  * ProductRequestDto：商品信息请求参数
  * 
  * @author ljz
- * @version 2014-12-23 10:20:57
+ * @version 2014-12-25 9:31:54
  * 
  */
 public class ProductRequestDto extends HbirdDto {

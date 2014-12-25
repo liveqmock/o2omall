@@ -6,7 +6,7 @@ import java.util.Date;
  * Product：商品信息实体类
  * 
  * @author ljz
- * @version 2014-12-23 10:20:57
+ * @version 2014-12-25 9:31:53
  * 
  */
 public class Product implements java.io.Serializable {

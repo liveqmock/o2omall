@@ -13,7 +13,7 @@ import com.awe.pms.sdk.response.dto.SkuImagesResponseDto;
  * sku图片服务的客户端
  * 
  * @author ljz
- * @version 2014-12-23 10:21:00
+ * @version 2014-12-25 9:31:58
  * 
  */
 public class SkuImagesClient extends AbstractClient {

@@ -8,7 +8,7 @@ import java.util.Date;
  * 提供rest接口时方法的返回对象
  * 
  * @author ljz
- * @version 2014-12-23 10:21:00
+ * @version 2014-12-25 9:31:59
  * 
  */
 public class ProductBrandResponseDto extends HbirdDto {
@@ -45,11 +45,11 @@ public class ProductBrandResponseDto extends HbirdDto {
     /** 商品类型名称 */
     private String typeName; 
     /** 地区-省份-名称 */
-    private String provinceName2; 
+    private String provinceName; 
     /** 地区-省份-编号 */
     private String provinceNo; 
     /** 地区-市-名称 */
-    private String cityName2; 
+    private String cityName; 
     /** 地区-市-编号 */
     private String cityNo; 
     /** 优先级 */
@@ -320,19 +320,19 @@ public class ProductBrandResponseDto extends HbirdDto {
     /**
      * get 地区-省份-名称
      * 
-     * @return the provinceName2
+     * @return the provinceName
      */
-    public String getProvinceName2(){
-        return provinceName2;
+    public String getProvinceName(){
+        return provinceName;
     }
         
     /**
      * set 地区-省份-名称
      * 
-     * @param provinceName2 the provinceName2 to set
+     * @param provinceName the provinceName to set
      */
-    public void setProvinceName2(String provinceName2) {
-        this.provinceName2 = provinceName2;
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
     }
     
     /**
@@ -356,19 +356,19 @@ public class ProductBrandResponseDto extends HbirdDto {
     /**
      * get 地区-市-名称
      * 
-     * @return the cityName2
+     * @return the cityName
      */
-    public String getCityName2(){
-        return cityName2;
+    public String getCityName(){
+        return cityName;
     }
         
     /**
      * set 地区-市-名称
      * 
-     * @param cityName2 the cityName2 to set
+     * @param cityName the cityName to set
      */
-    public void setCityName2(String cityName2) {
-        this.cityName2 = cityName2;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
     
     /**

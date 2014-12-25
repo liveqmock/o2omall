@@ -6,7 +6,7 @@ import java.util.Date;
  * BusinessAudit：审核商家流水表实体类
  * 
  * @author ljz
- * @version 2014-12-23 10:20:57
+ * @version 2014-12-25 9:31:53
  * 
  */
 public class BusinessAudit implements java.io.Serializable {

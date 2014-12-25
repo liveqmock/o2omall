@@ -67,6 +67,30 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="country" id="country" class="col-xs-10 col-sm-8" value="$!query.country"/>
                                     </div>
+									<label class="col-sm-1 control-label no-padding-right" for="provinceName">地区-省份-名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="provinceName" id="provinceName" class="col-xs-10 col-sm-8" value="$!query.provinceName"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="provinceNo">地区-省份-编号</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="provinceNo" id="provinceNo" class="col-xs-10 col-sm-8" value="$!query.provinceNo"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="cityName">地区-市-名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="cityName" id="cityName" class="col-xs-10 col-sm-8" value="$!query.cityName"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="cityNo">地区-市-编号</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="cityNo" id="cityNo" class="col-xs-10 col-sm-8" value="$!query.cityNo"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="countyName">地区-县-名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="countyName" id="countyName" class="col-xs-10 col-sm-8" value="$!query.countyName"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="countyNo">地区-县-编号</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="countyNo" id="countyNo" class="col-xs-10 col-sm-8" value="$!query.countyNo"/>
+                                    </div>
 									<label class="col-sm-1 control-label no-padding-right" for="company">公司</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="company" id="company" class="col-xs-10 col-sm-8" value="$!query.company"/>
@@ -181,6 +205,12 @@
 							<th class="center">商家英文名称</th>
 							<th class="center">名称缩写</th>
 							<th class="center">国家</th>
+							<th class="center">地区-省份-名称</th>
+							<th class="center">地区-省份-编号</th>
+							<th class="center">地区-市-名称</th>
+							<th class="center">地区-市-编号</th>
+							<th class="center">地区-县-名称</th>
+							<th class="center">地区-县-编号</th>
 							<th class="center">公司</th>
 							<th class="center">地址</th>
 							<th class="center">邮编</th>
@@ -217,6 +247,12 @@
                                 <td>$!item.enName</td>
                                 <td>$!item.businessAbbr</td>
                                 <td>$!item.country</td>
+                                <td>$!item.provinceName</td>
+                                <td>$!item.provinceNo</td>
+                                <td>$!item.cityName</td>
+                                <td>$!item.cityNo</td>
+                                <td>$!item.countyName</td>
+                                <td>$!item.countyNo</td>
                                 <td>$!item.company</td>
                                 <td>$!item.address</td>
                                 <td>$!item.postCode</td>

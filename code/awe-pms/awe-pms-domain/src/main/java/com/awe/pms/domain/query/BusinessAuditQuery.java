@@ -8,7 +8,7 @@ import com.hbird.common.utils.page.Query;
  * BusinessAuditQuery：审核商家流水表查询类
  * 
  * @author ljz
- * @version 2014-12-23 10:20:57
+ * @version 2014-12-25 9:31:54
  * 
  */
 public class BusinessAuditQuery extends Query {

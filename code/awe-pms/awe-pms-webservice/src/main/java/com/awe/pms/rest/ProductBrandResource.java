@@ -28,7 +28,7 @@ import com.awe.pms.service.ProductBrandService;
  * 商品类别品牌REST服务：提供有关商品类别品牌的接口
  * 
  * @author ljz
- * @version 2014-12-23 10:21:00
+ * @version 2014-12-25 9:31:58
  * 
  */
 @Component

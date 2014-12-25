@@ -9,7 +9,7 @@ import com.awe.pms.domain.query.SkuImagesQuery;
  * 对'sku图片'表进行基本的操作
  * 
  * @author ljz
- * @version 2014-12-23 10:20:57
+ * @version 2014-12-25 9:31:53
  * 
  */
 public interface SkuImagesDao {

@@ -99,17 +99,17 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="typeName" id="typeName" class="col-xs-10 col-sm-8" value="$!query.typeName"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="provinceName2">地区-省份-名称</label>
+									<label class="col-sm-1 control-label no-padding-right" for="provinceName">地区-省份-名称</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="provinceName2" id="provinceName2" class="col-xs-10 col-sm-8" value="$!query.provinceName2"/>
+                                        <input type="text" name="provinceName" id="provinceName" class="col-xs-10 col-sm-8" value="$!query.provinceName"/>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="provinceNo">地区-省份-编号</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="provinceNo" id="provinceNo" class="col-xs-10 col-sm-8" value="$!query.provinceNo"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="cityName2">地区-市-名称</label>
+									<label class="col-sm-1 control-label no-padding-right" for="cityName">地区-市-名称</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="cityName2" id="cityName2" class="col-xs-10 col-sm-8" value="$!query.cityName2"/>
+                                        <input type="text" name="cityName" id="cityName" class="col-xs-10 col-sm-8" value="$!query.cityName"/>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="cityNo">地区-市-编号</label>
                                     <div class="col-sm-3">
@@ -180,9 +180,9 @@
                                 <td>$!item.keyword</td>
                                 <td>$!item.type</td>
                                 <td>$!item.typeName</td>
-                                <td>$!item.provinceName2</td>
+                                <td>$!item.provinceName</td>
                                 <td>$!item.provinceNo</td>
-                                <td>$!item.cityName2</td>
+                                <td>$!item.cityName</td>
                                 <td>$!item.cityNo</td>
                                 <td>$!item.priority</td>
                                 <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.createTime)</td>

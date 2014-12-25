@@ -17,9 +17,9 @@
 		<result column="keyword" property="keyword" jdbcType="VARCHAR" />
 		<result column="type" property="type" jdbcType="DECIMAL" />
 		<result column="type_name" property="typeName" jdbcType="VARCHAR" />
-		<result column="province_name2" property="provinceName2" jdbcType="VARCHAR" />
+		<result column="province_name" property="provinceName" jdbcType="VARCHAR" />
 		<result column="province_no" property="provinceNo" jdbcType="VARCHAR" />
-		<result column="city_name2" property="cityName2" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 		<result column="city_no" property="cityNo" jdbcType="VARCHAR" />
 		<result column="priority" property="priority" jdbcType="DECIMAL" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -30,17 +30,17 @@
     </resultMap>
     
     <sql id="productBrandColumns">
-    	id,category_one_id,category_one,category_two_id,category_two,category_three_id,category_three,brand_code,brand_name,en_name,brand_abbr,keyword,type,type_name,province_name2,province_no,city_name2,city_no,priority,create_time,update_time,create_user,update_user,yn
+    	id,category_one_id,category_one,category_two_id,category_two,category_three_id,category_three,brand_code,brand_name,en_name,brand_abbr,keyword,type,type_name,province_name,province_no,city_name,city_no,priority,create_time,update_time,create_user,update_user,yn
     </sql>
     
      <sql id="productBrandUsedColumns">
-    	category_one_id,category_one,category_two_id,category_two,category_three_id,category_three,brand_code,brand_name,en_name,brand_abbr,keyword,type,type_name,province_name2,province_no,city_name2,city_no,priority,create_time,update_time,create_user,update_user,yn
+    	category_one_id,category_one,category_two_id,category_two,category_three_id,category_three,brand_code,brand_name,en_name,brand_abbr,keyword,type,type_name,province_name,province_no,city_name,city_no,priority,create_time,update_time,create_user,update_user,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="ProductBrand" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO product_brand(<include refid="productBrandUsedColumns"/>) 
-        VALUES (#{categoryOneId},#{categoryOne},#{categoryTwoId},#{categoryTwo},#{categoryThreeId},#{categoryThree},#{brandCode},#{brandName},#{enName},#{brandAbbr},#{keyword},#{type},#{typeName},#{provinceName2},#{provinceNo},#{cityName2},#{cityNo},#{priority},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+        VALUES (#{categoryOneId},#{categoryOne},#{categoryTwoId},#{categoryTwo},#{categoryThreeId},#{categoryThree},#{brandCode},#{brandName},#{enName},#{brandAbbr},#{keyword},#{type},#{typeName},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{priority},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -87,14 +87,14 @@
 		        <if test="typeName != null and typeName != ''">
                 	type_name = #{typeName,jdbcType=VARCHAR},
 		        </if>
-		        <if test="provinceName2 != null and provinceName2 != ''">
-                	province_name2 = #{provinceName2,jdbcType=VARCHAR},
+		        <if test="provinceName != null and provinceName != ''">
+                	province_name = #{provinceName,jdbcType=VARCHAR},
 		        </if>
 		        <if test="provinceNo != null and provinceNo != ''">
                 	province_no = #{provinceNo,jdbcType=VARCHAR},
 		        </if>
-		        <if test="cityName2 != null and cityName2 != ''">
-                	city_name2 = #{cityName2,jdbcType=VARCHAR},
+		        <if test="cityName != null and cityName != ''">
+                	city_name = #{cityName,jdbcType=VARCHAR},
 		        </if>
 		        <if test="cityNo != null and cityNo != ''">
                 	city_no = #{cityNo,jdbcType=VARCHAR},
@@ -196,14 +196,14 @@
         <if test="typeName != null and typeName != ''">
         	and type_name = #{typeName,jdbcType=VARCHAR}
         </if>
-        <if test="provinceName2 != null and provinceName2 != ''">
-        	and province_name2 = #{provinceName2,jdbcType=VARCHAR}
+        <if test="provinceName != null and provinceName != ''">
+        	and province_name = #{provinceName,jdbcType=VARCHAR}
         </if>
         <if test="provinceNo != null and provinceNo != ''">
         	and province_no = #{provinceNo,jdbcType=VARCHAR}
         </if>
-        <if test="cityName2 != null and cityName2 != ''">
-        	and city_name2 = #{cityName2,jdbcType=VARCHAR}
+        <if test="cityName != null and cityName != ''">
+        	and city_name = #{cityName,jdbcType=VARCHAR}
         </if>
         <if test="cityNo != null and cityNo != ''">
         	and city_no = #{cityNo,jdbcType=VARCHAR}

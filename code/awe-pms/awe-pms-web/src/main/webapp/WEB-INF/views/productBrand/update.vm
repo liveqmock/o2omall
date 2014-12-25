@@ -21,9 +21,9 @@
 						keyword: {required: true},
 						type: {required: true},
 						typeName: {required: true},
-						provinceName2: {required: true},
+						provinceName: {required: true},
 						provinceNo: {required: true},
-						cityName2: {required: true},
+						cityName: {required: true},
 						cityNo: {required: true},
 						priority: {required: true},
 					},
@@ -42,9 +42,9 @@
 						keyword: { required: "请输入关键字"},
 						type: { required: "请输入商品类型（国内、进口）"},
 						typeName: { required: "请输入商品类型名称"},
-						provinceName2: { required: "请输入地区-省份-名称"},
+						provinceName: { required: "请输入地区-省份-名称"},
 						provinceNo: { required: "请输入地区-省份-编号"},
-						cityName2: { required: "请输入地区-市-名称"},
+						cityName: { required: "请输入地区-市-名称"},
 						cityNo: { required: "请输入地区-市-编号"},
 						priority: { required: "请输入优先级"},
 					}
@@ -132,17 +132,17 @@
                                     <div class="col-sm-4">
                                         <input type="text" name="typeName" id="typeName" class="col-xs-12 col-sm-12" value="$!productBrand.typeName" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceName2">地区-省份-名称</label>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceName">地区-省份-名称</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="provinceName2" id="provinceName2" class="col-xs-12 col-sm-12" value="$!productBrand.provinceName2" />
+                                        <input type="text" name="provinceName" id="provinceName" class="col-xs-12 col-sm-12" value="$!productBrand.provinceName" />
                                     </div>
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceNo">地区-省份-编号</label>
                                     <div class="col-sm-4">
                                         <input type="text" name="provinceNo" id="provinceNo" class="col-xs-12 col-sm-12" value="$!productBrand.provinceNo" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityName2">地区-市-名称</label>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityName">地区-市-名称</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="cityName2" id="cityName2" class="col-xs-12 col-sm-12" value="$!productBrand.cityName2" />
+                                        <input type="text" name="cityName" id="cityName" class="col-xs-12 col-sm-12" value="$!productBrand.cityName" />
                                     </div>
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityNo">地区-市-编号</label>
                                     <div class="col-sm-4">

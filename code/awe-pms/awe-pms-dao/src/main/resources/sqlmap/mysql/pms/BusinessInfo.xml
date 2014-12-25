@@ -9,6 +9,12 @@
 		<result column="en_name" property="enName" jdbcType="VARCHAR" />
 		<result column="business_abbr" property="businessAbbr" jdbcType="VARCHAR" />
 		<result column="country" property="country" jdbcType="VARCHAR" />
+		<result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+		<result column="province_no" property="provinceNo" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="city_no" property="cityNo" jdbcType="VARCHAR" />
+		<result column="county_name" property="countyName" jdbcType="VARCHAR" />
+		<result column="county_no" property="countyNo" jdbcType="VARCHAR" />
 		<result column="company" property="company" jdbcType="VARCHAR" />
 		<result column="address" property="address" jdbcType="VARCHAR" />
 		<result column="post_code" property="postCode" jdbcType="VARCHAR" />
@@ -39,17 +45,17 @@
     </resultMap>
     
     <sql id="businessInfoColumns">
-    	id,business_no,business_name,en_name,business_abbr,country,company,address,post_code,contactor,tele_phone,mobile_phone,buss_sort,describe,remark,check_status,has_card,legal_person,company_register,enter_time,enter_year,contract_time_start,contract_time_end,level,earnest_money,credit_level,credit_limit,priority,create_time,update_time,create_user,update_user,yn
+    	id,business_no,business_name,en_name,business_abbr,country,province_name,province_no,city_name,city_no,county_name,county_no,company,address,post_code,contactor,tele_phone,mobile_phone,buss_sort,describe,remark,check_status,has_card,legal_person,company_register,enter_time,enter_year,contract_time_start,contract_time_end,level,earnest_money,credit_level,credit_limit,priority,create_time,update_time,create_user,update_user,yn
     </sql>
     
      <sql id="businessInfoUsedColumns">
-    	business_no,business_name,en_name,business_abbr,country,company,address,post_code,contactor,tele_phone,mobile_phone,buss_sort,describe,remark,check_status,has_card,legal_person,company_register,enter_time,enter_year,contract_time_start,contract_time_end,level,earnest_money,credit_level,credit_limit,priority,create_time,update_time,create_user,update_user,yn
+    	business_no,business_name,en_name,business_abbr,country,province_name,province_no,city_name,city_no,county_name,county_no,company,address,post_code,contactor,tele_phone,mobile_phone,buss_sort,describe,remark,check_status,has_card,legal_person,company_register,enter_time,enter_year,contract_time_start,contract_time_end,level,earnest_money,credit_level,credit_limit,priority,create_time,update_time,create_user,update_user,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="BusinessInfo" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO business_info(<include refid="businessInfoUsedColumns"/>) 
-        VALUES (#{businessNo},#{businessName},#{enName},#{businessAbbr},#{country},#{company},#{address},#{postCode},#{contactor},#{telePhone},#{mobilePhone},#{bussSort},#{describe},#{remark},#{checkStatus},#{hasCard},#{legalPerson},#{companyRegister},#{enterTime},#{enterYear},#{contractTimeStart},#{contractTimeEnd},#{level},#{earnestMoney},#{creditLevel},#{creditLimit},#{priority},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+        VALUES (#{businessNo},#{businessName},#{enName},#{businessAbbr},#{country},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{company},#{address},#{postCode},#{contactor},#{telePhone},#{mobilePhone},#{bussSort},#{describe},#{remark},#{checkStatus},#{hasCard},#{legalPerson},#{companyRegister},#{enterTime},#{enterYear},#{contractTimeStart},#{contractTimeEnd},#{level},#{earnestMoney},#{creditLevel},#{creditLimit},#{priority},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -71,6 +77,24 @@
 		        </if>
 		        <if test="country != null and country != ''">
                 	country = #{country,jdbcType=VARCHAR},
+		        </if>
+		        <if test="provinceName != null and provinceName != ''">
+                	province_name = #{provinceName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="provinceNo != null and provinceNo != ''">
+                	province_no = #{provinceNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="cityName != null and cityName != ''">
+                	city_name = #{cityName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="cityNo != null and cityNo != ''">
+                	city_no = #{cityNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="countyName != null and countyName != ''">
+                	county_name = #{countyName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="countyNo != null and countyNo != ''">
+                	county_no = #{countyNo,jdbcType=VARCHAR},
 		        </if>
 		        <if test="company != null and company != ''">
                 	company = #{company,jdbcType=VARCHAR},
@@ -207,6 +231,24 @@
         </if>
         <if test="country != null and country != ''">
         	and country = #{country,jdbcType=VARCHAR}
+        </if>
+        <if test="provinceName != null and provinceName != ''">
+        	and province_name = #{provinceName,jdbcType=VARCHAR}
+        </if>
+        <if test="provinceNo != null and provinceNo != ''">
+        	and province_no = #{provinceNo,jdbcType=VARCHAR}
+        </if>
+        <if test="cityName != null and cityName != ''">
+        	and city_name = #{cityName,jdbcType=VARCHAR}
+        </if>
+        <if test="cityNo != null and cityNo != ''">
+        	and city_no = #{cityNo,jdbcType=VARCHAR}
+        </if>
+        <if test="countyName != null and countyName != ''">
+        	and county_name = #{countyName,jdbcType=VARCHAR}
+        </if>
+        <if test="countyNo != null and countyNo != ''">
+        	and county_no = #{countyNo,jdbcType=VARCHAR}
         </if>
         <if test="company != null and company != ''">
         	and company = #{company,jdbcType=VARCHAR}

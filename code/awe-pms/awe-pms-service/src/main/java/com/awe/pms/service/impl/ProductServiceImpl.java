@@ -21,7 +21,7 @@ import org.perf4j.aop.Profiled;
  * ProductService接口的实现类
  * 
  * @author ljz
- * @version 2014-12-23 10:20:58
+ * @version 2014-12-25 9:31:54
  * 
  */
 @Service

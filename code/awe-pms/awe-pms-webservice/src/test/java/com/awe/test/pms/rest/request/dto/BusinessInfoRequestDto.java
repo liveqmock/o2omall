@@ -7,7 +7,7 @@ import java.util.Date;
  * BusinessInfoRequestDto：商家信息请求参数
  * 
  * @author ljz
- * @version 2014-12-23 10:21:00
+ * @version 2014-12-25 9:31:58
  * 
  */
 public class BusinessInfoRequestDto extends HbirdDto {
@@ -27,6 +27,18 @@ public class BusinessInfoRequestDto extends HbirdDto {
     private String businessAbbr; 
     /** 国家 */
     private String country; 
+    /** 地区-省份-名称 */
+    private String provinceName; 
+    /** 地区-省份-编号 */
+    private String provinceNo; 
+    /** 地区-市-名称 */
+    private String cityName; 
+    /** 地区-市-编号 */
+    private String cityNo; 
+    /** 地区-县-名称 */
+    private String countyName; 
+    /** 地区-县-编号 */
+    private String countyNo; 
     /** 公司 */
     private String company; 
     /** 地址 */
@@ -188,6 +200,114 @@ public class BusinessInfoRequestDto extends HbirdDto {
      */
     public void setCountry(String country) {
         this.country = country;
+    }
+    
+    /**
+     * get 地区-省份-名称
+     * 
+     * @return the provinceName
+     */
+    public String getProvinceName(){
+        return provinceName;
+    }
+        
+    /**
+     * set 地区-省份-名称
+     * 
+     * @param provinceName the provinceName to set
+     */
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
+    }
+    
+    /**
+     * get 地区-省份-编号
+     * 
+     * @return the provinceNo
+     */
+    public String getProvinceNo(){
+        return provinceNo;
+    }
+        
+    /**
+     * set 地区-省份-编号
+     * 
+     * @param provinceNo the provinceNo to set
+     */
+    public void setProvinceNo(String provinceNo) {
+        this.provinceNo = provinceNo;
+    }
+    
+    /**
+     * get 地区-市-名称
+     * 
+     * @return the cityName
+     */
+    public String getCityName(){
+        return cityName;
+    }
+        
+    /**
+     * set 地区-市-名称
+     * 
+     * @param cityName the cityName to set
+     */
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+    
+    /**
+     * get 地区-市-编号
+     * 
+     * @return the cityNo
+     */
+    public String getCityNo(){
+        return cityNo;
+    }
+        
+    /**
+     * set 地区-市-编号
+     * 
+     * @param cityNo the cityNo to set
+     */
+    public void setCityNo(String cityNo) {
+        this.cityNo = cityNo;
+    }
+    
+    /**
+     * get 地区-县-名称
+     * 
+     * @return the countyName
+     */
+    public String getCountyName(){
+        return countyName;
+    }
+        
+    /**
+     * set 地区-县-名称
+     * 
+     * @param countyName the countyName to set
+     */
+    public void setCountyName(String countyName) {
+        this.countyName = countyName;
+    }
+    
+    /**
+     * get 地区-县-编号
+     * 
+     * @return the countyNo
+     */
+    public String getCountyNo(){
+        return countyNo;
+    }
+        
+    /**
+     * set 地区-县-编号
+     * 
+     * @param countyNo the countyNo to set
+     */
+    public void setCountyNo(String countyNo) {
+        this.countyNo = countyNo;
     }
     
     /**

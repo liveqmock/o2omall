@@ -13,6 +13,12 @@
 						enName: {required: true},
 						businessAbbr: {required: true},
 						country: {required: true},
+						provinceName: {required: true},
+						provinceNo: {required: true},
+						cityName: {required: true},
+						cityNo: {required: true},
+						countyName: {required: true},
+						countyNo: {required: true},
 						company: {required: true},
 						address: {required: true},
 						postCode: {required: true},
@@ -43,6 +49,12 @@
 						enName: { required: "请输入商家英文名称"},
 						businessAbbr: { required: "请输入名称缩写"},
 						country: { required: "请输入国家"},
+						provinceName: { required: "请输入地区-省份-名称"},
+						provinceNo: { required: "请输入地区-省份-编号"},
+						cityName: { required: "请输入地区-市-名称"},
+						cityNo: { required: "请输入地区-市-编号"},
+						countyName: { required: "请输入地区-县-名称"},
+						countyNo: { required: "请输入地区-县-编号"},
 						company: { required: "请输入公司"},
 						address: { required: "请输入地址"},
 						postCode: { required: "请输入邮编"},
@@ -117,6 +129,30 @@
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="country">国家</label>
                                     <div class="col-sm-4">
                                         <input type="text" name="country" id="country" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceName">地区-省份-名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="provinceName" id="provinceName" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceNo">地区-省份-编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="provinceNo" id="provinceNo" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityName">地区-市-名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cityName" id="cityName" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityNo">地区-市-编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cityNo" id="cityNo" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="countyName">地区-县-名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="countyName" id="countyName" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="countyNo">地区-县-编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="countyNo" id="countyNo" class="col-xs-12 col-sm-12" />
                                     </div>
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="company">公司</label>
                                     <div class="col-sm-4">

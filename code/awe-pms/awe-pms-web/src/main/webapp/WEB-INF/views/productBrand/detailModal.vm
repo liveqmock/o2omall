@@ -52,13 +52,13 @@
 							<th class="center" style='width:25%;'>商品类型名称</th><td id="r_typeName" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>地区-省份-名称</th><td id="r_provinceName2" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>地区-省份-名称</th><td id="r_provinceName" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>地区-省份-编号</th><td id="r_provinceNo" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>地区-市-名称</th><td id="r_cityName2" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>地区-市-名称</th><td id="r_cityName" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>地区-市-编号</th><td id="r_cityNo" style='width:25%;'></td>
@@ -116,9 +116,9 @@
     				$("#r_keyword").text(r.keyword==null?"":r.keyword);
     				$("#r_type").text(r.type==null?"":r.type);
     				$("#r_typeName").text(r.typeName==null?"":r.typeName);
-    				$("#r_provinceName2").text(r.provinceName2==null?"":r.provinceName2);
+    				$("#r_provinceName").text(r.provinceName==null?"":r.provinceName);
     				$("#r_provinceNo").text(r.provinceNo==null?"":r.provinceNo);
-    				$("#r_cityName2").text(r.cityName2==null?"":r.cityName2);
+    				$("#r_cityName").text(r.cityName==null?"":r.cityName);
     				$("#r_cityNo").text(r.cityNo==null?"":r.cityNo);
     				$("#r_priority").text(r.priority==null?"":r.priority);
     				$("#r_createTime").text(r.createTime==null?"":r.createTime);

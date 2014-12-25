@@ -18,7 +18,7 @@ import com.awe.test.base.TestConstants;
  * BusinessAuditService单元测试
  * 
  * @author ljz
- * @version 2014-12-23 10:21:00
+ * @version 2014-12-25 9:31:57
  * 
  */
 public class BusinessAuditServiceTestCase extends BaseTransactionTestCase {

@@ -6,7 +6,7 @@ import java.util.Date;
  * ProductSku：商品SKU实体类
  * 
  * @author ljz
- * @version 2014-12-23 10:20:57
+ * @version 2014-12-25 9:31:53
  * 
  */
 public class ProductSku implements java.io.Serializable {

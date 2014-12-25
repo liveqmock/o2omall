@@ -28,6 +28,24 @@
 							<th class="center" style='width:25%;'>国家</th><td id="r_country" style='width:25%;'></td>
 						</tr>
 						<tr>
+							<th class="center" style='width:25%;'>地区-省份-名称</th><td id="r_provinceName" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>地区-省份-编号</th><td id="r_provinceNo" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>地区-市-名称</th><td id="r_cityName" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>地区-市-编号</th><td id="r_cityNo" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>地区-县-名称</th><td id="r_countyName" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>地区-县-编号</th><td id="r_countyNo" style='width:25%;'></td>
+						</tr>
+						<tr>
 							<th class="center" style='width:25%;'>公司</th><td id="r_company" style='width:25%;'></td>
 						</tr>
 						<tr>
@@ -135,6 +153,12 @@
     				$("#r_enName").text(r.enName==null?"":r.enName);
     				$("#r_businessAbbr").text(r.businessAbbr==null?"":r.businessAbbr);
     				$("#r_country").text(r.country==null?"":r.country);
+    				$("#r_provinceName").text(r.provinceName==null?"":r.provinceName);
+    				$("#r_provinceNo").text(r.provinceNo==null?"":r.provinceNo);
+    				$("#r_cityName").text(r.cityName==null?"":r.cityName);
+    				$("#r_cityNo").text(r.cityNo==null?"":r.cityNo);
+    				$("#r_countyName").text(r.countyName==null?"":r.countyName);
+    				$("#r_countyNo").text(r.countyNo==null?"":r.countyNo);
     				$("#r_company").text(r.company==null?"":r.company);
     				$("#r_address").text(r.address==null?"":r.address);
     				$("#r_postCode").text(r.postCode==null?"":r.postCode);

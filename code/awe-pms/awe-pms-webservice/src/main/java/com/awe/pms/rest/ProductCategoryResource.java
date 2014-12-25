@@ -28,7 +28,7 @@ import com.awe.pms.service.ProductCategoryService;
  * 商品类别REST服务：提供有关商品类别的接口
  * 
  * @author ljz
- * @version 2014-12-23 10:21:00
+ * @version 2014-12-25 9:31:58
  * 
  */
 @Component
