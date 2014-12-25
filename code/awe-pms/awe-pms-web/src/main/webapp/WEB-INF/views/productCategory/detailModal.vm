@@ -25,7 +25,7 @@
 							<th class="center" style='width:25%;'>关键字</th><td id="r_keyword" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>描述</th><td id="r_remark" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>描述</th><td id="r_features" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>级别</th><td id="r_level" style='width:25%;'></td>
@@ -74,7 +74,7 @@
     				$("#r_name").text(r.name==null?"":r.name);
     				$("#r_enName").text(r.enName==null?"":r.enName);
     				$("#r_keyword").text(r.keyword==null?"":r.keyword);
-    				$("#r_remark").text(r.remark==null?"":r.remark);
+    				$("#r_features").text(r.features==null?"":r.features);
     				$("#r_level").text(r.level==null?"":r.level);
     				$("#r_priority").text(r.priority==null?"":r.priority);
     				$("#r_createTime").text(r.createTime==null?"":r.createTime);

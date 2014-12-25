@@ -6,7 +6,7 @@ package com.awe.test.pms.rest;
 /**
  * 
  * @author ljz
- * @version 2014-12-25 9:31:58
+ * @version 2014-12-25 14:47:41
  * 
  */
 public interface Urls {

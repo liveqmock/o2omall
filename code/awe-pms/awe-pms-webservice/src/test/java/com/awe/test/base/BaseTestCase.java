@@ -11,7 +11,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
  * BaseTestCase without Transaction
  * 
  * @author ljz
- * @version 2014-12-25 9:31:58
+ * @version 2014-12-25 14:47:41
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -63,9 +63,9 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="isPrimaryPath" id="isPrimaryPath" class="col-xs-10 col-sm-8" value="$!query.isPrimaryPath"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="remark">描述</label>
+									<label class="col-sm-1 control-label no-padding-right" for="features">描述</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="remark" id="remark" class="col-xs-10 col-sm-8" value="$!query.remark"/>
+                                        <input type="text" name="features" id="features" class="col-xs-10 col-sm-8" value="$!query.features"/>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="priority">优先级</label>
                                     <div class="col-sm-3">
@@ -111,7 +111,7 @@
                                 <td>$!item.imgType</td>
                                 <td>$!item.imgPath</td>
                                 <td>$!item.isPrimaryPath</td>
-                                <td>$!item.remark</td>
+                                <td>$!item.features</td>
                                 <td>$!item.priority</td>
                                 <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.createTime)</td>
                                 <td>$!item.createUser</td>

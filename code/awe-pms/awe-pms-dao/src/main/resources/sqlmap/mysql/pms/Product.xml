@@ -31,7 +31,6 @@
 		<result column="applicable_crowd" property="applicableCrowd" jdbcType="VARCHAR" />
 		<result column="applicable_age" property="applicableAge" jdbcType="VARCHAR" />
 		<result column="features" property="features" jdbcType="VARCHAR" />
-		<result column="describe" property="describe" jdbcType="VARCHAR" />
 		<result column="introduce" property="introduce" jdbcType="VARCHAR" />
 		<result column="service" property="service" jdbcType="VARCHAR" />
 		<result column="weight" property="weight" jdbcType="DECIMAL" />
@@ -59,17 +58,17 @@
     </resultMap>
     
     <sql id="productColumns">
-    	id,product_no,product_name,en_name,keyword,category_one_id,category_one,category_two_id,category_two,category_three_id,category_three,sku_attr_name,score,level,brand_code,brand_name,type,type_name,mode,mode_name,business_no,business_name,method,origin_place,sale_time_start,applicable_crowd,applicable_age,features,describe,introduce,service,weight,gross_weight,length,width,height,diameter,pack_type,pack_length,pack_width,pack_height,support_return,distribution,freight_free,material,packing_list,sale_guarantee,kindly_reminder,create_time,update_time,create_user,update_user,yn
+    	id,product_no,product_name,en_name,keyword,category_one_id,category_one,category_two_id,category_two,category_three_id,category_three,sku_attr_name,score,level,brand_code,brand_name,type,type_name,mode,mode_name,business_no,business_name,method,origin_place,sale_time_start,applicable_crowd,applicable_age,features,introduce,service,weight,gross_weight,length,width,height,diameter,pack_type,pack_length,pack_width,pack_height,support_return,distribution,freight_free,material,packing_list,sale_guarantee,kindly_reminder,create_time,update_time,create_user,update_user,yn
     </sql>
     
      <sql id="productUsedColumns">
-    	product_no,product_name,en_name,keyword,category_one_id,category_one,category_two_id,category_two,category_three_id,category_three,sku_attr_name,score,level,brand_code,brand_name,type,type_name,mode,mode_name,business_no,business_name,method,origin_place,sale_time_start,applicable_crowd,applicable_age,features,describe,introduce,service,weight,gross_weight,length,width,height,diameter,pack_type,pack_length,pack_width,pack_height,support_return,distribution,freight_free,material,packing_list,sale_guarantee,kindly_reminder,create_time,update_time,create_user,update_user,yn
+    	product_no,product_name,en_name,keyword,category_one_id,category_one,category_two_id,category_two,category_three_id,category_three,sku_attr_name,score,level,brand_code,brand_name,type,type_name,mode,mode_name,business_no,business_name,method,origin_place,sale_time_start,applicable_crowd,applicable_age,features,introduce,service,weight,gross_weight,length,width,height,diameter,pack_type,pack_length,pack_width,pack_height,support_return,distribution,freight_free,material,packing_list,sale_guarantee,kindly_reminder,create_time,update_time,create_user,update_user,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO product(<include refid="productUsedColumns"/>) 
-        VALUES (#{productNo},#{productName},#{enName},#{keyword},#{categoryOneId},#{categoryOne},#{categoryTwoId},#{categoryTwo},#{categoryThreeId},#{categoryThree},#{skuAttrName},#{score},#{level},#{brandCode},#{brandName},#{type},#{typeName},#{mode},#{modeName},#{businessNo},#{businessName},#{method},#{originPlace},#{saleTimeStart},#{applicableCrowd},#{applicableAge},#{features},#{describe},#{introduce},#{service},#{weight},#{grossWeight},#{length},#{width},#{height},#{diameter},#{packType},#{packLength},#{packWidth},#{packHeight},#{supportReturn},#{distribution},#{freightFree},#{material},#{packingList},#{saleGuarantee},#{kindlyReminder},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+        VALUES (#{productNo},#{productName},#{enName},#{keyword},#{categoryOneId},#{categoryOne},#{categoryTwoId},#{categoryTwo},#{categoryThreeId},#{categoryThree},#{skuAttrName},#{score},#{level},#{brandCode},#{brandName},#{type},#{typeName},#{mode},#{modeName},#{businessNo},#{businessName},#{method},#{originPlace},#{saleTimeStart},#{applicableCrowd},#{applicableAge},#{features},#{introduce},#{service},#{weight},#{grossWeight},#{length},#{width},#{height},#{diameter},#{packType},#{packLength},#{packWidth},#{packHeight},#{supportReturn},#{distribution},#{freightFree},#{material},#{packingList},#{saleGuarantee},#{kindlyReminder},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -157,9 +156,6 @@
 		        </if>
 		        <if test="features != null and features != ''">
                 	features = #{features,jdbcType=VARCHAR},
-		        </if>
-		        <if test="describe != null and describe != ''">
-                	describe = #{describe,jdbcType=VARCHAR},
 		        </if>
 		        <if test="introduce != null and introduce != ''">
                 	introduce = #{introduce,jdbcType=VARCHAR},
@@ -353,9 +349,6 @@
         </if>
         <if test="features != null and features != ''">
         	and features = #{features,jdbcType=VARCHAR}
-        </if>
-        <if test="describe != null and describe != ''">
-        	and describe = #{describe,jdbcType=VARCHAR}
         </if>
         <if test="introduce != null and introduce != ''">
         	and introduce = #{introduce,jdbcType=VARCHAR}

@@ -8,7 +8,7 @@ import com.awe.test.pms.rest.response.dto.SkuImagesResponseDto;
  * 提供rest接口时方法的返回对象
  * 
  * @author ljz
- * @version 2014-12-25 9:31:58
+ * @version 2014-12-25 14:47:41
  * 
  */
 public class SkuImagesResponse extends HbirdResponse<SkuImagesResponseDto> {

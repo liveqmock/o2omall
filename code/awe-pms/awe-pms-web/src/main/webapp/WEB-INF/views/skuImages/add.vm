@@ -12,7 +12,7 @@
 						imgType: {required: true},
 						imgPath: {required: true},
 						isPrimaryPath: {required: true},
-						remark: {required: true},
+						features: {required: true},
 						priority: {required: true},
 					},
 			
@@ -21,7 +21,7 @@
 						imgType: { required: "请输入图片类型"},
 						imgPath: { required: "请输入图片路径"},
 						isPrimaryPath: { required: "请输入是否主图"},
-						remark: { required: "请输入描述"},
+						features: { required: "请输入描述"},
 						priority: { required: "请输入优先级"},
 					}
 				});
@@ -72,9 +72,9 @@
                                     <div class="col-sm-4">
                                         <input type="text" name="isPrimaryPath" id="isPrimaryPath" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="remark">描述</label>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="features">描述</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="remark" id="remark" class="col-xs-12 col-sm-12" />
+                                        <input type="text" name="features" id="features" class="col-xs-12 col-sm-12" />
                                     </div>
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="priority">优先级</label>
                                     <div class="col-sm-4">

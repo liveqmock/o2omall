@@ -20,7 +20,7 @@
 		<result column="sale_price" property="salePrice" jdbcType="DECIMAL" />
 		<result column="sale_quantity" property="saleQuantity" jdbcType="DECIMAL" />
 		<result column="discount" property="discount" jdbcType="DECIMAL" />
-		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="features" property="features" jdbcType="VARCHAR" />
 		<result column="dimension_code_one" property="dimensionCodeOne" jdbcType="VARCHAR" />
 		<result column="dimension_code_two" property="dimensionCodeTwo" jdbcType="VARCHAR" />
 		<result column="priority" property="priority" jdbcType="DECIMAL" />
@@ -32,17 +32,17 @@
     </resultMap>
     
     <sql id="productSkuColumns">
-    	id,product_no,sku_no,sku_name,size,product_ad,sales_promotion,durability_period,production_date,sale_status,sale_time_start,sale_time_end,img_path,price,sale_price,sale_quantity,discount,remark,dimension_code_one,dimension_code_two,priority,create_time,update_time,create_user,update_user,yn
+    	id,product_no,sku_no,sku_name,size,product_ad,sales_promotion,durability_period,production_date,sale_status,sale_time_start,sale_time_end,img_path,price,sale_price,sale_quantity,discount,features,dimension_code_one,dimension_code_two,priority,create_time,update_time,create_user,update_user,yn
     </sql>
     
      <sql id="productSkuUsedColumns">
-    	product_no,sku_no,sku_name,size,product_ad,sales_promotion,durability_period,production_date,sale_status,sale_time_start,sale_time_end,img_path,price,sale_price,sale_quantity,discount,remark,dimension_code_one,dimension_code_two,priority,create_time,update_time,create_user,update_user,yn
+    	product_no,sku_no,sku_name,size,product_ad,sales_promotion,durability_period,production_date,sale_status,sale_time_start,sale_time_end,img_path,price,sale_price,sale_quantity,discount,features,dimension_code_one,dimension_code_two,priority,create_time,update_time,create_user,update_user,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="ProductSku" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO product_sku(<include refid="productSkuUsedColumns"/>) 
-        VALUES (#{productNo},#{skuNo},#{skuName},#{size},#{productAd},#{salesPromotion},#{durabilityPeriod},#{productionDate},#{saleStatus},#{saleTimeStart},#{saleTimeEnd},#{imgPath},#{price},#{salePrice},#{saleQuantity},#{discount},#{remark},#{dimensionCodeOne},#{dimensionCodeTwo},#{priority},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+        VALUES (#{productNo},#{skuNo},#{skuName},#{size},#{productAd},#{salesPromotion},#{durabilityPeriod},#{productionDate},#{saleStatus},#{saleTimeStart},#{saleTimeEnd},#{imgPath},#{price},#{salePrice},#{saleQuantity},#{discount},#{features},#{dimensionCodeOne},#{dimensionCodeTwo},#{priority},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -98,8 +98,8 @@
 		        <if test="discount != null and discount != ''">
                 	discount = #{discount,jdbcType=DECIMAL},
 		        </if>
-		        <if test="remark != null and remark != ''">
-                	remark = #{remark,jdbcType=VARCHAR},
+		        <if test="features != null and features != ''">
+                	features = #{features,jdbcType=VARCHAR},
 		        </if>
 		        <if test="dimensionCodeOne != null and dimensionCodeOne != ''">
                 	dimension_code_one = #{dimensionCodeOne,jdbcType=VARCHAR},
@@ -213,8 +213,8 @@
         <if test="discount != null and discount != ''">
         	and discount = #{discount,jdbcType=DECIMAL}
         </if>
-        <if test="remark != null and remark != ''">
-        	and remark = #{remark,jdbcType=VARCHAR}
+        <if test="features != null and features != ''">
+        	and features = #{features,jdbcType=VARCHAR}
         </if>
         <if test="dimensionCodeOne != null and dimensionCodeOne != ''">
         	and dimension_code_one = #{dimensionCodeOne,jdbcType=VARCHAR}

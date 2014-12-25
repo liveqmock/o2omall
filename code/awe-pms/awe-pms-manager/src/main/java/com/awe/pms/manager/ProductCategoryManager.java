@@ -9,7 +9,7 @@ import com.hbird.common.utils.page.PageUtil;
  * ProductCategoryManager接口
  * 
  * @author ljz
- * @version 2014-12-25 9:31:54
+ * @version 2014-12-25 14:47:31
  * 
  */
 public interface ProductCategoryManager {

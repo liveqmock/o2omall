@@ -26,7 +26,7 @@ import com.hbird.common.utils.wrap.Wrapper;
  * BusinessInfoController ：商家信息控制器
  * 
  * @author ljz
- * @version 2014-12-25 9:31:55
+ * @version 2014-12-25 14:47:32
 */
 @Controller
 @RequestMapping("businessInfo")

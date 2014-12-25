@@ -6,7 +6,7 @@ import java.util.Date;
  * BusinessInfo：商家信息实体类
  * 
  * @author ljz
- * @version 2014-12-25 9:31:53
+ * @version 2014-12-25 14:47:30
  * 
  */
 public class BusinessInfo implements java.io.Serializable {
@@ -53,7 +53,7 @@ public class BusinessInfo implements java.io.Serializable {
     /** 商家类别 */
     private Long bussSort; 
     /** 描述 */
-    private String describe; 
+    private String features; 
     /** 备注 */
     private String remark; 
     /** 审核状态 */
@@ -438,19 +438,19 @@ public class BusinessInfo implements java.io.Serializable {
     /**
      * get 描述
      * 
-     * @return the describe
+     * @return the features
      */
-    public String getDescribe(){
-        return describe;
+    public String getFeatures(){
+        return features;
     }
         
     /**
      * set 描述
      * 
-     * @param describe the describe to set
+     * @param features the features to set
      */
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setFeatures(String features) {
+        this.features = features;
     }
     
     /**

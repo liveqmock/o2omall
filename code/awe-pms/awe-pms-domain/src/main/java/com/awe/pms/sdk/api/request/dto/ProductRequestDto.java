@@ -7,7 +7,7 @@ import java.util.Date;
  * ProductRequestDto：商品信息请求参数
  * 
  * @author ljz
- * @version 2014-12-25 9:31:54
+ * @version 2014-12-25 14:47:30
  * 
  */
 public class ProductRequestDto extends HbirdDto {
@@ -69,10 +69,8 @@ public class ProductRequestDto extends HbirdDto {
     private String applicableCrowd; 
     /** 适用年龄（配置表） */
     private String applicableAge; 
-    /** 特点 */
-    private String features; 
     /** 商品描述 */
-    private String describe; 
+    private String features; 
     /** 介绍 */
     private String introduce; 
     /** 服务（配送信息等） */
@@ -609,7 +607,7 @@ public class ProductRequestDto extends HbirdDto {
     }
     
     /**
-     * get 特点
+     * get 商品描述
      * 
      * @return the features
      */
@@ -618,30 +616,12 @@ public class ProductRequestDto extends HbirdDto {
     }
         
     /**
-     * set 特点
+     * set 商品描述
      * 
      * @param features the features to set
      */
     public void setFeatures(String features) {
         this.features = features;
-    }
-    
-    /**
-     * get 商品描述
-     * 
-     * @return the describe
-     */
-    public String getDescribe(){
-        return describe;
-    }
-        
-    /**
-     * set 商品描述
-     * 
-     * @param describe the describe to set
-     */
-    public void setDescribe(String describe) {
-        this.describe = describe;
     }
     
     /**

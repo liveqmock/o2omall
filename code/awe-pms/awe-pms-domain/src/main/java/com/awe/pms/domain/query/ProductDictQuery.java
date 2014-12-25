@@ -8,7 +8,7 @@ import com.hbird.common.utils.page.Query;
  * ProductDictQuery：配置表查询类
  * 
  * @author ljz
- * @version 2014-12-25 9:31:54
+ * @version 2014-12-25 14:47:30
  * 
  */
 public class ProductDictQuery extends Query {

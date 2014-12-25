@@ -67,7 +67,7 @@
 							<th class="center" style='width:25%;'>商家类别</th><td id="r_bussSort" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>描述</th><td id="r_describe" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>描述</th><td id="r_features" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>备注</th><td id="r_remark" style='width:25%;'></td>
@@ -166,7 +166,7 @@
     				$("#r_telePhone").text(r.telePhone==null?"":r.telePhone);
     				$("#r_mobilePhone").text(r.mobilePhone==null?"":r.mobilePhone);
     				$("#r_bussSort").text(r.bussSort==null?"":r.bussSort);
-    				$("#r_describe").text(r.describe==null?"":r.describe);
+    				$("#r_features").text(r.features==null?"":r.features);
     				$("#r_remark").text(r.remark==null?"":r.remark);
     				$("#r_checkStatus").text(r.checkStatus==null?"":r.checkStatus);
     				$("#r_hasCard").text(r.hasCard==null?"":r.hasCard);

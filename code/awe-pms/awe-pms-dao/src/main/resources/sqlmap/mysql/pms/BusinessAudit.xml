@@ -9,7 +9,7 @@
 		<result column="operator" property="operator" jdbcType="VARCHAR" />
 		<result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
 		<result column="check_result" property="checkResult" jdbcType="DECIMAL" />
-		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="features" property="features" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
@@ -18,17 +18,17 @@
     </resultMap>
     
     <sql id="businessAuditColumns">
-    	id,business_no,business_name,operator,operate_time,check_result,remark,create_time,update_time,create_user,update_user,yn
+    	id,business_no,business_name,operator,operate_time,check_result,features,create_time,update_time,create_user,update_user,yn
     </sql>
     
      <sql id="businessAuditUsedColumns">
-    	business_no,business_name,operator,operate_time,check_result,remark,create_time,update_time,create_user,update_user,yn
+    	business_no,business_name,operator,operate_time,check_result,features,create_time,update_time,create_user,update_user,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="BusinessAudit" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO business_audit(<include refid="businessAuditUsedColumns"/>) 
-        VALUES (#{businessNo},#{businessName},#{operator},#{operateTime},#{checkResult},#{remark},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+        VALUES (#{businessNo},#{businessName},#{operator},#{operateTime},#{checkResult},#{features},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -51,8 +51,8 @@
 		        <if test="checkResult != null and checkResult != ''">
                 	check_result = #{checkResult,jdbcType=DECIMAL},
 		        </if>
-		        <if test="remark != null and remark != ''">
-                	remark = #{remark,jdbcType=VARCHAR},
+		        <if test="features != null and features != ''">
+                	features = #{features,jdbcType=VARCHAR},
 		        </if>
 		        <if test="updateUser != null and updateUser != ''">
                 	update_user = #{updateUser,jdbcType=VARCHAR},
@@ -124,8 +124,8 @@
         <if test="checkResult != null and checkResult != ''">
         	and check_result = #{checkResult,jdbcType=DECIMAL}
         </if>
-        <if test="remark != null and remark != ''">
-        	and remark = #{remark,jdbcType=VARCHAR}
+        <if test="features != null and features != ''">
+        	and features = #{features,jdbcType=VARCHAR}
         </if>
         <if test="createTime != null and createTime != ''">
         	and create_time = #{createTime,jdbcType=TIMESTAMP}

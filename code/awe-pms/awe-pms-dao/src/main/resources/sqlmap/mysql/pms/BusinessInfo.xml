@@ -22,7 +22,7 @@
 		<result column="tele_phone" property="telePhone" jdbcType="VARCHAR" />
 		<result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
 		<result column="buss_sort" property="bussSort" jdbcType="DECIMAL" />
-		<result column="describe" property="describe" jdbcType="VARCHAR" />
+		<result column="features" property="features" jdbcType="VARCHAR" />
 		<result column="remark" property="remark" jdbcType="VARCHAR" />
 		<result column="check_status" property="checkStatus" jdbcType="DECIMAL" />
 		<result column="has_card" property="hasCard" jdbcType="DECIMAL" />
@@ -45,17 +45,17 @@
     </resultMap>
     
     <sql id="businessInfoColumns">
-    	id,business_no,business_name,en_name,business_abbr,country,province_name,province_no,city_name,city_no,county_name,county_no,company,address,post_code,contactor,tele_phone,mobile_phone,buss_sort,describe,remark,check_status,has_card,legal_person,company_register,enter_time,enter_year,contract_time_start,contract_time_end,level,earnest_money,credit_level,credit_limit,priority,create_time,update_time,create_user,update_user,yn
+    	id,business_no,business_name,en_name,business_abbr,country,province_name,province_no,city_name,city_no,county_name,county_no,company,address,post_code,contactor,tele_phone,mobile_phone,buss_sort,features,remark,check_status,has_card,legal_person,company_register,enter_time,enter_year,contract_time_start,contract_time_end,level,earnest_money,credit_level,credit_limit,priority,create_time,update_time,create_user,update_user,yn
     </sql>
     
      <sql id="businessInfoUsedColumns">
-    	business_no,business_name,en_name,business_abbr,country,province_name,province_no,city_name,city_no,county_name,county_no,company,address,post_code,contactor,tele_phone,mobile_phone,buss_sort,describe,remark,check_status,has_card,legal_person,company_register,enter_time,enter_year,contract_time_start,contract_time_end,level,earnest_money,credit_level,credit_limit,priority,create_time,update_time,create_user,update_user,yn
+    	business_no,business_name,en_name,business_abbr,country,province_name,province_no,city_name,city_no,county_name,county_no,company,address,post_code,contactor,tele_phone,mobile_phone,buss_sort,features,remark,check_status,has_card,legal_person,company_register,enter_time,enter_year,contract_time_start,contract_time_end,level,earnest_money,credit_level,credit_limit,priority,create_time,update_time,create_user,update_user,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="BusinessInfo" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO business_info(<include refid="businessInfoUsedColumns"/>) 
-        VALUES (#{businessNo},#{businessName},#{enName},#{businessAbbr},#{country},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{company},#{address},#{postCode},#{contactor},#{telePhone},#{mobilePhone},#{bussSort},#{describe},#{remark},#{checkStatus},#{hasCard},#{legalPerson},#{companyRegister},#{enterTime},#{enterYear},#{contractTimeStart},#{contractTimeEnd},#{level},#{earnestMoney},#{creditLevel},#{creditLimit},#{priority},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+        VALUES (#{businessNo},#{businessName},#{enName},#{businessAbbr},#{country},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{company},#{address},#{postCode},#{contactor},#{telePhone},#{mobilePhone},#{bussSort},#{features},#{remark},#{checkStatus},#{hasCard},#{legalPerson},#{companyRegister},#{enterTime},#{enterYear},#{contractTimeStart},#{contractTimeEnd},#{level},#{earnestMoney},#{creditLevel},#{creditLimit},#{priority},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -117,8 +117,8 @@
 		        <if test="bussSort != null and bussSort != ''">
                 	buss_sort = #{bussSort,jdbcType=DECIMAL},
 		        </if>
-		        <if test="describe != null and describe != ''">
-                	describe = #{describe,jdbcType=VARCHAR},
+		        <if test="features != null and features != ''">
+                	features = #{features,jdbcType=VARCHAR},
 		        </if>
 		        <if test="remark != null and remark != ''">
                 	remark = #{remark,jdbcType=VARCHAR},
@@ -271,8 +271,8 @@
         <if test="bussSort != null and bussSort != ''">
         	and buss_sort = #{bussSort,jdbcType=DECIMAL}
         </if>
-        <if test="describe != null and describe != ''">
-        	and describe = #{describe,jdbcType=VARCHAR}
+        <if test="features != null and features != ''">
+        	and features = #{features,jdbcType=VARCHAR}
         </if>
         <if test="remark != null and remark != ''">
         	and remark = #{remark,jdbcType=VARCHAR}

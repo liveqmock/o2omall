@@ -8,7 +8,7 @@ import java.util.Date;
  * 提供rest接口时方法的返回对象
  * 
  * @author ljz
- * @version 2014-12-25 9:31:58
+ * @version 2014-12-25 14:47:41
  * 
  */
 public class ProductSkuResponseDto extends HbirdDto {
@@ -51,7 +51,7 @@ public class ProductSkuResponseDto extends HbirdDto {
     /** 折扣（会员） */
     private Double discount; 
     /** 描述 */
-    private String remark; 
+    private String features; 
     /** 一维码 */
     private String dimensionCodeOne; 
     /** 二维码 */
@@ -378,19 +378,19 @@ public class ProductSkuResponseDto extends HbirdDto {
     /**
      * get 描述
      * 
-     * @return the remark
+     * @return the features
      */
-    public String getRemark(){
-        return remark;
+    public String getFeatures(){
+        return features;
     }
         
     /**
      * set 描述
      * 
-     * @param remark the remark to set
+     * @param features the features to set
      */
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setFeatures(String features) {
+        this.features = features;
     }
     
     /**

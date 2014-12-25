@@ -6,7 +6,7 @@ import java.util.Date;
  * Product：商品信息实体类
  * 
  * @author ljz
- * @version 2014-12-25 9:31:53
+ * @version 2014-12-25 14:47:30
  * 
  */
 public class Product implements java.io.Serializable {
@@ -68,10 +68,8 @@ public class Product implements java.io.Serializable {
     private String applicableCrowd; 
     /** 适用年龄（配置表） */
     private String applicableAge; 
-    /** 特点 */
-    private String features; 
     /** 商品描述 */
-    private String describe; 
+    private String features; 
     /** 介绍 */
     private String introduce; 
     /** 服务（配送信息等） */
@@ -608,7 +606,7 @@ public class Product implements java.io.Serializable {
     }
     
     /**
-     * get 特点
+     * get 商品描述
      * 
      * @return the features
      */
@@ -617,30 +615,12 @@ public class Product implements java.io.Serializable {
     }
         
     /**
-     * set 特点
+     * set 商品描述
      * 
      * @param features the features to set
      */
     public void setFeatures(String features) {
         this.features = features;
-    }
-    
-    /**
-     * get 商品描述
-     * 
-     * @return the describe
-     */
-    public String getDescribe(){
-        return describe;
-    }
-        
-    /**
-     * set 商品描述
-     * 
-     * @param describe the describe to set
-     */
-    public void setDescribe(String describe) {
-        this.describe = describe;
     }
     
     /**

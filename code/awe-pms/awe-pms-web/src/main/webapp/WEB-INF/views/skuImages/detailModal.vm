@@ -25,7 +25,7 @@
 							<th class="center" style='width:25%;'>是否主图</th><td id="r_isPrimaryPath" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>描述</th><td id="r_remark" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>描述</th><td id="r_features" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>优先级</th><td id="r_priority" style='width:25%;'></td>
@@ -71,7 +71,7 @@
     				$("#r_imgType").text(r.imgType==null?"":r.imgType);
     				$("#r_imgPath").text(r.imgPath==null?"":r.imgPath);
     				$("#r_isPrimaryPath").text(r.isPrimaryPath==null?"":r.isPrimaryPath);
-    				$("#r_remark").text(r.remark==null?"":r.remark);
+    				$("#r_features").text(r.features==null?"":r.features);
     				$("#r_priority").text(r.priority==null?"":r.priority);
     				$("#r_createTime").text(r.createTime==null?"":r.createTime);
     				$("#r_updateTime").text(r.updateTime==null?"":r.updateTime);

@@ -6,7 +6,7 @@ import java.util.Date;
  * ProductCategory：商品类别实体类
  * 
  * @author ljz
- * @version 2014-12-25 9:31:53
+ * @version 2014-12-25 14:47:29
  * 
  */
 public class ProductCategory implements java.io.Serializable {
@@ -25,7 +25,7 @@ public class ProductCategory implements java.io.Serializable {
     /** 关键字 */
     private String keyword; 
     /** 描述 */
-    private String remark; 
+    private String features; 
     /** 级别 */
     private Integer level; 
     /** 优先级 */
@@ -134,19 +134,19 @@ public class ProductCategory implements java.io.Serializable {
     /**
      * get 描述
      * 
-     * @return the remark
+     * @return the features
      */
-    public String getRemark(){
-        return remark;
+    public String getFeatures(){
+        return features;
     }
         
     /**
      * set 描述
      * 
-     * @param remark the remark to set
+     * @param features the features to set
      */
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setFeatures(String features) {
+        this.features = features;
     }
     
     /**

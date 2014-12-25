@@ -8,7 +8,7 @@ import com.awe.pms.sdk.response.dto.ProductResponseDto;
  * 提供rest接口时方法的返回对象
  * 
  * @author ljz
- * @version 2014-12-25 9:31:58
+ * @version 2014-12-25 14:47:43
  * 
  */
 public class ProductResponse extends HbirdResponse<ProductResponseDto> {

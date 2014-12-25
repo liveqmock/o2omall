@@ -8,7 +8,7 @@ import com.hbird.common.utils.page.Query;
  * BusinessInfoQuery：商家信息查询类
  * 
  * @author ljz
- * @version 2014-12-25 9:31:54
+ * @version 2014-12-25 14:47:30
  * 
  */
 public class BusinessInfoQuery extends Query {
@@ -52,7 +52,7 @@ public class BusinessInfoQuery extends Query {
     /** 商家类别 */
 	private Long bussSort; 
     /** 描述 */
-	private String describe; 
+	private String features; 
     /** 备注 */
 	private String remark; 
     /** 审核状态 */
@@ -441,19 +441,19 @@ public class BusinessInfoQuery extends Query {
     /**
      * get 描述
      * 
-     * @return the describe
+     * @return the features
      */
-    public String getDescribe(){
-        return describe;
+    public String getFeatures(){
+        return features;
     }
         
     /**
      * set 描述
      * 
-     * @param describe the describe to set
+     * @param features the features to set
      */
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setFeatures(String features) {
+        this.features = features;
     }
     
     /**

@@ -61,7 +61,7 @@
 							<th class="center" style='width:25%;'>折扣（会员）</th><td id="r_discount" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>描述</th><td id="r_remark" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>描述</th><td id="r_features" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>一维码</th><td id="r_dimensionCodeOne" style='width:25%;'></td>
@@ -125,7 +125,7 @@
     				$("#r_salePrice").text(r.salePrice==null?"":r.salePrice);
     				$("#r_saleQuantity").text(r.saleQuantity==null?"":r.saleQuantity);
     				$("#r_discount").text(r.discount==null?"":r.discount);
-    				$("#r_remark").text(r.remark==null?"":r.remark);
+    				$("#r_features").text(r.features==null?"":r.features);
     				$("#r_dimensionCodeOne").text(r.dimensionCodeOne==null?"":r.dimensionCodeOne);
     				$("#r_dimensionCodeTwo").text(r.dimensionCodeTwo==null?"":r.dimensionCodeTwo);
     				$("#r_priority").text(r.priority==null?"":r.priority);

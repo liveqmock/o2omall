@@ -26,7 +26,7 @@
 						telePhone: {required: true},
 						mobilePhone: {required: true},
 						bussSort: {required: true},
-						describe: {required: true},
+						features: {required: true},
 						remark: {required: true},
 						checkStatus: {required: true},
 						hasCard: {required: true},
@@ -62,7 +62,7 @@
 						telePhone: { required: "请输入联系人电话"},
 						mobilePhone: { required: "请输入手机"},
 						bussSort: { required: "请输入商家类别"},
-						describe: { required: "请输入描述"},
+						features: { required: "请输入描述"},
 						remark: { required: "请输入备注"},
 						checkStatus: { required: "请输入审核状态"},
 						hasCard: { required: "请输入是否有证件"},
@@ -182,9 +182,9 @@
                                     <div class="col-sm-4">
                                         <input type="text" name="bussSort" id="bussSort" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="describe">描述</label>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="features">描述</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="describe" id="describe" class="col-xs-12 col-sm-12" />
+                                        <input type="text" name="features" id="features" class="col-xs-12 col-sm-12" />
                                     </div>
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="remark">备注</label>
                                     <div class="col-sm-4">

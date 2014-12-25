@@ -151,13 +151,9 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="applicableAge" id="applicableAge" class="col-xs-10 col-sm-8" value="$!query.applicableAge"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="features">特点</label>
+									<label class="col-sm-1 control-label no-padding-right" for="features">商品描述</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="features" id="features" class="col-xs-10 col-sm-8" value="$!query.features"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="describe">商品描述</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="describe" id="describe" class="col-xs-10 col-sm-8" value="$!query.describe"/>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="introduce">介绍</label>
                                     <div class="col-sm-3">
@@ -282,7 +278,6 @@
 							<th class="center">商品上架时间</th>
 							<th class="center">适用人群</th>
 							<th class="center">适用年龄</th>
-							<th class="center">特点</th>
 							<th class="center">商品描述</th>
 							<th class="center">介绍</th>
 							<th class="center">服务（配送信息等）</th>
@@ -339,7 +334,6 @@
                                 <td>$!item.applicableCrowd</td>
                                 <td>$!item.applicableAge</td>
                                 <td>$!item.features</td>
-                                <td>$!item.describe</td>
                                 <td>$!item.introduce</td>
                                 <td>$!item.service</td>
                                 <td>$!item.weight</td>

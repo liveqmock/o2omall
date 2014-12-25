@@ -17,7 +17,7 @@
 						productId: {required: true},
 						productName: {required: true},
 						status: {required: true},
-						remark: {required: true},
+						features: {required: true},
 						priority: {required: true},
 					},
 			
@@ -31,7 +31,7 @@
 						productId: { required: "请输入商品ID"},
 						productName: { required: "请输入商品名称"},
 						status: { required: "请输入状态"},
-						remark: { required: "请输入描述"},
+						features: { required: "请输入描述"},
 						priority: { required: "请输入优先级"},
 					}
 				});
@@ -102,9 +102,9 @@
                                     <div class="col-sm-4">
                                         <input type="text" name="status" id="status" class="col-xs-12 col-sm-12" value="$!productTaxRate.status" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="remark">描述</label>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="features">描述</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="remark" id="remark" class="col-xs-12 col-sm-12" value="$!productTaxRate.remark" />
+                                        <input type="text" name="features" id="features" class="col-xs-12 col-sm-12" value="$!productTaxRate.features" />
                                     </div>
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="priority">优先级</label>
                                     <div class="col-sm-4">

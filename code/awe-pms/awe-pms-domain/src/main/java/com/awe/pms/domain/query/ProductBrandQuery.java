@@ -8,7 +8,7 @@ import com.hbird.common.utils.page.Query;
  * ProductBrandQuery：商品类别品牌查询类
  * 
  * @author ljz
- * @version 2014-12-25 9:31:53
+ * @version 2014-12-25 14:47:30
  * 
  */
 public class ProductBrandQuery extends Query {

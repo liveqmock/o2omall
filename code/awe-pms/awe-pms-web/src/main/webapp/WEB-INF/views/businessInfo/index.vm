@@ -119,9 +119,9 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="bussSort" id="bussSort" class="col-xs-10 col-sm-8" value="$!query.bussSort"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="describe">描述</label>
+									<label class="col-sm-1 control-label no-padding-right" for="features">描述</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="describe" id="describe" class="col-xs-10 col-sm-8" value="$!query.describe"/>
+                                        <input type="text" name="features" id="features" class="col-xs-10 col-sm-8" value="$!query.features"/>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="remark">备注</label>
                                     <div class="col-sm-3">
@@ -260,7 +260,7 @@
                                 <td>$!item.telePhone</td>
                                 <td>$!item.mobilePhone</td>
                                 <td>$!item.bussSort</td>
-                                <td>$!item.describe</td>
+                                <td>$!item.features</td>
                                 <td>$!item.remark</td>
                                 <td>$!item.checkStatus</td>
                                 <td>$!item.hasCard</td>

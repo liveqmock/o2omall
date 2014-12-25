@@ -91,10 +91,7 @@
 							<th class="center" style='width:25%;'>适用年龄</th><td id="r_applicableAge" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>特点</th><td id="r_features" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>商品描述</th><td id="r_describe" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>商品描述</th><td id="r_features" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>介绍</th><td id="r_introduce" style='width:25%;'></td>
@@ -217,7 +214,6 @@
     				$("#r_applicableCrowd").text(r.applicableCrowd==null?"":r.applicableCrowd);
     				$("#r_applicableAge").text(r.applicableAge==null?"":r.applicableAge);
     				$("#r_features").text(r.features==null?"":r.features);
-    				$("#r_describe").text(r.describe==null?"":r.describe);
     				$("#r_introduce").text(r.introduce==null?"":r.introduce);
     				$("#r_service").text(r.service==null?"":r.service);
     				$("#r_weight").text(r.weight==null?"":r.weight);

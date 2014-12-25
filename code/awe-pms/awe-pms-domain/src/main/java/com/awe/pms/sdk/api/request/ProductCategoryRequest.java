@@ -7,7 +7,7 @@ import com.awe.pms.sdk.api.request.dto.ProductCategoryRequestDto;
  * ProductCategoryRequest：商品类别请求参数
  * 
  * @author ljz
- * @version 2014-12-25 9:31:54
+ * @version 2014-12-25 14:47:30
  * 
  */
 public class ProductCategoryRequest extends HbirdSecureRequest<ProductCategoryRequestDto> {

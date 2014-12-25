@@ -6,7 +6,7 @@ import java.util.Date;
  * ProductDict：配置表实体类
  * 
  * @author ljz
- * @version 2014-12-25 9:31:53
+ * @version 2014-12-25 14:47:30
  * 
  */
 public class ProductDict implements java.io.Serializable {

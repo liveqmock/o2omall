@@ -7,7 +7,7 @@ import com.awe.pms.sdk.request.dto.BusinessInfoRequestDto;
  * BusinessInfoRequest：商家信息请求参数
  * 
  * @author ljz
- * @version 2014-12-25 9:31:58
+ * @version 2014-12-25 14:47:42
  * 
  */
 public class BusinessInfoRequest extends HbirdSecureRequest<BusinessInfoRequestDto> {

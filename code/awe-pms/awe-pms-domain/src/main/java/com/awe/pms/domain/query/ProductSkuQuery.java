@@ -8,7 +8,7 @@ import com.hbird.common.utils.page.Query;
  * ProductSkuQuery：商品SKU查询类
  * 
  * @author ljz
- * @version 2014-12-25 9:31:54
+ * @version 2014-12-25 14:47:30
  * 
  */
 public class ProductSkuQuery extends Query {
@@ -48,7 +48,7 @@ public class ProductSkuQuery extends Query {
     /** 折扣（会员） */
 	private Double discount; 
     /** 描述 */
-	private String remark; 
+	private String features; 
     /** 一维码 */
 	private String dimensionCodeOne; 
     /** 二维码 */
@@ -379,19 +379,19 @@ public class ProductSkuQuery extends Query {
     /**
      * get 描述
      * 
-     * @return the remark
+     * @return the features
      */
-    public String getRemark(){
-        return remark;
+    public String getFeatures(){
+        return features;
     }
         
     /**
      * set 描述
      * 
-     * @param remark the remark to set
+     * @param features the features to set
      */
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setFeatures(String features) {
+        this.features = features;
     }
     
     /**

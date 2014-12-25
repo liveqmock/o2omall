@@ -28,7 +28,7 @@
 							<th class="center" style='width:25%;'>审核结果</th><td id="r_checkResult" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>审核描述</th><td id="r_remark" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>审核描述</th><td id="r_features" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>创建时间</th><td id="r_createTime" style='width:25%;'></td>
@@ -72,7 +72,7 @@
     				$("#r_operator").text(r.operator==null?"":r.operator);
     				$("#r_operateTime").text(r.operateTime==null?"":r.operateTime);
     				$("#r_checkResult").text(r.checkResult==null?"":r.checkResult);
-    				$("#r_remark").text(r.remark==null?"":r.remark);
+    				$("#r_features").text(r.features==null?"":r.features);
     				$("#r_createTime").text(r.createTime==null?"":r.createTime);
     				$("#r_updateTime").text(r.updateTime==null?"":r.updateTime);
     				$("#r_createUser").text(r.createUser==null?"":r.createUser);

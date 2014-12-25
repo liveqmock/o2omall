@@ -7,7 +7,7 @@ import java.util.Date;
  * SkuImagesRequestDto：sku图片请求参数
  * 
  * @author ljz
- * @version 2014-12-25 9:31:58
+ * @version 2014-12-25 14:47:41
  * 
  */
 public class SkuImagesRequestDto extends HbirdDto {
@@ -26,7 +26,7 @@ public class SkuImagesRequestDto extends HbirdDto {
     /** 是否主图 */
     private Integer isPrimaryPath; 
     /** 描述 */
-    private String remark; 
+    private String features; 
     /** 优先级 */
     private Integer priority; 
     /** 创建时间 */
@@ -133,19 +133,19 @@ public class SkuImagesRequestDto extends HbirdDto {
     /**
      * get 描述
      * 
-     * @return the remark
+     * @return the features
      */
-    public String getRemark(){
-        return remark;
+    public String getFeatures(){
+        return features;
     }
         
     /**
      * set 描述
      * 
-     * @param remark the remark to set
+     * @param features the features to set
      */
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setFeatures(String features) {
+        this.features = features;
     }
     
     /**

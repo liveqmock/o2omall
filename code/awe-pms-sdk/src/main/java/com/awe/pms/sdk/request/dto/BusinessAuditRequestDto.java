@@ -7,7 +7,7 @@ import java.util.Date;
  * BusinessAuditRequestDto：审核商家流水表请求参数
  * 
  * @author ljz
- * @version 2014-12-25 9:31:58
+ * @version 2014-12-25 14:47:42
  * 
  */
 public class BusinessAuditRequestDto extends HbirdDto {
@@ -28,7 +28,7 @@ public class BusinessAuditRequestDto extends HbirdDto {
     /** 审核结果 */
     private Integer checkResult; 
     /** 审核描述 */
-    private String remark; 
+    private String features; 
     /** 创建时间 */
     private Date createTime; 
     /** 修改时间 */
@@ -151,19 +151,19 @@ public class BusinessAuditRequestDto extends HbirdDto {
     /**
      * get 审核描述
      * 
-     * @return the remark
+     * @return the features
      */
-    public String getRemark(){
-        return remark;
+    public String getFeatures(){
+        return features;
     }
         
     /**
      * set 审核描述
      * 
-     * @param remark the remark to set
+     * @param features the features to set
      */
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setFeatures(String features) {
+        this.features = features;
     }
     
     /**

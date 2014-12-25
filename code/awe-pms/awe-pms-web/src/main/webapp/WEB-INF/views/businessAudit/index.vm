@@ -67,9 +67,9 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="checkResult" id="checkResult" class="col-xs-10 col-sm-8" value="$!query.checkResult"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="remark">审核描述</label>
+									<label class="col-sm-1 control-label no-padding-right" for="features">审核描述</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="remark" id="remark" class="col-xs-10 col-sm-8" value="$!query.remark"/>
+                                        <input type="text" name="features" id="features" class="col-xs-10 col-sm-8" value="$!query.features"/>
                                     </div>
 								</div>
 								<div class="form-group">
@@ -112,7 +112,7 @@
                                 <td>$!item.operator</td>
                                 <td>$!item.operateTime</td>
                                 <td>$!item.checkResult</td>
-                                <td>$!item.remark</td>
+                                <td>$!item.features</td>
                                 <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.createTime)</td>
                                 <td>$!item.createUser</td>
                                 <td>

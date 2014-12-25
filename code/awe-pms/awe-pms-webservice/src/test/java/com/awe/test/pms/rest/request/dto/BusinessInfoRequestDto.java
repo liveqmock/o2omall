@@ -7,7 +7,7 @@ import java.util.Date;
  * BusinessInfoRequestDto：商家信息请求参数
  * 
  * @author ljz
- * @version 2014-12-25 9:31:58
+ * @version 2014-12-25 14:47:41
  * 
  */
 public class BusinessInfoRequestDto extends HbirdDto {
@@ -54,7 +54,7 @@ public class BusinessInfoRequestDto extends HbirdDto {
     /** 商家类别 */
     private Long bussSort; 
     /** 描述 */
-    private String describe; 
+    private String features; 
     /** 备注 */
     private String remark; 
     /** 审核状态 */
@@ -439,19 +439,19 @@ public class BusinessInfoRequestDto extends HbirdDto {
     /**
      * get 描述
      * 
-     * @return the describe
+     * @return the features
      */
-    public String getDescribe(){
-        return describe;
+    public String getFeatures(){
+        return features;
     }
         
     /**
      * set 描述
      * 
-     * @param describe the describe to set
+     * @param features the features to set
      */
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setFeatures(String features) {
+        this.features = features;
     }
     
     /**

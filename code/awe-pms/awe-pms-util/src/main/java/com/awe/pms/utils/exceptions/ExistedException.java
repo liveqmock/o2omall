@@ -4,7 +4,7 @@ package com.awe.pms.utils.exceptions;
  * 记录已存在异常 ：多用于添加数据时验证唯一
  * 
  * @author ljz
- * @version 2014-12-25 9:31:55
+ * @version 2014-12-25 14:47:31
  * 
  */
 public class ExistedException extends RuntimeException {

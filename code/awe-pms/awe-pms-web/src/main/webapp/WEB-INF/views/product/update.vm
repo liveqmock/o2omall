@@ -35,7 +35,6 @@
 						applicableCrowd: {required: true},
 						applicableAge: {required: true},
 						features: {required: true},
-						describe: {required: true},
 						introduce: {required: true},
 						service: {required: true},
 						weight: {required: true},
@@ -84,8 +83,7 @@
 						saleTimeStart: { required: "请输入商品上架时间"},
 						applicableCrowd: { required: "请输入适用人群"},
 						applicableAge: { required: "请输入适用年龄"},
-						features: { required: "请输入特点"},
-						describe: { required: "请输入商品描述"},
+						features: { required: "请输入商品描述"},
 						introduce: { required: "请输入介绍"},
 						service: { required: "请输入服务（配送信息等）"},
 						weight: { required: "请输入商品净重"},
@@ -242,13 +240,9 @@
                                     <div class="col-sm-4">
                                         <input type="text" name="applicableAge" id="applicableAge" class="col-xs-12 col-sm-12" value="$!product.applicableAge" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="features">特点</label>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="features">商品描述</label>
                                     <div class="col-sm-4">
                                         <input type="text" name="features" id="features" class="col-xs-12 col-sm-12" value="$!product.features" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="describe">商品描述</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="describe" id="describe" class="col-xs-12 col-sm-12" value="$!product.describe" />
                                     </div>
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="introduce">介绍</label>
                                     <div class="col-sm-4">

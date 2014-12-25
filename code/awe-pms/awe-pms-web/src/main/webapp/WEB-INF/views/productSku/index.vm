@@ -111,9 +111,9 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="discount" id="discount" class="col-xs-10 col-sm-8" value="$!query.discount"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="remark">描述</label>
+									<label class="col-sm-1 control-label no-padding-right" for="features">描述</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="remark" id="remark" class="col-xs-10 col-sm-8" value="$!query.remark"/>
+                                        <input type="text" name="features" id="features" class="col-xs-10 col-sm-8" value="$!query.features"/>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="dimensionCodeOne">一维码</label>
                                     <div class="col-sm-3">
@@ -193,7 +193,7 @@
                                 <td>$!item.salePrice</td>
                                 <td>$!item.saleQuantity</td>
                                 <td>$!item.discount</td>
-                                <td>$!item.remark</td>
+                                <td>$!item.features</td>
                                 <td>$!item.dimensionCodeOne</td>
                                 <td>$!item.dimensionCodeTwo</td>
                                 <td>$!item.priority</td>

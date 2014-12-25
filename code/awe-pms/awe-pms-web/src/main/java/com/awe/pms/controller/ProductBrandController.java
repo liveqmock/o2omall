@@ -26,7 +26,7 @@ import com.hbird.common.utils.wrap.Wrapper;
  * ProductBrandController ：商品类别品牌控制器
  * 
  * @author ljz
- * @version 2014-12-25 9:31:55
+ * @version 2014-12-25 14:47:32
 */
 @Controller
 @RequestMapping("productBrand")

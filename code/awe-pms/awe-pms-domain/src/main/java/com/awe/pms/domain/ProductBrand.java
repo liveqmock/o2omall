@@ -6,7 +6,7 @@ import java.util.Date;
  * ProductBrand：商品类别品牌实体类
  * 
  * @author ljz
- * @version 2014-12-25 9:31:53
+ * @version 2014-12-25 14:47:29
  * 
  */
 public class ProductBrand implements java.io.Serializable {

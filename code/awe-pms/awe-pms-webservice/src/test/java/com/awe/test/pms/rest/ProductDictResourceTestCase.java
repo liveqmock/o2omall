@@ -14,7 +14,7 @@ import com.awe.test.pms.rest.Urls;
  * ProductDictResource单元测试
  * 
  * @author ljz
- * @version 2014-12-25 9:31:58
+ * @version 2014-12-25 14:47:41
  * 
  */
 public class ProductDictResourceTestCase extends AbstractClient {
