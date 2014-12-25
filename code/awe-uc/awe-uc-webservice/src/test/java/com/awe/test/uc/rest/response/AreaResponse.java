@@ -1,5 +1,7 @@
 package com.awe.test.uc.rest.response;
 
+import java.util.List;
+
 import com.hbird.common.sdk.api.response.HbirdResponse;
 import com.awe.test.uc.rest.response.dto.AreaResponseDto;
 
@@ -11,7 +13,7 @@ import com.awe.test.uc.rest.response.dto.AreaResponseDto;
  * @version 2014-12-23 15:38:41
  * 
  */
-public class AreaResponse extends HbirdResponse<AreaResponseDto> {
+public class AreaResponse extends HbirdResponse<List<AreaResponseDto>> {
 
     /** 序列化标识 */
     private static final long serialVersionUID = 1L;

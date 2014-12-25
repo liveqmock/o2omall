@@ -1,5 +1,7 @@
 package com.awe.uc.sdk;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -27,7 +29,7 @@ public class AreaClient extends AbstractClient {
      *            查询请求对象
      * @return AreaDto 对象
      */
-    public AreaResponseDto getArea(AreaRequest request) {
+    public List<AreaResponseDto> getArea(AreaRequest request) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("getArea request: " + JsonHelper.toJson(request));
         }

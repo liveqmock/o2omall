@@ -11,7 +11,8 @@ import com.awe.rems.sdk.response.dto.ServiceAuditResponseDto;
 /**
  * ServiceAuditClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:29:58
  * 
  */
 public class ServiceAuditClientTestCase {
@@ -20,18 +21,19 @@ public class ServiceAuditClientTestCase {
     private ServiceAuditClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new ServiceAuditClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetServiceAudit() {
         ServiceAuditRequestDto requestDto = new ServiceAuditRequestDto();
         requestDto.setId(1l);
-        ServiceAuditRequest request = new ServiceAuditRequest("key",requestDto);
+        ServiceAuditRequest request = new ServiceAuditRequest("rems",requestDto);
         
         ServiceAuditResponseDto serviceAuditResponseDto = client.getServiceAudit(request);
         Assert.notNull(serviceAuditResponseDto);

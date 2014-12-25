@@ -19,6 +19,7 @@ import org.springframework.util.CollectionUtils;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.uc.domain.Area;
+import com.awe.uc.domain.query.AreaQuery;
 import com.awe.uc.sdk.api.request.AreaRequest;
 import com.awe.uc.sdk.api.request.dto.AreaRequestDto;
 import com.awe.uc.sdk.api.response.dto.AreaResponseDto;
@@ -59,15 +60,17 @@ public class AreaResource {
         }
         
         AreaRequestDto requestDto = request.getContent();
-        if (null == requestDto || null == requestDto.getId()) {
+        if (null == requestDto) {
             this.logger.error("getArea 传入参数有误");
             return WrapMapper.illegalArgument();
         }
 
         try {
-            Area area = areaService.getAreaById(requestDto.getId());
-            AreaResponseDto responseDto = convert(area);
-            return WrapMapper.ok().result(responseDto);
+            AreaQuery queryBean=new AreaQuery();
+            BeanUtils.copyProperties(requestDto, queryBean);
+            List<Area> areaList = areaService.queryAreaList(queryBean);
+            List<AreaResponseDto> responseDtoList = convertList(areaList);
+            return WrapMapper.ok().result(responseDtoList);
         } catch (Exception e) {
             this.logger.error("查询三级地址数据异常", e);
             return WrapMapper.error();

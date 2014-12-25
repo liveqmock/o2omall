@@ -11,7 +11,8 @@ import com.awe.pms.sdk.response.dto.ProductSkuResponseDto;
 /**
  * ProductSkuClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:30:05
  * 
  */
 public class ProductSkuClientTestCase {
@@ -20,18 +21,19 @@ public class ProductSkuClientTestCase {
     private ProductSkuClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new ProductSkuClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetProductSku() {
         ProductSkuRequestDto requestDto = new ProductSkuRequestDto();
         requestDto.setId(1l);
-        ProductSkuRequest request = new ProductSkuRequest("key",requestDto);
+        ProductSkuRequest request = new ProductSkuRequest("pms",requestDto);
         
         ProductSkuResponseDto productSkuResponseDto = client.getProductSku(request);
         Assert.notNull(productSkuResponseDto);

@@ -11,7 +11,8 @@ import com.awe.pms.sdk.response.dto.BusinessInfoResponseDto;
 /**
  * BusinessInfoClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:30:05
  * 
  */
 public class BusinessInfoClientTestCase {
@@ -20,18 +21,19 @@ public class BusinessInfoClientTestCase {
     private BusinessInfoClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new BusinessInfoClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetBusinessInfo() {
         BusinessInfoRequestDto requestDto = new BusinessInfoRequestDto();
         requestDto.setId(1l);
-        BusinessInfoRequest request = new BusinessInfoRequest("key",requestDto);
+        BusinessInfoRequest request = new BusinessInfoRequest("pms",requestDto);
         
         BusinessInfoResponseDto businessInfoResponseDto = client.getBusinessInfo(request);
         Assert.notNull(businessInfoResponseDto);

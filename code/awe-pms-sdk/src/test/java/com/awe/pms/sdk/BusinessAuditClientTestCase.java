@@ -11,7 +11,8 @@ import com.awe.pms.sdk.response.dto.BusinessAuditResponseDto;
 /**
  * BusinessAuditClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:30:05
  * 
  */
 public class BusinessAuditClientTestCase {
@@ -20,18 +21,19 @@ public class BusinessAuditClientTestCase {
     private BusinessAuditClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new BusinessAuditClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetBusinessAudit() {
         BusinessAuditRequestDto requestDto = new BusinessAuditRequestDto();
         requestDto.setId(1l);
-        BusinessAuditRequest request = new BusinessAuditRequest("key",requestDto);
+        BusinessAuditRequest request = new BusinessAuditRequest("pms",requestDto);
         
         BusinessAuditResponseDto businessAuditResponseDto = client.getBusinessAudit(request);
         Assert.notNull(businessAuditResponseDto);

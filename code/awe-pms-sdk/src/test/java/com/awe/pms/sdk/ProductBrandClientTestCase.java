@@ -11,7 +11,8 @@ import com.awe.pms.sdk.response.dto.ProductBrandResponseDto;
 /**
  * ProductBrandClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:30:05
  * 
  */
 public class ProductBrandClientTestCase {
@@ -20,18 +21,19 @@ public class ProductBrandClientTestCase {
     private ProductBrandClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new ProductBrandClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetProductBrand() {
         ProductBrandRequestDto requestDto = new ProductBrandRequestDto();
         requestDto.setId(1l);
-        ProductBrandRequest request = new ProductBrandRequest("key",requestDto);
+        ProductBrandRequest request = new ProductBrandRequest("pms",requestDto);
         
         ProductBrandResponseDto productBrandResponseDto = client.getProductBrand(request);
         Assert.notNull(productBrandResponseDto);

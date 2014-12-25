@@ -11,7 +11,8 @@ import com.awe.rems.sdk.response.dto.ReturnExchangeResponseDto;
 /**
  * ReturnExchangeClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:29:57
  * 
  */
 public class ReturnExchangeClientTestCase {
@@ -20,18 +21,19 @@ public class ReturnExchangeClientTestCase {
     private ReturnExchangeClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new ReturnExchangeClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetReturnExchange() {
         ReturnExchangeRequestDto requestDto = new ReturnExchangeRequestDto();
         requestDto.setId(1l);
-        ReturnExchangeRequest request = new ReturnExchangeRequest("key",requestDto);
+        ReturnExchangeRequest request = new ReturnExchangeRequest("rems",requestDto);
         
         ReturnExchangeResponseDto returnExchangeResponseDto = client.getReturnExchange(request);
         Assert.notNull(returnExchangeResponseDto);

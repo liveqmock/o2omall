@@ -11,7 +11,8 @@ import com.awe.rems.sdk.response.dto.ReturnExchangeImageResponseDto;
 /**
  * ReturnExchangeImageClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:29:57
  * 
  */
 public class ReturnExchangeImageClientTestCase {
@@ -20,18 +21,19 @@ public class ReturnExchangeImageClientTestCase {
     private ReturnExchangeImageClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new ReturnExchangeImageClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetReturnExchangeImage() {
         ReturnExchangeImageRequestDto requestDto = new ReturnExchangeImageRequestDto();
         requestDto.setId(1l);
-        ReturnExchangeImageRequest request = new ReturnExchangeImageRequest("key",requestDto);
+        ReturnExchangeImageRequest request = new ReturnExchangeImageRequest("rems",requestDto);
         
         ReturnExchangeImageResponseDto returnExchangeImageResponseDto = client.getReturnExchangeImage(request);
         Assert.notNull(returnExchangeImageResponseDto);

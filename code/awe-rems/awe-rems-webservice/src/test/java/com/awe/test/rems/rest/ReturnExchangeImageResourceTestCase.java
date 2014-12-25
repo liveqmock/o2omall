@@ -1,31 +1,38 @@
 package com.awe.test.rems.rest;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
+import com.awe.test.uc.rest.Urls;
 import com.hbird.common.client.AbstractClient;
 import com.awe.test.rems.rest.request.ReturnExchangeImageRequest;
 import com.awe.test.rems.rest.request.dto.ReturnExchangeImageRequestDto;
 import com.awe.test.rems.rest.response.ReturnExchangeImageResponse;
 import com.awe.test.rems.rest.response.dto.ReturnExchangeImageResponseDto;
-import com.awe.test.rems.rest.Urls;
 
 /**
  * ReturnExchangeImageResource单元测试
  * 
  * @author ljz
- * @version 2014-12-25 9:16:23
+ * @version 2014-12-25 15:29:57
  * 
  */
 public class ReturnExchangeImageResourceTestCase extends AbstractClient {
     
+    @Before
+    public void init() throws Exception {
+        setServiceUrlDomain(Urls.API_DOMAIN);
+        afterPropertiesSet();
+    }
+    
     @Test
     public void testGetReturnExchangeImage() {
-        String url= Urls.API_DOMAIN + "/returnExchangeImage/getReturnExchangeImage";
+        String url= getServiceUrlDomain() + "/returnExchangeImage/getReturnExchangeImage";
 
         ReturnExchangeImageRequestDto requestDto = new ReturnExchangeImageRequestDto();
         requestDto.setId(1l);
-        ReturnExchangeImageRequest request = new ReturnExchangeImageRequest("key",requestDto);
+        ReturnExchangeImageRequest request = new ReturnExchangeImageRequest("rems",requestDto);
         
         ReturnExchangeImageResponse response = super.getRestTemplate().postForObject(url, request, ReturnExchangeImageResponse.class);
         Assert.notNull(response);

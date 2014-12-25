@@ -11,7 +11,8 @@ import com.awe.uc.sdk.response.dto.UserAddressResponseDto;
 /**
  * UserAddressClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:23:48
  * 
  */
 public class UserAddressClientTestCase {
@@ -20,18 +21,19 @@ public class UserAddressClientTestCase {
     private UserAddressClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new UserAddressClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetUserAddress() {
         UserAddressRequestDto requestDto = new UserAddressRequestDto();
         requestDto.setId(1l);
-        UserAddressRequest request = new UserAddressRequest("key",requestDto);
+        UserAddressRequest request = new UserAddressRequest("uc",requestDto);
         
         UserAddressResponseDto userAddressResponseDto = client.getUserAddress(request);
         Assert.notNull(userAddressResponseDto);

@@ -11,7 +11,8 @@ import com.awe.pay.sdk.response.dto.RefundResponseDto;
 /**
  * RefundClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:29:50
  * 
  */
 public class RefundClientTestCase {
@@ -20,18 +21,19 @@ public class RefundClientTestCase {
     private RefundClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new RefundClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetRefund() {
         RefundRequestDto requestDto = new RefundRequestDto();
         requestDto.setId(1l);
-        RefundRequest request = new RefundRequest("key",requestDto);
+        RefundRequest request = new RefundRequest("pay",requestDto);
         
         RefundResponseDto refundResponseDto = client.getRefund(request);
         Assert.notNull(refundResponseDto);

@@ -11,7 +11,8 @@ import com.awe.pms.sdk.response.dto.SkuImagesResponseDto;
 /**
  * SkuImagesClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:30:05
  * 
  */
 public class SkuImagesClientTestCase {
@@ -20,18 +21,19 @@ public class SkuImagesClientTestCase {
     private SkuImagesClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new SkuImagesClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetSkuImages() {
         SkuImagesRequestDto requestDto = new SkuImagesRequestDto();
         requestDto.setId(1l);
-        SkuImagesRequest request = new SkuImagesRequest("key",requestDto);
+        SkuImagesRequest request = new SkuImagesRequest("pms",requestDto);
         
         SkuImagesResponseDto skuImagesResponseDto = client.getSkuImages(request);
         Assert.notNull(skuImagesResponseDto);

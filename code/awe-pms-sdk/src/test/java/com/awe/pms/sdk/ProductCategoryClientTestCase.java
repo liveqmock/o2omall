@@ -11,7 +11,8 @@ import com.awe.pms.sdk.response.dto.ProductCategoryResponseDto;
 /**
  * ProductCategoryClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:30:05
  * 
  */
 public class ProductCategoryClientTestCase {
@@ -20,18 +21,19 @@ public class ProductCategoryClientTestCase {
     private ProductCategoryClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new ProductCategoryClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetProductCategory() {
         ProductCategoryRequestDto requestDto = new ProductCategoryRequestDto();
         requestDto.setId(1l);
-        ProductCategoryRequest request = new ProductCategoryRequest("key",requestDto);
+        ProductCategoryRequest request = new ProductCategoryRequest("pms",requestDto);
         
         ProductCategoryResponseDto productCategoryResponseDto = client.getProductCategory(request);
         Assert.notNull(productCategoryResponseDto);

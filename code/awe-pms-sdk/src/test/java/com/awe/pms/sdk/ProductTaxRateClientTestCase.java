@@ -11,7 +11,8 @@ import com.awe.pms.sdk.response.dto.ProductTaxRateResponseDto;
 /**
  * ProductTaxRateClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:30:05
  * 
  */
 public class ProductTaxRateClientTestCase {
@@ -20,18 +21,19 @@ public class ProductTaxRateClientTestCase {
     private ProductTaxRateClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new ProductTaxRateClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetProductTaxRate() {
         ProductTaxRateRequestDto requestDto = new ProductTaxRateRequestDto();
         requestDto.setId(1l);
-        ProductTaxRateRequest request = new ProductTaxRateRequest("key",requestDto);
+        ProductTaxRateRequest request = new ProductTaxRateRequest("pms",requestDto);
         
         ProductTaxRateResponseDto productTaxRateResponseDto = client.getProductTaxRate(request);
         Assert.notNull(productTaxRateResponseDto);

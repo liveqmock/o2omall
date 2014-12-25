@@ -11,7 +11,8 @@ import com.awe.pay.sdk.response.dto.TradeRefundFailResponseDto;
 /**
  * TradeRefundFailClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:29:50
  * 
  */
 public class TradeRefundFailClientTestCase {
@@ -20,18 +21,19 @@ public class TradeRefundFailClientTestCase {
     private TradeRefundFailClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new TradeRefundFailClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetTradeRefundFail() {
         TradeRefundFailRequestDto requestDto = new TradeRefundFailRequestDto();
         requestDto.setId(1l);
-        TradeRefundFailRequest request = new TradeRefundFailRequest("key",requestDto);
+        TradeRefundFailRequest request = new TradeRefundFailRequest("pay",requestDto);
         
         TradeRefundFailResponseDto tradeRefundFailResponseDto = client.getTradeRefundFail(request);
         Assert.notNull(tradeRefundFailResponseDto);

@@ -11,7 +11,8 @@ import com.awe.order.sdk.response.dto.ECouponResponseDto;
 /**
  * ECouponClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:29:38
  * 
  */
 public class ECouponClientTestCase {
@@ -20,18 +21,19 @@ public class ECouponClientTestCase {
     private ECouponClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new ECouponClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetECoupon() {
         ECouponRequestDto requestDto = new ECouponRequestDto();
         requestDto.setId(1l);
-        ECouponRequest request = new ECouponRequest("key",requestDto);
+        ECouponRequest request = new ECouponRequest("order",requestDto);
         
         ECouponResponseDto eCouponResponseDto = client.getECoupon(request);
         Assert.notNull(eCouponResponseDto);

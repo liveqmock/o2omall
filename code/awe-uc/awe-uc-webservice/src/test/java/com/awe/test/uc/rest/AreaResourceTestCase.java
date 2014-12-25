@@ -1,5 +1,8 @@
 package com.awe.test.uc.rest;
 
+import java.util.List;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
@@ -8,7 +11,6 @@ import com.awe.test.uc.rest.request.AreaRequest;
 import com.awe.test.uc.rest.request.dto.AreaRequestDto;
 import com.awe.test.uc.rest.response.AreaResponse;
 import com.awe.test.uc.rest.response.dto.AreaResponseDto;
-import com.awe.test.uc.rest.Urls;
 
 /**
  * AreaResource单元测试
@@ -18,18 +20,24 @@ import com.awe.test.uc.rest.Urls;
  * 
  */
 public class AreaResourceTestCase extends AbstractClient {
-    
+
+    @Before
+    public void init() throws Exception {
+        setServiceUrlDomain(Urls.API_DOMAIN);
+        afterPropertiesSet();
+    }
+
     @Test
     public void testGetArea() {
-        String url= Urls.API_DOMAIN + "/area/getArea";
+        String url = getServiceUrlDomain() + "/area/getArea";
 
         AreaRequestDto requestDto = new AreaRequestDto();
         requestDto.setId(1l);
-        AreaRequest request = new AreaRequest("key",requestDto);
-        
+        AreaRequest request = new AreaRequest("uc", requestDto);
+
         AreaResponse response = super.getRestTemplate().postForObject(url, request, AreaResponse.class);
         Assert.notNull(response);
-        AreaResponseDto areaResponseDto = super.getResult(response);
-        Assert.notNull(areaResponseDto);
+        List<AreaResponseDto> areaResponseDtos = super.getResult(response);
+        Assert.notEmpty(areaResponseDtos);
     }
 }

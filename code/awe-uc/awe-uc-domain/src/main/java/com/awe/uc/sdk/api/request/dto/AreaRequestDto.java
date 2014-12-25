@@ -1,7 +1,6 @@
 package com.awe.uc.sdk.api.request.dto;
 
 import com.hbird.common.sdk.api.dto.HbirdDto;
-import java.util.Date;
 
 /**
  * AreaRequestDto：三级地址请求参数
@@ -25,16 +24,6 @@ public class AreaRequestDto extends HbirdDto {
     private String name; 
     /** 级别 */
     private Integer leval; 
-    /** 创建人 */
-    private String createUser; 
-    /** 创建时间 */
-    private Date createTime; 
-    /** 修改人 */
-    private String updateUser; 
-    /** 修改时间 */
-    private Date updateTime; 
-    /** 是否有效: 1-有效, 0-无效 */
-    private Integer yn; 
     
     /**
      * get 自增ID
@@ -124,95 +113,5 @@ public class AreaRequestDto extends HbirdDto {
      */
     public void setLeval(Integer leval) {
         this.leval = leval;
-    }
-    
-    /**
-     * get 创建人
-     * 
-     * @return the createUser
-     */
-    public String getCreateUser(){
-        return createUser;
-    }
-        
-    /**
-     * set 创建人
-     * 
-     * @param createUser the createUser to set
-     */
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser;
-    }
-    
-    /**
-     * get 创建时间
-     * 
-     * @return the createTime
-     */
-    public Date getCreateTime(){
-        return createTime;
-    }
-        
-    /**
-     * set 创建时间
-     * 
-     * @param createTime the createTime to set
-     */
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-    
-    /**
-     * get 修改人
-     * 
-     * @return the updateUser
-     */
-    public String getUpdateUser(){
-        return updateUser;
-    }
-        
-    /**
-     * set 修改人
-     * 
-     * @param updateUser the updateUser to set
-     */
-    public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser;
-    }
-    
-    /**
-     * get 修改时间
-     * 
-     * @return the updateTime
-     */
-    public Date getUpdateTime(){
-        return updateTime;
-    }
-        
-    /**
-     * set 修改时间
-     * 
-     * @param updateTime the updateTime to set
-     */
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-    
-    /**
-     * get 是否有效: 1-有效, 0-无效
-     * 
-     * @return the yn
-     */
-    public Integer getYn(){
-        return yn;
-    }
-        
-    /**
-     * set 是否有效: 1-有效, 0-无效
-     * 
-     * @param yn the yn to set
-     */
-    public void setYn(Integer yn) {
-        this.yn = yn;
-    }
+    } 
 }

@@ -1,31 +1,38 @@
 package com.awe.test.rems.rest;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
+import com.awe.test.uc.rest.Urls;
 import com.hbird.common.client.AbstractClient;
 import com.awe.test.rems.rest.request.ServiceAuditRequest;
 import com.awe.test.rems.rest.request.dto.ServiceAuditRequestDto;
 import com.awe.test.rems.rest.response.ServiceAuditResponse;
 import com.awe.test.rems.rest.response.dto.ServiceAuditResponseDto;
-import com.awe.test.rems.rest.Urls;
 
 /**
  * ServiceAuditResource单元测试
  * 
  * @author ljz
- * @version 2014-12-25 9:16:23
+ * @version 2014-12-25 15:29:57
  * 
  */
 public class ServiceAuditResourceTestCase extends AbstractClient {
     
+    @Before
+    public void init() throws Exception {
+        setServiceUrlDomain(Urls.API_DOMAIN);
+        afterPropertiesSet();
+    }
+    
     @Test
     public void testGetServiceAudit() {
-        String url= Urls.API_DOMAIN + "/serviceAudit/getServiceAudit";
+        String url= getServiceUrlDomain() + "/serviceAudit/getServiceAudit";
 
         ServiceAuditRequestDto requestDto = new ServiceAuditRequestDto();
         requestDto.setId(1l);
-        ServiceAuditRequest request = new ServiceAuditRequest("key",requestDto);
+        ServiceAuditRequest request = new ServiceAuditRequest("rems",requestDto);
         
         ServiceAuditResponse response = super.getRestTemplate().postForObject(url, request, ServiceAuditResponse.class);
         Assert.notNull(response);

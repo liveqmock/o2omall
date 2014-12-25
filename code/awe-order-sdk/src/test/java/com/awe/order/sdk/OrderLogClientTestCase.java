@@ -11,7 +11,8 @@ import com.awe.order.sdk.response.dto.OrderLogResponseDto;
 /**
  * OrderLogClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:29:38
  * 
  */
 public class OrderLogClientTestCase {
@@ -20,18 +21,19 @@ public class OrderLogClientTestCase {
     private OrderLogClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new OrderLogClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetOrderLog() {
         OrderLogRequestDto requestDto = new OrderLogRequestDto();
         requestDto.setId(1l);
-        OrderLogRequest request = new OrderLogRequest("key",requestDto);
+        OrderLogRequest request = new OrderLogRequest("order",requestDto);
         
         OrderLogResponseDto orderLogResponseDto = client.getOrderLog(request);
         Assert.notNull(orderLogResponseDto);

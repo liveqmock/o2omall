@@ -11,7 +11,8 @@ import com.awe.order.sdk.response.dto.OrdersItemsResponseDto;
 /**
  * OrdersItemsClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:29:38
  * 
  */
 public class OrdersItemsClientTestCase {
@@ -20,18 +21,19 @@ public class OrdersItemsClientTestCase {
     private OrdersItemsClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new OrdersItemsClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetOrdersItems() {
         OrdersItemsRequestDto requestDto = new OrdersItemsRequestDto();
         requestDto.setId(1l);
-        OrdersItemsRequest request = new OrdersItemsRequest("key",requestDto);
+        OrdersItemsRequest request = new OrdersItemsRequest("order",requestDto);
         
         OrdersItemsResponseDto ordersItemsResponseDto = client.getOrdersItems(request);
         Assert.notNull(ordersItemsResponseDto);

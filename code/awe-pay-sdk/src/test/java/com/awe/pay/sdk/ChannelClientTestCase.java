@@ -11,7 +11,8 @@ import com.awe.pay.sdk.response.dto.ChannelResponseDto;
 /**
  * ChannelClient测试用例
  * 
- * @author lijianzhong
+ * @author ljz
+ * @version 2014-12-25 15:29:50
  * 
  */
 public class ChannelClientTestCase {
@@ -20,18 +21,19 @@ public class ChannelClientTestCase {
     private ChannelClient client;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         client = new ChannelClient();
         client.setServiceUrlDomain(WS_DOMAIN);
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
+        client.afterPropertiesSet();
     }
 
     @Test
     public void testGetChannel() {
         ChannelRequestDto requestDto = new ChannelRequestDto();
         requestDto.setId(1l);
-        ChannelRequest request = new ChannelRequest("key",requestDto);
+        ChannelRequest request = new ChannelRequest("pay",requestDto);
         
         ChannelResponseDto channelResponseDto = client.getChannel(request);
         Assert.notNull(channelResponseDto);
