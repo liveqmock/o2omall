@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.rems.sdk.request.ReturnExchangeImageRequest;
 import com.awe.rems.sdk.request.dto.ReturnExchangeImageRequestDto;
 import com.awe.rems.sdk.response.dto.ReturnExchangeImageResponseDto;
 
@@ -12,7 +11,7 @@ import com.awe.rems.sdk.response.dto.ReturnExchangeImageResponseDto;
  * ReturnExchangeImageClient测试用例
  * 
  * @author ljz
- * @version 2014-12-25 15:29:57
+ * @version 2014-12-25 17:54:00
  * 
  */
 public class ReturnExchangeImageClientTestCase {
@@ -24,6 +23,7 @@ public class ReturnExchangeImageClientTestCase {
     public void init() throws Exception {
         client = new ReturnExchangeImageClient();
         client.setServiceUrlDomain(WS_DOMAIN);
+        client.setKey("rems");
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
         client.afterPropertiesSet();
@@ -33,9 +33,8 @@ public class ReturnExchangeImageClientTestCase {
     public void testGetReturnExchangeImage() {
         ReturnExchangeImageRequestDto requestDto = new ReturnExchangeImageRequestDto();
         requestDto.setId(1l);
-        ReturnExchangeImageRequest request = new ReturnExchangeImageRequest("rems",requestDto);
         
-        ReturnExchangeImageResponseDto returnExchangeImageResponseDto = client.getReturnExchangeImage(request);
+        ReturnExchangeImageResponseDto returnExchangeImageResponseDto = client.getReturnExchangeImage(requestDto);
         Assert.notNull(returnExchangeImageResponseDto);
     } 
 

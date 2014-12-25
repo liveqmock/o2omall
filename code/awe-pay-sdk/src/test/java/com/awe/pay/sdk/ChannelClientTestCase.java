@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.pay.sdk.request.ChannelRequest;
 import com.awe.pay.sdk.request.dto.ChannelRequestDto;
 import com.awe.pay.sdk.response.dto.ChannelResponseDto;
 
@@ -12,7 +11,7 @@ import com.awe.pay.sdk.response.dto.ChannelResponseDto;
  * ChannelClient测试用例
  * 
  * @author ljz
- * @version 2014-12-25 15:29:50
+ * @version 2014-12-25 17:55:04
  * 
  */
 public class ChannelClientTestCase {
@@ -24,6 +23,7 @@ public class ChannelClientTestCase {
     public void init() throws Exception {
         client = new ChannelClient();
         client.setServiceUrlDomain(WS_DOMAIN);
+        client.setKey("pay");
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
         client.afterPropertiesSet();
@@ -33,9 +33,8 @@ public class ChannelClientTestCase {
     public void testGetChannel() {
         ChannelRequestDto requestDto = new ChannelRequestDto();
         requestDto.setId(1l);
-        ChannelRequest request = new ChannelRequest("pay",requestDto);
         
-        ChannelResponseDto channelResponseDto = client.getChannel(request);
+        ChannelResponseDto channelResponseDto = client.getChannel(requestDto);
         Assert.notNull(channelResponseDto);
     } 
 

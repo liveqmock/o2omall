@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.order.sdk.request.ShoppingCartRequest;
 import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
 import com.awe.order.sdk.response.dto.ShoppingCartResponseDto;
 
@@ -12,7 +11,7 @@ import com.awe.order.sdk.response.dto.ShoppingCartResponseDto;
  * ShoppingCartClient测试用例
  * 
  * @author ljz
- * @version 2014-12-25 15:29:38
+ * @version 2014-12-25 17:52:58
  * 
  */
 public class ShoppingCartClientTestCase {
@@ -24,6 +23,7 @@ public class ShoppingCartClientTestCase {
     public void init() throws Exception {
         client = new ShoppingCartClient();
         client.setServiceUrlDomain(WS_DOMAIN);
+        client.setKey("order");
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
         client.afterPropertiesSet();
@@ -33,9 +33,8 @@ public class ShoppingCartClientTestCase {
     public void testGetShoppingCart() {
         ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
         requestDto.setId(1l);
-        ShoppingCartRequest request = new ShoppingCartRequest("order",requestDto);
         
-        ShoppingCartResponseDto shoppingCartResponseDto = client.getShoppingCart(request);
+        ShoppingCartResponseDto shoppingCartResponseDto = client.getShoppingCart(requestDto);
         Assert.notNull(shoppingCartResponseDto);
     } 
 

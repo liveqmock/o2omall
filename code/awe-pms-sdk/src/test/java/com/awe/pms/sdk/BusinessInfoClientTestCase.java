@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.pms.sdk.request.BusinessInfoRequest;
 import com.awe.pms.sdk.request.dto.BusinessInfoRequestDto;
 import com.awe.pms.sdk.response.dto.BusinessInfoResponseDto;
 
@@ -12,7 +11,7 @@ import com.awe.pms.sdk.response.dto.BusinessInfoResponseDto;
  * BusinessInfoClient测试用例
  * 
  * @author ljz
- * @version 2014-12-25 15:30:05
+ * @version 2014-12-25 17:50:15
  * 
  */
 public class BusinessInfoClientTestCase {
@@ -24,6 +23,7 @@ public class BusinessInfoClientTestCase {
     public void init() throws Exception {
         client = new BusinessInfoClient();
         client.setServiceUrlDomain(WS_DOMAIN);
+        client.setKey("pms");
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
         client.afterPropertiesSet();
@@ -33,9 +33,8 @@ public class BusinessInfoClientTestCase {
     public void testGetBusinessInfo() {
         BusinessInfoRequestDto requestDto = new BusinessInfoRequestDto();
         requestDto.setId(1l);
-        BusinessInfoRequest request = new BusinessInfoRequest("pms",requestDto);
         
-        BusinessInfoResponseDto businessInfoResponseDto = client.getBusinessInfo(request);
+        BusinessInfoResponseDto businessInfoResponseDto = client.getBusinessInfo(requestDto);
         Assert.notNull(businessInfoResponseDto);
     } 
 

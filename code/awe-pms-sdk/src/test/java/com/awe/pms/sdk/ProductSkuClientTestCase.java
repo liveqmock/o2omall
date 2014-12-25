@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.pms.sdk.request.ProductSkuRequest;
 import com.awe.pms.sdk.request.dto.ProductSkuRequestDto;
 import com.awe.pms.sdk.response.dto.ProductSkuResponseDto;
 
@@ -12,7 +11,7 @@ import com.awe.pms.sdk.response.dto.ProductSkuResponseDto;
  * ProductSkuClient测试用例
  * 
  * @author ljz
- * @version 2014-12-25 15:30:05
+ * @version 2014-12-25 17:50:15
  * 
  */
 public class ProductSkuClientTestCase {
@@ -24,6 +23,7 @@ public class ProductSkuClientTestCase {
     public void init() throws Exception {
         client = new ProductSkuClient();
         client.setServiceUrlDomain(WS_DOMAIN);
+        client.setKey("pms");
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
         client.afterPropertiesSet();
@@ -33,9 +33,8 @@ public class ProductSkuClientTestCase {
     public void testGetProductSku() {
         ProductSkuRequestDto requestDto = new ProductSkuRequestDto();
         requestDto.setId(1l);
-        ProductSkuRequest request = new ProductSkuRequest("pms",requestDto);
         
-        ProductSkuResponseDto productSkuResponseDto = client.getProductSku(request);
+        ProductSkuResponseDto productSkuResponseDto = client.getProductSku(requestDto);
         Assert.notNull(productSkuResponseDto);
     } 
 

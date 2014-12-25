@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.util.Assert;
 
-import com.hbird.common.client.AbstractClient;
+import com.hbird.common.client.AbstractSecureClient;
 import com.hbird.common.utils.serialize.JsonHelper;
 import com.awe.uc.sdk.request.AreaRequest;
+import com.awe.uc.sdk.request.dto.AreaRequestDto;
 import com.awe.uc.sdk.response.AreaResponse;
 import com.awe.uc.sdk.response.dto.AreaResponseDto;
+import com.awe.uc.sdk.util.MixContents;
 
 /**
  * 三级地址服务的客户端
@@ -18,8 +21,8 @@ import com.awe.uc.sdk.response.dto.AreaResponseDto;
  * @version 2014-12-23 10:06:48
  * 
  */
-public class AreaClient extends AbstractClient {
-    
+public class AreaClient extends AbstractSecureClient {
+
     private final static Log LOG = LogFactory.getLog(AreaClient.class);
 
     /**
@@ -29,7 +32,11 @@ public class AreaClient extends AbstractClient {
      *            查询请求对象
      * @return AreaDto 对象
      */
-    public List<AreaResponseDto> getArea(AreaRequest request) {
+    public List<AreaResponseDto> getArea(AreaRequestDto requestDto) {
+        Assert.notNull(requestDto);
+
+        AreaRequest request = new AreaRequest(super.getKey(), requestDto);
+        
         if (LOG.isDebugEnabled()) {
             LOG.debug("getArea request: " + JsonHelper.toJson(request));
         }
@@ -43,4 +50,45 @@ public class AreaClient extends AbstractClient {
         }
         return super.getResult(response);
     }
+
+    /**
+     * 获取所有省
+     * 
+     * @return
+     */
+    public List<AreaResponseDto> getProvinces() {
+        AreaRequestDto requestDto = new AreaRequestDto();
+        requestDto.setLeval(MixContents.PROVINCE_LEVEL);
+        return this.getArea(requestDto);
+    }
+
+    /**
+     * 获取省下面的所有市
+     * 
+     * @param provinceCode
+     *            省编码
+     * @return
+     */
+    public List<AreaResponseDto> getCities(String provinceCode) {
+        AreaRequestDto requestDto = new AreaRequestDto();
+        requestDto.setLeval(MixContents.CITY_LEVEL);
+        requestDto.setParentCode(provinceCode);
+        return this.getArea(requestDto);
+    }
+
+    /**
+     * 获取市下面的所有县
+     * 
+     * @param cityCode
+     *            市编码
+     * @return
+     */
+    public List<AreaResponseDto> getCountys(String cityCode) {
+        AreaRequestDto requestDto = new AreaRequestDto();
+        requestDto.setLeval(MixContents.COUNTY_LEVEL);
+        requestDto.setParentCode(cityCode);
+        return this.getArea(requestDto);
+    }
+
+   
 }

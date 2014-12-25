@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.rems.sdk.request.RefundRequest;
 import com.awe.rems.sdk.request.dto.RefundRequestDto;
 import com.awe.rems.sdk.response.dto.RefundResponseDto;
 
@@ -12,7 +11,7 @@ import com.awe.rems.sdk.response.dto.RefundResponseDto;
  * RefundClient测试用例
  * 
  * @author ljz
- * @version 2014-12-25 15:29:58
+ * @version 2014-12-25 17:54:00
  * 
  */
 public class RefundClientTestCase {
@@ -24,6 +23,7 @@ public class RefundClientTestCase {
     public void init() throws Exception {
         client = new RefundClient();
         client.setServiceUrlDomain(WS_DOMAIN);
+        client.setKey("rems");
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
         client.afterPropertiesSet();
@@ -33,9 +33,8 @@ public class RefundClientTestCase {
     public void testGetRefund() {
         RefundRequestDto requestDto = new RefundRequestDto();
         requestDto.setId(1l);
-        RefundRequest request = new RefundRequest("rems",requestDto);
         
-        RefundResponseDto refundResponseDto = client.getRefund(request);
+        RefundResponseDto refundResponseDto = client.getRefund(requestDto);
         Assert.notNull(refundResponseDto);
     } 
 

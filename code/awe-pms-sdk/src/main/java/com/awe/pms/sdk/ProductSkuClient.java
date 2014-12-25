@@ -2,10 +2,12 @@ package com.awe.pms.sdk;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.util.Assert;
 
-import com.hbird.common.client.AbstractClient;
+import com.hbird.common.client.AbstractSecureClient;
 import com.hbird.common.utils.serialize.JsonHelper;
 import com.awe.pms.sdk.request.ProductSkuRequest;
+import com.awe.pms.sdk.request.dto.ProductSkuRequestDto;
 import com.awe.pms.sdk.response.ProductSkuResponse;
 import com.awe.pms.sdk.response.dto.ProductSkuResponseDto;
 
@@ -13,10 +15,10 @@ import com.awe.pms.sdk.response.dto.ProductSkuResponseDto;
  * 商品SKU服务的客户端
  * 
  * @author ljz
- * @version 2014-12-25 14:47:42
+ * @version 2014-12-25 17:50:15
  * 
  */
-public class ProductSkuClient extends AbstractClient {
+public class ProductSkuClient extends AbstractSecureClient {
     
     private final static Log LOG = LogFactory.getLog(ProductSkuClient.class);
 
@@ -25,9 +27,13 @@ public class ProductSkuClient extends AbstractClient {
      * 
      * @param request
      *            查询请求对象
-     * @return ProductSkuDto 对象
+     * @return ProductSkuResponseDto 接口返回的数据对象
      */
-    public ProductSkuResponseDto getProductSku(ProductSkuRequest request) {
+    public ProductSkuResponseDto getProductSku(ProductSkuRequestDto requestDto) {
+        Assert.notNull(requestDto);
+
+        ProductSkuRequest request = new ProductSkuRequest(super.getKey(), requestDto);
+        
         if (LOG.isDebugEnabled()) {
             LOG.debug("getProductSku request: " + JsonHelper.toJson(request));
         }

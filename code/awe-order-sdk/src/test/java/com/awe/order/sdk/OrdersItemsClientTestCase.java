@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.order.sdk.request.OrdersItemsRequest;
 import com.awe.order.sdk.request.dto.OrdersItemsRequestDto;
 import com.awe.order.sdk.response.dto.OrdersItemsResponseDto;
 
@@ -12,7 +11,7 @@ import com.awe.order.sdk.response.dto.OrdersItemsResponseDto;
  * OrdersItemsClient测试用例
  * 
  * @author ljz
- * @version 2014-12-25 15:29:38
+ * @version 2014-12-25 17:52:58
  * 
  */
 public class OrdersItemsClientTestCase {
@@ -24,6 +23,7 @@ public class OrdersItemsClientTestCase {
     public void init() throws Exception {
         client = new OrdersItemsClient();
         client.setServiceUrlDomain(WS_DOMAIN);
+        client.setKey("order");
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
         client.afterPropertiesSet();
@@ -33,9 +33,8 @@ public class OrdersItemsClientTestCase {
     public void testGetOrdersItems() {
         OrdersItemsRequestDto requestDto = new OrdersItemsRequestDto();
         requestDto.setId(1l);
-        OrdersItemsRequest request = new OrdersItemsRequest("order",requestDto);
         
-        OrdersItemsResponseDto ordersItemsResponseDto = client.getOrdersItems(request);
+        OrdersItemsResponseDto ordersItemsResponseDto = client.getOrdersItems(requestDto);
         Assert.notNull(ordersItemsResponseDto);
     } 
 

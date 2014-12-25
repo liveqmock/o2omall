@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.rems.sdk.request.ServiceAuditRequest;
 import com.awe.rems.sdk.request.dto.ServiceAuditRequestDto;
 import com.awe.rems.sdk.response.dto.ServiceAuditResponseDto;
 
@@ -12,7 +11,7 @@ import com.awe.rems.sdk.response.dto.ServiceAuditResponseDto;
  * ServiceAuditClient测试用例
  * 
  * @author ljz
- * @version 2014-12-25 15:29:58
+ * @version 2014-12-25 17:54:00
  * 
  */
 public class ServiceAuditClientTestCase {
@@ -24,6 +23,7 @@ public class ServiceAuditClientTestCase {
     public void init() throws Exception {
         client = new ServiceAuditClient();
         client.setServiceUrlDomain(WS_DOMAIN);
+        client.setKey("rems");
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
         client.afterPropertiesSet();
@@ -33,9 +33,8 @@ public class ServiceAuditClientTestCase {
     public void testGetServiceAudit() {
         ServiceAuditRequestDto requestDto = new ServiceAuditRequestDto();
         requestDto.setId(1l);
-        ServiceAuditRequest request = new ServiceAuditRequest("rems",requestDto);
         
-        ServiceAuditResponseDto serviceAuditResponseDto = client.getServiceAudit(request);
+        ServiceAuditResponseDto serviceAuditResponseDto = client.getServiceAudit(requestDto);
         Assert.notNull(serviceAuditResponseDto);
     } 
 

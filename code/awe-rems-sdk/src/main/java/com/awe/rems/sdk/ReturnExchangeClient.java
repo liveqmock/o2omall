@@ -2,10 +2,12 @@ package com.awe.rems.sdk;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.util.Assert;
 
-import com.hbird.common.client.AbstractClient;
+import com.hbird.common.client.AbstractSecureClient;
 import com.hbird.common.utils.serialize.JsonHelper;
 import com.awe.rems.sdk.request.ReturnExchangeRequest;
+import com.awe.rems.sdk.request.dto.ReturnExchangeRequestDto;
 import com.awe.rems.sdk.response.ReturnExchangeResponse;
 import com.awe.rems.sdk.response.dto.ReturnExchangeResponseDto;
 
@@ -13,10 +15,10 @@ import com.awe.rems.sdk.response.dto.ReturnExchangeResponseDto;
  * 退换货服务的客户端
  * 
  * @author ljz
- * @version 2014-12-25 9:16:23
+ * @version 2014-12-25 17:54:00
  * 
  */
-public class ReturnExchangeClient extends AbstractClient {
+public class ReturnExchangeClient extends AbstractSecureClient {
     
     private final static Log LOG = LogFactory.getLog(ReturnExchangeClient.class);
 
@@ -25,9 +27,13 @@ public class ReturnExchangeClient extends AbstractClient {
      * 
      * @param request
      *            查询请求对象
-     * @return ReturnExchangeDto 对象
+     * @return ReturnExchangeResponseDto 接口返回的数据对象
      */
-    public ReturnExchangeResponseDto getReturnExchange(ReturnExchangeRequest request) {
+    public ReturnExchangeResponseDto getReturnExchange(ReturnExchangeRequestDto requestDto) {
+        Assert.notNull(requestDto);
+
+        ReturnExchangeRequest request = new ReturnExchangeRequest(super.getKey(), requestDto);
+        
         if (LOG.isDebugEnabled()) {
             LOG.debug("getReturnExchange request: " + JsonHelper.toJson(request));
         }

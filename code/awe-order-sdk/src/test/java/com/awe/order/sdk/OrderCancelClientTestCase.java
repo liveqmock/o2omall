@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.order.sdk.request.OrderCancelRequest;
 import com.awe.order.sdk.request.dto.OrderCancelRequestDto;
 import com.awe.order.sdk.response.dto.OrderCancelResponseDto;
 
@@ -12,7 +11,7 @@ import com.awe.order.sdk.response.dto.OrderCancelResponseDto;
  * OrderCancelClient测试用例
  * 
  * @author ljz
- * @version 2014-12-25 15:29:38
+ * @version 2014-12-25 17:52:58
  * 
  */
 public class OrderCancelClientTestCase {
@@ -24,6 +23,7 @@ public class OrderCancelClientTestCase {
     public void init() throws Exception {
         client = new OrderCancelClient();
         client.setServiceUrlDomain(WS_DOMAIN);
+        client.setKey("order");
         client.setConnectTimeout(3000);
         client.setReadTimeout(3000);
         client.afterPropertiesSet();
@@ -33,9 +33,8 @@ public class OrderCancelClientTestCase {
     public void testGetOrderCancel() {
         OrderCancelRequestDto requestDto = new OrderCancelRequestDto();
         requestDto.setId(1l);
-        OrderCancelRequest request = new OrderCancelRequest("order",requestDto);
         
-        OrderCancelResponseDto orderCancelResponseDto = client.getOrderCancel(request);
+        OrderCancelResponseDto orderCancelResponseDto = client.getOrderCancel(requestDto);
         Assert.notNull(orderCancelResponseDto);
     } 
 
