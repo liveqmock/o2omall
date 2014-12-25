@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#updateForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												serviceNo: {required: true},
+						pickupNo: {required: true},
+						serviceAuditStatus: {required: true},
+						orderNo: {required: true},
+						categoryId: {required: true},
+						productId: {required: true},
+						skuNo: {required: true},
+						skuName: {required: true},
+						serviceType: {required: true},
+						quantity: {required: true},
+						evidenceType: {required: true},
+						problemDescription: {required: true},
+						pickupType: {required: true},
+						pickupProvinceNo: {required: true},
+						pickupProvinceName: {required: true},
+						pickupCityNo: {required: true},
+						pickupCityName: {required: true},
+						pickupCountyNo: {required: true},
+						pickupCuountyName: {required: true},
+						pickupDetailedAddress: {required: true},
+						reservationPickupTime: {required: true},
+						provinceNo: {required: true},
+						provinceName: {required: true},
+						cityNo: {required: true},
+						cityName: {required: true},
+						countyNo: {required: true},
+						cuountyName: {required: true},
+						detailedAddress: {required: true},
+						consignee: {required: true},
+						mobileNo: {required: true},
+						telephoneNo: {required: true},
+						expressName: {required: true},
+						expressNo: {required: true},
+						waybillNo: {required: true},
+						createUserId: {required: true},
+						updateUserId: {required: true},
+					},
+			
+					messages: {
+						serviceNo: { required: "请输入售后单号"},
+						pickupNo: { required: "请输入取件单号"},
+						serviceAuditStatus: { required: "请输入售后单审核状态"},
+						orderNo: { required: "请输入订单号"},
+						categoryId: { required: "请输入商品分类编号"},
+						productId: { required: "请输入产品id"},
+						skuNo: { required: "请输入sku编号"},
+						skuName: { required: "请输入sku名称"},
+						serviceType: { required: "请输入服务类型"},
+						quantity: { required: "请输入申请的商品数量"},
+						evidenceType: { required: "请输入凭据类型"},
+						problemDescription: { required: "请输入问题描述"},
+						pickupType: { required: "请输入取件类型"},
+						pickupProvinceNo: { required: "请输入取件省编码"},
+						pickupProvinceName: { required: "请输入取件省名称"},
+						pickupCityNo: { required: "请输入取件市编码"},
+						pickupCityName: { required: "请输入取件市名字"},
+						pickupCountyNo: { required: "请输入取件县编码"},
+						pickupCuountyName: { required: "请输入取件县名称"},
+						pickupDetailedAddress: { required: "请输入取件详细地址"},
+						reservationPickupTime: { required: "请输入预约取件时间"},
+						provinceNo: { required: "请输入收货省编码"},
+						provinceName: { required: "请输入收货省名称"},
+						cityNo: { required: "请输入收货市编码"},
+						cityName: { required: "请输入收货市名字"},
+						countyNo: { required: "请输入收货县编码"},
+						cuountyName: { required: "请输入收货县名称"},
+						detailedAddress: { required: "请输入收货详细地址"},
+						consignee: { required: "请输入收货人"},
+						mobileNo: { required: "请输入收货人手机号"},
+						telephoneNo: { required: "请输入固定电话"},
+						expressName: { required: "请输入快递公司名称"},
+						expressNo: { required: "请输入快递公司编号"},
+						waybillNo: { required: "请输入快递单号"},
+						createUserId: { required: "请输入创建人id"},
+						updateUserId: { required: "请输入更新人id"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/returnExchange");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#updateForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/returnExchange/update',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/returnExchange"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>退换货&nbsp;&gt;&nbsp;修改
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="updateForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="serviceNo">售后单号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="serviceNo" id="serviceNo" class="col-xs-12 col-sm-12" value="$!returnExchange.serviceNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="pickupNo">取件单号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="pickupNo" id="pickupNo" class="col-xs-12 col-sm-12" value="$!returnExchange.pickupNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="serviceAuditStatus">售后单审核状态</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="serviceAuditStatus" id="serviceAuditStatus" class="col-xs-12 col-sm-12" value="$!returnExchange.serviceAuditStatus" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderNo">订单号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="orderNo" id="orderNo" class="col-xs-12 col-sm-12" value="$!returnExchange.orderNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="categoryId">商品分类编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="categoryId" id="categoryId" class="col-xs-12 col-sm-12" value="$!returnExchange.categoryId" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="productId">产品id</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="productId" id="productId" class="col-xs-12 col-sm-12" value="$!returnExchange.productId" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="skuNo">sku编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="skuNo" id="skuNo" class="col-xs-12 col-sm-12" value="$!returnExchange.skuNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="skuName">sku名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="skuName" id="skuName" class="col-xs-12 col-sm-12" value="$!returnExchange.skuName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="serviceType">服务类型</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="serviceType" id="serviceType" class="col-xs-12 col-sm-12" value="$!returnExchange.serviceType" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="quantity">申请的商品数量</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="quantity" id="quantity" class="col-xs-12 col-sm-12" value="$!returnExchange.quantity" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="evidenceType">凭据类型</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="evidenceType" id="evidenceType" class="col-xs-12 col-sm-12" value="$!returnExchange.evidenceType" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="problemDescription">问题描述</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="problemDescription" id="problemDescription" class="col-xs-12 col-sm-12" value="$!returnExchange.problemDescription" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="pickupType">取件类型</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="pickupType" id="pickupType" class="col-xs-12 col-sm-12" value="$!returnExchange.pickupType" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="pickupProvinceNo">取件省编码</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="pickupProvinceNo" id="pickupProvinceNo" class="col-xs-12 col-sm-12" value="$!returnExchange.pickupProvinceNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="pickupProvinceName">取件省名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="pickupProvinceName" id="pickupProvinceName" class="col-xs-12 col-sm-12" value="$!returnExchange.pickupProvinceName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="pickupCityNo">取件市编码</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="pickupCityNo" id="pickupCityNo" class="col-xs-12 col-sm-12" value="$!returnExchange.pickupCityNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="pickupCityName">取件市名字</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="pickupCityName" id="pickupCityName" class="col-xs-12 col-sm-12" value="$!returnExchange.pickupCityName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="pickupCountyNo">取件县编码</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="pickupCountyNo" id="pickupCountyNo" class="col-xs-12 col-sm-12" value="$!returnExchange.pickupCountyNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="pickupCuountyName">取件县名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="pickupCuountyName" id="pickupCuountyName" class="col-xs-12 col-sm-12" value="$!returnExchange.pickupCuountyName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="pickupDetailedAddress">取件详细地址</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="pickupDetailedAddress" id="pickupDetailedAddress" class="col-xs-12 col-sm-12" value="$!returnExchange.pickupDetailedAddress" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="reservationPickupTime">预约取件时间</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="reservationPickupTime" id="reservationPickupTime" class="col-xs-12 col-sm-12" value="$!returnExchange.reservationPickupTime" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceNo">收货省编码</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="provinceNo" id="provinceNo" class="col-xs-12 col-sm-12" value="$!returnExchange.provinceNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceName">收货省名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="provinceName" id="provinceName" class="col-xs-12 col-sm-12" value="$!returnExchange.provinceName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityNo">收货市编码</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cityNo" id="cityNo" class="col-xs-12 col-sm-12" value="$!returnExchange.cityNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityName">收货市名字</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cityName" id="cityName" class="col-xs-12 col-sm-12" value="$!returnExchange.cityName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="countyNo">收货县编码</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="countyNo" id="countyNo" class="col-xs-12 col-sm-12" value="$!returnExchange.countyNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cuountyName">收货县名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cuountyName" id="cuountyName" class="col-xs-12 col-sm-12" value="$!returnExchange.cuountyName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="detailedAddress">收货详细地址</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="detailedAddress" id="detailedAddress" class="col-xs-12 col-sm-12" value="$!returnExchange.detailedAddress" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="consignee">收货人</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="consignee" id="consignee" class="col-xs-12 col-sm-12" value="$!returnExchange.consignee" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="mobileNo">收货人手机号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="mobileNo" id="mobileNo" class="col-xs-12 col-sm-12" value="$!returnExchange.mobileNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="telephoneNo">固定电话</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="telephoneNo" id="telephoneNo" class="col-xs-12 col-sm-12" value="$!returnExchange.telephoneNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="expressName">快递公司名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="expressName" id="expressName" class="col-xs-12 col-sm-12" value="$!returnExchange.expressName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="expressNo">快递公司编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="expressNo" id="expressNo" class="col-xs-12 col-sm-12" value="$!returnExchange.expressNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="waybillNo">快递单号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="waybillNo" id="waybillNo" class="col-xs-12 col-sm-12" value="$!returnExchange.waybillNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="createUserId">创建人id</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="createUserId" id="createUserId" class="col-xs-12 col-sm-12" value="$!returnExchange.createUserId" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="updateUserId">更新人id</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="updateUserId" id="updateUserId" class="col-xs-12 col-sm-12" value="$!returnExchange.updateUserId" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<input type="hidden" name="id" id="id" value="$!returnExchange.id" />
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

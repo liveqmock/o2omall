@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#addForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												returnExchangeId: {required: true},
+						serviceNo: {required: true},
+						orderNo: {required: true},
+						status: {required: true},
+						comment: {required: true},
+						createUserId: {required: true},
+						updateUserId: {required: true},
+					},
+			
+					messages: {
+						returnExchangeId: { required: "请输入主表id"},
+						serviceNo: { required: "请输入售后单号"},
+						orderNo: { required: "请输入订单号"},
+						status: { required: "请输入服务单状态"},
+						comment: { required: "请输入审核备注"},
+						createUserId: { required: "请输入创建人id"},
+						updateUserId: { required: "请输入更新人id"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/serviceAudit");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#addForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/serviceAudit/add',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/serviceAudit"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>退换货审核流表&nbsp;&gt;&nbsp;新增
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="addForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="returnExchangeId">主表id</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="returnExchangeId" id="returnExchangeId" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="serviceNo">售后单号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="serviceNo" id="serviceNo" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="orderNo">订单号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="orderNo" id="orderNo" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="status">服务单状态</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="status" id="status" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="comment">审核备注</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="comment" id="comment" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="createUserId">创建人id</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="createUserId" id="createUserId" class="col-xs-12 col-sm-12" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="updateUserId">更新人id</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="updateUserId" id="updateUserId" class="col-xs-12 col-sm-12" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>
