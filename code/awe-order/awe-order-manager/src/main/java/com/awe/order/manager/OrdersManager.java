@@ -100,4 +100,13 @@ public interface OrdersManager {
      * @return
      */
     public boolean exist(Orders orders);
+
+    /**
+     * 根据orderNo查询order对象信息
+     * Date:2014年12月26日下午2:53:57
+     * user:js
+     * @param orderNo
+     * @return
+     */
+	public Orders getOrdersByOrderNO(String orderNo);
 }

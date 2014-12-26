@@ -84,4 +84,13 @@ public interface OrdersService {
      * @return
      */
     public boolean delete(Orders[] orderss);
+
+    /**
+     * 根据orderNO 获取订单对象信息
+     * Date:2014年12月26日下午2:52:15
+     * user:js
+     * @param orderNo
+     * @return
+     */
+	public Orders getOrdersByOrderNO(String orderNo);
 }

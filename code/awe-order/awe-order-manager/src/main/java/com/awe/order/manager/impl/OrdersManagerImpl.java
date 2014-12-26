@@ -134,4 +134,11 @@ public class OrdersManagerImpl extends BaseManager implements OrdersManager {
     public boolean exist(Orders orders) {
         return ordersDao.exist(orders);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+	public Orders getOrdersByOrderNO(String orderNo) {
+		return ordersDao.getOrdersByOrderNO(orderNo);
+	}
 }

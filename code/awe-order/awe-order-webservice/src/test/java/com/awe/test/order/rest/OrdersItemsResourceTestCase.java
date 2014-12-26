@@ -4,12 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.test.uc.rest.Urls;
-import com.hbird.common.client.AbstractClient;
 import com.awe.test.order.rest.request.OrdersItemsRequest;
 import com.awe.test.order.rest.request.dto.OrdersItemsRequestDto;
 import com.awe.test.order.rest.response.OrdersItemsResponse;
 import com.awe.test.order.rest.response.dto.OrdersItemsResponseDto;
+import com.hbird.common.client.AbstractClient;
 
 /**
  * OrdersItemsResource单元测试

@@ -4,12 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.test.uc.rest.Urls;
-import com.hbird.common.client.AbstractClient;
 import com.awe.test.order.rest.request.OrderCancelRequest;
 import com.awe.test.order.rest.request.dto.OrderCancelRequestDto;
 import com.awe.test.order.rest.response.OrderCancelResponse;
 import com.awe.test.order.rest.response.dto.OrderCancelResponseDto;
+import com.hbird.common.client.AbstractClient;
 
 /**
  * OrderCancelResource单元测试

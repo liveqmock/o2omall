@@ -174,5 +174,23 @@ public class OrdersServiceImpl implements OrdersService {
         }
         return orders;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Profiled(tag = "OrdersService.getOrdersByOrderNO")
+	public Orders getOrdersByOrderNO(String orderNo) {
+    	Orders orders = null;
+        try {
+            if (null != orderNo) {
+                orders = ordersManager.getOrdersByOrderNO(orderNo);
+            } else {
+                LOG.warn("OrdersServiceImpl#getOrdersByOrderNO failed, param is illegal.");
+            }
+        } catch (Exception e) {
+            LOG.error("OrdersServiceImpl#getOrdersByOrderNO has error.", e);
+        }
+        return orders;
+	}
 }
 

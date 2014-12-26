@@ -79,4 +79,13 @@ public interface OrdersDao {
      */
     public boolean exist(Orders orders);
 
+    /**
+     * 根据orderNO获取order对象信息
+     * Date:2014年12月26日下午2:55:13
+     * user:js
+     * @param orderNo
+     * @return
+     */
+	public Orders getOrdersByOrderNO(String orderNo);
+
 }

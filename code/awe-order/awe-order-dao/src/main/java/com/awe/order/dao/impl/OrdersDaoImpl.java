@@ -6,6 +6,7 @@ import com.awe.order.domain.Orders;
 import com.awe.order.domain.query.OrdersQuery;
 
 import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -77,4 +78,11 @@ public class OrdersDaoImpl extends BaseDao implements OrdersDao {
         int count = (Integer) queryForObject(namespace +".exist", orders);
         return count > 0;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+	public Orders getOrdersByOrderNO(String orderNo) {
+		 return (Orders) queryForObject(namespace +".getOrdersByOrderNO", orderNo);
+	}
 }

@@ -4,12 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.test.uc.rest.Urls;
-import com.hbird.common.client.AbstractClient;
 import com.awe.test.order.rest.request.ShoppingCartRequest;
 import com.awe.test.order.rest.request.dto.ShoppingCartRequestDto;
 import com.awe.test.order.rest.response.ShoppingCartResponse;
 import com.awe.test.order.rest.response.dto.ShoppingCartResponseDto;
+import com.hbird.common.client.AbstractClient;
 
 /**
  * ShoppingCartResource单元测试

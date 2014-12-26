@@ -207,4 +207,40 @@ public class OrdersController extends BaseController {
             return error();
         }
     }
+    
+    
+    
+    /**
+     * 根据订单号查询 订单详情
+     * Date:2014年12月26日下午2:47:16
+     * user:js 
+     * @param query
+     * @return
+     */
+    @RequestMapping(value = "detailOrderNo", method = RequestMethod.GET)
+    @ResponseBody
+    public Wrapper<?> detailOrderNo(OrdersQuery query) {
+        if (null == query || null == query.getOrderNo()) {
+            return illegalArgument();
+        }
+        try {
+            Orders orders = ordersService.getOrdersByOrderNO(query.getOrderNo());
+            if (orders != null) {
+                return new Wrapper<Orders>().result(orders);
+            } else {
+                return WrapMapper.wrap(Wrapper.ERROR_CODE, "查询订单详情失败！");
+            }
+        } catch (Exception e) {
+            LOG.warn("detail orders has error.", e);
+            return error();
+        }
+    }    
+    
+    
+    
+    
+    
+    
+    
+    
 }

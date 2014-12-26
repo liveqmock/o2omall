@@ -4,12 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.test.uc.rest.Urls;
-import com.hbird.common.client.AbstractClient;
 import com.awe.test.order.rest.request.ECouponRequest;
 import com.awe.test.order.rest.request.dto.ECouponRequestDto;
 import com.awe.test.order.rest.response.ECouponResponse;
 import com.awe.test.order.rest.response.dto.ECouponResponseDto;
+import com.hbird.common.client.AbstractClient;
 
 /**
  * ECouponResource单元测试

@@ -186,6 +186,17 @@
             where id = #{_parameter} and yn = 1
         </if>
     </select>
+    
+    
+    <!-- 根据订单号获取对象信息 -->
+    <select id="getOrdersByOrderNO" resultMap="OrdersMap" parameterType="java.lang.String">
+        <if test="_parameter != null">
+            select <include refid="ordersColumns"/> from orders
+            where order_no = #{_parameter} and yn = 1
+        </if>
+    </select>
+    
+    
 
     <!-- 根据查询Bean获取数据集合，不带翻页 -->
     <select id="queryOrdersList" resultMap="OrdersMap"
