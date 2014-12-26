@@ -51,11 +51,7 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="serviceNo" id="serviceNo" class="col-xs-10 col-sm-8" value="$!query.serviceNo"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="pickupNo">取件单号</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="pickupNo" id="pickupNo" class="col-xs-10 col-sm-8" value="$!query.pickupNo"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="serviceAuditStatus">售后单审核状态</label>
+									<label class="col-sm-1 control-label no-padding-right" for="serviceAuditStatus">审核状态</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="serviceAuditStatus" id="serviceAuditStatus" class="col-xs-10 col-sm-8" value="$!query.serviceAuditStatus"/>
                                     </div>
@@ -63,133 +59,13 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="orderNo" id="orderNo" class="col-xs-10 col-sm-8" value="$!query.orderNo"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="categoryId">商品分类编号</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="categoryId" id="categoryId" class="col-xs-10 col-sm-8" value="$!query.categoryId"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="productId">产品id</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="productId" id="productId" class="col-xs-10 col-sm-8" value="$!query.productId"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="skuNo">sku编号</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="skuNo" id="skuNo" class="col-xs-10 col-sm-8" value="$!query.skuNo"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="skuName">sku名称</label>
+									<label class="col-sm-1 control-label no-padding-right" for="skuName">商品名称</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="skuName" id="skuName" class="col-xs-10 col-sm-8" value="$!query.skuName"/>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="serviceType">服务类型</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="serviceType" id="serviceType" class="col-xs-10 col-sm-8" value="$!query.serviceType"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="quantity">申请的商品数量</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="quantity" id="quantity" class="col-xs-10 col-sm-8" value="$!query.quantity"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="evidenceType">凭据类型</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="evidenceType" id="evidenceType" class="col-xs-10 col-sm-8" value="$!query.evidenceType"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="problemDescription">问题描述</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="problemDescription" id="problemDescription" class="col-xs-10 col-sm-8" value="$!query.problemDescription"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="pickupType">取件类型</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="pickupType" id="pickupType" class="col-xs-10 col-sm-8" value="$!query.pickupType"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="pickupProvinceNo">取件省编码</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="pickupProvinceNo" id="pickupProvinceNo" class="col-xs-10 col-sm-8" value="$!query.pickupProvinceNo"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="pickupProvinceName">取件省名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="pickupProvinceName" id="pickupProvinceName" class="col-xs-10 col-sm-8" value="$!query.pickupProvinceName"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="pickupCityNo">取件市编码</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="pickupCityNo" id="pickupCityNo" class="col-xs-10 col-sm-8" value="$!query.pickupCityNo"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="pickupCityName">取件市名字</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="pickupCityName" id="pickupCityName" class="col-xs-10 col-sm-8" value="$!query.pickupCityName"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="pickupCountyNo">取件县编码</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="pickupCountyNo" id="pickupCountyNo" class="col-xs-10 col-sm-8" value="$!query.pickupCountyNo"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="pickupCuountyName">取件县名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="pickupCuountyName" id="pickupCuountyName" class="col-xs-10 col-sm-8" value="$!query.pickupCuountyName"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="pickupDetailedAddress">取件详细地址</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="pickupDetailedAddress" id="pickupDetailedAddress" class="col-xs-10 col-sm-8" value="$!query.pickupDetailedAddress"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="reservationPickupTime">预约取件时间</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="reservationPickupTime" id="reservationPickupTime" class="col-xs-10 col-sm-8" value="$!query.reservationPickupTime"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="provinceNo">收货省编码</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="provinceNo" id="provinceNo" class="col-xs-10 col-sm-8" value="$!query.provinceNo"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="provinceName">收货省名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="provinceName" id="provinceName" class="col-xs-10 col-sm-8" value="$!query.provinceName"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="cityNo">收货市编码</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="cityNo" id="cityNo" class="col-xs-10 col-sm-8" value="$!query.cityNo"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="cityName">收货市名字</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="cityName" id="cityName" class="col-xs-10 col-sm-8" value="$!query.cityName"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="countyNo">收货县编码</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="countyNo" id="countyNo" class="col-xs-10 col-sm-8" value="$!query.countyNo"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="cuountyName">收货县名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="cuountyName" id="cuountyName" class="col-xs-10 col-sm-8" value="$!query.cuountyName"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="detailedAddress">收货详细地址</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="detailedAddress" id="detailedAddress" class="col-xs-10 col-sm-8" value="$!query.detailedAddress"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="consignee">收货人</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="consignee" id="consignee" class="col-xs-10 col-sm-8" value="$!query.consignee"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="mobileNo">收货人手机号</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="mobileNo" id="mobileNo" class="col-xs-10 col-sm-8" value="$!query.mobileNo"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="telephoneNo">固定电话</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="telephoneNo" id="telephoneNo" class="col-xs-10 col-sm-8" value="$!query.telephoneNo"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="expressName">快递公司名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="expressName" id="expressName" class="col-xs-10 col-sm-8" value="$!query.expressName"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="expressNo">快递公司编号</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="expressNo" id="expressNo" class="col-xs-10 col-sm-8" value="$!query.expressNo"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="waybillNo">快递单号</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="waybillNo" id="waybillNo" class="col-xs-10 col-sm-8" value="$!query.waybillNo"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="createUserId">创建人id</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="createUserId" id="createUserId" class="col-xs-10 col-sm-8" value="$!query.createUserId"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="updateUserId">更新人id</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="updateUserId" id="updateUserId" class="col-xs-10 col-sm-8" value="$!query.updateUserId"/>
                                     </div>
 								</div>
 								<div class="form-group">
@@ -211,90 +87,22 @@
                 <table class="table table-striped table-bordered table-condensed table-hover">
                     <thead>
                         <tr>
-							<th class="center">id自增</th>
 							<th class="center">售后单号</th>
-							<th class="center">取件单号</th>
 							<th class="center">售后单审核状态</th>
 							<th class="center">订单号</th>
-							<th class="center">商品分类编号</th>
-							<th class="center">产品id</th>
-							<th class="center">sku编号</th>
-							<th class="center">sku名称</th>
+							<th class="center">商品名称</th>
 							<th class="center">服务类型</th>
-							<th class="center">申请的商品数量</th>
-							<th class="center">凭据类型</th>
-							<th class="center">问题描述</th>
-							<th class="center">取件类型</th>
-							<th class="center">取件省编码</th>
-							<th class="center">取件省名称</th>
-							<th class="center">取件市编码</th>
-							<th class="center">取件市名字</th>
-							<th class="center">取件县编码</th>
-							<th class="center">取件县名称</th>
-							<th class="center">取件详细地址</th>
-							<th class="center">预约取件时间</th>
-							<th class="center">收货省编码</th>
-							<th class="center">收货省名称</th>
-							<th class="center">收货市编码</th>
-							<th class="center">收货市名字</th>
-							<th class="center">收货县编码</th>
-							<th class="center">收货县名称</th>
-							<th class="center">收货详细地址</th>
-							<th class="center">收货人</th>
-							<th class="center">收货人手机号</th>
-							<th class="center">固定电话</th>
-							<th class="center">快递公司名称</th>
-							<th class="center">快递公司编号</th>
-							<th class="center">快递单号</th>
-							<th class="center">创建时间</th>
-							<th class="center">创建人id</th>
-							<th class="center">创建人</th>
-							<th class="center">更新人id</th>
     						<th class="center">操作</th>
                         </tr>
                     </thead>
                     <tbody>
                         #foreach( $item in $dataList)
                             <tr>
-                                <td>$!item.id</td>
                                 <td>$!item.serviceNo</td>
-                                <td>$!item.pickupNo</td>
                                 <td>$!item.serviceAuditStatus</td>
                                 <td>$!item.orderNo</td>
-                                <td>$!item.categoryId</td>
-                                <td>$!item.productId</td>
-                                <td>$!item.skuNo</td>
                                 <td>$!item.skuName</td>
                                 <td>$!item.serviceType</td>
-                                <td>$!item.quantity</td>
-                                <td>$!item.evidenceType</td>
-                                <td>$!item.problemDescription</td>
-                                <td>$!item.pickupType</td>
-                                <td>$!item.pickupProvinceNo</td>
-                                <td>$!item.pickupProvinceName</td>
-                                <td>$!item.pickupCityNo</td>
-                                <td>$!item.pickupCityName</td>
-                                <td>$!item.pickupCountyNo</td>
-                                <td>$!item.pickupCuountyName</td>
-                                <td>$!item.pickupDetailedAddress</td>
-                                <td>$!item.reservationPickupTime</td>
-                                <td>$!item.provinceNo</td>
-                                <td>$!item.provinceName</td>
-                                <td>$!item.cityNo</td>
-                                <td>$!item.cityName</td>
-                                <td>$!item.countyNo</td>
-                                <td>$!item.cuountyName</td>
-                                <td>$!item.detailedAddress</td>
-                                <td>$!item.consignee</td>
-                                <td>$!item.mobileNo</td>
-                                <td>$!item.telephoneNo</td>
-                                <td>$!item.expressName</td>
-                                <td>$!item.expressNo</td>
-                                <td>$!item.waybillNo</td>
-                                <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.createTime)</td>
-                                <td>$!item.createUserId</td>
-                                <td>$!item.createUser</td>
-                                <td>$!item.updateUserId</td>
                                 <td>
 									<a href="javascript:void(0)" onclick="toDetail($!item.id);" data-toggle="modal"><i class="icon-list">详情</i></a>
 									<a href="javascript:void(0)" onclick="toUpdate($!item.id)"><i class="icon-pencil pink">修改</i></a>

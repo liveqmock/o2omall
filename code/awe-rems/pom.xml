@@ -565,9 +565,9 @@
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://dev-ip:3306/rems?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
-				<database.jdbc.username>username</database.jdbc.username>
-				<database.jdbc.password>password</database.jdbc.password>
+				<database.jdbc.url>jdbc:mysql://localhost:3306/awe_rems?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
+				<database.jdbc.username>root</database.jdbc.username>
+				<database.jdbc.password>1qaz2wsx</database.jdbc.password>
 
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>

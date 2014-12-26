@@ -4,12 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.test.uc.rest.Urls;
-import com.hbird.common.client.AbstractClient;
 import com.awe.test.rems.rest.request.ReturnExchangeImageRequest;
 import com.awe.test.rems.rest.request.dto.ReturnExchangeImageRequestDto;
 import com.awe.test.rems.rest.response.ReturnExchangeImageResponse;
 import com.awe.test.rems.rest.response.dto.ReturnExchangeImageResponseDto;
+import com.hbird.common.client.AbstractClient;
 
 /**
  * ReturnExchangeImageResource单元测试

@@ -42,25 +42,6 @@
 		}
 	</script>
 
-	<div class="sidebar-shortcuts" id="sidebar-shortcuts">
-		<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-			<button onclick="changeTheme('#87B87F')" class="btn btn-success">
-				  &nbsp;
-			</button>
-
-			<button onclick="changeTheme('#438EB9')" class="btn btn-info">
-				&nbsp;
-			</button>
-
-			<button onclick="changeTheme('#FFB752')" class="btn btn-warning">
-				&nbsp;
-			</button>
-
-			<button onclick="changeTheme('#D15B47')" class="btn btn-danger">
-				&nbsp;
-			</button>
-		</div>
-	</div><!-- #sidebar-shortcuts -->
 
 	<ul class="nav nav-list" id="nav-menu">
 		<li>
@@ -73,22 +54,19 @@
 		<li id="menu-20">
 			<a href="javascript:void(0)" class="dropdown-toggle">
 				<i class="icon-desktop"></i>
-				<span class="menu-text">rems系统</span>
+				<span class="menu-text">售后服务系统</span>
 				<b class="arrow icon-angle-down"></b>
 			</a>
 
 			<ul class="submenu">
 				<li id="subMenu-200">
-					<a href="javascript:void(0)" onclick="link('200','退换货','returnExchange','20','rems系统');">退换货</a>
+					<a href="javascript:void(0)" onclick="link('200','退换货','returnExchange','20','售后服务系统');">退换货</a>
 				</li>
 				<li id="subMenu-201">
-					<a href="javascript:void(0)" onclick="link('201','退换货图片表','returnExchangeImage','20','rems系统');">退换货图片表</a>
+					<a href="javascript:void(0)" onclick="link('202','退换货审核流表','serviceAudit','20','售后服务系统');">退换货审核流表</a>
 				</li>
 				<li id="subMenu-202">
-					<a href="javascript:void(0)" onclick="link('202','退换货审核流表','serviceAudit','20','rems系统');">退换货审核流表</a>
-				</li>
-				<li id="subMenu-203">
-					<a href="javascript:void(0)" onclick="link('203','退款表','refund','20','rems系统');">退款表</a>
+					<a href="javascript:void(0)" onclick="link('203','退款表','refund','20','售后服务系统');">退款表</a>
 				</li>
 			</ul>
 		

@@ -4,12 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.test.uc.rest.Urls;
-import com.hbird.common.client.AbstractClient;
 import com.awe.test.rems.rest.request.ServiceAuditRequest;
 import com.awe.test.rems.rest.request.dto.ServiceAuditRequestDto;
 import com.awe.test.rems.rest.response.ServiceAuditResponse;
 import com.awe.test.rems.rest.response.dto.ServiceAuditResponseDto;
+import com.hbird.common.client.AbstractClient;
 
 /**
  * ServiceAuditResource单元测试

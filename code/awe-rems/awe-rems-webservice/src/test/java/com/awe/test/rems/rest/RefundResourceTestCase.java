@@ -4,12 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.test.uc.rest.Urls;
-import com.hbird.common.client.AbstractClient;
 import com.awe.test.rems.rest.request.RefundRequest;
 import com.awe.test.rems.rest.request.dto.RefundRequestDto;
 import com.awe.test.rems.rest.response.RefundResponse;
 import com.awe.test.rems.rest.response.dto.RefundResponseDto;
+import com.hbird.common.client.AbstractClient;
 
 /**
  * RefundResource单元测试
