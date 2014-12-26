@@ -6,13 +6,14 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
+import com.awe.test.base.BaseTransactionTestCase;
+import com.awe.test.base.TestConstants;
 import com.awe.uc.domain.UserAccount;
 import com.awe.uc.domain.query.UserAccountQuery;
 import com.awe.uc.service.UserAccountService;
 import com.awe.uc.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
-import com.awe.test.base.BaseTransactionTestCase;
-import com.awe.test.base.TestConstants;
+import com.hbird.common.utils.security.MD5Util;
 
 /**
  * UserAccountService单元测试
@@ -25,7 +26,7 @@ public class UserAccountServiceTestCase extends BaseTransactionTestCase {
 
     /** 不存在的 ID-删改查-失败的测试用例 */
     private static final long TEST_NOT_EXIST_ID = -2L;
-    
+
     /** 默认 存在的ID-删改查-成功的测试用例,数据库需存在改ID对应的数据 */
     private static final long TEST_DEFAULT_EXIST_ID = 1L;
 
@@ -39,10 +40,8 @@ public class UserAccountServiceTestCase extends BaseTransactionTestCase {
     public void testInsert() {
         Assert.notNull(userAccountService);
         UserAccount userAccount = new UserAccount();
-        String username = null; //TODO 初始化
-        userAccount.setUsername(username);
-        String password = null; //TODO 初始化
-        userAccount.setPassword(password);
+        userAccount.setUsername("user2");
+        userAccount.setPassword(MD5Util.md5Hex("123456"));
         userAccount.setCreateUser(TestConstants.UER_NAME);
         boolean result = userAccountService.insert(userAccount);
         Assert.isTrue(result);
@@ -55,10 +54,8 @@ public class UserAccountServiceTestCase extends BaseTransactionTestCase {
     public void testInsertFailure() {
         Assert.notNull(userAccountService);
         UserAccount userAccount = new UserAccount();
-        String username = null; //TODO 初始化// 已经存在的
-        userAccount.setUsername(username);
-        String password = null; //TODO 初始化// 已经存在的
-        userAccount.setPassword(password);
+        userAccount.setUsername("user1");// 已经存在的
+        userAccount.setPassword(MD5Util.md5Hex("123456"));
         userAccount.setCreateUser(TestConstants.UER_NAME);
         ExistedException ex = null;
         try {
@@ -78,15 +75,11 @@ public class UserAccountServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(userAccountService);
         UserAccount userAccount = new UserAccount();
         userAccount.setId(TEST_DEFAULT_EXIST_ID);
-        String username = null; //TODO 初始化
-        userAccount.setUsername(username);
-        String password = null; //TODO 初始化
-        userAccount.setPassword(password);
         userAccount.setUpdateUser(TestConstants.UER_NAME);
         boolean result = userAccountService.delete(userAccount);
         Assert.isTrue(result);
     }
-    
+
     /**
      * 测试删除数据-失败（ID不存在等）
      */
@@ -95,10 +88,6 @@ public class UserAccountServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(userAccountService);
         UserAccount userAccount = new UserAccount();
         userAccount.setId(TEST_NOT_EXIST_ID);// 不存在的ID
-        String username = null; //TODO 初始化
-        userAccount.setUsername(username);
-        String password = null; //TODO 初始化
-        userAccount.setPassword(password);
         userAccount.setUpdateUser(TestConstants.UER_NAME);
         boolean result = userAccountService.delete(userAccount);
         Assert.isTrue(!result);
@@ -112,10 +101,7 @@ public class UserAccountServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(userAccountService);
         UserAccount userAccount = new UserAccount();
         userAccount.setId(TEST_DEFAULT_EXIST_ID);
-        String username = null; //TODO 初始化
-        userAccount.setUsername(username);
-        String password = null; //TODO 初始化
-        userAccount.setPassword(password);
+        userAccount.setPassword("dadasd");
         userAccount.setUpdateUser(TestConstants.UER_NAME);
         boolean result = userAccountService.update(userAccount);
         Assert.isTrue(result);
@@ -129,10 +115,7 @@ public class UserAccountServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(userAccountService);
         UserAccount userAccount = new UserAccount();
         userAccount.setId(TEST_NOT_EXIST_ID);// 不存在的ID
-        String username = null; //TODO 初始化
-        userAccount.setUsername(username);
-        String password = null; //TODO 初始化
-        userAccount.setPassword(password);
+        userAccount.setPassword("dadasd");
         userAccount.setUpdateUser(TestConstants.UER_NAME);
         boolean result = userAccountService.update(userAccount);
         Assert.isTrue(!result);
@@ -166,8 +149,7 @@ public class UserAccountServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(userAccountService);
         UserAccountQuery queryBean = null;
         PageUtil pageUtil = null;
-        List<UserAccount> list = userAccountService.queryUserAccountListWithPage(
-                queryBean, pageUtil);
+        List<UserAccount> list = userAccountService.queryUserAccountListWithPage(queryBean, pageUtil);
         Assert.notEmpty(list);
         logger.info("list size = " + list.size());
     }
@@ -179,10 +161,6 @@ public class UserAccountServiceTestCase extends BaseTransactionTestCase {
     public void testQueryList() {
         Assert.notNull(userAccountService);
         UserAccountQuery queryBean = new UserAccountQuery();
-        String username = null; //TODO 初始化
-        queryBean.setUsername(username);
-        String password = null; //TODO 初始化
-        queryBean.setPassword(password);
         List<UserAccount> list = userAccountService.queryUserAccountList(queryBean);
         Assert.notEmpty(list);
         logger.info("list size = " + list.size());

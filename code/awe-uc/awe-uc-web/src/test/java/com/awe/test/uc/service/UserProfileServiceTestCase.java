@@ -1,9 +1,11 @@
 package com.awe.test.uc.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.util.Assert;
 
 import com.awe.uc.domain.UserProfile;
@@ -11,6 +13,7 @@ import com.awe.uc.domain.query.UserProfileQuery;
 import com.awe.uc.service.UserProfileService;
 import com.awe.uc.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
+import com.hbird.common.utils.security.MD5Util;
 import com.awe.test.base.BaseTransactionTestCase;
 import com.awe.test.base.TestConstants;
 
@@ -25,7 +28,7 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
 
     /** 不存在的 ID-删改查-失败的测试用例 */
     private static final long TEST_NOT_EXIST_ID = -2L;
-    
+
     /** 默认 存在的ID-删改查-成功的测试用例,数据库需存在改ID对应的数据 */
     private static final long TEST_DEFAULT_EXIST_ID = 1L;
 
@@ -36,13 +39,35 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
      * 测试插入数据-成功
      */
     @Test
+    @Rollback(false)
     public void testInsert() {
         Assert.notNull(userProfileService);
         UserProfile userProfile = new UserProfile();
-        Long userId = null; //TODO 初始化
-        userProfile.setUserId(userId);
-        String cnName = null; //TODO 初始化
-        userProfile.setCnName(cnName);
+        userProfile.setUserId(2L);
+        userProfile.setCnName("李四");
+        userProfile.setSex(1);
+        userProfile.setNickname("会飞的鱼");
+        userProfile.setEmail("1qaz@126.com");
+        userProfile.setEmailValidated(1);
+        userProfile.setBirthday(new Date());
+        userProfile.setConstellation("白羊座");
+        userProfile.setUserPhoto("imges/aa.jpg");
+        userProfile.setDescription("hello world");
+        userProfile.setProvinceName("北京");
+        userProfile.setProvinceNo("1");
+        userProfile.setCityName("朝阳");
+        userProfile.setCityNo("2");
+        userProfile.setCountyName("北苑");
+        userProfile.setCountyNo("3");
+        userProfile.setAddress("华堂商场3层");
+        userProfile.setPhone("010-66668888");
+        userProfile.setMobile("13155556666");
+        userProfile.setSafeQuestion("name ?");
+        userProfile.setSafeAnswer("zhang");
+        userProfile.setQq("1234567890");
+        userProfile.setGrade(2);
+        userProfile.setPayPassword(MD5Util.md5Hex("123456"));
+        userProfile.setScore(0);
         userProfile.setCreateUser(TestConstants.UER_NAME);
         boolean result = userProfileService.insert(userProfile);
         Assert.isTrue(result);
@@ -55,10 +80,31 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
     public void testInsertFailure() {
         Assert.notNull(userProfileService);
         UserProfile userProfile = new UserProfile();
-        Long userId = null; //TODO 初始化// 已经存在的
-        userProfile.setUserId(userId);
-        String cnName = null; //TODO 初始化// 已经存在的
-        userProfile.setCnName(cnName);
+        userProfile.setUserId(1L);// 已经存在的
+        userProfile.setCnName("张三");
+        userProfile.setSex(1);
+        userProfile.setNickname("会飞的鱼");
+        userProfile.setEmail("1qaz@126.com");
+        userProfile.setEmailValidated(1);
+        userProfile.setBirthday(new Date());
+        userProfile.setConstellation("白羊座");
+        userProfile.setUserPhoto("imges/aa.jpg");
+        userProfile.setDescription("hello world");
+        userProfile.setProvinceName("北京");
+        userProfile.setProvinceNo("1");
+        userProfile.setCityName("朝阳");
+        userProfile.setCityNo("2");
+        userProfile.setCountyName("北苑");
+        userProfile.setCountyNo("3");
+        userProfile.setAddress("华堂商场3层");
+        userProfile.setPhone("010-66668888");
+        userProfile.setMobile("13155556666");
+        userProfile.setSafeQuestion("name ?");
+        userProfile.setSafeAnswer("zhang");
+        userProfile.setQq("1234567890");
+        userProfile.setGrade(2);
+        userProfile.setPayPassword(MD5Util.md5Hex("123456"));
+        userProfile.setScore(0);
         userProfile.setCreateUser(TestConstants.UER_NAME);
         ExistedException ex = null;
         try {
@@ -78,15 +124,11 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(userProfileService);
         UserProfile userProfile = new UserProfile();
         userProfile.setId(TEST_DEFAULT_EXIST_ID);
-        Long userId = null; //TODO 初始化
-        userProfile.setUserId(userId);
-        String cnName = null; //TODO 初始化
-        userProfile.setCnName(cnName);
         userProfile.setUpdateUser(TestConstants.UER_NAME);
         boolean result = userProfileService.delete(userProfile);
         Assert.isTrue(result);
     }
-    
+
     /**
      * 测试删除数据-失败（ID不存在等）
      */
@@ -95,10 +137,6 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(userProfileService);
         UserProfile userProfile = new UserProfile();
         userProfile.setId(TEST_NOT_EXIST_ID);// 不存在的ID
-        Long userId = null; //TODO 初始化
-        userProfile.setUserId(userId);
-        String cnName = null; //TODO 初始化
-        userProfile.setCnName(cnName);
         userProfile.setUpdateUser(TestConstants.UER_NAME);
         boolean result = userProfileService.delete(userProfile);
         Assert.isTrue(!result);
@@ -112,10 +150,7 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(userProfileService);
         UserProfile userProfile = new UserProfile();
         userProfile.setId(TEST_DEFAULT_EXIST_ID);
-        Long userId = null; //TODO 初始化
-        userProfile.setUserId(userId);
-        String cnName = null; //TODO 初始化
-        userProfile.setCnName(cnName);
+        userProfile.setCnName("李四");
         userProfile.setUpdateUser(TestConstants.UER_NAME);
         boolean result = userProfileService.update(userProfile);
         Assert.isTrue(result);
@@ -129,10 +164,7 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(userProfileService);
         UserProfile userProfile = new UserProfile();
         userProfile.setId(TEST_NOT_EXIST_ID);// 不存在的ID
-        Long userId = null; //TODO 初始化
-        userProfile.setUserId(userId);
-        String cnName = null; //TODO 初始化
-        userProfile.setCnName(cnName);
+        userProfile.setCnName("李四");
         userProfile.setUpdateUser(TestConstants.UER_NAME);
         boolean result = userProfileService.update(userProfile);
         Assert.isTrue(!result);
@@ -166,8 +198,7 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(userProfileService);
         UserProfileQuery queryBean = null;
         PageUtil pageUtil = null;
-        List<UserProfile> list = userProfileService.queryUserProfileListWithPage(
-                queryBean, pageUtil);
+        List<UserProfile> list = userProfileService.queryUserProfileListWithPage(queryBean, pageUtil);
         Assert.notEmpty(list);
         logger.info("list size = " + list.size());
     }
@@ -179,10 +210,6 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
     public void testQueryList() {
         Assert.notNull(userProfileService);
         UserProfileQuery queryBean = new UserProfileQuery();
-        Long userId = null; //TODO 初始化
-        queryBean.setUserId(userId);
-        String cnName = null; //TODO 初始化
-        queryBean.setCnName(cnName);
         List<UserProfile> list = userProfileService.queryUserProfileList(queryBean);
         Assert.notEmpty(list);
         logger.info("list size = " + list.size());

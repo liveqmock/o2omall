@@ -43,7 +43,7 @@
         <if test="_parameter != null">
             <if test="id != null and id > 0">
                 update user_address set
-		        <if test="userId != null and userId != ''">
+		        <if test="userId != null">
                 	user_id = #{userId,jdbcType=DECIMAL},
 		        </if>
 		        <if test="name != null and name != ''">
@@ -139,7 +139,7 @@
         <if test="id != null">
         	and id = #{id,jdbcType=DECIMAL}
         </if>
-        <if test="userId != null and userId != ''">
+        <if test="userId != null">
         	and user_id = #{userId,jdbcType=DECIMAL}
         </if>
         <if test="name != null and name != ''">
