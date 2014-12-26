@@ -10,8 +10,6 @@
 
 	<dependencies>
 		<dependency>
-
-		<dependency>
 			<groupId>com.awe.mall</groupId>
 			<artifactId>awe-mall-proxy</artifactId>
 		</dependency>
