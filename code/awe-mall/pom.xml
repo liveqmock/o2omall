@@ -8,6 +8,7 @@
 
 	<modules>
 		<module>awe-mall-util</module>
+		<module>awe-mall-domain</module>
 		<module>awe-mall-proxy</module>
 		<module>awe-mall-service</module>
 		<module>awe-mall-web</module>
