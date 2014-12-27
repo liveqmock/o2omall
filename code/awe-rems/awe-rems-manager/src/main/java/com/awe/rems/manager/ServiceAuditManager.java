@@ -66,14 +66,6 @@ public interface ServiceAuditManager {
      */
     public int queryServiceAuditCount(ServiceAuditQuery queryBean);
 
-    /**
-     * 根据主键删除对象信息，该处做的是逻辑删除
-     * 
-     * @param serviceAudit
-     *            　
-     * @return
-     */
-    public boolean delete(ServiceAudit serviceAudit);
 
     /**
      * 根据主键获取对象信息
@@ -84,14 +76,6 @@ public interface ServiceAuditManager {
      */
     public ServiceAudit getServiceAuditById(Long id);
 
-    /**
-     * 根据主键集合批量删除对象信息，该处做的是逻辑删除
-     * 
-     * @param serviceAudits
-     *            ServiceAudit集合
-     * @return
-     */
-    public boolean delete(ServiceAudit[] serviceAudits);
 
     /**
      * 判断是否存在
