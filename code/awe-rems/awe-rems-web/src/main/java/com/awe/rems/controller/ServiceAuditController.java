@@ -191,8 +191,8 @@ public class ServiceAuditController extends BaseController {
      * @param query
      * @return
      */
-    @RequestMapping(value = "apply", method = RequestMethod.GET)
-    public String getAfterSaleServiceApply(ServiceAuditQuery query){
+    @RequestMapping(value = "getApply", method = RequestMethod.GET)
+    public String getApply(ServiceAuditQuery query){
     	//获取return_exchange表数据
     	return viewPrefix + "/applyDetail";
     }
