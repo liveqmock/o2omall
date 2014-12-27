@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Refund：退款表实体类
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */

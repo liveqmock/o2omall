@@ -7,7 +7,7 @@ import com.hbird.common.utils.page.Query;
 /**
  * ReturnExchangeImageQuery：退换货图片表查询类
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */

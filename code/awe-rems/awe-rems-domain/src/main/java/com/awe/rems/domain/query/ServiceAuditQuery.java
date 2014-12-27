@@ -7,7 +7,7 @@ import com.hbird.common.utils.page.Query;
 /**
  * ServiceAuditQuery：退换货审核流表查询类
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */
