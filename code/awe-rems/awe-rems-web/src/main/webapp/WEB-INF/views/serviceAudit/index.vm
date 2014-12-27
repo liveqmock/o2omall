@@ -23,10 +23,6 @@
         		window.location.href=("$basePath/serviceAudit/updateForward?id="+parameterId);
         	}
         	
-        	function toDelete(parameterId){
-        		MyPopWindow.ExecuteDelete("$basePath/serviceAudit/delete",{ id : parameterId });
-        	}
-        	
         </script>
 	</head>
     <body>
@@ -96,9 +92,8 @@
                                 <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.createTime)</td>
                                 <td>$!item.createUser</td>
                                 <td>
-									<a href="javascript:void(0)" onclick="toDetail($!item.id);" data-toggle="modal"><i class="icon-list">详情</i></a>
+									<a href="javascript:void(0)" onclick="toDetail($!item.id);" data-toggle="modal"><i class="icon-list">审核</i></a>
 									<a href="javascript:void(0)" onclick="toUpdate($!item.id)"><i class="icon-pencil pink">修改</i></a>
-									<a href="javascript:void(0)" onclick="toDelete($!item.id)"><i class="icon-remove red">删除</i></a>
 								</td>
                             </tr>
                         #end
