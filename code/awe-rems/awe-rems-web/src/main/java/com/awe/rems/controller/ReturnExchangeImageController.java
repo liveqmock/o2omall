@@ -25,7 +25,7 @@ import com.hbird.common.utils.wrap.Wrapper;
 /**
  * ReturnExchangeImageController ：退换货图片表控制器
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:22
 */
 @Controller

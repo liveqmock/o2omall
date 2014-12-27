@@ -25,7 +25,7 @@ import com.hbird.common.utils.wrap.Wrapper;
 /**
  * ServiceAuditController ：退换货审核流表控制器
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:22
 */
 @Controller
@@ -185,5 +185,15 @@ public class ServiceAuditController extends BaseController {
             LOG.warn("detail serviceAudit has error.", e);
             return error();
         }
+    }
+    /***
+     * @descripton:获取售后服务申请单信息
+     * @param query
+     * @return
+     */
+    @RequestMapping(value = "apply", method = RequestMethod.GET)
+    public String getAfterSaleServiceApply(ServiceAuditQuery query){
+    	//获取return_exchange表数据
+    	return viewPrefix + "/applyDetail";
     }
 }
