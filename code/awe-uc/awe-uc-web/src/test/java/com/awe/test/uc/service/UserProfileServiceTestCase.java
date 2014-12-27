@@ -5,17 +5,16 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.util.Assert;
 
+import com.awe.test.base.BaseTransactionTestCase;
+import com.awe.test.base.TestConstants;
 import com.awe.uc.domain.UserProfile;
 import com.awe.uc.domain.query.UserProfileQuery;
 import com.awe.uc.service.UserProfileService;
 import com.awe.uc.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.security.MD5Util;
-import com.awe.test.base.BaseTransactionTestCase;
-import com.awe.test.base.TestConstants;
 
 /**
  * UserProfileService单元测试
@@ -39,7 +38,6 @@ public class UserProfileServiceTestCase extends BaseTransactionTestCase {
      * 测试插入数据-成功
      */
     @Test
-    @Rollback(false)
     public void testInsert() {
         Assert.notNull(userProfileService);
         UserProfile userProfile = new UserProfile();

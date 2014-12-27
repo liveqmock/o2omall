@@ -208,7 +208,7 @@
                                 <td>$!item.nickname</td>
                                 <td>$!item.email</td>
                                 <td>$!item.emailValidated</td>
-                                <td>$!item.birthday</td>
+                                <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.birthday)</td>
                                 <td>$!item.constellation</td>
                                 <td>$!item.userPhoto</td>
                                 <td>$!item.description</td>
