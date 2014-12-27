@@ -4,12 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.test.uc.rest.Urls;
-import com.hbird.common.client.AbstractClient;
 import com.awe.test.pay.rest.request.TradeRefundFailRequest;
 import com.awe.test.pay.rest.request.dto.TradeRefundFailRequestDto;
 import com.awe.test.pay.rest.response.TradeRefundFailResponse;
 import com.awe.test.pay.rest.response.dto.TradeRefundFailResponseDto;
+import com.hbird.common.client.AbstractClient;
 
 /**
  * TradeRefundFailResource单元测试
