@@ -73,7 +73,7 @@
 		<li id="menu-20">
 			<a href="javascript:void(0)" class="dropdown-toggle">
 				<i class="icon-desktop"></i>
-				<span class="menu-text">uc系统</span>
+				<span class="menu-text">用户中心系统</span>
 				<b class="arrow icon-angle-down"></b>
 			</a>
 

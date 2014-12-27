@@ -10,37 +10,23 @@
 				<table class="table table-striped table-bordered table-condensed table-hover">
 					<tbody>
 						<tr>
-							<th class="center" style='width:25%;'>id自增</th><td id="r_id" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>ID</th><td id="u_a_id" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>账号</th><td id="u_a_username" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>账号</th><td id="r_username" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>用户上次登录时间</th><td id="u_a_lastLoginTime" style='width:25%;' colspan='3'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>密码</th><td id="r_password" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>用户上次登录IP</th><td id="u_a_lastLoginIp" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>登录次数</th><td id="u_a_loginTimes" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>登录次数</th><td id="r_loginTimes" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>创建人</th><td id="u_a_createUser" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>修改人</th><td id="u_a_updateUser" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>用户上次登录IP</th><td id="r_lastLoginIp" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>用户上次登录时间</th><td id="r_lastLoginTime" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>创建人</th><td id="r_createUser" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>修改人</th><td id="r_updateUser" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>创建时间</th><td id="r_createTime" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>修改时间</th><td id="r_updateTime" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>是否有效</th><td id="r_yn" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>创建时间</th><td id="u_a_createTime" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>修改时间</th><td id="u_a_updateTime" style='width:25%;'></td>
 						</tr>
 					</tbody>
 				</table>
@@ -50,7 +36,7 @@
 </div><!-- /.modal -->
 
 <script language="javascript">         	
-    function toDetail(parameterId){
+    function toUserAccountDetail(parameterId){
 		$("#tab_online_tbody").html("");
 		$("#tab_config_tbody").html("");
 		$("#tab_log_tbody").html("");
@@ -63,17 +49,15 @@
     		success: function(data){
     			if(data!=null && data.code==200 && data.result!=null){
     				var r = data.result;
-    				$("#r_id").text(r.id==null?"":r.id);
-    				$("#r_username").text(r.username==null?"":r.username);
-    				$("#r_password").text(r.password==null?"":r.password);
-    				$("#r_loginTimes").text(r.loginTimes==null?"":r.loginTimes);
-    				$("#r_lastLoginIp").text(r.lastLoginIp==null?"":r.lastLoginIp);
-    				$("#r_lastLoginTime").text(r.lastLoginTime==null?"":r.lastLoginTime);
-    				$("#r_createUser").text(r.createUser==null?"":r.createUser);
-    				$("#r_updateUser").text(r.updateUser==null?"":r.updateUser);
-    				$("#r_createTime").text(r.createTime==null?"":r.createTime);
-    				$("#r_updateTime").text(r.updateTime==null?"":r.updateTime);
-    				$("#r_yn").text(r.yn==null?"":r.yn);
+    				$("#u_a_id").text(r.id==null?"":r.id);
+    				$("#u_a_username").text(r.username==null?"":r.username);
+    				$("#u_a_loginTimes").text(r.loginTimes==null?"":r.loginTimes);
+    				$("#u_a_lastLoginIp").text(r.lastLoginIp==null?"":r.lastLoginIp);
+    				$("#u_a_lastLoginTime").text(r.lastLoginTime==null?"":r.lastLoginTime);
+    				$("#u_a_createUser").text(r.createUser==null?"":r.createUser);
+    				$("#u_a_updateUser").text(r.updateUser==null?"":r.updateUser);
+    				$("#u_a_createTime").text(r.createTime==null?"":r.createTime);
+    				$("#u_a_updateTime").text(r.updateTime==null?"":r.updateTime);
     			} else {
     				alert("获取详情失败");
     			}

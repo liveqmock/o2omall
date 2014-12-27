@@ -11,60 +11,41 @@
 					<tbody>
 						<tr>
 							<th class="center" style='width:25%;'>自增Id</th><td id="r_id" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>用户ID</th><td id="r_userId" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>收货人姓名</th><td id="r_name" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>收货人姓名</th><td id="r_name" style='width:25%;' colspan='3'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>省份名称</th><td id="r_provinceName" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>省份编码</th><td id="r_provinceNo" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>市名称</th><td id="r_cityName" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>市编号</th><td id="r_cityNo" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>县名称</th><td id="r_countyName" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>县编码</th><td id="r_countyNo" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>详细地址</th><td id="r_address" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>详细地址</th><td id="r_address" style='width:25%;' colspan='3'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>移动电话</th><td id="r_mobile" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>固定电话</th><td id="r_phone" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>电子邮件</th><td id="r_email" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>邮编</th><td id="r_zipcode" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>创建人</th><td id="r_createUser" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>修改人</th><td id="r_updateUser" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>创建时间</th><td id="r_createTime" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>修改时间</th><td id="r_updateTime" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>是否有效</th><td id="r_yn" style='width:25%;'></td>
 						</tr>
 					</tbody>
 				</table>
@@ -105,7 +86,6 @@
     				$("#r_updateUser").text(r.updateUser==null?"":r.updateUser);
     				$("#r_createTime").text(r.createTime==null?"":r.createTime);
     				$("#r_updateTime").text(r.updateTime==null?"":r.updateTime);
-    				$("#r_yn").text(r.yn==null?"":r.yn);
     			} else {
     				alert("获取详情失败");
     			}

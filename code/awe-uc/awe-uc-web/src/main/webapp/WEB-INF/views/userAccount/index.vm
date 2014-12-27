@@ -7,9 +7,6 @@
 				$("#btn-query").click(function() {
         			pageSubmit(1);
    				});
-				$("#btn-add").click(function() {
-        			window.location.href=("$basePath/userAccount/addForward");
-   				});
 			});
         	// 提交分页查询
         	function pageSubmit(pageNoParam) {
@@ -19,14 +16,9 @@
                 $("#queryForm").submit();
         	}
         	
-        	function toUpdate(parameterId){
-        		window.location.href=("$basePath/userAccount/updateForward?id="+parameterId);
-        	}
-        	
         	function toDelete(parameterId){
         		MyPopWindow.ExecuteDelete("$basePath/userAccount/delete",{ id : parameterId });
         	}
-        	
         </script>
 	</head>
     <body>
@@ -51,21 +43,9 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="username" id="username" class="col-xs-10 col-sm-8" value="$!query.username"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="password">密码</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="password" id="password" class="col-xs-10 col-sm-8" value="$!query.password"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="loginTimes">登录次数</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="loginTimes" id="loginTimes" class="col-xs-10 col-sm-8" value="$!query.loginTimes"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="lastLoginIp">用户上次登录IP</label>
+									<label class="col-sm-3 control-label no-padding-right" for="lastLoginIp">用户上次登录IP</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="lastLoginIp" id="lastLoginIp" class="col-xs-10 col-sm-8" value="$!query.lastLoginIp"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="lastLoginTime">用户上次登录时间</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="lastLoginTime" id="lastLoginTime" class="col-xs-10 col-sm-8" value="$!query.lastLoginTime"/>
                                     </div>
 								</div>
 								<div class="form-group">
@@ -74,8 +54,6 @@
                                         <button class="btn btn-info btn-sm" type="button" id="btn-query"><i class="icon-search"></i>查询</button>
                                         &nbsp; &nbsp; &nbsp;
                                         <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
-										 &nbsp; &nbsp; &nbsp;
-              							<button class="btn btn-success btn-sm" type="button" id="btn-add"><i class="icon-plus"></i>新增</button>
                                     </div>
                                 </div>
                             </form>
@@ -106,8 +84,7 @@
                                 <td>$!item.createUser</td>
                                 <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.createTime)</td>
                                 <td>
-									<a href="javascript:void(0)" onclick="toDetail($!item.id);" data-toggle="modal"><i class="icon-list">详情</i></a>
-									<a href="javascript:void(0)" onclick="toUpdate($!item.id)"><i class="icon-pencil pink">修改</i></a>
+									<a href="javascript:void(0)" onclick="toUserAccountDetail($!item.id);" data-toggle="modal"><i class="icon-list">详情</i></a>
 									<a href="javascript:void(0)" onclick="toDelete($!item.id)"><i class="icon-remove red">删除</i></a>
 								</td>
                             </tr>
