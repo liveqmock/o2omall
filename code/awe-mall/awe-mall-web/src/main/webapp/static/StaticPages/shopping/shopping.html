@@ -1,0 +1,883 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>母婴商城</title>
+<link href="../css/common.css" rel="stylesheet"  type="text/css"/>
+<link href="../css/login.css" rel="stylesheet"  type="text/css"/>
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script>
+  $(function(){
+    $('.adily_box li').bind('mouseover',function(){
+	  $(this).addClass('on').siblings().removeClass('on');
+	  var index = $(this).index();
+	  $(this).parents('.adily_title').next().children().eq(index).show().siblings().hide();
+	});
+  });
+</script>
+</head>
+
+<body>
+  
+ <!---------------------- 公共头部 ----------------------> 
+  <div class="header">
+    <div class="top">
+      <div class="wid1200">
+         <div class="top_login left">
+           <p>您好，欢迎来到Awesome</p>
+           <ul>
+             <li><a href="../login.html" class="logbtn">登录</a></li>
+             <li><a href="../register.html" class="regbtn">注册</a></li>
+           </ul>
+         </div>
+         <div class="right">
+           <ul class="top_list">
+             <li><i class="top_icon1"></i><a href="../member/my_order.html">我的订单</a></li>
+             <li><i class="top_icon2"></i><a href="../member/my_list.html">会员中心</a></li>
+             <li class="red"><i class="top_icon3"></i>400-960-999</li>
+           </ul>
+         </div>
+      </div>
+    </div>
+    
+    <div class="header-con">
+      <div class="wid1200"><img src="../images/m-banner.jpg" /></div>
+    </div>
+    
+    <div class="wid1200">
+        <div class="logo"><img src="../images/logo.jpg" /></div>
+        <div class="search">
+          <form id="" name="" class="search_form">
+            <input type="text" class="search_input" />
+            <button class="search_btn"></button>
+          </form>
+          <span class="shop_cat"><i></i>购物车</span>
+        </div>
+        <div class="nav clearfix">
+          <ul>
+            <li><a href="../index.html">首页</a></li>
+            <li class="on"><a href="../shopping/shopping.html">商品主页</a></li>
+            <li><a href="">奶粉</a></li>
+            <li><a href="">纸尿裤</a></li>
+            <li><a href="">玩具</a></li>
+            <li><a href="">服装</a></li>
+          </ul>
+        </div>
+    </div>
+  </div>
+  
+ <!---------------------- 公共头部 end ----------------------> 
+ 
+ <!---------------------- 正文 ----------------------> 
+    <div class="container wid1200 clearfix">
+    
+        <!---------------------- 商品分类 ----------------------> 
+         <div class="goods_list">
+            <h1>商品分类</h1>
+            <div class="goods_container">
+                <div class="goods_con">
+                   <h3><i class="goods_icon"><a href="shopping_list.html" class="reds">&gt;</a></i>品牌</h3>
+                   <ul class="goods_tl pt5 clearfix">
+                     <li><a href="shopping_list.html">美素佳儿</a></li>
+                     <li><a href="shopping_list.html">雅培</a></li>
+                     <li><a href="shopping_list.html">红黄蓝</a></li>
+                     <li><a href="shopping_list.html">贝因美</a></li>
+                     <li><a href="shopping_list.html">金宝贝</a></li>
+                   </ul>
+                </div>
+                <div class="goods_con">
+                   <h3><i class="goods_icon"><a href="shopping_list.html" class="reds">&gt;</a></i>吃</h3>
+                   <ul class="goods_tl pt5 clearfix">
+                     <li><a href="shopping_list.html">诺优能</a></li>
+                     <li><a href="shopping_list.html">爱他美</a></li>
+                     <li><a href="shopping_list.html">惠氏</a></li>
+                     <li><a href="shopping_list.html">美赞成</a></li>
+                     <li><a href="shopping_list.html">可瑞康</a></li>
+                   </ul>
+                </div>
+                <div class="goods_con">
+                   <h3><i class="goods_icon"><a href="shopping_list.html" class="reds">&gt;</a></i>穿</h3>
+                   <ul class="goods_tl pt5 clearfix">
+                     <li><a href="shopping_list.html">全棉时代</a></li>
+                     <li><a href="shopping_list.html">童泰</a></li>
+                     <li><a href="shopping_list.html">南极人</a></li>
+                     <li><a href="shopping_list.html">亿婴儿</a></li>
+                     <li><a href="shopping_list.html">班杰威尔</a></li>
+                   </ul>
+                </div>
+                <div class="goods_con">
+                   <h3><i class="goods_icon"><a href="shopping_list.html" class="reds">&gt;</a></i>乐</h3>
+                   <ul class="goods_tl pt5 clearfix">
+                     <li><a href="shopping_list.html">乐高</a></li>
+                     <li><a href="shopping_list.html">优贝比</a></li>
+                     <li><a href="shopping_list.html">贝恩施</a></li>
+                     <li><a href="shopping_list.html">故事光</a></li>
+                     <li><a href="shopping_list.html">特宝</a></li>
+                   </ul>
+                </div>
+                <div class="goods_con">
+                   <h3><i class="goods_icon"><a href="shopping_list.html" class="reds">&gt;</a></i>教</h3>
+                   <ul class="goods_tl pt5 clearfix">
+                     <li><a href="shopping_list.html">金宝贝</a></li>
+                     <li><a href="shopping_list.html">红黄蓝</a></li>
+                     <li><a href="shopping_list.html">爱贝花</a></li>
+                     <li><a href="shopping_list.html">东方爱婴</a></li>
+                     <li><a href="shopping_list.html">亲亲袋鼠</a></li>
+                   </ul>
+                </div>
+            </div>
+         
+         </div>  
+   
+        <!---------------------- 明星专家 广告部分 ----------------------> 
+        <div class="shop_banner left">
+           <img src="../images/m-img11.jpg" />
+        </div>
+
+        <div class="baby_right left">
+        
+        <!---------------------- 宝宝资料 ----------------------> 
+            <div class="baby_data">
+               <h3 class="ft14 normal"><i class="expert_icon1"></i>宝宝资料</h3>
+               <div class="childbirth">生日／预产期<input type="text" /></div>
+               <div class="sex clearfix">
+                 <span class="sex_icon1 on"></span>
+                 <span class="sex_icon2"></span>
+               </div>
+               <div class="choice_sex clearfix">您已选择宝宝性别为“<span>男生</span>”</div>
+               <div class="clearfix"><a href="" class="expert_btn">确定</a></div>
+            </div>
+        <!---------------------- 妈妈知识课堂 ----------------------> 
+            <div class="baby_data mt25">
+               <h3 class="ft14 normal"><i class="expert_icon2"></i>妈妈知识课堂</h3>
+               <ul class="knowledge clearfix">
+                 <li><span>&gt;</span><a href="">准备怀孕期</a></li>
+                 <li><span>&gt;</span><a href="">怀孕期</a></li>
+                 <li><span>&gt;</span><a href="">0-1岁</a></li>
+               </ul>
+            </div>
+        <!---------------------- 更多服务 ----------------------> 
+            <div class="baby_data mt25">
+               <h3 class="ft14 normal"><i class="expert_icon3"></i>更多服务</h3>
+               <ul class="more_services clearfix">
+                 <li><a href="">早教攻略</a></li>
+                 <li><a href="">护理攻略</a></li>
+                 <li><a href="">喂养攻略</a></li>
+                 <li><a href="">新生礼盒</a></li>
+                 <li><a href="">手足印</a></li>
+                 <li><a href="">纸尿裤</a></li>
+               </ul>
+            </div>
+            
+            
+        
+        </div>
+     </div>
+        <!---------------------- 专家解惑 ----------------------> 
+        <div class="container wid1200 clearfix">
+           <div class="experts_box">
+              <ul>
+                <li>准备怀孕</li>
+                <li class="on">怀孕期</li>
+                <li>0-3个月</li>
+                <li>3-6个月</li>
+                <li>6-12个月</li>
+                <li>1-2岁</li>
+
+              </ul>
+           </div>
+           <div class="wid1200 clearfix mt10">
+
+
+        <!---------------------- 日常饮品 ----------------------> 
+             <div class="daily_drink">
+                <div class="adily_title">
+                  <h3><i class="dr_icon">1</i>日常饮品</h3>
+                  <ul class="adily_box">
+                    <li class="on">营养食谱</li>
+                    <li>放心奶粉</li>
+                    <li>入口装备</li>
+                  </ul>
+                </div>
+                
+                <div class="daily_scroll">
+                  
+                   <div class="daily_box bf">
+                     <div class="shop_lb clearfix">
+                       <ul>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+    
+                       </ul>
+                     </div>
+                   </div>
+                   <div class="daily_box bf" style="display:none">
+                     <div class="shop_lb clearfix">
+                       <ul>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                       </ul>
+                     </div>
+                   </div>
+                   <div class="daily_box bf" style="display:none">
+                     <div class="shop_lb clearfix">
+                       <ul>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+    
+                       </ul>
+                     </div>
+                   </div>
+                 
+                </div>
+             </div>                 
+ 
+        <!---------------------- 热门攻略 ----------------------> 
+        
+             <div class="left hots_consult shop_r"> 
+                 <h3>热门攻略</h3>
+                 <div class="star_expert_con lct">
+                   <dl class="clearfix">
+                     <dt><a href="../expert/C-05.html"><img src="../images/m_img1.jpg" /></a><p><a href="../expert/C-05.html" class="message_btn mt10">咨询名师</a></p></dt>
+                     <dd class="mt5">
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                     </dd>
+                   </dl>             
+                   <dl class="clearfix">
+                     <dt><a href="../expert/C-05.html"><img src="../images/m_img1.jpg" /></a><p><a href="../expert/C-05.html" class="message_btn mt10">咨询名师</a></p></dt>
+                     <dd class="mt5">
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                     </dd>
+                   </dl>             
+                   <dl class="clearfix">
+                     <dt><a href="../expert/C-05.html"><img src="../images/m_img1.jpg" /></a><p><a href="../expert/C-05.html" class="message_btn mt10">咨询名师</a></p></dt>
+                     <dd class="mt5">
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                     </dd>
+                   </dl>             
+                   <dl class="clearfix">
+                     <dt><a href="../expert/C-05.html"><img src="../images/m_img1.jpg" /></a><p><a href="../expert/C-05.html" class="message_btn mt10">咨询名师</a></p></dt>
+                     <dd class="mt5">
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                     </dd>
+                   </dl>             
+          
+             </div>
+               </div>
+           </div>
+           
+           <div class="wid1200 clearfix mt10">
+
+
+        <!---------------------- 娱乐玩耍 ----------------------> 
+             <div class="daily_drink">
+                <div class="adily_title">
+                  <h3><i class="dr_icon">2</i>娱乐玩耍</h3>
+                  <ul class="adily_box">
+                    <li>助力学步</li>
+                    <li class="on">智力开发</li>
+                    <li>安全防护</li>
+                  </ul>
+                </div>
+                
+                <div class="daily_scroll">
+                  
+                   <div class="daily_box bf">
+                     <div class="shop_lb clearfix">
+                       <ul>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+    
+                       </ul>
+                     </div>
+                   </div>
+                   <div class="daily_box bf" style="display:none">
+                     <div class="shop_lb clearfix">
+                       <ul>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+>
+    
+                       </ul>
+                     </div>
+                   </div>
+                   <div class="daily_box bf" style="display:none">
+                     <div class="shop_lb clearfix">
+                       <ul>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+    
+                       </ul>
+                     </div>
+                   </div>
+                   
+                 
+                </div>
+             </div>                 
+ 
+        <!---------------------- 热门攻略 ----------------------> 
+        
+             <div class="left hots_consult shop_r"> 
+                 <h3>热门攻略</h3>
+                 <div class="star_expert_con lct">
+                   <dl class="clearfix">
+                     <dt><a href="../expert/C-05.html"><img src="../images/m_img1.jpg" /></a><p><a href="../expert/C-05.html" class="message_btn mt10">咨询名师</a></p></dt>
+                     <dd class="mt5">
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                     </dd>
+                   </dl>             
+                   <dl class="clearfix">
+                     <dt><a href="../expert/C-05.html"><img src="../images/m_img1.jpg" /></a><p><a href="../expert/C-05.html" class="message_btn mt10">咨询名师</a></p></dt>
+                     <dd class="mt5">
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                     </dd>
+                   </dl>             
+                   <dl class="clearfix">
+                     <dt><a href="../expert/C-05.html"><img src="../images/m_img1.jpg" /></a><p><a href="../expert/C-05.html" class="message_btn mt10">咨询名师</a></p></dt>
+                     <dd class="mt5">
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                     </dd>
+                   </dl>             
+                   <dl class="clearfix">
+                     <dt><a href="../expert/C-05.html"><img src="../images/m_img1.jpg" /></a><p><a href="../expert/C-05.html" class="message_btn mt10">咨询名师</a></p></dt>
+                     <dd class="mt5">
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                     </dd>
+                   </dl>             
+             </div>
+               </div>
+           </div>
+           
+           <div class="wid1200 clearfix mt10">
+
+
+        <!---------------------- 娱乐玩耍 ----------------------> 
+             <div class="daily_drink">
+                <div class="adily_title">
+                  <h3><i class="dr_icon">3</i>娱乐玩耍</h3>
+                  <ul  class="adily_box">
+                    <li>助力学步</li>
+                    <li class="on">智力开发</li>
+                    <li>安全防护</li>
+                  </ul>
+                </div>
+                
+                <div class="daily_scroll">
+                  
+                   <div class="daily_box bf">
+                     <div class="shop_lb clearfix">
+                       <ul>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+    
+                       </ul>
+                     </div>
+                   </div>
+                   <div class="daily_box bf" style="display:none">
+                     <div class="shop_lb clearfix">
+                       <ul>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+>
+    
+                       </ul>
+                     </div>
+                   </div>
+                   <div class="daily_box bf" style="display:none">
+                     <div class="shop_lb clearfix">
+                       <ul>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+                         <li>
+                             <div><a href="product_details.html"><img src="../images/m_img6.jpg" /></a></div>
+                             <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds">¥298.00</p>
+                         </li>
+    
+                       </ul>
+                     </div>
+                   </div>
+                 
+                </div>
+             </div>                 
+ 
+        <!---------------------- 热门攻略 ----------------------> 
+        
+             <div class="left hots_consult shop_r"> 
+                 <h3>热门攻略</h3>
+                 <div class="star_expert_con lct">
+                   <dl class="clearfix">
+                     <dt><a href="../expert/C-05.html"><img src="../images/m_img1.jpg" /></a><p><a href="../expert/C-05.html" class="message_btn mt10">咨询名师</a></p></dt>
+                     <dd class="mt5">
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                     </dd>
+                   </dl>             
+                   <dl class="clearfix">
+                     <dt><a href="../expert/C-05.html"><img src="../images/m_img1.jpg" /></a><p><a href="../expert/C-05.html" class="message_btn mt10">咨询名师</a></p></dt>
+                     <dd class="mt5">
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                     </dd>
+                   </dl>             
+                   <dl class="clearfix">
+                     <dt><a href="../expert/C-05.html"><img src="../images/m_img1.jpg" /></a><p><a href="../expert/C-05.html" class="message_btn mt10">咨询名师</a></p></dt>
+                     <dd class="mt5">
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                     </dd>
+                   </dl>             
+                   <dl class="clearfix">
+                     <dt><a href="../expert/C-05.html"><img src="../images/m_img1.jpg" /></a><p><a href="../expert/C-05.html" class="message_btn mt10">咨询名师</a></p></dt>
+                     <dd class="mt5">
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                       <p><a href="../expert/C-05.html">保护包包的味蕾</a></p>
+                     </dd>
+                   </dl>             
+             </div>
+               </div>
+           </div>
+        
+        </div>
+        
+
+
+    </div>
+ <!---------------------- 正文end ----------------------> 
+ 
+ <!---------------------- 公共尾部 ----------------------> 
+    <div class="footer wid1200">
+     
+      <div class="footer_logo left"><img src="../images/f-logo.jpg" /></div>
+      <div class="footer_con">
+         <p>版权所有（集团）股份有限公司 未经允许不得复杂、转载或编辑，违者必究.</p>
+         <p>Copyright(GROUP)COMPANY OF CHINA 、LTD ,All Rights Reserved</p>
+         <p>ICP许可证号 粤ICP 备06118999号-5</p>
+      </div>
+      
+    </div>
+ <!---------------------- 公共尾部end ----------------------> 
+ 
+ <script type="text/javascript" src="js/jquery.tabso_yeso.js"></script>
+
+</body>
+</html>
