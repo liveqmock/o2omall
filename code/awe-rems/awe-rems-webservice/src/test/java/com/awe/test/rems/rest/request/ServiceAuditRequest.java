@@ -6,7 +6,7 @@ import com.awe.test.rems.rest.request.dto.ServiceAuditRequestDto;
 /**
  * ServiceAuditRequest：退换货审核流表请求参数
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:23
  * 
  */

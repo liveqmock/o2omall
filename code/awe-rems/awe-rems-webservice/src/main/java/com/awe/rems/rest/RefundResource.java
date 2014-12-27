@@ -27,7 +27,7 @@ import com.awe.rems.service.RefundService;
 /**
  * 退款表REST服务：提供有关退款表的接口
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:23
  * 
  */

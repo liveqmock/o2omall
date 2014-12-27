@@ -27,7 +27,7 @@ import com.awe.rems.service.ReturnExchangeImageService;
 /**
  * 退换货图片表REST服务：提供有关退换货图片表的接口
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:23
  * 
  */

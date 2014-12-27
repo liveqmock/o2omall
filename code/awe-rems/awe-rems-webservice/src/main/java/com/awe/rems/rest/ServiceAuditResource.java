@@ -27,7 +27,7 @@ import com.awe.rems.service.ServiceAuditService;
 /**
  * 退换货审核流表REST服务：提供有关退换货审核流表的接口
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:23
  * 
  */
