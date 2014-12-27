@@ -34,11 +34,11 @@
         </div>
         <div class="nav clearfix">
           <ul>
-            <li class="on"><a href="index.html">首页</a></li>
-            <li><a href="expert/C-01.html">专家咨询</a></li>
-            <li><a href="shopping/shopping.html">商品</a></li>
-            <li><a href="service/service.html">服务</a></li>
-            <li><a href="member/my_list.html">我的</a></li>
+            <li #if(!$!navFlag) class="on" #end><a href="#springUrl('')/index">首页</a></li>
+            <li #if("expert"==$!navFlag) class="on" #end><a href="expert/C-01.html">专家咨询</a></li>
+            <li #if("shopping"==$!navFlag) class="on" #end><a href="shopping/shopping.html">商品</a></li>
+            <li #if("service"==$!navFlag) class="on" #end><a href="service/service.html">服务</a></li>
+            <li #if("member"==$!navFlag) class="on" #end><a href="member/my_list.html">我的</a></li>
           </ul>
         </div>
     </div>

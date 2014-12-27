@@ -40,12 +40,14 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login(Model model) {
         logger.debug("go to login page");
+        model.addAttribute("navFlag", "login"); //导航标识，无标识
         return "login";
     }
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
     public String register(Model model) {
         logger.debug("go to register page");
+        model.addAttribute("navFlag", "register"); //导航标识，无标识
         return "register";
     }
 
