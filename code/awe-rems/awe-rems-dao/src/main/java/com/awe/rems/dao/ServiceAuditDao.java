@@ -55,14 +55,6 @@ public interface ServiceAuditDao {
     public List<ServiceAudit> queryServiceAuditListWithPage(ServiceAuditQuery queryBean);
 
     /**
-     * 删除记录
-     * 
-     * @param serviceAudit
-     * @return
-     */
-    public boolean delete(ServiceAudit serviceAudit);
-
-    /**
      * 根据主键获取对象
      * 
      * @param id

@@ -59,13 +59,6 @@ public class ServiceAuditDaoImpl extends BaseDao implements ServiceAuditDao {
     /**
      * {@inheritDoc}
      */
-    public boolean delete(ServiceAudit configuration) {
-        return delete(namespace +".delete", configuration);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public ServiceAudit getServiceAuditById(Long id) {
         return (ServiceAudit) queryForObject(namespace +".getServiceAuditById", id);
     } 
