@@ -1,0 +1,222 @@
+<!-- Modal -->
+<div class="modal fade" id="myOrdersUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myOrdersModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myOrdersModalLabel">修改订单</h4>
+			</div>
+			<div class="modal-body"> 
+				<div class="widget-main" style="background-color: #fff;padding:5px;">
+                    <form class="form-horizontal" role="form" id="addForm">
+						<input id="hd_province" name="provinceName" type="hidden"/>
+                        <input id="hd_city" name="cityName" type="hidden"/>
+                        <input id="hd_county" name="countyName" type="hidden"/>
+                        <div class="form-group">
+                            <label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="orderNo">订单编号</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="orderNo" id="update_orderNo" class="col-xs-12 col-sm-12" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="consigneeName">收货人</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="consigneeName" id="update_consigneeName" class="col-xs-12 col-sm-12" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-offset-0 col-sm-3 control-label no-padding-right" for="consigneePhone">手机号</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="consigneePhone" id="update_consigneePhone" class="col-xs-12 col-sm-12"/>
+                            </div>
+                        </div>
+						
+                        <div class="form-group">
+                            <label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="provinceNo">省/直辖市</label>
+                            <div class="col-sm-4">
+                                <select id="Update_provinceNo" name="provinceNo" class="col-xs-12 col-sm-12" onchange="city(this.value);">
+                                </select>
+                            </div>
+                        </div>
+						
+						<div class="form-group">
+                            <label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="cityNo">市</label>
+                            <div class="col-sm-4">
+                                <select id="Update_cityNo" name="cityNo" class="col-xs-12 col-sm-12" onchange="county(this.value);">
+                                </select>
+                            </div>
+                        </div>
+						
+                        <div class="form-group">
+                            <label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="countyNo">区</label>
+                            <div class="col-sm-4">
+                                <select id="update_countyNo" name="countyNo" class="col-xs-12 col-sm-12">
+                                </select>
+                            </div>
+                        </div>
+						
+                        <div class="form-group">
+                            <label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="address">详细地址</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="address" id="update_address" class="col-xs-12 col-sm-12" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="emil">邮箱</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="emil" id="update_emil" class="col-xs-12 col-sm-12" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="zipCode">邮政编号</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="zipCode" id="update_zipCode" class="col-xs-12 col-sm-12" />
+                            </div>
+                        </div>
+						
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-4">
+                                <button class="btn btn-info btn-sm" type="button" id="btn-cancel"><i class="icon-remove"></i>取消</button>
+                                &nbsp; &nbsp; &nbsp;
+                                <button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script language="javascript">  
+	
+    $('#myOrdersUpdateModal').on('hidden.bs.modal', function (e) {
+      		$("#Update_provinceNo").empty();
+			$("#hd_city").empty();
+			$("#update_countyNo").empty();
+     })
+	
+	 $(function(){
+	   var pro = $("#hd_province").val();
+	   var city = $("#hd_city").val();
+	   var con = $("#hd_county").val();
+	   
+	   province();
+	 })
+	 
+	//获取省的所有列表
+	function province(){
+		jQuery.ajax({
+    		type: "GET",
+    		url: basePath + "/area/queryProvince",
+    		dataType : 'json',
+    		success: function(data){
+			    $("#Update_provinceNo").empty();
+				$("#Update_cityNo").empty();
+				$("#update_countyNo").empty();
+    			if(data!=null && data.code==200 && data.result!=null){
+    				var r = data.result;
+					if(r.length > 0){
+					 $('#Update_provinceNo').append("<option value=''>请选择</option>");
+						$.each(data.result,function(i,item){
+                        	 $('#Update_provinceNo').append("<option value='" + item.code+ "'>" + item.name + "</option>");
+						});
+					}		
+    			} else {
+    				alert("获取省份信息失败");
+    			}
+    		},
+    		error : function(data) {
+    			alert("获取省份信息失败");
+    		}
+    	}); 
+	}
+	 
+	//--//获取市的所有列表
+	function city(proNo){
+		jQuery.ajax({
+    		type: "GET",
+    		url: basePath + "/area/queryCityNo",
+    		dataType : 'json',
+			data:{provinceNO:proNo},
+    		success: function(data){
+			    $("#Update_cityNo").empty();
+				$("#update_countyNo").empty();
+    			if(data!=null && data.code==200 && data.result!=null){
+    				var r = data.result;
+					if(r.length > 0){
+					 $('#Update_cityNo').append("<option value=''>请选择</option>");
+						$.each(data.result,function(i,item){
+                        	 $('#Update_cityNo').append("<option value='" + item.code+ "'>" + item.name + "</option>");
+						});
+					}
+    			} else {
+    				alert("获取省份信息失败");
+    			}
+    		},
+    		error : function(data) {
+    			alert("获取省份信息失败");
+    		}
+    	});
+	}
+	//---获取县的列表
+	function county(cityNo){
+		jQuery.ajax({
+    		type: "GET",
+    		url: basePath + "/area/queryCountyNo",
+    		dataType : 'json',
+			data:{CityNo:cityNo},
+    		success: function(data){
+				$("#update_countyNo").empty();
+    			if(data!=null && data.code==200 && data.result!=null){
+    				var r = data.result;
+					if(r.length > 0){
+					 $('#update_countyNo').append("<option value=''>请选择</option>");
+						$.each(data.result,function(i,item){
+                        	 $('#update_countyNo').append("<option value='" + item.code+ "'>" + item.name + "</option>");
+						});
+					}
+    			} else {
+    				alert("获取省份信息失败");
+    			}
+    		},
+    		error : function(data) {
+    			alert("获取省份信息失败");
+    		}
+    	});
+	}
+
+    function toUpdateModal(parameterId){
+		$("#tab_online_tbody").html("");
+		$("#tab_config_tbody").html("");
+		$("#tab_log_tbody").html("");
+    	jQuery.ajax({
+    		type: "GET",
+    		url: basePath + "/orders/detail",
+    		dataType : 'json',
+    		data: "id=" + parameterId,
+    		success: function(data){
+    			if(data!=null && data.code==200 && data.result!=null){
+    				var r = data.result;
+    				$("#update_orderNo").val(r.orderNo==null?"":r.orderNo);
+					$("#update_consigneeName").val(r.consigneeName==null?"":r.consigneeName);
+					$("#update_consigneePhone").val(r.consigneePhone==null?"":r.consigneePhone);
+					$("#update_address").val(r.address==null?"":r.address);
+					$("#update_emil").val(r.emil==null?"":r.emil);
+					$("#update_zipCode").val(r.zipCode==null?"":r.zipCode);
+					
+					$("#hd_province").val(r.provinceNo==null?"":r.provinceNo);
+					$("#hd_city").val(r.cityNo==null?"":r.cityNo);
+					$("#hd_county").val(r.countyNo==null?"":r.countyNo);
+					
+    			} else {
+    				alert("获取详情失败");
+    			}
+    		},
+    		error : function(data) {
+    			alert("获取详情出现异常");
+    		}
+    	});
+    	$('#myOrdersUpdateModal').modal('show');
+    }
+</script>
