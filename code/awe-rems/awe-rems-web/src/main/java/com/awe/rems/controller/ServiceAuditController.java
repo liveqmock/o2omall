@@ -138,27 +138,6 @@ public class ServiceAuditController extends BaseController {
         }
     }
 
-    /**
-     * 退换货审核流表----删除
-     * 
-     * @param serviceAudit
-     * @return
-     */
-    @RequestMapping(value = "delete")
-    @ResponseBody
-    public Wrapper<?> delete(ServiceAudit serviceAudit) {
-        try {
-            serviceAudit.setUpdateUser(getLoginUserCnName());
-            if (serviceAuditService.delete(serviceAudit)) {
-                return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "删除成功！");
-            } else {
-                return WrapMapper.wrap(Wrapper.ERROR_CODE, "删除失败！");
-            }
-        } catch (Exception e) {
-            LOG.error("serviceAudit delete has error.", e);
-            return WrapMapper.error();
-        }
-    }
 
     /**
      * 退换货审核流表----查询-无分页
