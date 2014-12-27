@@ -47,59 +47,70 @@
                         <div class="widget-main" style="background-color: #f5f5f5;padding:5px;">
                             <form class="form-horizontal" role="form" id="queryForm">
 								<div class="form-group">
+									
 									<label class="col-sm-1 control-label no-padding-right" for="refund">退款单号</label>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <input type="text" name="refund" id="refund" class="col-xs-10 col-sm-8" value="$!query.refund"/>
                                     </div>
+									
 									<label class="col-sm-1 control-label no-padding-right" for="status">退款单状态</label>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <input type="text" name="status" id="status" class="col-xs-10 col-sm-8" value="$!query.status"/>
                                     </div>
+									
 									<label class="col-sm-1 control-label no-padding-right" for="orderNo">订单编号</label>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <input type="text" name="orderNo" id="orderNo" class="col-xs-10 col-sm-8" value="$!query.orderNo"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="refundAmount">退款金额</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="refundAmount" id="refundAmount" class="col-xs-10 col-sm-8" value="$!query.refundAmount"/>
-                                    </div>
+									
 									<label class="col-sm-1 control-label no-padding-right" for="cancelReason">取消原因</label>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <input type="text" name="cancelReason" id="cancelReason" class="col-xs-10 col-sm-8" value="$!query.cancelReason"/>
                                     </div>
+                                </div>
+								
+								<div class="form-group">
+									
 									<label class="col-sm-1 control-label no-padding-right" for="cancelType">取消类型</label>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <input type="text" name="cancelType" id="cancelType" class="col-xs-10 col-sm-8" value="$!query.cancelType"/>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="currentAuditName">审核人姓名</label>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <input type="text" name="currentAuditName" id="currentAuditName" class="col-xs-10 col-sm-8" value="$!query.currentAuditName"/>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="currentAuditNo">审核人编码</label>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <input type="text" name="currentAuditNo" id="currentAuditNo" class="col-xs-10 col-sm-8" value="$!query.currentAuditNo"/>
                                     </div>
+                                </div>
+								
+								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="isAuditing">是否审核通过</label>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <input type="text" name="isAuditing" id="isAuditing" class="col-xs-10 col-sm-8" value="$!query.isAuditing"/>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="auditingTime">审核时间</label>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <input type="text" name="auditingTime" id="auditingTime" class="col-xs-10 col-sm-8" value="$!query.auditingTime"/>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="finishTime">退款完成时间</label>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <input type="text" name="finishTime" id="finishTime" class="col-xs-10 col-sm-8" value="$!query.finishTime"/>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="remark">审核意见</label>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <input type="text" name="remark" id="remark" class="col-xs-10 col-sm-8" value="$!query.remark"/>
                                     </div>
+                                </div>
+								
+								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="isRefund">是否需要退款</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="isRefund" id="isRefund" class="col-xs-10 col-sm-8" value="$!query.isRefund"/>
                                     </div>
 								</div>
+								
 								<div class="form-group">
 									<div class="col-sm-4 col-sm-offset-8">
     									#parse("/layout/page.vm")
