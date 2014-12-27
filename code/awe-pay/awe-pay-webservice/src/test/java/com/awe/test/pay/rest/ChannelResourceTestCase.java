@@ -4,12 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.test.uc.rest.Urls;
-import com.hbird.common.client.AbstractClient;
 import com.awe.test.pay.rest.request.ChannelRequest;
 import com.awe.test.pay.rest.request.dto.ChannelRequestDto;
 import com.awe.test.pay.rest.response.ChannelResponse;
 import com.awe.test.pay.rest.response.dto.ChannelResponseDto;
+import com.hbird.common.client.AbstractClient;
 
 /**
  * ChannelResource单元测试
