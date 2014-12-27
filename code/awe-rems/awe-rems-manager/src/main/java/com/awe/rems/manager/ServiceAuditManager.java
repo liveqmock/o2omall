@@ -8,7 +8,7 @@ import com.hbird.common.utils.page.PageUtil;
 /**
  * ServiceAuditManager接口
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */
