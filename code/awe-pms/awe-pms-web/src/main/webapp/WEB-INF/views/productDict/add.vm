@@ -8,7 +8,7 @@
 					errorElement:"em",
 					errorClass:"red",
 					rules: {
-												type: {required: true},
+						type: {required: true},
 						attr: {required: true},
 						value: {required: true},
 						remark: {required: true},
@@ -52,21 +52,27 @@
                         <div class="widget-main" style="background-color: #fff;padding:5px;">
                             <form class="form-horizontal" role="form" id="addForm">
                                 <div class="form-group">
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="type">类型</label>
-                                    <div class="col-sm-4">
+									<label class="col-sm-offset-3 col-sm-1 control-label no-padding-right" for="type">类型</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="type" id="type" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="attr">属性</label>
-                                    <div class="col-sm-4">
+								</div>
+								<div class="form-group">
+									<label class="col-sm-offset-3 col-sm-1 control-label no-padding-right" for="attr">属性</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="attr" id="attr" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="value">值</label>
-                                    <div class="col-sm-4">
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-offset-3 col-sm-1 control-label no-padding-right" for="value">值</label>
+                                    <div class="col-sm-3">
                                         <input type="text" name="value" id="value" class="col-xs-12 col-sm-12" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="remark">备注</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="remark" id="remark" class="col-xs-12 col-sm-12" />
+								</div>
+								<div class="form-group">
+									<label class="col-sm-offset-3 col-sm-1 control-label no-padding-right" for="remark">备注</label>
+                                    <div class="col-sm-3">
+										<textarea name="remark" id="remark" class="col-xs-12 col-sm-12"></textarea>
                                     </div>
                                 </div>
 								<div class="form-group">

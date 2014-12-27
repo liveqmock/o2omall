@@ -1,7 +1,9 @@
 package com.awe.pms.controller;
    
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.pms.controller.base.BaseController;
+import com.awe.pms.controller.util.TreeList;
 import com.awe.pms.domain.ProductCategory;
+import com.awe.pms.domain.enums.ProductCategoryEnum;
 import com.awe.pms.domain.query.ProductCategoryQuery;
 import com.awe.pms.service.ProductCategoryService;
 import com.awe.pms.utils.exceptions.ExistedException;
@@ -51,10 +55,15 @@ public class ProductCategoryController extends BaseController {
     @RequestMapping(value = "")
     public String index(Model model, PageUtil page, ProductCategoryQuery query) {
         try {
-            List<ProductCategory> dataList = productCategoryService.queryProductCategoryListWithPage(query, page);
-            model.addAttribute("dataList", dataList);// 数据集合
+//            List<ProductCategory> dataList = productCategoryService.queryProductCategoryListWithPage(query, page);
+            List<ProductCategory> dataList = productCategoryService.queryProductCategoryList(query);
+            List<ProductCategory> newList_ = TreeList.setRootNode(dataList);
+            
+            model.addAttribute("dataList", newList_);// 数据集合
             model.addAttribute("query", query);// 查询参数
             model.addAttribute("page", page);// 分页
+            
+            this.setProductCategory(model);
         } catch (Exception e) {
             LOG.error("productCategory index has error.", e);
         }
@@ -68,7 +77,8 @@ public class ProductCategoryController extends BaseController {
      * @return
      */
     @RequestMapping(value = "addForward")
-    public String addForward() {
+    public String addForward(Model model) {
+    	this.setProductCategory(model);
         return viewPrefix + "/add";
     }
 
@@ -109,6 +119,7 @@ public class ProductCategoryController extends BaseController {
         try {
             ProductCategory productCategoryResult = productCategoryService.getProductCategoryById(productCategory.getId());
             model.addAttribute("productCategory", productCategoryResult);
+            this.setProductCategory(model);
         } catch (Exception e) {
             LOG.error("productCategory updateForward has error.", e);
         }
@@ -206,5 +217,17 @@ public class ProductCategoryController extends BaseController {
             LOG.warn("detail productCategory has error.", e);
             return error();
         }
+    }
+    
+    /**
+     * 获取商品品类并设置
+     * @param model
+     */
+    private void setProductCategory(Model model) {
+    	Map<Integer, ProductCategoryEnum> productCategoryEnumMap = new HashMap<Integer, ProductCategoryEnum>();
+    	for (ProductCategoryEnum item : ProductCategoryEnum.values()) {
+    		productCategoryEnumMap.put(item.getKey(), item);
+    	}
+    	model.addAttribute("productCategoryEnumMap", productCategoryEnumMap);
     }
 }
