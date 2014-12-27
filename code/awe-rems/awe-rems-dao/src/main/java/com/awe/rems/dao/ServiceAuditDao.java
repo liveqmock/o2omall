@@ -8,7 +8,7 @@ import com.awe.rems.domain.query.ServiceAuditQuery;
  * ServiceAuditDao接口<br/>
  * 对'退换货审核流表'表进行基本的操作
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */
