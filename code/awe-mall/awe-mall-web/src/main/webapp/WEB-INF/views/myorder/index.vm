@@ -1,0 +1,156 @@
+<!---------------------- 正文 ----------------------> 
+    <div class="container wid1200 clearfix">
+  
+   <!---------------------- 左则菜单列表 ----------------------> 
+    
+      <div class="article left">
+        <div class="peo_infor">
+          <dl class="clearfix">
+             <dt><img src="#springUrl('')/static/images/m-img1.jpg" /></dt>
+             <dd>
+               <h3><a href="">LEA.wang</a></h3>
+               <p>等级：<i class="class_num">25</i></p>
+               <p>积分：352566</p>
+               <p class="mes_num"><i class="mes"></i><a href="" class="mes_num">消息 (16)</a></p>
+             </dd>
+          </dl>
+          <div class="adress clearfix">
+             <strong class="left normal">默认地址：</strong><span class="left">中国北京海淀区中关村大街6号新中关购物中心</span>
+          </div>
+          <div class="edit_profile ft14"><a href="basic_data.html">编辑个人资料</a></div>
+        </div>
+        <div class="art_left_con">
+            <h3><i class="arti_icon"></i>我购买的</h3>
+            <ul class="article_list">
+               <li><a href="my_order.html" class="on">商品订单</a></li>
+               <li><a href="my_order.html">服务订单</a></li>
+            </ul>
+            <h3><i class="arti_icon"></i>我关注的</h3>
+            <ul class="article_list">
+               <li><a href="questions.html">咨询问题</a></li>
+               <li><a href="relevant_experts.html">相关专家</a></li>
+            </ul>
+            <h3><i class="arti_icon"></i>我发布的</h3>
+            <ul class="article_list">
+               <li><a href="my_diary.html">我的日记</a></li>
+               <li><a href="my_discussion.html">我的讨论</a></li>
+               <li><a href="my_baby.html">我的宝宝</a></li>
+            </ul>
+            <h3><i class="arti_icon"></i>我的资料</h3>
+            <ul class="article_list">
+               <li><a href="basic_data.html">基础资料</a></li>
+               <li><a href="delivery_address.html">收货地址</a></li>
+            </ul>
+            <h3><i class="arti_icon"></i>我的安全</h3>
+            <ul class="article_list">
+               <li><a href="login_password.html">登录密码</a></li>
+               <li><a href="pay.html">支付密码</a></li>
+            </ul>
+            <h3><i class="arti_icon"></i>我的消息</h3>
+            <ul class="article_list">
+               <li><a href="system_message.html">系统公告</a></li>
+            </ul>
+        </div>
+      </div>
+      
+   <!---------------------- 左则菜单列表 end ----------------------> 
+   
+   
+   <!---------------------- 右则内容 ----------------------> 
+      <div class="section right">
+       
+         <h2 class="my_order"><span class="my_order_icon"></span>我的订单</h2>
+         <ul class="my_order_list">
+            <li>待付款（<span>0</span>）</li>
+            <li>待确认收货（<span>2</span>）</li>
+         </ul>
+         <div class="my_order_form clearfix">
+            <form>
+               <input type="text" class="order_input" value="商品名称、商品编号、订单编号" />
+               <input type="button"  class="order_btn" value="查询"/>
+            </form>
+         </div>
+         <div class="order_tab clearfix mt25">
+         
+           <table width="100%" border="0"  cellspacing="0" cellpadding="0">
+           <thead>
+  <tr>
+    <th class="title th">订单信息 </th>
+    <th class="title">收货人</th>
+    <th class="title">订单金额</th>
+    <th class="title"><select name="" class="order_select"><option>最近三个月</option></select></th>
+    <th class="title"><select name="" class="order_select"><option>全部状态</option></select></th>
+    <th class="title tcenter">操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <th colspan="6" class="th">订单编号：21890382020</th>
+  </tr>
+  <tr>
+    <td width="260" class="tcenter"><img src="#springUrl('')/static/images/m-img2.jpg" /></td>
+    <td width="130">张先生</td>
+    <td width="123"><p>¥198.00</p><p>货到付款 </p></td>
+    <td width="172"><p>2014-10-15</p><p>10:58:31  </p></td>
+    <td width="165">等待收货</td>
+    <td class="tcenter"><a href="">查看</a><br /><a href="">取消订单</a></td>
+  </tr>
+  </tbody>
+</table>
+
+           <table width="100%" border="0" class="mt10" cellspacing="0" cellpadding="0">
+
+  <tr>
+    <th colspan="6" class="th">订单编号：21890382020</th>
+  </tr>
+  <tr>
+    <td width="260" class="tcenter"><img src="#springUrl('')/static/images/m-img2.jpg" /></td>
+    <td width="130">张先生</td>
+    <td width="123"><p>¥198.00</p><p>货到付款 </p></td>
+    <td width="172"><p>2014-10-15</p><p>10:58:31  </p></td>
+    <td width="165">等待收货</td>
+    <td class="tcenter"><a href="">查看</a><br /><a href="">取消订单</a></td>
+  </tr>
+
+</table>
+           <table width="100%" border="0" class="mt10" cellspacing="0" cellpadding="0">
+
+  <tr>
+    <th colspan="6" class="th">订单编号：21890382020</th>
+  </tr>
+  <tr>
+    <td width="260" class="tcenter"><img src="#springUrl('')/static/images/m-img2.jpg" /></td>
+    <td width="130">张先生</td>
+    <td width="123"><p>¥198.00</p><p>货到付款 </p></td>
+    <td width="172"><p>2014-10-15</p><p>10:58:31  </p></td>
+    <td width="165">等待收货</td>
+    <td class="tcenter"><a href="">查看</a><br /><a href="">取消订单</a></td>
+  </tr>
+  <tr>
+    <td width="260" class="tcenter"><img src="#springUrl('')/static/images/m-img2.jpg" /></td>
+    <td width="130">张先生</td>
+    <td width="123"><p>¥198.00</p><p>货到付款 </p></td>
+    <td width="172"><p>2014-10-15</p><p>10:58:31  </p></td>
+    <td width="165">等待收货</td>
+    <td class="tcenter"><a href="">查看</a><br /><a href="">取消订单</a></td>
+  </tr>
+    <th colspan="5" class="tt">订单编号：21890382020</th>
+    <th class="tt del "><a href=""></a></th>
+  <tr>
+    <td width="260" class="tcenter"><img src="#springUrl('')/static/images/m-img2.jpg" /></td>
+    <td width="130">张先生</td>
+    <td width="123"><p>¥198.00</p><p>货到付款 </p></td>
+    <td width="172"><p>2014-10-15</p><p>10:58:31  </p></td>
+    <td width="165">已完成</td>
+    <td class="tcenter"><a href="">查看</a><br /><a href="">申请返修</a><br /><a href="">退换货</a></td>
+  </tr>
+</table>
+
+         
+         </div>
+      
+      </div>
+      
+   <!---------------------- 右则内容end ----------------------> 
+    </div>
+ <!---------------------- 正文end ----------------------> 
