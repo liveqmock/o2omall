@@ -70,6 +70,9 @@ public class ReturnExchangeDaoImpl extends BaseDao implements ReturnExchangeDao 
         return (ReturnExchange) queryForObject(namespace +".getReturnExchangeById", id);
     } 
     
+    public ReturnExchange getReturnExchangeByServiceNo(String ServiceNo){
+    	return (ReturnExchange) queryForObject(namespace +".getReturnExchangeByServiceNo", ServiceNo);
+    }
     /**
      * {@inheritDoc}
      */

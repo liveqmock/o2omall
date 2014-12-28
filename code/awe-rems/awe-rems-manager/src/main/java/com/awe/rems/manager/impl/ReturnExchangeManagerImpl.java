@@ -110,7 +110,10 @@ public class ReturnExchangeManagerImpl extends BaseManager implements ReturnExch
     public ReturnExchange getReturnExchangeById(Long id) {
         return returnExchangeDao.getReturnExchangeById(id);
     }
-
+    
+    public ReturnExchange getReturnExchangeByServiceNo(String ServiceNo){
+    	return returnExchangeDao.getReturnExchangeByServiceNo(ServiceNo);
+    }
     /**
      * {@inheritDoc}
      */

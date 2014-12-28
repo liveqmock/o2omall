@@ -70,6 +70,12 @@ public interface ReturnExchangeDao {
      * @return
      */
     public ReturnExchange getReturnExchangeById(Long id);
+    /**
+     * 根据服务号获取对象信息
+     * @param ServiceNo:售后服务号
+     * @return
+     */
+    public ReturnExchange getReturnExchangeByServiceNo(String ServiceNo);
 
     /**
      * 判断是否存在

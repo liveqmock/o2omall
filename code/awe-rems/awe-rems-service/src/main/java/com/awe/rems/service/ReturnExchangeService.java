@@ -75,6 +75,12 @@ public interface ReturnExchangeService {
      * @return 对象信息
      */
     public ReturnExchange getReturnExchangeById(Long id);
+    /**
+     * 根据服务号获取对象信息
+     * @param ServiceNo:售后服务号
+     * @return
+     */
+    public ReturnExchange getReturnExchangeByServiceNo(String ServiceNo);
 
     /**
      * 根据主键集合批量删除对象信息，该处做的是逻辑删除

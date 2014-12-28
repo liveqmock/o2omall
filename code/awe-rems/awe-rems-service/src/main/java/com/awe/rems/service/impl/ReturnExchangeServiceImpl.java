@@ -174,5 +174,19 @@ public class ReturnExchangeServiceImpl implements ReturnExchangeService {
         }
         return returnExchange;
     }
+    @Profiled(tag = "ReturnExchangeService.getReturnExchangeByServiceNo")
+    public ReturnExchange getReturnExchangeByServiceNo(String ServiceNo){
+    	ReturnExchange returnExchange = null;
+    	try {
+            if (null != ServiceNo) {
+                returnExchange = returnExchangeManager.getReturnExchangeByServiceNo(ServiceNo);
+            } else {
+                LOG.warn("ReturnExchangeServiceImpl#getReturnExchangeByServiceNo failed, param is illegal.");
+            }
+        } catch (Exception e) {
+            LOG.error("ReturnExchangeServiceImpl#getReturnExchangeByServiceNo has error.", e);
+        }
+        return returnExchange;
+    }
 }
 
