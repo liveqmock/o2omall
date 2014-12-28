@@ -7,7 +7,7 @@ import java.util.Date;
  * ReturnExchangeResponseDto：退换货返回对象Dto<br/>
  * 提供rest接口时方法的返回对象
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:23
  * 
  */

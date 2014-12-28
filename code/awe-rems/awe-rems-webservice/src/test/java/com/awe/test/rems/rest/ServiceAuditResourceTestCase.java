@@ -13,7 +13,7 @@ import com.hbird.common.client.AbstractClient;
 /**
  * ServiceAuditResource单元测试
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 15:29:57
  * 
  */

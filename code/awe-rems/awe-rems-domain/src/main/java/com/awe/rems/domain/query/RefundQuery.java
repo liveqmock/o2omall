@@ -7,7 +7,7 @@ import com.hbird.common.utils.page.Query;
 /**
  * RefundQuery：退款表查询类
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */

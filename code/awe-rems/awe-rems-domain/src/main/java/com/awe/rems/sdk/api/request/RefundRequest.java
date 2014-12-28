@@ -6,7 +6,7 @@ import com.awe.rems.sdk.api.request.dto.RefundRequestDto;
 /**
  * RefundRequest：退款表请求参数
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */

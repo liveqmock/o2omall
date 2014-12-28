@@ -6,7 +6,7 @@ import com.awe.test.rems.rest.request.dto.ReturnExchangeImageRequestDto;
 /**
  * ReturnExchangeImageRequest：退换货图片表请求参数
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:23
  * 
  */

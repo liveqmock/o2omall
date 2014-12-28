@@ -17,7 +17,7 @@ import com.awe.test.base.TestConstants;
 /**
  * ServiceAuditService单元测试
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:23
  * 
  */
@@ -70,39 +70,6 @@ public class ServiceAuditServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(ex);
     }
 
-    /**
-     * 测试删除数据-成功
-     */
-    @Test
-    public void testDelete() {
-        Assert.notNull(serviceAuditService);
-        ServiceAudit serviceAudit = new ServiceAudit();
-        serviceAudit.setId(TEST_DEFAULT_EXIST_ID);
-        Long returnExchangeId = null; //TODO 初始化
-        serviceAudit.setReturnExchangeId(returnExchangeId);
-        String serviceNo = null; //TODO 初始化
-        serviceAudit.setServiceNo(serviceNo);
-        serviceAudit.setUpdateUser(TestConstants.UER_NAME);
-        boolean result = serviceAuditService.delete(serviceAudit);
-        Assert.isTrue(result);
-    }
-    
-    /**
-     * 测试删除数据-失败（ID不存在等）
-     */
-    @Test
-    public void testDeleteFailure() {
-        Assert.notNull(serviceAuditService);
-        ServiceAudit serviceAudit = new ServiceAudit();
-        serviceAudit.setId(TEST_NOT_EXIST_ID);// 不存在的ID
-        Long returnExchangeId = null; //TODO 初始化
-        serviceAudit.setReturnExchangeId(returnExchangeId);
-        String serviceNo = null; //TODO 初始化
-        serviceAudit.setServiceNo(serviceNo);
-        serviceAudit.setUpdateUser(TestConstants.UER_NAME);
-        boolean result = serviceAuditService.delete(serviceAudit);
-        Assert.isTrue(!result);
-    }
 
     /**
      * 测试修改数据-成功

@@ -7,7 +7,7 @@ import com.awe.test.rems.rest.response.dto.ServiceAuditResponseDto;
  * ServiceAuditResponse：退换货审核流表返回对象<br/>
  * 提供rest接口时方法的返回对象
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:23
  * 
  */

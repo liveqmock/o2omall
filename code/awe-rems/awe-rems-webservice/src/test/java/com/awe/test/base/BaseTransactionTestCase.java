@@ -12,7 +12,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 /**
  * Base TestCase with Transaction
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:23
  * 
  */

@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * ReturnExchangeImage：退换货图片表实体类
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */

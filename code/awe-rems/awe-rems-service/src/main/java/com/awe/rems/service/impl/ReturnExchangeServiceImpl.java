@@ -20,7 +20,7 @@ import org.perf4j.aop.Profiled;
 /**
  * ReturnExchangeService接口的实现类
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */
@@ -171,6 +171,20 @@ public class ReturnExchangeServiceImpl implements ReturnExchangeService {
             }
         } catch (Exception e) {
             LOG.error("ReturnExchangeServiceImpl#getReturnExchangeById has error.", e);
+        }
+        return returnExchange;
+    }
+    @Profiled(tag = "ReturnExchangeService.getReturnExchangeByServiceNo")
+    public ReturnExchange getReturnExchangeByServiceNo(String ServiceNo){
+    	ReturnExchange returnExchange = null;
+    	try {
+            if (null != ServiceNo) {
+                returnExchange = returnExchangeManager.getReturnExchangeByServiceNo(ServiceNo);
+            } else {
+                LOG.warn("ReturnExchangeServiceImpl#getReturnExchangeByServiceNo failed, param is illegal.");
+            }
+        } catch (Exception e) {
+            LOG.error("ReturnExchangeServiceImpl#getReturnExchangeByServiceNo has error.", e);
         }
         return returnExchange;
     }

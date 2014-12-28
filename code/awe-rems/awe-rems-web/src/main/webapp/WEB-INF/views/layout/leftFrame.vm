@@ -60,13 +60,13 @@
 
 			<ul class="submenu">
 				<li id="subMenu-200">
-					<a href="javascript:void(0)" onclick="link('200','退换货','returnExchange','20','售后服务系统');">退换货</a>
+					<a href="javascript:void(0)" onclick="link('200','售后查询','returnExchange','20','售后服务系统');">售后查询</a>
 				</li>
 				<li id="subMenu-201">
-					<a href="javascript:void(0)" onclick="link('202','退换货审核流表','serviceAudit','20','售后服务系统');">退换货审核流表</a>
+					<a href="javascript:void(0)" onclick="link('202','售后审核','serviceAudit','20','售后服务系统');">售后审核</a>
 				</li>
 				<li id="subMenu-202">
-					<a href="javascript:void(0)" onclick="link('203','退款表','refund','20','售后服务系统');">退款表</a>
+					<a href="javascript:void(0)" onclick="link('203','退款查询','refund','20','售后服务系统');">退款查询</a>
 				</li>
 			</ul>
 		

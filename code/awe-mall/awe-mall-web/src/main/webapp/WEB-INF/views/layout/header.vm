@@ -11,7 +11,7 @@
          </div>
          <div class="right">
            <ul class="top_list">
-             <li><i class="top_icon1"></i><a href="member/my_order.html">我的订单</a></li>
+             <li><i class="top_icon1"></i><a href="#springUrl('')/myorder/index">我的订单</a></li>
              <li><i class="top_icon2"></i><a href="member/my_list.html">会员中心</a></li>
              <li class="red"><i class="top_icon3"></i>400-960-999</li>
            </ul>

@@ -27,7 +27,7 @@ import com.awe.rems.service.ReturnExchangeService;
 /**
  * 退换货REST服务：提供有关退换货的接口
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:23
  * 
  */

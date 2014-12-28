@@ -17,7 +17,7 @@ import com.awe.test.base.TestConstants;
 /**
  * ReturnExchangeImageService单元测试
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:23
  * 
  */

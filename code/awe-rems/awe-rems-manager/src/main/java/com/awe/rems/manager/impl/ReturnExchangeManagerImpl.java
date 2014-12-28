@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 /**
  * ReturnExchangeManager接口的实现类
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */
@@ -110,7 +110,10 @@ public class ReturnExchangeManagerImpl extends BaseManager implements ReturnExch
     public ReturnExchange getReturnExchangeById(Long id) {
         return returnExchangeDao.getReturnExchangeById(id);
     }
-
+    
+    public ReturnExchange getReturnExchangeByServiceNo(String ServiceNo){
+    	return returnExchangeDao.getReturnExchangeByServiceNo(ServiceNo);
+    }
     /**
      * {@inheritDoc}
      */

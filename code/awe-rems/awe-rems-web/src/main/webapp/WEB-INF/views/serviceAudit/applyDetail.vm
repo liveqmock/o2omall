@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        #parse("/layout/head.vm")
+		<script language="javascript"> 
+			$(function() {
+				$("#btn-query").click(function() {
+        			pageSubmit(1);
+   				});
+				$("#btn-add").click(function() {
+        			window.location.href=("$basePath/serviceAudit/addForward");
+   				});
+			});
+        	// 提交分页查询
+        	function pageSubmit(pageNoParam) {
+                $("#curPage").val(pageNoParam);
+            	$("#queryForm").attr("action", "$basePath/serviceAudit");
+                $("#queryForm").attr("method", "POST");
+                $("#queryForm").submit();
+        	}
+        	
+        	function toUpdate(parameterId){
+        		window.location.href=("$basePath/serviceAudit/updateForward?id="+parameterId);
+        	}
+        	
+        </script>
+	</head>
+    <body>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-search green"></i>售后审核页面
+                        </h5>
+                        <div class="widget-toolbar">
+                           <!--->
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div class="col-xs-12 col-sm-12 table-responsive">
+				<div class="panel panel-default">
+                  <div class="panel-heading">
+					<i class="icon-th blue"></i>售后服务
+				  </div>
+    			<div class="panel-body" ><!--最外层面板body-start-->
+    				<div class="widget-box">
+    					<div class="widget-header">
+        					<h3 class="panel-title">售后服务详情</h3>
+        					<div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+            						<i class="1 icon-chevron-up bigger-100"></i>
+                                </a>
+                            </div>
+    					</div>
+        				<div class="widget-body">
+        					<!--内容-->	
+        				</div>
+                    </div>
+    			</div><!--最外层面板body-end-->
+    			<div class="panel-body" ><!--最外层面板body-start-->
+    				<div class="widget-box">
+    					<div class="widget-header">
+        					<h3 class="panel-title">售后服务进度条</h3>
+        					<div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+            						<i class="1 icon-chevron-up bigger-100"></i>
+                                </a>
+                            </div>
+    					</div>
+        				<div class="widget-body">
+        					<!--内容-->	
+        				</div>
+                    </div>
+    			</div><!--最外层面板body-end-->
+    			<div class="panel-body" ><!--最外层面板body-start-->
+    				<div class="widget-box">
+    					<div class="widget-header">
+        					<h3 class="panel-title">跟踪信息</h3>
+        					<div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+            						<i class="1 icon-chevron-up bigger-100"></i>
+                                </a>
+                            </div>
+    					</div>
+        				<div class="widget-body">
+        					<!--内容-->	
+        				</div>
+                    </div>
+    			</div><!--最外层面板body-end-->
+    			<div class="panel-body" ><!--最外层面板body-start-->
+    				<div class="widget-box">
+    					<div class="widget-header">
+        					<h3 class="panel-title">服务单信息</h3>
+        					<div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+            						<i class="1 icon-chevron-up bigger-100"></i>
+                                </a>
+                            </div>
+    					</div>
+        				<div class="widget-body">
+        					<!--内容-->	
+        				</div>
+                    </div>
+    			</div><!--最外层面板body-end-->
+    			<div class="panel-body" ><!--最外层面板body-start-->
+    				<div class="widget-box">
+    					<div class="widget-header">
+        					<h3 class="panel-title">审核</h3>
+        					<div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+            						<i class="1 icon-chevron-up bigger-100"></i>
+                                </a>
+                            </div>
+    					</div>
+        				<div class="widget-body">
+        					<!--内容-->	
+        				</div>
+                    </div>
+    			</div><!--最外层面板body-end-->
+			</div>
+           </div>
+        </div>
+    </body>
+</html>

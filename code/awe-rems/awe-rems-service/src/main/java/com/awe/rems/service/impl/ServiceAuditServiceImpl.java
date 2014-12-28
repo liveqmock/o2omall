@@ -20,7 +20,7 @@ import org.perf4j.aop.Profiled;
 /**
  * ServiceAuditService接口的实现类
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */
@@ -121,41 +121,6 @@ public class ServiceAuditServiceImpl implements ServiceAuditService {
         return serviceAuditList;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Profiled(tag = "ServiceAuditService.delete")
-    public boolean delete(ServiceAudit serviceAudit) {
-        boolean resultFlag = false;
-        try {
-            if (null != serviceAudit && null != serviceAudit.getId()) {
-                resultFlag = serviceAuditManager.delete(serviceAudit);
-            } else {
-                LOG.warn("ServiceAuditServiceImpl#delete param is illegal.");
-            }
-        } catch (Exception e) {
-            LOG.error("ServiceAuditServiceImpl#delete has error.", e);
-        }
-        return resultFlag;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Profiled(tag = "ServiceAuditService.batchDelete")
-    public boolean delete(ServiceAudit[] serviceAudits) {
-        boolean resultFlag = false;
-        try {
-            if (null != serviceAudits && serviceAudits.length > 0) {
-                resultFlag = serviceAuditManager.delete(serviceAudits);
-            } else {
-                LOG.warn("ServiceAuditServiceImpl#batchDelete failed, param is illegal.");
-            }
-        } catch (Exception e) {
-            LOG.error("ServiceAuditServiceImpl#batchDelete has error.", e);
-        }
-        return resultFlag;
-    }
 
     /**
      * {@inheritDoc}

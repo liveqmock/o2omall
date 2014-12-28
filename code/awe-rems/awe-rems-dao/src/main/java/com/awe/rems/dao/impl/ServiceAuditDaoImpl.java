@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * ServiceAuditDAO实现类<br/>
  * 对'退换货审核流表'表进行基本的操作
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */
@@ -54,13 +54,6 @@ public class ServiceAuditDaoImpl extends BaseDao implements ServiceAuditDao {
      */
     public List<ServiceAudit> queryServiceAuditListWithPage(ServiceAuditQuery queryBean) {
         return (List<ServiceAudit>) queryForList(namespace +".queryServiceAuditListWithPage", queryBean);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public boolean delete(ServiceAudit configuration) {
-        return delete(namespace +".delete", configuration);
     }
 
     /**

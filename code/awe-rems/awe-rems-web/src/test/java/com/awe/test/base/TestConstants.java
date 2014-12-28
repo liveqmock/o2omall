@@ -2,7 +2,7 @@ package com.awe.test.base;
 
 /**
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:23
  * 
  */
