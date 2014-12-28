@@ -40,7 +40,7 @@
     <!-- 创建信息 -->
     <insert id="insert" parameterType="ProductBrand" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO product_brand(<include refid="productBrandUsedColumns"/>) 
-        VALUES (#{categoryOneId},#{categoryOne},#{categoryTwoId},#{categoryTwo},#{categoryThreeId},#{categoryThree},#{brandCode},#{brandName},#{enName},#{brandAbbr},#{keyword},#{type},#{typeName},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{priority},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+        VALUES (#{categoryOneId},#{categoryOne},#{categoryTwoId},#{categoryTwo},#{categoryThreeId},#{categoryThree},#{brandCode},#{brandName},#{enName},#{brandAbbr},#{keyword},#{type},#{typeName},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{priority},now(),now(),#{createUser},#{updateUser},1)
 	</insert>
 	
     <!-- 修改信息 -->
@@ -48,19 +48,19 @@
         <if test="_parameter != null">
             <if test="id != null and id > 0">
                 update product_brand set
-		        <if test="categoryOneId != null and categoryOneId != ''">
+		        <if test="categoryOneId != null">
                 	category_one_id = #{categoryOneId,jdbcType=DECIMAL},
 		        </if>
 		        <if test="categoryOne != null and categoryOne != ''">
                 	category_one = #{categoryOne,jdbcType=VARCHAR},
 		        </if>
-		        <if test="categoryTwoId != null and categoryTwoId != ''">
+		        <if test="categoryTwoId != null">
                 	category_two_id = #{categoryTwoId,jdbcType=DECIMAL},
 		        </if>
 		        <if test="categoryTwo != null and categoryTwo != ''">
                 	category_two = #{categoryTwo,jdbcType=VARCHAR},
 		        </if>
-		        <if test="categoryThreeId != null and categoryThreeId != ''">
+		        <if test="categoryThreeId != null">
                 	category_three_id = #{categoryThreeId,jdbcType=DECIMAL},
 		        </if>
 		        <if test="categoryThree != null and categoryThree != ''">
@@ -81,7 +81,7 @@
 		        <if test="keyword != null and keyword != ''">
                 	keyword = #{keyword,jdbcType=VARCHAR},
 		        </if>
-		        <if test="type != null and type != ''">
+		        <if test="type != null">
                 	type = #{type,jdbcType=DECIMAL},
 		        </if>
 		        <if test="typeName != null and typeName != ''">
@@ -99,7 +99,7 @@
 		        <if test="cityNo != null and cityNo != ''">
                 	city_no = #{cityNo,jdbcType=VARCHAR},
 		        </if>
-		        <if test="priority != null and priority != ''">
+		        <if test="priority != null">
                 	priority = #{priority,jdbcType=DECIMAL},
 		        </if>
 		        <if test="updateUser != null and updateUser != ''">
@@ -135,7 +135,17 @@
 
     <!-- 根据查询Bean查询-判断是否存在 -->
     <select id="exist" resultType="java.lang.Integer" parameterType="ProductBrand">
-        select count(1) from product_brand where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+        select count(1) from product_brand where yn = 1 
+		<if test="categoryOneId != null">
+        	and category_one_id = #{categoryOneId,jdbcType=DECIMAL}
+        </if>
+        <if test="categoryTwoId != null">
+        	and category_two_id = #{categoryTwoId,jdbcType=DECIMAL}
+        </if>
+		<if test="type != null">
+        	and type = #{type,jdbcType=DECIMAL}
+        </if>
+       	and brand_code = #{brandCode,jdbcType=VARCHAR}
     </select>
 
     <!-- 根据查询Bean获取集合总数 -->
@@ -157,19 +167,19 @@
         <if test="id != null and id != ''">
         	and id = #{id,jdbcType=DECIMAL}
         </if>
-        <if test="categoryOneId != null and categoryOneId != ''">
+        <if test="categoryOneId != null">
         	and category_one_id = #{categoryOneId,jdbcType=DECIMAL}
         </if>
         <if test="categoryOne != null and categoryOne != ''">
         	and category_one = #{categoryOne,jdbcType=VARCHAR}
         </if>
-        <if test="categoryTwoId != null and categoryTwoId != ''">
+        <if test="categoryTwoId != null">
         	and category_two_id = #{categoryTwoId,jdbcType=DECIMAL}
         </if>
         <if test="categoryTwo != null and categoryTwo != ''">
         	and category_two = #{categoryTwo,jdbcType=VARCHAR}
         </if>
-        <if test="categoryThreeId != null and categoryThreeId != ''">
+        <if test="categoryThreeId != null">
         	and category_three_id = #{categoryThreeId,jdbcType=DECIMAL}
         </if>
         <if test="categoryThree != null and categoryThree != ''">
@@ -190,7 +200,7 @@
         <if test="keyword != null and keyword != ''">
         	and keyword = #{keyword,jdbcType=VARCHAR}
         </if>
-        <if test="type != null and type != ''">
+        <if test="type != null">
         	and type = #{type,jdbcType=DECIMAL}
         </if>
         <if test="typeName != null and typeName != ''">
@@ -208,7 +218,7 @@
         <if test="cityNo != null and cityNo != ''">
         	and city_no = #{cityNo,jdbcType=VARCHAR}
         </if>
-        <if test="priority != null and priority != ''">
+        <if test="priority != null">
         	and priority = #{priority,jdbcType=DECIMAL}
         </if>
         <if test="createTime != null and createTime != ''">
