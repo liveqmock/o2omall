@@ -7,7 +7,9 @@ package com.awe.uc.sdk.util;
  * @version 2014-12-25 下午4:27:42
  */
 public interface MixContents {
-
+    /** 省的父CODE */
+    String PROVINCE_PARENT_CODE = "0";
+    
     /** 三级地址-省的级别 1 */
     int PROVINCE_LEVEL = 1;
 

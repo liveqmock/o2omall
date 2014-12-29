@@ -6,13 +6,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Assert;
 
-import com.hbird.common.client.AbstractSecureClient;
-import com.hbird.common.utils.serialize.JsonHelper;
 import com.awe.uc.sdk.request.AreaRequest;
 import com.awe.uc.sdk.request.dto.AreaRequestDto;
 import com.awe.uc.sdk.response.AreaResponse;
 import com.awe.uc.sdk.response.dto.AreaResponseDto;
 import com.awe.uc.sdk.util.MixContents;
+import com.hbird.common.client.AbstractSecureClient;
+import com.hbird.common.utils.serialize.JsonHelper;
 
 /**
  * 三级地址服务的客户端
@@ -36,7 +36,7 @@ public class AreaClient extends AbstractSecureClient {
         Assert.notNull(requestDto);
 
         AreaRequest request = new AreaRequest(super.getKey(), requestDto);
-        
+
         if (LOG.isDebugEnabled()) {
             LOG.debug("getArea request: " + JsonHelper.toJson(request));
         }
@@ -52,14 +52,28 @@ public class AreaClient extends AbstractSecureClient {
     }
 
     /**
+     * 依据级别和父Code获取地址信息。
+     * 
+     * @param level
+     *            地址级别：省的级别为1,市的级别为2,县的级别为3
+     * @param parentCode
+     *            父Code，其中，省的父code为'0'
+     * @return
+     */
+    public List<AreaResponseDto> getAreas(int level, String parentCode) {
+        AreaRequestDto requestDto = new AreaRequestDto();
+        requestDto.setLevel(level);
+        requestDto.setParentCode(parentCode);
+        return this.getArea(requestDto);
+    }
+
+    /**
      * 获取所有省
      * 
      * @return
      */
     public List<AreaResponseDto> getProvinces() {
-        AreaRequestDto requestDto = new AreaRequestDto();
-        requestDto.setLevel(MixContents.PROVINCE_LEVEL);
-        return this.getArea(requestDto);
+        return this.getAreas(MixContents.PROVINCE_LEVEL, MixContents.PROVINCE_PARENT_CODE);
     }
 
     /**
@@ -70,10 +84,7 @@ public class AreaClient extends AbstractSecureClient {
      * @return
      */
     public List<AreaResponseDto> getCities(String provinceCode) {
-        AreaRequestDto requestDto = new AreaRequestDto();
-        requestDto.setLevel(MixContents.CITY_LEVEL);
-        requestDto.setParentCode(provinceCode);
-        return this.getArea(requestDto);
+        return this.getAreas(MixContents.CITY_LEVEL, provinceCode);
     }
 
     /**
@@ -83,12 +94,8 @@ public class AreaClient extends AbstractSecureClient {
      *            市编码
      * @return
      */
-    public List<AreaResponseDto> getCountys(String cityCode) {
-        AreaRequestDto requestDto = new AreaRequestDto();
-        requestDto.setLevel(MixContents.COUNTY_LEVEL);
-        requestDto.setParentCode(cityCode);
-        return this.getArea(requestDto);
+    public List<AreaResponseDto> getCounties(String cityCode) {
+        return this.getAreas(MixContents.COUNTY_LEVEL, cityCode);
     }
 
-   
 }
