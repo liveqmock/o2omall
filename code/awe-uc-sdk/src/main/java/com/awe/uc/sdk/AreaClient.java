@@ -58,7 +58,7 @@ public class AreaClient extends AbstractSecureClient {
      */
     public List<AreaResponseDto> getProvinces() {
         AreaRequestDto requestDto = new AreaRequestDto();
-        requestDto.setLeval(MixContents.PROVINCE_LEVEL);
+        requestDto.setLevel(MixContents.PROVINCE_LEVEL);
         return this.getArea(requestDto);
     }
 
@@ -71,7 +71,7 @@ public class AreaClient extends AbstractSecureClient {
      */
     public List<AreaResponseDto> getCities(String provinceCode) {
         AreaRequestDto requestDto = new AreaRequestDto();
-        requestDto.setLeval(MixContents.CITY_LEVEL);
+        requestDto.setLevel(MixContents.CITY_LEVEL);
         requestDto.setParentCode(provinceCode);
         return this.getArea(requestDto);
     }
@@ -85,7 +85,7 @@ public class AreaClient extends AbstractSecureClient {
      */
     public List<AreaResponseDto> getCountys(String cityCode) {
         AreaRequestDto requestDto = new AreaRequestDto();
-        requestDto.setLeval(MixContents.COUNTY_LEVEL);
+        requestDto.setLevel(MixContents.COUNTY_LEVEL);
         requestDto.setParentCode(cityCode);
         return this.getArea(requestDto);
     }
