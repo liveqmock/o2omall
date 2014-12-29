@@ -25,6 +25,11 @@
 			<groupId>com.awe.pms</groupId>
 			<artifactId>awe-pms-util</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.awe.uc</groupId>
+			<artifactId>awe-uc-sdk</artifactId>
+		</dependency>
 
 		<!-- Spring begin -->
 		<dependency>

@@ -2,6 +2,7 @@
 <html lang="zh-cn">
     <head>
         #parse("/layout/head.vm")
+		<script src="$basePath/static/js/inner/productBrand.js?v=16"></script>
 		<script language="javascript"> 
 			$(function() {
 				$("#btn-query").click(function() {
@@ -10,6 +11,41 @@
 				$("#btn-add").click(function() {
         			window.location.href=("$basePath/productBrand/addForward");
    				});
+				
+				loadProductCategorys(1,0,"$!query.categoryOneId","categoryOneId");
+				
+				$("#type").val("$!query.type");
+				
+    			$("#categoryOneId").change(function () {
+    				initSelected("categoryTwoId");
+    				initSelected("categoryThreeId");
+    				if (this.value == "") {
+    					return;
+    				}
+    				loadProductCategorys(2,this.value,0,"categoryTwoId");
+    			});
+    			
+    			$("#categoryTwoId").change(function () {
+    				initSelected("categoryThreeId");
+    				if (this.value == "") {
+    					return;
+    				}
+    				loadProductCategorys(3,this.value,0,"categoryThreeId");
+    			});
+				
+				loadAreas(1,0,"$!query.provinceNo","provinceNo");
+				
+				if ("$!query.provinceNo" != "") {
+					loadAreas(2,"$!query.provinceNo","$!query.cityNo","cityNo");
+				}
+				
+				$("#provinceNo").change(function () {
+					initSelected("cityNo");
+					if (this.value == "") {
+						return;
+					}
+					loadAreas(2,this.value,"","cityNo");
+				});
 			});
         	// 提交分页查询
         	function pageSubmit(pageNoParam) {
@@ -18,7 +54,7 @@
                 $("#queryForm").attr("method", "POST");
                 $("#queryForm").submit();
         	}
-        	
+			
         	function toUpdate(parameterId){
         		window.location.href=("$basePath/productBrand/updateForward?id="+parameterId);
         	}
@@ -49,28 +85,49 @@
 								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="categoryOneId">一级分类</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="categoryOneId" id="categoryOneId" class="col-xs-10 col-sm-8" value="$!query.categoryOneId"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="categoryOne">一级分类名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="categoryOne" id="categoryOne" class="col-xs-10 col-sm-8" value="$!query.categoryOne"/>
+										<select id="categoryOneId" name="categoryOneId" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+                                        </select>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="categoryTwoId">二级分类</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="categoryTwoId" id="categoryTwoId" class="col-xs-10 col-sm-8" value="$!query.categoryTwoId"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="categoryTwo">二级分类名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="categoryTwo" id="categoryTwo" class="col-xs-10 col-sm-8" value="$!query.categoryTwo"/>
+										<select id="categoryTwoId" name="categoryTwoId" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+                                        </select>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="categoryThreeId">三级分类</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="categoryThreeId" id="categoryThreeId" class="col-xs-10 col-sm-8" value="$!query.categoryThreeId"/>
+										<select id="categoryThreeId" name="categoryThreeId" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+                                        </select>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="categoryThree">三级分类名称</label>
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="provinceName">地区-省份</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="categoryThree" id="categoryThree" class="col-xs-10 col-sm-8" value="$!query.categoryThree"/>
+                                        <select id="provinceNo" name="provinceNo" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+                                        </select>
                                     </div>
+									<label class="col-sm-1 control-label no-padding-right" for="cityName">地区-市</label>
+                                    <div class="col-sm-3">
+                                        <select id="cityNo" name="cityNo" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+                                        </select>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="type">商品类型</label>
+                                    <div class="col-sm-3">
+										<select id="type" name="type" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+    										#if(!$null.isNull($!pmsTypes))
+                                    			#foreach($item in $pmsTypes)
+                                    				<option value="$item.attr">$item.value</option>
+                                    			#end
+                                    		#end
+                                        </select>
+                                    </div>
+								</div>
+								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="brandCode">品牌编号</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="brandCode" id="brandCode" class="col-xs-10 col-sm-8" value="$!query.brandCode"/>
@@ -78,46 +135,6 @@
 									<label class="col-sm-1 control-label no-padding-right" for="brandName">品牌名称</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="brandName" id="brandName" class="col-xs-10 col-sm-8" value="$!query.brandName"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="enName">品牌英文名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="enName" id="enName" class="col-xs-10 col-sm-8" value="$!query.enName"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="brandAbbr">品牌简称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="brandAbbr" id="brandAbbr" class="col-xs-10 col-sm-8" value="$!query.brandAbbr"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="keyword">关键字</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="keyword" id="keyword" class="col-xs-10 col-sm-8" value="$!query.keyword"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="type">商品类型（国内、进口）</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="type" id="type" class="col-xs-10 col-sm-8" value="$!query.type"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="typeName">商品类型名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="typeName" id="typeName" class="col-xs-10 col-sm-8" value="$!query.typeName"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="provinceName">地区-省份-名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="provinceName" id="provinceName" class="col-xs-10 col-sm-8" value="$!query.provinceName"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="provinceNo">地区-省份-编号</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="provinceNo" id="provinceNo" class="col-xs-10 col-sm-8" value="$!query.provinceNo"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="cityName">地区-市-名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="cityName" id="cityName" class="col-xs-10 col-sm-8" value="$!query.cityName"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="cityNo">地区-市-编号</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="cityNo" id="cityNo" class="col-xs-10 col-sm-8" value="$!query.cityNo"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="priority">优先级</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="priority" id="priority" class="col-xs-10 col-sm-8" value="$!query.priority"/>
                                     </div>
 								</div>
 								<div class="form-group">
@@ -141,22 +158,14 @@
                         <tr>
 							<th class="center">主键</th>
 							<th class="center">一级分类</th>
-							<th class="center">一级分类名称</th>
 							<th class="center">二级分类</th>
-							<th class="center">二级分类名称</th>
 							<th class="center">三级分类</th>
-							<th class="center">三级分类名称</th>
 							<th class="center">品牌编号</th>
 							<th class="center">品牌名称</th>
-							<th class="center">品牌英文名称</th>
 							<th class="center">品牌简称</th>
-							<th class="center">关键字</th>
-							<th class="center">商品类型（国内、进口）</th>
-							<th class="center">商品类型名称</th>
-							<th class="center">地区-省份-名称</th>
-							<th class="center">地区-省份-编号</th>
-							<th class="center">地区-市-名称</th>
-							<th class="center">地区-市-编号</th>
+							<th class="center">商品类型</th>
+							<th class="center">地区-省份</th>
+							<th class="center">地区-市</th>
 							<th class="center">优先级</th>
 							<th class="center">创建时间</th>
 							<th class="center">创建人</th>
@@ -167,28 +176,19 @@
                         #foreach( $item in $dataList)
                             <tr>
                                 <td>$!item.id</td>
-                                <td>$!item.categoryOneId</td>
                                 <td>$!item.categoryOne</td>
-                                <td>$!item.categoryTwoId</td>
                                 <td>$!item.categoryTwo</td>
-                                <td>$!item.categoryThreeId</td>
                                 <td>$!item.categoryThree</td>
                                 <td>$!item.brandCode</td>
                                 <td>$!item.brandName</td>
-                                <td>$!item.enName</td>
                                 <td>$!item.brandAbbr</td>
-                                <td>$!item.keyword</td>
                                 <td>$!item.type</td>
-                                <td>$!item.typeName</td>
                                 <td>$!item.provinceName</td>
-                                <td>$!item.provinceNo</td>
                                 <td>$!item.cityName</td>
-                                <td>$!item.cityNo</td>
                                 <td>$!item.priority</td>
                                 <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.createTime)</td>
                                 <td>$!item.createUser</td>
                                 <td>
-									<a href="javascript:void(0)" onclick="toDetail($!item.id);" data-toggle="modal"><i class="icon-list">详情</i></a>
 									<a href="javascript:void(0)" onclick="toUpdate($!item.id)"><i class="icon-pencil pink">修改</i></a>
 									<a href="javascript:void(0)" onclick="toDelete($!item.id)"><i class="icon-remove red">删除</i></a>
 								</td>

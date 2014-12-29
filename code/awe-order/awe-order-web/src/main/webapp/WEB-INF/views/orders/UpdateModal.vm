@@ -92,16 +92,18 @@
 	
     $('#myOrdersUpdateModal').on('hidden.bs.modal', function (e) {
       		$("#Update_provinceNo").empty();
-			$("#hd_city").empty();
+			$("#update_city").empty();
 			$("#update_countyNo").empty();
      })
 	
 	 $(function(){
-	   var pro = $("#hd_province").val();
-	   var city = $("#hd_city").val();
-	   var con = $("#hd_county").val();
-	   
 	   province();
+	   
+	   var proNo =  $("#hd_province").val();
+	   city(proNo);
+	   
+	   var cityNo = $("#hd_city").val();
+	   county(cityNo);
 	 })
 	 
 	//获取省的所有列表
@@ -119,7 +121,11 @@
 					if(r.length > 0){
 					 $('#Update_provinceNo').append("<option value=''>请选择</option>");
 						$.each(data.result,function(i,item){
-                        	 $('#Update_provinceNo').append("<option value='" + item.code+ "'>" + item.name + "</option>");
+						if($("#hd_province").val() == item.code){
+						     $('#Update_provinceNo').append("<option selected value='" + item.code+ "'>" + item.name + "</option>");
+						  }else{
+						  	 $('#Update_provinceNo').append("<option value='" + item.code+ "'>" + item.name + "</option>");
+						  }
 						});
 					}		
     			} else {
@@ -140,14 +146,18 @@
     		dataType : 'json',
 			data:{provinceNO:proNo},
     		success: function(data){
-			    $("#Update_cityNo").empty();
+				$("#Update_cityNo").empty();
 				$("#update_countyNo").empty();
     			if(data!=null && data.code==200 && data.result!=null){
     				var r = data.result;
 					if(r.length > 0){
 					 $('#Update_cityNo').append("<option value=''>请选择</option>");
 						$.each(data.result,function(i,item){
-                        	 $('#Update_cityNo').append("<option value='" + item.code+ "'>" + item.name + "</option>");
+						if($("#hd_city").val() == item.code){
+                        	 $('#Update_cityNo').append("<option selected value='" + item.code+ "'>" + item.name + "</option>");
+						}else{
+							 $('#Update_cityNo').append("<option  value='" + item.code+ "'>" + item.name + "</option>");
+						}
 						});
 					}
     			} else {
@@ -167,13 +177,17 @@
     		dataType : 'json',
 			data:{CityNo:cityNo},
     		success: function(data){
-				$("#update_countyNo").empty();
+			$("#update_countyNo").empty();
     			if(data!=null && data.code==200 && data.result!=null){
     				var r = data.result;
 					if(r.length > 0){
 					 $('#update_countyNo').append("<option value=''>请选择</option>");
 						$.each(data.result,function(i,item){
-                        	 $('#update_countyNo').append("<option value='" + item.code+ "'>" + item.name + "</option>");
+						if($("#hd_county").val() == item.code){
+                        	 $('#update_countyNo').append("<option selected value='" + item.code+ "'>" + item.name + "</option>");
+						}else{
+							  $('#update_countyNo').append("<option value='" + item.code+ "'>" + item.name + "</option>");
+						}
 						});
 					}
     			} else {

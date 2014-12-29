@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @description 我的订单
  * @author zyq
  * @date 2014-12-28
- * @since v1.0
+ * @version 1.0.0
  */
 @Controller
 @RequestMapping("myorder")
