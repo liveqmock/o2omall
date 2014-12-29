@@ -17,6 +17,7 @@
 						productId: {required: true},
 						productName: {required: true},
 						status: {required: true},
+						taxRate: {required: true},
 						features: {required: true},
 						priority: {required: true},
 					},
@@ -31,6 +32,7 @@
 						productId: { required: "请输入商品ID"},
 						productName: { required: "请输入商品名称"},
 						status: { required: "请输入状态"},
+						taxRate: { required: "请输入税率"},
 						features: { required: "请输入描述"},
 						priority: { required: "请输入优先级"},
 					}
@@ -101,6 +103,10 @@
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="status">状态</label>
                                     <div class="col-sm-4">
                                         <input type="text" name="status" id="status" class="col-xs-12 col-sm-12" value="$!productTaxRate.status" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="taxRate">税率</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="taxRate" id="taxRate" class="col-xs-12 col-sm-12" value="$!productTaxRate.taxRate" />
                                     </div>
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="features">描述</label>
                                     <div class="col-sm-4">

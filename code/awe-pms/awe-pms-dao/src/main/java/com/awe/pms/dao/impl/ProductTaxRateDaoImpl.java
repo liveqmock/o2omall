@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  * 对'税率'表进行基本的操作
  * 
  * @author ljz
- * @version 2014-12-25 14:47:29
+ * @version 2014-12-29 11:45:53
  * 
  */
 @Repository

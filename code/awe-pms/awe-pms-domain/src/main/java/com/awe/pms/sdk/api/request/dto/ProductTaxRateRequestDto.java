@@ -7,7 +7,7 @@ import java.util.Date;
  * ProductTaxRateRequestDto：税率请求参数
  * 
  * @author ljz
- * @version 2014-12-25 14:47:30
+ * @version 2014-12-29 11:45:53
  * 
  */
 public class ProductTaxRateRequestDto extends HbirdDto {
@@ -35,6 +35,8 @@ public class ProductTaxRateRequestDto extends HbirdDto {
     private String productName; 
     /** 状态 */
     private Integer status; 
+    /** 税率 */
+    private Double taxRate; 
     /** 描述 */
     private String features; 
     /** 优先级 */
@@ -228,6 +230,24 @@ public class ProductTaxRateRequestDto extends HbirdDto {
      */
     public void setStatus(Integer status) {
         this.status = status;
+    }
+    
+    /**
+     * get 税率
+     * 
+     * @return the taxRate
+     */
+    public Double getTaxRate(){
+        return taxRate;
+    }
+        
+    /**
+     * set 税率
+     * 
+     * @param taxRate the taxRate to set
+     */
+    public void setTaxRate(Double taxRate) {
+        this.taxRate = taxRate;
     }
     
     /**

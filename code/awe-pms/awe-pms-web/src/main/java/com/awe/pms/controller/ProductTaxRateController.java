@@ -26,7 +26,7 @@ import com.hbird.common.utils.wrap.Wrapper;
  * ProductTaxRateController ：税率控制器
  * 
  * @author ljz
- * @version 2014-12-25 14:47:32
+ * @version 2014-12-29 11:45:54
 */
 @Controller
 @RequestMapping("productTaxRate")
