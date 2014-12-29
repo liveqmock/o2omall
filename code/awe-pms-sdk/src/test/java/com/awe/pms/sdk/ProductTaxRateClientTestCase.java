@@ -11,7 +11,7 @@ import com.awe.pms.sdk.response.dto.ProductTaxRateResponseDto;
  * ProductTaxRateClient测试用例
  * 
  * @author ljz
- * @version 2014-12-25 17:50:15
+ * @version 2014-12-29 11:46:00
  * 
  */
 public class ProductTaxRateClientTestCase {
