@@ -190,7 +190,13 @@
             where id = #{_parameter} and yn = 1
         </if>
     </select>
-
+    <!--根据服务号获取对象信息-->
+	<select id="getReturnExchangeByServiceNo" resultMap="ReturnExchangeMap" parameterType="java.lang.String">
+        <if test="_parameter != null">
+            select <include refid="returnExchangeColumns"/> from return_exchange
+            where service_no = #{_parameter} and yn = 1
+        </if>
+    </select>
     <!-- 根据查询Bean获取数据集合，不带翻页 -->
     <select id="queryReturnExchangeList" resultMap="ReturnExchangeMap"
             parameterType="com.awe.rems.domain.query.ReturnExchangeQuery">

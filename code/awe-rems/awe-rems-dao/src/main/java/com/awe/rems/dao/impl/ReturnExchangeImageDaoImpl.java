@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * ReturnExchangeImageDAO实现类<br/>
  * 对'退换货图片表'表进行基本的操作
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */

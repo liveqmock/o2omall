@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.rems.controller.base.BaseController;
+import com.awe.rems.domain.ReturnExchange;
 import com.awe.rems.domain.ServiceAudit;
 import com.awe.rems.domain.query.ServiceAuditQuery;
+import com.awe.rems.service.ReturnExchangeService;
 import com.awe.rems.service.ServiceAuditService;
 import com.awe.rems.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
@@ -25,7 +27,7 @@ import com.hbird.common.utils.wrap.Wrapper;
 /**
  * ServiceAuditController ：退换货审核流表控制器
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:22
 */
 @Controller
@@ -34,7 +36,10 @@ public class ServiceAuditController extends BaseController {
 
     @Autowired
     private ServiceAuditService serviceAuditService;
-
+    @Autowired
+    private ReturnExchangeService returnExchangeService;
+    
+    
     /** 视图前缀 */
     private static final String viewPrefix ="serviceAudit";
     
@@ -138,27 +143,6 @@ public class ServiceAuditController extends BaseController {
         }
     }
 
-    /**
-     * 退换货审核流表----删除
-     * 
-     * @param serviceAudit
-     * @return
-     */
-    @RequestMapping(value = "delete")
-    @ResponseBody
-    public Wrapper<?> delete(ServiceAudit serviceAudit) {
-        try {
-            serviceAudit.setUpdateUser(getLoginUserCnName());
-            if (serviceAuditService.delete(serviceAudit)) {
-                return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "删除成功！");
-            } else {
-                return WrapMapper.wrap(Wrapper.ERROR_CODE, "删除失败！");
-            }
-        } catch (Exception e) {
-            LOG.error("serviceAudit delete has error.", e);
-            return WrapMapper.error();
-        }
-    }
 
     /**
      * 退换货审核流表----查询-无分页
@@ -206,5 +190,41 @@ public class ServiceAuditController extends BaseController {
             LOG.warn("detail serviceAudit has error.", e);
             return error();
         }
+    }
+    /***
+     * @descripton:获取售后服务申请单信息
+     * @param query
+     * @return
+     */
+    @RequestMapping(value = "getApply", method = RequestMethod.GET)
+    public String getApply(Model model,ServiceAuditQuery query){
+    	//获取return_exchange表数据
+    	try {
+    		ReturnExchange re = returnExchangeService.getReturnExchangeByServiceNo(query.getServiceNo());
+    		model.addAttribute("ReturnExchange", re);
+		} catch (Exception e) {
+			LOG.error("serviceAudit getApply has error.", e);
+		}
+    	return viewPrefix + "/applyDetail";
+    }
+    /**
+     * @description:售后审核
+     * @param query
+     */
+    @RequestMapping(value = "getApply", method = RequestMethod.POST)
+    public Wrapper<?> audit(ServiceAudit serviceAudit){
+    	if(null == serviceAudit){
+    		return WrapMapper.wrap(Wrapper.ILLEGAL_ARGUMENT_CODE_, "售后审核参数为空!");
+    	}
+    	try {
+    		if(serviceAuditService.update(serviceAudit)){
+    			return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "审核成功!");
+    		}else{
+    			return WrapMapper.wrap(Wrapper.ERROR_CODE, "审核失败!");
+    		}
+		} catch (Exception e) {
+			LOG.error("#售后审核异常:" + e.getMessage());
+			return WrapMapper.error();
+		}
     }
 }

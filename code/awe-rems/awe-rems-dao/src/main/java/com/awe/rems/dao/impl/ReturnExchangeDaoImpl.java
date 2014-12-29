@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * ReturnExchangeDAO实现类<br/>
  * 对'退换货'表进行基本的操作
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */
@@ -70,6 +70,9 @@ public class ReturnExchangeDaoImpl extends BaseDao implements ReturnExchangeDao 
         return (ReturnExchange) queryForObject(namespace +".getReturnExchangeById", id);
     } 
     
+    public ReturnExchange getReturnExchangeByServiceNo(String ServiceNo){
+    	return (ReturnExchange) queryForObject(namespace +".getReturnExchangeByServiceNo", ServiceNo);
+    }
     /**
      * {@inheritDoc}
      */

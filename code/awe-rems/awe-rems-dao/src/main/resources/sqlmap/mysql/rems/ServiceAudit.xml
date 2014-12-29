@@ -100,13 +100,6 @@
         select count(1) from service_audit where <include refid="queryServiceAuditListWhere"/>
     </select>
 
-    <!-- 删除信息-逻辑删除 -->
-    <update id="delete" parameterType="ServiceAudit">
-		update service_audit 
-		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
-		where id = #{id}
-    </update>
-
     <!-- 常用的查询Where条件 -->
     <sql id="queryServiceAuditListWhere">
     	yn = 1

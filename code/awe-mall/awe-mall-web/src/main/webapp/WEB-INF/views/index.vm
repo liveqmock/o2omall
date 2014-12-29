@@ -1,61 +1,225 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-	<head>
-		#parse("/layout/head.vm")
-		<style type="text/css">
-            * { margin: 0; padding: 0; }
-            html, body { height: 100%; overflow: hidden; }
-            
-            html>body { width: auto; height: auto; position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
-            #box { width: 100%; height: 100%; }
-            #right { width: 100%; height: 100%; }
-            #box>#right { width: auto; position: absolute; left: 10px;  right: 0; }
-            #main { width: 100%; height: 100%;}
-            #right>#main { height: auto; position: absolute; top: 38px; bottom: 20px; }
-            iframe { width:100%; height:100%;}
-            .main-container > .main-container-inner{ position: absolute} 
-        </style>
-	</head>
-	<body>
-		#parse("/layout/topFrame.vm")
-
-		<div class="main-container" id="main-container">
-			<script type="text/javascript">
-				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-			</script>
-
-			<div class="main-container-inner"  id="box">				
-				#parse("/layout/leftFrame.vm")	
-				
-				<div class="main-content"  id="right">
-					<div class="breadcrumbs" id="breadcrumbs">
-						<script type="text/javascript">
-							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-						</script>
-
-						<ul class="breadcrumb"  id="top">
-							<li>
-								<i class="icon-home home-icon"></i>
-								<a href="javascript:void(0)" id="breadcrumb-first">电商平台</a>
-							</li>
-							<li class="active" id="breadcrumb-second">首页</li>
-						</ul><!-- .breadcrumb -->
-
-						#parse("/layout/nav-search.vm")
-					</div>
+<!---------------------- 广告 ----------------------> 
+  <div class="wid1200 clearfix">
+    <div class="weichuangyi">
+        <div class="weichuangyi_main">
+            <ul class="weichuangyi_ul">
+                <li><a href="" class="img"><img src="#springUrl('')/static/images/banner1.jpg"  alt="微创意" /></a></li>
+                <li><a href="" class="img"><img src="#springUrl('')/static/images/m-banner1.jpg"    alt="微创意" /></a></li>
+                <li><a href="" class="img"><img src="#springUrl('')/static/images/m-banner2.jpg"  alt="微创意" /></a></li>
+                <li><a href="" class="img"><img src="#springUrl('')/static/images/banner1.jpg"   alt="微创意" /></a></li>
+            </ul>
+        </div>
+        <p class="weichuangyi_left"></p>
+        <p class="weichuangyi_right"></p>
+        <div class="weichuangyi_span"><p><span class="weichuangyi_span_one"></span> <span></span> <span></span><span></span></p> </div>
+    </div>
+  </div>
+ <!---------------------- 广告 end ----------------------> 
+ 
+ <!---------------------- 正文 ----------------------> 
+ <div class="wid1200 clearfix">
+    <div class="box left">
+       <div class="boximg"><img src="#springUrl('')/static/images/t_img1.jpg" /></div>
+       <h2 class="boxtitle normal">贴心咨询师全程指导</h2>
+       <div class="boxcon">
+         <p><span class="reds">1500</span>名专业咨询师随时恭候</p>
+         <p><span class="reds">7X24</span>小时服务不间断服务</p>
+         <p><span class="reds">1对1</span>专属服务最了解您的需求</p>
+       </div>
+    </div>
+    
+    <div class="box left ml">
+       <div class="boximg"><img src="#springUrl('')/static/images/t_img2.jpg" /></div>
+       <h2 class="boxtitle normal">安全 全球保真货源</h2>
+       <div class="boxcon">
+         <p>欧盟<span class="reds">6</span>大核心国家提供货源</p>
+         <p><span class="reds">200</span>家品牌公司商品保真</p>
+         <p><span class="reds">10</span>家顶尖服务中心提供服务</p>
+       </div>
+    </div>
+    
+    <div class="box right">
+       <div class="boximg"><img src="#springUrl('')/static/images/t_img3.jpg" /></div>
+       <h2 class="boxtitle normal">便捷 获取商品一站式</h2>
+       <div class="boxcon">
+         <p>商品分类科学便于<span class="reds">查找</span>商品</p>
+         <p>购买指导人性便于<span class="reds">选择</span>商品</p>
+         <p>支付方式灵活便于<span class="reds">完成</span>购买</p>
+       </div>
+    </div>
   
-					<div id="main"><iframe id="frame-content" frameborder="0"></iframe></div>
-	 
-					 
-				</div><!-- /.main-content -->
+ </div>
+ 
+  <div class="wid1200 clearfix">
+    
 
-			#parse("/layout/setting.vm")		 
-			</div><!-- /.main-container-inner -->
-
-			<a href="javascript:void(0)" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-				<i class="icon-double-angle-up icon-only bigger-110"></i>
-			</a>
-		</div><!-- /.main-container -->
-		
-	</body>
-</html>
+ <!---------------------- 明星专家 ----------------------> 
+     <div class="star left">
+       <h3><span class="right sicon"><a class="reds" href="expert/C-02.html">&gt;</a></span>明星专家</h3>
+       
+         <div class="star_con">
+          
+           <dl>
+             <dt><a href="expert/C-04.html"><img src="#springUrl('')/static/images/m-img4.jpg" /></a></dt>
+             <dd>
+               <p>专家姓名：  <a href="expert/C-04.html">王翔</a></p>
+               <p>特长：  母婴哺育   营养搭配 </p>
+               <p>明星指数：<span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span></p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-04.html"><img src="#springUrl('')/static/images/m-img4.jpg" /></a></dt>
+             <dd>
+               <p>专家姓名：  <a href="expert/C-04.html">王翔</a></p>
+               <p>特长：  母婴哺育   营养搭配 </p>
+               <p>明星指数：<span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span></p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-04.html"><img src="#springUrl('')/static/images/m-img4.jpg" /></a></dt>
+             <dd>
+               <p>专家姓名：  <a href="expert/C-04.html">王翔</a></p>
+               <p>特长：  母婴哺育   营养搭配 </p>
+               <p>明星指数：<span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span></p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-04.html"><img src="#springUrl('')/static/images/m-img4.jpg" /></a></dt>
+             <dd>
+               <p>专家姓名：  <a href="expert/C-04.html">王翔</a></p>
+               <p>特长：  母婴哺育   营养搭配 </p>
+               <p>明星指数：<span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span></p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-04.html"><img src="#springUrl('')/static/images/m-img4.jpg" /></a></dt>
+             <dd>
+               <p>专家姓名：  <a href="expert/C-04.html">王翔</a></p>
+               <p>特长：  母婴哺育   营养搭配 </p>
+               <p>明星指数：<span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span></p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-04.html"><img src="#springUrl('')/static/images/m-img4.jpg" /></a></dt>
+             <dd>
+               <p>专家姓名：  <a href="expert/C-04.html">王翔</a></p>
+               <p>特长：  母婴哺育   营养搭配 </p>
+               <p>明星指数：<span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span></p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-04.html"><img src="#springUrl('')/static/images/m-img4.jpg" /></a></dt>
+             <dd>
+               <p>专家姓名：  <a href="expert/C-04.html">王翔</a></p>
+               <p>特长：  母婴哺育   营养搭配 </p>
+               <p>明星指数：<span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span></p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-04.html"><img src="#springUrl('')/static/images/m-img4.jpg" /></a></dt>
+             <dd>
+               <p>专家姓名：  <a href="expert/C-04.html">王翔</a></p>
+               <p>特长：  母婴哺育   营养搭配 </p>
+               <p>明星指数：<span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span></p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-04.html"><img src="#springUrl('')/static/images/m-img4.jpg" /></a></dt>
+             <dd>
+               <p>专家姓名：  <a href="expert/C-04.html">王翔</a></p>
+               <p>特长：  母婴哺育   营养搭配 </p>
+               <p>明星指数：<span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span></p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-04.html"><img src="#springUrl('')/static/images/m-img4.jpg" /></a></dt>
+             <dd>
+               <p>专家姓名：  <a href="expert/C-04.html">王翔</a></p>
+               <p>特长：  母婴哺育   营养搭配 </p>
+               <p>明星指数：<span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span><span class="experts_icon"></span></p>
+             </dd>
+           </dl>
+         
+         </div>
+     </div>
+     
+ <!---------------------- 热门咨询 ----------------------> 
+     <div class="star right">
+       <h3><span class="right sicon"><a class="reds" href="expert/C-11.html">&gt;</a></span>热门咨询</h3>
+       
+         <div class="hot_consult">
+          
+           <dl>
+             <dt><a href="expert/C-12.html"><img src="#springUrl('')/static/images/m-img5.jpg" /></a></dt>
+             <dd>
+               <h4><i>·</i><a href="expert/C-12.html">宝宝不爱吃饭怎么办？</a></h4>
+               <p>专家您好，我家的宝宝从一周前就开始就不好好周前不是生病了,这种情况..</p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-12.html"><img src="#springUrl('')/static/images/m-img5.jpg" /></a></dt>
+             <dd>
+               <h4><i>·</i><a href="expert/C-12.html">宝宝不爱吃饭怎么办？</a></h4>
+               <p>专家您好，我家的宝宝从一周前就开始就不好好周前不是生病了,这种情况..</p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-12.html"><img src="#springUrl('')/static/images/m-img5.jpg" /></a></dt>
+             <dd>
+               <h4><i>·</i><a href="expert/C-12.html">宝宝不爱吃饭怎么办？</a></h4>
+               <p>专家您好，我家的宝宝从一周前就开始就不好好周前不是生病了,这种情况..</p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-12.html"><img src="#springUrl('')/static/images/m-img5.jpg" /></a></dt>
+             <dd>
+               <h4><i>·</i><a href="expert/C-12.html">宝宝不爱吃饭怎么办？</a></h4>
+               <p>专家您好，我家的宝宝从一周前就开始就不好好周前不是生病了,这种情况..</p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-12.html"><img src="#springUrl('')/static/images/m-img5.jpg" /></a></dt>
+             <dd>
+               <h4><i>·</i><a href="expert/C-12.html">宝宝不爱吃饭怎么办？</a></h4>
+               <p>专家您好，我家的宝宝从一周前就开始就不好好周前不是生病了,这种情况..</p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-12.html"><img src="#springUrl('')/static/images/m-img5.jpg" /></a></dt>
+             <dd>
+               <h4><i>·</i><a href="expert/C-12.html">宝宝不爱吃饭怎么办？</a></h4>
+               <p>专家您好，我家的宝宝从一周前就开始就不好好周前不是生病了,这种情况..</p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-12.html"><img src="#springUrl('')/static/images/m-img5.jpg" /></a></dt>
+             <dd>
+               <h4><i>·</i><a href="expert/C-12.html">宝宝不爱吃饭怎么办？</a></h4>
+               <p>专家您好，我家的宝宝从一周前就开始就不好好周前不是生病了,这种情况..</p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-12.html"><img src="#springUrl('')/static/images/m-img5.jpg" /></a></dt>
+             <dd>
+               <h4><i>·</i><a href="expert/C-12.html">宝宝不爱吃饭怎么办？</a></h4>
+               <p>专家您好，我家的宝宝从一周前就开始就不好好周前不是生病了,这种情况..</p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-12.html"><img src="#springUrl('')/static/images/m-img5.jpg" /></a></dt>
+             <dd>
+               <h4><i>·</i><a href="expert/C-12.html">宝宝不爱吃饭怎么办？</a></h4>
+               <p>专家您好，我家的宝宝从一周前就开始就不好好周前不是生病了,这种情况..</p>
+             </dd>
+           </dl>
+           <dl>
+             <dt><a href="expert/C-12.html"><img src="#springUrl('')/static/images/m-img5.jpg" /></a></dt>
+             <dd>
+               <h4><i>·</i><a href="expert/C-12.html">宝宝不爱吃饭怎么办？</a></h4>
+               <p>专家您好，我家的宝宝从一周前就开始就不好好周前不是生病了,这种情况..</p>
+             </dd>
+           </dl>
+         </div>
+     </div>
+  </div>
+<!---------------------- 正文end ----------------------> 

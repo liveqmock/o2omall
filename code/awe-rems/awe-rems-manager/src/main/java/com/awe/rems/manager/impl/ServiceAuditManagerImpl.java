@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 /**
  * ServiceAuditManager接口的实现类
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */
@@ -100,32 +100,8 @@ public class ServiceAuditManagerImpl extends BaseManager implements ServiceAudit
     /**
      * {@inheritDoc}
      */
-    public boolean delete(ServiceAudit serviceAudit) {
-        return serviceAuditDao.delete(serviceAudit);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public ServiceAudit getServiceAuditById(Long id) {
         return serviceAuditDao.getServiceAuditById(id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public boolean delete(final ServiceAudit[] serviceAudits) {
-        boolean resultFlag = false;
-        if (null != serviceAudits && serviceAudits.length > 0) {
-            for (int i = 0; i < serviceAudits.length; i++) {
-                resultFlag = delete(serviceAudits[i]);
-                if (!resultFlag) {
-                    throw new RuntimeException("批量删除表信息异常!");
-                }
-            }
-        }
-
-        return resultFlag;
     }
 
     /**

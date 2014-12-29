@@ -1,0 +1,12 @@
+<!---------------------- 公共尾部 ----------------------> 
+<div class="footer wid1200">
+  <div class="footer_logo left">
+	<img src="#springUrl('')/static/images/f-logo.jpg" />
+  </div>
+  <div class="footer_con">
+     <p>版权所有（集团）股份有限公司 未经允许不得复杂、转载或编辑，违者必究.</p>
+     <p>Copyright(GROUP)COMPANY OF CHINA 、LTD ,All Rights Reserved</p>
+     <p>ICP许可证号 粤ICP 备06118999号-5</p>
+  </div>
+</div>
+ <!---------------------- 公共尾部end ----------------------> 

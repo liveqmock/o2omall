@@ -18,6 +18,5 @@
 	<context:property-placeholder location="classpath*:conf/important.properties" ignore-unresolvable="true"/>
 
 	<import resource="classpath*:spring/spring-config-service.xml" />
-	<import resource="classpath*:spring/spring-config-datasource.xml" />
 	<import resource="classpath*:spring/spring-config-resteasy.xml" />
 </beans>

@@ -37,10 +37,23 @@ public class IndexController extends BaseController {
         return VIEW_INDEX;
     }
 
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String login(Model model) {
+        logger.debug("go to login page");
+        model.addAttribute("navFlag", "login"); //导航标识，无标识
+        return "login";
+    }
+
+    @RequestMapping(value = "register", method = RequestMethod.GET)
+    public String register(Model model) {
+        logger.debug("go to register page");
+        model.addAttribute("navFlag", "register"); //导航标识，无标识
+        return "register";
+    }
+
     @RequestMapping("quit")
     public String quit(HttpServletRequest request, HttpServletResponse response, Model model) {
         // 用户登出
-        // SecurityUtils.getSubject().logout();
         LoginUserUtils.invalidateCookie(response);
         return REDIRECT + VIEW_INDEX;
     }

@@ -5,7 +5,7 @@ package com.awe.test.rems.rest;
 
 /**
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 15:29:57
  * 
  */

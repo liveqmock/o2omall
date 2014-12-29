@@ -8,7 +8,7 @@ import com.awe.rems.domain.query.ReturnExchangeQuery;
  * ReturnExchangeDao接口<br/>
  * 对'退换货'表进行基本的操作
  * 
- * @author ljz
+ * @author zyq
  * @version 2014-12-25 9:16:21
  * 
  */
@@ -70,6 +70,12 @@ public interface ReturnExchangeDao {
      * @return
      */
     public ReturnExchange getReturnExchangeById(Long id);
+    /**
+     * 根据服务号获取对象信息
+     * @param ServiceNo:售后服务号
+     * @return
+     */
+    public ReturnExchange getReturnExchangeByServiceNo(String ServiceNo);
 
     /**
      * 判断是否存在
