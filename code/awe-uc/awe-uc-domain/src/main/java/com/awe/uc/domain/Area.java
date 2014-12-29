@@ -27,7 +27,7 @@ public class Area implements java.io.Serializable {
     /** 名称 */
     private String name;
     /** 级别 */
-    private Integer leval;
+    private Integer level;
     /** 创建人 */
     private String createUser;
     /** 创建时间 */
@@ -118,20 +118,20 @@ public class Area implements java.io.Serializable {
     /**
      * get 级别
      * 
-     * @return the leval
+     * @return the level
      */
-    public Integer getLeval() {
-        return leval;
+    public Integer getLevel() {
+        return level;
     }
 
     /**
      * set 级别
      * 
-     * @param leval
-     *            the leval to set
+     * @param level
+     *            the level to set
      */
-    public void setLeval(Integer leval) {
-        this.leval = leval;
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     /**

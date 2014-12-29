@@ -42,7 +42,7 @@ public class AreaServiceTestCase extends BaseTransactionTestCase {
         area.setParentCode("0");
         area.setCode("2");
         area.setName("上海");
-        area.setLeval(1);
+        area.setLevel(1);
         area.setCreateUser(TestConstants.UER_NAME);
         boolean result = areaService.insert(area);
         Assert.isTrue(result);
@@ -58,7 +58,7 @@ public class AreaServiceTestCase extends BaseTransactionTestCase {
         area.setParentCode("0");
         area.setCode("1");
         area.setName("北京");
-        area.setLeval(1);
+        area.setLevel(1);
         area.setCreateUser(TestConstants.UER_NAME);
         ExistedException ex = null;
         try {
