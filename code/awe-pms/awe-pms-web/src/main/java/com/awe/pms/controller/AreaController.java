@@ -43,7 +43,7 @@ public class AreaController extends BaseController {
     @ResponseBody
     public Wrapper<?> query(AreaRequestDto query) {
         try {
-        	if (query != null && query.getLeval() != null) {
+        	if (query != null && query.getLevel() != null) {
         		List<AreaResponseDto> list = this.areaService.getAreas(query);
         		if (!CollectionUtils.isEmpty(list)) {
         			return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, list);

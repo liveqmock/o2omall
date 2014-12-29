@@ -66,10 +66,10 @@ public class AreaServiceImpl implements AreaService {
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<AreaResponseDto> getCountys(String cityCode) {
+	public List<AreaResponseDto> getCounties(String cityCode) {
 		List<AreaResponseDto> list = null;
 		try {
-			list = areaClient.getCountys(cityCode);
+			list = areaClient.getCounties(cityCode);
 		} catch (Exception e) {
 			LOG.warn("getCountys has error,", e);
 		}

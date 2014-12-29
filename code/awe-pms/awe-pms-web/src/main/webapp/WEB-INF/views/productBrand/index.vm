@@ -2,7 +2,7 @@
 <html lang="zh-cn">
     <head>
         #parse("/layout/head.vm")
-		<script src="$basePath/static/js/inner/productBrand.js?v=16"></script>
+		<script src="$basePath/static/js/inner/productBrand.js?v=19"></script>
 		<script language="javascript"> 
 			$(function() {
 				$("#btn-query").click(function() {
@@ -12,9 +12,9 @@
         			window.location.href=("$basePath/productBrand/addForward");
    				});
 				
-				loadProductCategorys(1,0,"$!query.categoryOneId","categoryOneId");
-				
 				$("#type").val("$!query.type");
+				
+				loadProductCategorys(1,0,"$!query.categoryOneId","categoryOneId");
 				
     			$("#categoryOneId").change(function () {
     				initSelected("categoryTwoId");

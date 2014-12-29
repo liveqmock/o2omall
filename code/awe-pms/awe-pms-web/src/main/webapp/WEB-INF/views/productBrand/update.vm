@@ -3,7 +3,7 @@
     <head>
 		#parse("/layout/head.vm")
 		<script src="$basePath/static/js/fuelux/fuelux.spinner.min.js"></script>
-		<script src="$basePath/static/js/inner/productBrand.js?v=16"></script>
+		<script src="$basePath/static/js/inner/productBrand.js?v=19"></script>
         <script language="javascript">
             $(function() {
 				$('#addForm').validate({

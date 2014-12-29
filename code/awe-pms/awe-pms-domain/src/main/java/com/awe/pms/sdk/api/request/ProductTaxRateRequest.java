@@ -7,7 +7,7 @@ import com.awe.pms.sdk.api.request.dto.ProductTaxRateRequestDto;
  * ProductTaxRateRequest：税率请求参数
  * 
  * @author ljz
- * @version 2014-12-29 11:45:53
+ * @version 2014-12-29 17:29:33
  * 
  */
 public class ProductTaxRateRequest extends HbirdSecureRequest<ProductTaxRateRequestDto> {

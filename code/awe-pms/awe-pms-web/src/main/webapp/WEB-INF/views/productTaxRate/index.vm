@@ -2,15 +2,68 @@
 <html lang="zh-cn">
     <head>
         #parse("/layout/head.vm")
+		<script src="$basePath/static/js/inner/productBrand.js?v=19"></script>
 		<script language="javascript"> 
 			$(function() {
+				if ("$!query.taxRateType" != "") {
+    				$("#taxRateType").val("$!query.taxRateType");
+				}
+			
+				loadTaxRateType("$!query.taxRateType");
+				
+				$("#taxRateType").change(function() {
+					loadTaxRateType("$!query.taxRateType");
+				});
+				
+				loadProductCategorys(1,0,"$!query.categoryOneId","categoryOneId");
+				
+    			$("#categoryOneId").change(function () {
+    				initSelected("categoryTwoId");
+    				initSelected("categoryThreeId");
+    				if (this.value == "") {
+    					return;
+    				}
+    				loadProductCategorys(2,this.value,0,"categoryTwoId");
+    			});
+    			
+    			$("#categoryTwoId").change(function () {
+    				initSelected("categoryThreeId");
+    				if (this.value == "") {
+    					return;
+    				}
+    				loadProductCategorys(3,this.value,0,"categoryThreeId");
+    			});
+				
 				$("#btn-query").click(function() {
         			pageSubmit(1);
    				});
 				$("#btn-add").click(function() {
-        			window.location.href=("$basePath/productTaxRate/addForward");
+					var taxRateType = $("#taxRateType").val();
+        			window.location.href=("$basePath/productTaxRate/addForward?taxRateType=" + taxRateType);
    				});
 			});
+			
+			function loadTaxRateType(taxRateType) {
+				if (taxRateType == "") {
+					taxRateType = $("#taxRateType").val();
+				}
+				if (taxRateType == 1) {
+					$("span[name='TAX_RATE_TYPE_1']").show();
+					//$("th[name='TAX_RATE_TYPE_1']").show();
+					//$("td[name='TAX_RATE_TYPE_1']").show();
+					$("span[name='TAX_RATE_TYPE_2']").hide();
+					//$("th[name='TAX_RATE_TYPE_2']").hide();
+					//$("td[name='TAX_RATE_TYPE_2']").hide();
+				} else if (taxRateType == 2) {
+					$("span[name='TAX_RATE_TYPE_1']").hide();
+					//$("th[name='TAX_RATE_TYPE_1']").hide();
+					//$("td[name='TAX_RATE_TYPE_1']").hide();
+					$("span[name='TAX_RATE_TYPE_2']").show();
+					//$("th[name='TAX_RATE_TYPE_2']").show();
+					//$("td[name='TAX_RATE_TYPE_2']").show();
+				}
+			}
+			
         	// 提交分页查询
         	function pageSubmit(pageNoParam) {
                 $("#curPage").val(pageNoParam);
@@ -47,30 +100,55 @@
                         <div class="widget-main" style="background-color: #f5f5f5;padding:5px;">
                             <form class="form-horizontal" role="form" id="queryForm">
 								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="categoryOneId">查询类别</label>
+                                    <div class="col-sm-3">
+										<select id="taxRateType" name="taxRateType" class="col-xs-10 col-sm-8">
+											#if(!$null.isNull($!taxRateTypeMap))
+                                    			#foreach($key in $taxRateTypeMap.keySet())
+                                    				<option value="$key">$taxRateTypeMap.get($key).value</option>
+                                    			#end
+                                    		#end
+                                        </select>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="taxRate">税率</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="taxRate" id="taxRate" class="col-xs-10 col-sm-8" value="$!query.taxRate"/>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="status">状态</label>
+                                    <div class="col-sm-2">
+										<select id="status" name="status" class="col-xs-10 col-sm-8">
+											#if(!$null.isNull($!taxRateStatusMap))
+                                    			#foreach($key in $taxRateStatusMap.keySet())
+                                    				<option value="$key">$taxRateStatusMap.get($key).value</option>
+                                    			#end
+                                    		#end
+                                        </select>
+                                    </div>
+                                </div>
+								<span name="TAX_RATE_TYPE_1">
+								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="categoryOneId">一级分类</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="categoryOneId" id="categoryOneId" class="col-xs-10 col-sm-8" value="$!query.categoryOneId"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="categoryOne">一级分类名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="categoryOne" id="categoryOne" class="col-xs-10 col-sm-8" value="$!query.categoryOne"/>
+                                        <select id="categoryOneId" name="categoryOneId" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+                                        </select>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="categoryTwoId">二级分类</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="categoryTwoId" id="categoryTwoId" class="col-xs-10 col-sm-8" value="$!query.categoryTwoId"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="categoryTwo">二级分类名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="categoryTwo" id="categoryTwo" class="col-xs-10 col-sm-8" value="$!query.categoryTwo"/>
+                                        <select id="categoryTwoId" name="categoryTwoId" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+                                        </select>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="categoryThreeId">三级分类</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="categoryThreeId" id="categoryThreeId" class="col-xs-10 col-sm-8" value="$!query.categoryThreeId"/>
+                                        <select id="categoryThreeId" name="categoryThreeId" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+                                        </select>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="categoryThree">三级分类名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="categoryThree" id="categoryThree" class="col-xs-10 col-sm-8" value="$!query.categoryThree"/>
-                                    </div>
+                                </div>
+                                </span>
+								<span name="TAX_RATE_TYPE_2">
+								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="productId">商品ID</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="productId" id="productId" class="col-xs-10 col-sm-8" value="$!query.productId"/>
@@ -79,23 +157,8 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="productName" id="productName" class="col-xs-10 col-sm-8" value="$!query.productName"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="status">状态</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="status" id="status" class="col-xs-10 col-sm-8" value="$!query.status"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="taxRate">税率</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="taxRate" id="taxRate" class="col-xs-10 col-sm-8" value="$!query.taxRate"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="features">描述</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="features" id="features" class="col-xs-10 col-sm-8" value="$!query.features"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="priority">优先级</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="priority" id="priority" class="col-xs-10 col-sm-8" value="$!query.priority"/>
-                                    </div>
 								</div>
+                                </span>
 								<div class="form-group">
 									<div class="col-sm-4 col-sm-offset-8">
     									#parse("/layout/page.vm")
@@ -116,18 +179,18 @@
                     <thead>
                         <tr>
 							<th class="center">主键</th>
-							<th class="center">一级分类</th>
-							<th class="center">一级分类名称</th>
-							<th class="center">二级分类</th>
-							<th class="center">二级分类名称</th>
-							<th class="center">三级分类</th>
-							<th class="center">三级分类名称</th>
-							<th class="center">商品ID</th>
-							<th class="center">商品名称</th>
+							<span name="TAX_RATE_TYPE_1">
+							<th class="center" name="TAX_RATE_TYPE_1">一级分类</th>
+							<th class="center" name="TAX_RATE_TYPE_1">二级分类</th>
+							<th class="center" name="TAX_RATE_TYPE_1">三级分类</th>
+                            </span>
+							<span name="TAX_RATE_TYPE_2">
+							<th class="center" name="TAX_RATE_TYPE_2">商品ID</th>
+							<th class="center" name="TAX_RATE_TYPE_2">商品名称</th>
+                            </span>
 							<th class="center">状态</th>
 							<th class="center">税率</th>
 							<th class="center">描述</th>
-							<th class="center">优先级</th>
 							<th class="center">创建时间</th>
 							<th class="center">创建人</th>
     						<th class="center">操作</th>
@@ -137,22 +200,21 @@
                         #foreach( $item in $dataList)
                             <tr>
                                 <td>$!item.id</td>
-                                <td>$!item.categoryOneId</td>
-                                <td>$!item.categoryOne</td>
-                                <td>$!item.categoryTwoId</td>
-                                <td>$!item.categoryTwo</td>
-                                <td>$!item.categoryThreeId</td>
-                                <td>$!item.categoryThree</td>
-                                <td>$!item.productId</td>
-                                <td>$!item.productName</td>
+								<span name="TAX_RATE_TYPE_1">
+                                <td name="TAX_RATE_TYPE_1">$!item.categoryOne</td>
+                                <td name="TAX_RATE_TYPE_1">$!item.categoryTwo</td>
+                                <td name="TAX_RATE_TYPE_1">$!item.categoryThree</td>
+                                </span>
+								<span name="TAX_RATE_TYPE_2">
+                                <td name="TAX_RATE_TYPE_2">$!item.productId</td>
+                                <td name="TAX_RATE_TYPE_2">$!item.productName</td>
+                                </span>
                                 <td>$!item.status</td>
                                 <td>$!item.taxRate</td>
                                 <td>$!item.features</td>
-                                <td>$!item.priority</td>
                                 <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.createTime)</td>
                                 <td>$!item.createUser</td>
                                 <td>
-									<a href="javascript:void(0)" onclick="toDetail($!item.id);" data-toggle="modal"><i class="icon-list">详情</i></a>
 									<a href="javascript:void(0)" onclick="toUpdate($!item.id)"><i class="icon-pencil pink">修改</i></a>
 									<a href="javascript:void(0)" onclick="toDelete($!item.id)"><i class="icon-remove red">删除</i></a>
 								</td>

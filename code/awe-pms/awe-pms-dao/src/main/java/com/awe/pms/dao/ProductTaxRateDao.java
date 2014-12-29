@@ -9,7 +9,7 @@ import com.awe.pms.domain.query.ProductTaxRateQuery;
  * 对'税率'表进行基本的操作
  * 
  * @author ljz
- * @version 2014-12-29 11:45:53
+ * @version 2014-12-29 17:29:32
  * 
  */
 public interface ProductTaxRateDao {

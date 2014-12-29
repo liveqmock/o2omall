@@ -26,7 +26,7 @@ function loadAreas(levelParam,parentAreaCode,currentAreaCode,idAttr){
 		type: "GET",
 		url: basePath + "/area/query",
 		dataType : 'json',
-		data: "leval=" + levelParam + "&parentCode=" + parentAreaCode,
+		data: "level=" + levelParam + "&parentCode=" + parentAreaCode,
 		success: function(data){
 		if(data!=null && data.code==200 && data.result!=null){
 			$.each(data.result, function(i,n){
