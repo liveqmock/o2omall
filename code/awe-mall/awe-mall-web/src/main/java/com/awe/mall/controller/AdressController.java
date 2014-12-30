@@ -19,7 +19,7 @@ public class AdressController {
 	private static final Log LOG = LogFactory.getLog(AdressController.class);
 	
 	private static final String VIEW_WORKSPACE = "myorder/";
-	private static final String VIEW_PAGE = " deliveryAddress";
+	private static final String VIEW_PAGE = "deliveryAddress";
 	
 	@RequestMapping("list")
 	public String list(Model model){
