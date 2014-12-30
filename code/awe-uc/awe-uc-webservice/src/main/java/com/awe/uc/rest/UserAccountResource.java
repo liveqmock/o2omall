@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeanUtils;
@@ -16,13 +17,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import com.hbird.common.utils.security.MD5Util;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.uc.domain.UserAccount;
+import com.awe.uc.domain.query.UserAccountQuery;
 import com.awe.uc.sdk.api.request.UserAccountRequest;
 import com.awe.uc.sdk.api.request.dto.UserAccountRequestDto;
+import com.awe.uc.sdk.api.response.UserAccountResponse;
 import com.awe.uc.sdk.api.response.dto.UserAccountResponseDto;
 import com.awe.uc.service.UserAccountService;
+import com.awe.uc.utils.exceptions.ExistedException;
 
 /**
  * 用户账号REST服务：提供有关用户账号的接口
@@ -40,7 +45,7 @@ public class UserAccountResource {
     private final Log logger = LogFactory.getLog(this.getClass());
 
     @Autowired
-    private UserAccountService userAccountService; 
+    private UserAccountService userAccountService;
 
     /**
      * 查询用户账号信息
@@ -57,7 +62,7 @@ public class UserAccountResource {
             this.logger.error("getUserAccount 拒绝访问");
             return WrapMapper.forbidden();
         }
-        
+
         UserAccountRequestDto requestDto = request.getContent();
         if (null == requestDto || null == requestDto.getId()) {
             this.logger.error("getUserAccount 传入参数有误");
@@ -72,7 +77,98 @@ public class UserAccountResource {
             this.logger.error("查询用户账号数据异常", e);
             return WrapMapper.error();
         }
-    } 
+    }
+
+    /**
+     * 用户注册
+     * 
+     * @param request
+     *            用户账号请求参数
+     * @return 用户注册结果
+     * 
+     */
+    @POST
+    @Path("/userAccount/register")
+    public Wrapper<?> register(UserAccountRequest request) {
+        if (null == request || !request.checkSign()) {
+            this.logger.error("register 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+
+        UserAccountRequestDto requestDto = request.getContent();
+        if (null == requestDto || StringUtils.isBlank(requestDto.getUsername())
+                || StringUtils.isBlank(requestDto.getPassword())) {
+            this.logger.error("register 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+
+        try {
+            UserAccount userAccount = new UserAccount();
+            userAccount.setUsername(requestDto.getUsername());
+            userAccount.setPassword(MD5Util.md5Hex(requestDto.getPassword()));
+            userAccount.setCreateUser(requestDto.getUsername());
+            userAccount.setLoginTimes(0);
+            boolean result = userAccountService.insert(userAccount);
+            if (result) {
+                return WrapMapper.ok();
+            } else {
+                logger.warn("用户注册 失败，未知错误， username=" + requestDto.getUsername());
+                return WrapMapper.wrap(UserAccountResponse.REGISTER_ERROR_CODE,
+                        UserAccountResponse.REGISTER_ERROR_MESSAGE);
+            }
+        } catch (ExistedException e) {
+            logger.warn("用户注册失败，账号已经存在，username=" + requestDto.getUsername());
+            return WrapMapper.wrap(UserAccountResponse.REGISTER_FAIL_CODE, UserAccountResponse.REGISTER_FAIL_MESSAGE);
+        } catch (Exception e) {
+            this.logger.error("用户注册异常，username=" + requestDto.getUsername(), e);
+            return WrapMapper.error();
+        }
+    }
+
+    /**
+     * 用户登录
+     * 
+     * @param request
+     *            用户账号请求参数
+     * @return 用户账号返回对象
+     * 
+     */
+    @POST
+    @Path("/userAccount/login")
+    public Wrapper<?> login(UserAccountRequest request) {
+        if (null == request || !request.checkSign()) {
+            this.logger.error("login 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+
+        UserAccountRequestDto requestDto = request.getContent();
+        if (null == requestDto || StringUtils.isBlank(requestDto.getUsername())
+                || StringUtils.isBlank(requestDto.getPassword())) {
+            this.logger.error("login 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+
+        try {
+            UserAccountQuery queryBean = new UserAccountQuery();
+            queryBean.setUsername(requestDto.getUsername());
+
+            UserAccount userAccount = null;
+            List<UserAccount> list = userAccountService.queryUserAccountList(queryBean);
+            if (!CollectionUtils.isEmpty(list)) {
+                userAccount = list.get(0);
+            }
+            if (null != userAccount && MD5Util.md5Hex(requestDto.getPassword()).equals(userAccount.getPassword())) {
+                UserAccountResponseDto responseDto = convert(userAccount);
+                return WrapMapper.ok().result(responseDto);
+            } else {
+                logger.warn("用户登录 失败， username=" + requestDto.getUsername());
+                return WrapMapper.wrap(UserAccountResponse.LOGIN_FAIL_CODE, UserAccountResponse.LOGIN_FAIL_MESSAGE);
+            }
+        } catch (Exception e) {
+            this.logger.error("用户登录异常，username=" + requestDto.getUsername(), e);
+            return WrapMapper.error();
+        }
+    }
 
     // 数据转换
     private UserAccountResponseDto convert(UserAccount userAccount) {
@@ -96,6 +192,6 @@ public class UserAccountResource {
             list.add(convert(userAccount));
         }
         return list;
-    } 
+    }
 
 }
