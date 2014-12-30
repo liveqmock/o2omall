@@ -2,7 +2,7 @@
 <html lang="zh-cn">
     <head>
         #parse("/layout/head.vm")
-		<script src="$basePath/static/js/inner/productBrand.js?v=11"></script>
+		<script src="$basePath/static/js/inner/productBrand.js?v=19"></script>
 		<script language="javascript"> 
 			$(function() {
 				$("#btn-query").click(function() {
@@ -12,12 +12,9 @@
         			window.location.href=("$basePath/productBrand/addForward");
    				});
 				
-				loadProductCategorys(1,0,"categoryOneId");
-				
-				$("#categoryOneId").val("$!query.categoryOneId");
-				$("#categoryTwoId").val("$!query.categoryTwoId");
-				$("#categoryThreeId").val("$!query.categoryThreeId");
 				$("#type").val("$!query.type");
+				
+				loadProductCategorys(1,0,"$!query.categoryOneId","categoryOneId");
 				
     			$("#categoryOneId").change(function () {
     				initSelected("categoryTwoId");
@@ -25,7 +22,7 @@
     				if (this.value == "") {
     					return;
     				}
-    				loadProductCategorys(2,this.value,"categoryTwoId");
+    				loadProductCategorys(2,this.value,0,"categoryTwoId");
     			});
     			
     			$("#categoryTwoId").change(function () {
@@ -33,8 +30,22 @@
     				if (this.value == "") {
     					return;
     				}
-    				loadProductCategorys(3,this.value,"categoryThreeId");
+    				loadProductCategorys(3,this.value,0,"categoryThreeId");
     			});
+				
+				loadAreas(1,0,"$!query.provinceNo","provinceNo");
+				
+				if ("$!query.provinceNo" != "") {
+					loadAreas(2,"$!query.provinceNo","$!query.cityNo","cityNo");
+				}
+				
+				$("#provinceNo").change(function () {
+					initSelected("cityNo");
+					if (this.value == "") {
+						return;
+					}
+					loadAreas(2,this.value,"","cityNo");
+				});
 			});
         	// 提交分页查询
         	function pageSubmit(pageNoParam) {
@@ -92,13 +103,17 @@
                                     </div>
                                 </div>
 								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="brandCode">品牌编号</label>
+									<label class="col-sm-1 control-label no-padding-right" for="provinceName">地区-省份</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="brandCode" id="brandCode" class="col-xs-10 col-sm-8" value="$!query.brandCode"/>
+                                        <select id="provinceNo" name="provinceNo" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+                                        </select>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="brandName">品牌名称</label>
+									<label class="col-sm-1 control-label no-padding-right" for="cityName">地区-市</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="brandName" id="brandName" class="col-xs-10 col-sm-8" value="$!query.brandName"/>
+                                        <select id="cityNo" name="cityNo" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+                                        </select>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="type">商品类型</label>
                                     <div class="col-sm-3">
@@ -113,13 +128,13 @@
                                     </div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="provinceName">地区-省份-名称</label>
+									<label class="col-sm-1 control-label no-padding-right" for="brandCode">品牌编号</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="provinceName" id="provinceName" class="col-xs-10 col-sm-8" value="$!query.provinceName"/>
+                                        <input type="text" name="brandCode" id="brandCode" class="col-xs-10 col-sm-8" value="$!query.brandCode"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="cityName">地区-市-名称</label>
+									<label class="col-sm-1 control-label no-padding-right" for="brandName">品牌名称</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="cityName" id="cityName" class="col-xs-10 col-sm-8" value="$!query.cityName"/>
+                                        <input type="text" name="brandName" id="brandName" class="col-xs-10 col-sm-8" value="$!query.brandName"/>
                                     </div>
 								</div>
 								<div class="form-group">
@@ -149,8 +164,8 @@
 							<th class="center">品牌名称</th>
 							<th class="center">品牌简称</th>
 							<th class="center">商品类型</th>
-							<th class="center">地区-省份-名称</th>
-							<th class="center">地区-市-名称</th>
+							<th class="center">地区-省份</th>
+							<th class="center">地区-市</th>
 							<th class="center">优先级</th>
 							<th class="center">创建时间</th>
 							<th class="center">创建人</th>

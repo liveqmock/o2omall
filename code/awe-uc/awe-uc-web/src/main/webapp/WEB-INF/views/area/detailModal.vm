@@ -18,7 +18,7 @@
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>父编号</th><td id="r_parentCode" style='width:25%;'></td>
-							<th class="center" style='width:25%;'>级别</th><td id="r_leval" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>级别</th><td id="r_level" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>创建人</th><td id="r_createUser" style='width:25%;'></td>
@@ -53,7 +53,7 @@
     				$("#r_parentCode").text(r.parentCode==null?"":r.parentCode);
     				$("#r_code").text(r.code==null?"":r.code);
     				$("#r_name").text(r.name==null?"":r.name);
-    				$("#r_leval").text(r.leval==null?"":r.leval);
+    				$("#r_level").text(r.level==null?"":r.level);
     				$("#r_createUser").text(r.createUser==null?"":r.createUser);
     				$("#r_createTime").text(r.createTime==null?"":r.createTime);
     				$("#r_updateUser").text(r.updateUser==null?"":r.updateUser);

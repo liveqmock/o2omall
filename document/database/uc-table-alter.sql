@@ -1,0 +1,2 @@
+use awe_uc;
+ALTER TABLE AREA CHANGE leval LEVEL TINYINT COMMENT '¼¶±ð';

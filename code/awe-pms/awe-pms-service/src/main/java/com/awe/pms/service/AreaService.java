@@ -45,6 +45,6 @@ public interface AreaService {
 	 *            市编码
 	 * @return
 	 */
-	List<AreaResponseDto> getCountys(String cityCode);
+	List<AreaResponseDto> getCounties(String cityCode);
 
 }

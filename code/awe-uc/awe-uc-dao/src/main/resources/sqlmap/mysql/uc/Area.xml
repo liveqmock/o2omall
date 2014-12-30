@@ -7,7 +7,7 @@
 		<result column="parent_code" property="parentCode" jdbcType="VARCHAR" />
 		<result column="code" property="code" jdbcType="VARCHAR" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
-		<result column="leval" property="leval" jdbcType="DECIMAL" />
+		<result column="level" property="level" jdbcType="DECIMAL" />
 		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
@@ -16,17 +16,17 @@
     </resultMap>
     
     <sql id="areaColumns">
-    	id,parent_code,code,name,leval,create_user,create_time,update_user,update_time,yn
+    	id,parent_code,code,name,level,create_user,create_time,update_user,update_time,yn
     </sql>
     
      <sql id="areaUsedColumns">
-    	parent_code,code,name,leval,create_user,create_time,update_user,update_time,yn
+    	parent_code,code,name,level,create_user,create_time,update_user,update_time,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="Area" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO area(<include refid="areaUsedColumns"/>) 
-        VALUES (#{parentCode},#{code},#{name},#{leval},#{createUser},now(),#{updateUser},now(),1)
+        VALUES (#{parentCode},#{code},#{name},#{level},#{createUser},now(),#{updateUser},now(),1)
 	</insert>
 	
     <!-- 修改信息 -->
@@ -43,8 +43,8 @@
 		        <if test="name != null and name != ''">
                 	name = #{name,jdbcType=VARCHAR},
 		        </if>
-		        <if test="leval != null">
-                	leval = #{leval,jdbcType=DECIMAL},
+		        <if test="level != null">
+                	level = #{level,jdbcType=DECIMAL},
 		        </if>
 		        <if test="updateUser != null and updateUser != ''">
                 	update_user = #{updateUser,jdbcType=VARCHAR},
@@ -110,8 +110,8 @@
         <if test="name != null and name != ''">
         	and name = #{name,jdbcType=VARCHAR}
         </if>
-        <if test="leval != null">
-        	and leval = #{leval,jdbcType=DECIMAL}
+        <if test="level != null">
+        	and level = #{level,jdbcType=DECIMAL}
         </if>
         <if test="createUser != null and createUser != ''">
         	and create_user = #{createUser,jdbcType=VARCHAR}

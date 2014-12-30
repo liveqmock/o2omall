@@ -290,7 +290,9 @@ create table product_tax_rate
    category_three       varchar(50) comment '三级分类名称',
    product_id           bigint comment '商品ID',
    product_name         varchar(100) comment '商品名称',
+   tax_rate_type        tinyint comment '税率设置类型',
    status               tinyint comment '状态',
+   tax_rate             double comment '税率',
    features             varchar(2000) comment '描述',
    priority             tinyint comment '优先级',
    create_time          timestamp comment '创建时间',
@@ -302,6 +304,7 @@ create table product_tax_rate
 );
 
 alter table product_tax_rate comment '税率';
+
 
 /*==============================================================*/
 /* Table: sku_images                                            */

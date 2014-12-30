@@ -24,7 +24,7 @@ public class AreaResponseDto extends HbirdDto {
     /** 名称 */
     private String name;
     /** 级别 */
-    private Integer leval;
+    private Integer level;
 
     /**
      * get 自增ID
@@ -105,20 +105,20 @@ public class AreaResponseDto extends HbirdDto {
     /**
      * get 级别
      * 
-     * @return the leval
+     * @return the level
      */
-    public Integer getLeval() {
-        return leval;
+    public Integer getLevel() {
+        return level;
     }
 
     /**
      * set 级别
      * 
-     * @param leval
-     *            the leval to set
+     * @param level
+     *            the level to set
      */
-    public void setLeval(Integer leval) {
-        this.leval = leval;
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
 }

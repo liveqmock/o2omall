@@ -21,7 +21,7 @@ create table area
    parent_code          varchar(30) comment '父编号',
    code                 varchar(30) comment '编号',
    name                 varchar(30) comment '名称',
-   leval                tinyint(4) comment '级别',
+   level                tinyint(4) comment '级别',
    create_user          varchar(30) comment '创建人',
    create_time          timestamp comment '创建时间',
    update_user          varchar(30) comment '修改人',

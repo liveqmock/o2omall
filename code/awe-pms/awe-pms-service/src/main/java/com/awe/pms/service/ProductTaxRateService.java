@@ -10,7 +10,7 @@ import com.hbird.common.utils.page.PageUtil;
  * ProductTaxRateService接口
  * 
  * @author ljz
- * @version 2014-12-25 14:47:31
+ * @version 2014-12-29 11:45:53
  * 
  */
 public interface ProductTaxRateService {

@@ -18,7 +18,7 @@ import com.awe.test.base.TestConstants;
  * ProductTaxRateService单元测试
  * 
  * @author ljz
- * @version 2014-12-25 14:47:40
+ * @version 2014-12-29 11:45:59
  * 
  */
 public class ProductTaxRateServiceTestCase extends BaseTransactionTestCase {

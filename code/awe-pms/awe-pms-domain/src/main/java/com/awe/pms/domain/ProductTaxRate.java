@@ -6,7 +6,7 @@ import java.util.Date;
  * ProductTaxRate：税率实体类
  * 
  * @author ljz
- * @version 2014-12-25 14:47:30
+ * @version 2014-12-29 17:29:33
  * 
  */
 public class ProductTaxRate implements java.io.Serializable {
@@ -32,8 +32,12 @@ public class ProductTaxRate implements java.io.Serializable {
     private Long productId; 
     /** 商品名称 */
     private String productName; 
+    /** 税率设置类型 */
+    private Integer taxRateType; 
     /** 状态 */
     private Integer status; 
+    /** 税率 */
+    private Double taxRate; 
     /** 描述 */
     private String features; 
     /** 优先级 */
@@ -212,6 +216,24 @@ public class ProductTaxRate implements java.io.Serializable {
     }
     
     /**
+     * get 税率设置类型
+     * 
+     * @return the taxRateType
+     */
+    public Integer getTaxRateType(){
+        return taxRateType;
+    }
+        
+    /**
+     * set 税率设置类型
+     * 
+     * @param taxRateType the taxRateType to set
+     */
+    public void setTaxRateType(Integer taxRateType) {
+        this.taxRateType = taxRateType;
+    }
+    
+    /**
      * get 状态
      * 
      * @return the status
@@ -227,6 +249,24 @@ public class ProductTaxRate implements java.io.Serializable {
      */
     public void setStatus(Integer status) {
         this.status = status;
+    }
+    
+    /**
+     * get 税率
+     * 
+     * @return the taxRate
+     */
+    public Double getTaxRate(){
+        return taxRate;
+    }
+        
+    /**
+     * set 税率
+     * 
+     * @param taxRate the taxRate to set
+     */
+    public void setTaxRate(Double taxRate) {
+        this.taxRate = taxRate;
     }
     
     /**

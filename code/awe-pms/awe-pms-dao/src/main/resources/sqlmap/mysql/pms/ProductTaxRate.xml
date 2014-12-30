@@ -12,7 +12,9 @@
 		<result column="category_three" property="categoryThree" jdbcType="VARCHAR" />
 		<result column="product_id" property="productId" jdbcType="DECIMAL" />
 		<result column="product_name" property="productName" jdbcType="VARCHAR" />
+		<result column="tax_rate_type" property="taxRateType" jdbcType="DECIMAL" />
 		<result column="status" property="status" jdbcType="DECIMAL" />
+		<result column="tax_rate" property="taxRate" jdbcType="DECIMAL" />
 		<result column="features" property="features" jdbcType="VARCHAR" />
 		<result column="priority" property="priority" jdbcType="DECIMAL" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -23,17 +25,17 @@
     </resultMap>
     
     <sql id="productTaxRateColumns">
-    	id,category_one_id,category_one,category_two_id,category_two,category_three_id,category_three,product_id,product_name,status,features,priority,create_time,update_time,create_user,update_user,yn
+    	id,category_one_id,category_one,category_two_id,category_two,category_three_id,category_three,product_id,product_name,tax_rate_type,status,tax_rate,features,priority,create_time,update_time,create_user,update_user,yn
     </sql>
     
      <sql id="productTaxRateUsedColumns">
-    	category_one_id,category_one,category_two_id,category_two,category_three_id,category_three,product_id,product_name,status,features,priority,create_time,update_time,create_user,update_user,yn
+    	category_one_id,category_one,category_two_id,category_two,category_three_id,category_three,product_id,product_name,tax_rate_type,status,tax_rate,features,priority,create_time,update_time,create_user,update_user,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="ProductTaxRate" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO product_tax_rate(<include refid="productTaxRateUsedColumns"/>) 
-        VALUES (#{categoryOneId},#{categoryOne},#{categoryTwoId},#{categoryTwo},#{categoryThreeId},#{categoryThree},#{productId},#{productName},#{status},#{features},#{priority},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+        VALUES (#{categoryOneId},#{categoryOne},#{categoryTwoId},#{categoryTwo},#{categoryThreeId},#{categoryThree},#{productId},#{productName},#{taxRateType},#{status},#{taxRate},#{features},#{priority},now(),now(),#{createUser},#{updateUser},1)
 	</insert>
 	
     <!-- 修改信息 -->
@@ -41,37 +43,43 @@
         <if test="_parameter != null">
             <if test="id != null and id > 0">
                 update product_tax_rate set
-		        <if test="categoryOneId != null and categoryOneId != ''">
+		        <if test="categoryOneId != null">
                 	category_one_id = #{categoryOneId,jdbcType=DECIMAL},
 		        </if>
 		        <if test="categoryOne != null and categoryOne != ''">
                 	category_one = #{categoryOne,jdbcType=VARCHAR},
 		        </if>
-		        <if test="categoryTwoId != null and categoryTwoId != ''">
+		        <if test="categoryTwoId != null">
                 	category_two_id = #{categoryTwoId,jdbcType=DECIMAL},
 		        </if>
 		        <if test="categoryTwo != null and categoryTwo != ''">
                 	category_two = #{categoryTwo,jdbcType=VARCHAR},
 		        </if>
-		        <if test="categoryThreeId != null and categoryThreeId != ''">
+		        <if test="categoryThreeId != null">
                 	category_three_id = #{categoryThreeId,jdbcType=DECIMAL},
 		        </if>
 		        <if test="categoryThree != null and categoryThree != ''">
                 	category_three = #{categoryThree,jdbcType=VARCHAR},
 		        </if>
-		        <if test="productId != null and productId != ''">
+		        <if test="productId != null">
                 	product_id = #{productId,jdbcType=DECIMAL},
 		        </if>
 		        <if test="productName != null and productName != ''">
                 	product_name = #{productName,jdbcType=VARCHAR},
 		        </if>
-		        <if test="status != null and status != ''">
+		        <if test="taxRateType != null">
+                	tax_rate_type = #{taxRateType,jdbcType=DECIMAL},
+		        </if>
+		        <if test="status != null">
                 	status = #{status,jdbcType=DECIMAL},
+		        </if>
+		        <if test="taxRate != null">
+                	tax_rate = #{taxRate,jdbcType=DECIMAL},
 		        </if>
 		        <if test="features != null and features != ''">
                 	features = #{features,jdbcType=VARCHAR},
 		        </if>
-		        <if test="priority != null and priority != ''">
+		        <if test="priority != null">
                 	priority = #{priority,jdbcType=DECIMAL},
 		        </if>
 		        <if test="updateUser != null and updateUser != ''">
@@ -107,7 +115,24 @@
 
     <!-- 根据查询Bean查询-判断是否存在 -->
     <select id="exist" resultType="java.lang.Integer" parameterType="ProductTaxRate">
-        select count(1) from product_tax_rate where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+        select count(1) from product_tax_rate where yn = 1 
+			and tax_rate_type = #{taxRateType,jdbcType=DECIMAL}
+	        <if test="taxRateType = 1">
+	        	<if test="categoryOneId != null">
+		        	and category_one_id = #{categoryOneId,jdbcType=DECIMAL}
+		        </if>
+		        <if test="categoryTwoId != null">
+		        	and category_two_id = #{categoryTwoId,jdbcType=DECIMAL}
+		        </if>
+		        <if test="categoryThreeId != null">
+		        	and category_three_id = #{categoryThreeId,jdbcType=DECIMAL}
+		        </if>
+	        </if>
+	        <if test="taxRateType = 2">
+	        	<if test="productId != null">
+		        	and product_id = #{productId,jdbcType=DECIMAL}
+		        </if>
+	        </if>
     </select>
 
     <!-- 根据查询Bean获取集合总数 -->
@@ -129,37 +154,43 @@
         <if test="id != null and id != ''">
         	and id = #{id,jdbcType=DECIMAL}
         </if>
-        <if test="categoryOneId != null and categoryOneId != ''">
+        <if test="categoryOneId != null">
         	and category_one_id = #{categoryOneId,jdbcType=DECIMAL}
         </if>
         <if test="categoryOne != null and categoryOne != ''">
         	and category_one = #{categoryOne,jdbcType=VARCHAR}
         </if>
-        <if test="categoryTwoId != null and categoryTwoId != ''">
+        <if test="categoryTwoId != null">
         	and category_two_id = #{categoryTwoId,jdbcType=DECIMAL}
         </if>
         <if test="categoryTwo != null and categoryTwo != ''">
         	and category_two = #{categoryTwo,jdbcType=VARCHAR}
         </if>
-        <if test="categoryThreeId != null and categoryThreeId != ''">
+        <if test="categoryThreeId != null">
         	and category_three_id = #{categoryThreeId,jdbcType=DECIMAL}
         </if>
         <if test="categoryThree != null and categoryThree != ''">
         	and category_three = #{categoryThree,jdbcType=VARCHAR}
         </if>
-        <if test="productId != null and productId != ''">
+        <if test="productId != null">
         	and product_id = #{productId,jdbcType=DECIMAL}
         </if>
         <if test="productName != null and productName != ''">
         	and product_name = #{productName,jdbcType=VARCHAR}
         </if>
-        <if test="status != null and status != ''">
+        <if test="taxRateType != null">
+        	and tax_rate_type = #{taxRateType,jdbcType=DECIMAL}
+        </if>
+        <if test="status != null">
         	and status = #{status,jdbcType=DECIMAL}
+        </if>
+        <if test="taxRate != null">
+        	and tax_rate = #{taxRate,jdbcType=DECIMAL}
         </if>
         <if test="features != null and features != ''">
         	and features = #{features,jdbcType=VARCHAR}
         </if>
-        <if test="priority != null and priority != ''">
+        <if test="priority != null">
         	and priority = #{priority,jdbcType=DECIMAL}
         </if>
         <if test="createTime != null and createTime != ''">
@@ -173,9 +204,6 @@
         </if>
         <if test="updateUser != null and updateUser != ''">
         	and update_user = #{updateUser,jdbcType=VARCHAR}
-        </if>
-        <if test="yn != null and yn != ''">
-        	and yn = #{yn,jdbcType=DECIMAL}
         </if>
     </sql>
 </mapper>

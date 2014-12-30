@@ -1,7 +1,9 @@
 package com.awe.pms.controller;
    
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.pms.controller.base.BaseController;
 import com.awe.pms.domain.ProductTaxRate;
+import com.awe.pms.domain.enums.ProductTaxRateStatusEnum;
+import com.awe.pms.domain.enums.ProductTaxRateTypeEnum;
 import com.awe.pms.domain.query.ProductTaxRateQuery;
 import com.awe.pms.service.ProductTaxRateService;
 import com.awe.pms.utils.exceptions.ExistedException;
@@ -26,7 +30,7 @@ import com.hbird.common.utils.wrap.Wrapper;
  * ProductTaxRateController ：税率控制器
  * 
  * @author ljz
- * @version 2014-12-25 14:47:32
+ * @version 2014-12-29 11:45:54
 */
 @Controller
 @RequestMapping("productTaxRate")
@@ -51,10 +55,15 @@ public class ProductTaxRateController extends BaseController {
     @RequestMapping(value = "")
     public String index(Model model, PageUtil page, ProductTaxRateQuery query) {
         try {
+        	if (query != null && query.getTaxRateType() == null) {
+        		query.setTaxRateType(ProductTaxRateTypeEnum.TAX_RATE_TYPE_1.getKey());
+        	}
             List<ProductTaxRate> dataList = productTaxRateService.queryProductTaxRateListWithPage(query, page);
             model.addAttribute("dataList", dataList);// 数据集合
             model.addAttribute("query", query);// 查询参数
             model.addAttribute("page", page);// 分页
+            model.addAttribute("taxRateTypeMap", this.getTaxRateTypeMap());
+            model.addAttribute("taxRateStatusMap", this.getTaxRateStatusMap());
         } catch (Exception e) {
             LOG.error("productTaxRate index has error.", e);
         }
@@ -68,7 +77,12 @@ public class ProductTaxRateController extends BaseController {
      * @return
      */
     @RequestMapping(value = "addForward")
-    public String addForward() {
+    public String addForward(Model model, Integer taxRateType) {
+    	if (taxRateType == null) {
+    		taxRateType = ProductTaxRateTypeEnum.TAX_RATE_TYPE_1.getKey();
+    	}
+    	model.addAttribute("taxRateType", taxRateType);
+        model.addAttribute("taxRateStatusMap", this.getTaxRateStatusMap());
         return viewPrefix + "/add";
     }
 
@@ -109,6 +123,7 @@ public class ProductTaxRateController extends BaseController {
         try {
             ProductTaxRate productTaxRateResult = productTaxRateService.getProductTaxRateById(productTaxRate.getId());
             model.addAttribute("productTaxRate", productTaxRateResult);
+            model.addAttribute("taxRateStatusMap", this.getTaxRateStatusMap());
         } catch (Exception e) {
             LOG.error("productTaxRate updateForward has error.", e);
         }
@@ -206,5 +221,27 @@ public class ProductTaxRateController extends BaseController {
             LOG.warn("detail productTaxRate has error.", e);
             return error();
         }
+    }
+    
+    /**
+     * 获取商品税率类型
+     */
+    private Map<Integer, ProductTaxRateTypeEnum> getTaxRateTypeMap() {
+    	Map<Integer, ProductTaxRateTypeEnum> productTaxRateEnumMap = new HashMap<Integer, ProductTaxRateTypeEnum>();
+    	for (ProductTaxRateTypeEnum item : ProductTaxRateTypeEnum.values()) {
+    		productTaxRateEnumMap.put(item.getKey(), item);
+    	}
+    	return productTaxRateEnumMap;
+    }
+    
+    /**
+     * 获取税率状态
+     */
+    private Map<Integer, ProductTaxRateStatusEnum> getTaxRateStatusMap() {
+    	Map<Integer, ProductTaxRateStatusEnum> productTaxStatusEnumMap = new HashMap<Integer, ProductTaxRateStatusEnum>();
+    	for (ProductTaxRateStatusEnum item : ProductTaxRateStatusEnum.values()) {
+    		productTaxStatusEnumMap.put(item.getKey(), item);
+    	}
+    	return productTaxStatusEnumMap;
     }
 }

@@ -40,6 +40,9 @@
 							<th class="center" style='width:25%;'>状态</th><td id="r_status" style='width:25%;'></td>
 						</tr>
 						<tr>
+							<th class="center" style='width:25%;'>税率</th><td id="r_taxRate" style='width:25%;'></td>
+						</tr>
+						<tr>
 							<th class="center" style='width:25%;'>描述</th><td id="r_features" style='width:25%;'></td>
 						</tr>
 						<tr>
@@ -91,6 +94,7 @@
     				$("#r_productId").text(r.productId==null?"":r.productId);
     				$("#r_productName").text(r.productName==null?"":r.productName);
     				$("#r_status").text(r.status==null?"":r.status);
+    				$("#r_taxRate").text(r.taxRate==null?"":r.taxRate);
     				$("#r_features").text(r.features==null?"":r.features);
     				$("#r_priority").text(r.priority==null?"":r.priority);
     				$("#r_createTime").text(r.createTime==null?"":r.createTime);
