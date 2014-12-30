@@ -5,8 +5,8 @@
          <div class="top_login left">
            <p>您好，欢迎来到Awesome</p>
            <ul>
-             <li><a href="#springUrl('')/login" class="logbtn">登录</a></li>
-             <li><a href="#springUrl('')/register" class="regbtn">注册</a></li>
+             <li><a href="#springUrl('')/user/login" class="logbtn">登录</a></li>
+             <li><a href="#springUrl('')/user/register" class="regbtn">注册</a></li>
            </ul>
          </div>
          <div class="right">
