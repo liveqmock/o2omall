@@ -17,7 +17,7 @@
           <div class="adress clearfix">
              <strong class="left normal">默认地址：</strong><span class="left">中国北京海淀区中关村大街6号新中关购物中心</span>
           </div>
-          <div class="edit_profile ft14"><a href="basic_data.html">编辑个人资料</a></div>
+          <div class="edit_profile ft14"><a href="#springUrl('')/profile/myprofile">编辑个人资料</a></div>
         </div>
         <div class="art_left_con">
             <h3><i class="arti_icon"></i>我购买的</h3>
