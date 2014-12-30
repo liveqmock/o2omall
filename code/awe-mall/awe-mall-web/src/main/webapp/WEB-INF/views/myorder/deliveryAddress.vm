@@ -22,8 +22,8 @@
         <div class="art_left_con">
             <h3><i class="arti_icon"></i>我购买的</h3>
             <ul class="article_list">
-               <li><a href="my_order.html" >商品订单</a></li>
-               <li><a href="my_order.html">服务订单</a></li>
+               <li><a href="#springUrl('')/myorder/productorderlist" >商品订单</a></li>
+               <li><a href="#springUrl('')/myorder/serviceorderlist">服务订单</a></li>
             </ul>
             <h3><i class="arti_icon"></i>我关注的</h3>
             <ul class="article_list">
@@ -43,8 +43,8 @@
             </ul>
             <h3><i class="arti_icon"></i>我的安全</h3>
             <ul class="article_list">
-               <li><a href="login_password.html">登录密码</a></li>
-               <li><a href="pay.html">支付密码</a></li>
+               <li><a href="#springUrl('')/password/editlogin">登录密码</a></li>
+               <li><a href="#springUrl('')/password/editpay">支付密码</a></li>
             </ul>
             <h3><i class="arti_icon"></i>我的消息</h3>
             <ul class="article_list">
