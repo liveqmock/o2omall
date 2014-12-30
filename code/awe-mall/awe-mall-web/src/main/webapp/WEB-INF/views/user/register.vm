@@ -1,0 +1,74 @@
+<script>
+    $(function(){
+        $('.login_input,.login_code').focus(function(){
+	     	$(this).css({'color':'#333'});
+		 	$(this).val("");
+	 	});
+      	$('#login_input1').blur(function(){
+	      	$(this).val("请输入手机号");
+		  	$(this).css({'color':'#939393'});
+	  	});
+      	$('#login_input2').blur(function(){
+	      	$(this).val("请输入密码");
+		  	$(this).css({'color':'#939393'});
+	  	});
+      	$('#login_input2_code').blur(function(){
+	      	$(this).val("重复登录密码");
+		  	$(this).css({'color':'#939393'});
+	  	});
+      	$('#login_input3').blur(function(){
+	      	$(this).val("验证码");
+		  	$(this).css({'color':'#939393'});
+	  	});
+	  	$('#imageCode').click(function() {    
+        	refreshCheckCode();    
+      	}); 
+	  	$('#submit').click(function() {    
+        	$.post("#springUrl('')/checkCode/validate?checkcode="+ $('#checkCode').val(), function(data) {    
+                if (data) {    
+                    window.top.location.href='需要重定向的页面地址';    
+                } else {    
+                    refreshCheckCode();    
+                    $.messager.show({    
+                        title:'警告',    
+                        msg:'校验码输入不正确。',    
+                        timeout:5000,    
+                        showType:'slide'    
+                    });    
+                }    
+            });    
+        });    
+   	});
+        
+    function refreshCheckCode() {    
+        var append = '#springUrl('')/checkCode/create?clearCache=' + new Date().getTime() + 'a' + Math.random();    
+        $('#imageCode').attr('src', append);    
+    } 
+</script>
+
+<!---------------------- 正文 ----------------------> 
+<div class="login register">
+    <div class="wid1200">
+        <div class="right login_r">
+            <div class="login_con">
+                <div class="login_box pl20">
+                    <h2>现在注册</h2>
+                    <form>
+                        <ul>
+                            <li><input type="text" class="login_input" id="login_input1" value="请输入手机号" /></li>
+                            <li><input type="text" class="login_input" id="login_input2" value="请输入密码" /></li>
+                            <li><input type="text" class="login_input" id="login_input2_code" value="重复登录密码" /></li>
+                            <li><input type="text" class="login_code left" id="login_input3" value="验证码" />
+								<img id="imageCode" src="#springUrl('')/checkCode/create" class="lp_img left" title="看不清，点击换一张" style="cursor: pointer;" />
+                            </li> 
+                            <li class="consent"><input type="checkbox"  />同意《Awesome服务协议》</li>
+                            <li><input type="button" class="login_btn" value="提交注册" /></li>
+                        </ul>
+                    </form>
+                    <p class="text_r login_reg"><a href="#springUrl('')/user/login">立即登录</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <!---------------------- 正文end ----------------------> 
