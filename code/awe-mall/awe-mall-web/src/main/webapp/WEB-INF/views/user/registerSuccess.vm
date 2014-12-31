@@ -1,0 +1,14 @@
+<!---------------------- 正文 ----------------------> 
+<div class="login register">
+    <div class="wid1200">
+        <div class="right login_r">
+            <div class="login_con">
+                <div class="login_box pl20">
+                    <h2>注册成功</h2>
+                    <p class="text_r login_reg"><a href="#springUrl('')/user/login">立即登录</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <!---------------------- 正文end ----------------------> 

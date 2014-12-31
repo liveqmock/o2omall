@@ -159,6 +159,7 @@ small{ font-size:12px;}
 .header{ width:100%}
 .top{ background:#333; height:48px;}
 .top_login p{ float:left; margin:0px 10px;line-height:48px;}
+.top_login p a{ color:#fff;}
 .top_login{ color:#fff; font-size:14px; }
 .top_login ul{ float:left;}
 .top_login ul li{ float:left;margin:13px 0 0 20px;}

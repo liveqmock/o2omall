@@ -103,5 +103,6 @@
 	</bean>
 	
 	<context:component-scan base-package="com.awe.mall.controller" />
-	
+	<context:property-placeholder location="classpath*:conf/authen.properties" ignore-unresolvable="true"/>
+	<import resource="spring-config-authen.xml" />
 </beans>

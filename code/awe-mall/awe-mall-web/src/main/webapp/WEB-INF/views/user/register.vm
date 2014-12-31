@@ -2,22 +2,17 @@
     $(function(){
         $('.login_input,.login_code').focus(function(){
 	     	$(this).css({'color':'#333'});
-		 	$(this).val("");
 	 	});
-      	$('#login_input1').blur(function(){
-	      	$(this).val("请输入手机号");
+      	$('#username').blur(function(){
 		  	$(this).css({'color':'#939393'});
 	  	});
-      	$('#login_input2').blur(function(){
-	      	$(this).val("请输入密码");
+      	$('#password').blur(function(){
 		  	$(this).css({'color':'#939393'});
 	  	});
-      	$('#login_input2_code').blur(function(){
-	      	$(this).val("重复登录密码");
+      	$('#password2').blur(function(){
 		  	$(this).css({'color':'#939393'});
 	  	});
-      	$('#login_input3').blur(function(){
-	      	$(this).val("验证码");
+      	$('#checkCode').blur(function(){
 		  	$(this).css({'color':'#939393'});
 	  	});
 	  	$('#imageCode').click(function() {    
@@ -53,16 +48,21 @@
             <div class="login_con">
                 <div class="login_box pl20">
                     <h2>现在注册</h2>
-                    <form>
+                    <form name="registerForm" id="registerForm" action="#springUrl('')/user/doRegister" method="post">
                         <ul>
-                            <li><input type="text" class="login_input" id="login_input1" value="请输入手机号" /></li>
-                            <li><input type="text" class="login_input" id="login_input2" value="请输入密码" /></li>
-                            <li><input type="text" class="login_input" id="login_input2_code" value="重复登录密码" /></li>
-                            <li><input type="text" class="login_code left" id="login_input3" value="验证码" />
+    						#if($tips_msg)
+    							<li class="reds">
+    								$!tips_msg
+    							</li>
+    					   #end
+                            <li><input type="text" class="login_input" id="username" name="username" placeholder="请输入手机号" /></li>
+                            <li><input type="text" class="login_input" id="password" name="password" placeholder="请输入密码" /></li>
+                            <li><input type="text" class="login_input" id="password2" name="password2" placeholder="请重复输入密码" /></li>
+                            <li><input type="text" class="login_code left" id="checkCode" name="checkCode" placeholder="请输入验证码" />
 								<img id="imageCode" src="#springUrl('')/checkCode/create" class="lp_img left" title="看不清，点击换一张" style="cursor: pointer;" />
                             </li> 
                             <li class="consent"><input type="checkbox"  />同意《Awesome服务协议》</li>
-                            <li><input type="button" class="login_btn" value="提交注册" /></li>
+                            <li><input type="submit" class="login_btn" value="提交注册" /></li>
                         </ul>
                     </form>
                     <p class="text_r login_reg"><a href="#springUrl('')/user/login">立即登录</a></p>

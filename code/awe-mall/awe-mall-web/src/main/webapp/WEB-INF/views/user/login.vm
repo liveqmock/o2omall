@@ -50,6 +50,11 @@
 				
                 <form name="loginForm" id="loginForm" action="#springUrl('')/user/doLogin" method="post">
                     <ul>
+						#if($tips_msg)
+							<li class="reds">
+								$!tips_msg
+							</li>
+					   #end
                        <li>
     						<input type="text" class="login_input" id="username" name="username" placeholder="请输入手机号" />
     				   </li>

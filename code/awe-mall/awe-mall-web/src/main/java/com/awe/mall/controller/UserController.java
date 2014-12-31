@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.awe.mall.controller.base.BaseController;
 import com.awe.mall.service.UserAccountService;
 import com.awe.uc.sdk.response.dto.UserAccountResponseDto;
+import com.hbird.common.utils.wrap.Wrapper;
 import com.hbird.common.web.context.LoginUser;
 import com.hbird.common.web.context.LoginUserUtils;
 
@@ -27,13 +28,15 @@ import com.hbird.common.web.context.LoginUserUtils;
 @Controller
 @RequestMapping("user")
 public class UserController extends BaseController {
-    private static final String VIEW_INDEX = "index";
+    private static final String VIEW_INDEX = "/index";
     private static final String VIEW_LOGIN = "user/login";
-    private static final String VIEW_LOGIN_FORWARD = "user/loginForward";
+    private static final String VIEW_LOGIN_SUCCESS = "user/loginSuccess";
     private static final String VIEW_REGISTER = "user/register";
-    private static final String LOGIN_MSG_KEY = "login_msg";
-    private static final String LOGIN_MSG_VALUE_ERROR = "用户名或密码错误";
-    private static final String LOGIN_MSG_VALUE_ILLEGAL = "用户名或密码不能空";
+    private static final String VIEW_REGISTER_SUCCESS = "user/registerSuccess";
+    private static final String MSG_KEY = "tips_msg";
+    private static final String MSG_VALUE_LOGIN_ERROR = "用户名或密码错误";
+    private static final String MSG_VALUE_REGISTER_ERROR = "注册失败，未知错误";
+    private static final String MSG_VALUE_ILLEGAL = "用户名或密码不能空";
     private static final String REDIRECT = "redirect:";
     private static final String FORWARD_URL = "forwardUrl";
 
@@ -67,7 +70,7 @@ public class UserController extends BaseController {
     public String doLogin(Model model, String username, String password, HttpServletResponse response, String forwardUrl) {
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             // 缺少参数
-            model.addAttribute(LOGIN_MSG_KEY, LOGIN_MSG_VALUE_ILLEGAL);
+            model.addAttribute(MSG_KEY, MSG_VALUE_ILLEGAL);
             return VIEW_LOGIN;
         }
 
@@ -81,20 +84,22 @@ public class UserController extends BaseController {
                     forwardUrl = VIEW_INDEX;
                 }
                 model.addAttribute(FORWARD_URL, forwardUrl);
-                return VIEW_LOGIN_FORWARD;
+                return VIEW_LOGIN_SUCCESS;
             } else {
-                model.addAttribute(LOGIN_MSG_KEY, LOGIN_MSG_VALUE_ERROR);
+                model.addAttribute(MSG_KEY, MSG_VALUE_LOGIN_ERROR);
                 return VIEW_LOGIN;
             }
         } catch (Exception e) {
             // 通过处理Shiro的运行时AuthenticationException就可以控制用户登录失败或密码错误时的情景
             logger.error("对用户[" + username + "]进行登录验证未通过,堆栈轨迹如下:", e);
-            model.addAttribute(LOGIN_MSG_KEY, LOGIN_MSG_VALUE_ERROR);
+            model.addAttribute(MSG_KEY, MSG_VALUE_LOGIN_ERROR);
             return VIEW_LOGIN;
         }
     }
 
     /**
+     * setCookie
+     * 
      * @param response
      * @param loginUser
      */
@@ -120,6 +125,40 @@ public class UserController extends BaseController {
         logger.debug("go to register page");
         model.addAttribute("navFlag", "register"); // 导航标识，无标识
         return VIEW_REGISTER;
+    }
+
+    /**
+     * 注册事件
+     * 
+     * @param model
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "doRegister", method = RequestMethod.POST)
+    public String doRegister(Model model, String username, String password) {
+        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+            // 缺少参数
+            model.addAttribute(MSG_KEY, MSG_VALUE_ILLEGAL);
+            return VIEW_REGISTER;
+        }
+
+        this.logger.info("doRegister: username=" + username);
+
+        try {
+            Wrapper<?> wrapper = userAccountService.register(username, password);
+            if (null != wrapper && wrapper.isSuccess()) {
+                return VIEW_REGISTER_SUCCESS;
+            } else if (null != wrapper) {
+                model.addAttribute(MSG_KEY, wrapper.getMessage());
+                return VIEW_REGISTER;
+            } else {
+                model.addAttribute(MSG_KEY, MSG_VALUE_REGISTER_ERROR);
+                return VIEW_REGISTER;
+            }
+        } catch (Exception e) {
+            model.addAttribute(MSG_KEY, MSG_VALUE_REGISTER_ERROR);
+            return VIEW_REGISTER;
+        }
     }
 
     /**
