@@ -96,6 +96,11 @@
 				<artifactId>hbird-common-web</artifactId>
 				<version>${hbird-common.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.awe.uc</groupId>
+				<artifactId>awe-uc-sdk</artifactId>
+				<version>1.0.0.1</version>
+			</dependency>
 			<!-- awe-mall dependencies -->
 			<dependency>
 				<groupId>com.awe.mall</groupId>

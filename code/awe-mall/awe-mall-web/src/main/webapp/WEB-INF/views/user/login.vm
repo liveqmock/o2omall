@@ -1,20 +1,16 @@
 <script>
 	$(function(){
       	$('.login_input,.login_code').focus(function(){
-	     	$(this).css({'color':'#333'});
-		 	$(this).val("");
+			$(this).css({'color':'#333'});
 	  	});
-      	$('#login_input1').blur(function(){
-	      $(this).val("请输入手机号");
-		  $(this).css({'color':'#939393'});
+      	$('#username').blur(function(){
+	  		$(this).css({'color':'#939393'});
 	  	});
-      	$('#login_input2').blur(function(){
-	      $(this).val("请输入密码");
-		  $(this).css({'color':'#939393'});
+      	$('#password').blur(function(){
+			$(this).css({'color':'#939393'});
 	  	});
-      	$('#login_input3').blur(function(){
-	      $(this).val("验证码");
-		  $(this).css({'color':'#939393'});
+      	$('#checkCode').blur(function(){
+    		$(this).css({'color':'#939393'});
 	  	});
 	  	$('#imageCode').click(function() {    
         	refreshCheckCode();    
@@ -51,19 +47,29 @@
            <div class="login_con">
              <div class="login_box pl20">
                 <h2>用户登录</h2>
-                <form>
-                <ul>
-                   <li><input type="text" class="login_input" id="login_input1" value="请输入手机号" /></li>
-                   <li><input type="text" class="login_input" id="login_input2" value="请输入密码" /></li>
-                   <li><input type="text" class="login_code left" id="login_input3"  value="验证码" />
-					<img id="imageCode" src="#springUrl('')/checkCode/create" class="lp_img left" title="看不清，点击换一张" style="cursor: pointer;" />
-				   </li>
-				   <li class="reds">温馨提示：一个手机只能注册一个会员</li>
-                   <li><input type="button" class="login_btn" value="登 录" /></li>
-                   
-                </ul>
-                
+				
+                <form name="loginForm" id="loginForm" action="#springUrl('')/user/doLogin" method="post">
+                    <ul>
+                       <li>
+    						<input type="text" class="login_input" id="username" name="username" placeholder="请输入手机号" />
+    				   </li>
+                       <li>
+    						<input type="password" class="login_input" id="password" name="password" placeholder="请输入密码" />
+    				   </li>
+                       <li>
+    						<input type="text" class="login_code left" id="checkCode" name="checkCode" placeholder="请输入验证码" />
+    						<img id="imageCode" src="#springUrl('')/checkCode/create" class="lp_img left" title="看不清，点击换一张" style="cursor: pointer;" />
+    				   </li>
+    				   <li class="reds">
+    						温馨提示：一个手机只能注册一个会员
+    				   </li>
+                       <li>
+    						<input type="hidden" name="forwardUrl" id ="forwardUrl" value="$!forwardUrl"/>
+    						<input type="submit" class="login_btn" value="登 录" />
+    				   </li>
+                    </ul>
                 </form>
+				
                 <p class="text_r login_reg"><a href="#springUrl('')/user/register">用户注册</a><a href="">忘记密码？</a></p>
               </div>
            </div>
