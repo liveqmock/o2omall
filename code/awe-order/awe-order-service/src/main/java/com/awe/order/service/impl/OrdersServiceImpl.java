@@ -82,7 +82,7 @@ public class OrdersServiceImpl implements OrdersService {
     public boolean update(Orders orders) {
         boolean resultFlag = false;
         try {
-            if (null != orders && null != orders.getId()) {
+            if (null != orders && null != orders.getOrderNo()) {
                 resultFlag = ordersManager.update(orders);
             } else {
                 LOG.warn("OrdersServiceImpl#update failed, param is illegal.");

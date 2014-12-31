@@ -63,7 +63,6 @@
     <!-- 修改信息 -->
     <update id="update" parameterType="Orders">
         <if test="_parameter != null">
-            <if test="id != null and id > 0">
                 update orders set
 		        <if test="orderNo != null and orderNo != ''">
                 	order_no = #{orderNo,jdbcType=VARCHAR},
@@ -174,8 +173,7 @@
                 	update_user = #{updateUser,jdbcType=VARCHAR},
 		        </if>
                 	update_time = now()
-                where id = #{id}
-            </if>
+                where order_no = #{orderNo}
         </if>
     </update>
 

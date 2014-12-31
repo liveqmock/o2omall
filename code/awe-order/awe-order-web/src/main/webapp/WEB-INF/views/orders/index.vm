@@ -139,6 +139,7 @@
                     </div>
                 </div>
             </div>
+			
 			<div class="col-xs-12 col-sm-12 table-responsive">
                 <table class="table table-striped table-bordered table-condensed table-hover">
                     <thead>
@@ -170,7 +171,7 @@
                         #foreach( $item in $dataList)
                             <tr>
                                 <td>$!item.id</td>
-                                <td>$!item.orderNo</td>
+                                <td><a href="javascript:void(0)" onclick="OrderLog($!item.orderNo);"><font color='red'>$!item.orderNo</font></a></td>
                                 <td>$!item.orderType</td>
                                 <td>$!item.orderName</td>
                                 <td>$!item.consigneeName</td>
@@ -201,7 +202,11 @@
 				#pageBarPost($page.totalRow $page.curPage $page.totalPage)
 			</div>
         </div>
+		<!--订单详情-->
 		#parse("/orders/detailModal.vm")
+		<!--修改订单-->
 		#parse("/orders/UpdateModal.vm")
+		<!--订单日志-->
+		#parse("/orders/OrderLogModal.vm")
     </body>
 </html>

@@ -8,14 +8,14 @@
 			</div>
 			<div class="modal-body"> 
 				<div class="widget-main" style="background-color: #fff;padding:5px;">
-                    <form class="form-horizontal" role="form" id="addForm">
+                    <form class="form-horizontal" role="form" id="updateOrderForm">
 						<input id="hd_province" name="provinceName" type="hidden"/>
                         <input id="hd_city" name="cityName" type="hidden"/>
                         <input id="hd_county" name="countyName" type="hidden"/>
                         <div class="form-group">
                             <label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="orderNo">订单编号</label>
                             <div class="col-sm-9">
-                                <input type="text" name="orderNo" id="update_orderNo" class="col-xs-12 col-sm-12" />
+                                <input type="text" name="orderNo" id="updatess_orderNo"  class="col-xs-12 col-sm-12" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -34,7 +34,8 @@
                         <div class="form-group">
                             <label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="provinceNo">省/直辖市</label>
                             <div class="col-sm-4">
-                                <select id="Update_provinceNo" name="provinceNo" class="col-xs-12 col-sm-12" onchange="city(this.value);">
+                                <select id="Update_provinceNo" name="provinceNo" onclick="CleanArea();" class="col-xs-12 col-sm-12" onchange="Oncity(this.value);">
+									 <option value="">-请选择-</option>
                                 </select>
                             </div>
                         </div>
@@ -42,7 +43,8 @@
 						<div class="form-group">
                             <label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="cityNo">市</label>
                             <div class="col-sm-4">
-                                <select id="Update_cityNo" name="cityNo" class="col-xs-12 col-sm-12" onchange="county(this.value);">
+                                <select id="Update_cityNo" name="cityNo" class="col-xs-12 col-sm-12" onchange="Oncounty(this.value);">
+									 <option value="">-请选择-</option>
                                 </select>
                             </div>
                         </div>
@@ -51,6 +53,7 @@
                             <label class="col-sm-offset-1 col-sm-2 control-label no-padding-right" for="countyNo">区</label>
                             <div class="col-sm-4">
                                 <select id="update_countyNo" name="countyNo" class="col-xs-12 col-sm-12">
+									 <option value="">-请选择-</option>
                                 </select>
                             </div>
                         </div>
@@ -78,7 +81,7 @@
                             <div class="col-sm-8 col-sm-offset-4">
                                 <button class="btn btn-info btn-sm" type="button" id="btn-cancel"><i class="icon-remove"></i>取消</button>
                                 &nbsp; &nbsp; &nbsp;
-                                <button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                <button class="btn btn-success btn-sm" type="button" id="update-btn-submit"><i class="icon-ok"></i>提交</button>
                             </div>
                         </div>
                     </form>
@@ -89,37 +92,46 @@
 </div><!-- /.modal -->
 
 <script language="javascript">  
-	
+	function CleanArea(){
+		$("#hd_province").val('');
+		$("#hd_city").val('');
+		$("#hd_county").val('');
+	}
     $('#myOrdersUpdateModal').on('hidden.bs.modal', function (e) {
       		$("#Update_provinceNo").empty();
 			$("#update_city").empty();
 			$("#update_countyNo").empty();
      })
-	
 	 $(function(){
-	   province();
-	   
-	   var proNo =  $("#hd_province").val();
-	   city(proNo);
-	   
-	   var cityNo = $("#hd_city").val();
-	   county(cityNo);
-	 })
+	 	 $("#update-btn-submit").click(function(){		 
+            var form = $("#updateOrderForm");
+            if(form.valid()==false){
+                return;
+            }
+            $("#update-btn-submit").attr("disabled","true");
+            jQuery.post('$basePath/orders/update',
+                    form.serialize(),
+                    function(data) {
+					 MyPopWindow.SubmitCompletedCallback2(data, "$basePath/orders"); }
+            );
+        });
+    });
+
+	 
 	 
 	//获取省的所有列表
 	function province(){
+	$("#Update_cityNo").empty();
+	$("#update_countyNo").empty();
 		jQuery.ajax({
     		type: "GET",
     		url: basePath + "/area/queryProvince",
     		dataType : 'json',
     		success: function(data){
-			    $("#Update_provinceNo").empty();
-				$("#Update_cityNo").empty();
-				$("#update_countyNo").empty();
+			    $('#Update_cityNo').append("<option value=''>请选择</option>");
     			if(data!=null && data.code==200 && data.result!=null){
     				var r = data.result;
 					if(r.length > 0){
-					 $('#Update_provinceNo').append("<option value=''>请选择</option>");
 						$.each(data.result,function(i,item){
 						if($("#hd_province").val() == item.code){
 						     $('#Update_provinceNo').append("<option selected value='" + item.code+ "'>" + item.name + "</option>");
@@ -139,15 +151,16 @@
 	}
 	 
 	//--//获取市的所有列表
-	function city(proNo){
+	function Oncity(){
+	$("#Update_cityNo").empty();
+	$("#update_countyNo").empty();
+	var proNo = $('#Update_provinceNo').find("option:selected").val();
 		jQuery.ajax({
     		type: "GET",
     		url: basePath + "/area/queryCityNo",
     		dataType : 'json',
 			data:{provinceNO:proNo},
     		success: function(data){
-				$("#Update_cityNo").empty();
-				$("#update_countyNo").empty();
     			if(data!=null && data.code==200 && data.result!=null){
     				var r = data.result;
 					if(r.length > 0){
@@ -170,14 +183,15 @@
     	});
 	}
 	//---获取县的列表
-	function county(cityNo){
+	function Oncounty(){
+	$("#update_countyNo").empty();
+	var cityNo = $('#Update_cityNo').find("option:selected").val();
 		jQuery.ajax({
     		type: "GET",
     		url: basePath + "/area/queryCountyNo",
     		dataType : 'json',
 			data:{CityNo:cityNo},
     		success: function(data){
-			$("#update_countyNo").empty();
     			if(data!=null && data.code==200 && data.result!=null){
     				var r = data.result;
 					if(r.length > 0){
@@ -212,7 +226,7 @@
     		success: function(data){
     			if(data!=null && data.code==200 && data.result!=null){
     				var r = data.result;
-    				$("#update_orderNo").val(r.orderNo==null?"":r.orderNo);
+    				$("#updatess_orderNo").val(r.orderNo==null?"":r.orderNo);
 					$("#update_consigneeName").val(r.consigneeName==null?"":r.consigneeName);
 					$("#update_consigneePhone").val(r.consigneePhone==null?"":r.consigneePhone);
 					$("#update_address").val(r.address==null?"":r.address);
@@ -226,6 +240,11 @@
     			} else {
     				alert("获取详情失败");
     			}
+				
+				   //显示省市县
+				   province();
+            	   Oncity();
+            	   Oncounty();
     		},
     		error : function(data) {
     			alert("获取详情出现异常");

@@ -170,7 +170,7 @@ public class OrderLogController extends BaseController {
     @ResponseBody
     public Wrapper<?> query(OrderLogQuery query) {
         try {
-            List<OrderLog> list = orderLogService.queryOrderLogList(query);
+             List<OrderLog> list = orderLogService.queryOrderLogList(query);
             if (!CollectionUtils.isEmpty(list)) {
                 return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, list);
             } else {
