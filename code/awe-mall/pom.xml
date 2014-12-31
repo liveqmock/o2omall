@@ -96,6 +96,11 @@
 				<artifactId>hbird-common-web</artifactId>
 				<version>${hbird-common.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.awe.uc</groupId>
+				<artifactId>awe-uc-sdk</artifactId>
+				<version>1.0.0.1</version>
+			</dependency>
 			<!-- awe-mall dependencies -->
 			<dependency>
 				<groupId>com.awe.mall</groupId>
@@ -537,6 +542,8 @@
 				<domain.web>local.mall.shop.hbird.com</domain.web>
 				<domain.webservice>local.mallws.shop.hbird.com</domain.webservice>
 				<domain.worker>local.mall-worker.shop.hbird.com</domain.worker>
+				<!-- 登录权限认证信息 -->
+				<my.web.domain.name>local.mall.shop.hbird.com:8080</my.web.domain.name>
 			</properties>
 		</profile>
 		
@@ -559,6 +566,8 @@
 				<domain.web>dev.mall.shop.hbird.com</domain.web>
 				<domain.webservice>dev.mallws.shop.hbird.com</domain.webservice>
 				<domain.worker>dev.mall-worker.shop.hbird.com</domain.worker>
+				<!-- 登录权限认证信息 -->
+				<my.web.domain.name>dev.mall.shop.hbird.com</my.web.domain.name>
 			</properties>
 		</profile>
 
@@ -581,6 +590,8 @@
 				<domain.web>test.mall.shop.hbird.com</domain.web>
 				<domain.webservice>test.mallws.shop.hbird.com</domain.webservice>
 				<domain.worker>test.mall-worker.shop.hbird.com</domain.worker>
+				<!-- 登录权限认证信息 -->
+				<my.web.domain.name>test.mall.shop.hbird.com</my.web.domain.name>
 			</properties>
 		</profile>
 
@@ -603,6 +614,8 @@
 				<domain.web>mall.shop.hbird.com</domain.web>
 				<domain.webservice>mallws.shop.hbird.com</domain.webservice>
 				<domain.worker>mall-worker.shop.hbird.com</domain.worker>
+				<!-- 登录权限认证信息 -->
+				<my.web.domain.name>mall.shop.hbird.com</my.web.domain.name>
 			</properties>
 		</profile>
 	</profiles>
