@@ -18,6 +18,7 @@ import com.awe.mall.controller.base.BaseController;
 @Controller
 @RequestMapping("")
 public class IndexController extends BaseController {
+
     private static final String VIEW_INDEX = "index";
 
     private final Log logger = LogFactory.getLog(this.getClass());

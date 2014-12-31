@@ -10,5 +10,10 @@
 	http://www.springframework.org/schema/aop
 	http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
 	default-autowire="byName">
+	
+	<bean id="userAccountClient" class="com.awe.uc.sdk.UserAccountClient">
+		<property name="key" value="${mall.common.key}" />
+		<property name="serviceUrlDomain" value="${service.url.domain.uc}" />
+	</bean>
 
 </beans>
