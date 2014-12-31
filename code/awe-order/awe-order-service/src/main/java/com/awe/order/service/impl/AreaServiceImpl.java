@@ -58,7 +58,7 @@ public class AreaServiceImpl implements AreaService {
 	public List<AreaResponseDto> getCountys(String cityCode) {
 		List<AreaResponseDto> list = null;
 		try {
-			list = areaClient.getCountys(cityCode);
+			list = areaClient.getCounties(cityCode);
 		} catch (Exception e) {
 			LOG.warn("getCountys has error,", e);
 		}
