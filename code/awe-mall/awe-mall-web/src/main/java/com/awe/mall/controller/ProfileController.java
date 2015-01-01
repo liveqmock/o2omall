@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.awe.mall.controller.base.BaseController;
 import com.awe.mall.service.ProfileService;
 import com.awe.uc.sdk.request.dto.UserProfileRequestDto;
 import com.hbird.common.utils.wrap.Wrapper;
@@ -19,7 +20,7 @@ import com.hbird.common.utils.wrap.Wrapper;
  */
 @Controller
 @RequestMapping("profile")
-public class ProfileController {
+public class ProfileController extends BaseController{
 
 	private static final Log LOG = LogFactory.getLog(ProfileController.class);
 	

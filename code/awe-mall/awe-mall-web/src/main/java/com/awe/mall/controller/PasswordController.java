@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.awe.mall.controller.base.BaseController;
 import com.awe.mall.service.PasswordService;
 import com.awe.uc.sdk.request.dto.UserAccountRequestDto;
 import com.hbird.common.utils.wrap.Wrapper;
@@ -19,7 +20,7 @@ import com.hbird.common.utils.wrap.Wrapper;
  */
 @Controller
 @RequestMapping("password")
-public class PasswordController {
+public class PasswordController extends BaseController{
 private static final Log LOG = LogFactory.getLog(AdressController.class);
 	
 	private static final String VIEW_WORKSPACE = "myorder/";
@@ -48,7 +49,7 @@ private static final Log LOG = LogFactory.getLog(AdressController.class);
 			UserAccountRequestDto requestDto = new UserAccountRequestDto();
 			requestDto.setPassword(newPassword);
 			requestDto.setUsername(username);
-			passwordService.modifyLoginPwd(requestDto);
+			wrapper = passwordService.modifyLoginPwd(requestDto);
 		} catch (Exception e) {
 			LOG.error("#PasswordController.modifyLoginPwd#" + e);
 		}
