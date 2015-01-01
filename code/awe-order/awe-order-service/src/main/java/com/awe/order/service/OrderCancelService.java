@@ -84,4 +84,11 @@ public interface OrderCancelService {
      * @return
      */
     public boolean delete(OrderCancel[] orderCancels);
+
+    /**
+     * 取消订单审核
+     * @param orderCancel
+     * @return
+     */
+	public boolean Cancelupdate(OrderCancel orderCancel);
 }
