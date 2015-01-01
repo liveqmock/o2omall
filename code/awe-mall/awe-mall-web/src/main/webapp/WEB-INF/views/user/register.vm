@@ -1,3 +1,5 @@
+<script type="text/javascript" src="#springUrl('')/static/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="#springUrl('')/static/js/inner/common.js"></script>
 <script>
     $(function(){
         $('.login_input,.login_code').focus(function(){
@@ -18,21 +20,29 @@
 	  	$('#imageCode').click(function() {    
         	refreshCheckCode();    
       	}); 
-	  	$('#submit').click(function() {    
-        	$.post("#springUrl('')/checkCode/validate?checkcode="+ $('#checkCode').val(), function(data) {    
-                if (data) {    
-                    window.top.location.href='需要重定向的页面地址';    
-                } else {    
-                    refreshCheckCode();    
-                    $.messager.show({    
-                        title:'警告',    
-                        msg:'校验码输入不正确。',    
-                        timeout:5000,    
-                        showType:'slide'    
-                    });    
-                }    
-            });    
-        });    
+	  	$('#registerForm').validate({
+			errorElement:"p",
+			errorClass:"reds",
+			rules: {
+				username: {required: true, mobile: true},
+				password: {required: true, minlength: 6, maxlength: 9},
+				password2: {required: true, equalTo:"#password"},
+				checkCode: {required: true}
+			},
+			messages: {
+				username: { required: "请输入手机号", mobile: "请输入正确的11位手机号"},
+				password: { required: "请输入密码", minlength: jQuery.validator.format("请输入长度最少是{0}位的密码"), maxlength: jQuery.validator.format("请输入长度最多是{0}位的密码")},
+				password2: { required: "请重复输入密码",equalTo:"输入值必须和上面的密码相同"},
+				checkCode: { required: "请输入验证码"}
+			}
+		});
+	  	$('#register_btn').click(function() {    
+        	var form = $("#registerForm");
+			if(form.valid()==false){
+				return;
+			}
+			form.submit();
+        });      
    	});
         
     function refreshCheckCode() {    
@@ -55,14 +65,14 @@
     								$!tips_msg
     							</li>
     					   #end
-                            <li><input type="text" class="login_input" id="username" name="username" placeholder="请输入手机号" /></li>
-                            <li><input type="text" class="login_input" id="password" name="password" placeholder="请输入密码" /></li>
-                            <li><input type="text" class="login_input" id="password2" name="password2" placeholder="请重复输入密码" /></li>
+                            <li><input type="text" class="login_input" id="username" name="username" placeholder="请输入手机号" value="$!username" /></li>
+                            <li><input type="password" class="login_input" id="password" name="password" placeholder="请输入密码" value="$!password" /></li>
+                            <li><input type="password" class="login_input" id="password2" name="password2" placeholder="请重复输入密码" value="$!password" /></li>
                             <li><input type="text" class="login_code left" id="checkCode" name="checkCode" placeholder="请输入验证码" />
 								<img id="imageCode" src="#springUrl('')/checkCode/create" class="lp_img left" title="看不清，点击换一张" style="cursor: pointer;" />
                             </li> 
                             <li class="consent"><input type="checkbox"  />同意《Awesome服务协议》</li>
-                            <li><input type="submit" class="login_btn" value="提交注册" /></li>
+                            <li><input type="button" name="register_btn" id="register_btn" class="login_btn" value="提交注册" /></li>
                         </ul>
                     </form>
                     <p class="text_r login_reg"><a href="#springUrl('')/user/login">立即登录</a></p>

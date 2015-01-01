@@ -27,7 +27,7 @@ import com.hbird.common.web.interceptor.AbstractHandlerInterceptorAdapter;
 public class LoginCookieInterceptor extends AbstractHandlerInterceptorAdapter {
 
     /** KEY:登录用户名 */
-    private static final String KEY_LOGIN_USERNAME = "username";
+    private static final String KEY_LOGIN_USERNAME = "loginUsername";
     private final static Log LOG = LogFactory.getLog(LoginCookieInterceptor.class);
 
     @Override
