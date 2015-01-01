@@ -5,6 +5,9 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.perf4j.aop.Profiled;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.awe.pms.domain.ProductDict;
 import com.awe.pms.domain.query.ProductDictQuery;
@@ -12,10 +15,6 @@ import com.awe.pms.manager.ProductDictManager;
 import com.awe.pms.service.ProductDictService;
 import com.awe.pms.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.perf4j.aop.Profiled;
  
 /**
  * ProductDictService接口的实现类
@@ -105,6 +104,25 @@ public class ProductDictServiceImpl implements ProductDictService {
             LOG.error("ProductDictServiceImpl#queryProductDictList has error.", e);
         }
         return productDictList;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Profiled(tag = "ProductDictService.getPmsTypeDict")
+    public List<ProductDict> getPmsTypeDict(int type) {
+    	if (type < 0) {
+    		return null;
+    	}
+    	List<ProductDict> productDictList = null;
+    	try {
+        	ProductDictQuery queryBean = new ProductDictQuery();
+        	queryBean.setType(type);
+    		productDictList = productDictManager.queryProductDictList(queryBean);
+    	} catch (Exception e) {
+    		LOG.error("ProductDictServiceImpl#queryProductDictList has error.", e);
+    	}
+    	return productDictList;
     }
 
     /**

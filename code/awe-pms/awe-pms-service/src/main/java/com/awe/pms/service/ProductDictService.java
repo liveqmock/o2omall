@@ -47,6 +47,14 @@ public interface ProductDictService {
      * @return
      */
     public List<ProductDict> queryProductDictList(ProductDictQuery queryBean);
+    
+    /**
+     * 根据类型查询对象集合
+     * 
+     * @param type
+     * @return
+     */
+    public List<ProductDict> getPmsTypeDict(int type);
 
     /**
      * 根据查询Bean获取对象集合，带翻页

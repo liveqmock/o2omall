@@ -3,7 +3,7 @@ package com.awe.test.base;
 /**
  * 
  * @author ljz
- * @version 2014-12-25 14:47:40
+ * @version 2014-12-30 16:41:55
  * 
  */
 public interface TestConstants {

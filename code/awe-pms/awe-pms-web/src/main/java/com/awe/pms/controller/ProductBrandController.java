@@ -1,7 +1,6 @@
 package com.awe.pms.controller;
    
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -16,10 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.pms.controller.base.BaseController;
 import com.awe.pms.domain.ProductBrand;
-import com.awe.pms.domain.ProductDict;
 import com.awe.pms.domain.enums.ProductDictEnum;
 import com.awe.pms.domain.query.ProductBrandQuery;
-import com.awe.pms.domain.query.ProductDictQuery;
 import com.awe.pms.service.ProductBrandService;
 import com.awe.pms.service.ProductDictService;
 import com.awe.pms.utils.exceptions.ExistedException;
@@ -61,7 +58,7 @@ public class ProductBrandController extends BaseController {
         try {
             List<ProductBrand> dataList = productBrandService.queryProductBrandListWithPage(query, page);
             model.addAttribute("dataList", dataList);// 数据集合
-            model.addAttribute("pmsTypes", this.getPmsTypeDict());// 商品类型集合
+            model.addAttribute("pmsTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PMS_TYPE.getType()));// 商品类型集合
             model.addAttribute("query", query);// 查询参数
             model.addAttribute("page", page);// 分页
         } catch (Exception e) {
@@ -78,7 +75,7 @@ public class ProductBrandController extends BaseController {
      */
     @RequestMapping(value = "addForward")
     public String addForward(Model model) {
-    	model.addAttribute("pmsTypes", this.getPmsTypeDict());// 商品类型集合
+    	model.addAttribute("pmsTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PMS_TYPE.getType()));// 商品类型集合
         return viewPrefix + "/add";
     }
 
@@ -119,7 +116,7 @@ public class ProductBrandController extends BaseController {
         try {
             ProductBrand productBrandResult = productBrandService.getProductBrandById(productBrand.getId());
             model.addAttribute("productBrand", productBrandResult);
-            model.addAttribute("pmsTypes", this.getPmsTypeDict());// 商品类型集合
+            model.addAttribute("pmsTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PMS_TYPE.getType()));// 商品类型集合
         } catch (Exception e) {
             LOG.error("productBrand updateForward has error.", e);
         }
@@ -217,13 +214,5 @@ public class ProductBrandController extends BaseController {
             LOG.warn("detail productBrand has error.", e);
             return error();
         }
-    }
-    
-    private List<ProductDict> getPmsTypeDict() {
-    	List<ProductDict> productDicts = new ArrayList<ProductDict>();
-    	ProductDictQuery queryBean = new ProductDictQuery();
-    	queryBean.setType(ProductDictEnum.PMS_TYPE.getType());
-    	productDicts = this.productDictService.queryProductDictList(queryBean);
-    	return productDicts;
     }
 }
