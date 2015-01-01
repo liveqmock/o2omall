@@ -6,6 +6,8 @@ import com.awe.order.domain.OrderLog;
 import com.awe.order.domain.query.OrderLogQuery;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Repository;
  * 
  */
 @Repository
+@SuppressWarnings("all")
 public class OrderLogDaoImpl extends BaseDao implements OrderLogDao {
     /** namespace */
     private final String namespace = OrderLogDaoImpl.class.getName();
@@ -73,8 +76,15 @@ public class OrderLogDaoImpl extends BaseDao implements OrderLogDao {
     /**
      * {@inheritDoc}
      */
-    public boolean exist(OrderLog orderLog) {
+	public boolean exist(OrderLog orderLog) {
         int count = (Integer) queryForObject(namespace +".exist", orderLog);
         return count > 0;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+	public boolean orderLogAudit(Map map) {
+		return insert(namespace +".orderLogAudit", map);
+	}
 }

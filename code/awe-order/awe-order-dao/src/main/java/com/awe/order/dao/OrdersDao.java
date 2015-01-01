@@ -1,6 +1,7 @@
 package com.awe.order.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.awe.order.domain.Orders;
 import com.awe.order.domain.query.OrdersQuery;
@@ -12,6 +13,7 @@ import com.awe.order.domain.query.OrdersQuery;
  * @version 2014-12-23 10:58:05
  * 
  */
+@SuppressWarnings("all")
 public interface OrdersDao {
     
     /**
@@ -87,5 +89,12 @@ public interface OrdersDao {
      * @return
      */
 	public Orders getOrdersByOrderNO(String orderNo);
+
+	/**
+	 * 修改订单表状态
+	 * @param map
+	 * @return
+	 */
+	public boolean orderAudit(Map map);
 
 }
