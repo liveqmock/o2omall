@@ -41,3 +41,9 @@ jQuery.validator.addMethod("phone", function(value, element, params) {
         },
         '联系方式格式不正确,正确格式:010-88886666或11位手机号'
 );
+
+jQuery.validator.addMethod("mobile", function(value, element, params) { 
+    		return  this.optional(element)|| ismobile(value);
+		},
+		'请输入正确的11位手机号'
+);

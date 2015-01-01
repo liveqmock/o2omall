@@ -1,3 +1,5 @@
+<script type="text/javascript" src="#springUrl('')/static/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="#springUrl('')/static/js/inner/common.js"></script>
 <script>
 	$(function(){
       	$('.login_input,.login_code').focus(function(){
@@ -14,21 +16,27 @@
 	  	});
 	  	$('#imageCode').click(function() {    
         	refreshCheckCode();    
-      	});  
-	  	$('#submit').click(function() {    
-        	$.post("#springUrl('')/checkCode/validate?checkcode="+ $('#checkCode').val(), function(data) {    
-                if (data) {    
-                    window.top.location.href='需要重定向的页面地址';    
-                } else {    
-                    refreshCheckCode();    
-                    $.messager.show({    
-                        title:'警告',    
-                        msg:'校验码输入不正确。',    
-                        timeout:5000,    
-                        showType:'slide'    
-                    });    
-                }    
-            });    
+      	}); 
+		$('#loginForm').validate({
+			errorElement:"p",
+			errorClass:"reds",
+			rules: {
+				username: {required: true, mobile: true},
+				password: {required: true},
+				checkCode: {required: true}
+			},
+			messages: {
+				username: { required: "请输入手机号", mobile: "请输入正确的11位手机号"},
+				password: { required: "请输入密码"},
+				checkCode: { required: "请输入验证码"}
+			}
+		});
+	  	$('#login_btn').click(function() {    
+        	var form = $("#loginForm");
+			if(form.valid()==false){
+				return;
+			}
+			form.submit();
         });    
 
    	});
@@ -49,6 +57,8 @@
                 <h2>用户登录</h2>
 				
                 <form name="loginForm" id="loginForm" action="#springUrl('')/user/doLogin" method="post">
+				   <div id="errorPlace">
+				   </div>
                     <ul>
 						#if($tips_msg)
 							<li class="reds">
@@ -56,10 +66,10 @@
 							</li>
 					   #end
                        <li>
-    						<input type="text" class="login_input" id="username" name="username" placeholder="请输入手机号" />
+    						<input type="text" class="login_input" id="username" name="username" placeholder="请输入手机号" value="$!username" />
     				   </li>
                        <li>
-    						<input type="password" class="login_input" id="password" name="password" placeholder="请输入密码" />
+    						<input type="password" class="login_input" id="password" name="password" placeholder="请输入密码" value="$!password" />
     				   </li>
                        <li>
     						<input type="text" class="login_code left" id="checkCode" name="checkCode" placeholder="请输入验证码" />
@@ -70,7 +80,7 @@
     				   </li>
                        <li>
     						<input type="hidden" name="forwardUrl" id ="forwardUrl" value="$!forwardUrl"/>
-    						<input type="submit" class="login_btn" value="登 录" />
+    						<input type="button" name="login_btn" id="login_btn" class="login_btn" value="登 录" />
     				   </li>
                     </ul>
                 </form>

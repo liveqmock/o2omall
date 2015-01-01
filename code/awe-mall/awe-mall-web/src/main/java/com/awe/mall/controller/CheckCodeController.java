@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -31,13 +30,12 @@ public class CheckCodeController {
     /**
      * 生成校验码图片
      * 
-     * @param request
+     * @param session
      * @param response
-     * @param model
      * @throws IOException
      */
     @RequestMapping("/create")
-    public void create(HttpServletRequest request, HttpServletResponse response,Model model) throws IOException {
+    public void create(HttpSession session, HttpServletResponse response) throws IOException {
         // 禁止缓存
         response.setHeader("Pragma", "No-cache");
         response.setHeader("Cache-Control", "No-cache");
@@ -48,9 +46,7 @@ public class CheckCodeController {
         // String code = checkCodeService.generateRandomNumberCode();
         String code = checkCodeService.generateRandomMixedCode();
         // 将生成的验证码保存到Session中
-        HttpSession session = request.getSession(true);
         session.setAttribute("checkCode", code);
-        model.addAttribute("checkCode", code);
         ImageIO.write(checkCodeService.getImage(code), "JPEG", response.getOutputStream());
     }
 
@@ -59,12 +55,11 @@ public class CheckCodeController {
      * 
      * @param checkcode
      * @param request
-     * @param model
      * @return 校验码正确返回true
      */
     @ResponseBody
     @RequestMapping("/validate")
-    public boolean validate(String checkcode, HttpServletRequest request,Model model) {
+    public boolean validate(String checkcode, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null) {
             return false;
