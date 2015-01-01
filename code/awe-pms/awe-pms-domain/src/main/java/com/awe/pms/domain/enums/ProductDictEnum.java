@@ -8,7 +8,8 @@ package com.awe.pms.domain.enums;
  */
 public enum ProductDictEnum {
 	
-	PMS_TYPE(10, "商品类型：1，进口；2，国内");
+	PMS_TYPE(10, "商品类型：1，进口；2，国内"),
+	AUDIT_TYPE(20, "商家审核状态：0，待审核；10，审核中；20，审核成功；30，审核驳回；");
 
 	int type;
     String desc;
