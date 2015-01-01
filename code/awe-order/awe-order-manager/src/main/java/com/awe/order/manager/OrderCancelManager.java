@@ -1,6 +1,7 @@
 package com.awe.order.manager;
 
 import java.util.List;
+import java.util.Map;
 
 import com.awe.order.domain.OrderCancel;
 import com.awe.order.domain.query.OrderCancelQuery;
@@ -100,4 +101,11 @@ public interface OrderCancelManager {
      * @return
      */
     public boolean exist(OrderCancel orderCancel);
+
+    /**
+     * 订单审核
+     * @param orderCancel
+     * @return
+     */
+	public boolean Cancelupdate(Map map);
 }
