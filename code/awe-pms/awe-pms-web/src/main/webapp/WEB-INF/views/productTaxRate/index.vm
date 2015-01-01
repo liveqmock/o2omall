@@ -12,10 +12,16 @@
 				loadTaxRateType("$!query.taxRateType");
 				
 				$("#taxRateType").change(function() {
-					loadTaxRateType("$!query.taxRateType");
+					loadTaxRateType(this.value);
 				});
 				
 				loadProductCategorys(1,0,"$!query.categoryOneId","categoryOneId");
+				if ("$!query.categoryOneId" != "") {
+    				loadProductCategorys(2,"$!query.categoryOneId","$!query.categoryTwoId","categoryTwoId");
+				}
+				if ("$!query.categoryTwoId" != "") {
+					loadProductCategorys(3,"$!query.categoryTwoId","$!query.categoryThreeId","categoryThreeId");
+				}
 				
     			$("#categoryOneId").change(function () {
     				initSelected("categoryTwoId");

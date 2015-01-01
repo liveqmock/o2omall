@@ -116,4 +116,28 @@ public class UserAccountClient extends AbstractSecureClient {
         }
         return super.getResult(response);
     }
+    
+    
+    public Wrapper<?> modifyPwd(UserAccountRequestDto requestDto){
+    	Assert.notNull(requestDto);
+        UserAccountRequest request = new UserAccountRequest(super.getKey(), requestDto);
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("register request: " + JsonHelper.toJson(request));
+        }
+
+        String url = super.getServiceUrlDomain() + "services/userAccount/modifyPwd";
+        UserAccountResponse response = super.getRestTemplate().postForObject(url, request, UserAccountResponse.class);
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("register url: " + url);
+            LOG.debug("register response: " + JsonHelper.toJson(response));
+        }
+
+        if (null != response) {
+            return WrapMapper.wrap(response.getCode(), response.getMessage());
+        } else {
+            return WrapMapper.error();
+        }
+    }
 }

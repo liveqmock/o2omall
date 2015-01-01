@@ -21,9 +21,6 @@ import com.hbird.common.web.context.UserContext;
  */
 public abstract class BaseController extends WrapController {
 
-    /** KEY:登录用户名 */
-    protected static final String KEY_LOGIN_USERNAME = "username";
-
     protected final Log logger = LogFactory.getLog(this.getClass());
 
     /**

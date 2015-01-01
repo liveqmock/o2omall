@@ -3,8 +3,8 @@
 	<div class="top">
 		<div class="wid1200">
 			<div class="top_login left">
-				#if($username)
-					<p>您好，$username，欢迎来到Awesome [<a href="#springUrl('')/user/quit">退出</a>]</p>
+				#if($loginUsername)
+					<p>您好，$loginUsername，欢迎来到Awesome [<a href="#springUrl('')/user/quit">退出</a>]</p>
 				#else
 					<p>您好，欢迎来到Awesome</p>
 					<ul>

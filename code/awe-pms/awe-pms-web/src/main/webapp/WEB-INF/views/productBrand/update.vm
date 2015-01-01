@@ -6,7 +6,7 @@
 		<script src="$basePath/static/js/inner/productBrand.js?v=19"></script>
         <script language="javascript">
             $(function() {
-				$('#addForm').validate({
+				$('#updateForm').validate({
 					errorElement:"em",
 					errorClass:"red",
 					rules: {
@@ -33,6 +33,8 @@
 				});
 				
 				$('#priority').ace_spinner({value:10,min:1,max:100,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+				
+				$("#priority").val("$!productBrand.priority");
 				
 				loadProductCategorys(1,0,"$!productBrand.categoryOneId","categoryOneId");
 				if ("$!productBrand.categoryOneId" != "") {
@@ -111,7 +113,7 @@
                     </div>
                     <div class="widget-body">
                         <div class="widget-main" style="background-color: #fff;padding:5px;">
-							<form class="form-horizontal" role="form" id="addForm">
+							<form class="form-horizontal" role="form" id="updateForm">
                                 <div class="form-group">
 									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="categoryOneId">一级分类</label>
                                     <div class="col-sm-3">
@@ -138,14 +140,14 @@
                                     </div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceName">地区-省份-名称</label>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="provinceName">地区-省份</label>
                                     <div class="col-sm-3">
 										<select id="provinceNo" name="provinceNo" class="col-xs-10 col-sm-8">
 											<option value="">请选择</option>
                                         </select>
                                         <input type="hidden" name="provinceName" id="provinceName" class="col-xs-12 col-sm-12" value="$!productBrand.provinceName" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityName">地区-市-名称</label>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="cityName">地区-市</label>
                                     <div class="col-sm-3">
 										<select id="cityNo" name="cityNo" class="col-xs-10 col-sm-8">
 											<option value="">请选择</option>
@@ -191,6 +193,7 @@
                                     </div>
                                 </div>
 								<div class="form-group">
+									<input type="hidden" name="id" id="id" value="$!productBrand.id" />
 									<div class="col-sm-8 col-sm-offset-4">
                                         <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
                                         &nbsp; &nbsp; &nbsp;

@@ -63,6 +63,9 @@ public class UserAddressServiceImpl implements UserAddressService {
                     throw new ExistedException();
                 }
                 resultFlag = userAddressManager.insert(userAddress);
+                if(resultFlag&&userAddress.getIsdefault()==1){
+                	userAddressManager.updateDefault(userAddress);
+                }
             } else {
                 LOG.warn("UserAddressServiceImpl#insert failed, param is illegal.");
             }
@@ -84,6 +87,9 @@ public class UserAddressServiceImpl implements UserAddressService {
         try {
             if (null != userAddress && null != userAddress.getId()) {
                 resultFlag = userAddressManager.update(userAddress);
+                if(resultFlag&&userAddress.getIsdefault()==1){
+                	userAddressManager.updateDefault(userAddress);
+                }
             } else {
                 LOG.warn("UserAddressServiceImpl#update failed, param is illegal.");
             }

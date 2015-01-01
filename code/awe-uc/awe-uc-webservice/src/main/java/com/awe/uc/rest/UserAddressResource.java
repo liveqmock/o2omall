@@ -19,6 +19,7 @@ import org.springframework.util.CollectionUtils;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.uc.domain.UserAddress;
+import com.awe.uc.domain.query.UserAddressQuery;
 import com.awe.uc.sdk.api.request.UserAddressRequest;
 import com.awe.uc.sdk.api.request.dto.UserAddressRequestDto;
 import com.awe.uc.sdk.api.response.dto.UserAddressResponseDto;
@@ -27,7 +28,7 @@ import com.awe.uc.service.UserAddressService;
 /**
  * 收货地址REST服务：提供有关收货地址的接口
  * 
- * @author ljz
+ * @author ljz,zyq
  * @version 2014-12-23 15:38:41
  * 
  */
@@ -73,7 +74,142 @@ public class UserAddressResource {
             return WrapMapper.error();
         }
     } 
+    @POST
+    @Path("/userAddress/queryUserAddressList")
+    public Wrapper<?> queryUserAddressList(UserAddressRequest request) {
+        if (null == request || !request.checkSign()) {
+            this.logger.error("queryUserAddressList 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        UserAddressRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getId()) {
+            this.logger.error("queryUserAddressList 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
 
+        try {
+        	UserAddressQuery queryBean = new UserAddressQuery();
+        	queryBean.setUserId(requestDto.getUserId());
+            List<UserAddress> userAddressList = userAddressService.queryUserAddressList(queryBean);
+            List<UserAddressResponseDto> responseDtoList = convertList(userAddressList);
+            return WrapMapper.ok().result(responseDtoList);
+        } catch (Exception e) {
+            this.logger.error("查询收货地址数据异常", e);
+            return WrapMapper.error();
+        }
+    } 
+    
+    @POST
+    @Path("/userAddress/insert")
+    public Wrapper<?> insert(UserAddressRequest request){
+    	 if (null == request || !request.checkSign()) {
+             this.logger.error("insert 拒绝访问");
+             return WrapMapper.forbidden();
+         }
+         
+         UserAddressRequestDto requestDto = request.getContent();
+         if (null == requestDto || null == requestDto.getId()) {
+             this.logger.error("insert 传入参数有误");
+             return WrapMapper.illegalArgument();
+         }
+         try {
+        	 UserAddress userAddress = new UserAddress();
+        	 userAddress.setUserId(requestDto.getUserId());
+        	 userAddress.setProvinceNo(requestDto.getProvinceNo());
+        	 userAddress.setProvinceName(requestDto.getProvinceName());
+        	 userAddress.setCityNo(requestDto.getCityNo());
+        	 userAddress.setCityName(requestDto.getCityName());
+        	 userAddress.setCountyNo(requestDto.getCountyNo());
+        	 userAddress.setCountyName(requestDto.getCountyName());
+        	 userAddress.setAddress(requestDto.getAddress());
+        	 userAddress.setMobile(requestDto.getMobile());
+        	 userAddress.setPhone(requestDto.getPhone());
+        	 userAddress.setEmail(requestDto.getEmail());
+        	 userAddress.setIsdefault(requestDto.getIsdefault());
+        	 boolean ret = userAddressService.insert(userAddress);
+        	 if(ret){
+        		 return WrapMapper.ok();
+        	 }else{
+        		 return WrapMapper.error();
+        	 }
+		} catch (Exception e) {
+			 this.logger.error("新增收货地址数据异常", e);
+	         return WrapMapper.error();
+		}
+         
+    }
+    
+    @POST
+    @Path("/userAddress/update")
+    public Wrapper<?> update(UserAddressRequest request){
+    	 if (null == request || !request.checkSign()) {
+             this.logger.error("update 拒绝访问");
+             return WrapMapper.forbidden();
+         }
+         
+         UserAddressRequestDto requestDto = request.getContent();
+         if (null == requestDto || null == requestDto.getId()) {
+             this.logger.error("update 传入参数有误");
+             return WrapMapper.illegalArgument();
+         }
+         try {
+        	 UserAddress userAddress = new UserAddress();
+        	 userAddress.setUserId(requestDto.getUserId());
+        	 userAddress.setProvinceNo(requestDto.getProvinceNo());
+        	 userAddress.setProvinceName(requestDto.getProvinceName());
+        	 userAddress.setCityNo(requestDto.getCityNo());
+        	 userAddress.setCityName(requestDto.getCityName());
+        	 userAddress.setCountyNo(requestDto.getCountyNo());
+        	 userAddress.setCountyName(requestDto.getCountyName());
+        	 userAddress.setAddress(requestDto.getAddress());
+        	 userAddress.setMobile(requestDto.getMobile());
+        	 userAddress.setPhone(requestDto.getPhone());
+        	 userAddress.setEmail(requestDto.getEmail());
+        	 userAddress.setIsdefault(requestDto.getIsdefault());
+        	 boolean ret = userAddressService.update(userAddress);
+        	 if(ret){
+        		 return WrapMapper.ok();
+        	 }else{
+        		 return WrapMapper.error();
+        	 }
+		} catch (Exception e) {
+			 this.logger.error("编辑收货地址数据异常", e);
+	         return WrapMapper.error();
+		}
+         
+    }
+    
+    @POST
+    @Path("/userAddress/delete")
+    public Wrapper<?> delete(UserAddressRequest request){
+    	 if (null == request || !request.checkSign()) {
+             this.logger.error("delete 拒绝访问");
+             return WrapMapper.forbidden();
+         }
+         
+         UserAddressRequestDto requestDto = request.getContent();
+         if (null == requestDto || null == requestDto.getId()) {
+             this.logger.error("delete 传入参数有误");
+             return WrapMapper.illegalArgument();
+         }
+         try {
+        	 UserAddress userAddress = new UserAddress();
+        	 userAddress.setId(requestDto.getId());
+        	 userAddress.setUserId(requestDto.getUserId());
+        	 boolean ret = userAddressService.delete(userAddress);
+        	 if(ret){
+        		 return WrapMapper.ok();
+        	 }else{
+        		 return WrapMapper.error();
+        	 }
+		} catch (Exception e) {
+			 this.logger.error("删除收货地址数据异常", e);
+	         return WrapMapper.error();
+		}
+         
+    }
+    
     // 数据转换
     private UserAddressResponseDto convert(UserAddress userAddress) {
         if (null == userAddress) {

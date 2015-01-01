@@ -78,5 +78,10 @@ public interface UserAddressDao {
      * @return
      */
     public boolean exist(UserAddress userAddress);
-
+    /**
+     * 设置默认配置地址
+     * @param userAddress
+     * @return
+     */
+    public boolean updateDefault(UserAddress userAddress);
 }

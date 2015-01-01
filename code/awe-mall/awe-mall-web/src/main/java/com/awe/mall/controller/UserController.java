@@ -2,6 +2,7 @@ package com.awe.mall.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -33,10 +34,13 @@ public class UserController extends BaseController {
     private static final String VIEW_LOGIN_SUCCESS = "user/loginSuccess";
     private static final String VIEW_REGISTER = "user/register";
     private static final String VIEW_REGISTER_SUCCESS = "user/registerSuccess";
-    private static final String MSG_KEY = "tips_msg";
+    private static final String KEY_MESSAGE = "tips_msg";
+    private static final String KEY_USERNAME = "username";
+    private static final String KEY_PASSWORD = "password";
     private static final String MSG_VALUE_LOGIN_ERROR = "用户名或密码错误";
     private static final String MSG_VALUE_REGISTER_ERROR = "注册失败，未知错误";
     private static final String MSG_VALUE_ILLEGAL = "用户名或密码不能空";
+    private static final String MSG_CHECK_CODE_ERROR = "验证码输入错误";
     private static final String REDIRECT = "redirect:";
     private static final String FORWARD_URL = "forwardUrl";
 
@@ -63,38 +67,55 @@ public class UserController extends BaseController {
      * 登录事件
      * 
      * @param model
+     * @param username
+     *            账号
+     * @param password
+     *            密码
+     * @param checkCode
+     *            验证码
+     * @param forwardUrl
+     *            跳转url
      * @param response
      * @return
      */
     @RequestMapping(value = "doLogin", method = RequestMethod.POST)
-    public String doLogin(Model model, String username, String password, HttpServletResponse response, String forwardUrl) {
+    public String doLogin(Model model, String username, String password, String checkCode, String forwardUrl,
+            HttpServletRequest request, HttpServletResponse response) {
+        String view = VIEW_LOGIN;
+        String message = null;
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-            // 缺少参数
-            model.addAttribute(MSG_KEY, MSG_VALUE_ILLEGAL);
-            return VIEW_LOGIN;
-        }
+            message = MSG_VALUE_ILLEGAL;
+        } else if (!validate(checkCode, request)) {
+            message = MSG_CHECK_CODE_ERROR;
+        } else {
+            this.logger.info("doLogin: username=" + username);
 
-        this.logger.info("doLogin: username=" + username);
+            try {
+                UserAccountResponseDto responseDto = userAccountService.login(username, password);
+                if (responseDto == null) {
+                    message = MSG_VALUE_LOGIN_ERROR;
+                } else {
+                    view = VIEW_LOGIN_SUCCESS;
 
-        try {
-            UserAccountResponseDto responseDto = userAccountService.login(username, password);
-            if (responseDto != null) {
-                setCookie(response, responseDto);
-                if (StringUtils.isBlank(forwardUrl)) {
-                    forwardUrl = VIEW_INDEX;
+                    setCookie(response, responseDto);
+
+                    if (StringUtils.isBlank(forwardUrl)) {
+                        forwardUrl = VIEW_INDEX;
+                    }
+                    model.addAttribute(FORWARD_URL, forwardUrl);
                 }
-                model.addAttribute(FORWARD_URL, forwardUrl);
-                return VIEW_LOGIN_SUCCESS;
-            } else {
-                model.addAttribute(MSG_KEY, MSG_VALUE_LOGIN_ERROR);
-                return VIEW_LOGIN;
+            } catch (Exception e) {
+                logger.error("用户[" + username + "]登录验证出现异常，", e);
+                message = MSG_VALUE_LOGIN_ERROR;
             }
-        } catch (Exception e) {
-            // 通过处理Shiro的运行时AuthenticationException就可以控制用户登录失败或密码错误时的情景
-            logger.error("对用户[" + username + "]进行登录验证未通过,堆栈轨迹如下:", e);
-            model.addAttribute(MSG_KEY, MSG_VALUE_LOGIN_ERROR);
-            return VIEW_LOGIN;
         }
+
+        if (view.equals(VIEW_LOGIN)) {
+            model.addAttribute(KEY_USERNAME, username);
+            model.addAttribute(KEY_PASSWORD, password);
+            model.addAttribute(KEY_MESSAGE, message);
+        }
+        return view;
     }
 
     /**
@@ -131,34 +152,47 @@ public class UserController extends BaseController {
      * 注册事件
      * 
      * @param model
-     * @param response
+     * @param username
+     *            账号
+     * @param password
+     *            密码
+     * @param checkCode
+     *            验证码
      * @return
      */
     @RequestMapping(value = "doRegister", method = RequestMethod.POST)
-    public String doRegister(Model model, String username, String password) {
+    public String doRegister(Model model, HttpServletRequest request, String username, String password, String checkCode) {
+        String view = VIEW_REGISTER;
+        String message = null;
+
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-            // 缺少参数
-            model.addAttribute(MSG_KEY, MSG_VALUE_ILLEGAL);
-            return VIEW_REGISTER;
-        }
+            message = MSG_VALUE_ILLEGAL;
+        } else if (!validate(checkCode, request)) {
+            message = MSG_CHECK_CODE_ERROR;
+        } else {
+            this.logger.info("doRegister: username=" + username);
 
-        this.logger.info("doRegister: username=" + username);
-
-        try {
-            Wrapper<?> wrapper = userAccountService.register(username, password);
-            if (null != wrapper && wrapper.isSuccess()) {
-                return VIEW_REGISTER_SUCCESS;
-            } else if (null != wrapper) {
-                model.addAttribute(MSG_KEY, wrapper.getMessage());
-                return VIEW_REGISTER;
-            } else {
-                model.addAttribute(MSG_KEY, MSG_VALUE_REGISTER_ERROR);
-                return VIEW_REGISTER;
+            try {
+                Wrapper<?> wrapper = userAccountService.register(username, password);
+                if (null != wrapper && wrapper.isSuccess()) {
+                    return VIEW_REGISTER_SUCCESS;
+                } else if (null != wrapper) {
+                    message = wrapper.getMessage();
+                } else {
+                    message = MSG_VALUE_REGISTER_ERROR;
+                }
+            } catch (Exception e) {
+                logger.error("用户[" + username + "]注册出现异常，", e);
+                message = MSG_VALUE_REGISTER_ERROR;
             }
-        } catch (Exception e) {
-            model.addAttribute(MSG_KEY, MSG_VALUE_REGISTER_ERROR);
-            return VIEW_REGISTER;
         }
+
+        if (view.equals(VIEW_REGISTER)) {
+            model.addAttribute(KEY_USERNAME, username);
+            model.addAttribute(KEY_PASSWORD, password);
+            model.addAttribute(KEY_MESSAGE, message);
+        }
+        return view;
     }
 
     /**
@@ -174,6 +208,20 @@ public class UserController extends BaseController {
         // 用户登出
         LoginUserUtils.invalidateCookie(response);
         return REDIRECT + VIEW_INDEX;
+    }
+
+    public boolean validate(String checkCode, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            return false;
+        }
+        String code = (String) session.getAttribute("checkCode");
+        session.removeAttribute("checkCode");
+        if (checkCode != null && checkCode.length() > 0 && checkCode.toUpperCase().equals(code)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
