@@ -11,7 +11,7 @@ import com.awe.pms.sdk.response.dto.BusinessInfoResponseDto;
  * BusinessInfoClient测试用例
  * 
  * @author ljz
- * @version 2014-12-25 17:50:15
+ * @version 2014-12-30 16:41:56
  * 
  */
 public class BusinessInfoClientTestCase {

@@ -15,7 +15,7 @@ import com.awe.pms.sdk.response.dto.BusinessInfoResponseDto;
  * 商家信息服务的客户端
  * 
  * @author ljz
- * @version 2014-12-25 17:50:15
+ * @version 2014-12-30 16:41:56
  * 
  */
 public class BusinessInfoClient extends AbstractSecureClient {
