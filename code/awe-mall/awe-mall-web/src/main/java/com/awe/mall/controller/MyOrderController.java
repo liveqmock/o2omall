@@ -5,6 +5,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.awe.mall.controller.base.BaseController;
 /**
  * @description 我的订单
  * @author zyq
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("myorder")
-public class MyOrderController {
+public class MyOrderController extends BaseController {
 
 	private static final Log LOG = LogFactory.getLog(MyOrderController.class);
 	

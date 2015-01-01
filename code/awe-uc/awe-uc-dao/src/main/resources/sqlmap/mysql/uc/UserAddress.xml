@@ -90,6 +90,19 @@
             </if>
         </if>
     </update>
+	<!-- 更新该地址为默认-->
+    <update id="updateDefault" parameterType="UserAddress">
+        <if test="_parameter != null">
+            <if test="id != null and id > 0">
+                update user_address set
+		        <if test="isdefault != null">
+                	isdefault = 0
+		        </if>
+		        
+                where id <> #{id} and user_id = #{userId,jdbcType=DECIMAL}
+            </if>
+        </if>
+    </update>
 
     <!-- 根据主键获取对象信息 -->
     <select id="getUserAddressById" resultMap="UserAddressMap" parameterType="java.lang.Long">

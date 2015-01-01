@@ -77,4 +77,10 @@ public class UserAddressDaoImpl extends BaseDao implements UserAddressDao {
         int count = (Integer) queryForObject(namespace +".exist", userAddress);
         return count > 0;
     }
+    /**
+     * {@inheritDoc}
+     */
+	public boolean updateDefault(UserAddress userAddress) {
+		return update(namespace +".updateDefault", userAddress);
+	}
 }

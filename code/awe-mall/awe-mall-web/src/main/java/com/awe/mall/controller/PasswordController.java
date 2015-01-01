@@ -2,9 +2,15 @@ package com.awe.mall.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.awe.mall.controller.base.BaseController;
+import com.awe.mall.service.PasswordService;
+import com.awe.uc.sdk.request.dto.UserAccountRequestDto;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * @description 改密
@@ -14,12 +20,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("password")
-public class PasswordController {
+public class PasswordController extends BaseController{
 private static final Log LOG = LogFactory.getLog(AdressController.class);
 	
 	private static final String VIEW_WORKSPACE = "myorder/";
 	private static final String VIEW_LOGIN_PASSWORD_PAGE = "modifyLoginPassword";
 	private static final String VIEW_PAY_PASSWORD_PAGE = "modifyPayPassword";
+	
+	@Autowired
+	private PasswordService passwordService;
 	
 	@RequestMapping("editlogin")
 	public String editLogin(Model model){
@@ -32,4 +41,20 @@ private static final Log LOG = LogFactory.getLog(AdressController.class);
 		LOG.info("-- welcome to editPay page --");
 		return VIEW_WORKSPACE + VIEW_PAY_PASSWORD_PAGE;
 	}
+	
+	public Wrapper<?> modifyLoginPwd(Model model,String username,String smCode,String newPassword,String renewPassword,String randomVerifyCode){
+		Wrapper<?> wrapper = null;
+		//少逻辑后补
+		try {
+			UserAccountRequestDto requestDto = new UserAccountRequestDto();
+			requestDto.setPassword(newPassword);
+			requestDto.setUsername(username);
+			wrapper = passwordService.modifyLoginPwd(requestDto);
+		} catch (Exception e) {
+			LOG.error("#PasswordController.modifyLoginPwd#" + e);
+		}
+		return wrapper;
+	}
+	
+	
 }

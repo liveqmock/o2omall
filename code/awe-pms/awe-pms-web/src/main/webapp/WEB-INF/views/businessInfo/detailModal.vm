@@ -25,7 +25,28 @@
 							<th class="center" style='width:25%;'>名称缩写</th><td id="r_businessAbbr" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>国家</th><td id="r_country" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>类型</th><td id="r_type" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>类型名称</th><td id="r_typeName" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>一级分类</th><td id="r_categoryOneId" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>一级分类名称</th><td id="r_categoryOne" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>二级分类</th><td id="r_categoryTwoId" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>二级分类名称</th><td id="r_categoryTwo" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>三级分类</th><td id="r_categoryThreeId" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>三级分类名称</th><td id="r_categoryThree" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>地区-省份-名称</th><td id="r_provinceName" style='width:25%;'></td>
@@ -46,25 +67,19 @@
 							<th class="center" style='width:25%;'>地区-县-编号</th><td id="r_countyNo" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>公司</th><td id="r_company" style='width:25%;'></td>
+							<th class="center" style='width:25%;'>联系人</th><td id="r_contactor" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>手机</th><td id="r_mobilePhone" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>电话</th><td id="r_telePhone" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>地址</th><td id="r_address" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>邮编</th><td id="r_postCode" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>联系人</th><td id="r_contactor" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>联系人电话</th><td id="r_telePhone" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>手机</th><td id="r_mobilePhone" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>商家类别</th><td id="r_bussSort" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>描述</th><td id="r_features" style='width:25%;'></td>
@@ -76,19 +91,7 @@
 							<th class="center" style='width:25%;'>审核状态</th><td id="r_checkStatus" style='width:25%;'></td>
 						</tr>
 						<tr>
-							<th class="center" style='width:25%;'>是否有证件</th><td id="r_hasCard" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>法定人身份证（图片地址）</th><td id="r_legalPerson" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>公司注册信息（扫描件）</th><td id="r_companyRegister" style='width:25%;'></td>
-						</tr>
-						<tr>
 							<th class="center" style='width:25%;'>入驻时间</th><td id="r_enterTime" style='width:25%;'></td>
-						</tr>
-						<tr>
-							<th class="center" style='width:25%;'>入驻年限</th><td id="r_enterYear" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>有效合同开始时间</th><td id="r_contractTimeStart" style='width:25%;'></td>
@@ -98,6 +101,15 @@
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>商家级别</th><td id="r_level" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>是否有证件</th><td id="r_hasCard" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>法定人身份证（图片地址）</th><td id="r_legalPerson" style='width:25%;'></td>
+						</tr>
+						<tr>
+							<th class="center" style='width:25%;'>公司注册信息（扫描件）</th><td id="r_companyRegister" style='width:25%;'></td>
 						</tr>
 						<tr>
 							<th class="center" style='width:25%;'>保证金</th><td id="r_earnestMoney" style='width:25%;'></td>
@@ -152,31 +164,35 @@
     				$("#r_businessName").text(r.businessName==null?"":r.businessName);
     				$("#r_enName").text(r.enName==null?"":r.enName);
     				$("#r_businessAbbr").text(r.businessAbbr==null?"":r.businessAbbr);
-    				$("#r_country").text(r.country==null?"":r.country);
+    				$("#r_type").text(r.type==null?"":r.type);
+    				$("#r_typeName").text(r.typeName==null?"":r.typeName);
+    				$("#r_categoryOneId").text(r.categoryOneId==null?"":r.categoryOneId);
+    				$("#r_categoryOne").text(r.categoryOne==null?"":r.categoryOne);
+    				$("#r_categoryTwoId").text(r.categoryTwoId==null?"":r.categoryTwoId);
+    				$("#r_categoryTwo").text(r.categoryTwo==null?"":r.categoryTwo);
+    				$("#r_categoryThreeId").text(r.categoryThreeId==null?"":r.categoryThreeId);
+    				$("#r_categoryThree").text(r.categoryThree==null?"":r.categoryThree);
     				$("#r_provinceName").text(r.provinceName==null?"":r.provinceName);
     				$("#r_provinceNo").text(r.provinceNo==null?"":r.provinceNo);
     				$("#r_cityName").text(r.cityName==null?"":r.cityName);
     				$("#r_cityNo").text(r.cityNo==null?"":r.cityNo);
     				$("#r_countyName").text(r.countyName==null?"":r.countyName);
     				$("#r_countyNo").text(r.countyNo==null?"":r.countyNo);
-    				$("#r_company").text(r.company==null?"":r.company);
+    				$("#r_contactor").text(r.contactor==null?"":r.contactor);
+    				$("#r_mobilePhone").text(r.mobilePhone==null?"":r.mobilePhone);
+    				$("#r_telePhone").text(r.telePhone==null?"":r.telePhone);
     				$("#r_address").text(r.address==null?"":r.address);
     				$("#r_postCode").text(r.postCode==null?"":r.postCode);
-    				$("#r_contactor").text(r.contactor==null?"":r.contactor);
-    				$("#r_telePhone").text(r.telePhone==null?"":r.telePhone);
-    				$("#r_mobilePhone").text(r.mobilePhone==null?"":r.mobilePhone);
-    				$("#r_bussSort").text(r.bussSort==null?"":r.bussSort);
     				$("#r_features").text(r.features==null?"":r.features);
     				$("#r_remark").text(r.remark==null?"":r.remark);
     				$("#r_checkStatus").text(r.checkStatus==null?"":r.checkStatus);
-    				$("#r_hasCard").text(r.hasCard==null?"":r.hasCard);
-    				$("#r_legalPerson").text(r.legalPerson==null?"":r.legalPerson);
-    				$("#r_companyRegister").text(r.companyRegister==null?"":r.companyRegister);
     				$("#r_enterTime").text(r.enterTime==null?"":r.enterTime);
-    				$("#r_enterYear").text(r.enterYear==null?"":r.enterYear);
     				$("#r_contractTimeStart").text(r.contractTimeStart==null?"":r.contractTimeStart);
     				$("#r_contractTimeEnd").text(r.contractTimeEnd==null?"":r.contractTimeEnd);
     				$("#r_level").text(r.level==null?"":r.level);
+    				$("#r_hasCard").text(r.hasCard==null?"":r.hasCard);
+    				$("#r_legalPerson").text(r.legalPerson==null?"":r.legalPerson);
+    				$("#r_companyRegister").text(r.companyRegister==null?"":r.companyRegister);
     				$("#r_earnestMoney").text(r.earnestMoney==null?"":r.earnestMoney);
     				$("#r_creditLevel").text(r.creditLevel==null?"":r.creditLevel);
     				$("#r_creditLimit").text(r.creditLimit==null?"":r.creditLimit);

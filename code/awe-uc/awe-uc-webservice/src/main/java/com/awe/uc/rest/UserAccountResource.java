@@ -169,7 +169,41 @@ public class UserAccountResource {
             return WrapMapper.error();
         }
     }
+    @POST
+    @Path("/userAccount/modifyPwd")
+    public Wrapper<?> modifyPwd(UserAccountRequest request){
+    	if (null == request || !request.checkSign()) {
+            this.logger.error("modifyPwd 拒绝访问");
+            return WrapMapper.forbidden();
+        }
 
+        UserAccountRequestDto requestDto = request.getContent();
+        if (null == requestDto || StringUtils.isBlank(requestDto.getUsername())
+                || StringUtils.isBlank(requestDto.getPassword())) {
+            this.logger.error("modifyPwd 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+        
+        try {
+        	UserAccount account = new UserAccount();
+        	account.setId(requestDto.getId());
+        	account.setUsername(requestDto.getUsername());
+        	account.setPassword(MD5Util.md5Hex(requestDto.getPassword()));
+            boolean ret = userAccountService.update(account);
+            if (ret) {
+                return WrapMapper.ok();
+            } else {
+                logger.warn("修改登录密码，未知错误， username=" + requestDto.getUsername());
+                return WrapMapper.wrap(UserAccountResponse.ERROR_CODE,UserAccountResponse.ERROR_MESSAGE);
+            }
+		} catch (Exception e) {
+			logger.error("修改登录密码失败，未知错误， username=" + requestDto.getUsername());
+			return WrapMapper.error();
+		}
+        
+    }
+    
+    
     // 数据转换
     private UserAccountResponseDto convert(UserAccount userAccount) {
         if (null == userAccount) {

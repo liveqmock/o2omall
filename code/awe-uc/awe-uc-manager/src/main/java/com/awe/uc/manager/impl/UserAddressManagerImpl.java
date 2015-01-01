@@ -134,4 +134,10 @@ public class UserAddressManagerImpl extends BaseManager implements UserAddressMa
     public boolean exist(UserAddress userAddress) {
         return userAddressDao.exist(userAddress);
     }
+    /**
+     * {@inheritDoc}
+     */
+	public boolean updateDefault(UserAddress userAddress) {
+		return userAddressDao.updateDefault(userAddress);
+	}
 }

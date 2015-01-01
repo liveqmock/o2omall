@@ -4,6 +4,8 @@
         #parse("/layout/head.vm")
 		<script language="javascript"> 
 			$(function() {
+			    OnOrderStatus();
+				
 				$("#btn-query").click(function() {
         			pageSubmit(1);
    				});
@@ -54,7 +56,9 @@
 									
 									<label class="col-sm-1 control-label no-padding-right" for="orderType">订单类型</label>
                                     <div class="col-sm-2">
-                                        <input type="text" name="orderType" id="orderType" class="col-xs-10 col-sm-8" value="$!query.orderType"/>
+										<select id="orderType" name="orderType" class="col-xs-10 col-sm-8"  onchange="OnOrderType();">
+											<option value="">-请选择-</option>
+										</select>
                                     </div>
 
 									<label class="col-sm-1 control-label no-padding-right" for="orderName">下单姓名</label>
@@ -106,12 +110,9 @@
 									
 									<label class="col-sm-1 control-label no-padding-right" for="orderStatus">订单状态</label>
                                     <div class="col-sm-2">
-                                        <input type="text" name="orderStatus" id="orderStatus" class="col-xs-10 col-sm-8" value="$!query.orderStatus"/>
-                                    </div>
-									
-									<label class="col-sm-1 control-label no-padding-right" for="orderStatus">订单状态</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" name="orderStatus" id="orderStatus" class="col-xs-10 col-sm-8" value="$!query.orderStatus"/>
+										<select id="orderStatus" name="orderStatus" class="col-xs-10 col-sm-8"  onchange="OnOrderStatus();">
+											<option value="">-请选择-</option>
+										</select>
                                     </div>
 									
                                 </div>
@@ -208,5 +209,7 @@
 		#parse("/orders/UpdateModal.vm")
 		<!--订单日志-->
 		#parse("/orders/OrderLogModal.vm")
+		
+		<script src="#springUrl('')/static/js/inner/utils/EnumUtils.js"></script>
     </body>
 </html>

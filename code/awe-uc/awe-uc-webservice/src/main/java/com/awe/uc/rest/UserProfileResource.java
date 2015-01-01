@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeanUtils;
@@ -18,16 +19,18 @@ import org.springframework.util.CollectionUtils;
 
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
+import com.awe.test.uc.rest.response.UserProfileResponse;
 import com.awe.uc.domain.UserProfile;
 import com.awe.uc.sdk.api.request.UserProfileRequest;
 import com.awe.uc.sdk.api.request.dto.UserProfileRequestDto;
+import com.awe.uc.sdk.api.response.UserAccountResponse;
 import com.awe.uc.sdk.api.response.dto.UserProfileResponseDto;
 import com.awe.uc.service.UserProfileService;
 
 /**
  * 用户基本信息REST服务：提供有关用户基本信息的接口
  * 
- * @author ljz
+ * @author ljz,zyq
  * @version 2014-12-23 15:38:41
  * 
  */
@@ -37,7 +40,7 @@ import com.awe.uc.service.UserProfileService;
 @Consumes({ MediaType.APPLICATION_JSON })
 public class UserProfileResource {
 
-    private final Log logger = LogFactory.getLog(this.getClass());
+    private static final Log LOG = LogFactory.getLog(UserProfileResource.class);
 
     @Autowired
     private UserProfileService userProfileService; 
@@ -54,13 +57,13 @@ public class UserProfileResource {
     @Path("/userProfile/getUserProfile")
     public Wrapper<?> getUserProfile(UserProfileRequest request) {
         if (null == request || !request.checkSign()) {
-            this.logger.error("getUserProfile 拒绝访问");
+        	LOG.error("getUserProfile 拒绝访问");
             return WrapMapper.forbidden();
         }
         
         UserProfileRequestDto requestDto = request.getContent();
         if (null == requestDto || null == requestDto.getId()) {
-            this.logger.error("getUserProfile 传入参数有误");
+        	LOG.error("getUserProfile 传入参数有误");
             return WrapMapper.illegalArgument();
         }
 
@@ -69,11 +72,90 @@ public class UserProfileResource {
             UserProfileResponseDto responseDto = convert(userProfile);
             return WrapMapper.ok().result(responseDto);
         } catch (Exception e) {
-            this.logger.error("查询用户基本信息数据异常", e);
+        	LOG.error("查询用户基本信息数据异常", e);
             return WrapMapper.error();
         }
     } 
-
+    @POST
+    @Path("/userProfile/add")
+    public Wrapper<?> add(UserProfileRequest request){
+    	if (null == request || !request.checkSign()) {
+    		LOG.error("register 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+    	UserProfileRequestDto requestDto = request.getContent();
+    	if (null == requestDto) {
+    		LOG.error("add 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+    	try {
+    		UserProfile userProfile = new UserProfile();
+    		userProfile.setNickname(requestDto.getNickname());
+    		userProfile.setBirthday(requestDto.getBirthday());
+    		userProfile.setSex(requestDto.getSex());
+    		userProfile.setCnName(requestDto.getCnName());
+    		userProfile.setProvinceNo(requestDto.getProvinceNo());
+    		userProfile.setProvinceName(requestDto.getProvinceName());
+    		userProfile.setCityNo(requestDto.getCityNo());
+    		userProfile.setCityName(requestDto.getCityName());
+    		userProfile.setCountyNo(requestDto.getCountyNo());
+    		userProfile.setCountyName(requestDto.getCountyName());
+    		userProfile.setAddress(requestDto.getAddress());
+    		userProfile.setUserPhoto(requestDto.getUserPhoto());
+    		boolean ret = userProfileService.insert(userProfile);
+    		if (ret) {
+                return WrapMapper.ok();
+            } else {
+            	LOG.warn("添加基本资料 失败，未知错误， Nickname=" + requestDto.getNickname());
+                return WrapMapper.wrap(UserProfileResponse.ERROR_CODE, UserAccountResponse.ERROR_MESSAGE);
+            }
+		} catch (Exception e) {
+			LOG.warn("添加基本资料 失败，未知错误， Nickname=" + requestDto.getNickname());
+			return WrapMapper.error();
+		}
+    }
+    @POST
+    @Path("/userProfile/edit")
+    public Wrapper<?> edit(UserProfileRequest request){
+    	if (null == request || !request.checkSign()) {
+    		LOG.error("register 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+    	UserProfileRequestDto requestDto = request.getContent();
+    	if (null == requestDto) {
+    		LOG.error("edit 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+    	try {
+    		UserProfile userProfile = userProfileService.getUserProfileById(requestDto.getUserId());
+    		userProfile.setNickname(requestDto.getNickname());
+    		userProfile.setBirthday(requestDto.getBirthday());
+    		userProfile.setSex(requestDto.getSex());
+    		userProfile.setCnName(requestDto.getCnName());
+    		userProfile.setProvinceNo(requestDto.getProvinceNo());
+    		userProfile.setProvinceName(requestDto.getProvinceName());
+    		userProfile.setCityNo(requestDto.getCityNo());
+    		userProfile.setCityName(requestDto.getCityName());
+    		userProfile.setCountyNo(requestDto.getCountyNo());
+    		userProfile.setCountyName(requestDto.getCountyName());
+    		userProfile.setAddress(requestDto.getAddress());
+    		userProfile.setUserPhoto(requestDto.getUserPhoto());
+    		boolean ret = userProfileService.update(userProfile);
+    		if (ret) {
+                return WrapMapper.ok();
+            } else {
+            	LOG.warn("编辑基本资料 失败，未知错误， Nickname=" + requestDto.getNickname() + ",UserId=" + requestDto.getUserId());
+                return WrapMapper.wrap(UserProfileResponse.ERROR_CODE, UserAccountResponse.ERROR_MESSAGE);
+            }
+		} catch (Exception e) {
+			LOG.warn("编辑基本资料 失败，未知错误， Nickname=" + requestDto.getNickname() + ",UserId=" + requestDto.getUserId());
+			return WrapMapper.error();
+		}
+    }
+    
+    
+    
+    
     // 数据转换
     private UserProfileResponseDto convert(UserProfile userProfile) {
         if (null == userProfile) {
