@@ -9,7 +9,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeanUtils;
@@ -17,15 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
-import com.awe.test.uc.rest.response.UserProfileResponse;
 import com.awe.uc.domain.UserProfile;
 import com.awe.uc.sdk.api.request.UserProfileRequest;
 import com.awe.uc.sdk.api.request.dto.UserProfileRequestDto;
 import com.awe.uc.sdk.api.response.UserAccountResponse;
+import com.awe.uc.sdk.api.response.UserProfileResponse;
 import com.awe.uc.sdk.api.response.dto.UserProfileResponseDto;
 import com.awe.uc.service.UserProfileService;
+import com.hbird.common.utils.wrap.WrapMapper;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 用户基本信息REST服务：提供有关用户基本信息的接口
