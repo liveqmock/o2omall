@@ -10,6 +10,12 @@
 		<result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
 		<result column="cancel_reason" property="cancelReason" jdbcType="VARCHAR" />
 		<result column="cancel_type" property="cancelType" jdbcType="DECIMAL" />
+		
+		<result column="user_id" property="userId" jdbcType="DECIMAL" />
+		<result column="pay_way" property="payWay" jdbcType="DECIMAL" />
+		<result column="seller" property="seller" jdbcType="VARCHAR" />
+		<result column="seller_no" property="sellerNo" jdbcType="VARCHAR" />
+		
 		<result column="current_audit_name" property="currentAuditName" jdbcType="VARCHAR" />
 		<result column="current_audit_no" property="currentAuditNo" jdbcType="VARCHAR" />
 		<result column="is_auditing" property="isAuditing" jdbcType="DECIMAL" />
@@ -25,17 +31,17 @@
     </resultMap>
     
     <sql id="orderCancelColumns">
-    	id,refund,status,order_no,refund_amount,cancel_reason,cancel_type,current_audit_name,current_audit_no,is_auditing,auditing_time,finish_time,remark,is_refund,create_user,update_user,create_time,update_time,yn
+    	id,refund,status,order_no,refund_amount,cancel_reason,cancel_type,user_id,pay_way,seller,seller_no,current_audit_name,current_audit_no,is_auditing,auditing_time,finish_time,remark,is_refund,create_user,update_user,create_time,update_time,yn
     </sql>
     
      <sql id="orderCancelUsedColumns">
-    	refund,status,order_no,refund_amount,cancel_reason,cancel_type,current_audit_name,current_audit_no,is_auditing,auditing_time,finish_time,remark,is_refund,create_user,update_user,create_time,update_time,yn
+    	refund,status,order_no,refund_amount,cancel_reason,cancel_type,user_id,pay_way,seller,seller_no,current_audit_name,current_audit_no,is_auditing,auditing_time,finish_time,remark,is_refund,create_user,update_user,create_time,update_time,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="OrderCancel" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO order_cancel(<include refid="orderCancelUsedColumns"/>) 
-        VALUES (#{refund},#{status},#{orderNo},#{refundAmount},#{cancelReason},#{cancelType},#{currentAuditName},#{currentAuditNo},#{isAuditing},#{auditingTime},#{finishTime},#{remark},#{isRefund},#{createUser},#{updateUser},#{createTime},#{updateTime},#{yn})
+        VALUES (#{refund},#{status},#{orderNo},#{refundAmount},#{cancelReason},#{cancelType},#{userId},#{payWay},#{seller},#{sellerNo},#{currentAuditName},#{currentAuditNo},#{isAuditing},#{auditingTime},#{finishTime},#{remark},#{isRefund},#{createUser},#{updateUser},#{createTime},#{updateTime},#{yn})
 	</insert>
 	
 	<!-- 批量修改  -->
@@ -81,6 +87,18 @@
 		        </if>
 		        <if test="cancelType != null and cancelType != ''">
                 	cancel_type = #{cancelType,jdbcType=DECIMAL},
+		        </if>
+		        <if test="userId != null and userId != ''">
+                	user_id = #{userId,jdbcType=DECIMAL},
+		        </if>
+		        <if test="payWay != null and payWay != ''">
+                	pay_way = #{payWay,jdbcType=DECIMAL},
+		        </if>
+		        <if test="seller != null and seller != ''">
+                	seller = #{seller,jdbcType=VARCHAR},
+		        </if>
+		        <if test="sellerNo != null and sellerNo != ''">
+                	seller_no = #{sellerNo,jdbcType=VARCHAR},
 		        </if>
 		        <if test="currentAuditName != null and currentAuditName != ''">
                 	current_audit_name = #{currentAuditName,jdbcType=VARCHAR},
@@ -176,6 +194,18 @@
         </if>
         <if test="cancelType != null and cancelType != ''">
         	and cancel_type = #{cancelType,jdbcType=DECIMAL}
+        </if>
+        <if test="userId != null and userId != ''">
+             and user_id = #{userId,jdbcType=DECIMAL},
+        </if>
+        <if test="payWay != null and payWay != ''">
+             and pay_way = #{payWay,jdbcType=DECIMAL},
+        </if>
+        <if test="seller != null and seller != ''">
+             and seller = #{seller,jdbcType=VARCHAR},
+        </if>
+        <if test="sellerNo != null and sellerNo != ''">
+             and seller_no = #{sellerNo,jdbcType=VARCHAR},
         </if>
         <if test="currentAuditName != null and currentAuditName != ''">
         	and current_audit_name = #{currentAuditName,jdbcType=VARCHAR}

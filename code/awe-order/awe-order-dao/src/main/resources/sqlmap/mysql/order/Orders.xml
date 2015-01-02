@@ -13,6 +13,10 @@
 		<result column="consignee_phone" property="consigneePhone" jdbcType="VARCHAR" />
 		<result column="telephone" property="telephone" jdbcType="VARCHAR" />
 		<result column="emil" property="emil" jdbcType="VARCHAR" />
+		
+		<result column="seller" property="seller" jdbcType="VARCHAR" />
+		<result column="seller_no" property="sellerNo" jdbcType="VARCHAR" />
+		
 		<result column="zip_code" property="zipCode" jdbcType="VARCHAR" />
 		<result column="pay_name" property="payName" jdbcType="VARCHAR" />
 		<result column="order_date" property="orderDate" jdbcType="DECIMAL" />
@@ -47,11 +51,11 @@
     </resultMap>
     
     <sql id="ordersColumns">
-    	id,order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,Integral,remark,create_time,update_time,create_user,update_user,yn
+    	id,order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,seller,seller_no,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,Integral,remark,create_time,update_time,create_user,update_user,yn
     </sql>
     
      <sql id="ordersUsedColumns">
-    	order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,Integral,remark,create_time,update_time,create_user,update_user,yn
+    	order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,seller,seller_no,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,Integral,remark,create_time,update_time,create_user,update_user,yn
     </sql>
 
 	<!-- 审核时修改订单状态  -->
@@ -77,7 +81,7 @@
     <!-- 创建信息 -->
     <insert id="insert" parameterType="Orders" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO orders(<include refid="ordersUsedColumns"/>) 
-        VALUES (#{orderNo},#{orderType},#{userId},#{userName},#{orderName},#{consigneeName},#{consigneePhone},#{telephone},#{emil},#{zipCode},#{payName},#{orderDate},#{isTalSure},#{payWay},#{payType},#{isInvoice},#{invoiceType},#{invoiceTitle},#{invoiceContent},#{orderStatus},#{commAmount},#{retCash},#{expenses},#{amountPay},#{parentOrderNo},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{payTime},#{integral},#{remark},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+        VALUES (#{orderNo},#{orderType},#{userId},#{userName},#{orderName},#{consigneeName},#{consigneePhone},#{telephone},#{emil},#{seller},#{seller_no},#{zipCode},#{payName},#{orderDate},#{isTalSure},#{payWay},#{payType},#{isInvoice},#{invoiceType},#{invoiceTitle},#{invoiceContent},#{orderStatus},#{commAmount},#{retCash},#{expenses},#{amountPay},#{parentOrderNo},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{payTime},#{integral},#{remark},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -110,6 +114,12 @@
 		        </if>
 		        <if test="emil != null and emil != ''">
                 	emil = #{emil,jdbcType=VARCHAR},
+		        </if>
+		        <if test="seller != null and seller != ''">
+                	seller = #{seller,jdbcType=VARCHAR},
+		        </if>
+		        <if test="sellerNo != null and sellerNo != ''">
+                	seller_no = #{sellerNo,jdbcType=VARCHAR},
 		        </if>
 		        <if test="zipCode != null and zipCode != ''">
                 	zip_code = #{zipCode,jdbcType=VARCHAR},
@@ -281,6 +291,12 @@
         <if test="emil != null and emil != ''">
         	and emil = #{emil,jdbcType=VARCHAR}
         </if>
+        <if test="seller != null and seller != ''">
+            and seller = #{seller,jdbcType=VARCHAR},
+		</if>
+		<if test="sellerNo != null and sellerNo != ''">
+            and seller_no = #{sellerNo,jdbcType=VARCHAR},
+		</if>
         <if test="zipCode != null and zipCode != ''">
         	and zip_code = #{zipCode,jdbcType=VARCHAR}
         </if>

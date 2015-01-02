@@ -36,6 +36,11 @@ public class ShoppingCartRequestDto extends HbirdDto {
     /** 0:无效;1:有效 */
     private Integer yn; 
     
+    /** 销售商 */
+    private String seller; 
+    /** 销售商编号*/
+    private String sellerNo;
+    
     /**
      * get 自增id
      * 
@@ -215,4 +220,41 @@ public class ShoppingCartRequestDto extends HbirdDto {
     public void setYn(Integer yn) {
         this.yn = yn;
     }
+    
+
+    /**
+     * get 销售商
+     * 
+     * @return the seller
+     */
+	public String getSeller() {
+		return seller;
+	}
+
+	/**
+     * set 销售商
+     * 
+     * @param seller the seller to set
+     */
+	public void setSeller(String seller) {
+		this.seller = seller;
+	}
+
+	/**
+     * get 销售商编号
+     * 
+     * @return the seller
+     */
+	public String getSellerNo() {
+		return sellerNo;
+	}
+
+	/**
+     * set 销售商
+     * 
+     * @param sellerNo the sellerNo to set
+     */
+	public void setSellerNo(String sellerNo) {
+		this.sellerNo = sellerNo;
+	}
 }
