@@ -46,7 +46,7 @@
    	});
         
     function refreshCheckCode() {    
-        var append = '#springUrl('')/checkCode/create?clearCache=' + new Date().getTime() + 'a' + Math.random();    
+        var append = '#springUrl('')/checkCode/createImage?clearCache=' + new Date().getTime() + 'a' + Math.random();    
         $('#imageCode').attr('src', append);    
     } 
 </script>
@@ -69,7 +69,7 @@
                             <li><input type="password" class="login_input" id="password" name="password" placeholder="请输入密码" value="$!password" /></li>
                             <li><input type="password" class="login_input" id="password2" name="password2" placeholder="请重复输入密码" value="$!password" /></li>
                             <li><input type="text" class="login_code left" id="checkCode" name="checkCode" placeholder="请输入验证码" />
-								<img id="imageCode" src="#springUrl('')/checkCode/create" class="lp_img left" title="看不清，点击换一张" style="cursor: pointer;" />
+								<img id="imageCode" src="#springUrl('')/checkCode/createImage" class="lp_img left" title="看不清，点击换一张" style="cursor: pointer;" />
                             </li> 
                             <li class="consent"><input type="checkbox"  />同意《Awesome服务协议》</li>
                             <li><input type="button" name="register_btn" id="register_btn" class="login_btn" value="提交注册" /></li>

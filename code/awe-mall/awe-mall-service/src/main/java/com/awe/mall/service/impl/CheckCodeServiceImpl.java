@@ -20,46 +20,16 @@ import com.awe.mall.service.CheckCodeService;
 @Service
 public class CheckCodeServiceImpl implements CheckCodeService {
 
-    /** 校验码图片宽 */
-    private int width = 90;
-    /** 校验码图片高 */
-    private int height = 36;
-    /** 校验码长度 */
-    private int codeLength = 4;
     /** 混合字母数字数组 */
     private static final String[] charArray = new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A",
             "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
             "W", "X", "W", "Z" };
 
     /**
-     * @param width
-     *            the width to set
-     */
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    /**
-     * @param height
-     *            the height to set
-     */
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    /**
-     * @param codeLength
-     *            the codeLength to set
-     */
-    public void setCodeLength(int codeLength) {
-        this.codeLength = codeLength;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Profiled(tag = "CheckCodeService.generateRandomNumberCode")
-    public String generateRandomNumberCode() {
+    public String generateRandomNumberCode(int codeLength) {
         String sRand = "";
         Random random = new Random();
         for (int i = 0; i < codeLength; i++) {
@@ -72,7 +42,7 @@ public class CheckCodeServiceImpl implements CheckCodeService {
      * {@inheritDoc}
      */
     @Profiled(tag = "CheckCodeService.generateRandomMixedCode")
-    public String generateRandomMixedCode() {
+    public String generateRandomMixedCode(int codeLength) {
         String sRand = "";
         Random random = new Random();
         for (int i = 0; i < codeLength; i++) {
@@ -85,7 +55,7 @@ public class CheckCodeServiceImpl implements CheckCodeService {
      * {@inheritDoc}
      */
     @Profiled(tag = "CheckCodeService.getImage")
-    public BufferedImage getImage(String checkCode) {
+    public BufferedImage getImage(String checkCode, int width, int height) {
         // 在内存中创建图象
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         // 获取图形上下文

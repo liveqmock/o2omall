@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.awe.mall.service.UserAccountService;
 import com.awe.uc.sdk.UserAccountClient;
+import com.awe.uc.sdk.request.dto.PasswordModifyRequestDto;
 import com.awe.uc.sdk.response.dto.UserAccountResponseDto;
 import com.hbird.common.utils.wrap.Wrapper;
 
@@ -53,6 +54,36 @@ public class UserAccountServiceImpl implements UserAccountService {
             LOG.warn("UserAccountService#login fail,", e);
         }
         return responseDto;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Profiled(tag = "UserAccountService.modifyPassword")
+    public Wrapper<?> modifyPassword(PasswordModifyRequestDto requestDto) {
+        Wrapper<?> wrapper = null;
+
+        try {
+            wrapper = userAccountClient.modifyPassword(requestDto);
+        } catch (Exception e) {
+            LOG.warn("UserAccountService#modifyPassword fail,", e);
+        }
+        return wrapper;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Profiled(tag = "UserAccountService.resetPassword")
+    public Wrapper<?> resetPassword(PasswordModifyRequestDto requestDto) {
+        Wrapper<?> wrapper = null;
+
+        try {
+            wrapper = userAccountClient.resetPassword(requestDto);
+        } catch (Exception e) {
+            LOG.warn("UserAccountService#resetPassword fail,", e);
+        }
+        return wrapper;
     }
 
 }

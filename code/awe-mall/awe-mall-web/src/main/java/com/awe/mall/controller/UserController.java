@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.awe.mall.controller.base.BaseController;
 import com.awe.mall.service.UserAccountService;
+import com.awe.mall.utils.CodeUtil;
+import com.awe.uc.sdk.request.dto.PasswordModifyRequestDto;
 import com.awe.uc.sdk.response.dto.UserAccountResponseDto;
+import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 import com.hbird.common.web.context.LoginUser;
 import com.hbird.common.web.context.LoginUserUtils;
@@ -85,7 +88,7 @@ public class UserController extends BaseController {
         String message = null;
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             message = MSG_VALUE_ILLEGAL;
-        } else if (!validate(checkCode, request)) {
+        } else if (!validateCheckCode(checkCode, request)) {
             message = MSG_CHECK_CODE_ERROR;
         } else {
             this.logger.info("doLogin: username=" + username);
@@ -167,7 +170,7 @@ public class UserController extends BaseController {
 
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             message = MSG_VALUE_ILLEGAL;
-        } else if (!validate(checkCode, request)) {
+        } else if (!validateCheckCode(checkCode, request)) {
             message = MSG_CHECK_CODE_ERROR;
         } else {
             this.logger.info("doRegister: username=" + username);
@@ -210,18 +213,115 @@ public class UserController extends BaseController {
         return REDIRECT + VIEW_INDEX;
     }
 
-    public boolean validate(String checkCode, HttpServletRequest request) {
+    /**
+     * 用户修改密码事件
+     * 
+     * @param model
+     * @param request
+     * @param username
+     *            账号
+     * @param oldPassword
+     *            原始密码
+     * @param newPassword
+     *            新密码
+     * @param smsCode
+     *            短信验证码
+     * @param checkCode
+     *            随机图片验证码
+     * @return
+     */
+    @RequestMapping("modifyPassword")
+    public Wrapper<?> modifyPassword(Model model, HttpServletRequest request, String username, String oldPassword,
+            String newPassword, String smsCode, String checkCode) {
+        try {
+            PasswordModifyRequestDto requestDto = new PasswordModifyRequestDto();
+            requestDto.setUsername(username);
+            requestDto.setOldPassword(oldPassword);
+            requestDto.setNewPassword(newPassword);
+            requestDto.setMobile(username);
+            Wrapper<?> wrapper = userAccountService.modifyPassword(requestDto);
+            if (null != wrapper) {
+                return wrapper;
+            } else {
+                logger.error("modifyPassword fail.");
+                return WrapMapper.error();
+            }
+        } catch (Exception e) {
+            logger.error("modifyPassword has error,", e);
+            return WrapMapper.error();
+        }
+    }
+
+    /**
+     * 用户重置密码事件
+     * 
+     * @param model
+     * @param request
+     * @param username
+     *            账号
+     * @param newPassword
+     *            新密码
+     * @param smsCode
+     *            短信验证码
+     * @param checkCode
+     *            随机图片验证码
+     * @return
+     */
+    @RequestMapping("resetPassword")
+    public Wrapper<?> resetPassword(Model model, HttpServletRequest request, String username, String newPassword,
+            String smsCode, String checkCode) {
+        try {
+            PasswordModifyRequestDto requestDto = new PasswordModifyRequestDto();
+            requestDto.setUsername(username);
+            requestDto.setNewPassword(newPassword);
+            requestDto.setMobile(username);
+            Wrapper<?> wrapper = userAccountService.resetPassword(requestDto);
+            if (null != wrapper) {
+                return wrapper;
+            } else {
+                logger.error("resetPassword fail.");
+                return WrapMapper.error();
+            }
+        } catch (Exception e) {
+            logger.error("resetPassword has error,", e);
+            return WrapMapper.error();
+        }
+    }
+
+    /**
+     * 校验用户输入的随机图片验证码
+     * 
+     * @param checkCode
+     * @param request
+     * @return
+     */
+    boolean validateCheckCode(String checkCode, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null) {
             return false;
         }
-        String code = (String) session.getAttribute("checkCode");
-        session.removeAttribute("checkCode");
-        if (checkCode != null && checkCode.length() > 0 && checkCode.toUpperCase().equals(code)) {
-            return true;
-        } else {
+
+        String code = (String) session.getAttribute(CodeUtil.KEY_CHECK_CODE);
+        session.removeAttribute(CodeUtil.KEY_CHECK_CODE);
+        return StringUtils.isNotBlank(checkCode) && checkCode.toUpperCase().equals(code);
+    }
+
+    /**
+     * 校验用户输入的短信验证码
+     * 
+     * @param checkCode
+     * @param request
+     * @return
+     */
+    boolean validateSmsCode(String checkCode, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session == null) {
             return false;
         }
+
+        String code = (String) session.getAttribute(CodeUtil.KEY_SMS_CODE);
+        session.removeAttribute(CodeUtil.KEY_SMS_CODE);
+        return StringUtils.isNotBlank(checkCode) && checkCode.toUpperCase().equals(code);
     }
 
 }
