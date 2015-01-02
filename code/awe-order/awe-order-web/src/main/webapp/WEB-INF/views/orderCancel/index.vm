@@ -27,6 +27,18 @@
         		MyPopWindow.ExecuteDelete("$basePath/orderCancel/delete",{ id : parameterId });
         	}
         	
+        	function toAudit(){
+        	    var orderNo='';
+        		$('input[name="orderNocheckbox"]:checked').each(function(){
+			       orderNo+=$(this).val()+','; 
+                 });
+                 if(orderNo == ''){
+                 	alert("亲,请选择数据,在进行审核");
+                 	return;
+                 }
+                 toAuditModal(orderNo);
+        	}
+        	
         </script>
 	</head>
     <body>
@@ -132,8 +144,7 @@
 			<div class="widget-box">	
 				<div class="widget-header">
                         <h5 class="lighter">
-                            <a href="javascript:void(0)" onclick="toDetail($!item.id);" data-toggle="modal"><i class="icon-list">审核</i></a>
-							<button class="btn btn-xs btn-pink" type="button" id="btn-add">新增</button>
+                            <a href="javascript:void(0)" onclick="toAudit();" data-toggle="modal"><i class="icon-list">审核</i></a>
                         </h5>
                         <div class="widget-toolbar">
                             <a href="#" data-action="collapse">
@@ -146,7 +157,7 @@
 						 <table class="table table-striped table-bordered table-condensed table-hover">
                     <thead>
                         <tr>
-							<th class="center">自增id</th>
+							<th class="center">选择</th>
 							<th class="center">退款单号</th>
 							<th class="center">退款单状态</th>
 							<th class="center">订单编号</th>
@@ -168,7 +179,7 @@
                     <tbody>
                         #foreach( $item in $dataList)
                             <tr>
-                                <td>$!item.id</td>
+                                <td><input type="checkbox"  value="$!item.orderNo"  name="orderNocheckbox" id="id$!item.orderNo"/></td>
                                 <td>$!item.refund</td>
                                 <td>$!item.status</td>
                                 <td>$!item.orderNo</td>
@@ -199,6 +210,6 @@
 				#pageBarPost($page.totalRow $page.curPage $page.totalPage)
 			</div>
         </div>
-		#parse("/orderCancel/detailModal.vm")
+		#parse("/orderCancel/AuditModal.vm")
     </body>
 </html>

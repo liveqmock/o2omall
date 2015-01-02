@@ -38,6 +38,27 @@
         VALUES (#{refund},#{status},#{orderNo},#{refundAmount},#{cancelReason},#{cancelType},#{currentAuditName},#{currentAuditNo},#{isAuditing},#{auditingTime},#{finishTime},#{remark},#{isRefund},#{createUser},#{updateUser},#{createTime},#{updateTime},#{yn})
 	</insert>
 	
+	<!-- 批量修改  -->
+	<update id="Cancelupdate" parameterType="java.util.Map">
+		update order_cancel set
+	      <if test="status != null and status != ''">
+               	status = #{status,jdbcType=DECIMAL},
+	      </if>
+	      <if test="updateUser != null and updateUser != ''">
+                	update_user = #{updateUser,jdbcType=VARCHAR},
+		  </if>
+		  <if test="remark != null and remark != ''">
+                	remark = #{remark,jdbcType=VARCHAR},
+		  </if>
+		  <if test="isAuditing != null and isAuditing != ''">
+                	is_auditing = #{isAuditing,jdbcType=DECIMAL},
+		  </if>
+			update_time = now()
+			where order_no in 
+			 <foreach collection="orderList" index="index" item="item" open="(" separator="," close=")">  
+                 #{item,jdbcType=VARCHAR}   
+             </foreach>  
+	</update>
     <!-- 修改信息 -->
     <update id="update" parameterType="OrderCancel">
         <if test="_parameter != null">
@@ -86,6 +107,7 @@
                 	update_user = #{updateUser,jdbcType=VARCHAR},
 		        </if>
                 	update_time = now()
+                
                 where id = #{id}
             </if>
         </if>

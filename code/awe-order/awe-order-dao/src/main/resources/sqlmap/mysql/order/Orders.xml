@@ -54,6 +54,26 @@
     	order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,Integral,remark,create_time,update_time,create_user,update_user,yn
     </sql>
 
+	<!-- 审核时修改订单状态  -->
+	<update id="orderAudit" parameterType="java.util.Map">
+		update orders set
+	      <if test="status != null and status != ''">
+               	order_status = #{status,jdbcType=DECIMAL},
+	      </if>
+	      <if test="updateUser != null and updateUser != ''">
+                	update_user = #{updateUser,jdbcType=VARCHAR},
+		  </if>
+		  <if test="remark != null and remark != ''">
+                	remark = #{remark,jdbcType=VARCHAR},
+		  </if>
+		    update_time = now()
+			where order_no in 
+			 <foreach collection="orderList" index="index" item="item" open="(" separator="," close=")">  
+                 #{item,jdbcType=VARCHAR}   
+             </foreach>  
+	</update>
+
+
     <!-- 创建信息 -->
     <insert id="insert" parameterType="Orders" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO orders(<include refid="ordersUsedColumns"/>) 

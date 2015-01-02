@@ -65,7 +65,7 @@
 	function OnPayWay(){
 		jQuery.ajax({
 			type: "GET",
-			url: basePath + "/enums/OnPayWay",
+			url: basePath + "/enums/queryPayWay",
 			dataType : 'json',
 			success: function(data){
 				if(data!=null && data.code==200 && data.result!=null){

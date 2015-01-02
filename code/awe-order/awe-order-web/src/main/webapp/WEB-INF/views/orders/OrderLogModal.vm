@@ -55,9 +55,8 @@
 					var j=i+1;
 						$("#order_Log_product").append("<tr><td>"+j+"</td><td>"+item.statusName+"</td><td>"+item.description+"</td><td>"+item.createTime+"</td><td>"+item.createUser+"</td><td>"+item.updateTime+"</td><td>"+item.updateUser+"</td></tr>")
 					});
-    				
     			} else {
-    				alert("获取详情失败");
+    				alert("此订单没有日志");
     			}
     		},
     		error : function(data) {

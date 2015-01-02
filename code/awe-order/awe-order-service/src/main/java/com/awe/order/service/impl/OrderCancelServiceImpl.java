@@ -1,6 +1,9 @@
 package com.awe.order.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
@@ -174,5 +177,37 @@ public class OrderCancelServiceImpl implements OrderCancelService {
         }
         return orderCancel;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Profiled(tag = "OrderCancelService.Cancelupdate")
+	public boolean Cancelupdate(OrderCancel orderCancel) {
+    	boolean resultFlag = false;
+    	Map<String,Object> map= new HashMap<String, Object>();
+    	List<OrderCancel> list = new ArrayList<OrderCancel>();
+    	String noStr = orderCancel.getOrderNo();
+    	String orderNo[] = noStr.split(",");
+    	map.put("orderList", orderNo);
+    	map.put("statusName", "先写死");
+    	map.put("isAuditing", orderCancel.getIsAuditing());
+    	map.put("remark", orderCancel.getRemark());
+    	map.put("updateUser", orderCancel.getUpdateUser());
+    	if(orderCancel.getIsAuditing() == 1){
+    		map.put("status", "5");//待退款
+    	}else{
+    		map.put("status", "6");//审核驳回
+    	}
+        try {
+            if (null != orderCancel && null != orderCancel.getOrderNo()) {
+                resultFlag = orderCancelManager.Cancelupdate(map);
+            } else {
+                LOG.warn("OrderCancelServiceImpl#Cancelupdate failed, param is illegal.");
+            }
+        } catch (Exception e) {
+            LOG.error("OrderCancelServiceImpl#Cancelupdate has error.", e);
+        }
+        return resultFlag;
+	}
 }
 

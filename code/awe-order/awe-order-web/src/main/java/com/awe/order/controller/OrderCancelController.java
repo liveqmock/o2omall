@@ -72,6 +72,7 @@ public class OrderCancelController extends BaseController {
         return viewPrefix + "/add";
     }
 
+    
     /**
      * 订单取消----添加
      * 
@@ -138,6 +139,32 @@ public class OrderCancelController extends BaseController {
         }
     }
 
+    /**
+     * 订单取消----审核
+     * 
+     * @param model
+     * @param orderCancel
+     * @return
+     * 1:修改 取消表状态
+     * 2:修改订单状态
+     * 3:写订单日志
+     */
+    @RequestMapping(value = "Cancelupdate")
+    @ResponseBody
+    public Wrapper<?> Cancelupdate(Model model, OrderCancel orderCancel) {
+        try {
+            orderCancel.setUpdateUser(getLoginUserCnName());
+            if (orderCancelService.Cancelupdate(orderCancel)) {
+                return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "更新成功！");
+            } else {
+                return WrapMapper.wrap(Wrapper.ERROR_CODE, "更新失败！");
+            }
+        } catch (Exception e) {
+            LOG.error("orderCancel update has error.", e);
+            return WrapMapper.error();
+        }
+    }
+    
     /**
      * 订单取消----删除
      * 

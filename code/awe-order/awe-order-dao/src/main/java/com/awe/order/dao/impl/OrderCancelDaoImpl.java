@@ -6,6 +6,8 @@ import com.awe.order.domain.OrderCancel;
 import com.awe.order.domain.query.OrderCancelQuery;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -77,4 +79,11 @@ public class OrderCancelDaoImpl extends BaseDao implements OrderCancelDao {
         int count = (Integer) queryForObject(namespace +".exist", orderCancel);
         return count > 0;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+	public boolean Cancelupdate(Map map) {
+		return update(namespace +".Cancelupdate", map);
+	}
 }

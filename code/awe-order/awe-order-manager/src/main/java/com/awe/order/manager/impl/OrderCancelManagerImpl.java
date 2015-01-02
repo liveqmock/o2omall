@@ -1,16 +1,19 @@
 package com.awe.order.manager.impl;
 
 import java.util.List;
-
-import com.hbird.common.manager.BaseManager;
-import com.hbird.common.utils.page.PageUtil;
-import com.awe.order.domain.OrderCancel;
-import com.awe.order.domain.query.OrderCancelQuery;
-import com.awe.order.dao.OrderCancelDao;
-import com.awe.order.manager.OrderCancelManager;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.awe.order.dao.OrderCancelDao;
+import com.awe.order.dao.OrderLogDao;
+import com.awe.order.dao.OrdersDao;
+import com.awe.order.domain.OrderCancel;
+import com.awe.order.domain.query.OrderCancelQuery;
+import com.awe.order.manager.OrderCancelManager;
+import com.hbird.common.manager.BaseManager;
+import com.hbird.common.utils.page.PageUtil;
 
 /**
  * OrderCancelManager接口的实现类
@@ -24,7 +27,10 @@ public class OrderCancelManagerImpl extends BaseManager implements OrderCancelMa
 	
     @Autowired
     private OrderCancelDao orderCancelDao;
-
+    @Autowired
+    private OrdersDao ordersDao;
+    @Autowired
+    private OrderLogDao logDao;
     /**
      * {@inheritDoc}
      */
@@ -134,4 +140,23 @@ public class OrderCancelManagerImpl extends BaseManager implements OrderCancelMa
     public boolean exist(OrderCancel orderCancel) {
         return orderCancelDao.exist(orderCancel);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+	public boolean Cancelupdate(Map map) {
+		boolean resultFlag = false;
+		//1:根据订单编号改变取消表的数据update
+		 resultFlag = orderCancelDao.Cancelupdate(map);
+		 if(resultFlag){
+		//2：改变订单状态update
+		 resultFlag =  ordersDao.orderAudit(map);
+		 }
+		//3:写订单日志表insert
+		 if(resultFlag){
+		 resultFlag	= logDao.orderLogAudit(map);
+		 }
+		
+		return resultFlag;
+	}
 }

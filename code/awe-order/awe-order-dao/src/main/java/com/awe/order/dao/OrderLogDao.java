@@ -1,6 +1,7 @@
 package com.awe.order.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.awe.order.domain.OrderLog;
 import com.awe.order.domain.query.OrderLogQuery;
@@ -12,6 +13,7 @@ import com.awe.order.domain.query.OrderLogQuery;
  * @version 2014-12-23 10:58:05
  * 
  */
+@SuppressWarnings("all")
 public interface OrderLogDao {
     
     /**
@@ -78,5 +80,12 @@ public interface OrderLogDao {
      * @return
      */
     public boolean exist(OrderLog orderLog);
+
+    /**
+     * 审核时，写日志表
+     * @param map
+     * @return
+     */
+	public boolean orderLogAudit(Map map);
 
 }

@@ -6,6 +6,7 @@ import com.awe.order.domain.Orders;
 import com.awe.order.domain.query.OrdersQuery;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Repository;
  * 
  */
 @Repository
+@SuppressWarnings("all")
 public class OrdersDaoImpl extends BaseDao implements OrdersDao {
     /** namespace */
     private final String namespace = OrdersDaoImpl.class.getName();
@@ -25,7 +27,7 @@ public class OrdersDaoImpl extends BaseDao implements OrdersDao {
     /**
      * {@inheritDoc}
      */
-    public List<Orders> queryOrdersList(OrdersQuery queryBean) {
+	public List<Orders> queryOrdersList(OrdersQuery queryBean) {
         return (List<Orders>) queryForList(namespace +".queryOrdersList", queryBean);
     }
 
@@ -84,5 +86,12 @@ public class OrdersDaoImpl extends BaseDao implements OrdersDao {
      */
 	public Orders getOrdersByOrderNO(String orderNo) {
 		 return (Orders) queryForObject(namespace +".getOrdersByOrderNO", orderNo);
+	}
+
+	/**
+     * {@inheritDoc}
+     */
+	public boolean orderAudit(Map map) {
+		return update(namespace +".orderAudit", map);
 	}
 }

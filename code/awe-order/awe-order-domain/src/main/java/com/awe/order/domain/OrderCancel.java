@@ -33,7 +33,7 @@ public class OrderCancel implements java.io.Serializable {
     /** 审核人编号 */
     private String currentAuditNo; 
     /** 0：不通过；1：通过 */
-    private Long isAuditing; 
+    private Long isAuditing;
     /** 审核时间 */
     private Date auditingTime; 
     /** 退款完成时间 */

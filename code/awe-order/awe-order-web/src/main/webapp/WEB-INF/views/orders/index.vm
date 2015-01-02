@@ -4,8 +4,11 @@
         #parse("/layout/head.vm")
 		<script language="javascript"> 
 			$(function() {
-			    OnOrderStatus();
-				
+				OnOrderStatus();
+				OnOrderType();
+			    OnPayType();
+			    OnPayWay();
+			    OnInvoiceType();
 				$("#btn-query").click(function() {
         			pageSubmit(1);
    				});
@@ -28,7 +31,6 @@
         	function toDelete(parameterId){
         		MyPopWindow.ExecuteDelete("$basePath/orders/delete",{ id : parameterId });
         	}
-        	
         </script>
 	</head>
     <body>
@@ -56,7 +58,7 @@
 									
 									<label class="col-sm-1 control-label no-padding-right" for="orderType">订单类型</label>
                                     <div class="col-sm-2">
-										<select id="orderType" name="orderType" class="col-xs-10 col-sm-8"  onchange="OnOrderType();">
+										<select id="orderType" name="orderType" class="col-xs-10 col-sm-8">
 											<option value="">-请选择-</option>
 										</select>
                                     </div>
@@ -110,7 +112,7 @@
 									
 									<label class="col-sm-1 control-label no-padding-right" for="orderStatus">订单状态</label>
                                     <div class="col-sm-2">
-										<select id="orderStatus" name="orderStatus" class="col-xs-10 col-sm-8"  onchange="OnOrderStatus();">
+										<select id="orderStatus" name="orderStatus" class="col-xs-10 col-sm-8">
 											<option value="">-请选择-</option>
 										</select>
                                     </div>

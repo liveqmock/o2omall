@@ -1,6 +1,7 @@
 package com.awe.order.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.awe.order.domain.OrderCancel;
 import com.awe.order.domain.query.OrderCancelQuery;
@@ -78,5 +79,12 @@ public interface OrderCancelDao {
      * @return
      */
     public boolean exist(OrderCancel orderCancel);
+
+    /**
+     * 订单审核
+     * @param map
+     * @return
+     */
+	public boolean Cancelupdate(Map map);
 
 }

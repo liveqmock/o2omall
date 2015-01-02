@@ -30,6 +30,18 @@
         VALUES (#{orderNo},#{status},#{statusName},#{description},#{logType},#{createTime},#{createUser},#{updateTime},#{updateUser},#{yn})
 	</insert>
 	
+	<!-- 审核时写日志 批量  -->
+	<insert id="orderLogAudit" parameterType="java.util.Map">
+        INSERT INTO order_log(<include refid="orderLogUsedColumns"/>) 
+        VALUES
+        <foreach collection="orderList" index="index" item="item"  separator="," >  
+          (#{item,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{statusName,jdbcType=VARCHAR},
+           #{remark,jdbcType=VARCHAR},100,now(),#{updateUser,jdbcType=VARCHAR},NOW(),#{updateUser,jdbcType=VARCHAR},1)
+       </foreach> 
+	</insert>
+	
+	
+	
     <!-- 修改信息 -->
     <update id="update" parameterType="OrderLog">
         <if test="_parameter != null">
