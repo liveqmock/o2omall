@@ -8,7 +8,7 @@ import java.util.Date;
  * 提供rest接口时方法的返回对象
  * 
  * @author ljz
- * @version 2014-12-25 14:47:41
+ * @version 2014-12-30 16:41:55
  * 
  */
 public class BusinessInfoResponseDto extends HbirdDto {
@@ -26,8 +26,22 @@ public class BusinessInfoResponseDto extends HbirdDto {
     private String enName; 
     /** 名称缩写 */
     private String businessAbbr; 
-    /** 国家 */
-    private String country; 
+    /** 类型（国内、进口） */
+    private Integer type; 
+    /** 类型名称 */
+    private String typeName; 
+    /** 一级分类 */
+    private Long categoryOneId; 
+    /** 一级分类名称 */
+    private String categoryOne; 
+    /** 二级分类 */
+    private Long categoryTwoId; 
+    /** 二级分类名称 */
+    private String categoryTwo; 
+    /** 三级分类 */
+    private Long categoryThreeId; 
+    /** 三级分类名称 */
+    private String categoryThree; 
     /** 地区-省份-名称 */
     private String provinceName; 
     /** 地区-省份-编号 */
@@ -40,42 +54,36 @@ public class BusinessInfoResponseDto extends HbirdDto {
     private String countyName; 
     /** 地区-县-编号 */
     private String countyNo; 
-    /** 公司 */
-    private String company; 
+    /** 联系人 */
+    private String contactor; 
+    /** 手机 */
+    private String mobilePhone; 
+    /** 联系人电话 */
+    private String telePhone; 
     /** 地址 */
     private String address; 
     /** 邮编 */
     private String postCode; 
-    /** 联系人 */
-    private String contactor; 
-    /** 联系人电话 */
-    private String telePhone; 
-    /** 手机 */
-    private String mobilePhone; 
-    /** 商家类别 */
-    private Long bussSort; 
     /** 描述 */
     private String features; 
     /** 备注 */
     private String remark; 
     /** 审核状态 */
     private Integer checkStatus; 
-    /** 是否有证件 */
-    private Integer hasCard; 
-    /** 法定人身份证（图片地址） */
-    private String legalPerson; 
-    /** 公司注册信息（扫描件） */
-    private String companyRegister; 
     /** 入驻时间 */
     private Date enterTime; 
-    /** 入驻年限 */
-    private Date enterYear; 
     /** 有效合同开始时间 */
     private Date contractTimeStart; 
     /** 有效合同结束时间 */
     private Date contractTimeEnd; 
     /** 商家级别 */
     private Integer level; 
+    /** 是否有证件 */
+    private Integer hasCard; 
+    /** 法定人身份证（图片地址） */
+    private String legalPerson; 
+    /** 公司注册信息（扫描件） */
+    private String companyRegister; 
     /** 保证金 */
     private Double earnestMoney; 
     /** 信用等级 */
@@ -186,21 +194,147 @@ public class BusinessInfoResponseDto extends HbirdDto {
     }
     
     /**
-     * get 国家
+     * get 类型（国内、进口）
      * 
-     * @return the country
+     * @return the type
      */
-    public String getCountry(){
-        return country;
+    public Integer getType(){
+        return type;
     }
         
     /**
-     * set 国家
+     * set 类型（国内、进口）
      * 
-     * @param country the country to set
+     * @param type the type to set
      */
-    public void setCountry(String country) {
-        this.country = country;
+    public void setType(Integer type) {
+        this.type = type;
+    }
+    
+    /**
+     * get 类型名称
+     * 
+     * @return the typeName
+     */
+    public String getTypeName(){
+        return typeName;
+    }
+        
+    /**
+     * set 类型名称
+     * 
+     * @param typeName the typeName to set
+     */
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+    
+    /**
+     * get 一级分类
+     * 
+     * @return the categoryOneId
+     */
+    public Long getCategoryOneId(){
+        return categoryOneId;
+    }
+        
+    /**
+     * set 一级分类
+     * 
+     * @param categoryOneId the categoryOneId to set
+     */
+    public void setCategoryOneId(Long categoryOneId) {
+        this.categoryOneId = categoryOneId;
+    }
+    
+    /**
+     * get 一级分类名称
+     * 
+     * @return the categoryOne
+     */
+    public String getCategoryOne(){
+        return categoryOne;
+    }
+        
+    /**
+     * set 一级分类名称
+     * 
+     * @param categoryOne the categoryOne to set
+     */
+    public void setCategoryOne(String categoryOne) {
+        this.categoryOne = categoryOne;
+    }
+    
+    /**
+     * get 二级分类
+     * 
+     * @return the categoryTwoId
+     */
+    public Long getCategoryTwoId(){
+        return categoryTwoId;
+    }
+        
+    /**
+     * set 二级分类
+     * 
+     * @param categoryTwoId the categoryTwoId to set
+     */
+    public void setCategoryTwoId(Long categoryTwoId) {
+        this.categoryTwoId = categoryTwoId;
+    }
+    
+    /**
+     * get 二级分类名称
+     * 
+     * @return the categoryTwo
+     */
+    public String getCategoryTwo(){
+        return categoryTwo;
+    }
+        
+    /**
+     * set 二级分类名称
+     * 
+     * @param categoryTwo the categoryTwo to set
+     */
+    public void setCategoryTwo(String categoryTwo) {
+        this.categoryTwo = categoryTwo;
+    }
+    
+    /**
+     * get 三级分类
+     * 
+     * @return the categoryThreeId
+     */
+    public Long getCategoryThreeId(){
+        return categoryThreeId;
+    }
+        
+    /**
+     * set 三级分类
+     * 
+     * @param categoryThreeId the categoryThreeId to set
+     */
+    public void setCategoryThreeId(Long categoryThreeId) {
+        this.categoryThreeId = categoryThreeId;
+    }
+    
+    /**
+     * get 三级分类名称
+     * 
+     * @return the categoryThree
+     */
+    public String getCategoryThree(){
+        return categoryThree;
+    }
+        
+    /**
+     * set 三级分类名称
+     * 
+     * @param categoryThree the categoryThree to set
+     */
+    public void setCategoryThree(String categoryThree) {
+        this.categoryThree = categoryThree;
     }
     
     /**
@@ -312,21 +446,57 @@ public class BusinessInfoResponseDto extends HbirdDto {
     }
     
     /**
-     * get 公司
+     * get 联系人
      * 
-     * @return the company
+     * @return the contactor
      */
-    public String getCompany(){
-        return company;
+    public String getContactor(){
+        return contactor;
     }
         
     /**
-     * set 公司
+     * set 联系人
      * 
-     * @param company the company to set
+     * @param contactor the contactor to set
      */
-    public void setCompany(String company) {
-        this.company = company;
+    public void setContactor(String contactor) {
+        this.contactor = contactor;
+    }
+    
+    /**
+     * get 手机
+     * 
+     * @return the mobilePhone
+     */
+    public String getMobilePhone(){
+        return mobilePhone;
+    }
+        
+    /**
+     * set 手机
+     * 
+     * @param mobilePhone the mobilePhone to set
+     */
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+    }
+    
+    /**
+     * get 联系人电话
+     * 
+     * @return the telePhone
+     */
+    public String getTelePhone(){
+        return telePhone;
+    }
+        
+    /**
+     * set 联系人电话
+     * 
+     * @param telePhone the telePhone to set
+     */
+    public void setTelePhone(String telePhone) {
+        this.telePhone = telePhone;
     }
     
     /**
@@ -363,78 +533,6 @@ public class BusinessInfoResponseDto extends HbirdDto {
      */
     public void setPostCode(String postCode) {
         this.postCode = postCode;
-    }
-    
-    /**
-     * get 联系人
-     * 
-     * @return the contactor
-     */
-    public String getContactor(){
-        return contactor;
-    }
-        
-    /**
-     * set 联系人
-     * 
-     * @param contactor the contactor to set
-     */
-    public void setContactor(String contactor) {
-        this.contactor = contactor;
-    }
-    
-    /**
-     * get 联系人电话
-     * 
-     * @return the telePhone
-     */
-    public String getTelePhone(){
-        return telePhone;
-    }
-        
-    /**
-     * set 联系人电话
-     * 
-     * @param telePhone the telePhone to set
-     */
-    public void setTelePhone(String telePhone) {
-        this.telePhone = telePhone;
-    }
-    
-    /**
-     * get 手机
-     * 
-     * @return the mobilePhone
-     */
-    public String getMobilePhone(){
-        return mobilePhone;
-    }
-        
-    /**
-     * set 手机
-     * 
-     * @param mobilePhone the mobilePhone to set
-     */
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
-    }
-    
-    /**
-     * get 商家类别
-     * 
-     * @return the bussSort
-     */
-    public Long getBussSort(){
-        return bussSort;
-    }
-        
-    /**
-     * set 商家类别
-     * 
-     * @param bussSort the bussSort to set
-     */
-    public void setBussSort(Long bussSort) {
-        this.bussSort = bussSort;
     }
     
     /**
@@ -492,60 +590,6 @@ public class BusinessInfoResponseDto extends HbirdDto {
     }
     
     /**
-     * get 是否有证件
-     * 
-     * @return the hasCard
-     */
-    public Integer getHasCard(){
-        return hasCard;
-    }
-        
-    /**
-     * set 是否有证件
-     * 
-     * @param hasCard the hasCard to set
-     */
-    public void setHasCard(Integer hasCard) {
-        this.hasCard = hasCard;
-    }
-    
-    /**
-     * get 法定人身份证（图片地址）
-     * 
-     * @return the legalPerson
-     */
-    public String getLegalPerson(){
-        return legalPerson;
-    }
-        
-    /**
-     * set 法定人身份证（图片地址）
-     * 
-     * @param legalPerson the legalPerson to set
-     */
-    public void setLegalPerson(String legalPerson) {
-        this.legalPerson = legalPerson;
-    }
-    
-    /**
-     * get 公司注册信息（扫描件）
-     * 
-     * @return the companyRegister
-     */
-    public String getCompanyRegister(){
-        return companyRegister;
-    }
-        
-    /**
-     * set 公司注册信息（扫描件）
-     * 
-     * @param companyRegister the companyRegister to set
-     */
-    public void setCompanyRegister(String companyRegister) {
-        this.companyRegister = companyRegister;
-    }
-    
-    /**
      * get 入驻时间
      * 
      * @return the enterTime
@@ -561,24 +605,6 @@ public class BusinessInfoResponseDto extends HbirdDto {
      */
     public void setEnterTime(Date enterTime) {
         this.enterTime = enterTime;
-    }
-    
-    /**
-     * get 入驻年限
-     * 
-     * @return the enterYear
-     */
-    public Date getEnterYear(){
-        return enterYear;
-    }
-        
-    /**
-     * set 入驻年限
-     * 
-     * @param enterYear the enterYear to set
-     */
-    public void setEnterYear(Date enterYear) {
-        this.enterYear = enterYear;
     }
     
     /**
@@ -633,6 +659,60 @@ public class BusinessInfoResponseDto extends HbirdDto {
      */
     public void setLevel(Integer level) {
         this.level = level;
+    }
+    
+    /**
+     * get 是否有证件
+     * 
+     * @return the hasCard
+     */
+    public Integer getHasCard(){
+        return hasCard;
+    }
+        
+    /**
+     * set 是否有证件
+     * 
+     * @param hasCard the hasCard to set
+     */
+    public void setHasCard(Integer hasCard) {
+        this.hasCard = hasCard;
+    }
+    
+    /**
+     * get 法定人身份证（图片地址）
+     * 
+     * @return the legalPerson
+     */
+    public String getLegalPerson(){
+        return legalPerson;
+    }
+        
+    /**
+     * set 法定人身份证（图片地址）
+     * 
+     * @param legalPerson the legalPerson to set
+     */
+    public void setLegalPerson(String legalPerson) {
+        this.legalPerson = legalPerson;
+    }
+    
+    /**
+     * get 公司注册信息（扫描件）
+     * 
+     * @return the companyRegister
+     */
+    public String getCompanyRegister(){
+        return companyRegister;
+    }
+        
+    /**
+     * set 公司注册信息（扫描件）
+     * 
+     * @param companyRegister the companyRegister to set
+     */
+    public void setCompanyRegister(String companyRegister) {
+        this.companyRegister = companyRegister;
     }
     
     /**
