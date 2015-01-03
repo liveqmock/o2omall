@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import com.awe.order.domain.OrderCancel;
-import com.awe.order.domain.query.OrderCancelQuery;
+import com.awe.order.domain.query.FrontOrderCancelQuery;
 import com.awe.order.sdk.api.request.OrderCancelRequest;
 import com.awe.order.sdk.api.request.dto.OrderCancelRequestDto;
 import com.awe.order.sdk.api.response.dto.OrderCancelResponseDto;
@@ -83,27 +83,26 @@ public class OrderCancelResource {
      * @return
      */
     @POST
-    @Path("/orderCancel/queryOrderCancelListWithPage")
-    public Wrapper<?> queryOrderCancelListWithPage(PageUtil page,OrderCancelRequest request){
+    @Path("/orderCancel/queryFrontOrderCancelListWithPage")
+    public Wrapper<?> queryFrontOrderCancelListWithPage(OrderCancelRequest request,PageUtil pageUtil){
     	if (null == request || !request.checkSign()) {
-            this.logger.error("queryOrderCancelListWithPage 拒绝访问");
+            this.logger.error("queryFrontOrderCancelListWithPage 拒绝访问");
             return WrapMapper.forbidden();
         }
         
         OrderCancelRequestDto requestDto = request.getContent();
         if (null == requestDto || null == requestDto.getId()) {
-            this.logger.error("queryOrderCancelListWithPage 传入参数有误");
+            this.logger.error("queryFrontOrderCancelListWithPage 传入参数有误");
             return WrapMapper.illegalArgument();
         }
         try {
-        	OrderCancelQuery queryBean = new OrderCancelQuery();
-        	//这个条件需要再斟酌,前端网站传过来的UID是否是后端表中的createUser？
-        	queryBean.setCreateUser(requestDto.getCreateUser());
-        	List<OrderCancel> dataList = orderCancelService.queryOrderCancelListWithPage(queryBean, page);
+        	FrontOrderCancelQuery queryBean = new FrontOrderCancelQuery();
+        	queryBean.setUserId(requestDto.getUserId());
+        	List<OrderCancel> dataList = orderCancelService.queryFrontOrderCancelListWithPage(queryBean, pageUtil);
         	List<OrderCancelResponseDto> responseDtoList = convertList(dataList);
         	return WrapMapper.ok().result(responseDtoList);
 		} catch (Exception e) {
-			this.logger.error("#OrderCancelResource.queryOrderCancelListWithPage# Error:" + e);
+			this.logger.error("#OrderCancelResource.queryFrontOrderCancelListWithPage# Error:" + e);
 			return WrapMapper.error();
 		}
     }

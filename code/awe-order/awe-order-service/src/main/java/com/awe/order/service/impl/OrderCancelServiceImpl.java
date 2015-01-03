@@ -214,8 +214,11 @@ public class OrderCancelServiceImpl implements OrderCancelService {
         }
         return resultFlag;
 	}
-
-	public List<OrderCancel> queryOrderCancelListWithPage(FrontOrderCancelQuery queryBean, PageUtil pageUtil) {
+    /**
+     * {@inheritDoc}
+     */
+    @Profiled(tag = "OrderCancelService.queryFrontOrderCancelListWithPage")
+	public List<OrderCancel> queryFrontOrderCancelListWithPage(FrontOrderCancelQuery queryBean, PageUtil pageUtil) {
 		List<OrderCancelDto> orderCancelDtoList = null;
     	List<OrderCancel> dataList = new ArrayList<OrderCancel>();
     	OrderCancel orderCancel = null;
@@ -239,9 +242,10 @@ public class OrderCancelServiceImpl implements OrderCancelService {
         		}
 			}
         } catch (Exception e) {
-            LOG.error("OrderCancelServiceImpl#queryOrderCancelListWithPage has error.", e);
+            LOG.error("OrderCancelServiceImpl#queryFrontOrderCancelListWithPage has error.", e);
         }
         return dataList;
 	}
+
 }
 

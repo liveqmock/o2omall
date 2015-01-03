@@ -56,8 +56,7 @@ public interface OrderCancelService {
      * @param pageUtil
      * @return
      */
-    public List<OrderCancel> queryOrderCancelListWithPage(OrderCancelQuery queryBean,
-            PageUtil pageUtil);
+    public List<OrderCancel> queryOrderCancelListWithPage(OrderCancelQuery queryBean,PageUtil pageUtil);
 
     /**
      * 根据主键删除对象信息，该处做的是逻辑删除
@@ -99,5 +98,5 @@ public interface OrderCancelService {
      * @param pageUtil
      * @return
      */
-    public List<OrderCancel> queryOrderCancelListWithPage(FrontOrderCancelQuery queryBean,PageUtil pageUtil);
+    public List<OrderCancel> queryFrontOrderCancelListWithPage(FrontOrderCancelQuery queryBean,PageUtil pageUtil);
 }

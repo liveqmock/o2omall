@@ -5,6 +5,9 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.perf4j.aop.Profiled;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.awe.order.domain.ShoppingCart;
 import com.awe.order.domain.query.ShoppingCartQuery;
@@ -12,10 +15,6 @@ import com.awe.order.manager.ShoppingCartManager;
 import com.awe.order.service.ShoppingCartService;
 import com.awe.order.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.perf4j.aop.Profiled;
  
 /**
  * ShoppingCartService接口的实现类

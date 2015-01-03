@@ -96,7 +96,6 @@ public class OrdersResource {
         }
         try {
         	FrontOrdersQuery queryBean = new FrontOrdersQuery();
-        	//这个条件需要再斟酌,前端网站传过来的UID是否是后端表中的createUser？
         	queryBean.setUserId(requestDto.getUserId());
         	queryBean.setOrderStatus(requestDto.getOrderStatus());
         	queryBean.setCreateTime(requestDto.getCreateTime());
