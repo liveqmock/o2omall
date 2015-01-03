@@ -108,6 +108,12 @@ public class ReturnExchangeResource {
             return WrapMapper.error();
         }
     }
+    /**
+     * 我的退换货列表
+     * @param request
+     * @param pageUtil
+     * @return
+     */
     @POST
     @Path("/returnExchange/queryReturnExchangeListWithPage")
     public Wrapper<?> queryReturnExchangeListWithPage(ReturnExchangeRequest request,PageUtil pageUtil){
