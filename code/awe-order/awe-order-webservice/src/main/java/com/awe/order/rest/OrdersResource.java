@@ -16,18 +16,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.order.domain.Orders;
+import com.awe.order.domain.query.FrontOrdersQuery;
 import com.awe.order.sdk.api.request.OrdersRequest;
 import com.awe.order.sdk.api.request.dto.OrdersRequestDto;
 import com.awe.order.sdk.api.response.dto.OrdersResponseDto;
 import com.awe.order.service.OrdersService;
+import com.hbird.common.utils.page.PageUtil;
+import com.hbird.common.utils.wrap.WrapMapper;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 订单REST服务：提供有关订单的接口
  * 
- * @author ljz
+ * @author ljz,zyq
  * @version 2014-12-23 10:58:09
  * 
  */
@@ -73,7 +75,102 @@ public class OrdersResource {
             return WrapMapper.error();
         }
     } 
-
+    /**
+     * 获取已下单订单列表
+     * @param request
+     * @param page
+     * @return
+     */
+    @POST
+    @Path("/orders/queryFrontOrdersListWithPage")
+    public Wrapper<?> queryFrontOrdersListWithPage(OrdersRequest request,PageUtil page){
+    	if (null == request || !request.checkSign()) {
+            this.logger.error("queryFrontOrdersListWithPage 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        OrdersRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getId()) {
+            this.logger.error("queryFrontOrdersListWithPage 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+        try {
+        	FrontOrdersQuery queryBean = new FrontOrdersQuery();
+        	//这个条件需要再斟酌,前端网站传过来的UID是否是后端表中的createUser？
+        	queryBean.setUserId(requestDto.getUserId());
+        	queryBean.setOrderStatus(requestDto.getOrderStatus());
+        	queryBean.setCreateTime(requestDto.getCreateTime());
+        	List<Orders> dataList  = ordersService.queryFrontOrdersListWithPage(queryBean, page);
+        	List<OrdersResponseDto> responseDto = convertList(dataList);
+        	return WrapMapper.ok().result(responseDto);
+		} catch (Exception e) {
+			 this.logger.error("查询订单数据异常", e);
+	         return WrapMapper.error();
+		}
+    }
+    /**
+     * 订单取消
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/orders/cancelOrders")
+    public Wrapper<?> cancelOrders(OrdersRequest request){
+    	if (null == request || !request.checkSign()) {
+            this.logger.error("cancelOrders 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        OrdersRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getId()) {
+            this.logger.error("cancelOrders 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+        try {
+        	Orders orders = new Orders();
+        	boolean ret = ordersService.update(orders);
+        	if(ret){
+        		return WrapMapper.ok();
+        	}else{
+        		return WrapMapper.error();
+        	}
+		} catch (Exception e) {
+			 this.logger.error("取消订单数据异常", e);
+	         return WrapMapper.error();
+		}
+    }
+    /**
+     * 删除订单数据
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/orders/deleteOrders")
+    public Wrapper<?> deleteOrders(OrdersRequest request){
+    	if (null == request || !request.checkSign()) {
+            this.logger.error("deleteOrders 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        OrdersRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getId()) {
+            this.logger.error("deleteOrders 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+        try {
+        	Orders orders = new Orders();
+        	boolean ret = ordersService.delete(orders);
+        	if(ret){
+        		return WrapMapper.ok();
+        	}else{
+        		return WrapMapper.error();
+        	}
+		} catch (Exception e) {
+			this.logger.error("删除订单数据异常", e);
+	        return WrapMapper.error();
+		}
+    }
+    
     // 数据转换
     private OrdersResponseDto convert(Orders orders) {
         if (null == orders) {
