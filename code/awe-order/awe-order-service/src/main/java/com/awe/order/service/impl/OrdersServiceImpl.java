@@ -1,21 +1,29 @@
 package com.awe.order.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.awe.order.domain.Orders;
-import com.awe.order.domain.query.OrdersQuery;
-import com.awe.order.manager.OrdersManager;
-import com.awe.order.service.OrdersService;
-import com.awe.order.utils.exceptions.ExistedException;
-import com.hbird.common.utils.page.PageUtil;
-
+import org.perf4j.aop.Profiled;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.perf4j.aop.Profiled;
+
+import com.awe.order.domain.Orders;
+import com.awe.order.domain.OrdersItems;
+import com.awe.order.domain.query.FrontOrdersQuery;
+import com.awe.order.domain.query.OrdersQuery;
+import com.awe.order.dto.OrdersDto;
+import com.awe.order.manager.OrdersManager;
+import com.awe.order.service.OrdersService;
+import com.awe.order.service.helper.OrdersComparator;
+import com.awe.order.utils.exceptions.ExistedException;
+import com.hbird.common.utils.page.PageUtil;
  
 /**
  * OrdersService接口的实现类
@@ -191,6 +199,38 @@ public class OrdersServiceImpl implements OrdersService {
             LOG.error("OrdersServiceImpl#getOrdersByOrderNO has error.", e);
         }
         return orders;
+	}
+    /**
+     * {@inheritDoc}
+     */
+    @Profiled(tag = "OrdersService.queryFrontOrdersListWithPage")
+	public List<Orders> queryFrontOrdersListWithPage(FrontOrdersQuery queryBean, PageUtil pageUtil) {
+    	List<OrdersDto> ordersDtoList = null;
+    	List<Orders> dataList = new ArrayList<Orders>();
+    	Orders orders = null;
+    	OrdersItems ordersItems = null;
+    	List<OrdersItems> ordersItemsList = null;
+    	Map<String,Orders> tempMap = new HashMap<String,Orders>();
+        try {
+        	ordersDtoList = ordersManager.queryFrontOrdersListWithPage(queryBean, pageUtil);
+        	Collections.sort(ordersDtoList, new OrdersComparator());//按订单号排序
+        	for (OrdersDto ordersDto : ordersDtoList) {
+        		if(!tempMap.containsKey(ordersDto.getOrderNo())){
+        			orders = new Orders();
+        			BeanUtils.copyProperties(ordersDto,orders);
+        			ordersItemsList = new ArrayList<OrdersItems>();
+        		}
+        		ordersItems = new OrdersItems();
+        		BeanUtils.copyProperties(ordersDto,ordersItems);
+        		ordersItemsList.add(ordersItems);
+        		if(!tempMap.containsKey(ordersDto.getOrderNo())){
+        			orders.setOrdersItemsList(ordersItemsList);
+        		}
+			}
+        } catch (Exception e) {
+            LOG.error("OrdersServiceImpl#queryFrontOrdersListWithPage has error.", e);
+        }
+        return dataList;
 	}
 }
 
