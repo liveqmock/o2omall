@@ -1,6 +1,7 @@
 package com.awe.order.domain;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Orders：订单实体类
@@ -100,6 +101,8 @@ public class Orders implements java.io.Serializable {
     private String updateUser; 
     /** 0:无效;1有效 */
     private Integer yn; 
+    /**订单明细数据集*/
+    private List<OrdersItems> ordersItemsList;
     
     /**
      * get 自增id
@@ -846,4 +849,20 @@ public class Orders implements java.io.Serializable {
     public void setYn(Integer yn) {
         this.yn = yn;
     }
+    /**
+     * get 订单明细数据集
+     * @return
+     */
+	public List<OrdersItems> getOrdersItemsList() {
+		return ordersItemsList;
+	}
+	/**
+	 * set 订单明细数据集
+	 * @param ordersItemsList
+	 */
+	public void setOrdersItemsList(List<OrdersItems> ordersItemsList) {
+		this.ordersItemsList = ordersItemsList;
+	}
+    
+    
 }
