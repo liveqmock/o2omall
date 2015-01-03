@@ -30,5 +30,15 @@
 		<property name="key" value="${mall.common.key}" />
 		<property name="serviceUrlDomain" value="${service.url.domain.uc}" />
 	</bean>
+	
+	<bean id="productBrandClient" class="com.awe.pms.sdk.ProductBrandClient">
+		<property name="key" value="${mall.common.key}" />
+		<property name="serviceUrlDomain" value="${service.url.domain.pms}" />
+	</bean>
+	
+	<bean id="productCategoryClient" class="com.awe.pms.sdk.ProductCategoryClient">
+		<property name="key" value="${mall.common.key}" />
+		<property name="serviceUrlDomain" value="${service.url.domain.pms}" />
+	</bean>
 
 </beans>
