@@ -3,7 +3,9 @@ package com.awe.order.dao.impl;
 import com.hbird.common.dao.mybatis.BaseDao;
 import com.awe.order.dao.OrderCancelDao;
 import com.awe.order.domain.OrderCancel;
+import com.awe.order.domain.query.FrontOrderCancelQuery;
 import com.awe.order.domain.query.OrderCancelQuery;
+import com.awe.order.dto.OrderCancelDto;
 
 import java.util.List;
 import java.util.Map;
@@ -85,5 +87,24 @@ public class OrderCancelDaoImpl extends BaseDao implements OrderCancelDao {
      */
 	public boolean Cancelupdate(Map map) {
 		return update(namespace +".Cancelupdate", map);
+	}
+	/**
+     * {@inheritDoc}
+     */
+	public List<OrderCancelDto> queryFrontOrderCancelListWithPage(FrontOrderCancelQuery queryBean) {
+		return (List<OrderCancelDto>) queryForList(namespace +".queryFrontOrderCancelListWithPage", queryBean);
+	}
+	/**
+     * {@inheritDoc}
+     */
+	public int queryFrontOrderCancelCount(FrontOrderCancelQuery queryBean) {
+		
+		return (Integer) queryForObject(namespace +".queryFrontOrderCancelCount", queryBean);
+	}
+	/**
+     * {@inheritDoc}
+     */
+	public OrderCancel getOrderCancelByOrderNo(String orderNo) {
+		return (OrderCancel) queryForObject(namespace +".getOrderCancelByOrderNo", orderNo);
 	}
 }
