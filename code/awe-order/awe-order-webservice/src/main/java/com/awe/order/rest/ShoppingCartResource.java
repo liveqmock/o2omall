@@ -16,18 +16,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.order.domain.ShoppingCart;
+import com.awe.order.domain.query.ShoppingCartQuery;
 import com.awe.order.sdk.api.request.ShoppingCartRequest;
 import com.awe.order.sdk.api.request.dto.ShoppingCartRequestDto;
 import com.awe.order.sdk.api.response.dto.ShoppingCartResponseDto;
 import com.awe.order.service.ShoppingCartService;
+import com.hbird.common.utils.wrap.WrapMapper;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 购物车REST服务：提供有关购物车的接口
  * 
- * @author ljz
+ * @author ljz,zyq
  * @version 2014-12-23 10:58:09
  * 
  */
@@ -73,7 +74,143 @@ public class ShoppingCartResource {
             return WrapMapper.error();
         }
     } 
-
+    /**
+     * 购物车列表数据获取
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/shoppingCart/queryShoppingCartList")
+    public Wrapper<?> queryShoppingCartList(ShoppingCartRequest request){
+    	if (null == request || !request.checkSign()) {
+            this.logger.error("queryShoppingCartList 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        ShoppingCartRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getId()) {
+            this.logger.error("queryShoppingCartList 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+        try {
+        	ShoppingCartQuery queryBean = new ShoppingCartQuery();
+        	queryBean.setUserNo(requestDto.getUserNo());
+        	List<ShoppingCart> dataList = shoppingCartService.queryShoppingCartList(queryBean);
+        	List<ShoppingCartResponseDto> responseDtoList = convertList(dataList);
+        	return WrapMapper.ok().result(responseDtoList);
+		} catch (Exception e) {
+			this.logger.error("查询购物车数据列表异常", e);
+            return WrapMapper.error();
+		}
+    }
+    /**
+     * 删除购物车指定商品数据
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/shoppingCart/deleteShoppingCartById")
+    public Wrapper<?> deleteShoppingCartById(ShoppingCartRequest request){
+    	if (null == request || !request.checkSign()) {
+            this.logger.error("deleteShoppingCartById 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        ShoppingCartRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getId()) {
+            this.logger.error("deleteShoppingCartById 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+        try {
+        	ShoppingCart shoppingCart = new ShoppingCart();
+        	shoppingCart.setId(requestDto.getId());
+        	shoppingCart.setSkuNo(requestDto.getSkuNo());
+        	boolean ret = shoppingCartService.delete(shoppingCart);
+        	if(ret){
+        		return WrapMapper.ok();
+        	}else{
+        		return WrapMapper.error();
+        	}
+		} catch (Exception e) {
+			this.logger.error("删除购物车数据异常", e);
+            return WrapMapper.error();
+		}
+    }
+    /**
+     * 添加购物车
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/shoppingCart/addShoppingCart")
+    public Wrapper<?> addShoppingCart(ShoppingCartRequest request){
+    	if (null == request || !request.checkSign()) {
+            this.logger.error("addShoppingCart 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        ShoppingCartRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getId()) {
+            this.logger.error("addShoppingCart 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+        try {
+        	ShoppingCart shoppingCart = new ShoppingCart();
+        	shoppingCart.setSkuNo(requestDto.getSkuNo());
+        	shoppingCart.setCreateUser(requestDto.getCreateUser());
+        	shoppingCart.setSkuCount(requestDto.getSkuCount());
+        	shoppingCart.setStatus(requestDto.getStatus());
+        	requestDto.setUpdateUser(requestDto.getUpdateUser());
+        	requestDto.setUserNo(requestDto.getUserNo());
+        	boolean ret = shoppingCartService.insert(shoppingCart);
+        	if(ret){
+        		return WrapMapper.ok();
+        	}else{
+        		return WrapMapper.error();
+        	}
+		} catch (Exception e) {
+			this.logger.error("添加购物车数据异常", e);
+            return WrapMapper.error();
+		}
+    }
+    /**
+     * 更新购物车数据
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/shoppingCart/updateShoppingCart")
+    public Wrapper<?> updateShoppingCart(ShoppingCartRequest request){
+    	if (null == request || !request.checkSign()) {
+            this.logger.error("updateShoppingCart 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        ShoppingCartRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getId()) {
+            this.logger.error("updateShoppingCart 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+        try {
+        	ShoppingCart shoppingCart = new ShoppingCart();
+        	shoppingCart.setSkuNo(requestDto.getSkuNo());
+        	shoppingCart.setCreateUser(requestDto.getCreateUser());
+        	shoppingCart.setSkuCount(requestDto.getSkuCount());
+        	shoppingCart.setStatus(requestDto.getStatus());
+        	requestDto.setUpdateUser(requestDto.getUpdateUser());
+        	requestDto.setUserNo(requestDto.getUserNo());
+        	boolean ret = shoppingCartService.update(shoppingCart);
+        	if(ret){
+        		return WrapMapper.ok();
+        	}else{
+        		return WrapMapper.error();
+        	}
+		} catch (Exception e) {
+			this.logger.error("更新购物车数据异常", e);
+            return WrapMapper.error();
+		}
+    }
+    
     // 数据转换
     private ShoppingCartResponseDto convert(ShoppingCart shoppingCart) {
         if (null == shoppingCart) {
