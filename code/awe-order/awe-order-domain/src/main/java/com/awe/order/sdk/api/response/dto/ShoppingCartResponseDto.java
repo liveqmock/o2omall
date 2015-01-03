@@ -39,7 +39,7 @@ public class ShoppingCartResponseDto extends HbirdDto {
     /** 销售商 */
     private String seller; 
     /** 销售商编号*/
-    private String sellerNo
+    private String sellerNo;
     /**
      * get 自增id
      * 

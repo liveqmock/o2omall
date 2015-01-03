@@ -105,7 +105,8 @@ public class Orders implements java.io.Serializable {
     /** 销售商 */
     private String seller; 
     /** 销售商编号*/
-    private String sellerNo;    /**订单明细数据集*/
+    private String sellerNo;    
+    /**订单明细数据集*/
     private List<OrdersItems> ordersItemsList;    
     /**
      * get 自增id
@@ -887,7 +888,8 @@ public class Orders implements java.io.Serializable {
      */
 	public void setSellerNo(String sellerNo) {
 		this.sellerNo = sellerNo;
-	}     * get 订单明细数据集
+	}     
+	/* get 订单明细数据集
      * @return
      */
 	public List<OrdersItems> getOrdersItemsList() {

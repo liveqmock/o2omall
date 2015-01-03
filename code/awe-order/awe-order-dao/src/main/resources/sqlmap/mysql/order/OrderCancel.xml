@@ -29,7 +29,6 @@
 		<result column="user_id" property="userId" jdbcType="DECIMAL" />
 		<result column="seller" property="seller" jdbcType="VARCHAR" />
 		<result column="seller_no" property="sellerNo" jdbcType="VARCHAR" />
-		<result column="pay_type" property="payType" jdbcType="DECIMAL" />
 		<result column="pay_way" property="payWay" jdbcType="DECIMAL" />
 		<result column="refund" property="refund" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="DECIMAL" />
@@ -162,7 +161,7 @@
 
 	<!-- 前端网站-取消订单列表-根据查询Bean获取数据集合，翻页 -->
 	<select id="queryFrontOrderCancelListWithPage" resultMap="FrontOrdersMap" parameterType="com.awe.order.domain.query.FrontOrderCancelQuery">
-		SELECT oc.order_no as order_no,oc.user_id as user_id,oc.seller as seller,oc.seller_no as seller_no,oc.pay_type as pay_type,oc.pay_way as pay_way,oc.refund as refund,oc.status as status,oc.refund_amount as refund_amount,oc.create_time as create_time,
+		SELECT oc.order_no as order_no,oc.user_id as user_id,oc.seller as seller,oc.seller_no as seller_no,oc.pay_way as pay_way,oc.refund as refund,oc.status as status,oc.refund_amount as refund_amount,oc.create_time as create_time,
 		oi.sku_no as sku_no,oi.product_no as product_no,oi.count as count,oi.sku_name as sku_name,oi.img_url as img_url 
 		FROM order_cancel oc
 		JOIN orders_items oi
