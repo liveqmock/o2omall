@@ -16,19 +16,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.order.domain.OrderCancel;
+import com.awe.order.domain.query.OrderCancelQuery;
 import com.awe.order.sdk.api.request.OrderCancelRequest;
 import com.awe.order.sdk.api.request.dto.OrderCancelRequestDto;
 import com.awe.order.sdk.api.response.dto.OrderCancelResponseDto;
 import com.awe.order.service.OrderCancelService;
+import com.hbird.common.utils.page.PageUtil;
+import com.hbird.common.utils.wrap.WrapMapper;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 订单取消REST服务：提供有关订单取消的接口
  * 
- * @author ljz
- * @version 2014-12-23 10:58:09
+ * @author ljz,zyq
+ * @version 2015-1-2
  * 
  */
 @Component
@@ -74,6 +76,39 @@ public class OrderCancelResource {
         }
     } 
 
+    /**
+     * 获取取消了的订单列表
+     * @param page
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/orderCancel/queryOrderCancelListWithPage")
+    public Wrapper<?> queryOrderCancelListWithPage(PageUtil page,OrderCancelRequest request){
+    	if (null == request || !request.checkSign()) {
+            this.logger.error("queryOrderCancelListWithPage 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        OrderCancelRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getId()) {
+            this.logger.error("queryOrderCancelListWithPage 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+        try {
+        	OrderCancelQuery queryBean = new OrderCancelQuery();
+        	//这个条件需要再斟酌,前端网站传过来的UID是否是后端表中的createUser？
+        	queryBean.setCreateUser(requestDto.getCreateUser());
+        	List<OrderCancel> dataList = orderCancelService.queryOrderCancelListWithPage(queryBean, page);
+        	List<OrderCancelResponseDto> responseDtoList = convertList(dataList);
+        	return WrapMapper.ok().result(responseDtoList);
+		} catch (Exception e) {
+			this.logger.error("#OrderCancelResource.queryOrderCancelListWithPage# Error:" + e);
+			return WrapMapper.error();
+		}
+    }
+    
+    
     // 数据转换
     private OrderCancelResponseDto convert(OrderCancel orderCancel) {
         if (null == orderCancel) {
