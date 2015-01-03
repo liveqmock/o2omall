@@ -15,18 +15,11 @@
 		<property name="key" value="${mall.common.key}" />
 		<property name="serviceUrlDomain" value="${service.url.domain.uc}" />
 	</bean>
-	
-	<bean id="userProfileClient" class="com.awe.uc.sdk.UserProfileClient">
-		<property name="key" value="${mall.common.key}" />
-		<property name="serviceUrlDomain" value="${service.url.domain.uc}" />
-	</bean>
-	
 	<bean id="userAddressClient" class="com.awe.uc.sdk.UserAddressClient">
 		<property name="key" value="${mall.common.key}" />
 		<property name="serviceUrlDomain" value="${service.url.domain.uc}" />
 	</bean>
-	
-	<bean id="areaClient" class="com.awe.uc.sdk.AreaClient">
+	<bean id="userProfileClient" class="com.awe.uc.sdk.UserProfileClient">
 		<property name="key" value="${mall.common.key}" />
 		<property name="serviceUrlDomain" value="${service.url.domain.uc}" />
 	</bean>

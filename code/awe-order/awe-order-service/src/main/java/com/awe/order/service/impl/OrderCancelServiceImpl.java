@@ -1,6 +1,7 @@
 package com.awe.order.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,17 +9,21 @@ import java.util.Map;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.awe.order.domain.OrderCancel;
-import com.awe.order.domain.query.OrderCancelQuery;
-import com.awe.order.manager.OrderCancelManager;
-import com.awe.order.service.OrderCancelService;
-import com.awe.order.utils.exceptions.ExistedException;
-import com.hbird.common.utils.page.PageUtil;
-
+import org.perf4j.aop.Profiled;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.perf4j.aop.Profiled;
+
+import com.awe.order.domain.OrderCancel;
+import com.awe.order.domain.OrdersItems;
+import com.awe.order.domain.query.FrontOrderCancelQuery;
+import com.awe.order.domain.query.OrderCancelQuery;
+import com.awe.order.dto.OrderCancelDto;
+import com.awe.order.manager.OrderCancelManager;
+import com.awe.order.service.OrderCancelService;
+import com.awe.order.service.helper.OrderCancelComparator;
+import com.awe.order.utils.exceptions.ExistedException;
+import com.hbird.common.utils.page.PageUtil;
  
 /**
  * OrderCancelService接口的实现类
@@ -208,6 +213,35 @@ public class OrderCancelServiceImpl implements OrderCancelService {
             LOG.error("OrderCancelServiceImpl#Cancelupdate has error.", e);
         }
         return resultFlag;
+	}
+
+	public List<OrderCancel> queryOrderCancelListWithPage(FrontOrderCancelQuery queryBean, PageUtil pageUtil) {
+		List<OrderCancelDto> orderCancelDtoList = null;
+    	List<OrderCancel> dataList = new ArrayList<OrderCancel>();
+    	OrderCancel orderCancel = null;
+    	OrdersItems ordersItems = null;
+    	List<OrdersItems> ordersItemsList = null;
+    	Map<String,OrderCancel> tempMap = new HashMap<String,OrderCancel>();
+        try {
+        	orderCancelDtoList = orderCancelManager.queryFrontOrderCancelListWithPage(queryBean, pageUtil);
+        	Collections.sort(orderCancelDtoList, new OrderCancelComparator());//按订单号排序
+        	for (OrderCancelDto orderCancelDto : orderCancelDtoList) {
+        		if(!tempMap.containsKey(orderCancelDto.getOrderNo())){
+        			orderCancel = new OrderCancel();
+        			BeanUtils.copyProperties(orderCancelDto,orderCancel);
+        			ordersItemsList = new ArrayList<OrdersItems>();
+        		}
+        		ordersItems = new OrdersItems();
+        		BeanUtils.copyProperties(orderCancelDto,ordersItems);
+        		ordersItemsList.add(ordersItems);
+        		if(!tempMap.containsKey(orderCancelDto.getOrderNo())){
+        			orderCancel.setOrdersItemsList(ordersItemsList);
+        		}
+			}
+        } catch (Exception e) {
+            LOG.error("OrderCancelServiceImpl#queryOrderCancelListWithPage has error.", e);
+        }
+        return dataList;
 	}
 }
 

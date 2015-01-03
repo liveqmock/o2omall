@@ -1,7 +1,6 @@
 package com.awe.order.sdk.request.dto;
 
 import com.hbird.common.sdk.api.dto.HbirdDto;
-
 import java.util.Date;
 
 /**
@@ -102,10 +101,6 @@ public class OrdersRequestDto extends HbirdDto {
     private String updateUser; 
     /** 0:无效;1有效 */
     private Integer yn; 
-    /** 销售商 */
-    private String seller; 
-    /** 销售商编号*/
-    private String sellerNo;
     
     /**
      * get 自增id
@@ -852,41 +847,4 @@ public class OrdersRequestDto extends HbirdDto {
     public void setYn(Integer yn) {
         this.yn = yn;
     }
-    
-
-    /**
-     * get 商家名称
-     * 
-     * @return the seller
-     */
-	public String getSeller() {
-		return seller;
-	}
-	
-	/**
-     * set 商家名称
-     * 
-     * @param seller the seller to set
-     */
-	public void setSeller(String seller) {
-		this.seller = seller;
-	}
-
-	/**
-     * get 商家编号
-     * 
-     * @return the sellerNo
-     */
-	public String getSellerNo() {
-		return sellerNo;
-	}
-
-	/**
-     * set 商家编号
-     * 
-     * @param sellerNo the sellerNo to set
-     */
-	public void setSellerNo(String sellerNo) {
-		this.sellerNo = sellerNo;
-	}
 }

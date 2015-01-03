@@ -10,7 +10,9 @@ import com.awe.order.dao.OrderCancelDao;
 import com.awe.order.dao.OrderLogDao;
 import com.awe.order.dao.OrdersDao;
 import com.awe.order.domain.OrderCancel;
+import com.awe.order.domain.query.FrontOrderCancelQuery;
 import com.awe.order.domain.query.OrderCancelQuery;
+import com.awe.order.dto.OrderCancelDto;
 import com.awe.order.manager.OrderCancelManager;
 import com.hbird.common.manager.BaseManager;
 import com.hbird.common.utils.page.PageUtil;
@@ -158,5 +160,36 @@ public class OrderCancelManagerImpl extends BaseManager implements OrderCancelMa
 		 }
 		
 		return resultFlag;
+	}
+	/**
+     * {@inheritDoc}
+     */
+	public List<OrderCancelDto> queryFrontOrderCancelListWithPage(FrontOrderCancelQuery queryBean,PageUtil pageUtil) {
+		if (null == queryBean) {
+            queryBean = new FrontOrderCancelQuery();
+        }
+
+        // 查询总数
+        int totalItem = queryFrontOrderCancelCount(queryBean);
+
+        if (pageUtil == null) {
+            pageUtil = new PageUtil();
+        }
+        pageUtil.setTotalRow(totalItem);
+        pageUtil.init();
+        
+        if (totalItem > 0) {
+            queryBean.setPageIndex(pageUtil.getCurPage());
+            queryBean.setPageSize(pageUtil.getPageSize());
+            // 调用Dao翻页方法
+            return orderCancelDao.queryFrontOrderCancelListWithPage(queryBean);
+        }
+        return null;
+	}
+	/**
+     * {@inheritDoc}
+     */
+	public int queryFrontOrderCancelCount(FrontOrderCancelQuery queryBean) {
+		return orderCancelDao.queryFrontOrderCancelCount(queryBean);
 	}
 }

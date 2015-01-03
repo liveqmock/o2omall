@@ -3,6 +3,7 @@ package com.awe.order.service;
 import java.util.List;
 
 import com.awe.order.domain.Orders;
+import com.awe.order.domain.query.FrontOrdersQuery;
 import com.awe.order.domain.query.OrdersQuery;
 import com.hbird.common.utils.page.PageUtil;
 
@@ -93,4 +94,11 @@ public interface OrdersService {
      * @return
      */
 	public Orders getOrdersByOrderNO(String orderNo);
+	/**
+	 * 前端商城-我的订单-根据查询Bean获取集合，带翻页
+	 * @param queryBean
+	 * @param pageUtil
+	 * @return
+	 */
+	public List<Orders> queryFrontOrdersListWithPage(FrontOrdersQuery queryBean,PageUtil pageUtil);
 }

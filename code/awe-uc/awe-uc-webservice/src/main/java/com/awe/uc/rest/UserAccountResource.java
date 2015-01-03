@@ -1,5 +1,6 @@
 package com.awe.uc.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -16,20 +17,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import com.hbird.common.utils.security.MD5Util;
+import com.hbird.common.utils.wrap.WrapMapper;
+import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.uc.domain.UserAccount;
 import com.awe.uc.domain.query.UserAccountQuery;
-import com.awe.uc.sdk.api.request.PasswordModifyRequest;
 import com.awe.uc.sdk.api.request.UserAccountRequest;
-import com.awe.uc.sdk.api.request.dto.PasswordModifyRequestDto;
 import com.awe.uc.sdk.api.request.dto.UserAccountRequestDto;
-import com.awe.uc.sdk.api.response.PasswordModifyResponse;
 import com.awe.uc.sdk.api.response.UserAccountResponse;
 import com.awe.uc.sdk.api.response.dto.UserAccountResponseDto;
 import com.awe.uc.service.UserAccountService;
 import com.awe.uc.utils.exceptions.ExistedException;
-import com.hbird.common.utils.security.MD5Util;
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 用户账号REST服务：提供有关用户账号的接口
@@ -114,7 +112,7 @@ public class UserAccountResource {
             if (result) {
                 return WrapMapper.ok();
             } else {
-                logger.warn("用户注册失败，未知错误， username=" + requestDto.getUsername());
+                logger.warn("用户注册 失败，未知错误， username=" + requestDto.getUsername());
                 return WrapMapper.wrap(UserAccountResponse.REGISTER_ERROR_CODE,
                         UserAccountResponse.REGISTER_ERROR_MESSAGE);
             }
@@ -163,7 +161,7 @@ public class UserAccountResource {
                 UserAccountResponseDto responseDto = convert(userAccount);
                 return WrapMapper.ok().result(responseDto);
             } else {
-                logger.warn("用户登录失败， username=" + requestDto.getUsername());
+                logger.warn("用户登录 失败， username=" + requestDto.getUsername());
                 return WrapMapper.wrap(UserAccountResponse.LOGIN_FAIL_CODE, UserAccountResponse.LOGIN_FAIL_MESSAGE);
             }
         } catch (Exception e) {
@@ -171,121 +169,41 @@ public class UserAccountResource {
             return WrapMapper.error();
         }
     }
-
-    /**
-     * 用户修改密码
-     * 
-     * @param request
-     * @return
-     */
     @POST
-    @Path("/userAccount/modifyPassword")
-    public Wrapper<?> modifyPassword(PasswordModifyRequest request) {
-        if (null == request || !request.checkSign()) {
-            this.logger.error("modifyPassword 拒绝访问");
+    @Path("/userAccount/modifyPwd")
+    public Wrapper<?> modifyPwd(UserAccountRequest request){
+    	if (null == request || !request.checkSign()) {
+            this.logger.error("modifyPwd 拒绝访问");
             return WrapMapper.forbidden();
         }
 
-        PasswordModifyRequestDto requestDto = request.getContent();
+        UserAccountRequestDto requestDto = request.getContent();
         if (null == requestDto || StringUtils.isBlank(requestDto.getUsername())
-                || StringUtils.isBlank(requestDto.getOldPassword()) || StringUtils.isBlank(requestDto.getNewPassword())
-                || StringUtils.isBlank(requestDto.getMobile())) {
-            this.logger.error("modifyPassword 传入参数有误");
+                || StringUtils.isBlank(requestDto.getPassword())) {
+            this.logger.error("modifyPwd 传入参数有误");
             return WrapMapper.illegalArgument();
         }
-
+        
         try {
-            UserAccountQuery queryBean = new UserAccountQuery();
-            queryBean.setUsername(requestDto.getUsername());
-
-            UserAccount userAccount = null;
-            List<UserAccount> list = userAccountService.queryUserAccountList(queryBean);
-            if (!CollectionUtils.isEmpty(list)) {
-                userAccount = list.get(0);
-            }
-
-            if (null == userAccount) {
-                logger.warn("modifyPassword 用户账号不存在， usernasme=" + requestDto.getUsername());
-                return WrapMapper.wrap(PasswordModifyResponse.ACCOUNT_ERROR_CODE,
-                        PasswordModifyResponse.ACCOUNT_ERROR_MESSAGE);
-            } else if (!MD5Util.md5Hex(requestDto.getOldPassword()).equals(userAccount.getPassword())) {
-                logger.warn("modifyPassword 原始密码错误， usernasme=" + requestDto.getUsername());
-                return WrapMapper.wrap(PasswordModifyResponse.MODIFY_FAIL_CODE,
-                        PasswordModifyResponse.MODIFY_FAIL_MESSAGE);
-            }
-
-            UserAccount account = new UserAccount();
-            account.setId(userAccount.getId());
-            account.setPassword(MD5Util.md5Hex(requestDto.getNewPassword()));
-            account.setUpdateUser(requestDto.getUsername());
-            if (userAccountService.update(account)) {
-                logger.info("用户修改密码成功， username=" + requestDto.getUsername());
+        	UserAccount account = new UserAccount();
+        	account.setId(requestDto.getId());
+        	account.setUsername(requestDto.getUsername());
+        	account.setPassword(MD5Util.md5Hex(requestDto.getPassword()));
+            boolean ret = userAccountService.update(account);
+            if (ret) {
                 return WrapMapper.ok();
             } else {
-                logger.warn("用户修改密码失败， username=" + requestDto.getUsername());
-                return WrapMapper.error();
+                logger.warn("修改登录密码，未知错误， username=" + requestDto.getUsername());
+                return WrapMapper.wrap(UserAccountResponse.ERROR_CODE,UserAccountResponse.ERROR_MESSAGE);
             }
-        } catch (Exception e) {
-            logger.error("修改登录密码异常， username=" + requestDto.getUsername(),e);
-            return WrapMapper.error();
-        }
+		} catch (Exception e) {
+			logger.error("修改登录密码失败，未知错误， username=" + requestDto.getUsername());
+			return WrapMapper.error();
+		}
+        
     }
-
-    /**
-     * 用户重置密码
-     * 
-     * @param request
-     * @return
-     */
-    @POST
-    @Path("/userAccount/resetPassword")
-    public Wrapper<?> resetPassword(PasswordModifyRequest request) {
-        if (null == request || !request.checkSign()) {
-            this.logger.error("resetPassword 拒绝访问");
-            return WrapMapper.forbidden();
-        }
-
-        PasswordModifyRequestDto requestDto = request.getContent();
-        if (null == requestDto || StringUtils.isBlank(requestDto.getUsername())
-                || StringUtils.isBlank(requestDto.getOldPassword()) || StringUtils.isBlank(requestDto.getNewPassword())
-                || StringUtils.isBlank(requestDto.getMobile())) {
-            this.logger.error("resetPassword 传入参数有误");
-            return WrapMapper.illegalArgument();
-        }
-
-        try {
-            UserAccountQuery queryBean = new UserAccountQuery();
-            queryBean.setUsername(requestDto.getUsername());
-
-            UserAccount userAccount = null;
-            List<UserAccount> list = userAccountService.queryUserAccountList(queryBean);
-            if (!CollectionUtils.isEmpty(list)) {
-                userAccount = list.get(0);
-            }
-
-            if (null == userAccount) {
-                logger.warn("resetPassword 用户账号不存在， usernasme=" + requestDto.getUsername());
-                return WrapMapper.wrap(PasswordModifyResponse.ACCOUNT_ERROR_CODE,
-                        PasswordModifyResponse.ACCOUNT_ERROR_MESSAGE);
-            }
-
-            UserAccount account = new UserAccount();
-            account.setId(userAccount.getId());
-            account.setPassword(MD5Util.md5Hex(requestDto.getNewPassword()));
-            account.setUpdateUser(requestDto.getUsername());
-            if (userAccountService.update(account)) {
-                logger.info("用户重置密码成功， username=" + requestDto.getUsername());
-                return WrapMapper.ok();
-            } else {
-                logger.warn("用户重置密码失败， username=" + requestDto.getUsername());
-                return WrapMapper.error();
-            }
-        } catch (Exception e) {
-            logger.error("用户重置密码异常， username=" + requestDto.getUsername(),e);
-            return WrapMapper.error();
-        }
-    }
-
+    
+    
     // 数据转换
     private UserAccountResponseDto convert(UserAccount userAccount) {
         if (null == userAccount) {
@@ -295,6 +213,19 @@ public class UserAccountResource {
         UserAccountResponseDto userAccountResponseDto = new UserAccountResponseDto();
         BeanUtils.copyProperties(userAccount, userAccountResponseDto);
         return userAccountResponseDto;
+    }
+
+    // 数据转换
+    private List<UserAccountResponseDto> convertList(List<UserAccount> userAccounts) {
+        if (CollectionUtils.isEmpty(userAccounts)) {
+            return null;
+        }
+
+        List<UserAccountResponseDto> list = new ArrayList<UserAccountResponseDto>(userAccounts.size());
+        for (UserAccount userAccount : userAccounts) {
+            list.add(convert(userAccount));
+        }
+        return list;
     }
 
 }

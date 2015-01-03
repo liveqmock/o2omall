@@ -8,9 +8,7 @@ import com.hbird.common.client.AbstractSecureClient;
 import com.hbird.common.utils.serialize.JsonHelper;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
-import com.awe.uc.sdk.request.PasswordModifyRequest;
 import com.awe.uc.sdk.request.UserAccountRequest;
-import com.awe.uc.sdk.request.dto.PasswordModifyRequestDto;
 import com.awe.uc.sdk.request.dto.UserAccountRequestDto;
 import com.awe.uc.sdk.response.UserAccountResponse;
 import com.awe.uc.sdk.response.dto.UserAccountResponseDto;
@@ -118,56 +116,22 @@ public class UserAccountClient extends AbstractSecureClient {
         }
         return super.getResult(response);
     }
-
-    /**
-     * 用户修改密码
-     * 
-     * @param requestDto
-     * @return
-     */
-    public Wrapper<?> modifyPassword(PasswordModifyRequestDto requestDto) {
-        Assert.notNull(requestDto);
-        PasswordModifyRequest request = new PasswordModifyRequest(super.getKey(), requestDto);
+    
+    
+    public Wrapper<?> modifyPwd(UserAccountRequestDto requestDto){
+    	Assert.notNull(requestDto);
+        UserAccountRequest request = new UserAccountRequest(super.getKey(), requestDto);
 
         if (LOG.isDebugEnabled()) {
-            LOG.debug("modifyPassword request: " + JsonHelper.toJson(request));
+            LOG.debug("register request: " + JsonHelper.toJson(request));
         }
 
-        String url = super.getServiceUrlDomain() + "services/userAccount/modifyPassword";
+        String url = super.getServiceUrlDomain() + "services/userAccount/modifyPwd";
         UserAccountResponse response = super.getRestTemplate().postForObject(url, request, UserAccountResponse.class);
 
         if (LOG.isDebugEnabled()) {
-            LOG.debug("modifyPassword url: " + url);
-            LOG.debug("modifyPassword response: " + JsonHelper.toJson(response));
-        }
-
-        if (null != response) {
-            return WrapMapper.wrap(response.getCode(), response.getMessage());
-        } else {
-            return WrapMapper.error();
-        }
-    }
-
-    /**
-     * 用户重置密码
-     * 
-     * @param requestDto
-     * @return
-     */
-    public Wrapper<?> resetPassword(PasswordModifyRequestDto requestDto) {
-        Assert.notNull(requestDto);
-        PasswordModifyRequest request = new PasswordModifyRequest(super.getKey(), requestDto);
-
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("resetPassword request: " + JsonHelper.toJson(request));
-        }
-
-        String url = super.getServiceUrlDomain() + "services/userAccount/resetPassword";
-        UserAccountResponse response = super.getRestTemplate().postForObject(url, request, UserAccountResponse.class);
-
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("resetPassword url: " + url);
-            LOG.debug("resetPassword response: " + JsonHelper.toJson(response));
+            LOG.debug("register url: " + url);
+            LOG.debug("register response: " + JsonHelper.toJson(response));
         }
 
         if (null != response) {

@@ -42,7 +42,7 @@
    	});
         
     function refreshCheckCode() {    
-        var append = '#springUrl('')/checkCode/createImage?clearCache=' + new Date().getTime() + 'a' + Math.random();    
+        var append = '#springUrl('')/checkCode/create?clearCache=' + new Date().getTime() + 'a' + Math.random();    
         $('#imageCode').attr('src', append);    
     } 
 </script>
@@ -73,7 +73,7 @@
     				   </li>
                        <li>
     						<input type="text" class="login_code left" id="checkCode" name="checkCode" placeholder="请输入验证码" />
-    						<img id="imageCode" src="#springUrl('')/checkCode/createImage" class="lp_img left" title="看不清，点击换一张" style="cursor: pointer;" />
+    						<img id="imageCode" src="#springUrl('')/checkCode/create" class="lp_img left" title="看不清，点击换一张" style="cursor: pointer;" />
     				   </li>
     				   <li class="reds">
     						温馨提示：一个手机只能注册一个会员

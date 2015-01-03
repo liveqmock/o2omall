@@ -4,11 +4,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
+import com.awe.test.uc.rest.Urls;
+import com.hbird.common.client.AbstractClient;
 import com.awe.test.pms.rest.request.ProductDictRequest;
 import com.awe.test.pms.rest.request.dto.ProductDictRequestDto;
 import com.awe.test.pms.rest.response.ProductDictResponse;
 import com.awe.test.pms.rest.response.dto.ProductDictResponseDto;
-import com.hbird.common.client.AbstractClient;
 
 /**
  * ProductDictResource单元测试

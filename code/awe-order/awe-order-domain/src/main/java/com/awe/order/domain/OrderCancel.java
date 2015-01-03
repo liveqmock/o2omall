@@ -1,6 +1,7 @@
 package com.awe.order.domain;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * OrderCancel：订单取消实体类
@@ -52,7 +53,8 @@ public class OrderCancel implements java.io.Serializable {
     private Date updateTime; 
     /** 1:有效;0:无效 */
     private Integer yn; 
-    
+    /**订单取消明细表集合*/
+    private List<OrdersItems> ordersItemsList;
     /**支付方式 1:货到付款;2:在线支付;3:公司转账;4:邮局汇款 */
     private Integer payWay;
     /**用户ID*/
@@ -403,6 +405,20 @@ public class OrderCancel implements java.io.Serializable {
     public void setYn(Integer yn) {
         this.yn = yn;
     }
+    /**
+     * get 订单取消明细表集合
+     * @return
+     */
+	public List<OrdersItems> getOrdersItemsList() {
+		return ordersItemsList;
+	}
+	/**
+	 * set 订单取消明细表集合
+	 * @param ordersItemsList
+	 */
+	public void setOrdersItemsList(List<OrdersItems> ordersItemsList) {
+		this.ordersItemsList = ordersItemsList;
+	}
     
     /**
      * get 销售商

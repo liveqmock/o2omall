@@ -13,10 +13,6 @@
 		<result column="consignee_phone" property="consigneePhone" jdbcType="VARCHAR" />
 		<result column="telephone" property="telephone" jdbcType="VARCHAR" />
 		<result column="emil" property="emil" jdbcType="VARCHAR" />
-		
-		<result column="seller" property="seller" jdbcType="VARCHAR" />
-		<result column="seller_no" property="sellerNo" jdbcType="VARCHAR" />
-		
 		<result column="zip_code" property="zipCode" jdbcType="VARCHAR" />
 		<result column="pay_name" property="payName" jdbcType="VARCHAR" />
 		<result column="order_date" property="orderDate" jdbcType="DECIMAL" />
@@ -50,12 +46,32 @@
 		<result column="yn" property="yn" jdbcType="DECIMAL" />
     </resultMap>
     
+    <resultMap id="FrontOrdersMap" type="OrdersDto">
+		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="DECIMAL" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="seller" property="seller" jdbcType="VARCHAR" />
+		<result column="seller_no" property="sellerNo" jdbcType="VARCHAR" />
+		<result column="consignee_name" property="consigneeName" jdbcType="VARCHAR" />
+		<result column="pay_type" property="payType" jdbcType="DECIMAL" />
+		<result column="order_status" property="orderStatus" jdbcType="DECIMAL" />
+		<result column="amount_pay" property="amountPay" jdbcType="DECIMAL" />
+		<result column="parent_order_no" property="parentOrderNo" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="sku_no" property="skuNo" jdbcType="VARCHAR" />
+		<result column="product_no" property="productNo" jdbcType="VARCHAR" />
+		<result column="count" property="count" jdbcType="DECIMAL" />
+		<result column="sku_name" property="skuName" jdbcType="VARCHAR" />
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    
     <sql id="ordersColumns">
-    	id,order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,seller,seller_no,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,Integral,remark,create_time,update_time,create_user,update_user,yn
+    	id,order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,Integral,remark,create_time,update_time,create_user,update_user,yn
     </sql>
     
      <sql id="ordersUsedColumns">
-    	order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,seller,seller_no,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,Integral,remark,create_time,update_time,create_user,update_user,yn
+    	order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,Integral,remark,create_time,update_time,create_user,update_user,yn
     </sql>
 
 	<!-- 审核时修改订单状态  -->
@@ -81,7 +97,7 @@
     <!-- 创建信息 -->
     <insert id="insert" parameterType="Orders" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO orders(<include refid="ordersUsedColumns"/>) 
-        VALUES (#{orderNo},#{orderType},#{userId},#{userName},#{orderName},#{consigneeName},#{consigneePhone},#{telephone},#{emil},#{seller},#{seller_no},#{zipCode},#{payName},#{orderDate},#{isTalSure},#{payWay},#{payType},#{isInvoice},#{invoiceType},#{invoiceTitle},#{invoiceContent},#{orderStatus},#{commAmount},#{retCash},#{expenses},#{amountPay},#{parentOrderNo},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{payTime},#{integral},#{remark},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+        VALUES (#{orderNo},#{orderType},#{userId},#{userName},#{orderName},#{consigneeName},#{consigneePhone},#{telephone},#{emil},#{zipCode},#{payName},#{orderDate},#{isTalSure},#{payWay},#{payType},#{isInvoice},#{invoiceType},#{invoiceTitle},#{invoiceContent},#{orderStatus},#{commAmount},#{retCash},#{expenses},#{amountPay},#{parentOrderNo},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{payTime},#{integral},#{remark},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -114,12 +130,6 @@
 		        </if>
 		        <if test="emil != null and emil != ''">
                 	emil = #{emil,jdbcType=VARCHAR},
-		        </if>
-		        <if test="seller != null and seller != ''">
-                	seller = #{seller,jdbcType=VARCHAR},
-		        </if>
-		        <if test="sellerNo != null and sellerNo != ''">
-                	seller_no = #{sellerNo,jdbcType=VARCHAR},
 		        </if>
 		        <if test="zipCode != null and zipCode != ''">
                 	zip_code = #{zipCode,jdbcType=VARCHAR},
@@ -239,7 +249,23 @@
         order by create_time desc 
         limit #{startIndex},#{pageSize}
     </select>
-
+	<!-- 前端网站-我的订单列表-根据查询Bean获取数据集合，翻页 -->
+	<select id="queryFrontOrdersListWithPage" resultMap="FrontOrdersMap" parameterType="com.awe.order.domain.query.FrontOrdersQuery">
+		SELECT o.order_no as order_no,o.consignee_name as consignee_name,o.pay_type as pay_type,o.amount_pay as amount_pay,o.user_id as user_id,o.create_time as create_time,o.order_status as order_status,
+		oi.sku_no as sku_no,oi.product_no as product_no,oi.count as count,oi.sku_name as sku_name,oi.img_url as img_url FROM orders o
+		JOIN orders_items oi
+		ON o.order_no=oi.order_no
+		WHERE <include refid="queryFrontOrdersListWhere"/>
+		ORDER BY o.create_time DESC
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+	<!-- 前端网站-我的订单列表-根据查询Bean获取集合总数 -->
+    <select id="queryFrontOrdersCount" resultType="java.lang.Integer" parameterType="com.awe.order.domain.query.FrontOrdersQuery">
+        SELECT count(1) FROM orders o
+		JOIN orders_items oi
+		ON o.order_no=oi.order_no
+        WHERE <include refid="queryFrontOrdersListWhere"/>
+    </select>
     <!-- 根据查询Bean查询-判断是否存在 -->
     <select id="exist" resultType="java.lang.Integer" parameterType="Orders">
         select count(1) from orders where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
@@ -255,8 +281,37 @@
     <update id="delete" parameterType="Orders">
 		update orders 
 		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
-		where id = #{id}
+		where order_no = #{orderNo}
     </update>
+
+	<!-- 前端我的订单查询Where条件 -->
+    <sql id="queryFrontOrdersListWhere">
+    	o.yn = 1 and oi.yn = 1 
+        <if test="orderNo != null and orderNo != ''">
+        	and o.order_no = #{orderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="userId != null and userId != ''">
+        	and o.user_id = #{userId,jdbcType=DECIMAL}
+        </if>
+        <if test="consigneeName != null and consigneeName != ''">
+        	and o.consignee_name = #{consigneeName,jdbcType=VARCHAR}
+        </if>
+        <if test="orderStatus != null and orderStatus != ''">
+        	and o.order_status = #{orderStatus,jdbcType=DECIMAL}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and DATE_FORMAT(o.create_time,'%Y-%m-%d') &gt;= #{createTimeStart,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and DATE_FORMAT(o.create_time,'%Y-%m-%d') &lt;= #{createTimeEnd,jdbcType=TIMESTAMP}
+        </if>
+        <if test="skuNo != null and skuNo != ''">
+        	and oi.sku_no = #{skuNo,jdbcType=VARCHAR}
+        </if>
+        <if test="skuName != null and skuName != ''">
+        	and oi.sku_name = #{skuName,jdbcType=VARCHAR}
+        </if>
+    </sql>
 
     <!-- 常用的查询Where条件 -->
     <sql id="queryOrdersListWhere">
@@ -291,12 +346,6 @@
         <if test="emil != null and emil != ''">
         	and emil = #{emil,jdbcType=VARCHAR}
         </if>
-        <if test="seller != null and seller != ''">
-            and seller = #{seller,jdbcType=VARCHAR},
-		</if>
-		<if test="sellerNo != null and sellerNo != ''">
-            and seller_no = #{sellerNo,jdbcType=VARCHAR},
-		</if>
         <if test="zipCode != null and zipCode != ''">
         	and zip_code = #{zipCode,jdbcType=VARCHAR}
         </if>

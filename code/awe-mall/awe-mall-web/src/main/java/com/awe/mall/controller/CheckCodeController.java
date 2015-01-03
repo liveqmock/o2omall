@@ -1,9 +1,9 @@
 package com.awe.mall.controller;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.mall.service.CheckCodeService;
-import com.awe.mall.utils.CodeUtil;
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 验证码 控制器
@@ -37,8 +34,8 @@ public class CheckCodeController {
      * @param response
      * @throws IOException
      */
-    @RequestMapping("/createImage")
-    public void createImage(HttpSession session, HttpServletResponse response) throws IOException {
+    @RequestMapping("/create")
+    public void create(HttpSession session, HttpServletResponse response) throws IOException {
         // 禁止缓存
         response.setHeader("Pragma", "No-cache");
         response.setHeader("Cache-Control", "No-cache");
@@ -46,27 +43,34 @@ public class CheckCodeController {
         // 指定生成的响应是图片
         response.setContentType("image/jpeg");
 
-        String code = checkCodeService.generateRandomMixedCode(CodeUtil.PICTURE_CODE_LENGTH);
+        // String code = checkCodeService.generateRandomNumberCode();
+        String code = checkCodeService.generateRandomMixedCode();
         // 将生成的验证码保存到Session中
-        session.setAttribute(CodeUtil.KEY_CHECK_CODE, code);
-        BufferedImage image = checkCodeService.getImage(code, CodeUtil.PICTURE_WIDTH, CodeUtil.PICTURE_HEIGHT);
-        ImageIO.write(image, "JPEG", response.getOutputStream());
+        session.setAttribute("checkCode", code);
+        ImageIO.write(checkCodeService.getImage(code), "JPEG", response.getOutputStream());
     }
 
     /**
-     * 生成短信校验码
+     * 验证校验码
      * 
-     * @param session
-     * @return
+     * @param checkcode
+     * @param request
+     * @return 校验码正确返回true
      */
-    @RequestMapping("/createSms")
     @ResponseBody
-    public Wrapper<?> createSms(HttpSession session) {
-
-        String code = checkCodeService.generateRandomNumberCode(CodeUtil.SMS_CODE_LENGTH);
-        // 将生成的验证码保存到Session中
-        session.setAttribute(CodeUtil.KEY_SMS_CODE, code);
-        return WrapMapper.ok();
+    @RequestMapping("/validate")
+    public boolean validate(String checkcode, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            return false;
+        }
+        String code = (String) session.getAttribute("checkCode");
+        session.removeAttribute("checkCode");
+        if (checkcode != null && checkcode.length() > 0 && checkcode.toUpperCase().equals(code)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

@@ -10,12 +10,6 @@
 		<result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
 		<result column="cancel_reason" property="cancelReason" jdbcType="VARCHAR" />
 		<result column="cancel_type" property="cancelType" jdbcType="DECIMAL" />
-		
-		<result column="user_id" property="userId" jdbcType="DECIMAL" />
-		<result column="pay_way" property="payWay" jdbcType="DECIMAL" />
-		<result column="seller" property="seller" jdbcType="VARCHAR" />
-		<result column="seller_no" property="sellerNo" jdbcType="VARCHAR" />
-		
 		<result column="current_audit_name" property="currentAuditName" jdbcType="VARCHAR" />
 		<result column="current_audit_no" property="currentAuditNo" jdbcType="VARCHAR" />
 		<result column="is_auditing" property="isAuditing" jdbcType="DECIMAL" />
@@ -30,18 +24,37 @@
 		<result column="yn" property="yn" jdbcType="DECIMAL" />
     </resultMap>
     
+    <resultMap id="FrontOrderCancelMap" type="OrderCancelDto">
+		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="DECIMAL" />
+		<result column="seller" property="seller" jdbcType="VARCHAR" />
+		<result column="seller_no" property="sellerNo" jdbcType="VARCHAR" />
+		<result column="pay_type" property="payType" jdbcType="DECIMAL" />
+		<result column="pay_way" property="payWay" jdbcType="DECIMAL" />
+		<result column="refund" property="refund" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="DECIMAL" />
+		<result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="sku_no" property="skuNo" jdbcType="VARCHAR" />
+		<result column="product_no" property="productNo" jdbcType="VARCHAR" />
+		<result column="count" property="count" jdbcType="DECIMAL" />
+		<result column="sku_name" property="skuName" jdbcType="VARCHAR" />
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    
     <sql id="orderCancelColumns">
-    	id,refund,status,order_no,refund_amount,cancel_reason,cancel_type,user_id,pay_way,seller,seller_no,current_audit_name,current_audit_no,is_auditing,auditing_time,finish_time,remark,is_refund,create_user,update_user,create_time,update_time,yn
+    	id,refund,status,order_no,refund_amount,cancel_reason,cancel_type,current_audit_name,current_audit_no,is_auditing,auditing_time,finish_time,remark,is_refund,create_user,update_user,create_time,update_time,yn
     </sql>
     
      <sql id="orderCancelUsedColumns">
-    	refund,status,order_no,refund_amount,cancel_reason,cancel_type,user_id,pay_way,seller,seller_no,current_audit_name,current_audit_no,is_auditing,auditing_time,finish_time,remark,is_refund,create_user,update_user,create_time,update_time,yn
+    	refund,status,order_no,refund_amount,cancel_reason,cancel_type,current_audit_name,current_audit_no,is_auditing,auditing_time,finish_time,remark,is_refund,create_user,update_user,create_time,update_time,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="OrderCancel" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO order_cancel(<include refid="orderCancelUsedColumns"/>) 
-        VALUES (#{refund},#{status},#{orderNo},#{refundAmount},#{cancelReason},#{cancelType},#{userId},#{payWay},#{seller},#{sellerNo},#{currentAuditName},#{currentAuditNo},#{isAuditing},#{auditingTime},#{finishTime},#{remark},#{isRefund},#{createUser},#{updateUser},#{createTime},#{updateTime},#{yn})
+        VALUES (#{refund},#{status},#{orderNo},#{refundAmount},#{cancelReason},#{cancelType},#{currentAuditName},#{currentAuditNo},#{isAuditing},#{auditingTime},#{finishTime},#{remark},#{isRefund},#{createUser},#{updateUser},#{createTime},#{updateTime},#{yn})
 	</insert>
 	
 	<!-- 批量修改  -->
@@ -88,18 +101,6 @@
 		        <if test="cancelType != null and cancelType != ''">
                 	cancel_type = #{cancelType,jdbcType=DECIMAL},
 		        </if>
-		        <if test="userId != null and userId != ''">
-                	user_id = #{userId,jdbcType=DECIMAL},
-		        </if>
-		        <if test="payWay != null and payWay != ''">
-                	pay_way = #{payWay,jdbcType=DECIMAL},
-		        </if>
-		        <if test="seller != null and seller != ''">
-                	seller = #{seller,jdbcType=VARCHAR},
-		        </if>
-		        <if test="sellerNo != null and sellerNo != ''">
-                	seller_no = #{sellerNo,jdbcType=VARCHAR},
-		        </if>
 		        <if test="currentAuditName != null and currentAuditName != ''">
                 	current_audit_name = #{currentAuditName,jdbcType=VARCHAR},
 		        </if>
@@ -138,7 +139,13 @@
             where id = #{_parameter} and yn = 1
         </if>
     </select>
-
+	<!-- 根据订单号获取对象信息 -->
+    <select id="getOrderCancelByOrderNo" resultMap="OrderCancelMap" parameterType="java.lang.String">
+        <if test="_parameter != null">
+            select <include refid="orderCancelColumns"/> from order_cancel
+            where order_no = #{_parameter} and yn = 1
+        </if>
+    </select>
     <!-- 根据查询Bean获取数据集合，不带翻页 -->
     <select id="queryOrderCancelList" resultMap="OrderCancelMap"
             parameterType="com.awe.order.domain.query.OrderCancelQuery">
@@ -152,6 +159,26 @@
         order by create_time desc 
         limit #{startIndex},#{pageSize}
     </select>
+
+	<!-- 前端网站-取消订单列表-根据查询Bean获取数据集合，翻页 -->
+	<select id="queryFrontOrderCancelListWithPage" resultMap="FrontOrdersMap" parameterType="com.awe.order.domain.query.FrontOrderCancelQuery">
+		SELECT oc.order_no as order_no,oc.user_id as user_id,oc.seller as seller,oc.seller_no as seller_no,oc.pay_type as pay_type,oc.pay_way as pay_way,oc.refund as refund,oc.status as status,oc.refund_amount as refund_amount,oc.create_time as create_time,
+		oi.sku_no as sku_no,oi.product_no as product_no,oi.count as count,oi.sku_name as sku_name,oi.img_url as img_url 
+		FROM order_cancel oc
+		JOIN orders_items oi
+		ON oc.order_no=oi.order_no
+		WHERE <include refid="queryFrontOrderCancelListWhere"/>
+		ORDER BY oc.create_time DESC
+		LIMIT #{startIndex},#{pageSize}
+	</select>
+	<!-- 前端网站-取消订单列表-根据查询Bean获取集合总数 -->
+    <select id="queryFrontOrderCancelCount" resultType="java.lang.Integer" parameterType="com.awe.order.domain.query.FrontOrderCancelQuery">
+        SELECT count(1) FROM order_cancel oc
+		JOIN orders_items oi
+		ON oc.order_no=oi.order_no
+        WHERE <include refid="queryFrontOrderCancelListWhere"/>
+    </select>
+
 
     <!-- 根据查询Bean查询-判断是否存在 -->
     <select id="exist" resultType="java.lang.Integer" parameterType="OrderCancel">
@@ -170,6 +197,24 @@
 		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
 		where id = #{id}
     </update>
+
+
+	<!-- 前端取消订单查询Where条件 -->
+    <sql id="queryFrontOrderCancelListWhere">
+    	oc.yn = 1 and oi.yn = 1 
+        <if test="orderNo != null and orderNo != ''">
+        	and o.order_no = #{orderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="userId != null and userId != ''">
+        	and oc.user_id = #{userId,jdbcType=DECIMAL}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and DATE_FORMAT(oc.create_time,'%Y-%m-%d') &gt;= #{createTimeStart,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and DATE_FORMAT(oc.create_time,'%Y-%m-%d') &lt;= #{createTimeEnd,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
 
     <!-- 常用的查询Where条件 -->
     <sql id="queryOrderCancelListWhere">
@@ -194,18 +239,6 @@
         </if>
         <if test="cancelType != null and cancelType != ''">
         	and cancel_type = #{cancelType,jdbcType=DECIMAL}
-        </if>
-        <if test="userId != null and userId != ''">
-             and user_id = #{userId,jdbcType=DECIMAL},
-        </if>
-        <if test="payWay != null and payWay != ''">
-             and pay_way = #{payWay,jdbcType=DECIMAL},
-        </if>
-        <if test="seller != null and seller != ''">
-             and seller = #{seller,jdbcType=VARCHAR},
-        </if>
-        <if test="sellerNo != null and sellerNo != ''">
-             and seller_no = #{sellerNo,jdbcType=VARCHAR},
         </if>
         <if test="currentAuditName != null and currentAuditName != ''">
         	and current_audit_name = #{currentAuditName,jdbcType=VARCHAR}

@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.awe.order.domain.Orders;
+import com.awe.order.domain.query.FrontOrdersQuery;
 import com.awe.order.domain.query.OrdersQuery;
+import com.awe.order.dto.OrdersDto;
 /**
  * OrdersDao接口<br/>
  * 对'订单'表进行基本的操作
@@ -97,4 +99,16 @@ public interface OrdersDao {
 	 */
 	public boolean orderAudit(Map map);
 
+	/**
+	 * 前端商城-我的订单-根据查询Bean获取集合，带翻页
+	 * @param queryBean
+	 * @return
+	 */
+	public List<OrdersDto> queryFrontOrdersListWithPage(FrontOrdersQuery queryBean);
+	/**
+	 * 前端商城-我的订单-根据查询Bean获取总数
+	 * @param queryBean
+	 * @return
+	 */
+	public int queryFrontOrdersCount(FrontOrdersQuery queryBean);
 }

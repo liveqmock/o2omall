@@ -3,6 +3,7 @@ package com.awe.order.service;
 import java.util.List;
 
 import com.awe.order.domain.OrderCancel;
+import com.awe.order.domain.query.FrontOrderCancelQuery;
 import com.awe.order.domain.query.OrderCancelQuery;
 import com.hbird.common.utils.page.PageUtil;
 
@@ -91,4 +92,12 @@ public interface OrderCancelService {
      * @return
      */
 	public boolean Cancelupdate(OrderCancel orderCancel);
+    /**
+     * 商城-根据查询Bean获取对象集合，带翻页
+     * 
+     * @param queryBean
+     * @param pageUtil
+     * @return
+     */
+    public List<OrderCancel> queryOrderCancelListWithPage(FrontOrderCancelQuery queryBean,PageUtil pageUtil);
 }

@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.awe.order.domain.OrderCancel;
+import com.awe.order.domain.query.FrontOrderCancelQuery;
 import com.awe.order.domain.query.OrderCancelQuery;
+import com.awe.order.dto.OrderCancelDto;
 import com.hbird.common.utils.page.PageUtil;
 /**
  * OrderCancelManager接口
@@ -108,4 +110,17 @@ public interface OrderCancelManager {
      * @return
      */
 	public boolean Cancelupdate(Map map);
+	/**
+	 * 商城-取消订单列表，带翻页
+	 * @param queryBean
+	 * @param pageUtil
+	 * @return
+	 */
+	public List<OrderCancelDto> queryFrontOrderCancelListWithPage(FrontOrderCancelQuery queryBean,PageUtil pageUtil);
+	/**
+	 * 商城-根据查询Bean获取总数
+	 * @param queryBean
+	 * @return
+	 */
+	public int queryFrontOrderCancelCount(FrontOrderCancelQuery queryBean);
 }
