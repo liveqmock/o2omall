@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.awe.order.domain.OrderCancel;
+import com.awe.order.domain.query.FrontOrderCancelQuery;
 import com.awe.order.domain.query.OrderCancelQuery;
+import com.awe.order.dto.OrderCancelDto;
 /**
  * OrderCancelDao接口<br/>
  * 对'订单取消'表进行基本的操作
@@ -71,7 +73,12 @@ public interface OrderCancelDao {
      * @return
      */
     public OrderCancel getOrderCancelById(Long id);
-
+    /**
+     *  根据订单号获取对象
+     * @param orderNo
+     * @return
+     */
+    public OrderCancel getOrderCancelByOrderNo(String orderNo);
     /**
      * 判断是否存在
      * 
@@ -86,5 +93,16 @@ public interface OrderCancelDao {
      * @return
      */
 	public boolean Cancelupdate(Map map);
-
+	/**
+	 * 商城-取消订单列表，带翻页
+	 * @param queryBean
+	 * @return
+	 */
+	public List<OrderCancelDto> queryFrontOrderCancelListWithPage(FrontOrderCancelQuery queryBean);
+	/**
+	 * 商城-根据查询Bean获取总数
+	 * @param queryBean
+	 * @return
+	 */
+	public int queryFrontOrderCancelCount(FrontOrderCancelQuery queryBean);
 }
