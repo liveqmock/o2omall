@@ -55,8 +55,7 @@ public interface RefundService {
      * @param pageUtil
      * @return
      */
-    public List<Refund> queryRefundListWithPage(RefundQuery queryBean,
-            PageUtil pageUtil);
+    public List<Refund> queryRefundListWithPage(RefundQuery queryBean,PageUtil pageUtil);
 
     /**
      * 根据主键删除对象信息，该处做的是逻辑删除

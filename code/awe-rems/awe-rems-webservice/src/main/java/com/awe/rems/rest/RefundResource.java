@@ -16,9 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.rems.domain.Refund;
+import com.awe.rems.domain.query.RefundQuery;
 import com.awe.rems.sdk.api.request.RefundRequest;
 import com.awe.rems.sdk.api.request.dto.RefundRequestDto;
 import com.awe.rems.sdk.api.response.dto.RefundResponseDto;
@@ -73,7 +75,40 @@ public class RefundResource {
             return WrapMapper.error();
         }
     } 
+    /**
+     * 查询退款列表
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/refund/queryRefundListWithPage")
+    public Wrapper<?> queryRefundListWithPage(RefundRequest request,PageUtil pageUtil){
+    	if (null == request || !request.checkSign()) {
+            this.logger.error("queryRefundListWithPage 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        RefundRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getId()) {
+            this.logger.error("queryRefundListWithPage 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
 
+        try {
+        	RefundQuery queryBean = new RefundQuery();
+        	queryBean.setOrderNo(requestDto.getOrderNo());
+        	queryBean.setServiceNo(requestDto.getServiceNo());
+        	List<Refund> dataList = refundService.queryRefundListWithPage(queryBean, pageUtil);
+            List<RefundResponseDto> responseDtoList = convertList(dataList);
+            return WrapMapper.ok().result(responseDtoList);
+        } catch (Exception e) {
+            this.logger.error("查询退款表数据异常", e);
+            return WrapMapper.error();
+        }
+    }
+    
+    
+    
     // 数据转换
     private RefundResponseDto convert(Refund refund) {
         if (null == refund) {

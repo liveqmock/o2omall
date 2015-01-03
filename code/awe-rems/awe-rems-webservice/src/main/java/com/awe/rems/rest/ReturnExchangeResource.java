@@ -16,13 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.rems.domain.ReturnExchange;
+import com.awe.rems.domain.query.ReturnExchangeQuery;
 import com.awe.rems.sdk.api.request.ReturnExchangeRequest;
 import com.awe.rems.sdk.api.request.dto.ReturnExchangeRequestDto;
 import com.awe.rems.sdk.api.response.dto.ReturnExchangeResponseDto;
 import com.awe.rems.service.ReturnExchangeService;
+import com.hbird.common.utils.page.PageUtil;
+import com.hbird.common.utils.wrap.WrapMapper;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 退换货REST服务：提供有关退换货的接口
@@ -73,7 +75,65 @@ public class ReturnExchangeResource {
             return WrapMapper.error();
         }
     } 
+    /**
+     * 申请退换货
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/returnExchange/addReturnExchange")
+    public Wrapper<?> addReturnExchange(ReturnExchangeRequest request){
+    	if (null == request || !request.checkSign()) {
+            this.logger.error("addReturnExchange 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        ReturnExchangeRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getId()) {
+            this.logger.error("addReturnExchange 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
 
+        try {
+        	ReturnExchange returnExchange = new ReturnExchange();
+        	BeanUtils.copyProperties(requestDto, returnExchange);
+            boolean ret = returnExchangeService.insert(returnExchange);
+            if(ret){
+            	return WrapMapper.ok();
+            }else{
+            	return WrapMapper.error();
+            }
+        } catch (Exception e) {
+            this.logger.error("申请退换货数据异常", e);
+            return WrapMapper.error();
+        }
+    }
+    @POST
+    @Path("/returnExchange/queryReturnExchangeListWithPage")
+    public Wrapper<?> queryReturnExchangeListWithPage(ReturnExchangeRequest request,PageUtil pageUtil){
+    	if (null == request || !request.checkSign()) {
+            this.logger.error("queryReturnExchangeListWithPage 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        ReturnExchangeRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getId()) {
+            this.logger.error("queryReturnExchangeListWithPage 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+        try {
+        	ReturnExchangeQuery queryBean = new ReturnExchangeQuery();
+        	BeanUtils.copyProperties(requestDto,queryBean);
+        	
+        	List<ReturnExchange> dataList = returnExchangeService.queryReturnExchangeListWithPage(queryBean, pageUtil);
+        	List<ReturnExchangeResponseDto> responseDtoList = convertList(dataList);
+        	return WrapMapper.ok().result(responseDtoList);
+		} catch (Exception e) {
+			this.logger.error("查询退换货数据异常", e);
+            return WrapMapper.error();
+		}
+    }
+    
     // 数据转换
     private ReturnExchangeResponseDto convert(ReturnExchange returnExchange) {
         if (null == returnExchange) {
