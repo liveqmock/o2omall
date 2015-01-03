@@ -40,8 +40,8 @@ public class BusinessInfoResource {
     private final Log logger = LogFactory.getLog(this.getClass());
 
     @Autowired
-    private BusinessInfoService businessInfoService; 
-
+    private BusinessInfoService businessInfoService;
+    
     /**
      * 查询商家信息信息
      * 
@@ -72,6 +72,32 @@ public class BusinessInfoResource {
             this.logger.error("查询商家信息数据异常", e);
             return WrapMapper.error();
         }
+    } 
+    
+    /**
+     * 查询所有商家信息
+     * 
+     * @param request
+     *            商家信息请求参数
+     * @return 商家信息返回对象
+     * 
+     */
+    @POST
+    @Path("/businessInfo/getAllBusinessInfos")
+    public Wrapper<?> getAllBusinessInfos(BusinessInfoRequest request) {
+    	if (null == request || !request.checkSign()) {
+    		this.logger.error("getAllBusinessInfos 拒绝访问");
+    		return WrapMapper.forbidden();
+    	}
+    	
+    	try {
+    		List<BusinessInfo> businessInfos = this.businessInfoService.queryBusinessInfoList(null);
+    		List<BusinessInfoResponseDto> responseDtos = convertList(businessInfos);
+    		return WrapMapper.ok().result(responseDtos);
+    	} catch (Exception e) {
+    		this.logger.error("查询所有商家信息数据异常", e);
+    		return WrapMapper.error();
+    	}
     } 
 
     // 数据转换

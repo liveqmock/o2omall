@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.pms.controller.base.BaseController;
 import com.awe.pms.domain.Product;
+import com.awe.pms.domain.enums.ProductDictEnum;
 import com.awe.pms.domain.query.ProductQuery;
+import com.awe.pms.service.ProductDictService;
 import com.awe.pms.service.ProductService;
 import com.awe.pms.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
@@ -34,6 +36,9 @@ public class ProductController extends BaseController {
 
     @Autowired
     private ProductService productService;
+    
+    @Autowired
+    private ProductDictService productDictService;
 
     /** 视图前缀 */
     private static final String viewPrefix ="product";
@@ -55,6 +60,9 @@ public class ProductController extends BaseController {
             model.addAttribute("dataList", dataList);// 数据集合
             model.addAttribute("query", query);// 查询参数
             model.addAttribute("page", page);// 分页
+            model.addAttribute("pmsTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PMS_TYPE.getType()));// 商品类型集合
+            model.addAttribute("auditTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.AUDIT_TYPE.getType()));// 商品审核状态集合
+            model.addAttribute("modeTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.MODE_TYPE.getType()));// 商家模式
         } catch (Exception e) {
             LOG.error("product index has error.", e);
         }
@@ -68,7 +76,10 @@ public class ProductController extends BaseController {
      * @return
      */
     @RequestMapping(value = "addForward")
-    public String addForward() {
+    public String addForward(Model model) {
+    	model.addAttribute("pmsTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PMS_TYPE.getType()));// 商品类型集合
+        model.addAttribute("auditTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.AUDIT_TYPE.getType()));// 商品审核状态集合
+        model.addAttribute("modeTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.MODE_TYPE.getType()));// 商家模式
         return viewPrefix + "/add";
     }
 
@@ -109,6 +120,9 @@ public class ProductController extends BaseController {
         try {
             Product productResult = productService.getProductById(product.getId());
             model.addAttribute("product", productResult);
+            model.addAttribute("pmsTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PMS_TYPE.getType()));// 商品类型集合
+            model.addAttribute("auditTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.AUDIT_TYPE.getType()));// 商品审核状态集合
+            model.addAttribute("modeTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.MODE_TYPE.getType()));// 商家模式
         } catch (Exception e) {
             LOG.error("product updateForward has error.", e);
         }

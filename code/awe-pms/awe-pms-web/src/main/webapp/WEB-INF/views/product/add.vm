@@ -2,108 +2,56 @@
 <html lang="zh-cn">
     <head>
 		#parse("/layout/head.vm")
+		<script src="$basePath/static/js/inner/productBrand.js?v=19"></script>
         <script language="javascript">
             $(function() {
 				$('#addForm').validate({
 					errorElement:"em",
 					errorClass:"red",
 					rules: {
-												productNo: {required: true},
+						productNo: {required: true},
 						productName: {required: true},
-						enName: {required: true},
-						keyword: {required: true},
 						categoryOneId: {required: true},
-						categoryOne: {required: true},
-						categoryTwoId: {required: true},
-						categoryTwo: {required: true},
-						categoryThreeId: {required: true},
-						categoryThree: {required: true},
-						skuAttrName: {required: true},
-						score: {required: true},
-						level: {required: true},
 						brandCode: {required: true},
-						brandName: {required: true},
 						type: {required: true},
-						typeName: {required: true},
 						mode: {required: true},
-						modeName: {required: true},
 						businessNo: {required: true},
-						businessName: {required: true},
-						method: {required: true},
-						originPlace: {required: true},
-						saleTimeStart: {required: true},
-						applicableCrowd: {required: true},
-						applicableAge: {required: true},
-						features: {required: true},
-						introduce: {required: true},
-						service: {required: true},
-						weight: {required: true},
-						grossWeight: {required: true},
-						length: {required: true},
-						width: {required: true},
-						height: {required: true},
-						diameter: {required: true},
-						packType: {required: true},
-						packLength: {required: true},
-						packWidth: {required: true},
-						packHeight: {required: true},
-						supportReturn: {required: true},
-						distribution: {required: true},
-						freightFree: {required: true},
-						material: {required: true},
-						packingList: {required: true},
-						saleGuarantee: {required: true},
-						kindlyReminder: {required: true},
 					},
 			
 					messages: {
 						productNo: { required: "请输入商品编号"},
 						productName: { required: "请输入商品名称"},
-						enName: { required: "请输入商品英文名称"},
-						keyword: { required: "请输入关键字"},
 						categoryOneId: { required: "请输入一级分类"},
-						categoryOne: { required: "请输入一级分类名称"},
-						categoryTwoId: { required: "请输入二级分类"},
-						categoryTwo: { required: "请输入二级分类名称"},
-						categoryThreeId: { required: "请输入三级分类"},
-						categoryThree: { required: "请输入三级分类名称"},
-						skuAttrName: { required: "请输入商品SKU属性值"},
-						score: { required: "请输入商品评分"},
-						level: { required: "请输入推荐级别"},
 						brandCode: { required: "请输入品牌编号"},
-						brandName: { required: "请输入品牌名称"},
 						type: { required: "请输入商品类型（国内、进口）"},
-						typeName: { required: "请输入商品类型名称"},
 						mode: { required: "请输入经营模式（自营。。）"},
-						modeName: { required: "请输入经营模式名称"},
 						businessNo: { required: "请输入商家编号"},
-						businessName: { required: "请输入商家名称"},
-						method: { required: "请输入食用方式"},
-						originPlace: { required: "请输入商品产地"},
-						saleTimeStart: { required: "请输入商品上架时间"},
-						applicableCrowd: { required: "请输入适用人群"},
-						applicableAge: { required: "请输入适用年龄"},
-						features: { required: "请输入商品描述"},
-						introduce: { required: "请输入介绍"},
-						service: { required: "请输入服务（配送信息等）"},
-						weight: { required: "请输入商品净重"},
-						grossWeight: { required: "请输入毛重"},
-						length: { required: "请输入长"},
-						width: { required: "请输入宽"},
-						height: { required: "请输入高"},
-						diameter: { required: "请输入直径"},
-						packType: { required: "请输入包装类型（桶装等）"},
-						packLength: { required: "请输入包装长"},
-						packWidth: { required: "请输入包装宽"},
-						packHeight: { required: "请输入包装高"},
-						supportReturn: { required: "请输入是否支持退货"},
-						distribution: { required: "请输入配送信息"},
-						freightFree: { required: "请输入是否免运费"},
-						material: { required: "请输入材质"},
-						packingList: { required: "请输入包装清单"},
-						saleGuarantee: { required: "请输入售后保障"},
-						kindlyReminder: { required: "请输入温馨提示"},
 					}
+				});
+				
+				loadProductCategorys(1,0,0,"categoryOneId");
+				
+				$("#categoryOneId").change(function () {
+					initSelected("categoryTwoId");
+					initSelected("categoryThreeId");
+					if (this.value == "") {
+						return;
+					}
+					loadProductCategorys(2,this.value,"","categoryTwoId");
+					$("#categoryOne").val($("#categoryOneId option:selected").text());
+				});
+				
+				$("#categoryTwoId").change(function () {
+					initSelected("categoryThreeId");
+					if (this.value == "") {
+						return;
+					}
+					loadProductCategorys(3,this.value,"","categoryThreeId");
+					$("#categoryTwo").val($("#categoryTwoId option:selected").text());
+				});
+				
+				$("#categoryThreeId").change(function () {
+					$("#categoryThree").val($("#categoryThreeId option:selected").text());
 				});
 				
 				$("#btn-back").click(function(){
@@ -135,190 +83,200 @@
                     <div class="widget-body">
                         <div class="widget-main" style="background-color: #fff;padding:5px;">
                             <form class="form-horizontal" role="form" id="addForm">
-                                <div class="form-group">
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="productNo">商品编号</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="productNo" id="productNo" class="col-xs-12 col-sm-12" />
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="categoryOneId">一级分类</label>
+                                    <div class="col-sm-3">
+                                        <select id="categoryOneId" name="categoryOneId" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+                                        </select>
+										<input type="hidden" name="categoryOne" id="categoryOne" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="productName">商品名称</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="productName" id="productName" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="categoryTwoId">二级分类</label>
+                                    <div class="col-sm-3">
+                                        <select id="categoryTwoId" name="categoryTwoId" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+                                        </select>
+										<input type="hidden" name="categoryTwo" id="categoryTwo" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="enName">商品英文名称</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="enName" id="enName" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="categoryThreeId">三级分类</label>
+                                    <div class="col-sm-3">
+                                        <select id="categoryThreeId" name="categoryThreeId" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+                                        </select>
+										<input type="hidden" name="categoryThree" id="categoryThree" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="keyword">关键字</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="keyword" id="keyword" class="col-xs-12 col-sm-12" />
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="brandCode">品牌编号</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="brandCode" id="brandCode" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="categoryOneId">一级分类</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="categoryOneId" id="categoryOneId" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="type">类型</label>
+                                    <div class="col-sm-3">
+										<select id="type" name="type" class="col-xs-10 col-sm-8">
+    										#if(!$null.isNull($!pmsTypes))
+                                    			#foreach($item in $pmsTypes)
+                                    				<option value="$item.attr">$item.value</option>
+                                    			#end
+                                    		#end
+                                        </select>
+                                        <input type="hidden" name="typeName" id="typeName" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="categoryOne">一级分类名称</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="categoryOne" id="categoryOne" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="mode">经营模式</label>
+                                    <div class="col-sm-3">
+										<select id="mode" name="mode" class="col-xs-10 col-sm-8">
+    										#if(!$null.isNull($!modeTypes))
+                                    			#foreach($item in $modeTypes)
+                                    				<option value="$item.attr">$item.value</option>
+                                    			#end
+                                    		#end
+                                        </select>
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="categoryTwoId">二级分类</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="categoryTwoId" id="categoryTwoId" class="col-xs-12 col-sm-12" />
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="productNo">商品编号</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="productNo" id="productNo" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="categoryTwo">二级分类名称</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="categoryTwo" id="categoryTwo" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="productName">商品名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="productName" id="productName" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="categoryThreeId">三级分类</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="categoryThreeId" id="categoryThreeId" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="enName">商品英文名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="enName" id="enName" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="categoryThree">三级分类名称</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="categoryThree" id="categoryThree" class="col-xs-12 col-sm-12" />
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="skuAttrName">商品SKU属性值</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="skuAttrName" id="skuAttrName" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="skuAttrName">商品SKU属性值</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="skuAttrName" id="skuAttrName" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="businessNo">商家编号</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="businessNo" id="businessNo" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="score">商品评分</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="score" id="score" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="businessName">商家名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="businessName" id="businessName" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="level">推荐级别</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="level" id="level" class="col-xs-12 col-sm-12" />
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="method">食用方式</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="method" id="method" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="brandCode">品牌编号</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="brandCode" id="brandCode" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="originPlace">商品产地</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="originPlace" id="originPlace" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="brandName">品牌名称</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="brandName" id="brandName" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="saleTimeStart">商品上架时间</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="saleTimeStart" id="saleTimeStart" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="type">商品类型（国内、进口）</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="type" id="type" class="col-xs-12 col-sm-12" />
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="applicableCrowd">适用人群</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="applicableCrowd" id="applicableCrowd" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="typeName">商品类型名称</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="typeName" id="typeName" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="applicableAge">适用年龄</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="applicableAge" id="applicableAge" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="mode">经营模式（自营。。）</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="mode" id="mode" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="features">商品描述</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="features" id="features" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="modeName">经营模式名称</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="modeName" id="modeName" class="col-xs-12 col-sm-12" />
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="introduce">介绍</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="introduce" id="introduce" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="businessNo">商家编号</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="businessNo" id="businessNo" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="service">服务（配送信息等）</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="service" id="service" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="businessName">商家名称</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="businessName" id="businessName" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="weight">商品净重</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="weight" id="weight" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="method">食用方式</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="method" id="method" class="col-xs-12 col-sm-12" />
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="grossWeight">毛重</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="grossWeight" id="grossWeight" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="originPlace">商品产地</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="originPlace" id="originPlace" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="length">长</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="length" id="length" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="saleTimeStart">商品上架时间</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="saleTimeStart" id="saleTimeStart" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="width">宽</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="width" id="width" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="applicableCrowd">适用人群</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="applicableCrowd" id="applicableCrowd" class="col-xs-12 col-sm-12" />
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="height">高</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="height" id="height" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="applicableAge">适用年龄</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="applicableAge" id="applicableAge" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="diameter">直径</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="diameter" id="diameter" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="features">商品描述</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="features" id="features" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="packType">包装类型（桶装等）</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="packType" id="packType" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="introduce">介绍</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="introduce" id="introduce" class="col-xs-12 col-sm-12" />
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="packLength">包装长</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="packLength" id="packLength" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="service">服务（配送信息等）</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="service" id="service" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="packWidth">包装宽</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="packWidth" id="packWidth" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="weight">商品净重</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="weight" id="weight" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="packHeight">包装高</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="packHeight" id="packHeight" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="grossWeight">毛重</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="grossWeight" id="grossWeight" class="col-xs-12 col-sm-12" />
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="supportReturn">是否支持退货</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="supportReturn" id="supportReturn" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="length">长</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="length" id="length" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="distribution">配送信息</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="distribution" id="distribution" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="width">宽</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="width" id="width" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="freightFree">是否免运费</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="freightFree" id="freightFree" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="height">高</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="height" id="height" class="col-xs-12 col-sm-12" />
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="material">材质</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="material" id="material" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="diameter">直径</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="diameter" id="diameter" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="packingList">包装清单</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="packingList" id="packingList" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="packType">包装类型（桶装等）</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="packType" id="packType" class="col-xs-12 col-sm-12" />
+									<label class="col-sm-1 control-label no-padding-right" for="saleGuarantee">售后保障</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="saleGuarantee" id="saleGuarantee" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="packLength">包装长</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="packLength" id="packLength" class="col-xs-12 col-sm-12" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="packWidth">包装宽</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="packWidth" id="packWidth" class="col-xs-12 col-sm-12" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="packHeight">包装高</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="packHeight" id="packHeight" class="col-xs-12 col-sm-12" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="supportReturn">是否支持退货</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="supportReturn" id="supportReturn" class="col-xs-12 col-sm-12" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="distribution">配送信息</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="distribution" id="distribution" class="col-xs-12 col-sm-12" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="freightFree">是否免运费</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="freightFree" id="freightFree" class="col-xs-12 col-sm-12" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="material">材质</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="material" id="material" class="col-xs-12 col-sm-12" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="packingList">包装清单</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="packingList" id="packingList" class="col-xs-12 col-sm-12" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="saleGuarantee">售后保障</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="saleGuarantee" id="saleGuarantee" class="col-xs-12 col-sm-12" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="kindlyReminder">温馨提示</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="kindlyReminder" id="kindlyReminder" class="col-xs-12 col-sm-12" />
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="kindlyReminder">温馨提示</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="kindlyReminder" id="kindlyReminder" class="col-xs-10 col-sm-8" />
                                     </div>
                                 </div>
 								<div class="form-group">

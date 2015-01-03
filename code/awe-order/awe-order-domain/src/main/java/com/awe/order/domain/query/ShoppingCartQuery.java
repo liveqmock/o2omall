@@ -38,6 +38,11 @@ public class ShoppingCartQuery extends Query {
     /** 结束时间 */
     private Date endTime; 
     
+    /** 销售商 */
+    private String seller; 
+    /** 销售商编号*/
+    private String sellerNo;
+    
     /**
      * get 自增id
      * 
@@ -255,4 +260,40 @@ public class ShoppingCartQuery extends Query {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
+    
+    /**
+     * get 销售商
+     * 
+     * @return the seller
+     */
+	public String getSeller() {
+		return seller;
+	}
+
+	/**
+     * set 销售商
+     * 
+     * @param seller the seller to set
+     */
+	public void setSeller(String seller) {
+		this.seller = seller;
+	}
+
+	/**
+     * get 销售商编号
+     * 
+     * @return the seller
+     */
+	public String getSellerNo() {
+		return sellerNo;
+	}
+
+	/**
+     * set 销售商
+     * 
+     * @param sellerNo the sellerNo to set
+     */
+	public void setSellerNo(String sellerNo) {
+		this.sellerNo = sellerNo;
+	}
 }

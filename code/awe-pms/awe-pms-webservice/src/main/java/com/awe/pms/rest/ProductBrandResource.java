@@ -19,6 +19,7 @@ import org.springframework.util.CollectionUtils;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.pms.domain.ProductBrand;
+import com.awe.pms.domain.query.ProductBrandQuery;
 import com.awe.pms.sdk.api.request.ProductBrandRequest;
 import com.awe.pms.sdk.api.request.dto.ProductBrandRequestDto;
 import com.awe.pms.sdk.api.response.dto.ProductBrandResponseDto;
@@ -72,6 +73,41 @@ public class ProductBrandResource {
             this.logger.error("查询商品类别品牌数据异常", e);
             return WrapMapper.error();
         }
+    }
+    
+    /**
+     * 根据类别查询商品品牌信息
+     * 
+     * @param request
+     *            商品类别品牌请求参数
+     * @return 商品类别品牌返回对象
+     * 
+     */
+    @POST
+    @Path("/productBrand/getProductBrands")
+    public Wrapper<?> getProductBrands(ProductBrandRequest request) {
+    	if (null == request || !request.checkSign()) {
+    		this.logger.error("getProductBrands 拒绝访问");
+    		return WrapMapper.forbidden();
+    	}
+    	
+    	ProductBrandRequestDto requestDto = request.getContent();
+    	ProductBrandQuery queryBean = new ProductBrandQuery();
+    	if (null != requestDto) {
+    		queryBean.setId(requestDto.getId());
+    		queryBean.setCategoryOneId(requestDto.getCategoryOneId());
+    		queryBean.setCategoryTwoId(requestDto.getCategoryTwoId());
+    		queryBean.setCategoryThreeId(requestDto.getCategoryThreeId());
+    	}
+    	
+    	try {
+    		List<ProductBrand> productBrands = this.productBrandService.queryProductBrandList(queryBean);
+    		List<ProductBrandResponseDto> responseDtos = convertList(productBrands);
+    		return WrapMapper.ok().result(responseDtos);
+    	} catch (Exception e) {
+    		this.logger.error("根据类别查询商品品牌信息数据异常", e);
+    		return WrapMapper.error();
+    	}
     } 
 
     // 数据转换

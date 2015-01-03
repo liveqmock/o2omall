@@ -8,6 +8,10 @@
 		<result column="sku_no" property="skuNo" jdbcType="VARCHAR" />
 		<result column="sku_count" property="skuCount" jdbcType="DECIMAL" />
 		<result column="status" property="status" jdbcType="DECIMAL" />
+		
+		<result column="seller" property="seller" jdbcType="VARCHAR" />
+		<result column="seller_no" property="sellerNo" jdbcType="VARCHAR" />
+		
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
@@ -16,17 +20,17 @@
     </resultMap>
     
     <sql id="shoppingCartColumns">
-    	id,user_no,sku_no,sku_count,status,create_time,update_time,create_user,update_user,yn
+    	id,user_no,sku_no,sku_count,status,seller,seller_no,create_time,update_time,create_user,update_user,yn
     </sql>
     
      <sql id="shoppingCartUsedColumns">
-    	user_no,sku_no,sku_count,status,create_time,update_time,create_user,update_user,yn
+    	user_no,sku_no,sku_count,status,seller,seller_no,create_time,update_time,create_user,update_user,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="ShoppingCart" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO shopping_cart(<include refid="shoppingCartUsedColumns"/>) 
-        VALUES (#{userNo},#{skuNo},#{skuCount},#{status},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+        VALUES (#{userNo},#{skuNo},#{skuCount},#{status},#{seller},#{sellerNo},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -45,6 +49,12 @@
 		        </if>
 		        <if test="status != null and status != ''">
                 	status = #{status,jdbcType=DECIMAL},
+		        </if>
+		        <if test="seller != null and seller != ''">
+                	seller = #{seller,jdbcType=VARCHAR},
+		        </if>
+		        <if test="sellerNo != null and sellerNo != ''">
+                	seller_no = #{sellerNo,jdbcType=VARCHAR},
 		        </if>
 		        <if test="updateUser != null and updateUser != ''">
                 	update_user = #{updateUser,jdbcType=VARCHAR},
@@ -112,6 +122,12 @@
         </if>
         <if test="status != null and status != ''">
         	and status = #{status,jdbcType=DECIMAL}
+        </if>
+        <if test="seller != null and seller != ''">
+             and seller = #{seller,jdbcType=VARCHAR},
+        </if>
+        <if test="sellerNo != null and sellerNo != ''">
+             and seller_no = #{sellerNo,jdbcType=VARCHAR},
         </if>
         <if test="createTime != null and createTime != ''">
         	and create_time = #{createTime,jdbcType=TIMESTAMP}
