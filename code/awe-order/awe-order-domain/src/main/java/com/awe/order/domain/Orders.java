@@ -101,9 +101,12 @@ public class Orders implements java.io.Serializable {
     private String updateUser; 
     /** 0:无效;1有效 */
     private Integer yn; 
-    /**订单明细数据集*/
-    private List<OrdersItems> ordersItemsList;
-    
+
+    /** 销售商 */
+    private String seller; 
+    /** 销售商编号*/
+    private String sellerNo;    /**订单明细数据集*/
+    private List<OrdersItems> ordersItemsList;    
     /**
      * get 自增id
      * 
@@ -849,8 +852,42 @@ public class Orders implements java.io.Serializable {
     public void setYn(Integer yn) {
         this.yn = yn;
     }
+
     /**
-     * get 订单明细数据集
+     * get 销售商
+     * 
+     * @return the seller
+     */
+	public String getSeller() {
+		return seller;
+	}
+
+	/**
+     * set 销售商
+     * 
+     * @param seller the seller to set
+     */
+	public void setSeller(String seller) {
+		this.seller = seller;
+	}
+
+	/**
+     * get 销售商编号
+     * 
+     * @return the seller
+     */
+	public String getSellerNo() {
+		return sellerNo;
+	}
+
+	/**
+     * set 销售商
+     * 
+     * @param sellerNo the sellerNo to set
+     */
+	public void setSellerNo(String sellerNo) {
+		this.sellerNo = sellerNo;
+	}     * get 订单明细数据集
      * @return
      */
 	public List<OrdersItems> getOrdersItemsList() {
@@ -864,5 +901,4 @@ public class Orders implements java.io.Serializable {
 		this.ordersItemsList = ordersItemsList;
 	}
     
-    
-}
+    }

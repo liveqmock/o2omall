@@ -55,7 +55,14 @@ public class OrderCancel implements java.io.Serializable {
     private Integer yn; 
     /**订单取消明细表集合*/
     private List<OrdersItems> ordersItemsList;
-    
+    /**支付方式 1:货到付款;2:在线支付;3:公司转账;4:邮局汇款 */
+    private Integer payWay;
+    /**用户ID*/
+    private Long userId;
+    /** 销售商 */
+    private String seller; 
+    /** 销售商编号*/
+    private String sellerNo;
     
     /**
      * get 自增id
@@ -413,5 +420,75 @@ public class OrderCancel implements java.io.Serializable {
 		this.ordersItemsList = ordersItemsList;
 	}
     
-    
+    /**
+     * get 销售商
+     * 
+     * @return the seller
+     */
+	public String getSeller() {
+		return seller;
+	}
+
+	/**
+     * set 销售商
+     * 
+     * @param seller the seller to set
+     */
+	public void setSeller(String seller) {
+		this.seller = seller;
+	}
+
+	/**
+     * get 销售商编号
+     * 
+     * @return the seller
+     */
+	public String getSellerNo() {
+		return sellerNo;
+	}
+
+	/**
+     * set 销售商
+     * 
+     * @param sellerNo the sellerNo to set
+     */
+	public void setSellerNo(String sellerNo) {
+		this.sellerNo = sellerNo;
+	}
+
+	/**
+     * get 支付方式 1:货到付款;2:在线支付;3:公司转账;4:邮局汇款
+     * 
+     * @return the payWay
+     */
+	public Integer getPayWay() {
+		return payWay;
+	}
+
+	/**
+     * set 支付方式 1:货到付款;2:在线支付;3:公司转账;4:邮局汇款
+     * 
+     * @param payWay the payWay to set
+     */
+	public void setPayWay(Integer payWay) {
+		this.payWay = payWay;
+	}
+
+	/**
+     * get 用户id
+     * 
+     * @return the userId
+     */
+	public Long getUserId() {
+		return userId;
+	}
+
+	/**
+     * set 用户id
+     * 
+     * @param userId the userId to set
+     */
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 }
