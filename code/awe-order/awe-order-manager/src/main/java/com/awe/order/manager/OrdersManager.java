@@ -3,7 +3,9 @@ package com.awe.order.manager;
 import java.util.List;
 
 import com.awe.order.domain.Orders;
+import com.awe.order.domain.query.FrontOrdersQuery;
 import com.awe.order.domain.query.OrdersQuery;
+import com.awe.order.dto.OrdersDto;
 import com.hbird.common.utils.page.PageUtil;
 /**
  * OrdersManager接口
@@ -109,4 +111,18 @@ public interface OrdersManager {
      * @return
      */
 	public Orders getOrdersByOrderNO(String orderNo);
+	
+	/**
+	 * 前端商城-我的订单-根据查询Bean获取集合，带翻页
+	 * @param queryBean
+	 * @param pageUtil
+	 * @return
+	 */
+	public List<OrdersDto> queryFrontOrdersListWithPage(FrontOrdersQuery queryBean,PageUtil pageUtil);
+	/**
+	 * 前端商城-我的订单-根据查询Bean获取总数
+	 * @param queryBean
+	 * @return
+	 */
+	public int queryFrontOrdersCount(FrontOrdersQuery queryBean);
 }

@@ -5,7 +5,9 @@ import java.util.List;
 import com.hbird.common.manager.BaseManager;
 import com.hbird.common.utils.page.PageUtil;
 import com.awe.order.domain.Orders;
+import com.awe.order.domain.query.FrontOrdersQuery;
 import com.awe.order.domain.query.OrdersQuery;
+import com.awe.order.dto.OrdersDto;
 import com.awe.order.dao.OrdersDao;
 import com.awe.order.manager.OrdersManager;
 
@@ -66,8 +68,7 @@ public class OrdersManagerImpl extends BaseManager implements OrdersManager {
     /**
      * {@inheritDoc}
      */
-    public List<Orders> queryOrdersListWithPage(OrdersQuery queryBean,
-            PageUtil pageUtil) {
+    public List<Orders> queryOrdersListWithPage(OrdersQuery queryBean,PageUtil pageUtil) {
         if (null == queryBean) {
             queryBean = new OrdersQuery();
         }
@@ -140,5 +141,36 @@ public class OrdersManagerImpl extends BaseManager implements OrdersManager {
      */
 	public Orders getOrdersByOrderNO(String orderNo) {
 		return ordersDao.getOrdersByOrderNO(orderNo);
+	}
+	/**
+     * {@inheritDoc}
+     */
+	public List<OrdersDto> queryFrontOrdersListWithPage(FrontOrdersQuery queryBean,PageUtil pageUtil) {
+		if (null == queryBean) {
+            queryBean = new FrontOrdersQuery();
+        }
+
+        // 查询总数
+        int totalItem = queryFrontOrdersCount(queryBean);
+
+        if (pageUtil == null) {
+            pageUtil = new PageUtil();
+        }
+        pageUtil.setTotalRow(totalItem);
+        pageUtil.init();
+        
+        if (totalItem > 0) {
+            queryBean.setPageIndex(pageUtil.getCurPage());
+            queryBean.setPageSize(pageUtil.getPageSize());
+            // 调用Dao翻页方法
+            return ordersDao.queryFrontOrdersListWithPage(queryBean);
+        }
+        return null;
+	}
+	/**
+     * {@inheritDoc}
+     */
+	public int queryFrontOrdersCount(FrontOrdersQuery queryBean) {
+		return ordersDao.queryFrontOrdersCount(queryBean);
 	}
 }
