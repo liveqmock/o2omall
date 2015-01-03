@@ -3,7 +3,9 @@ package com.awe.order.dao.impl;
 import com.hbird.common.dao.mybatis.BaseDao;
 import com.awe.order.dao.OrdersDao;
 import com.awe.order.domain.Orders;
+import com.awe.order.domain.query.FrontOrdersQuery;
 import com.awe.order.domain.query.OrdersQuery;
+import com.awe.order.dto.OrdersDto;
 
 import java.util.List;
 import java.util.Map;
@@ -94,4 +96,18 @@ public class OrdersDaoImpl extends BaseDao implements OrdersDao {
 	public boolean orderAudit(Map map) {
 		return update(namespace +".orderAudit", map);
 	}
+	/**
+     * {@inheritDoc}
+     */
+	public List<OrdersDto> queryFrontOrdersListWithPage(FrontOrdersQuery queryBean) {
+		return (List<OrdersDto>) queryForList(namespace +".queryFrontOrdersListWithPage", queryBean);
+	}
+	/**
+     * {@inheritDoc}
+     */
+	public int queryFrontOrdersCount(FrontOrdersQuery queryBean) {
+		return (Integer) queryForObject(namespace +".queryFrontOrdersCount", queryBean);
+	}
+	
+	
 }
