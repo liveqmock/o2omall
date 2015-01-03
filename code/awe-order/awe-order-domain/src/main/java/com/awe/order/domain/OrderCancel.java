@@ -61,7 +61,7 @@ public class OrderCancel implements java.io.Serializable {
     private String seller; 
     /** 销售商编号*/
     private String sellerNo;
-    
+      
     /**
      * get 自增id
      * 
