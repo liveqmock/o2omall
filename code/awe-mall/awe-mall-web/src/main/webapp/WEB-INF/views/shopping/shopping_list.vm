@@ -1,0 +1,143 @@
+
+ <!---------------------- 正文 ----------------------> 
+    <div class="container wid1200 clearfix">
+    
+        <!---------------------- 商品分类 ----------------------> 
+        <div class="shopl">
+             <div class="goods_l">
+                <h1>商品分类</h1>
+                <div class="goods_lb">
+					#foreach($item in $!productCategorys)
+    					#if("$item.fid" == "0")
+                        <div class="gl_box">
+							<h3><i class="cz_icon"></i>$item.name</h3>
+							<ul class="article_list">
+        					#foreach($item_child in $!productCategorys)
+    							#if("$item_child.fid" == "$item.id")
+    								<li><a href="#springUrl('')/shopping/shopping_list?$item_child.id">$item_child.name</a></li>
+    							#end
+        					 #end
+                           </ul>
+                        </div>
+    					#end
+    				#end
+                </div>
+             
+             </div>  
+             
+        <!---------------------- 浏览奶粉最终购买 ----------------------> 
+             <div class="powder mt10">
+               <h3>浏览<b class="reds">奶粉</b>最终购买</h3>
+               <ul class="pdcon">
+                 <li>
+                   <div><a href="#springUrl('')/shopping/product_details?id=1"><img src="#springUrl('')/static/images/m_img8.jpg" /></a></div>
+                   <p><span class="galy2 normal">9%会买：</span>雅培(Similac) </p>
+                   <p><a href="#springUrl('')/shopping/product_details">美国雅培精装奶粉</a></p>
+                   <p class="galy2">¥98.00</p>
+                 </li>
+               </ul>
+             </div>
+
+        <!---------------------- 一周畅销排行 ----------------------> 
+             <div class="powder mt10">
+               <h3>一周畅销排行</h3>
+               <ul class="bestseller">
+                 <li><span class="reds">1,</span><a href="product_details.html">雅培奶粉</a></li>
+                 <li><span class="reds">2,</span><a href="product_details.html">雅培奶粉</a></li>
+                 <li><span class="reds">3,</span><a href="product_details.html">雅培奶粉</a></li>
+               </ul>
+             </div>
+        </div>
+        
+        
+        <div class="shopr right">
+        
+        <!---------------------- 专家推荐 ----------------------> 
+           <div class="groom clearfix">
+              <h3 class="ft14">专家推荐</h3>
+              <div class="groom_box">
+                <dl>
+                  <dt><a href="#springUrl('')/shopping/product_details?id=1"><img src="#springUrl('')/static/images/m_img6.jpg" /></a></dt>
+                  <dd>
+                    <p><a href="#springUrl('')/shopping/product_details?id=1">雅培(Similac) 美国雅培</a></p>
+                    <p class="galy2 bold">¥298.00</p>
+                    <p><a href="#springUrl('')/shopping/product_details?id=1" class="message_btn mt15">立即抢购</a></p>
+                  </dd>
+                </dl>
+                <dl>
+                  <dt><a href="product_details.html"><img src="#springUrl('')/static/images/m_img6.jpg" /></a></dt>
+                  <dd>
+                    <p><a href="#springUrl('')/shopping/product_details?id=1">雅培(Similac) 美国雅培</a></p>
+                    <p class="galy2 bold">¥298.00</p>
+                    <p><a href="#springUrl('')/shopping/product_details?id=1" class="message_btn mt15">立即抢购</a></p>
+                  </dd>
+                </dl>
+              </div>
+           </div>
+           
+
+        <!---------------------- 奶粉品牌分类 ----------------------> 
+           <div class="groom clearfix mt10 hg210">
+              <h3 class="ft14">奶粉品牌分类</h3>
+              <ul class="fication">
+				#foreach($item in $!productBrands)
+					<li><a href="#springUrl('')/shopping/shopping_list?$item.id">$item.brandName</a></li>
+    			#end
+              </ul>
+           </div>
+           
+        <!---------------------- 综合排序 ----------------------> 
+            <div class="ranking">
+             
+              <div class="rank_title mt10">
+                <ul class="rank_l left">
+                  <li class="on">综合排序</li>
+                  <li>销售</li>
+                  <li>价格<i class="down_icon"></i></li>
+                  <li>推荐数</li>
+                </ul>
+                <ul class="rank_r right">
+                  <li>共800个商品</li>
+                  <li><span class="reds">1</span>/15</li>
+                  <li>上一页</li>
+                  <li>下一页</li>
+                </ul>
+              </div>
+              <div class="bf rank_lb">
+                  <div class="shop_lb clearfix">
+                   <ul>
+                     <li class="pl">
+                         <div><a href="product_details.html"><img src="#springUrl('')/static/images/m_img6.jpg" /></a></div>
+                         <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                         <p>优质配方工艺</p>
+                         <p class="reds">¥298.00</p>
+                     </li>
+                     <li>
+                         <div><a href="product_details.html"><img src="#springUrl('')/static/images/m_img6.jpg" /></a></div>
+                         <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                         <p>优质配方工艺</p>
+                         <p class="reds">¥298.00</p>
+                     </li>
+                     <li>
+                         <div><a href="product_details.html"><img src="#springUrl('')/static/images/m_img6.jpg" /></a></div>
+                         <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                         <p>优质配方工艺</p>
+                         <p class="reds">¥298.00</p>
+                     </li>
+                     <li>
+                         <div><a href="product_details.html"><img src="#springUrl('')/static/images/m_img6.jpg" /></a></div>
+                         <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
+                         <p>优质配方工艺</p>
+                         <p class="reds">¥298.00</p>
+                     </li>
+                   </ul>
+                 </div>
+              </div>   
+            </div>
+
+        </div> 
+     </div>
+
+
+    </div>
+ <!---------------------- 正文end ----------------------> 

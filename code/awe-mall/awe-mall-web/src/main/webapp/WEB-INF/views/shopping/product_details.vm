@@ -1,0 +1,166 @@
+<link href="#springUrl('')/static/css/common.css" rel="stylesheet"  type="text/css"/>
+<link href="#springUrl('')/static/css/login.css" rel="stylesheet"  type="text/css"/>
+<script type="text/javascript" src="#springUrl('')/static/js/jquery-1.8.3.min.js"></script>
+<script>
+  $(function(){
+    $('.size span').bind('click',function(){
+	  $(this).attr('class','on').siblings().removeAttr('class','on');
+	});
+  });
+$(function(){
+	$("#quantity").keyup(function(){
+		if(isNaN($(this).val()) || parseInt($(this).val())<1){
+			$(this).val("1");
+			$("#totalPrice").html($("#price").val());
+			return;
+		}
+		var total = parseFloat($("#price").val())*parseInt($(this).val());
+		$("#totalPrice").html(total.toFixed(2));
+	})
+	
+})
+
+/*商品数量+1*/
+function numAdd(){
+	var num_add = parseInt($("#quantity").val())+1;
+	if($("#quantity").val()==""){
+		num_add = 1;
+	}
+	$("#quantity").val(num_add);
+	var total = parseFloat($("#price").val())*parseInt($("#quantity").val());
+	$("#totalPrice").html(total.toFixed(2));
+}
+
+/*商品数量-1*/
+function numDec(){
+	var num_dec = parseInt($("#quantity").val())-1;
+	if(num_dec<1){
+		//购买数量必须大于或等于1
+		//alert("not lt 1");
+	}else{
+		$("#quantity").val(num_dec);
+		var total = parseFloat($("#price").val())*parseInt($("#quantity").val());
+		$("#totalPrice").html(total.toFixed(2));
+	}
+}</script>
+ 
+ <!---------------------- 商品介绍          规格参数          包装清单           售后保障        ----------------------> 
+    <div class="container wid1200 clearfix">
+       
+       <div class="product_l">
+            <div id="tsShopContainer">
+                <div id="tsImgS"><a href="#springUrl('')/static/images/01.jpg" title="Images" class="MagicZoom" id="MagicZoom"><img width="352" height="351" src="#springUrl('')/static/images/01.jpg" /></a></div>
+                <div id="tsPicContainer">
+                    <div id="tsImgSArrL" onclick="tsScrollArrLeft()"></div>
+                    <div id="tsImgSCon">
+                        <ul>
+                            <li onclick="showPic(0)" rel="MagicZoom" class="tsSelectImg"><img  src="#springUrl('')/static/images/01.jpg" tsImgS="#springUrl('')/static/images/01.jpg" /></li>
+                            <li onclick="showPic(1)" rel="MagicZoom"><img  src="#springUrl('')/static/images/02.jpg" tsImgS="#springUrl('')/static/images/02.jpg" /></li>
+                            <li onclick="showPic(2)" rel="MagicZoom"><img  src="#springUrl('')/static/images/03.jpg" tsImgS="#springUrl('')/static/images/03.jpg" /></li>
+                            <li onclick="showPic(3)" rel="MagicZoom"><img  src="#springUrl('')/static/images/04.jpg" tsImgS="#springUrl('')/static/images/04.jpg" /></li>
+                            <li onclick="showPic(4)" rel="MagicZoom"><img  src="#springUrl('')/static/images/05.jpg" tsImgS="#springUrl('')/static/images/05.jpg" /></li>
+                            <li onclick="showPic(5)" rel="MagicZoom"><img  src="#springUrl('')/static/images/06.jpg" tsImgS="#springUrl('')/static/images/06.jpg" /></li>
+                            <li onclick="showPic(6)" rel="MagicZoom"><img  src="#springUrl('')/static/images/07.jpg" tsImgS="#springUrl('')/static/images/07.jpg" /></li>
+                            <li onclick="showPic(7)" rel="MagicZoom"><img  src="#springUrl('')/static/images/08.jpg" tsImgS="#springUrl('')/static/images/08.jpg" /></li>
+                            <li onclick="showPic(8)" rel="MagicZoom"><img  src="#springUrl('')/static/images/09.jpg" tsImgS="#springUrl('')/static/images/09.jpg" /></li>
+                            <li onclick="showPic(9)" rel="MagicZoom"><img  src="#springUrl('')/static/images/10.gif" tsImgS="#springUrl('')/static/images/10.gif" /></li>
+                            <li onclick="showPic(10)" rel="MagicZoom"><img  src="#springUrl('')/static/images/11.gif" tsImgS="#springUrl('')/static/images/10.gif" /></li>
+                        </ul>
+                    </div>
+                    <div id="tsImgSArrR" onclick="tsScrollArrRight()"></div>
+                </div>
+            </div>   
+            
+            <div class="product_con">
+              <h3>荷兰原装进口诺优能幼儿配方奶粉900克</h3>
+              <ul>
+                <li>品牌价：<span class="reds ft18">￥306</span></li>
+                <li>运费：8元</li>
+                <li class="size">尺码规格：<span>500g</span><span>600g</span><span>700g</span><span>800g</span></li>
+                <li class="buynum">购买数量：<a href="javascript:" onclick="numDec()" class="reduce ml20">-</a><input type="text" value="1" id="quantity" /><a href="javascript:"  onclick="numAdd()" class="reduce">+</a></li>
+                <li><a class="cat_btn mt15" href="shop_join_cat.html">加入购物车</a></li>
+              </ul>
+            </div>
+                
+       </div>
+       <div class="product_r right">
+        <div class="hots_consult pdr ">
+         <h3>咨询社区</h3>
+             <div class="star_expert_con tcm">
+               <dl class="clearfix">
+                 <dt><a href="#springUrl('')/static/expert/C-07.html"><img src="#springUrl('')/static/images/m_img1.jpg" /></a></dt>
+                 <dd>
+                   <p>专家：<a href="#springUrl('')/static/expert/C-07.html">王翔</a></p>
+                   <p><span class="right">母婴养育 营养搭配</span>特长：</p>
+                 </dd>
+               </dl>             
+           
+             </div>
+         <h4>咨询社区</h4>
+         <div class="pdr_box clearfix">
+             <span><a href="#springUrl('')/static/expert/C-08.html"><img src="#springUrl('')/static/images/m_img1.jpg" /></a></span>
+         </div>   
+         <div class="edit_profile ft14 clearfix"><a href="">进入卖家店铺</a></div>
+       </div>
+       </div>  
+   
+        <!---------------------- 明星专家 广告部分 ----------------------> 
+        
+
+        
+     </div>
+        
+    <div class="container wid1200 clearfix">
+        <div class="rank_title mt10">
+                <ul class="indtr left">
+                  <li class="on">商品介绍</li>
+                  <li>规格参数</li>
+                  <li>包装清单</li>
+                  <li>售后保障</li>
+                </ul>
+              </div>
+              
+        
+        <div class="shop_scroll clearfix">
+            
+             <!---------------------- 商品介绍 ----------------------> 
+            <div class="shop_details ml15">
+               <ul class="t1">
+                 <li>商品名称：雅培奶粉</li>
+                 <li>商品毛重：1.07kg</li>
+                 <li>类型：进口奶源</li>
+               </ul>
+               <ul class="t2">
+                 <li>商品编号：1130831</li>
+                 <li>商品产地：中国浙江省嘉兴</li>
+                 <li>分类：牛奶粉</li>
+               </ul>
+               <ul class="t3">
+                 <li>品牌：雅培（Abbott）</li>
+                 <li>适用年龄：1-3岁</li>
+                 <li>包装：桶装</li>
+               </ul>
+               <ul class="t4">
+                 <li>上架时间：2014-06-09 19:21:08</li>
+                 <li>段位：3段</li>
+               </ul>
+            </div>
+        
+        </div>      
+        
+        
+
+    </div>
+    
+    <div class="container wid1200 clearfix">
+      
+      <div class="pro_con mt10">
+        <img src="#springUrl('')/static/images/pro_img.jpg" />
+      </div>
+    
+    </div>
+    
+    
+ <!---------------------- 正文end ----------------------> 
+<script src="#springUrl('')/static/js/MagicZoom.js" type="text/javascript"></script>
+<script src="#springUrl('')/static/js/ShopShow.js"></script>
