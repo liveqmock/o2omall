@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.mall.service.CheckCodeService;
+import com.awe.mall.service.SmsService;
 import com.awe.mall.utils.CodeUtil;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
@@ -29,6 +30,8 @@ public class CheckCodeController {
 
     @Autowired
     private CheckCodeService checkCodeService;
+    @Autowired
+    private SmsService smsService;
 
     /**
      * 生成校验码图片
@@ -57,15 +60,20 @@ public class CheckCodeController {
      * 生成短信校验码
      * 
      * @param session
+     * @param mobile
+     *            手机号
      * @return
      */
     @RequestMapping("/createSms")
     @ResponseBody
-    public Wrapper<?> createSms(HttpSession session) {
+    public Wrapper<?> createSms(HttpSession session, String mobile) {
 
         String code = checkCodeService.generateRandomNumberCode(CodeUtil.SMS_CODE_LENGTH);
         // 将生成的验证码保存到Session中
         session.setAttribute(CodeUtil.KEY_SMS_CODE, code);
+        String content = String.format("您申请的手机验证码是：%s，请输入后进行验证，谢谢！", code);
+        smsService.send(mobile, content);
+        // TODO 发短信到手机
         return WrapMapper.ok();
     }
 
