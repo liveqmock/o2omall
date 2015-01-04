@@ -44,4 +44,14 @@ public interface UserAddressService {
      * @return
      */
     public Wrapper<?> delete(UserAddressRequestDto requestDto);
+    
+    /**
+     * 根据id查到单个地址对象
+     * Date:2015年1月4日下午8:16:22
+     * user:js
+     * @param requestDto
+     * @return
+     */
+    public UserAddressResponseDto queryUserAddress(UserAddressRequestDto requestDto);
+    
 }

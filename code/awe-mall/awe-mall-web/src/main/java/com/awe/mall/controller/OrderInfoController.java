@@ -57,7 +57,7 @@ public class OrderInfoController extends BaseController{
 	  */
 	 @RequestMapping("address")
 	 @ResponseBody
-     public Wrapper<?> modifyPassword(Model model, UserAddressRequestDto requestDto) {
+     public Wrapper<?> address(Model model, UserAddressRequestDto requestDto) {
 		 List<UserAddressResponseDto> ret = null;
         try {
         	ret = userAddressService.queryUserAddressList(requestDto);
@@ -71,6 +71,24 @@ public class OrderInfoController extends BaseController{
             return WrapMapper.error();
         }
     }
+	 
+	 
+	 @RequestMapping("addr")
+	 @ResponseBody
+     public Wrapper<?> addr(Model model, UserAddressRequestDto requestDto) {
+		 UserAddressResponseDto ret = null;
+        try {
+        	ret = userAddressService.queryUserAddress(requestDto);
+        	if (ret != null) {
+                return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, ret);
+            } else {
+                return WrapMapper.wrap(Wrapper.ERROR_CODE, "没有查询到信息！");
+            }
+        } catch (Exception e) {
+            logger.error("modifyPassword has error,", e);
+            return WrapMapper.error();
+        }
+    } 
 	
 	
 	

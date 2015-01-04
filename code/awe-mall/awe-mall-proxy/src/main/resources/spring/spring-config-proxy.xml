@@ -59,4 +59,12 @@
 		<property name="serviceUrlDomain" value="${service.url.domain.pms}" />
 	</bean>
 	<!-- awe-pms-sdk end -->
+	
+	<!-- com.awe.uc.sdk start  -->
+	<bean id="areaClient" class="com.awe.uc.sdk.AreaClient">
+		<property name="serviceUrlDomain" value="${service.url.domain.uc}" />
+		<property name="key" value="${mall.common.key}" />
+	</bean>
+	<!-- com.awe.uc.sdk end  -->
+	
 </beans>

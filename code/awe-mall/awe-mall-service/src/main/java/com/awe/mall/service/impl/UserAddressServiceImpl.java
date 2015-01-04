@@ -66,4 +66,16 @@ public class UserAddressServiceImpl implements UserAddressService {
 		return wrapper;
 	}
 
+	public UserAddressResponseDto queryUserAddress(
+			UserAddressRequestDto requestDto) {
+		UserAddressResponseDto addressResponseDto = null;
+		try {
+			addressResponseDto = userAddressClient.getUserAddress(requestDto);
+		} catch (Exception e) {
+			LOG.error("#UserAddressServiceImpl.queryUserAddress# Error:" + e);
+		}
+		return addressResponseDto;
+		
+	}
+
 }

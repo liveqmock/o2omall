@@ -34,10 +34,15 @@ background: -webkit-linear-gradient(top,#b11a1a,#bf2626);
 background: -moz-linear-gradient(top,#b11a1a,#bf2626);
 background: linear-gradient(top,#b11a1a,#bf2626);
 }
+
+
 </style>
  <script language="javascript">
     $(function(){
+	//加载用户配送地址
 	user_address();
+	//加载省
+	province();
 	
       $("#user_update").hide();
       $("#add_address").hide();
@@ -55,9 +60,11 @@ background: linear-gradient(top,#b11a1a,#bf2626);
  	//选择新增地址
  	function myradio(){
  	   var address = $("input[id='radioaddress']:checked").val();
- 	   if(address == '3'){
+ 	   if(address == '0'){
  	   	  $("#add_address").show();
- 	   }
+ 	   }else{
+	      $("#add_address").hide();
+	   }
  	}
  	//点击保存新地址
  	function saveAddress(){
@@ -74,6 +81,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 	
 	//加载当前用户地址数据
 	function user_address(){
+	var txt="";
 	 var userId = $("#userId").val();
 		jQuery.ajax({
     		type: "GET",
@@ -82,17 +90,139 @@ background: linear-gradient(top,#b11a1a,#bf2626);
     		dataType : 'json',
     		success: function(data){
     			if(data!=null && data.code==200 && data.result!=null){
-    						
+				   var txtRadio='';
+    				$.each(data.result,function(i,item){
+						txt = item.name +"  "+ item.mobile +" "+ item.phone+"<p>"+"<br/>"+ item.provinceName + " "+ item.cityName +" "+ item.countyName +" "+item.address;
+						txtRadio=  item.name +"  "+ item.mobile +" "+ item.phone+" "+ item.provinceName + " "+ item.cityName +" "+ item.countyName +" "+item.address;
+						//全部地址  <input type="radio" name="address" id="radioaddress" value="1" onchange="myradio();" checked />张三
+						$('#user_radio').append("<input type='radio' name='address' id='radioaddress' onchange='myradio();'/> "+txtRadio+"  <a href='javascript:void(0)' onclick='queryAddress("+item.id+")'><font color='blue'>编辑</font></a>   | <a href='javascript:void(0)'><font color='blue'>删除</font></a>  <p><br/> ");
+					});
+					$("#user_text").html(txt);
+					//新增radio
+					$('#user_radio').append("<input type='radio' value='0' name='address' id='radioaddress' onchange='myradio();'/> 使用新地址");
     			} else {
-    				alert("获取省份信息失败");
+    				//alert("获取省份信息失败");
+    			}
+    		},
+    		error : function(data) {
+    			alert("获取信息失败");
+    		}
+    	});
+	}
+ 	
+	//获取省信息
+	function province(){
+	$("#cityNo").empty();
+	$("#countyNo").empty();
+		jQuery.ajax({
+    		type: "GET",
+    		url:"#springUrl('')/area/queryProvince",
+    		dataType : 'json',
+    		success: function(data){
+    			if(data!=null && data.code==200 && data.result!=null){
+    				var r = data.result;
+					if(r.length > 0){
+						$.each(data.result,function(i,item){
+						if($("#hd_province").val() == item.code){
+						     $('#provinceNo').append("<option selected value='" + item.code+ "'>" + item.name + "</option>");
+						  }else{
+						  	 $('#provinceNo').append("<option value='" + item.code+ "'>" + item.name + "</option>");
+						  }
+						});
+					}		
+    			} else {
+    				//alert("获取省份信息失败");
     			}
     		},
     		error : function(data) {
     			alert("获取省份信息失败");
     		}
+    	}); 
+	}
+	//市
+	function Oncity(provinceNo){
+	$("#cityNo").empty();
+	$("#countyNo").empty();
+		jQuery.ajax({
+    		type: "GET",
+			data:{provinceNO:provinceNo},
+    		url:"#springUrl('')/area/queryCityNo",
+    		dataType : 'json',
+    		success: function(data){
+    			if(data!=null && data.code==200 && data.result!=null){
+    				var r = data.result;
+					if(r.length > 0){
+					    $('#cityNo').append("<option value=''>请选择</option>");
+						$.each(data.result,function(i,item){
+						if($("#hd_province").val() == item.code){
+						     $('#cityNo').append("<option selected value='" + item.code+ "'>" + item.name + "</option>");
+						  }else{
+						  	 $('#cityNo').append("<option value='" + item.code+ "'>" + item.name + "</option>");
+						  }
+						});
+					}		
+    			} else {
+    				//alert("获取市份信息失败");
+    			}
+    		},
+    		error : function(data) {
+    			alert("获取市份信息失败");
+    		}
+    	}); 
+	}
+	//县
+	//---获取县的列表
+	function Oncounty(cityNo){
+	$("#countyNo").empty();
+		jQuery.ajax({
+    		type: "GET",
+			data:{cityNo:cityNo},
+    		url: "#springUrl('')/area/queryCountyNo",
+    		dataType : 'json',
+    		success: function(data){
+    			if(data!=null && data.code==200 && data.result!=null){
+    				var r = data.result;
+					if(r.length > 0){
+					 $('#countyNo').append("<option value=''>请选择</option>");
+						$.each(data.result,function(i,item){
+						if($("#hd_county").val() == item.code){
+                        	 $('#countyNo').append("<option selected value='" + item.code+ "'>" + item.name + "</option>");
+						}else{
+							  $('#countyNo').append("<option value='" + item.code+ "'>" + item.name + "</option>");
+						}
+						});
+					}
+    			} else {
+    				//alert("获取县份信息失败");
+    			}
+    		},
+    		error : function(data) {
+    			alert("获取县份信息失败");
+    		}
     	});
 	}
- 	
+	//-------
+	function queryAddress(id){
+		jQuery.ajax({
+    		type: "GET",
+    		url: "#springUrl('')/orderinfo/addr",
+			data:{id:id},
+    		dataType : 'json',
+    		success: function(data){
+    			if(data!=null && data.code==200 && data.result!=null){
+    				$.each(data.result,function(i,item){
+					});
+				} else {
+    				//alert("获取单个地区失败");
+    			}
+    		},
+    		error : function(data) {
+    			alert("获取单个地区失败");
+    		}
+    	});
+	}
+
+	
  </script>
 <!---------------------- 填写并核对订单信息  ----------------------> 
       <div class="container wid1200 clearfix">
@@ -105,16 +235,14 @@ background: linear-gradient(top,#b11a1a,#bf2626);
             <div id="user_Info">
 	             <dl id="user_basic">
 	               <dt>收货人信息【<a href="javascript:void(0)" onclick="update();" class="reds">修改</a>】</dt>
-	               <dd>杨桃   18610000005</dd><input type="hidden" value="${userId}" id="userId"/>
-	               <dd>北京市 朝阳区 三环到四环之间 建国路100号天地中心B座10层</dd>
+	               <input type="hidden" value="${userId}" id="userId"/>
+				   <dd><div id="user_text"></div><dd>
 	             </dl>
 	             
 	             <dl id="user_update">
 	             	<div>
-	             	    <dt>收货人信息</dt> 
-	             		<dd><input type="radio" name="address" id="radioaddress" value="1" onchange="myradio();" checked />张三</dd>
-	             		<dd><input type="radio" name="address" id="radioaddress" value="2" onchange="myradio();"/>李四</dd>
-	             		<dd><input type="radio" name="address" id="radioaddress" value="3" onchange="myradio();"/>使用新地址</dd>
+	             	    <dt>收货人信息</dt>
+                        <dd><div id="user_radio"></div></dd>
 	             	</div>
 	             	
 	             	<br/>
@@ -136,9 +264,9 @@ background: linear-gradient(top,#b11a1a,#bf2626);
                                 </span>
                             </td>
                             <td>&nbsp;&nbsp;
-                                <select> <option/> </select>&nbsp;&nbsp;
-                                <select> <option/> </select>&nbsp;&nbsp;
-                                <select> <option/> </select>&nbsp;&nbsp;
+                                <select id="provinceNo" onchange="Oncity(this.value);" style="width:100px;height:30px"> <option value=""> -请选择- </option> </select>&nbsp;&nbsp;
+                                <select id="cityNo" onchange="Oncounty(this.value);" style="width:100px;height:30px"> <option value=""> -请选择- </option> </select>&nbsp;&nbsp;
+                                <select id="countyNo" style="width:100px;height:30px"> <option value=""> -请选择-  </option> </select>&nbsp;&nbsp;
                             </td>
                         </tr>
                            <tr><td><br/></td><td></td></tr>
