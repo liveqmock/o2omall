@@ -157,7 +157,7 @@
         select <include refid="orderCancelColumns"/> from order_cancel where <include refid="queryOrderCancelListWhere"/>
         order by create_time desc 
         limit #{startIndex},#{pageSize}
-    </select>
+    </select> 
 
 	<!-- 前端网站-取消订单列表-根据查询Bean获取数据集合，翻页 -->
 	<select id="queryFrontOrderCancelListWithPage" resultMap="FrontOrderCancelMap" parameterType="com.awe.order.domain.query.FrontOrderCancelQuery">
