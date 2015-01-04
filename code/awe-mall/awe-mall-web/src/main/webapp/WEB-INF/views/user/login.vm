@@ -29,7 +29,13 @@
 				username: { required: "请输入手机号", mobile: "请输入正确的11位手机号"},
 				password: { required: "请输入密码"},
 				checkCode: { required: "请输入验证码"}
-			}
+			},
+			errorPlacement: function(error, element) {
+                if ( element.is("#checkCode") )
+                    error.appendTo( element.parent().last());
+                else
+                    error.appendTo( element.parent());
+            }
 		});
 	  	$('#login_btn').click(function() {    
         	var form = $("#loginForm");

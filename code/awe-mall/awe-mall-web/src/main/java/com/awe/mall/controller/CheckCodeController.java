@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.mall.service.CheckCodeService;
@@ -40,7 +41,7 @@ public class CheckCodeController {
      * @param response
      * @throws IOException
      */
-    @RequestMapping("/createImage")
+    @RequestMapping("createImage")
     public void createImage(HttpSession session, HttpServletResponse response) throws IOException {
         // 禁止缓存
         response.setHeader("Pragma", "No-cache");
@@ -64,17 +65,21 @@ public class CheckCodeController {
      *            手机号
      * @return
      */
-    @RequestMapping("/createSms")
+    @RequestMapping(value = "createSms", method = RequestMethod.POST)
     @ResponseBody
     public Wrapper<?> createSms(HttpSession session, String mobile) {
+        try {
 
-        String code = checkCodeService.generateRandomNumberCode(CodeUtil.SMS_CODE_LENGTH);
-        // 将生成的验证码保存到Session中
-        session.setAttribute(CodeUtil.KEY_SMS_CODE, code);
-        String content = String.format("您申请的手机验证码是：%s，请输入后进行验证，谢谢！", code);
-        smsService.send(mobile, content);
-        // TODO 发短信到手机
-        return WrapMapper.ok();
+            String code = checkCodeService.generateRandomNumberCode(CodeUtil.SMS_CODE_LENGTH);
+            // 将生成的验证码保存到Session中
+            session.setAttribute(CodeUtil.KEY_SMS_CODE, code);
+            String content = String.format("您申请的手机验证码是：%s，请输入后进行验证，谢谢！", code);
+            //发短信到手机
+            smsService.send(mobile, content);
+            return WrapMapper.ok();
+        } catch (Exception e) {
+            return WrapMapper.error();
+        }
     }
 
 }
