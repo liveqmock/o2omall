@@ -214,6 +214,17 @@ public class UserController extends BaseController {
     }
 
     /**
+     * 进入用户修改密码页面
+     * 
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "modifyPasswordForward", method = RequestMethod.GET)
+    public String modifyPasswordForward(Model model) {
+        return "user/modifyPassword";
+    }
+
+    /**
      * 用户修改密码事件
      * 
      * @param model
@@ -252,6 +263,19 @@ public class UserController extends BaseController {
         }
     }
 
+
+
+    /**
+     * 进入用户重置密码页面
+     * 
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "resetPasswordForward", method = RequestMethod.GET)
+    public String resetPasswordForward(Model model) {
+        return "user/resetPassword";
+    }
+    
     /**
      * 用户重置密码事件
      * 

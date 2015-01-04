@@ -129,6 +129,7 @@ create table product
    sale_time_start      timestamp comment '商品上架时间',
    applicable_crowd     varchar(30) comment '适用人群（配置表）',
    applicable_age       varchar(30) comment '适用年龄（配置表）',
+   applicable_step      tinyint comment '适用阶段',
    features             text comment '商品描述',
    introduce            varchar(2000) comment '介绍',
    service              varchar(50) comment '服务（配送信息等）',
@@ -158,6 +159,7 @@ create table product
 );
 
 alter table product comment '商品信息';
+
 
 /*==============================================================*/
 /* Table: product_brand                                         */
