@@ -4,7 +4,7 @@ import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
 import com.hbird.common.utils.wrap.Wrapper;
 
 /**
- * 个人基础资料
+ * 购物车
  * @author zyq
  * @version 1.0.0
  * @since 2015-1-4

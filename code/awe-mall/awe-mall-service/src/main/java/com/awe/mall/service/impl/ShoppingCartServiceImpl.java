@@ -3,17 +3,19 @@ package com.awe.mall.service.impl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.awe.mall.service.ShoppingCartService;
 import com.awe.order.sdk.ShoppingCartClient;
 import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
 import com.hbird.common.utils.wrap.Wrapper;
 /**
- * 个人基础资料
+ * 购物车
  * @author zyq
  * @version 1.0.0
  * @since 2015-1-4
  */
+@Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 	
 	private static final Log LOG = LogFactory.getLog(ShoppingCartServiceImpl.class);
