@@ -552,7 +552,7 @@
 
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>
-				<log.logs.path>D:/logs</log.logs.path>
+				<log.logs.path>E:/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
 
 				<!-- 域名配置 -->
