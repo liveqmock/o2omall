@@ -37,6 +37,16 @@
 		<property name="serviceUrlDomain" value="${service.url.domain.order}" />
 	</bean>
 	<!--awe-order-sdk end-->
+	<!--awe-rems-sdk start-->
+	<bean id="returnExchangeClient" class="com.awe.rems.sdk.ReturnExchangeClient">
+		<property name="key" value="${mall.common.key}" />
+		<property name="serviceUrlDomain" value="${service.url.domain.rems}" />
+	</bean>
+	<bean id="refundClient" class="com.awe.rems.sdk.RefundClient">
+		<property name="key" value="${mall.common.key}" />
+		<property name="serviceUrlDomain" value="${service.url.domain.rems}" />
+	</bean>
+	<!--awe-rems-sdk end-->
 	
 	<!-- awe-pms-sdk start -->
 	<bean id="productBrandClient" class="com.awe.pms.sdk.ProductBrandClient">
