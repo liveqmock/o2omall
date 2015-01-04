@@ -23,5 +23,18 @@
 		<property name="key" value="${mall.common.key}" />
 		<property name="serviceUrlDomain" value="${service.url.domain.uc}" />
 	</bean>
-
+	<!--awe-order-sdk start-->
+	<bean id="orderCancelClient" class="com.awe.order.sdk.OrderCancelClient">
+		<property name="key" value="${mall.common.key}" />
+		<property name="serviceUrlDomain" value="${service.url.domain.order}" />
+	</bean>
+	<bean id="ordersClient" class="com.awe.order.sdk.OrdersClient">
+		<property name="key" value="${mall.common.key}" />
+		<property name="serviceUrlDomain" value="${service.url.domain.order}" />
+	</bean>
+	<bean id="shoppingCartClient" class="com.awe.order.sdk.ShoppingCartClient">
+		<property name="key" value="${mall.common.key}" />
+		<property name="serviceUrlDomain" value="${service.url.domain.order}" />
+	</bean>
+	<!--awe-order-sdk end-->
 </beans>
