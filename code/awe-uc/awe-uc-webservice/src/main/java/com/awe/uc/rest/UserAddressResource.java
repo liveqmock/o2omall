@@ -83,7 +83,7 @@ public class UserAddressResource {
         }
         
         UserAddressRequestDto requestDto = request.getContent();
-        if (null == requestDto || null == requestDto.getId()) {
+        if (null == requestDto || null == requestDto.getUserId()) {
             this.logger.error("queryUserAddressList 传入参数有误");
             return WrapMapper.illegalArgument();
         }
