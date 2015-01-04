@@ -31,8 +31,14 @@
 			<groupId>com.awe.mall</groupId>
 			<artifactId>awe-mall-util</artifactId>
 		</dependency>
-		
-		
+		<dependency>
+			<groupId>com.awe.order</groupId>
+			<artifactId>awe-order-sdk</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.awe.rems</groupId>
+			<artifactId>awe-rems-sdk</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.awe.pms</groupId>
 			<artifactId>awe-pms-sdk</artifactId>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.awe.mall</groupId>
 	<artifactId>awe-mall</artifactId>
@@ -13,7 +14,7 @@
 		<module>awe-mall-service</module>
 		<module>awe-mall-web</module>
 	</modules>
-	
+
 	<properties>
 		<hbird-common.version>2.0.0.0</hbird-common.version>
 		<awe-pms-sdk.version>1.0.0.1</awe-pms-sdk.version>
@@ -100,6 +101,16 @@
 			<dependency>
 				<groupId>com.awe.uc</groupId>
 				<artifactId>awe-uc-sdk</artifactId>
+				<version>1.0.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>com.awe.order</groupId>
+				<artifactId>awe-order-sdk</artifactId>
+				<version>1.0.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>com.awe.rems</groupId>
+				<artifactId>awe-rems-sdk</artifactId>
 				<version>1.0.0.1</version>
 			</dependency>
 			<dependency>
@@ -486,7 +497,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -541,9 +552,9 @@
 
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>
-				<log.logs.path>D:/logs</log.logs.path>
+				<log.logs.path>E:/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
-				
+
 				<!-- 域名配置 -->
 				<domain.web>local.mall.shop.hbird.com</domain.web>
 				<domain.webservice>local.mallws.shop.hbird.com</domain.webservice>
@@ -552,7 +563,7 @@
 				<my.web.domain.name>local.mall.shop.hbird.com:8080</my.web.domain.name>
 			</properties>
 		</profile>
-		
+
 		<!--开发环境 -->
 		<profile>
 			<id>dev</id>
@@ -567,7 +578,7 @@
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
-				
+
 				<!-- 域名配置 -->
 				<domain.web>dev.mall.shop.hbird.com</domain.web>
 				<domain.webservice>dev.mallws.shop.hbird.com</domain.webservice>
@@ -591,7 +602,7 @@
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
-				
+
 				<!-- 域名配置 -->
 				<domain.web>test.mall.shop.hbird.com</domain.web>
 				<domain.webservice>test.mallws.shop.hbird.com</domain.webservice>
@@ -615,7 +626,7 @@
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
-				
+
 				<!-- 域名配置 -->
 				<domain.web>mall.shop.hbird.com</domain.web>
 				<domain.webservice>mallws.shop.hbird.com</domain.webservice>
