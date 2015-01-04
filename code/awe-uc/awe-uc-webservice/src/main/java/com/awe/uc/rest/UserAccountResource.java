@@ -1,6 +1,5 @@
 package com.awe.uc.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -17,17 +16,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.hbird.common.utils.security.MD5Util;
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.uc.domain.UserAccount;
 import com.awe.uc.domain.query.UserAccountQuery;
+import com.awe.uc.sdk.api.request.PasswordModifyRequest;
 import com.awe.uc.sdk.api.request.UserAccountRequest;
+import com.awe.uc.sdk.api.request.dto.PasswordModifyRequestDto;
 import com.awe.uc.sdk.api.request.dto.UserAccountRequestDto;
+import com.awe.uc.sdk.api.response.PasswordModifyResponse;
 import com.awe.uc.sdk.api.response.UserAccountResponse;
 import com.awe.uc.sdk.api.response.dto.UserAccountResponseDto;
 import com.awe.uc.service.UserAccountService;
 import com.awe.uc.utils.exceptions.ExistedException;
+import com.hbird.common.utils.security.MD5Util;
+import com.hbird.common.utils.wrap.WrapMapper;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 用户账号REST服务：提供有关用户账号的接口
@@ -112,7 +114,7 @@ public class UserAccountResource {
             if (result) {
                 return WrapMapper.ok();
             } else {
-                logger.warn("用户注册 失败，未知错误， username=" + requestDto.getUsername());
+                logger.warn("用户注册失败，未知错误， username=" + requestDto.getUsername());
                 return WrapMapper.wrap(UserAccountResponse.REGISTER_ERROR_CODE,
                         UserAccountResponse.REGISTER_ERROR_MESSAGE);
             }
@@ -161,7 +163,7 @@ public class UserAccountResource {
                 UserAccountResponseDto responseDto = convert(userAccount);
                 return WrapMapper.ok().result(responseDto);
             } else {
-                logger.warn("用户登录 失败， username=" + requestDto.getUsername());
+                logger.warn("用户登录失败， username=" + requestDto.getUsername());
                 return WrapMapper.wrap(UserAccountResponse.LOGIN_FAIL_CODE, UserAccountResponse.LOGIN_FAIL_MESSAGE);
             }
         } catch (Exception e) {
@@ -169,6 +171,7 @@ public class UserAccountResource {
             return WrapMapper.error();
         }
     }
+
     /**
      * 用户修改密码
      * 
@@ -283,8 +286,6 @@ public class UserAccountResource {
         }
     }
 
-    
-    
     // 数据转换
     private UserAccountResponseDto convert(UserAccount userAccount) {
         if (null == userAccount) {
@@ -294,19 +295,6 @@ public class UserAccountResource {
         UserAccountResponseDto userAccountResponseDto = new UserAccountResponseDto();
         BeanUtils.copyProperties(userAccount, userAccountResponseDto);
         return userAccountResponseDto;
-    }
-
-    // 数据转换
-    private List<UserAccountResponseDto> convertList(List<UserAccount> userAccounts) {
-        if (CollectionUtils.isEmpty(userAccounts)) {
-            return null;
-        }
-
-        List<UserAccountResponseDto> list = new ArrayList<UserAccountResponseDto>(userAccounts.size());
-        for (UserAccount userAccount : userAccounts) {
-            list.add(convert(userAccount));
-        }
-        return list;
     }
 
 }
