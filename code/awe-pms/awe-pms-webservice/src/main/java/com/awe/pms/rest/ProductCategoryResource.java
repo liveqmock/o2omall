@@ -19,6 +19,7 @@ import org.springframework.util.CollectionUtils;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.pms.domain.ProductCategory;
+import com.awe.pms.domain.query.ProductCategoryQuery;
 import com.awe.pms.sdk.api.request.ProductCategoryRequest;
 import com.awe.pms.sdk.api.request.dto.ProductCategoryRequestDto;
 import com.awe.pms.sdk.api.response.dto.ProductCategoryResponseDto;
@@ -72,7 +73,40 @@ public class ProductCategoryResource {
             this.logger.error("查询商品类别数据异常", e);
             return WrapMapper.error();
         }
-    } 
+    }
+    
+    /**
+     * 根据条件查询商品类别信息
+     * 
+     * @param request
+     *            商品类别请求参数
+     * @return 商品类别返回对象
+     * 
+     */
+    @POST
+    @Path("/productCategory/getProductCategorys")
+    public Wrapper<?> getProductCategorys(ProductCategoryRequest request) {
+    	if (null == request || !request.checkSign()) {
+    		this.logger.error("getProductCategorys 拒绝访问");
+    		return WrapMapper.forbidden();
+    	}
+    	
+    	ProductCategoryRequestDto requestDto = request.getContent();
+    	ProductCategoryQuery queryBean = new ProductCategoryQuery();
+    	if (null != requestDto) {
+    		queryBean.setId(requestDto.getId());
+    		queryBean.setFid(requestDto.getFid());
+    	}
+    	
+    	try {
+			List<ProductCategory> productCategorys = this.productCategoryService.queryProductCategoryList(queryBean );
+    		List<ProductCategoryResponseDto> responseDtos = convertList(productCategorys);
+    		return WrapMapper.ok().result(responseDtos);
+    	} catch (Exception e) {
+    		this.logger.error("根据条件查询商品类别信息异常", e);
+    		return WrapMapper.error();
+    	}
+    }
 
     // 数据转换
     private ProductCategoryResponseDto convert(ProductCategory productCategory) {
