@@ -1,5 +1,7 @@
 package com.awe.test.order.rest;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
@@ -7,8 +9,10 @@ import org.springframework.util.Assert;
 import com.awe.test.order.rest.request.ShoppingCartRequest;
 import com.awe.test.order.rest.request.dto.ShoppingCartRequestDto;
 import com.awe.test.order.rest.response.ShoppingCartResponse;
+import com.awe.test.order.rest.response.ShoppingCartResponseList;
 import com.awe.test.order.rest.response.dto.ShoppingCartResponseDto;
 import com.hbird.common.client.AbstractClient;
+import com.hbird.common.utils.wrap.WrapMapper;
 
 /**
  * ShoppingCartResource单元测试
@@ -97,4 +101,5 @@ public class ShoppingCartResourceTestCase extends AbstractClient {
         ShoppingCartResponse response = super.getRestTemplate().postForObject(url, request, ShoppingCartResponse.class);
         Assert.notNull(response);
         Assert.isTrue(WrapMapper.ok().getMessage().equals(response.getMessage()));
+    }
 }
