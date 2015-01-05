@@ -25,9 +25,30 @@ public class ShoppingCartResourceTestCase extends AbstractClient {
         afterPropertiesSet();
     }
     
+    /**
+     * 购物车列表数据获取
+     * @result : 测试通过
+     */
     @Test
-    public void testGetShoppingCart() {
-        String url= getServiceUrlDomain() + "/shoppingCart/getShoppingCart";
+    public void testQueryShoppingCartList(){
+    	String url= getServiceUrlDomain() + "/shoppingCart/queryShoppingCartList";
+
+        ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
+        requestDto.setUserNo("1");
+        ShoppingCartRequest request = new ShoppingCartRequest("order",requestDto);
+        
+        ShoppingCartResponseList responseList = super.getRestTemplate().postForObject(url, request, ShoppingCartResponseList.class);
+        Assert.notNull(responseList);
+        List<ShoppingCartResponseDto> shoppingCartResponseDtoList = super.getResult(responseList);
+        Assert.notNull(shoppingCartResponseDtoList);
+    }
+    /**
+     * 删除购物车指定商品数据
+     * @result : 测试通过
+     */
+    @Test
+    public void deleteShoppingCartById(){
+    	String url= getServiceUrlDomain() + "/shoppingCart/deleteShoppingCartById";
 
         ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
         requestDto.setId(1l);
@@ -35,21 +56,45 @@ public class ShoppingCartResourceTestCase extends AbstractClient {
         
         ShoppingCartResponse response = super.getRestTemplate().postForObject(url, request, ShoppingCartResponse.class);
         Assert.notNull(response);
-        ShoppingCartResponseDto shoppingCartResponseDto = super.getResult(response);
-        Assert.notNull(shoppingCartResponseDto);
+        Assert.isTrue(WrapMapper.ok().getMessage().equals(response.getMessage()));
     }
-    
+    /**
+     * 添加购物车
+     * @result : 测试通过
+     */
     @Test
-    public void testQueryShoppingCartList() {
-        String url= getServiceUrlDomain() + "/shoppingCart/queryShoppingCartList";
+    public void addShoppingCart(){
+    	String url= getServiceUrlDomain() + "/shoppingCart/addShoppingCart";
 
         ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
-        requestDto.setUserNo("1");
+        requestDto.setSeller("好再来商家");
+        requestDto.setSellerNo("120");
+        requestDto.setSkuCount(1);
+        requestDto.setSkuNo("1245214");
+        requestDto.setStatus(1);
+        requestDto.setUserNo("2");
+        requestDto.setCreateUser("张三");
+        requestDto.setUpdateUser("张三");
         ShoppingCartRequest request = new ShoppingCartRequest("order",requestDto);
         
         ShoppingCartResponse response = super.getRestTemplate().postForObject(url, request, ShoppingCartResponse.class);
         Assert.notNull(response);
-        ShoppingCartResponseDto shoppingCartResponseDto = super.getResult(response);
-        Assert.notNull(shoppingCartResponseDto);
+        Assert.isTrue(WrapMapper.ok().getMessage().equals(response.getMessage()));
     }
+    /**
+     * 更新购物车数据
+     * @result : 测试通过
+     */
+    @Test
+    public void updateShoppingCart(){
+    	String url= getServiceUrlDomain() + "/shoppingCart/updateShoppingCart";
+
+        ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
+        requestDto.setId(1l);
+        requestDto.setSkuCount(100);
+        ShoppingCartRequest request = new ShoppingCartRequest("order",requestDto);
+        
+        ShoppingCartResponse response = super.getRestTemplate().postForObject(url, request, ShoppingCartResponse.class);
+        Assert.notNull(response);
+        Assert.isTrue(WrapMapper.ok().getMessage().equals(response.getMessage()));
 }
