@@ -25,7 +25,7 @@
 			errorClass:"reds",
 			rules: {
 				username: {required: true, mobile: true},
-				password: {required: true, minlength: 6, maxlength: 9},
+				password: {required: true, minlength: 6, maxlength: 30},
 				password2: {required: true, equalTo:"#password"},
 				checkCode: {required: true}
 			},
@@ -34,11 +34,21 @@
 				password: { required: "请输入密码", minlength: jQuery.validator.format("请输入长度最少是{0}位的密码"), maxlength: jQuery.validator.format("请输入长度最多是{0}位的密码")},
 				password2: { required: "请重复输入密码",equalTo:"输入值必须和上面的密码相同"},
 				checkCode: { required: "请输入验证码"}
-			}
+			},
+			errorPlacement: function(error, element) {
+                if ( element.is("#checkCode") )
+                    error.appendTo( element.parent().last());
+                else
+                    error.appendTo( element.parent());
+            }
 		});
 	  	$('#register_btn').click(function() {    
         	var form = $("#registerForm");
 			if(form.valid()==false){
+				return;
+			}
+			if($('#register_ck').is(':checked')==false){
+				alert("请同意《Awesome服务协议》");
 				return;
 			}
 			form.submit();
@@ -71,7 +81,7 @@
                             <li><input type="text" class="login_code left" id="checkCode" name="checkCode" placeholder="请输入验证码" />
 								<img id="imageCode" src="#springUrl('')/checkCode/createImage" class="lp_img left" title="看不清，点击换一张" style="cursor: pointer;" />
                             </li> 
-                            <li class="consent"><input type="checkbox"  />同意《Awesome服务协议》</li>
+                            <li class="consent"><input type="checkbox" name="register_ck" id="register_ck" />同意《Awesome服务协议》</li>
                             <li><input type="button" name="register_btn" id="register_btn" class="login_btn" value="提交注册" /></li>
                         </ul>
                     </form>

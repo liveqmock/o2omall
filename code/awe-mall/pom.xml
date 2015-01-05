@@ -544,15 +544,9 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<!--数据库配置 -->
-				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://dev-ip:3306/mall?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
-				<database.jdbc.username>username</database.jdbc.username>
-				<database.jdbc.password>password</database.jdbc.password>
-
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>
-				<log.logs.path>E:/logs</log.logs.path>
+				<log.logs.path>D:/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
 
 				<!-- 域名配置 -->
@@ -568,12 +562,6 @@
 		<profile>
 			<id>dev</id>
 			<properties>
-				<!--数据库配置 -->
-				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://dev-ip:3306/mall?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
-				<database.jdbc.username>username</database.jdbc.username>
-				<database.jdbc.password>password</database.jdbc.password>
-
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
@@ -592,12 +580,6 @@
 		<profile>
 			<id>test</id>
 			<properties>
-				<!--数据库配置 -->
-				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://test-ip:3306/mall?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
-				<database.jdbc.username>username</database.jdbc.username>
-				<database.jdbc.password>password</database.jdbc.password>
-
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
@@ -616,12 +598,6 @@
 		<profile>
 			<id>release</id>
 			<properties>
-				<!--数据库配置 -->
-				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://release-ip:3306/mall?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
-				<database.jdbc.username>username</database.jdbc.username>
-				<database.jdbc.password>password</database.jdbc.password>
-
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
