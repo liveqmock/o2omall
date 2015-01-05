@@ -226,7 +226,7 @@ public class UserAccountResource {
                 return WrapMapper.error();
             }
         } catch (Exception e) {
-            logger.error("修改登录密码异常， username=" + requestDto.getUsername(),e);
+            logger.error("修改登录密码异常， username=" + requestDto.getUsername(), e);
             return WrapMapper.error();
         }
     }
@@ -247,8 +247,7 @@ public class UserAccountResource {
 
         PasswordModifyRequestDto requestDto = request.getContent();
         if (null == requestDto || StringUtils.isBlank(requestDto.getUsername())
-                || StringUtils.isBlank(requestDto.getOldPassword()) || StringUtils.isBlank(requestDto.getNewPassword())
-                || StringUtils.isBlank(requestDto.getMobile())) {
+                || StringUtils.isBlank(requestDto.getNewPassword()) || StringUtils.isBlank(requestDto.getMobile())) {
             this.logger.error("resetPassword 传入参数有误");
             return WrapMapper.illegalArgument();
         }
@@ -281,7 +280,7 @@ public class UserAccountResource {
                 return WrapMapper.error();
             }
         } catch (Exception e) {
-            logger.error("用户重置密码异常， username=" + requestDto.getUsername(),e);
+            logger.error("用户重置密码异常， username=" + requestDto.getUsername(), e);
             return WrapMapper.error();
         }
     }
