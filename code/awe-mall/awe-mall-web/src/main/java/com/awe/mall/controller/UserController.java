@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.mall.controller.base.BaseController;
 import com.awe.mall.service.UserAccountService;
@@ -61,7 +62,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login(Model model, String forwardUrl) {
         logger.debug("go to login page");
-        model.addAttribute("navFlag", "login"); // 导航标识，无标识
+        model.addAttribute("navFlag", "login"); // 页面主要导航标识，无标识
         model.addAttribute(FORWARD_URL, forwardUrl);
         return VIEW_LOGIN;
     }
@@ -219,8 +220,10 @@ public class UserController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "modifyPasswordForward", method = RequestMethod.GET)
-    public String modifyPasswordForward(Model model) {
+    @RequestMapping(value = "modifyPassword", method = RequestMethod.GET)
+    public String modifyPassword(Model model) {
+        model.addAttribute("navFlag", "member"); // 页面主要导航标识，‘我的‘
+        model.addAttribute("leftFlag", "modifyPassword");//我的订单-左边菜单标志
         return "user/modifyPassword";
     }
 
@@ -241,9 +244,18 @@ public class UserController extends BaseController {
      *            随机图片验证码
      * @return
      */
-    @RequestMapping("modifyPassword")
-    public Wrapper<?> modifyPassword(Model model, HttpServletRequest request, String username, String oldPassword,
+    @RequestMapping("doModifyPassword")
+    @ResponseBody
+    public Wrapper<?> doModifyPassword(Model model, HttpServletRequest request, String username, String oldPassword,
             String newPassword, String smsCode, String checkCode) {
+        if (StringUtils.isBlank(username) || StringUtils.isBlank(oldPassword) || StringUtils.isBlank(newPassword)
+                || StringUtils.isBlank(smsCode) || StringUtils.isBlank(checkCode)) {
+            return WrapMapper.error().message(MSG_VALUE_ILLEGAL);
+        } else if (!validateCheckCode(checkCode, request) || !validateSmsCode(smsCode, request)) {
+            return WrapMapper.error().message(MSG_CHECK_CODE_ERROR);
+        }
+        
+        this.logger.info("modifyPassword: username=" + username);
         try {
             PasswordModifyRequestDto requestDto = new PasswordModifyRequestDto();
             requestDto.setUsername(username);
@@ -261,9 +273,8 @@ public class UserController extends BaseController {
             logger.error("modifyPassword has error,", e);
             return WrapMapper.error();
         }
+
     }
-
-
 
     /**
      * 进入用户重置密码页面
@@ -271,11 +282,11 @@ public class UserController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "resetPasswordForward", method = RequestMethod.GET)
-    public String resetPasswordForward(Model model) {
+    @RequestMapping(value = "resetPassword", method = RequestMethod.GET)
+    public String resetPassword(Model model) {
         return "user/resetPassword";
     }
-    
+
     /**
      * 用户重置密码事件
      * 
@@ -291,8 +302,9 @@ public class UserController extends BaseController {
      *            随机图片验证码
      * @return
      */
-    @RequestMapping("resetPassword")
-    public Wrapper<?> resetPassword(Model model, HttpServletRequest request, String username, String newPassword,
+    @RequestMapping("doResetPassword")
+    @ResponseBody
+    public Wrapper<?> doResetPassword(Model model, HttpServletRequest request, String username, String newPassword,
             String smsCode, String checkCode) {
         try {
             PasswordModifyRequestDto requestDto = new PasswordModifyRequestDto();
