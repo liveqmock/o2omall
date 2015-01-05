@@ -1,6 +1,9 @@
 package com.awe.mall.service;
 
+import java.util.List;
+
 import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
+import com.awe.order.sdk.response.dto.ShoppingCartResponseDto;
 import com.hbird.common.utils.wrap.Wrapper;
 
 /**
@@ -16,7 +19,7 @@ public interface ShoppingCartService {
 	 * @param requestDto
 	 * @return
 	 */
-	public Wrapper<?> queryShoppingCartList(ShoppingCartRequestDto requestDto);
+	public List<ShoppingCartResponseDto> queryShoppingCartList(ShoppingCartRequestDto requestDto);
 	
 	/**
 	 * 删除购物车指定商品数据
