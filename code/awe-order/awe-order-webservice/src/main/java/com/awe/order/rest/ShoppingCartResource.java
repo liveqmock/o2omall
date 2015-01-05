@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeanUtils;
@@ -90,7 +91,7 @@ public class ShoppingCartResource {
         }
         
         ShoppingCartRequestDto requestDto = request.getContent();
-        if (null == requestDto || null == requestDto.getUserNo()) {
+        if (null == requestDto || StringUtils.isEmpty(requestDto.getUserNo())) {
             this.logger.error("queryShoppingCartList 传入参数有误");
             return WrapMapper.illegalArgument();
         }
@@ -152,18 +153,14 @@ public class ShoppingCartResource {
         }
         
         ShoppingCartRequestDto requestDto = request.getContent();
-        if (null == requestDto || null == requestDto.getId()) {
+        if (null == requestDto || StringUtils.isEmpty(requestDto.getUserNo())) {
             this.logger.error("addShoppingCart 传入参数有误");
             return WrapMapper.illegalArgument();
         }
         try {
         	ShoppingCart shoppingCart = new ShoppingCart();
-        	shoppingCart.setSkuNo(requestDto.getSkuNo());
-        	shoppingCart.setCreateUser(requestDto.getCreateUser());
-        	shoppingCart.setSkuCount(requestDto.getSkuCount());
-        	shoppingCart.setStatus(requestDto.getStatus());
-        	requestDto.setUpdateUser(requestDto.getUpdateUser());
-        	requestDto.setUserNo(requestDto.getUserNo());
+
+        	BeanUtils.copyProperties(requestDto,shoppingCart);
         	boolean ret = shoppingCartService.insert(shoppingCart);
         	if(ret){
         		return WrapMapper.ok();
@@ -195,12 +192,8 @@ public class ShoppingCartResource {
         }
         try {
         	ShoppingCart shoppingCart = new ShoppingCart();
-        	shoppingCart.setSkuNo(requestDto.getSkuNo());
-        	shoppingCart.setCreateUser(requestDto.getCreateUser());
-        	shoppingCart.setSkuCount(requestDto.getSkuCount());
-        	shoppingCart.setStatus(requestDto.getStatus());
-        	requestDto.setUpdateUser(requestDto.getUpdateUser());
-        	requestDto.setUserNo(requestDto.getUserNo());
+
+        	BeanUtils.copyProperties(requestDto,shoppingCart);
         	boolean ret = shoppingCartService.update(shoppingCart);
         	if(ret){
         		return WrapMapper.ok();
