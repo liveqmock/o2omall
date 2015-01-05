@@ -109,7 +109,7 @@
                 return;
             }
             $("#update-btn-submit").attr("disabled","true");
-            jQuery.post('$basePath/orders/update',
+            jQuery.post('$basePath/orders/updateAdress',
                     form.serialize(),
                     function(data) {
 					 MyPopWindow.SubmitCompletedCallback2(data, "$basePath/orders"); }

@@ -155,6 +155,8 @@ public class UserAddressResource {
          }
          try {
         	 UserAddress userAddress = new UserAddress();
+        	 userAddress.setId(requestDto.getId());
+        	 userAddress.setName(requestDto.getName());
         	 userAddress.setUserId(requestDto.getUserId());
         	 userAddress.setProvinceNo(requestDto.getProvinceNo());
         	 userAddress.setProvinceName(requestDto.getProvinceName());

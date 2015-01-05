@@ -22,14 +22,15 @@
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 		<result column="yn" property="yn" jdbcType="DECIMAL" />
+		<result column="isdefault" property="isdefault" jdbcType="DECIMAL" />
     </resultMap>
     
     <sql id="userAddressColumns">
-    	id,user_id,name,province_name,province_no,city_name,city_no,county_name,county_no,address,mobile,phone,email,zipcode,create_user,update_user,create_time,update_time,yn
+    	id,user_id,name,province_name,province_no,city_name,city_no,county_name,county_no,address,mobile,phone,email,zipcode,create_user,update_user,create_time,update_time,yn,isdefault
     </sql>
     
      <sql id="userAddressUsedColumns">
-    	user_id,name,province_name,province_no,city_name,city_no,county_name,county_no,address,mobile,phone,email,zipcode,create_user,update_user,create_time,update_time,yn
+    	user_id,name,province_name,province_no,city_name,city_no,county_name,county_no,address,mobile,phone,email,zipcode,create_user,update_user,create_time,update_time,yn,isdefault
     </sql>
 
     <!-- 创建信息 -->

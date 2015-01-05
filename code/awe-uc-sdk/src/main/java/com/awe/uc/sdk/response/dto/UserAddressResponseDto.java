@@ -1,6 +1,7 @@
 package com.awe.uc.sdk.response.dto;
 
 import com.hbird.common.sdk.api.dto.HbirdDto;
+
 import java.util.Date;
 
 /**
@@ -54,6 +55,8 @@ public class UserAddressResponseDto extends HbirdDto {
     private Date updateTime; 
     /** 是否有效: 1-有效, 0-无效 */
     private Integer yn; 
+    /**是否默认: 1- 默认,0-不默认*/
+    private Integer isdefault;
     
     /**
      * get 自增Id
@@ -396,4 +399,22 @@ public class UserAddressResponseDto extends HbirdDto {
     public void setYn(Integer yn) {
         this.yn = yn;
     }
+    
+    /**
+     * get 是否默认: 1-默认, 0-不默认
+     * 
+     * @return the isdefault
+     */
+	public Integer getIsdefault() {
+		return isdefault;
+	}
+
+	/**
+     * set 是否默认: 1-默认, 0-不默认
+     * 
+     * @param isdefault the isdefault to set
+     */
+	public void setIsdefault(Integer isdefault) {
+		this.isdefault = isdefault;
+	}
 }

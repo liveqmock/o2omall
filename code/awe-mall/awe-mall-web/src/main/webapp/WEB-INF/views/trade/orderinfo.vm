@@ -76,7 +76,19 @@ background: linear-gradient(top,#b11a1a,#bf2626);
  		//2:去掉边框颜色
 		var div = document.getElementById("user_Info");
 		    div.style.border = "";
-		
+		//3:保存方法	
+		var form = $("#mall_form");	
+		jQuery.post('#springUrl('')/orderinfo/updateAdress',
+                    form.serialize(),
+                    function(data) {
+    					if(data!=null && data.code==200){
+    					  user_address();
+    					}else{
+						
+    					}
+					 
+					 }
+            );
  	}
 	
 	//加载当前用户地址数据
@@ -95,7 +107,11 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 						txt = item.name +"  "+ item.mobile +" "+ item.phone+"<p>"+"<br/>"+ item.provinceName + " "+ item.cityName +" "+ item.countyName +" "+item.address;
 						txtRadio=  item.name +"  "+ item.mobile +" "+ item.phone+" "+ item.provinceName + " "+ item.cityName +" "+ item.countyName +" "+item.address;
 						//全部地址  <input type="radio" name="address" id="radioaddress" value="1" onchange="myradio();" checked />张三
+						if(item.isdefault == 1){
+						$('#user_radio').append("<input checked type='radio' name='address' id='radioaddress' onchange='myradio();'/> "+txtRadio+"  <a href='javascript:void(0)' onclick='queryAddress("+item.id+")'><font color='blue'>编辑</font></a>   | <a href='javascript:void(0)'><font color='blue'>删除</font></a>  <p><br/> ");
+						}else{
 						$('#user_radio').append("<input type='radio' name='address' id='radioaddress' onchange='myradio();'/> "+txtRadio+"  <a href='javascript:void(0)' onclick='queryAddress("+item.id+")'><font color='blue'>编辑</font></a>   | <a href='javascript:void(0)'><font color='blue'>删除</font></a>  <p><br/> ");
+						}
 					});
 					$("#user_text").html(txt);
 					//新增radio
@@ -210,8 +226,16 @@ background: linear-gradient(top,#b11a1a,#bf2626);
     		dataType : 'json',
     		success: function(data){
     			if(data!=null && data.code==200 && data.result!=null){
-    				$.each(data.result,function(i,item){
-					});
+				$("#mall_name").val(data.result.name);//收货人
+				$("#mall_address").val(data.result.address);//详细地址
+				$("#mobile").val(data.result.mobile);//移动电话
+				$("#email").val(data.result.email);//邮箱
+				$("#mall_id").val(data.result.id);//id
+				//给省市县 select 赋值
+				 $('#provinceNo').append("<option selected value='" + data.result.provinceNo + "'>" + data.result.provinceName + "</option>");
+				 $('#cityNo').append("<option selected value='" + data.result.cityNo + "'>" + data.result.cityName + "</option>");
+				 $('#countyNo').append("<option selected value='" + data.result.countyNo + "'>" + data.result.countyName + "</option>");
+				 $("#add_address").show();
 				} else {
     				//alert("获取单个地区失败");
     			}
@@ -247,6 +271,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 	             	
 	             	<br/>
 	             	<div id="add_address">
+                    <form id="mall_form">	
                     <table width="570">
                     	<tr>
                             <td width="102"  align="right">
@@ -254,7 +279,10 @@ background: linear-gradient(top,#b11a1a,#bf2626);
                                 <em><font color="#FF0000">*&nbsp;&nbsp;</font></em>收货人:
                                 </span>
                             </td>
-                            <td width="456">&nbsp;&nbsp;<input type="text"  style="width:300px;height:25px;"/></td>
+                            <td width="456">&nbsp;&nbsp;<input type="text" name="name" id="mall_name" style="width:300px;height:25px;"/>
+								<input type="hidden" name="id" id="mall_id"/>
+								<input type="hidden" name="isdefault" id="isdefault" value="1"/>
+							</td>
                         </tr>
                           <tr><td><br/></td><td></td></tr>
                         <tr>
@@ -276,7 +304,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
                                 <em><font color="#FF0000">*&nbsp;&nbsp;</font></em>详细地址:
                                 </span>
                             </td>
-                             <td width="456">&nbsp;&nbsp;<input type="text"  style="width:300px;height:25px;"/></td>
+                             <td width="456">&nbsp;&nbsp;<input type="text" name="address" id="mall_address" style="width:300px;height:25px;"/></td>
                         </tr>
                           <tr><td><br/></td><td></td></tr>
                         <tr>
@@ -285,7 +313,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
                                 <em><font color="#FF0000">*&nbsp;&nbsp;</font></em>手机号码:
                                 </span>
                             </td>
-                             <td width="456">&nbsp;&nbsp;<input type="text"  style="width:300px;height:25px;"/></td>
+                             <td width="456">&nbsp;&nbsp;<input type="text" name="mobile" id="mall_mobile" style="width:300px;height:25px;"/></td>
                         </tr>
                           <tr><td><br/></td><td></td></tr>
                         <tr>
@@ -294,10 +322,11 @@ background: linear-gradient(top,#b11a1a,#bf2626);
                                 <em><font color="#FF0000">*&nbsp;&nbsp;</font></em>邮箱:
                                 </span>
                             </td>
-                             <td width="456">&nbsp;&nbsp;<input type="text"  style="width:300px;height:25px;"/></td>
+                             <td width="456">&nbsp;&nbsp;<input type="text" name="email" id="mall_email" style="width:300px;height:25px;"/></td>
                         </tr>
                         <tr><td><br/></td><td></td></tr>
-                    </table>            
+                    </table>
+					</form>
                  </div>
 					<button type="button" class="button red" onclick="saveAddress();">保存收货人信息</button>
              </div>

@@ -33,7 +33,7 @@ public class OrderInfoController extends BaseController{
 	
 	private static final Log LOG = LogFactory.getLog(OrderInfoController.class);
 	
-	private static final String VIEW_WORKSPACE = "myorder/";
+	private static final String VIEW_WORKSPACE = "trade/";
 	private static final String VIEW_order_info = "orderinfo";
 	
 	@Autowired
@@ -73,6 +73,14 @@ public class OrderInfoController extends BaseController{
     }
 	 
 	 
+	 /**
+	  * 根据id查询单个地址
+	  * Date:2015年1月5日下午1:53:58
+	  * user:js
+	  * @param model
+	  * @param requestDto
+	  * @return
+	  */
 	 @RequestMapping("addr")
 	 @ResponseBody
      public Wrapper<?> addr(Model model, UserAddressRequestDto requestDto) {
@@ -89,6 +97,26 @@ public class OrderInfoController extends BaseController{
             return WrapMapper.error();
         }
     } 
+	 
+
+	 /**
+	  * 根据id修改
+	  * Date:2015年1月5日下午1:54:19
+	  * user:js
+	  * @param requestDto
+	  * @return
+	  */
+	 @RequestMapping("updateAdress")
+	 @ResponseBody
+	 public Wrapper<?> updateAdress(UserAddressRequestDto requestDto) {
+			Wrapper<?> wrapper = null;
+			try {
+				wrapper = userAddressService.update(requestDto);
+			} catch (Exception e) {
+				LOG.error("#UserAddressServiceImpl.update# Error:" + e);
+			}
+			return wrapper;
+		}
 	
 	
 	

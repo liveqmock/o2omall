@@ -124,6 +124,7 @@ public class UserAddressServiceTestCase extends BaseTransactionTestCase {
         userAddress.setId(TEST_DEFAULT_EXIST_ID);
         userAddress.setPhone("010-66668888");
         userAddress.setUpdateUser(TestConstants.UER_NAME);
+        userAddress.setIsdefault(1);
         boolean result = userAddressService.update(userAddress);
         Assert.isTrue(result);
     }
