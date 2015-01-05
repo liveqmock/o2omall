@@ -38,4 +38,18 @@ public class ShoppingCartResourceTestCase extends AbstractClient {
         ShoppingCartResponseDto shoppingCartResponseDto = super.getResult(response);
         Assert.notNull(shoppingCartResponseDto);
     }
+    
+    @Test
+    public void testQueryShoppingCartList() {
+        String url= getServiceUrlDomain() + "/shoppingCart/queryShoppingCartList";
+
+        ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
+        requestDto.setUserNo("1");
+        ShoppingCartRequest request = new ShoppingCartRequest("order",requestDto);
+        
+        ShoppingCartResponse response = super.getRestTemplate().postForObject(url, request, ShoppingCartResponse.class);
+        Assert.notNull(response);
+        ShoppingCartResponseDto shoppingCartResponseDto = super.getResult(response);
+        Assert.notNull(shoppingCartResponseDto);
+    }
 }
