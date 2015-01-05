@@ -109,24 +109,13 @@ public class UserAddressResource {
          }
          
          UserAddressRequestDto requestDto = request.getContent();
-         if (null == requestDto || null == requestDto.getId()) {
+         if (null == requestDto || null == requestDto.getUserId()) {
              this.logger.error("insert 传入参数有误");
              return WrapMapper.illegalArgument();
          }
          try {
         	 UserAddress userAddress = new UserAddress();
-        	 userAddress.setUserId(requestDto.getUserId());
-        	 userAddress.setProvinceNo(requestDto.getProvinceNo());
-        	 userAddress.setProvinceName(requestDto.getProvinceName());
-        	 userAddress.setCityNo(requestDto.getCityNo());
-        	 userAddress.setCityName(requestDto.getCityName());
-        	 userAddress.setCountyNo(requestDto.getCountyNo());
-        	 userAddress.setCountyName(requestDto.getCountyName());
-        	 userAddress.setAddress(requestDto.getAddress());
-        	 userAddress.setMobile(requestDto.getMobile());
-        	 userAddress.setPhone(requestDto.getPhone());
-        	 userAddress.setEmail(requestDto.getEmail());
-        	 userAddress.setIsdefault(requestDto.getIsdefault());
+        	 BeanUtils.copyProperties(requestDto, userAddress);
         	 boolean ret = userAddressService.insert(userAddress);
         	 if(ret){
         		 return WrapMapper.ok();

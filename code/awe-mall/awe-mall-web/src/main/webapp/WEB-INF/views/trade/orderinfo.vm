@@ -61,12 +61,22 @@ background: linear-gradient(top,#b11a1a,#bf2626);
  	function myradio(){
  	   var address = $("input[id='radioaddress']:checked").val();
  	   if(address == '0'){
+	   		//清空
+            $("#mall_name").val('');//收货人
+			$("#mall_address").val('');//详细地址
+			$("#mall_mobile").val('');//移动电话
+			$("#mall_email").val('');//邮箱
+			$("#mall_id").val('');//id
+			
+			$("#cityNo").empty();
+	        $("#countyNo").empty();
+			
  	   	  $("#add_address").show();
  	   }else{
 	      $("#add_address").hide();
 	   }
  	}
- 	//点击保存新地址
+ 	//---------------------------------------点击保存新地址-----------------------------------------------
  	function saveAddress(){
  		//1:隐藏新增框
  		$("#add_address").hide();
@@ -76,19 +86,58 @@ background: linear-gradient(top,#b11a1a,#bf2626);
  		//2:去掉边框颜色
 		var div = document.getElementById("user_Info");
 		    div.style.border = "";
-		//3:保存方法	
+		var type = $("#mall_id").val();
 		var form = $("#mall_form");	
-		jQuery.post('#springUrl('')/orderinfo/updateAdress',
-                    form.serialize(),
-                    function(data) {
-    					if(data!=null && data.code==200){
-    					  user_address();
-    					}else{
-						
-    					}
-					 
-					 }
-            );
+		//获取select的值
+		var provinceName=$("#provinceNo").find("option:selected").text();  //获取Select选择的Text
+        var provinceNo=$("#provinceNo").val();  //获取Select选择的Value
+		
+		var cityName=$("#cityNo").find("option:selected").text();  //获取Select选择的Text
+        var cityNo=$("#cityNo").val();  //获取Select选择的Value
+		var countyName=$("#countyNo").find("option:selected").text();  //获取Select选择的Text
+        var countyNo=$("#countyNo").val();  //获取Select选择的Value
+		
+		$("#mall_provinceName").val(provinceName);
+		$("#mall_provinceNo").val(provinceNo);
+		
+		$("#mall_cityName").val(cityName);
+		$("#mall_cityNo").val(cityNo);
+		
+		$("#mall_countyName").val(countyName);
+		$("#mall_countyNo").val(countyNo);
+		
+		if(type != ''){
+    		//3:修改
+    		jQuery.post('#springUrl('')/orderinfo/updateAdress',
+                        form.serialize(),
+                        function(data) {
+        					if(data!=null && data.code==200){
+    						  //现清空div
+    						  $("#user_radio").empty();
+    						  //重新加载
+        					  user_address();
+        					}else{
+    						 alert("修改失败");
+        					}
+    					 }
+                );
+		}else{
+		   //添加
+    		jQuery.post('#springUrl('')/orderinfo/addAddress',
+                        form.serialize(),
+                        function(data) {
+        					if(data!=null && data.code==200){
+    						  //现清空div
+    						  $("#user_radio").empty();
+    						  //重新加载
+        					  user_address();
+        					}else{
+    						 alert("修改失败");
+        					}
+    					 }
+                );
+		}
+		
  	}
 	
 	//加载当前用户地址数据
@@ -104,13 +153,17 @@ background: linear-gradient(top,#b11a1a,#bf2626);
     			if(data!=null && data.code==200 && data.result!=null){
 				   var txtRadio='';
     				$.each(data.result,function(i,item){
-						txt = item.name +"  "+ item.mobile +" "+ item.phone+"<p>"+"<br/>"+ item.provinceName + " "+ item.cityName +" "+ item.countyName +" "+item.address;
-						txtRadio=  item.name +"  "+ item.mobile +" "+ item.phone+" "+ item.provinceName + " "+ item.cityName +" "+ item.countyName +" "+item.address;
+					    var phone = item.phone;
+						if(item.phone == null){
+						    phone = '';
+						}
+						txtRadio=  item.name +"    "+ item.mobile  +"    "+ phone+" "+ item.provinceName + " "+ item.cityName +" "+ item.countyName +" "+item.address;
 						//全部地址  <input type="radio" name="address" id="radioaddress" value="1" onchange="myradio();" checked />张三
 						if(item.isdefault == 1){
-						$('#user_radio').append("<input checked type='radio' name='address' id='radioaddress' onchange='myradio();'/> "+txtRadio+"  <a href='javascript:void(0)' onclick='queryAddress("+item.id+")'><font color='blue'>编辑</font></a>   | <a href='javascript:void(0)'><font color='blue'>删除</font></a>  <p><br/> ");
+						txt = item.name + "    " + item.mobile +"   "+ phone+"<p>"+"<br/>"+ item.provinceName + " "+ item.cityName +" "+ item.countyName +" "+item.address;
+						$('#user_radio').append("<input checked type='radio' name='address' id='radioaddress' onchange='myradio();'/> "+txtRadio+"  <a href='javascript:void(0)' onclick='queryAddress("+item.id+")'><font color='blue'>编辑</font></a>   | <a href='javascript:void(0)' onclick='deleteAddress("+item.id+")'><font color='blue'>删除</font></a>  <p><br/> ");
 						}else{
-						$('#user_radio').append("<input type='radio' name='address' id='radioaddress' onchange='myradio();'/> "+txtRadio+"  <a href='javascript:void(0)' onclick='queryAddress("+item.id+")'><font color='blue'>编辑</font></a>   | <a href='javascript:void(0)'><font color='blue'>删除</font></a>  <p><br/> ");
+						$('#user_radio').append("<input type='radio' name='address' id='radioaddress' onchange='myradio();'/> "+txtRadio+"  <a href='javascript:void(0)' onclick='queryAddress("+item.id+")'><font color='blue'>编辑</font></a>   | <a href='javascript:void(0)' onclick='deleteAddress("+item.id+")'><font color='blue'>删除</font></a>  <p><br/> ");
 						}
 					});
 					$("#user_text").html(txt);
@@ -128,6 +181,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
  	
 	//获取省信息
 	function province(){
+	$("#provinceNo").empty();
 	$("#cityNo").empty();
 	$("#countyNo").empty();
 		jQuery.ajax({
@@ -138,12 +192,9 @@ background: linear-gradient(top,#b11a1a,#bf2626);
     			if(data!=null && data.code==200 && data.result!=null){
     				var r = data.result;
 					if(r.length > 0){
+					    $('#provinceNo').append("<option value=''>请选择</option>");
 						$.each(data.result,function(i,item){
-						if($("#hd_province").val() == item.code){
-						     $('#provinceNo').append("<option selected value='" + item.code+ "'>" + item.name + "</option>");
-						  }else{
-						  	 $('#provinceNo').append("<option value='" + item.code+ "'>" + item.name + "</option>");
-						  }
+						 $('#provinceNo').append("<option value='" + item.code+ "'>" + item.name + "</option>");
 						});
 					}		
     			} else {
@@ -170,11 +221,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 					if(r.length > 0){
 					    $('#cityNo').append("<option value=''>请选择</option>");
 						$.each(data.result,function(i,item){
-						if($("#hd_province").val() == item.code){
-						     $('#cityNo').append("<option selected value='" + item.code+ "'>" + item.name + "</option>");
-						  }else{
 						  	 $('#cityNo').append("<option value='" + item.code+ "'>" + item.name + "</option>");
-						  }
 						});
 					}		
     			} else {
@@ -201,11 +248,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 					if(r.length > 0){
 					 $('#countyNo').append("<option value=''>请选择</option>");
 						$.each(data.result,function(i,item){
-						if($("#hd_county").val() == item.code){
-                        	 $('#countyNo').append("<option selected value='" + item.code+ "'>" + item.name + "</option>");
-						}else{
 							  $('#countyNo').append("<option value='" + item.code+ "'>" + item.name + "</option>");
-						}
 						});
 					}
     			} else {
@@ -228,11 +271,11 @@ background: linear-gradient(top,#b11a1a,#bf2626);
     			if(data!=null && data.code==200 && data.result!=null){
 				$("#mall_name").val(data.result.name);//收货人
 				$("#mall_address").val(data.result.address);//详细地址
-				$("#mobile").val(data.result.mobile);//移动电话
-				$("#email").val(data.result.email);//邮箱
+				$("#mall_mobile").val(data.result.mobile);//移动电话
+				$("#mall_email").val(data.result.email);//邮箱
 				$("#mall_id").val(data.result.id);//id
 				//给省市县 select 赋值
-				 $('#provinceNo').append("<option selected value='" + data.result.provinceNo + "'>" + data.result.provinceName + "</option>");
+				 $("#provinceNo").find("option[text='data.result.provinceName']").attr("selected",true);
 				 $('#cityNo').append("<option selected value='" + data.result.cityNo + "'>" + data.result.cityName + "</option>");
 				 $('#countyNo').append("<option selected value='" + data.result.countyNo + "'>" + data.result.countyName + "</option>");
 				 $("#add_address").show();
@@ -246,6 +289,26 @@ background: linear-gradient(top,#b11a1a,#bf2626);
     	});
 	}
 
+	function deleteAddress(id){
+		jQuery.ajax({
+    		type: "GET",
+    		url: "#springUrl('')/orderinfo/deleteAddress",
+			data:{id:id},
+    		dataType : 'json',
+    		success: function(data){
+    			if(data!=null && data.code==200){
+				     //现清空div
+    				 $("#user_radio").empty();
+				     user_address();
+				}else {
+    				alert("删除失败");
+    			}
+    		},
+    		error : function(data) {
+    			alert("删除失败");
+    		}
+    	});
+	}
 	
  </script>
 <!---------------------- 填写并核对订单信息  ----------------------> 
@@ -259,7 +322,6 @@ background: linear-gradient(top,#b11a1a,#bf2626);
             <div id="user_Info">
 	             <dl id="user_basic">
 	               <dt>收货人信息【<a href="javascript:void(0)" onclick="update();" class="reds">修改</a>】</dt>
-	               <input type="hidden" value="${userId}" id="userId"/>
 				   <dd><div id="user_text"></div><dd>
 	             </dl>
 	             
@@ -282,6 +344,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
                             <td width="456">&nbsp;&nbsp;<input type="text" name="name" id="mall_name" style="width:300px;height:25px;"/>
 								<input type="hidden" name="id" id="mall_id"/>
 								<input type="hidden" name="isdefault" id="isdefault" value="1"/>
+								<input type="hidden" value="${userId}" id="userId" name="userId"/>
 							</td>
                         </tr>
                           <tr><td><br/></td><td></td></tr>
@@ -295,6 +358,12 @@ background: linear-gradient(top,#b11a1a,#bf2626);
                                 <select id="provinceNo" onchange="Oncity(this.value);" style="width:100px;height:30px"> <option value=""> -请选择- </option> </select>&nbsp;&nbsp;
                                 <select id="cityNo" onchange="Oncounty(this.value);" style="width:100px;height:30px"> <option value=""> -请选择- </option> </select>&nbsp;&nbsp;
                                 <select id="countyNo" style="width:100px;height:30px"> <option value=""> -请选择-  </option> </select>&nbsp;&nbsp;
+								<input type="hidden" name="provinceNo" id="mall_provinceNo"/>
+								<input type="hidden" name="provinceName" id="mall_provinceName"/>
+								<input type="hidden" name="cityNo" id="mall_cityNo"/>
+								<input type="hidden" name="cityName" id="mall_cityName"/>
+								<input type="hidden" name="countyNo" id="countyNo"/>
+								<input type="hidden" name="countyName" id="mall_countyName"/>
                             </td>
                         </tr>
                            <tr><td><br/></td><td></td></tr>

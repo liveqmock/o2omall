@@ -118,6 +118,43 @@ public class OrderInfoController extends BaseController{
 			return wrapper;
 		}
 	
+	 /**
+	  * 添加
+	  * Date:2015年1月5日下午1:54:19
+	  * user:js
+	  * @param requestDto
+	  * @return
+	  */
+	 @RequestMapping("addAddress")
+	 @ResponseBody
+	 public Wrapper<?> addAddress(UserAddressRequestDto requestDto) {
+			Wrapper<?> wrapper = null;
+			try {
+				wrapper = userAddressService.insert(requestDto);
+			} catch (Exception e) {
+				LOG.error("#UserAddressServiceImpl.update# Error:" + e);
+			}
+			return wrapper;
+		}
+	 
+	 /**
+	  * 删除地址
+	  * Date:2015年1月5日下午1:54:19
+	  * user:js
+	  * @param requestDto
+	  * @return
+	  */
+	 @RequestMapping("deleteAddress")
+	 @ResponseBody
+	 public Wrapper<?> deleteAddress(UserAddressRequestDto requestDto) {
+			Wrapper<?> wrapper = null;
+			try {
+				wrapper = userAddressService.delete(requestDto);
+			} catch (Exception e) {
+				LOG.error("#UserAddressServiceImpl.update# Error:" + e);
+			}
+			return wrapper;
+		}
 	
 	
 }
