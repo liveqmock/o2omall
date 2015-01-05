@@ -8,6 +8,7 @@ import org.springframework.util.Assert;
 
 import com.awe.uc.sdk.request.UserAddressRequest;
 import com.awe.uc.sdk.request.dto.UserAddressRequestDto;
+import com.awe.uc.sdk.response.UserAddressListResponse;
 import com.awe.uc.sdk.response.UserAddressResponse;
 import com.awe.uc.sdk.response.dto.UserAddressResponseDto;
 import com.hbird.common.client.AbstractSecureClient;
@@ -49,7 +50,7 @@ public class UserAddressClient extends AbstractSecureClient {
             LOG.debug("getUserAddress url: " + url);
             LOG.debug("getUserAddress response: " + JsonHelper.toJson(response));
         }
-        return super.getResult(response).get(0);
+        return super.getResult(response);
     }
     
     /**
@@ -66,7 +67,7 @@ public class UserAddressClient extends AbstractSecureClient {
         }
 
         String url = super.getServiceUrlDomain() + "services/userAddress/queryUserAddressList";
-        UserAddressResponse response = super.getRestTemplate().postForObject(url, request, UserAddressResponse.class);
+        UserAddressListResponse response = super.getRestTemplate().postForObject(url, request, UserAddressListResponse.class);
 
         if (LOG.isDebugEnabled()) {
             LOG.debug("queryUserAddressList url: " + url);

@@ -1,9 +1,7 @@
 package com.awe.uc.sdk.response;
 
-import java.util.List;
-
-import com.hbird.common.sdk.api.response.HbirdResponse;
 import com.awe.uc.sdk.response.dto.UserAddressResponseDto;
+import com.hbird.common.sdk.api.response.HbirdResponse;
 
 /**
  * UserAddressResponse：收货地址返回对象<br/>
@@ -13,7 +11,7 @@ import com.awe.uc.sdk.response.dto.UserAddressResponseDto;
  * @version 2014-12-23 10:06:48
  * 
  */
-public class UserAddressResponse extends HbirdResponse<List<UserAddressResponseDto>> {
+public class UserAddressResponse extends HbirdResponse<UserAddressResponseDto> {
 
     /** 序列化标识 */
     private static final long serialVersionUID = 1L;
