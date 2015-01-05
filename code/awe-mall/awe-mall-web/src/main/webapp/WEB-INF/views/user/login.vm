@@ -93,7 +93,7 @@
 				
                 <p class="text_r login_reg">
 					<a href="#springUrl('')/user/register">用户注册</a>
-					<a href="#springUrl('')/user/resetPasswordForward">忘记密码？</a>
+					<a href="#springUrl('')/user/resetPassword">忘记密码？</a>
 				</p>
               </div>
            </div>

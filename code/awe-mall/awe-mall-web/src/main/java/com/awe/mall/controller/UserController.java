@@ -223,7 +223,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "modifyPassword", method = RequestMethod.GET)
     public String modifyPassword(Model model) {
         model.addAttribute("navFlag", "member"); // 页面主要导航标识，‘我的‘
-        model.addAttribute("leftFlag", "modifyPassword");//我的订单-左边菜单标志
+        model.addAttribute("leftFlag", "modifyPassword");// 我的订单-左边菜单标志
         return "user/modifyPassword";
     }
 
@@ -254,7 +254,7 @@ public class UserController extends BaseController {
         } else if (!validateCheckCode(checkCode, request) || !validateSmsCode(smsCode, request)) {
             return WrapMapper.error().message(MSG_CHECK_CODE_ERROR);
         }
-        
+
         this.logger.info("modifyPassword: username=" + username);
         try {
             PasswordModifyRequestDto requestDto = new PasswordModifyRequestDto();
@@ -306,6 +306,14 @@ public class UserController extends BaseController {
     @ResponseBody
     public Wrapper<?> doResetPassword(Model model, HttpServletRequest request, String username, String newPassword,
             String smsCode, String checkCode) {
+        if (StringUtils.isBlank(username) || StringUtils.isBlank(newPassword) || StringUtils.isBlank(smsCode)
+                || StringUtils.isBlank(checkCode)) {
+            return WrapMapper.error().message(MSG_VALUE_ILLEGAL);
+        } else if (!validateCheckCode(checkCode, request) || !validateSmsCode(smsCode, request)) {
+            return WrapMapper.error().message(MSG_CHECK_CODE_ERROR);
+        }
+
+        this.logger.info("resetPassword: username=" + username);
         try {
             PasswordModifyRequestDto requestDto = new PasswordModifyRequestDto();
             requestDto.setUsername(username);
@@ -338,7 +346,10 @@ public class UserController extends BaseController {
         }
 
         String code = (String) session.getAttribute(CodeUtil.KEY_CHECK_CODE);
-        session.removeAttribute(CodeUtil.KEY_CHECK_CODE);
+        session.removeAttribute(CodeUtil.KEY_CHECK_CODE);      
+        logger.info(checkCode);
+        logger.info(code);
+
         return StringUtils.isNotBlank(checkCode) && checkCode.toUpperCase().equals(code);
     }
 
@@ -354,9 +365,10 @@ public class UserController extends BaseController {
         if (session == null) {
             return false;
         }
-
         String code = (String) session.getAttribute(CodeUtil.KEY_SMS_CODE);
         session.removeAttribute(CodeUtil.KEY_SMS_CODE);
+        logger.info(checkCode);
+        logger.info(code);
         return StringUtils.isNotBlank(checkCode) && checkCode.toUpperCase().equals(code);
     }
 
