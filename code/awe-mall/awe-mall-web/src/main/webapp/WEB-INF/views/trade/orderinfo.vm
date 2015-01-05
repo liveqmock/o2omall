@@ -57,8 +57,11 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 		     div.style.border = "3px solid #f60";
  	}
  	
+	//标识是否点击选择新增按钮
+	var newadd='';
  	//选择新增地址
  	function myradio(){
+	newadd="add";
  	   var address = $("input[id='radioaddress']:checked").val();
  	   if(address == '0'){
 	   		//清空
@@ -88,6 +91,15 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 		    div.style.border = "";
 		var type = $("#mall_id").val();
 		var form = $("#mall_form");	
+		
+		if(newadd == ''){
+		  //现清空div
+		  $("#user_radio").empty();
+		  //重新加载
+		  user_address();
+		  return;
+		}
+		
 		//获取select的值
 		var provinceName=$("#provinceNo").find("option:selected").text();  //获取Select选择的Text
         var provinceNo=$("#provinceNo").val();  //获取Select选择的Value
@@ -137,7 +149,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
     					 }
                 );
 		}
-		
+		newadd='';
  	}
 	
 	//加载当前用户地址数据
