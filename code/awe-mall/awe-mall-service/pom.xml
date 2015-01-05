@@ -13,6 +13,10 @@
 			<groupId>com.awe.mall</groupId>
 			<artifactId>awe-mall-proxy</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.awe.mall</groupId>
+			<artifactId>awe-mall-domain</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.perf4j</groupId>

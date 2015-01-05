@@ -1,61 +1,6 @@
 <!---------------------- 正文 ----------------------> 
-    <div class="container wid1200 clearfix">
-  
-   <!---------------------- 左则菜单列表 ----------------------> 
-    
-      <div class="article left">
-        <div class="peo_infor">
-          <dl class="clearfix">
-             <dt><img src="#springUrl('')/static/images/m-img1.jpg" /></dt>
-             <dd>
-               <h3><a href="">LEA.wang</a></h3>
-               <p>等级：<i class="class_num">25</i></p>
-               <p>积分：352566</p>
-               <p class="mes_num"><i class="mes"></i><a href="" class="mes_num">消息 (16)</a></p>
-             </dd>
-          </dl>
-          <div class="adress clearfix">
-             <strong class="left normal">默认地址：</strong><span class="left">中国北京海淀区中关村大街6号新中关购物中心</span>
-          </div>
-          <div class="edit_profile ft14"><a href="#springUrl('')/profile/edit">编辑个人资料</a></div>
-        </div>
-        <div class="art_left_con">
-            <h3><i class="arti_icon"></i>我购买的</h3>
-            <ul class="article_list">
-               <li><a href="#springUrl('')/myorder/productorderlist" class="on">商品订单</a></li>
-               <li><a href="#springUrl('')/myorder/serviceorderlist">服务订单</a></li>
-            </ul>
-            <h3><i class="arti_icon"></i>我关注的</h3>
-            <ul class="article_list">
-               <li><a href="questions.html">咨询问题</a></li>
-               <li><a href="relevant_experts.html">相关专家</a></li>
-            </ul>
-            <h3><i class="arti_icon"></i>我发布的</h3>
-            <ul class="article_list">
-               <li><a href="my_diary.html">我的日记</a></li>
-               <li><a href="my_discussion.html">我的讨论</a></li>
-               <li><a href="my_baby.html">我的宝宝</a></li>
-            </ul>
-            <h3><i class="arti_icon"></i>我的资料</h3>
-            <ul class="article_list">
-               <li><a href="#springUrl('')/profile/myprofile">基础资料</a></li>
-               <li><a href="#springUrl('')/address/list">收货地址</a></li>
-            </ul>
-            <h3><i class="arti_icon"></i>我的安全</h3>
-            <ul class="article_list">
-               <li><a href="#springUrl('')/user/modifyPasswordForward">登录密码</a></li>
-               <li><a href="#springUrl('')/password/editpay">支付密码</a></li>
-            </ul>
-            <h3><i class="arti_icon"></i>我的消息</h3>
-            <ul class="article_list">
-               <li><a href="system_message.html">系统公告</a></li>
-            </ul>
-        </div>
-      </div>
-      
-   <!---------------------- 左则菜单列表 end ----------------------> 
-   
-   
+<div class="container wid1200 clearfix">
+	#parse("/myorder/common/left.vm")
    <!---------------------- 右则内容 ----------------------> 
       <div class="section right">
        

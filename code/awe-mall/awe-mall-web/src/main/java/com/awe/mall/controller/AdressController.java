@@ -35,6 +35,8 @@ public class AdressController extends BaseController{
 	@RequestMapping("list")
 	public String list(Model model){
 		LOG.info("-- welcome to list page --");
+        model.addAttribute("navFlag", "member"); // 页面主要导航标识，‘我的‘
+        model.addAttribute("leftFlag", "address_list");//我的订单-左边菜单标志
 		return VIEW_WORKSPACE + VIEW_PAGE;
 	}
 	

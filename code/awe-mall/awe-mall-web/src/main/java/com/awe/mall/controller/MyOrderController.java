@@ -26,12 +26,16 @@ public class MyOrderController extends BaseController {
 	@RequestMapping("productorderlist")
 	public String productOrderList(Model model){
 		LOG.info("-- welcome to productOrderList index --");
+        model.addAttribute("navFlag", "member"); // 页面主要导航标识，‘我的‘
+		model.addAttribute("leftFlag", "productorderlist");//我的订单-左边菜单标志
 		return VIEW_WORKSPACE + VIEW_PRODUCT_ORDER_LIST_PAGE;
 	}
 	
 	@RequestMapping("serviceorderlist")
 	public String serviceOrderList(Model model){
 		LOG.info("-- welcome to serviceOrderList index --");
+        model.addAttribute("navFlag", "member"); // 页面主要导航标识，‘我的‘
+        model.addAttribute("leftFlag", "serviceorderlist");//我的订单-左边菜单标志
 		return VIEW_WORKSPACE + VIEW_SERVICE_ORDER_LIST_PAGE;
 	}
 }
