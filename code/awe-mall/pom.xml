@@ -560,6 +560,7 @@
 				<domain.worker>local.mall-worker.shop.hbird.com</domain.worker>
 				<!-- 登录权限认证信息 -->
 				<my.web.domain.name>local.mall.shop.hbird.com:8080</my.web.domain.name>
+				<service.url.domain.pms>http\://local.pmsws.shop.hbird.com\:8120/</service.url.domain.pms>
 			</properties>
 		</profile>
 
@@ -578,6 +579,7 @@
 				<domain.worker>dev.mall-worker.shop.hbird.com</domain.worker>
 				<!-- 登录权限认证信息 -->
 				<my.web.domain.name>dev.mall.shop.hbird.com</my.web.domain.name>
+				<service.url.domain.pms>http\://dev.pmsws.shop.hbird.com\:8120/</service.url.domain.pms>
 			</properties>
 		</profile>
 
@@ -596,6 +598,7 @@
 				<domain.worker>test.mall-worker.shop.hbird.com</domain.worker>
 				<!-- 登录权限认证信息 -->
 				<my.web.domain.name>test.mall.shop.hbird.com</my.web.domain.name>
+				<service.url.domain.pms>http\://test.pmsws.shop.hbird.com\:8120/</service.url.domain.pms>
 			</properties>
 		</profile>
 
@@ -614,6 +617,7 @@
 				<domain.worker>mall-worker.shop.hbird.com</domain.worker>
 				<!-- 登录权限认证信息 -->
 				<my.web.domain.name>mall.shop.hbird.com</my.web.domain.name>
+				<service.url.domain.pms>http\://pmsws.shop.hbird.com</service.url.domain.pms>
 			</properties>
 		</profile>
 	</profiles>
