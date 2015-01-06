@@ -548,8 +548,8 @@
 				<database.jdbc.password>awe123456</database.jdbc.password>
 
 				<!-- 服务器日志配置 -->
-				<log.root.level>INFO</log.root.level>
-				<log.logs.path>D:/logs</log.logs.path>
+				<log.root.level>DEBUG</log.root.level>
+				<log.logs.path>E:/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
 				<!-- 域名配置-日志父路径 -->
 				<domain.web>uc</domain.web>
