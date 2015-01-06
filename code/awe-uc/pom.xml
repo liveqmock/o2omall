@@ -551,11 +551,15 @@
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>D:/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
+				<!-- 域名配置-日志父路径 -->
+				<domain.web>uc</domain.web>
+				<domain.webservice>ucws</domain.webservice>
+				<domain.worker>uc-worker</domain.worker>
 				
-				<!-- 域名配置 -->
-				<domain.web>local.uc.shop.hbird.com</domain.web>
-				<domain.webservice>local.ucws.shop.hbird.com</domain.webservice>
-				<domain.worker>local.uc-worker.shop.hbird.com</domain.worker>
+				<!-- Portal权限认证信息 -->
+				<portal.web.domain.name>test.its.shop.hbird.com</portal.web.domain.name>
+				<portal.api.domain.name>test.itsws.shop.hbird.com</portal.api.domain.name>
+				<my.web.domain.name>local.uc.shop.hbird.com</my.web.domain.name>
 			</properties>
 		</profile>
 		
@@ -573,11 +577,15 @@
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
+				<!-- 域名配置-日志父路径 -->
+				<domain.web>uc</domain.web>
+				<domain.webservice>ucws</domain.webservice>
+				<domain.worker>uc-worker</domain.worker>
 				
-				<!-- 域名配置 -->
-				<domain.web>dev.uc.shop.hbird.com</domain.web>
-				<domain.webservice>dev.ucws.shop.hbird.com</domain.webservice>
-				<domain.worker>dev.uc-worker.shop.hbird.com</domain.worker>
+				<!-- Portal权限认证信息 -->
+				<portal.web.domain.name>test.its.shop.hbird.com</portal.web.domain.name>
+				<portal.api.domain.name>test.itsws.shop.hbird.com</portal.api.domain.name>
+				<my.web.domain.name>dev.uc.shop.hbird.com</my.web.domain.name>
 			</properties>
 		</profile>
 
@@ -595,11 +603,15 @@
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
+				<!-- 域名配置-日志父路径 -->
+				<domain.web>uc</domain.web>
+				<domain.webservice>ucws</domain.webservice>
+				<domain.worker>uc-worker</domain.worker>
 				
-				<!-- 域名配置 -->
-				<domain.web>test.uc.shop.hbird.com</domain.web>
-				<domain.webservice>test.ucws.shop.hbird.com</domain.webservice>
-				<domain.worker>test.uc-worker.shop.hbird.com</domain.worker>
+				<!-- Portal权限认证信息 -->
+				<portal.web.domain.name>test.its.shop.hbird.com</portal.web.domain.name>
+				<portal.api.domain.name>test.itsws.shop.hbird.com</portal.api.domain.name>
+				<my.web.domain.name>test.uc.shop.hbird.com</my.web.domain.name>
 			</properties>
 		</profile>
 
@@ -617,11 +629,15 @@
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
+				<!-- 域名配置-日志父路径 -->
+				<domain.web>uc</domain.web>
+				<domain.webservice>ucws</domain.webservice>
+				<domain.worker>uc-worker</domain.worker>
 				
-				<!-- 域名配置 -->
-				<domain.web>uc.shop.hbird.com</domain.web>
-				<domain.webservice>ucws.shop.hbird.com</domain.webservice>
-				<domain.worker>uc-worker.shop.hbird.com</domain.worker>
+				<!-- Portal权限认证信息 -->
+				<portal.web.domain.name>its.shop.hbird.com</portal.web.domain.name>
+				<portal.api.domain.name>itsws.shop.hbird.com</portal.api.domain.name>
+				<my.web.domain.name>uc.shop.hbird.com</my.web.domain.name>
 			</properties>
 		</profile>
 	</profiles>
