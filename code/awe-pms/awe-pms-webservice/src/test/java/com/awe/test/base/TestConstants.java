@@ -6,7 +6,7 @@ package com.awe.test.base;
 /**
  * 
  * @author ljz
- * @version 2014-12-25 14:47:42
+ * @version 2015-1-4 16:09:19
  * 
  */
 public interface TestConstants {

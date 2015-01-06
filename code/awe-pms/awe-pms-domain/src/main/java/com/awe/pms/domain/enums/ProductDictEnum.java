@@ -8,9 +8,13 @@ package com.awe.pms.domain.enums;
  */
 public enum ProductDictEnum {
 	
+	YN_TYPE(1, " 	是否：1，是；0，否；"),
 	PMS_TYPE(10, "商品类型：1，原装进口；2，进口奶源；3，国产奶粉"),
 	AUDIT_TYPE(20, "商家审核状态：0，待审核；10，审核中；20，审核成功；30，审核驳回；"),
-	MODE_TYPE(30, "经营模式 ：10，三方；20，自营");
+	MODE_TYPE(30, "经营模式 ：10，三方；20，自营"),
+	APPLICABLE_STEP_TYPE(40, "适用阶段 ：10，准备怀孕；20，0-3个月；30，3-6个月；40，6-12个月；50，1-2岁；"),
+	PACK_TYPE(50, "包装方式 ：10，桶装；20，罐装；30，袋装；40，无；"),
+	COLOR_TYPE(60, "颜色 ：10，红；20，黄；30，蓝；40，绿；50，黑；60，白；");
 
 	int type;
     String desc;

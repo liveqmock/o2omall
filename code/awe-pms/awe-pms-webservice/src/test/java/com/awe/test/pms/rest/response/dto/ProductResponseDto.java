@@ -8,7 +8,7 @@ import java.util.Date;
  * 提供rest接口时方法的返回对象
  * 
  * @author ljz
- * @version 2014-12-25 14:47:41
+ * @version 2015-1-4 16:09:19
  * 
  */
 public class ProductResponseDto extends HbirdDto {
@@ -70,6 +70,8 @@ public class ProductResponseDto extends HbirdDto {
     private String applicableCrowd; 
     /** 适用年龄（配置表） */
     private String applicableAge; 
+    /** 适用阶段 */
+    private Integer applicableStep; 
     /** 商品描述 */
     private String features; 
     /** 介绍 */
@@ -605,6 +607,24 @@ public class ProductResponseDto extends HbirdDto {
      */
     public void setApplicableAge(String applicableAge) {
         this.applicableAge = applicableAge;
+    }
+    
+    /**
+     * get 适用阶段
+     * 
+     * @return the applicableStep
+     */
+    public Integer getApplicableStep(){
+        return applicableStep;
+    }
+        
+    /**
+     * set 适用阶段
+     * 
+     * @param applicableStep the applicableStep to set
+     */
+    public void setApplicableStep(Integer applicableStep) {
+        this.applicableStep = applicableStep;
     }
     
     /**

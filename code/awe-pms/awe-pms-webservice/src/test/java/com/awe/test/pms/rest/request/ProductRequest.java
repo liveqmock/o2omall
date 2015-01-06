@@ -7,7 +7,7 @@ import com.awe.test.pms.rest.request.dto.ProductRequestDto;
  * ProductRequest：商品信息请求参数
  * 
  * @author ljz
- * @version 2014-12-25 14:47:41
+ * @version 2015-1-4 16:09:19
  * 
  */
 public class ProductRequest extends HbirdSecureRequest<ProductRequestDto> {

@@ -84,6 +84,9 @@
 				<li id="subMenu-201">
 					<a href="javascript:void(0)" onclick="link('201','商品类别品牌','productBrand','20','pms系统');">商品类别品牌</a>
 				</li>
+				<li id="subMenu-207">
+					<a href="javascript:void(0)" onclick="link('207','商品信息','product','20','pms系统');">商品信息</a>
+				</li>
 				<li id="subMenu-202">
 					<a href="javascript:void(0)" onclick="link('202','商品SKU','productSku','20','pms系统');">商品SKU</a>
 				</li>
@@ -98,9 +101,6 @@
 				</li>
 				<li id="subMenu-206">
 					<a href="javascript:void(0)" onclick="link('206','审核商家流水表','businessAudit','20','pms系统');">审核商家流水表</a>
-				</li>
-				<li id="subMenu-207">
-					<a href="javascript:void(0)" onclick="link('207','商品信息','product','20','pms系统');">商品信息</a>
 				</li>
 				<li id="subMenu-208">
 					<a href="javascript:void(0)" onclick="link('208','配置表','productDict','20','pms系统');">配置表</a>

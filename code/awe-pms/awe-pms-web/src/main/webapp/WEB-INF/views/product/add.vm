@@ -3,6 +3,7 @@
     <head>
 		#parse("/layout/head.vm")
 		<script src="$basePath/static/js/inner/productBrand.js?v=19"></script>
+		<script src="$basePath/static/CKEditor/ckeditor.js"></script>
         <script language="javascript">
             $(function() {
 				$('#addForm').validate({
@@ -16,6 +17,7 @@
 						type: {required: true},
 						mode: {required: true},
 						businessNo: {required: true},
+						applicableStep: {required: true},
 					},
 			
 					messages: {
@@ -26,6 +28,7 @@
 						type: { required: "请输入商品类型（国内、进口）"},
 						mode: { required: "请输入经营模式（自营。。）"},
 						businessNo: { required: "请输入商家编号"},
+						applicableStep: { required: "请选择适用阶段"},
 					}
 				});
 				
@@ -52,6 +55,14 @@
 				
 				$("#categoryThreeId").change(function () {
 					$("#categoryThree").val($("#categoryThreeId option:selected").text());
+				});
+				
+				$("#brandCode").change(function () {
+					$("#brandName").val($("#brandCode option:selected").text());
+				});
+				
+				$("#businessNo").change(function () {
+					$("#businessName").val($("#businessNo option:selected").text());
 				});
 				
 				$("#btn-back").click(function(){
@@ -107,9 +118,16 @@
                                     </div>
                                 </div>
 								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="brandCode">品牌编号</label>
+									<label class="col-sm-1 control-label no-padding-right" for="applicableStep">适用阶段</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="brandCode" id="brandCode" class="col-xs-10 col-sm-8" />
+										<select id="applicableStep" name="applicableStep" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+    										#if(!$null.isNull($!applicableSteps))
+                                    			#foreach($item in $applicableSteps)
+                                    				<option value="$item.attr">$item.value</option>
+                                    			#end
+                                    		#end
+                                        </select>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="type">类型</label>
                                     <div class="col-sm-3">
@@ -148,17 +166,29 @@
                                     </div>
                                 </div>
 								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="skuAttrName">商品SKU属性值</label>
+									<label class="col-sm-1 control-label no-padding-right" for="brandCode">品牌</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="skuAttrName" id="skuAttrName" class="col-xs-10 col-sm-8" />
+										<select id="brandCode" name="brandCode" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+    										#if(!$null.isNull($!productBrands))
+                                    			#foreach($item in $productBrands)
+                                    				<option value="$item.brandCode">$item.brandName</option>
+                                    			#end
+                                    		#end
+                                        </select>
+										<input type="hidden" name="brandName" id="brandName" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="businessNo">商家编号</label>
+									<label class="col-sm-1 control-label no-padding-right" for="businessNo">商家</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="businessNo" id="businessNo" class="col-xs-10 col-sm-8" />
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="businessName">商家名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="businessName" id="businessName" class="col-xs-10 col-sm-8" />
+										<select id="businessNo" name="businessNo" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+    										#if(!$null.isNull($!businessInfos))
+                                    			#foreach($item in $businessInfos)
+                                    				<option value="$item.businessNo">$item.businessName</option>
+                                    			#end
+                                    		#end
+                                        </select>
+                                        <input type="hidden" name="businessName" id="businessName" class="col-xs-10 col-sm-8" readonly />
                                     </div>
 								</div>
 								<div class="form-group">
@@ -184,30 +214,42 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="applicableAge" id="applicableAge" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="features">商品描述</label>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="packType">包装类型</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="features" id="features" class="col-xs-10 col-sm-8" />
+										<select id="packType" name="packType" class="col-xs-10 col-sm-8">
+    										#if(!$null.isNull($!packTypes))
+                                    			#foreach($item in $packTypes)
+                                    				<option value="$item.attr">$item.value</option>
+                                    			#end
+                                    		#end
+                                        </select>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="packingList">包装清单</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="packingList" id="packingList" class="col-xs-10 col-sm-8" />
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="material">材质</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="material" id="material" class="col-xs-10 col-sm-8" />
                                     </div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="introduce">介绍</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="introduce" id="introduce" class="col-xs-10 col-sm-8" />
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="service">服务（配送信息等）</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="service" id="service" class="col-xs-10 col-sm-8" />
-                                    </div>
 									<label class="col-sm-1 control-label no-padding-right" for="weight">商品净重</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="weight" id="weight" class="col-xs-10 col-sm-8" />
                                     </div>
-								</div>
-								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="grossWeight">毛重</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="grossWeight" id="grossWeight" class="col-xs-10 col-sm-8" />
                                     </div>
+									<label class="col-sm-1 control-label no-padding-right" for="diameter">直径</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="diameter" id="diameter" class="col-xs-10 col-sm-8" />
+                                    </div>
+								</div>
+								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="length">长</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="length" id="length" class="col-xs-10 col-sm-8" />
@@ -216,19 +258,9 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="width" id="width" class="col-xs-10 col-sm-8" />
                                     </div>
-								</div>
-								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="height">高</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="height" id="height" class="col-xs-10 col-sm-8" />
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="diameter">直径</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="diameter" id="diameter" class="col-xs-10 col-sm-8" />
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="packType">包装类型（桶装等）</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="packType" id="packType" class="col-xs-10 col-sm-8" />
                                     </div>
 								</div>
 								<div class="form-group">
@@ -248,37 +280,65 @@
 								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="supportReturn">是否支持退货</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="supportReturn" id="supportReturn" class="col-xs-10 col-sm-8" />
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="distribution">配送信息</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="distribution" id="distribution" class="col-xs-10 col-sm-8" />
+										<select id="supportReturn" name="supportReturn" class="col-xs-10 col-sm-8">
+    										#if(!$null.isNull($!ynTypes))
+                                    			#foreach($item in $ynTypes)
+                                    				<option value="$item.attr">$item.value</option>
+                                    			#end
+                                    		#end
+                                        </select>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="freightFree">是否免运费</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="freightFree" id="freightFree" class="col-xs-10 col-sm-8" />
+										<select id="freightFree" name="freightFree" class="col-xs-10 col-sm-8">
+    										#if(!$null.isNull($!ynTypes))
+                                    			#foreach($item in $ynTypes)
+                                    				<option value="$item.attr">$item.value</option>
+                                    			#end
+                                    		#end
+                                        </select>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="skuAttrName">商品SKU属性值</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="skuAttrName" id="skuAttrName" class="col-xs-10 col-sm-8" />
                                     </div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="material">材质</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="material" id="material" class="col-xs-10 col-sm-8" />
+									<label class="col-sm-1 control-label no-padding-right" for="distribution">配送信息</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="distribution" id="distribution" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="packingList">包装清单</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="packingList" id="packingList" class="col-xs-10 col-sm-8" />
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="saleGuarantee">售后保障</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="saleGuarantee" id="saleGuarantee" class="col-xs-10 col-sm-8" />
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="service">服务（配送信息等）</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="service" id="service" class="col-xs-10 col-sm-8" />
                                     </div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="kindlyReminder">温馨提示</label>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-9">
                                         <input type="text" name="kindlyReminder" id="kindlyReminder" class="col-xs-10 col-sm-8" />
                                     </div>
                                 </div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="features">商品描述</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="features" id="features" class="col-xs-10 col-sm-8" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="introduce">商品介绍</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="introduce" id="introduce" class="col-xs-10 col-sm-8" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="saleGuarantee">售后保障</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="saleGuarantee" id="saleGuarantee" class="col-xs-10 col-sm-8" />
+                                    </div>
+								</div>
 								<div class="form-group">
 									<div class="col-sm-8 col-sm-offset-4">
                                         <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
@@ -296,3 +356,207 @@
         </div>
 	</body>
 </html>
+<script type="text/javascript">
+//<![CDATA[
+ CKEDITOR.replace( 'distribution',//editor1是你文本域的ID
+  {
+   skin : 'kama',//想要使用的皮肤
+	// 图片上传配置 
+   filebrowserImageUploadUrl : 'upload.do?type=Image',
+	// 图片浏览配置filebrowserImageUploadUrl 
+   filebrowserUploadUrl : 'upload.do?type=File',
+   filebrowserImageUploadUrl:'$basePath/file/skuckeditor',//上传的路径
+   toolbar :
+	   [
+       ['Source','-','NewPage','Preview','-','Templates'],
+	   //加粗     斜体，     下划线      穿过线      下标字        上标字
+	   ['Bold','Italic','Underline','Strike','Subscript','Superscript'],
+	   //数字列表          实体列表            减小缩进    增大缩进
+	   ['NumberedList','BulletedList','-','Outdent','Indent'],
+	   //左对齐             居中对齐          右对齐          两端对齐
+	   ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+	   //超链接 取消超链接 锚点
+	   ['Link','Unlink','Anchor'],
+	   //图片    flash    表格       水平线            表情       特殊字符        分页符
+	   ['Image','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+	   '/',
+	   //样式       格式      字体    字体大小
+	   ['Styles','Format','Font','FontSize'],
+	   //文本颜色     背景颜色
+	   ['TextColor','BGColor'],
+	   //全屏           显示区块
+	   ['Maximize', 'ShowBlocks','-']
+	   ]
+  });
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+ CKEDITOR.replace( 'service',//editor1是你文本域的ID
+  {
+   skin : 'kama',//想要使用的皮肤
+	// 图片上传配置 
+   filebrowserImageUploadUrl : 'upload.do?type=Image',
+	// 图片浏览配置filebrowserImageUploadUrl 
+   filebrowserUploadUrl : 'upload.do?type=File',
+   filebrowserImageUploadUrl:'$basePath/file/skuckeditor',//上传的路径
+   toolbar :
+	   [
+       ['Source','-','NewPage','Preview','-','Templates'],
+	   //加粗     斜体，     下划线      穿过线      下标字        上标字
+	   ['Bold','Italic','Underline','Strike','Subscript','Superscript'],
+	   //数字列表          实体列表            减小缩进    增大缩进
+	   ['NumberedList','BulletedList','-','Outdent','Indent'],
+	   //左对齐             居中对齐          右对齐          两端对齐
+	   ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+	   //超链接 取消超链接 锚点
+	   ['Link','Unlink','Anchor'],
+	   //图片    flash    表格       水平线            表情       特殊字符        分页符
+	   ['Image','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+	   '/',
+	   //样式       格式      字体    字体大小
+	   ['Styles','Format','Font','FontSize'],
+	   //文本颜色     背景颜色
+	   ['TextColor','BGColor'],
+	   //全屏           显示区块
+	   ['Maximize', 'ShowBlocks','-']
+	   ]
+  });
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+ CKEDITOR.replace( 'kindlyReminder',//editor1是你文本域的ID
+  {
+   skin : 'kama',//想要使用的皮肤
+	// 图片上传配置 
+   filebrowserImageUploadUrl : 'upload.do?type=Image',
+	// 图片浏览配置filebrowserImageUploadUrl 
+   filebrowserUploadUrl : 'upload.do?type=File',
+   filebrowserImageUploadUrl:'$basePath/file/skuckeditor',//上传的路径
+   toolbar :
+	   [
+       ['Source','-','NewPage','Preview','-','Templates'],
+	   //加粗     斜体，     下划线      穿过线      下标字        上标字
+	   ['Bold','Italic','Underline','Strike','Subscript','Superscript'],
+	   //数字列表          实体列表            减小缩进    增大缩进
+	   ['NumberedList','BulletedList','-','Outdent','Indent'],
+	   //左对齐             居中对齐          右对齐          两端对齐
+	   ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+	   //超链接 取消超链接 锚点
+	   ['Link','Unlink','Anchor'],
+	   //图片    flash    表格       水平线            表情       特殊字符        分页符
+	   ['Image','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+	   '/',
+	   //样式       格式      字体    字体大小
+	   ['Styles','Format','Font','FontSize'],
+	   //文本颜色     背景颜色
+	   ['TextColor','BGColor'],
+	   //全屏           显示区块
+	   ['Maximize', 'ShowBlocks','-']
+	   ]
+  });
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+ CKEDITOR.replace( 'features',//editor1是你文本域的ID
+  {
+   skin : 'kama',//想要使用的皮肤
+	// 图片上传配置 
+   filebrowserImageUploadUrl : 'upload.do?type=Image',
+	// 图片浏览配置filebrowserImageUploadUrl 
+   filebrowserUploadUrl : 'upload.do?type=File',
+   filebrowserImageUploadUrl:'$basePath/file/skuckeditor',//上传的路径
+   toolbar :
+	   [
+       ['Source','-','NewPage','Preview','-','Templates'],
+	   //加粗     斜体，     下划线      穿过线      下标字        上标字
+	   ['Bold','Italic','Underline','Strike','Subscript','Superscript'],
+	   //数字列表          实体列表            减小缩进    增大缩进
+	   ['NumberedList','BulletedList','-','Outdent','Indent'],
+	   //左对齐             居中对齐          右对齐          两端对齐
+	   ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+	   //超链接 取消超链接 锚点
+	   ['Link','Unlink','Anchor'],
+	   //图片    flash    表格       水平线            表情       特殊字符        分页符
+	   ['Image','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+	   '/',
+	   //样式       格式      字体    字体大小
+	   ['Styles','Format','Font','FontSize'],
+	   //文本颜色     背景颜色
+	   ['TextColor','BGColor'],
+	   //全屏           显示区块
+	   ['Maximize', 'ShowBlocks','-']
+	   ]
+  });
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+ CKEDITOR.replace( 'introduce',//editor1是你文本域的ID
+  {
+   skin : 'kama',//想要使用的皮肤
+	// 图片上传配置 
+   filebrowserImageUploadUrl : 'upload.do?type=Image',
+	// 图片浏览配置filebrowserImageUploadUrl 
+   filebrowserUploadUrl : 'upload.do?type=File',
+   filebrowserImageUploadUrl:'$basePath/file/skuckeditor',//上传的路径
+   toolbar :
+	   [
+       ['Source','-','NewPage','Preview','-','Templates'],
+	   //加粗     斜体，     下划线      穿过线      下标字        上标字
+	   ['Bold','Italic','Underline','Strike','Subscript','Superscript'],
+	   //数字列表          实体列表            减小缩进    增大缩进
+	   ['NumberedList','BulletedList','-','Outdent','Indent'],
+	   //左对齐             居中对齐          右对齐          两端对齐
+	   ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+	   //超链接 取消超链接 锚点
+	   ['Link','Unlink','Anchor'],
+	   //图片    flash    表格       水平线            表情       特殊字符        分页符
+	   ['Image','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+	   '/',
+	   //样式       格式      字体    字体大小
+	   ['Styles','Format','Font','FontSize'],
+	   //文本颜色     背景颜色
+	   ['TextColor','BGColor'],
+	   //全屏           显示区块
+	   ['Maximize', 'ShowBlocks','-']
+	   ]
+  });
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+ CKEDITOR.replace( 'saleGuarantee',//editor1是你文本域的ID
+  {
+   skin : 'kama',//想要使用的皮肤
+	// 图片上传配置 
+   filebrowserImageUploadUrl : 'upload.do?type=Image',
+	// 图片浏览配置filebrowserImageUploadUrl 
+   filebrowserUploadUrl : 'upload.do?type=File',
+   filebrowserImageUploadUrl:'$basePath/file/skuckeditor',//上传的路径
+   toolbar :
+	   [
+       ['Source','-','NewPage','Preview','-','Templates'],
+	   //加粗     斜体，     下划线      穿过线      下标字        上标字
+	   ['Bold','Italic','Underline','Strike','Subscript','Superscript'],
+	   //数字列表          实体列表            减小缩进    增大缩进
+	   ['NumberedList','BulletedList','-','Outdent','Indent'],
+	   //左对齐             居中对齐          右对齐          两端对齐
+	   ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+	   //超链接 取消超链接 锚点
+	   ['Link','Unlink','Anchor'],
+	   //图片    flash    表格       水平线            表情       特殊字符        分页符
+	   ['Image','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+	   '/',
+	   //样式       格式      字体    字体大小
+	   ['Styles','Format','Font','FontSize'],
+	   //文本颜色     背景颜色
+	   ['TextColor','BGColor'],
+	   //全屏           显示区块
+	   ['Maximize', 'ShowBlocks','-']
+	   ]
+  });
+//]]>
+</script>

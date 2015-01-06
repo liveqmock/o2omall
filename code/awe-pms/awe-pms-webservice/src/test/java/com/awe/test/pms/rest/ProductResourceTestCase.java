@@ -14,7 +14,7 @@ import com.hbird.common.client.AbstractClient;
  * ProductResource单元测试
  * 
  * @author ljz
- * @version 2014-12-25 15:30:05
+ * @version 2015-1-4 16:09:19
  * 
  */
 public class ProductResourceTestCase extends AbstractClient {

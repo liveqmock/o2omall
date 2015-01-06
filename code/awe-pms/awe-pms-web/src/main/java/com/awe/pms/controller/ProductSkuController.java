@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.pms.controller.base.BaseController;
 import com.awe.pms.domain.ProductSku;
+import com.awe.pms.domain.enums.ProductDictEnum;
 import com.awe.pms.domain.query.ProductSkuQuery;
+import com.awe.pms.service.ProductDictService;
 import com.awe.pms.service.ProductSkuService;
 import com.awe.pms.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
@@ -34,6 +36,9 @@ public class ProductSkuController extends BaseController {
 
     @Autowired
     private ProductSkuService productSkuService;
+    
+    @Autowired
+    private ProductDictService productDictService;
 
     /** 视图前缀 */
     private static final String viewPrefix ="productSku";
@@ -55,6 +60,8 @@ public class ProductSkuController extends BaseController {
             model.addAttribute("dataList", dataList);// 数据集合
             model.addAttribute("query", query);// 查询参数
             model.addAttribute("page", page);// 分页
+            
+            model.addAttribute("colorTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.COLOR_TYPE.getType()));// 颜色类型集合
         } catch (Exception e) {
             LOG.error("productSku index has error.", e);
         }
@@ -68,7 +75,9 @@ public class ProductSkuController extends BaseController {
      * @return
      */
     @RequestMapping(value = "addForward")
-    public String addForward() {
+    public String addForward(Model model, ProductSku productSku) {
+    	model.addAttribute("productSku", productSku);// 查询参数
+    	model.addAttribute("colorTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.COLOR_TYPE.getType()));// 颜色类型集合
         return viewPrefix + "/add";
     }
 

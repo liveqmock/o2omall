@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.awe.pms.controller.base.BaseController;
 import com.awe.pms.domain.Product;
 import com.awe.pms.domain.enums.ProductDictEnum;
+import com.awe.pms.domain.query.BusinessInfoQuery;
+import com.awe.pms.domain.query.ProductBrandQuery;
 import com.awe.pms.domain.query.ProductQuery;
+import com.awe.pms.service.BusinessInfoService;
+import com.awe.pms.service.ProductBrandService;
 import com.awe.pms.service.ProductDictService;
 import com.awe.pms.service.ProductService;
 import com.awe.pms.utils.exceptions.ExistedException;
@@ -39,6 +43,12 @@ public class ProductController extends BaseController {
     
     @Autowired
     private ProductDictService productDictService;
+    
+    @Autowired
+    private ProductBrandService productBrandService;
+    
+    @Autowired
+    private BusinessInfoService businessInfoService;
 
     /** 视图前缀 */
     private static final String viewPrefix ="product";
@@ -60,9 +70,15 @@ public class ProductController extends BaseController {
             model.addAttribute("dataList", dataList);// 数据集合
             model.addAttribute("query", query);// 查询参数
             model.addAttribute("page", page);// 分页
+            
+            BusinessInfoQuery queryBeanBusinessInfo = new BusinessInfoQuery();
+            model.addAttribute("businessInfos", this.businessInfoService.queryBusinessInfoList(queryBeanBusinessInfo));
+            model.addAttribute("applicableSteps", this.productDictService.getPmsTypeDict(ProductDictEnum.APPLICABLE_STEP_TYPE.getType()));// 适用阶段类型集合
             model.addAttribute("pmsTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PMS_TYPE.getType()));// 商品类型集合
             model.addAttribute("auditTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.AUDIT_TYPE.getType()));// 商品审核状态集合
             model.addAttribute("modeTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.MODE_TYPE.getType()));// 商家模式
+            model.addAttribute("packTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PACK_TYPE.getType()));// 包装方式
+            model.addAttribute("ynTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.YN_TYPE.getType()));
         } catch (Exception e) {
             LOG.error("product index has error.", e);
         }
@@ -77,9 +93,17 @@ public class ProductController extends BaseController {
      */
     @RequestMapping(value = "addForward")
     public String addForward(Model model) {
+    	ProductBrandQuery queryBeanProductBrand = new ProductBrandQuery();
+		model.addAttribute("productBrands", this.productBrandService.queryProductBrandList(queryBeanProductBrand));
+		
+		BusinessInfoQuery queryBeanBusinessInfo = new BusinessInfoQuery();
+		model.addAttribute("businessInfos", this.businessInfoService.queryBusinessInfoList(queryBeanBusinessInfo));
+    	model.addAttribute("applicableSteps", this.productDictService.getPmsTypeDict(ProductDictEnum.APPLICABLE_STEP_TYPE.getType()));// 适用阶段类型集合
     	model.addAttribute("pmsTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PMS_TYPE.getType()));// 商品类型集合
         model.addAttribute("auditTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.AUDIT_TYPE.getType()));// 商品审核状态集合
         model.addAttribute("modeTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.MODE_TYPE.getType()));// 商家模式
+        model.addAttribute("packTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PACK_TYPE.getType()));// 包装方式
+        model.addAttribute("ynTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.YN_TYPE.getType()));
         return viewPrefix + "/add";
     }
 
@@ -120,9 +144,12 @@ public class ProductController extends BaseController {
         try {
             Product productResult = productService.getProductById(product.getId());
             model.addAttribute("product", productResult);
+            model.addAttribute("applicableSteps", this.productDictService.getPmsTypeDict(ProductDictEnum.APPLICABLE_STEP_TYPE.getType()));// 适用阶段类型集合
             model.addAttribute("pmsTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PMS_TYPE.getType()));// 商品类型集合
             model.addAttribute("auditTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.AUDIT_TYPE.getType()));// 商品审核状态集合
             model.addAttribute("modeTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.MODE_TYPE.getType()));// 商家模式
+            model.addAttribute("packTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PACK_TYPE.getType()));// 包装方式
+            model.addAttribute("ynTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.YN_TYPE.getType()));
         } catch (Exception e) {
             LOG.error("product updateForward has error.", e);
         }

@@ -6,7 +6,7 @@ import java.util.Date;
  * Product：商品信息实体类
  * 
  * @author ljz
- * @version 2014-12-25 14:47:30
+ * @version 2015-1-4 16:09:12
  * 
  */
 public class Product implements java.io.Serializable {
@@ -68,6 +68,8 @@ public class Product implements java.io.Serializable {
     private String applicableCrowd; 
     /** 适用年龄（配置表） */
     private String applicableAge; 
+    /** 适用阶段 */
+    private Integer applicableStep; 
     /** 商品描述 */
     private String features; 
     /** 介绍 */
@@ -603,6 +605,24 @@ public class Product implements java.io.Serializable {
      */
     public void setApplicableAge(String applicableAge) {
         this.applicableAge = applicableAge;
+    }
+    
+    /**
+     * get 适用阶段
+     * 
+     * @return the applicableStep
+     */
+    public Integer getApplicableStep(){
+        return applicableStep;
+    }
+        
+    /**
+     * set 适用阶段
+     * 
+     * @param applicableStep the applicableStep to set
+     */
+    public void setApplicableStep(Integer applicableStep) {
+        this.applicableStep = applicableStep;
     }
     
     /**

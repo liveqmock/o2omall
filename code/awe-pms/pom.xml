@@ -549,7 +549,7 @@
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://dev-ip:3306/pms?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
+				<database.jdbc.url>jdbc:mysql://dev-ip:3306/awe_pms?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
 				<database.jdbc.username>awe</database.jdbc.username>
 				<database.jdbc.password>awe123456</database.jdbc.password>
 
@@ -563,7 +563,7 @@
 				<domain.webservice>local.pmsws.shop.hbird.com</domain.webservice>
 				<domain.worker>local.pms-worker.shop.hbird.com</domain.worker>
 				<!-- 调用uc -->
-				<service.url.domain.uc>http\://local.ucws.shop.hbird.com\:8090</service.url.domain.uc>
+				<service.url.domain.uc>http\://local.ucws.shop.hbird.com\:8020</service.url.domain.uc>
 				<key.common.order>pms</key.common.order>
 			</properties>
 		</profile>
@@ -574,7 +574,7 @@
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://dev-ip:3306/pms?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
+				<database.jdbc.url>jdbc:mysql://dev-ip:3306/awe_pms?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
 				<database.jdbc.username>awe</database.jdbc.username>
 				<database.jdbc.password>awe123456</database.jdbc.password>
 
@@ -588,7 +588,7 @@
 				<domain.webservice>dev.pmsws.shop.hbird.com</domain.webservice>
 				<domain.worker>dev.pms-worker.shop.hbird.com</domain.worker>
 				<!-- 调用uc -->
-				<service.url.domain.uc>http\://local.ucws.shop.hbird.com\:8090</service.url.domain.uc>
+				<service.url.domain.uc>http\://local.ucws.shop.hbird.com\:8020</service.url.domain.uc>
 				<key.common.order>pms</key.common.order>
 			</properties>
 		</profile>
@@ -599,7 +599,7 @@
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://test-ip:3306/pms?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
+				<database.jdbc.url>jdbc:mysql://test-ip:3306/awe_pms?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
 				<database.jdbc.username>awe</database.jdbc.username>
 				<database.jdbc.password>awe123456</database.jdbc.password>
 
@@ -613,7 +613,7 @@
 				<domain.webservice>test.pmsws.shop.hbird.com</domain.webservice>
 				<domain.worker>test.pms-worker.shop.hbird.com</domain.worker>
 				<!-- 调用uc -->
-				<service.url.domain.uc>http\://local.ucws.shop.hbird.com\:8090</service.url.domain.uc>
+				<service.url.domain.uc>http\://test.ucws.shop.hbird.com\:8020</service.url.domain.uc>
 				<key.common.order>pms</key.common.order>
 			</properties>
 		</profile>
@@ -624,7 +624,7 @@
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://release-ip:3306/pms?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
+				<database.jdbc.url>jdbc:mysql://release-ip:3306/awe_pms?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
 				<database.jdbc.username>username</database.jdbc.username>
 				<database.jdbc.password>password</database.jdbc.password>
 
@@ -638,7 +638,7 @@
 				<domain.webservice>pmsws.shop.hbird.com</domain.webservice>
 				<domain.worker>pms-worker.shop.hbird.com</domain.worker>
 				<!-- 调用uc -->
-				<service.url.domain.uc>http\://local.ucws.shop.hbird.com\:8090</service.url.domain.uc>
+				<service.url.domain.uc>http\://ucws.shop.hbird.com\:8020</service.url.domain.uc>
 				<key.common.order>pms</key.common.order>
 			</properties>
 		</profile>
