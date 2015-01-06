@@ -543,7 +543,7 @@
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://10.154.252.107:3306/awe_uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
+				<database.jdbc.url>jdbc:mysql://test-ip:3306/awe_uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
 				<database.jdbc.username>awe</database.jdbc.username>
 				<database.jdbc.password>awe123456</database.jdbc.password>
 
@@ -551,11 +551,15 @@
 				<log.root.level>DEBUG</log.root.level>
 				<log.logs.path>E:/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
+				<!-- 域名配置-日志父路径 -->
+				<domain.web>uc</domain.web>
+				<domain.webservice>ucws</domain.webservice>
+				<domain.worker>uc-worker</domain.worker>
 				
-				<!-- 域名配置 -->
-				<domain.web>local.uc.shop.hbird.com</domain.web>
-				<domain.webservice>local.ucws.shop.hbird.com</domain.webservice>
-				<domain.worker>local.uc-worker.shop.hbird.com</domain.worker>
+				<!-- Portal权限认证信息 -->
+				<portal.web.domain.name>test.its.shop.hbird.com</portal.web.domain.name>
+				<portal.api.domain.name>test.itsws.shop.hbird.com</portal.api.domain.name>
+				<my.web.domain.name>local.uc.shop.hbird.com</my.web.domain.name>
 			</properties>
 		</profile>
 		
@@ -565,7 +569,7 @@
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://10.154.252.107:3306/awe_uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
+				<database.jdbc.url>jdbc:mysql://dev-ip:3306/awe_uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
 				<database.jdbc.username>awe</database.jdbc.username>
 				<database.jdbc.password>awe123456</database.jdbc.password>
 
@@ -573,11 +577,15 @@
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
+				<!-- 域名配置-日志父路径 -->
+				<domain.web>uc</domain.web>
+				<domain.webservice>ucws</domain.webservice>
+				<domain.worker>uc-worker</domain.worker>
 				
-				<!-- 域名配置 -->
-				<domain.web>dev.uc.shop.hbird.com</domain.web>
-				<domain.webservice>dev.ucws.shop.hbird.com</domain.webservice>
-				<domain.worker>dev.uc-worker.shop.hbird.com</domain.worker>
+				<!-- Portal权限认证信息 -->
+				<portal.web.domain.name>test.its.shop.hbird.com</portal.web.domain.name>
+				<portal.api.domain.name>test.itsws.shop.hbird.com</portal.api.domain.name>
+				<my.web.domain.name>dev.uc.shop.hbird.com</my.web.domain.name>
 			</properties>
 		</profile>
 
@@ -587,7 +595,7 @@
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://10.154.252.107:3306/awe_uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
+				<database.jdbc.url>jdbc:mysql://test-ip:3306/awe_uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
 				<database.jdbc.username>awe</database.jdbc.username>
 				<database.jdbc.password>awe123456</database.jdbc.password>
 
@@ -595,11 +603,15 @@
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
+				<!-- 域名配置-日志父路径 -->
+				<domain.web>uc</domain.web>
+				<domain.webservice>ucws</domain.webservice>
+				<domain.worker>uc-worker</domain.worker>
 				
-				<!-- 域名配置 -->
-				<domain.web>test.uc.shop.hbird.com</domain.web>
-				<domain.webservice>test.ucws.shop.hbird.com</domain.webservice>
-				<domain.worker>test.uc-worker.shop.hbird.com</domain.worker>
+				<!-- Portal权限认证信息 -->
+				<portal.web.domain.name>test.its.shop.hbird.com</portal.web.domain.name>
+				<portal.api.domain.name>test.itsws.shop.hbird.com</portal.api.domain.name>
+				<my.web.domain.name>test.uc.shop.hbird.com</my.web.domain.name>
 			</properties>
 		</profile>
 
@@ -609,7 +621,7 @@
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://10.154.252.107:3306/awe_uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
+				<database.jdbc.url>jdbc:mysql://release-ip:3306/awe_uc?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
 				<database.jdbc.username>awe</database.jdbc.username>
 				<database.jdbc.password>awe123456</database.jdbc.password>
 
@@ -617,11 +629,15 @@
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
+				<!-- 域名配置-日志父路径 -->
+				<domain.web>uc</domain.web>
+				<domain.webservice>ucws</domain.webservice>
+				<domain.worker>uc-worker</domain.worker>
 				
-				<!-- 域名配置 -->
-				<domain.web>uc.shop.hbird.com</domain.web>
-				<domain.webservice>ucws.shop.hbird.com</domain.webservice>
-				<domain.worker>uc-worker.shop.hbird.com</domain.worker>
+				<!-- Portal权限认证信息 -->
+				<portal.web.domain.name>its.shop.hbird.com</portal.web.domain.name>
+				<portal.api.domain.name>itsws.shop.hbird.com</portal.api.domain.name>
+				<my.web.domain.name>uc.shop.hbird.com</my.web.domain.name>
 			</properties>
 		</profile>
 	</profiles>

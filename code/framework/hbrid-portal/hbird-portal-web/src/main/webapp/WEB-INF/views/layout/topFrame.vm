@@ -7,7 +7,6 @@
 		<div class="navbar-header pull-left">
 			<a href="#" class="navbar-brand">
 				<small>
-					<img src="#springUrl('')/static/avatars/logo.png" width="33%"  style="margin-top:-6px;"/>
                     <span class="bold">商城ERP系统</span>
                 </small>
 			</a><!-- /.brand -->

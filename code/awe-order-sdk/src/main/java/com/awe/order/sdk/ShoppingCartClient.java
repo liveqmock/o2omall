@@ -1,5 +1,7 @@
 package com.awe.order.sdk;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Assert;
@@ -7,6 +9,7 @@ import org.springframework.util.Assert;
 import com.awe.order.sdk.request.ShoppingCartRequest;
 import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
 import com.awe.order.sdk.response.ShoppingCartResponse;
+import com.awe.order.sdk.response.ShoppingCartResponseList;
 import com.awe.order.sdk.response.dto.ShoppingCartResponseDto;
 import com.hbird.common.client.AbstractSecureClient;
 import com.hbird.common.utils.serialize.JsonHelper;
@@ -54,28 +57,24 @@ public class ShoppingCartClient extends AbstractSecureClient {
      * @param requestDto
      * @return
      */
-    public Wrapper<?> queryShoppingCartList(ShoppingCartRequestDto requestDto){
+    public List<ShoppingCartResponseDto> queryShoppingCartList(ShoppingCartRequestDto requestDto){
     	if (LOG.isDebugEnabled()) {
             LOG.debug("queryShoppingCartList request: " + JsonHelper.toJson(requestDto));
         }
     	ShoppingCartRequest request = new ShoppingCartRequest(super.getKey(), requestDto);
-    	ShoppingCartResponse response = null;
+    	ShoppingCartResponseList responseList = null;
     	String url = null;
     	try {
     		 url = super.getServiceUrlDomain() + "services/shoppingCart/queryShoppingCartList";
-    	     response = super.getRestTemplate().postForObject(url, request, ShoppingCartResponse.class);
+    		 responseList = super.getRestTemplate().postForObject(url, request, ShoppingCartResponseList.class);
 		} catch (Exception e) {
 			LOG.error("#ShoppingCartClient.queryShoppingCartList# ERROR:" + e);
 		}
 		if (LOG.isDebugEnabled()) {
             LOG.debug("queryShoppingCartList url: " + url);
-            LOG.debug("queryShoppingCartList response: " + JsonHelper.toJson(response));
+            LOG.debug("queryShoppingCartList response: " + JsonHelper.toJson(responseList));
         }
-		if (null != response) {
-            return WrapMapper.wrap(response.getCode(), response.getMessage());
-        } else {
-            return WrapMapper.error();
-        }
+		return super.getResult(responseList);
     }
     /**
      * 删除购物车指定商品数据
