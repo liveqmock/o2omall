@@ -36,7 +36,7 @@
     <!-- 创建信息 -->
     <insert id="insert" parameterType="UserAddress" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user_address(<include refid="userAddressUsedColumns"/>) 
-        VALUES (#{userId},#{name},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{mobile},#{phone},#{email},#{zipcode},#{createUser},#{updateUser},now(),now(),1)
+        VALUES (#{userId},#{name},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{mobile},#{phone},#{email},#{zipcode},#{createUser},#{updateUser},now(),now(),1,1)
 	</insert>
 	
     <!-- 修改信息 -->

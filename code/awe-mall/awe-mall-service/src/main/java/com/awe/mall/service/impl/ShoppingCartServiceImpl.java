@@ -1,5 +1,7 @@
 package com.awe.mall.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.awe.mall.service.ShoppingCartService;
 import com.awe.order.sdk.ShoppingCartClient;
 import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
+import com.awe.order.sdk.response.dto.ShoppingCartResponseDto;
 import com.hbird.common.utils.wrap.Wrapper;
 /**
  * 购物车
@@ -25,14 +28,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	/**
      * {@inheritDoc}
      */
-	public Wrapper<?> queryShoppingCartList(ShoppingCartRequestDto requestDto) {
-		Wrapper<?> wrapper = null;
+	public List<ShoppingCartResponseDto> queryShoppingCartList(ShoppingCartRequestDto requestDto) {
+		List<ShoppingCartResponseDto> responseDtoList = null;
 		try {
-			wrapper = shoppingCartClient.queryShoppingCartList(requestDto);
+			responseDtoList = shoppingCartClient.queryShoppingCartList(requestDto);
 		} catch (Exception e) {
 			LOG.error("#ShoppingCartServiceImpl.queryShoppingCartList# Error:" + e);
 		}
-		return wrapper;
+		return responseDtoList;
 	}
 	/**
      * {@inheritDoc}
