@@ -43,9 +43,12 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 	user_address();
 	//加载省
 	province();
+	//隐藏  div id="invoiceTitle_electronic"  id="electronic" 当选择电子发票时显示
+	$("#electronic").hide();
+	$("#mall_companyName").hide();
 	
-      $("#user_update").hide();
-      $("#add_address").hide();
+     $("#user_update").hide();
+     $("#add_address").hide();
     })
  	function update(){
  		//隐藏
@@ -92,13 +95,31 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 		var type = $("#mall_id").val();
 		var form = $("#mall_form");	
 		
-		if(newadd == ''){
-		  //现清空div
-		  $("#user_radio").empty();
-		  //重新加载
-		  user_address();
-		  return;
+		var raId = $('input[id="radioaddress"]').filter(':checked').val();
+		if(raId != 0){
+			$("#mall_id").val(raId);
 		}
+		
+		if(type == '' &&  newadd ==''){
+			jQuery.post('#springUrl('')/orderinfo/updateAdress',
+                        form.serialize(),
+                        function(data) {
+        					if(data!=null && data.code==200){
+    						  //现清空div
+    						  $("#user_radio").empty();
+    						  //重新加载
+        					  user_address();
+							  return;
+        					}else{
+    						 alert("修改失败");
+        					}
+    					 }
+                );
+		}
+		
+		//数据验证----start
+		
+		//数据验证----end
 		
 		//获取select的值
 		var provinceName=$("#provinceNo").find("option:selected").text();  //获取Select选择的Text
@@ -118,7 +139,10 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 		$("#mall_countyName").val(countyName);
 		$("#mall_countyNo").val(countyNo);
 		
+		
+		
 		if(type != ''){
+		alert("xiug ");
     		//3:修改
     		jQuery.post('#springUrl('')/orderinfo/updateAdress',
                         form.serialize(),
@@ -173,17 +197,17 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 						//全部地址  <input type="radio" name="address" id="radioaddress" value="1" onchange="myradio();" checked />张三
 						if(item.isdefault == 1){
 						txt = item.name + "    " + item.mobile +"   "+ phone+"<p>"+"<br/>"+ item.provinceName + " "+ item.cityName +" "+ item.countyName +" "+item.address;
-						$('#user_radio').append("<input checked type='radio' name='address' id='radioaddress' onchange='myradio();'/> "+txtRadio+"  <a href='javascript:void(0)' onclick='queryAddress("+item.id+")'><font color='blue'>编辑</font></a>   | <a href='javascript:void(0)' onclick='deleteAddress("+item.id+")'><font color='blue'>删除</font></a>  <p><br/> ");
+						$('#user_radio').append("<input checked type='radio' name='address' value='"+item.id+"' id='radioaddress' onchange='myradio();'/> "+txtRadio+"  <a href='javascript:void(0)' onclick='queryAddress("+item.id+")'><font color='blue'>编辑</font></a>   | <a href='javascript:void(0)' onclick='deleteAddress("+item.id+")'><font color='blue'>删除</font></a>  <p><br/> ");
 						}else{
-						$('#user_radio').append("<input type='radio' name='address' id='radioaddress' onchange='myradio();'/> "+txtRadio+"  <a href='javascript:void(0)' onclick='queryAddress("+item.id+")'><font color='blue'>编辑</font></a>   | <a href='javascript:void(0)' onclick='deleteAddress("+item.id+")'><font color='blue'>删除</font></a>  <p><br/> ");
+						$('#user_radio').append("<input type='radio' name='address' value='"+item.id+"' id='radioaddress' onchange='myradio();'/> "+txtRadio+"  <a href='javascript:void(0)' onclick='queryAddress("+item.id+")'><font color='blue'>编辑</font></a>   | <a href='javascript:void(0)' onclick='deleteAddress("+item.id+")'><font color='blue'>删除</font></a>  <p><br/> ");
 						}
 					});
 					$("#user_text").html(txt);
 					//新增radio
-					$('#user_radio').append("<input type='radio' value='0' name='address' id='radioaddress' onchange='myradio();'/> 使用新地址");
     			} else {
     				//alert("获取省份信息失败");
     			}
+				$('#user_radio').append("<input type='radio' value='0' name='address' id='radioaddress' onchange='myradio();'/> 使用新地址");
     		},
     		error : function(data) {
     			alert("获取信息失败");
@@ -321,6 +345,29 @@ background: linear-gradient(top,#b11a1a,#bf2626);
     		}
     	});
 	}
+	//单击发票开具方式
+	function OninvoiceType(type){
+		//当type=2的时候隐藏单位  2==普通发票电子 
+		if(type == 2){
+			$("#mall_invoiceTitleTwo").hide();
+			$("#company").hide();//单位--字
+			$("#electronic").show();
+		}else if(type == 1){
+		   $("#mall_invoiceTitleTwo").show();
+		   $("#company").show();//单位--字
+		   $("#electronic").hide();
+		}
+	}
+	
+	//单击发票抬头
+	function OninvoiceTitle(title){
+		//当title=1 隐藏文本框     等于2时显示
+		if(title == 1){
+		 $("#mall_companyName").hide();
+		}else if(title == 2){
+		 $("#mall_companyName").show();
+		}
+	}
 	
  </script>
 <!---------------------- 填写并核对订单信息  ----------------------> 
@@ -414,16 +461,82 @@ background: linear-gradient(top,#b11a1a,#bf2626);
              
              <div id="pay_Info">
 	             <dl>
-	               <dt>支付及配送方式【<a href="javascript:void(0)" class="reds">修改</a>】</dt>
-	               <dd>在线支付</dd>
-	               <dd>圆通快递  中小件商品 <span class="reds">预计 11月25日送达</span></dd>
+	               <dt>支付及配送方式</dt>
+	               <dd>
+					   <font size="+1">支付方式</font>
+					   <br/><br/>
+    				   <input type="radio" name="paytype" id="mall_paytype" value="2" checked/>【在线支付】
+    	               <input type="radio" name="paytype" id="mall_paytype" value="1"/>【货到付款】
+    				   <input type="radio" name="paytype" id="mall_paytype" value="3"/>【公司转账】
+    				   <input type="radio" name="paytype" id="mall_paytype" value="4"/>【邮件汇款】
+				   </dd>
+				   
+				   <dd>
+					   <font size="+1">配送时间</font>
+                       <dd>
+						<input type="radio" name="orderDate" id="mall_orderDate" value="1" checked/>【只工作日送货(双休日、假日不用送)】
+					   </dd>
+					   <dd>
+						<input type="radio" name="orderDate" id="mall_orderDate" value="2"/>【工作日、双休日与假日均可送货】
+                       </dd>
+					   <dd>
+						<input type="radio" name="orderDate" id="mall_orderDate" value="3"/>【只双休日、假日送货(工作日不用送)】
+                       </dd>
+				   </dd>
+				   
 	             </dl>
 	         </div>    
              
              <div id="invoice_info">
 	             <dl>
-	               <dt>发票信息【<a href="" class="reds">修改</a>】</dt>
-	               <dd>普通发票（电子）<span class="pl15">个人</span><span class="pl15">明细</span></dd>
+	               <dt>发票信息</dt>
+                   <dd>
+						<font size="+1">类型和抬头</font>
+						<br/><br/>
+                        <span class="reds">发票信息:&nbsp;&nbsp;</span>
+						<input type="radio" name="invoiceType" id="mall_invoiceType" value="1" checked onclick="OninvoiceType(this.value)"/>&nbsp;普通发票(纸质)
+						&nbsp;&nbsp;
+						<input type="radio" name="invoiceType" id="mall_invoiceType" value="2" onclick="OninvoiceType(this.value)"/>&nbsp;普通发票(电子)
+				   </dd>
+	               <dd>
+                        
+								<span class="reds">发票抬头:&nbsp;&nbsp;</span>
+								<input type="radio" name="invoiceTitle" id="mall_invoiceTitleOne" value="1" checked onclick="OninvoiceTitle(this.value)"/>&nbsp;个人
+								&nbsp;&nbsp;
+        						<input type="radio" name="invoiceTitle" id="mall_invoiceTitleTwo" value="2" onclick="OninvoiceTitle(this.value)"/>&nbsp;<span id="company">单位</span>
+        						&nbsp;&nbsp;
+        						<input type="text" name="companyName" id="mall_companyName" style="width:300px;height:25px;"/>
+						
+				   </dd>
+                   <dd>
+                        <font size="+1">发票内容</font>
+						<br/><br/>
+						<span class="reds">发票内容:&nbsp;&nbsp;</span>
+						<input type="radio" name="invoiceContent" id="mall_invoiceContent" value="1" checked/>&nbsp;明细
+						&nbsp;&nbsp;
+						<input type="radio" name="invoiceContent" id="mall_invoiceContent" value="2"/>&nbsp;办公用品
+						&nbsp;&nbsp;
+						<input type="radio" name="invoiceContent" id="mall_invoiceContent" value="3"/>&nbsp;电脑配件
+						&nbsp;&nbsp;
+						<input type="radio" name="invoiceContent" id="mall_invoiceContent" value="4"/>&nbsp;耗材
+						
+                        
+                        <dd>
+							<div id="electronic">
+							<span class="reds">收票人手机:</span>
+							&nbsp;&nbsp;
+							<input type="text" name="consigneePhone" id="mall_consigneePhone" style="width:300px;height:25px;"/>
+							<br/>
+							<br/>
+							<span class="reds">收票人邮箱:</span>
+							&nbsp;&nbsp;
+							<input type="text" name="emil" id="mall_emil" style="width:300px;height:25px;"/>
+							</div>
+						</dd>
+						
+						
+						
+				   </dd>
 	             </dl>
              </div>
              

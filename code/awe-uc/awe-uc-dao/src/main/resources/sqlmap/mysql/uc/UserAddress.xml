@@ -53,6 +53,9 @@
 		        <if test="provinceName != null and provinceName != ''">
                 	province_name = #{provinceName,jdbcType=VARCHAR},
 		        </if>
+		        <if test="isdefault != null">
+                	isdefault = #{isdefault,jdbcType=DECIMAL},
+		        </if>
 		        <if test="provinceNo != null and provinceNo != ''">
                 	province_no = #{provinceNo,jdbcType=VARCHAR},
 		        </if>
