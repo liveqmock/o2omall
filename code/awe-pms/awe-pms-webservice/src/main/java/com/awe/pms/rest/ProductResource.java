@@ -16,13 +16,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.pms.domain.Product;
+import com.awe.pms.domain.ProductSku;
+import com.awe.pms.domain.query.ProductQuery;
 import com.awe.pms.sdk.api.request.ProductRequest;
 import com.awe.pms.sdk.api.request.dto.ProductRequestDto;
 import com.awe.pms.sdk.api.response.dto.ProductResponseDto;
+import com.awe.pms.sdk.api.response.dto.ProductSkuResponseDto;
 import com.awe.pms.service.ProductService;
+import com.hbird.common.utils.wrap.WrapMapper;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 商品信息REST服务：提供有关商品信息的接口
@@ -72,7 +75,39 @@ public class ProductResource {
             this.logger.error("查询商品信息数据异常", e);
             return WrapMapper.error();
         }
-    } 
+    }
+    
+    /**
+     * 根据条件查询商品信息信息
+     * 
+     * @param request
+     *            商品信息请求参数
+     * @return 商品信息返回对象
+     * 
+     */
+    @POST
+    @Path("/product/getProducts")
+    public Wrapper<?> getProducts(ProductRequest request) {
+    	if (null == request || !request.checkSign()) {
+    		this.logger.error("getProducts 拒绝访问");
+    		return WrapMapper.forbidden();
+    	}	
+    	
+    	ProductRequestDto requestDto = request.getContent();
+    	ProductQuery queryBean = new ProductQuery();
+    	if (null != requestDto) {
+    		BeanUtils.copyProperties(requestDto, queryBean);
+    	}
+    	
+    	try {
+			List<Product> products = this.productService.queryProductList(queryBean);
+    		List<ProductResponseDto> responseDtos = convertList(products);
+    		return WrapMapper.ok().result(responseDtos);
+    	} catch (Exception e) {
+    		this.logger.error("根据条件查询商品信息数据异常", e);
+    		return WrapMapper.error();
+    	}
+    }
 
     // 数据转换
     private ProductResponseDto convert(Product product) {
@@ -82,6 +117,17 @@ public class ProductResource {
 
         ProductResponseDto productResponseDto = new ProductResponseDto();
         BeanUtils.copyProperties(product, productResponseDto);
+        
+        List<ProductSku> productSkus = product.getProductSkus();
+        if (productSkus != null && productSkus.size() > 0) {
+        	List<ProductSkuResponseDto> productSkuResponseDtos = new ArrayList<ProductSkuResponseDto>();
+        	for (ProductSku productSku : productSkus) {
+        		ProductSkuResponseDto productSkuResponseDto = new ProductSkuResponseDto();
+        		BeanUtils.copyProperties(productSku, productSkuResponseDto);
+        		productSkuResponseDtos.add(productSkuResponseDto);
+        	}
+        	productResponseDto.setProductSkuResponseDtos(productSkuResponseDtos);
+        }
         return productResponseDto;
     }
 

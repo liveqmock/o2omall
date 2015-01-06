@@ -1,7 +1,9 @@
 package com.awe.pms.sdk.response.dto;
 
-import com.hbird.common.sdk.api.dto.HbirdDto;
 import java.util.Date;
+import java.util.List;
+
+import com.hbird.common.sdk.api.dto.HbirdDto;
 
 /**
  * ProductResponseDto：商品信息返回对象Dto<br/>
@@ -122,6 +124,8 @@ public class ProductResponseDto extends HbirdDto {
     private String updateUser; 
     /** 是否有效 */
     private Integer yn; 
+    
+    private List<ProductSkuResponseDto> productSkuResponseDtos;
     
     /**
      * get 主键
@@ -1076,4 +1080,18 @@ public class ProductResponseDto extends HbirdDto {
     public void setYn(Integer yn) {
         this.yn = yn;
     }
+
+	/**
+	 * @return the productSkuResponseDtos
+	 */
+	public List<ProductSkuResponseDto> getProductSkuResponseDtos() {
+		return productSkuResponseDtos;
+	}
+
+	/**
+	 * @param productSkuResponseDtos the productSkuResponseDtos to set
+	 */
+	public void setProductSkuResponseDtos(List<ProductSkuResponseDto> productSkuResponseDtos) {
+		this.productSkuResponseDtos = productSkuResponseDtos;
+	}
 }

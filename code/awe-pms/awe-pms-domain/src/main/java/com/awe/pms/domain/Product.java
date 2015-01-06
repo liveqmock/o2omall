@@ -1,6 +1,7 @@
 package com.awe.pms.domain;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Product：商品信息实体类
@@ -119,7 +120,12 @@ public class Product implements java.io.Serializable {
     /** 修改人 */
     private String updateUser; 
     /** 是否有效 */
-    private Integer yn; 
+    private Integer yn;
+    
+    /**
+     * 商品SKU集合
+     */
+    private List<ProductSku> productSkus;
     
     /**
      * get 主键
@@ -1074,4 +1080,18 @@ public class Product implements java.io.Serializable {
     public void setYn(Integer yn) {
         this.yn = yn;
     }
+
+	/**
+	 * @return the productSkus
+	 */
+	public List<ProductSku> getProductSkus() {
+		return productSkus;
+	}
+
+	/**
+	 * @param productSkus the productSkus to set
+	 */
+	public void setProductSkus(List<ProductSku> productSkus) {
+		this.productSkus = productSkus;
+	}
 }

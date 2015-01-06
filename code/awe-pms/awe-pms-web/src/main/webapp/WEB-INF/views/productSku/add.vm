@@ -59,7 +59,7 @@
 				$('#sizeOrder').ace_spinner({value:10,min:1,max:100,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
 				
 				$("#btn-back").click(function(){
-					window.location.href=("$basePath/productSku");
+					window.location.href=("$basePath/productSku?productNo=$!productSku.productNo");
 				});
 				$("#btn-submit").click(function(){
             		var form = $("#addForm");
@@ -68,7 +68,7 @@
 					}
 					jQuery.post('$basePath/productSku/add',
             			form.serialize(),
-            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/productSku"); }
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/productSku?productNo=$!productSku.productNo"); }
             		);
             	});
             });
