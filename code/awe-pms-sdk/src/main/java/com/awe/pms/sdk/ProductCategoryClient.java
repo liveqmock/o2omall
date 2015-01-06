@@ -60,7 +60,7 @@ public class ProductCategoryClient extends AbstractSecureClient {
      */
     @SuppressWarnings("unchecked")
 	public List<ProductCategoryResponseDto> getProductCategorys(ProductCategoryRequestDto requestDto) {
-    	Assert.notNull(requestDto);
+//    	Assert.notNull(requestDto);
     	
     	ProductCategoryRequest request = new ProductCategoryRequest(super.getKey(), requestDto);
     	

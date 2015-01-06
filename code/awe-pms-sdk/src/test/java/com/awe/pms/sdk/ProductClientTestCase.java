@@ -11,7 +11,7 @@ import com.awe.pms.sdk.response.dto.ProductResponseDto;
  * ProductClient测试用例
  * 
  * @author ljz
- * @version 2014-12-25 17:50:15
+ * @version 2015-1-4 16:09:20
  * 
  */
 public class ProductClientTestCase {

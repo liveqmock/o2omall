@@ -60,7 +60,7 @@ public class ProductBrandClient extends AbstractSecureClient {
      */
     @SuppressWarnings("unchecked")
 	public List<ProductBrandResponseDto> getProductBrands(ProductBrandRequestDto requestDto) {
-    	Assert.notNull(requestDto);
+//    	Assert.notNull(requestDto);
     	
     	ProductBrandRequest request = new ProductBrandRequest(super.getKey(), requestDto);
     	
