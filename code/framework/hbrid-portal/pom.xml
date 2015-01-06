@@ -611,22 +611,22 @@
 				<!--数据库连接的方式 -->
 				<portal.jdbc.driver>com.mysql.jdbc.Driver</portal.jdbc.driver>
 
-				<portal.jdbc.url>jdbc:mysql://10.154.252.107:3306/portal_i?characterEncoding=UTF-8</portal.jdbc.url>
-				<portal.jdbc.username>hbird_base</portal.jdbc.username>
-				<portal.jdbc.password>base123456</portal.jdbc.password>
+				<portal.jdbc.url>jdbc:mysql://test-ip:3306/awe_its?characterEncoding=UTF-8</portal.jdbc.url>
+				<portal.jdbc.username>awe</portal.jdbc.username>
+				<portal.jdbc.password>awe123456</portal.jdbc.password>
 
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>D:/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
 				<!-- 域名配置-日志父路径 -->
-				<domain.web>i</domain.web>
-				<domain.webservice>iapi</domain.webservice>
+				<domain.web>its</domain.web>
+				<domain.webservice>itsws</domain.webservice>
 				
 				<!-- Portal权限认证信息 -->
-				<portal.web.domain.name>local.i.shop.hbird.com:8080</portal.web.domain.name>
-				<portal.api.domain.name>dev.iapi.shop.hbird.com</portal.api.domain.name>
-				<my.web.domain.name>local.i.shop.hbird.com:8080</my.web.domain.name>
+				<portal.web.domain.name>local.its.shop.hbird.com:8080</portal.web.domain.name>
+				<portal.api.domain.name>dev.itsws.shop.hbird.com</portal.api.domain.name>
+				<my.web.domain.name>local.its.shop.hbird.com:8080</my.web.domain.name>
 			</properties>
 		</profile>
 		<!--开发环境 -->
@@ -636,22 +636,22 @@
 				<!--数据库连接的方式 -->
 				<portal.jdbc.driver>com.mysql.jdbc.Driver</portal.jdbc.driver>
 
-				<portal.jdbc.url>jdbc:mysql://10.154.252.107:3306/portal_i?characterEncoding=UTF-8</portal.jdbc.url>
-				<portal.jdbc.username>hbird_base</portal.jdbc.username>
-				<portal.jdbc.password>base123456</portal.jdbc.password>
+				<portal.jdbc.url>jdbc:mysql://test-ip:3306/awe_its?characterEncoding=UTF-8</portal.jdbc.url>
+				<portal.jdbc.username>awe</portal.jdbc.username>
+				<portal.jdbc.password>awe123456</portal.jdbc.password>
 
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
 				<!-- 域名配置-日志父路径 -->
-				<domain.web>i</domain.web>
-				<domain.webservice>iapi</domain.webservice>
+				<domain.web>its</domain.web>
+				<domain.webservice>itsws</domain.webservice>
 				
 				<!-- Portal权限认证信息 -->
-				<portal.web.domain.name>dev.i.shop.hbird.com</portal.web.domain.name>
-				<portal.api.domain.name>dev.iapi.shop.hbird.com</portal.api.domain.name>
-				<my.web.domain.name>dev.i.shop.hbird.com</my.web.domain.name>
+				<portal.web.domain.name>dev.its.shop.hbird.com</portal.web.domain.name>
+				<portal.api.domain.name>dev.itsws.shop.hbird.com</portal.api.domain.name>
+				<my.web.domain.name>dev.its.shop.hbird.com</my.web.domain.name>
 			</properties>
 		</profile>
 
@@ -662,22 +662,22 @@
 				<!--数据库连接的方式 -->
 				<portal.jdbc.driver>com.mysql.jdbc.Driver</portal.jdbc.driver>
 
-				<portal.jdbc.url>jdbc:mysql://10.154.250.19:3306/ams?characterEncoding=UTF-8</portal.jdbc.url>
-				<portal.jdbc.username>wangjiu</portal.jdbc.username>
-				<portal.jdbc.password>wangjiu</portal.jdbc.password>
+				<portal.jdbc.url>jdbc:mysql://test-ip:3306/awe_its?characterEncoding=UTF-8</portal.jdbc.url>
+				<portal.jdbc.username>awe</portal.jdbc.username>
+				<portal.jdbc.password>awe123456</portal.jdbc.password>
 
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
 				<!-- 域名配置-日志父路径 -->
-				<domain.web>i</domain.web>
-				<domain.webservice>iapi</domain.webservice>
+				<domain.web>its</domain.web>
+				<domain.webservice>itsws</domain.webservice>
 				
 				<!-- Portal权限认证信息 -->
-				<portal.web.domain.name>test.i.shop.hbird.com</portal.web.domain.name>
-				<portal.api.domain.name>test.iapi.shop.hbird.com</portal.api.domain.name>
-				<my.web.domain.name>test.i.shop.hbird.com</my.web.domain.name>
+				<portal.web.domain.name>test.its.shop.hbird.com</portal.web.domain.name>
+				<portal.api.domain.name>test.itsws.shop.hbird.com</portal.api.domain.name>
+				<my.web.domain.name>test.its.shop.hbird.com</my.web.domain.name>
 			</properties>
 		</profile>
 
@@ -688,22 +688,22 @@
 				<!--数据库连接的方式 -->
 				<portal.jdbc.driver>com.mysql.jdbc.Driver</portal.jdbc.driver>
 
-				<portal.jdbc.url>jdbc:mysql://117.121.54.233:3320/zx_ams?characterEncoding=UTF-8</portal.jdbc.url>
-				<portal.jdbc.username>zx_ams_w</portal.jdbc.username>
-				<portal.jdbc.password>hmC8Xa8CIJq5aImXCy93</portal.jdbc.password>
+				<portal.jdbc.url>jdbc:mysql://release-ip:3323060/awe_its?characterEncoding=UTF-8</portal.jdbc.url>
+				<portal.jdbc.username>awe</portal.jdbc.username>
+				<portal.jdbc.password>awe123456</portal.jdbc.password>
 
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
 				<!-- 域名配置-日志父路径 -->
-				<domain.web>i</domain.web>
-				<domain.webservice>iapi</domain.webservice>
+				<domain.web>its</domain.web>
+				<domain.webservice>itsws</domain.webservice>
 				
 				<!-- Portal权限认证信息 -->
-				<portal.web.domain.name>i.shop.hbird.com</portal.web.domain.name>
-				<portal.api.domain.name>iapi.shop.hbird.com</portal.api.domain.name>
-				<my.web.domain.name>i.shop.hbird.com</my.web.domain.name>
+				<portal.web.domain.name>its.shop.hbird.com</portal.web.domain.name>
+				<portal.api.domain.name>itsws.shop.hbird.com</portal.api.domain.name>
+				<my.web.domain.name>its.shop.hbird.com</my.web.domain.name>
 			</properties>
 		</profile>
 	</profiles>
