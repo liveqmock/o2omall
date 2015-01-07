@@ -1,6 +1,10 @@
 package com.awe.mall.service;
 
+import java.util.List;
+
 import com.awe.order.sdk.request.dto.OrdersRequestDto;
+import com.awe.order.sdk.response.dto.OrdersResponseDto;
+import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.wrap.Wrapper;
 
 /**
@@ -22,7 +26,7 @@ public interface OrdersService {
 	 * @param requestDto
 	 * @return
 	 */
-	public Wrapper<?> queryFrontOrdersListWithPage(OrdersRequestDto requestDto);
+	public List<OrdersResponseDto> queryFrontOrdersListWithPage(OrdersRequestDto requestDto,PageUtil pageUtil);
 	/**
 	 * 订单取消
 	 * @param requestDto

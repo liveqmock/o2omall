@@ -1,5 +1,7 @@
 package com.awe.mall.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import com.awe.mall.service.OrdersService;
 import com.awe.order.sdk.OrdersClient;
 import com.awe.order.sdk.request.dto.OrdersRequestDto;
 import com.awe.order.sdk.response.dto.OrdersResponseDto;
+import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 /**
@@ -39,14 +42,14 @@ public class OrdersServiceImpl implements OrdersService {
 	/**
      * {@inheritDoc}
      */
-	public Wrapper<?> queryFrontOrdersListWithPage(OrdersRequestDto requestDto) {
-		Wrapper<?> wrapper = null;
+	public List<OrdersResponseDto> queryFrontOrdersListWithPage(OrdersRequestDto requestDto,PageUtil pageUtil) {
+		List<OrdersResponseDto> responseDtoList = null;
 		try {
-			wrapper = ordersClient.queryFrontOrdersListWithPage(requestDto);
+			responseDtoList = ordersClient.queryFrontOrdersListWithPage(requestDto,pageUtil);
 		} catch (Exception e) {
 			LOG.error("#OrdersServiceImpl.queryFrontOrdersListWithPage# Error:" + e);
 		}
-		return wrapper;
+		return responseDtoList;
 	}
 	/**
      * {@inheritDoc}

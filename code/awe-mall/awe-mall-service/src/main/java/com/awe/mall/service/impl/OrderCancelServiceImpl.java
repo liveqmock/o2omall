@@ -1,5 +1,7 @@
 package com.awe.mall.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import com.awe.mall.service.OrderCancelService;
 import com.awe.order.sdk.OrderCancelClient;
 import com.awe.order.sdk.request.dto.OrderCancelRequestDto;
 import com.awe.order.sdk.response.dto.OrderCancelResponseDto;
+import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 /**
@@ -39,14 +42,14 @@ public class OrderCancelServiceImpl implements OrderCancelService {
 	/**
      * {@inheritDoc}
      */
-	public Wrapper<?> queryFrontOrderCancelListWithPage(OrderCancelRequestDto requestDto) {
-		Wrapper<?> wrapper = null;
+	public List<OrderCancelResponseDto> queryFrontOrderCancelListWithPage(OrderCancelRequestDto requestDto,PageUtil pageUtil) {
+		List<OrderCancelResponseDto> responseDtoList = null;
 		try {
-			wrapper = orderCancelClient.queryFrontOrderCancelListWithPage(requestDto);
+			responseDtoList = orderCancelClient.queryFrontOrderCancelListWithPage(requestDto,pageUtil);
 		} catch (Exception e) {
 			LOG.error("#ShoppingCartServiceImpl.queryFrontOrderCancelListWithPage# Error:" + e);
 		}
-		return wrapper;
+		return responseDtoList;
 	}
 
 }

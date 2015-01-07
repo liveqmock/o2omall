@@ -1,6 +1,10 @@
 package com.awe.mall.service;
 
+import java.util.List;
+
 import com.awe.order.sdk.request.dto.OrderCancelRequestDto;
+import com.awe.order.sdk.response.dto.OrderCancelResponseDto;
+import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.wrap.Wrapper;
 
 /**
@@ -19,7 +23,8 @@ public interface OrderCancelService {
 	/**
 	 * 获取取消了的订单列表
 	 * @param requestDto
+	 * @param pageUtil
 	 * @return
 	 */
-	public Wrapper<?> queryFrontOrderCancelListWithPage(OrderCancelRequestDto requestDto);
+	public List<OrderCancelResponseDto> queryFrontOrderCancelListWithPage(OrderCancelRequestDto requestDto,PageUtil pageUtil);
 }
