@@ -543,9 +543,6 @@
 		<!--本地环境 -->
 		<profile>
 			<id>local</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
@@ -596,6 +593,9 @@
 		<!--测试环境 -->
 		<profile>
 			<id>test</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
@@ -613,7 +613,7 @@
 				<domain.webservice>test.pmsws.shop.hbird.com</domain.webservice>
 				<domain.worker>test.pms-worker.shop.hbird.com</domain.worker>
 				<!-- 调用uc -->
-				<service.url.domain.uc>http\://test.ucws.shop.hbird.com\:8020</service.url.domain.uc>
+				<service.url.domain.uc>http\://test.ucws.shop.hbird.com\:8100</service.url.domain.uc>
 				<key.common.order>pms</key.common.order>
 			</properties>
 		</profile>

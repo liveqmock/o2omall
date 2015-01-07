@@ -545,9 +545,6 @@
 		<!--本地环境 -->
 		<profile>
 			<id>local</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 			<properties>
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>
@@ -586,6 +583,9 @@
 		<!--测试环境 -->
 		<profile>
 			<id>test</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<properties>
 				<!-- 服务器日志配置 -->
 				<log.root.level>INFO</log.root.level>
@@ -598,7 +598,7 @@
 				<domain.worker>test.mall-worker.shop.hbird.com</domain.worker>
 				<!-- 登录权限认证信息 -->
 				<my.web.domain.name>test.mall.shop.hbird.com</my.web.domain.name>
-				<service.url.domain.pms>http\://test.pmsws.shop.hbird.com\:8120/</service.url.domain.pms>
+				<service.url.domain.pms>http\://test.pmsws.shop.hbird.com\:8100/</service.url.domain.pms>
 			</properties>
 		</profile>
 
