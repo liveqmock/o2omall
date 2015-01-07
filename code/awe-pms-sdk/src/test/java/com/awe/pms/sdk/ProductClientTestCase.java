@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.springframework.util.Assert;
 
 import com.awe.pms.sdk.request.dto.ProductRequestDto;
+import com.awe.pms.sdk.request.dto.ProductSkuRequestDto;
 import com.awe.pms.sdk.response.dto.ProductResponseDto;
 
 /**
@@ -38,7 +39,16 @@ public class ProductClientTestCase {
         
         ProductResponseDto productResponseDto = client.getProduct(requestDto);
         Assert.notNull(productResponseDto);
-    } 
+    }
+    
+    @Test
+    public void testGetProductBySkuNo() {
+    	ProductSkuRequestDto requestDto = new ProductSkuRequestDto();
+    	requestDto.setSkuNo("sku001");
+    	
+    	ProductResponseDto productResponseDto = client.getProductBySkuNo(requestDto);
+    	Assert.notNull(productResponseDto);
+    }
     
     @Test
     public void testGetProducts() {

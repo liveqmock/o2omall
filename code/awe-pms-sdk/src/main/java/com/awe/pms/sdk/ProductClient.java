@@ -7,7 +7,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Assert;
 
 import com.awe.pms.sdk.request.ProductRequest;
+import com.awe.pms.sdk.request.ProductSkuRequest;
 import com.awe.pms.sdk.request.dto.ProductRequestDto;
+import com.awe.pms.sdk.request.dto.ProductSkuRequestDto;
 import com.awe.pms.sdk.response.ProductResponse;
 import com.awe.pms.sdk.response.dto.ProductResponseDto;
 import com.hbird.common.client.AbstractSecureClient;
@@ -52,13 +54,40 @@ public class ProductClient extends AbstractSecureClient {
     }
     
     /**
+     * 根据 SKU_NO 查询商品信息信息
+     * 
+     * @param request
+     *            查询请求对象
+     * @return ProductResponseDto 接口返回的数据对象
+     */
+    public ProductResponseDto getProductBySkuNo(ProductSkuRequestDto requestDto) {
+    	Assert.notNull(requestDto);
+    	
+    	ProductSkuRequest request = new ProductSkuRequest(super.getKey(), requestDto);
+    	
+    	if (LOG.isDebugEnabled()) {
+    		LOG.debug("getProductBySkuNo request: " + JsonHelper.toJson(request));
+    	}
+    	
+    	String url = super.getServiceUrlDomain() + "services/product/getProductBySkuNo";
+    	ProductResponse response = super.getRestTemplate().postForObject(url, request, ProductResponse.class);
+    	
+    	if (LOG.isDebugEnabled()) {
+    		LOG.debug("getProductBySkuNo url: " + url);
+    		LOG.debug("getProductBySkuNo response: " + JsonHelper.toJson(response));
+    	}
+    	return super.getResult(response);
+    }
+    
+    /**
      * 根据条件查询商品信息服务
      * 
      * @param request
      *            查询请求对象
      * @return List<ProductResponseDto> 接口返回的数据对象
      */
-    public List<ProductResponseDto> getProducts(ProductRequestDto requestDto) {
+    @SuppressWarnings("unchecked")
+	public List<ProductResponseDto> getProducts(ProductRequestDto requestDto) {
 //    	Assert.notNull(requestDto);
     	
     	ProductRequest request = new ProductRequest(super.getKey(), requestDto);
