@@ -1,5 +1,7 @@
 package com.awe.order.sdk;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Assert;
@@ -10,8 +12,10 @@ import com.awe.order.sdk.request.dto.OrderDetailsRequestDto;
 import com.awe.order.sdk.request.dto.OrdersRequestDto;
 import com.awe.order.sdk.response.OrderDetailsResponse;
 import com.awe.order.sdk.response.OrdersResponse;
+import com.awe.order.sdk.response.OrdersResponseList;
 import com.awe.order.sdk.response.dto.OrdersResponseDto;
 import com.hbird.common.client.AbstractSecureClient;
+import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.serialize.JsonHelper;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
@@ -57,28 +61,30 @@ public class OrdersClient extends AbstractSecureClient {
      * @param requestDto
      * @return
      */
-    public Wrapper<?> queryFrontOrdersListWithPage(OrdersRequestDto requestDto){
+    public List<OrdersResponseDto> queryFrontOrdersListWithPage(OrdersRequestDto requestDto,PageUtil pageUtil){
     	if (LOG.isDebugEnabled()) {
             LOG.debug("queryFrontOrdersListWithPage request: " + JsonHelper.toJson(requestDto));
         }
-    	OrdersRequest request = new OrdersRequest(super.getKey(), requestDto);
-    	OrdersResponse response = null;
+    	OrdersRequest request = new OrdersRequest(super.getKey(), requestDto, pageUtil);
+    	List<OrdersResponseDto> responseDtoList = null;
+    	OrdersResponseList responseList = null;
     	String url = null;
     	try {
+    		int totalRow;
     		 url = super.getServiceUrlDomain() + "services/orders/queryFrontOrdersListWithPage";
-    	     response = super.getRestTemplate().postForObject(url, request, OrdersResponse.class);
+    		 responseList = super.getRestTemplate().postForObject(url, request, OrdersResponseList.class);
+    		 responseDtoList = responseList.getResult();
+    		 totalRow = responseList.getPageUtil().getTotalRow();
+    		 pageUtil.setTotalRow(totalRow);
+    		 pageUtil.init();
 		} catch (Exception e) {
 			LOG.error("#OrdersClient.queryFrontOrdersListWithPage# ERROR:" + e);
 		}
 		if (LOG.isDebugEnabled()) {
             LOG.debug("queryFrontOrdersListWithPage url: " + url);
-            LOG.debug("queryFrontOrdersListWithPage response: " + JsonHelper.toJson(response));
+            LOG.debug("queryFrontOrdersListWithPage responseList: " + JsonHelper.toJson(responseList));
         }
-		if (null != response) {
-            return WrapMapper.wrap(response.getCode(), response.getMessage());
-        } else {
-            return WrapMapper.error();
-        }
+		return responseDtoList;
     }
     /**
      * 订单取消
