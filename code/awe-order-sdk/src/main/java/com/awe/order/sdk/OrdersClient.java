@@ -4,8 +4,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Assert;
 
+import com.awe.order.sdk.request.OrdersDetailsRequest;
 import com.awe.order.sdk.request.OrdersRequest;
+import com.awe.order.sdk.request.dto.OrderDetailsRequestDto;
 import com.awe.order.sdk.request.dto.OrdersRequestDto;
+import com.awe.order.sdk.response.OrderDetailsResponse;
 import com.awe.order.sdk.response.OrdersResponse;
 import com.awe.order.sdk.response.dto.OrdersResponseDto;
 import com.hbird.common.client.AbstractSecureClient;
@@ -132,6 +135,38 @@ public class OrdersClient extends AbstractSecureClient {
         } else {
             return WrapMapper.error();
         }
+    }
+    
+    /**
+     * 添加订单基础数据，订单日志，订单item
+     * Date:2015年1月7日下午2:44:20
+     * user:js
+     * @param orderDetailsRequestDto
+     * @return
+     */
+    public Wrapper<?> addOrdersDetails(OrderDetailsRequestDto orderDetailsRequestDto){
+    	if (LOG.isDebugEnabled()) {
+            LOG.debug("addOrdersDetails request: " + JsonHelper.toJson(orderDetailsRequestDto));
+        }
+    	OrdersDetailsRequest ordersDetailsRequest = new OrdersDetailsRequest(super.getKey(),orderDetailsRequestDto);
+    	OrderDetailsResponse response = null;
+    	String url = null;
+    	try {
+    		 url = super.getServiceUrlDomain() + "services/ordersDetails/insert";
+    		 response = super.getRestTemplate().postForObject(url, ordersDetailsRequest, OrderDetailsResponse.class);
+		} catch (Exception e) {
+			LOG.error("#OrdersClient.addOrdersDetails# ERROR:" + e);
+		}
+    	if (LOG.isDebugEnabled()) {
+            LOG.debug("addOrdersDetails url: " + url);
+            LOG.debug("addOrdersDetails response: " + JsonHelper.toJson(response));
+        }
+		if (null != response) {
+            return WrapMapper.wrap(response.getCode(),response.getMessage());
+        } else {
+            return WrapMapper.error();
+        }
+    	
     }
     
 }

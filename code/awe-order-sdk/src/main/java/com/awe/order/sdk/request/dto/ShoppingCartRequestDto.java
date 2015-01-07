@@ -11,7 +11,7 @@ import java.util.Date;
  * 
  */
 public class ShoppingCartRequestDto extends HbirdDto {
-
+ 
     /** 序列化标识 */
     private static final long serialVersionUID = 1L;
     

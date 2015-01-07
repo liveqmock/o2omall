@@ -14,6 +14,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.awe.order.domain.OrderDetails;
+import com.awe.order.domain.OrderLog;
 import com.awe.order.domain.Orders;
 import com.awe.order.domain.OrdersItems;
 import com.awe.order.domain.query.FrontOrdersQuery;
@@ -67,10 +69,12 @@ public class OrdersServiceImpl implements OrdersService {
         boolean resultFlag = false;
         try {
             if (null != orders) {
+            	//1:查询有效的订单好是否在订单表中
                 if (ordersManager.exist(orders)) {
                     throw new ExistedException();
                 }
                 resultFlag = ordersManager.insert(orders);
+                
             } else {
                 LOG.warn("OrdersServiceImpl#insert failed, param is illegal.");
             }
@@ -231,6 +235,31 @@ public class OrdersServiceImpl implements OrdersService {
             LOG.error("OrdersServiceImpl#queryFrontOrdersListWithPage has error.", e);
         }
         return dataList;
+	}
+
+    /**
+     * {@inheritDoc}
+     */
+    @Profiled(tag = "OrdersService.insertDetails")
+	public boolean insertDetails(OrderDetails orderDetails) {
+    	 boolean resultFlag = false;
+         try {
+             if (null != orderDetails) {
+             	//1:查询有效的订单号是否在订单表中
+                 if (ordersManager.exist(orderDetails.getOrders())) {
+                     throw new ExistedException();
+                 }
+                 ordersManager.insertDetails(orderDetails);
+             } else {
+                 LOG.warn("OrdersServiceImpl#insert failed, param is illegal.");
+             }
+         } catch (ExistedException e) {
+             LOG.warn("OrdersServiceImpl#insert failed, orders has existed.");
+             throw e;
+         } catch (Exception e) {
+             LOG.error("OrdersServiceImpl#insert has error.", e);
+         }
+         return resultFlag;
 	}
 }
 

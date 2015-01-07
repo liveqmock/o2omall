@@ -31,7 +31,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	public List<ShoppingCartResponseDto> queryShoppingCartList(ShoppingCartRequestDto requestDto) {
 		List<ShoppingCartResponseDto> responseDtoList = null;
 		try {
-			responseDtoList = shoppingCartClient.queryShoppingCartList(requestDto);
+			//responseDtoList = shoppingCartClient.queryShoppingCartList(requestDto);
 		} catch (Exception e) {
 			LOG.error("#ShoppingCartServiceImpl.queryShoppingCartList# Error:" + e);
 		}
