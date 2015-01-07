@@ -3,7 +3,7 @@ package com.awe.order.sdk.response;
 import java.util.List;
 
 import com.awe.order.sdk.response.dto.OrdersResponseDto;
-import com.hbird.common.sdk.api.response.HbirdResponse;
+import com.hbird.common.sdk.api.response.HbirdPageResponse;
 
 /**
  * OrdersResponse：订单返回对象<br/>
@@ -13,7 +13,7 @@ import com.hbird.common.sdk.api.response.HbirdResponse;
  * @version 2014-12-23 10:58:06
  * 
  */
-public class OrdersResponseList extends HbirdResponse<List<OrdersResponseDto>> {
+public class OrdersResponseList extends HbirdPageResponse<List<OrdersResponseDto>> {
 
     /** 序列化标识 */
     private static final long serialVersionUID = 1L;

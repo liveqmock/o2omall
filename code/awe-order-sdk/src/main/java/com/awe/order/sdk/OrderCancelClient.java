@@ -1,5 +1,7 @@
 package com.awe.order.sdk;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Assert;
@@ -7,11 +9,11 @@ import org.springframework.util.Assert;
 import com.awe.order.sdk.request.OrderCancelRequest;
 import com.awe.order.sdk.request.dto.OrderCancelRequestDto;
 import com.awe.order.sdk.response.OrderCancelResponse;
+import com.awe.order.sdk.response.OrderCancelResponseList;
 import com.awe.order.sdk.response.dto.OrderCancelResponseDto;
 import com.hbird.common.client.AbstractSecureClient;
+import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.serialize.JsonHelper;
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 订单取消服务的客户端
@@ -54,27 +56,29 @@ public class OrderCancelClient extends AbstractSecureClient {
      * @param requestDto
      * @return
      */
-    public Wrapper<?> queryFrontOrderCancelListWithPage(OrderCancelRequestDto requestDto){
+    public List<OrderCancelResponseDto> queryFrontOrderCancelListWithPage(OrderCancelRequestDto requestDto,PageUtil pageUtil){
     	if (LOG.isDebugEnabled()) {
             LOG.debug("queryFrontOrderCancelListWithPage request: " + JsonHelper.toJson(requestDto));
         }
     	OrderCancelRequest request = new OrderCancelRequest(super.getKey(), requestDto);
-    	OrderCancelResponse response = null;
+    	List<OrderCancelResponseDto> responseDtoList = null;
+    	OrderCancelResponseList responseList = null;
     	String url = null;
     	try {
+    		int totalRow;
     		 url = super.getServiceUrlDomain() + "services/orderCancel/queryFrontOrderCancelListWithPage";
-    	     response = super.getRestTemplate().postForObject(url, request, OrderCancelResponse.class);
+    		 responseList = super.getRestTemplate().postForObject(url, request, OrderCancelResponseList.class);
+    		 responseDtoList = responseList.getResult();
+    		 totalRow = responseList.getPageUtil().getTotalRow();
+    		 pageUtil.setTotalRow(totalRow);
+    		 pageUtil.init();
 		} catch (Exception e) {
 			LOG.error("#OrderCancelClient.queryFrontOrderCancelListWithPage# ERROR:" + e);
 		}
 		if (LOG.isDebugEnabled()) {
             LOG.debug("queryFrontOrderCancelListWithPage url: " + url);
-            LOG.debug("queryFrontOrderCancelListWithPage response: " + JsonHelper.toJson(response));
+            LOG.debug("queryFrontOrderCancelListWithPage responseList: " + JsonHelper.toJson(responseList));
         }
-		if (null != response) {
-            return WrapMapper.wrap(response.getCode(), response.getMessage());
-        } else {
-            return WrapMapper.error();
-        }
+		return responseDtoList;
     }
 }
