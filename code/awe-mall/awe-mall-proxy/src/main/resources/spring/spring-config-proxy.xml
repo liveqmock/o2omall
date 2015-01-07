@@ -58,6 +58,11 @@
 		<property name="key" value="${mall.common.key}" />
 		<property name="serviceUrlDomain" value="${service.url.domain.pms}" />
 	</bean>
+	
+	<bean id="productClient" class="com.awe.pms.sdk.ProductClient">
+		<property name="key" value="${mall.common.key}" />
+		<property name="serviceUrlDomain" value="${service.url.domain.pms}" />
+	</bean>
 	<!-- awe-pms-sdk end -->
 	
 	<!-- com.awe.uc.sdk start  -->

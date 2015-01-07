@@ -14,7 +14,7 @@
 							<ul class="article_list">
         					#foreach($item_child in $!productCategorys)
     							#if("$item_child.fid" == "$item.id")
-    								<li><a href="#springUrl('')/shopping/shopping_list?$item_child.id">$item_child.name</a></li>
+    								<li><a href="#springUrl('')/shopping/shopping_list?categoryTwoId=$item_child.id">$item_child.name</a></li>
     							#end
         					 #end
                            </ul>
@@ -106,30 +106,17 @@
               <div class="bf rank_lb">
                   <div class="shop_lb clearfix">
                    <ul>
-                     <li class="pl">
-                         <div><a href="product_details.html"><img src="#springUrl('')/static/images/m_img6.jpg" /></a></div>
-                         <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
-                         <p>优质配方工艺</p>
-                         <p class="reds">¥298.00</p>
-                     </li>
-                     <li>
-                         <div><a href="product_details.html"><img src="#springUrl('')/static/images/m_img6.jpg" /></a></div>
-                         <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
-                         <p>优质配方工艺</p>
-                         <p class="reds">¥298.00</p>
-                     </li>
-                     <li>
-                         <div><a href="product_details.html"><img src="#springUrl('')/static/images/m_img6.jpg" /></a></div>
-                         <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
-                         <p>优质配方工艺</p>
-                         <p class="reds">¥298.00</p>
-                     </li>
-                     <li>
-                         <div><a href="product_details.html"><img src="#springUrl('')/static/images/m_img6.jpg" /></a></div>
-                         <p><a href="product_details.html">雅培(Similac) 美国雅培精装奶粉</a></p>
-                         <p>优质配方工艺</p>
-                         <p class="reds">¥298.00</p>
-                     </li>
+					 #foreach($product in $!products)
+						#foreach($productSku in $!{product.productSkuResponseDtos})
+                         <li class="pl">
+                             <div><a href="#springUrl('')/shopping/product_details?id=$!{product.id}&currentSkuNo=$!{productSku.skuNo}"><img src="#springUrl('')/static/images/m_img6.jpg" /></a></div>
+                             <p><a href="#springUrl('')/shopping/product_details?id=$!{product.id}&currentSkuNo=$!{productSku.skuNo}">$!{product.productName} $!{productSku.skuName}</a></p>
+                             <p>优质配方工艺</p>
+                             <p class="reds"><s>¥$!{productSku.price}元</s></p>
+                             <p class="reds">¥$!{productSku.salePrice}元</p>
+                         </li>
+						#end
+					 #end
                    </ul>
                  </div>
               </div>   
