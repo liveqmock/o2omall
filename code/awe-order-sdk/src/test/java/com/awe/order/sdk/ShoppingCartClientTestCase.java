@@ -47,11 +47,11 @@ public class ShoppingCartClientTestCase {
      * 删除购物车指定商品数据
      */
     @Test
-    public void deleteShoppingCartById(){
+    public void deleteShoppingCart(){
     	ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
-        requestDto.setId(1l);
+        requestDto.setSkuNo("1");
         
-        Wrapper<?> wrapper = client.deleteShoppingCartById(requestDto);
+        Wrapper<?> wrapper = client.deleteShoppingCart(requestDto);
         Assert.isTrue(WrapMapper.ok().getMessage().equals(wrapper.getMessage()));
     }
     /**
