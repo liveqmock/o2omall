@@ -7,7 +7,7 @@ import java.util.List;
  * Product：商品信息实体类
  * 
  * @author ljz
- * @version 2015-1-4 16:09:12
+ * @version 2015-1-7 9:51:31
  * 
  */
 public class Product implements java.io.Serializable {
@@ -103,6 +103,8 @@ public class Product implements java.io.Serializable {
     private String distribution; 
     /** 是否免运费 */
     private Integer freightFree; 
+    /** 运费 */
+    private Double freight; 
     /** 材质 */
     private String material; 
     /** 包装清单 */
@@ -120,14 +122,29 @@ public class Product implements java.io.Serializable {
     /** 修改人 */
     private String updateUser; 
     /** 是否有效 */
-    private Integer yn;
+    private Integer yn; 
     
     /**
      * 商品SKU集合
      */
     private List<ProductSku> productSkus;
     
+    
     /**
+	 * @return the productSkus
+	 */
+	public List<ProductSku> getProductSkus() {
+		return productSkus;
+	}
+
+	/**
+	 * @param productSkus the productSkus to set
+	 */
+	public void setProductSkus(List<ProductSku> productSkus) {
+		this.productSkus = productSkus;
+	}
+
+	/**
      * get 主键
      * 
      * @return the id
@@ -920,6 +937,24 @@ public class Product implements java.io.Serializable {
     }
     
     /**
+     * get 运费
+     * 
+     * @return the freight
+     */
+    public Double getFreight(){
+        return freight;
+    }
+        
+    /**
+     * set 运费
+     * 
+     * @param freight the freight to set
+     */
+    public void setFreight(Double freight) {
+        this.freight = freight;
+    }
+    
+    /**
      * get 材质
      * 
      * @return the material
@@ -1080,18 +1115,4 @@ public class Product implements java.io.Serializable {
     public void setYn(Integer yn) {
         this.yn = yn;
     }
-
-	/**
-	 * @return the productSkus
-	 */
-	public List<ProductSku> getProductSkus() {
-		return productSkus;
-	}
-
-	/**
-	 * @param productSkus the productSkus to set
-	 */
-	public void setProductSkus(List<ProductSku> productSkus) {
-		this.productSkus = productSkus;
-	}
 }

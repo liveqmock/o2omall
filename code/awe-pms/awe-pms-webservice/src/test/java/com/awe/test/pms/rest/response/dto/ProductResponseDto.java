@@ -10,7 +10,7 @@ import java.util.List;
  * 提供rest接口时方法的返回对象
  * 
  * @author ljz
- * @version 2015-1-4 16:09:19
+ * @version 2015-1-7 9:51:33
  * 
  */
 public class ProductResponseDto extends HbirdDto {
@@ -106,6 +106,8 @@ public class ProductResponseDto extends HbirdDto {
     private String distribution; 
     /** 是否免运费 */
     private Integer freightFree; 
+    /** 运费 */
+    private Double freight; 
     /** 材质 */
     private String material; 
     /** 包装清单 */
@@ -128,6 +130,20 @@ public class ProductResponseDto extends HbirdDto {
     private List<ProductSkuResponseDto> productSkuResponseDtos;
     
     /**
+	 * @return the productSkuResponseDtos
+	 */
+	public List<ProductSkuResponseDto> getProductSkuResponseDtos() {
+		return productSkuResponseDtos;
+	}
+
+	/**
+	 * @param productSkuResponseDtos the productSkuResponseDtos to set
+	 */
+	public void setProductSkuResponseDtos(List<ProductSkuResponseDto> productSkuResponseDtos) {
+		this.productSkuResponseDtos = productSkuResponseDtos;
+	}
+
+	/**
      * get 主键
      * 
      * @return the id
@@ -920,6 +936,24 @@ public class ProductResponseDto extends HbirdDto {
     }
     
     /**
+     * get 运费
+     * 
+     * @return the freight
+     */
+    public Double getFreight(){
+        return freight;
+    }
+        
+    /**
+     * set 运费
+     * 
+     * @param freight the freight to set
+     */
+    public void setFreight(Double freight) {
+        this.freight = freight;
+    }
+    
+    /**
      * get 材质
      * 
      * @return the material
@@ -1080,18 +1114,4 @@ public class ProductResponseDto extends HbirdDto {
     public void setYn(Integer yn) {
         this.yn = yn;
     }
-
-	/**
-	 * @return the productSkuResponseDtos
-	 */
-	public List<ProductSkuResponseDto> getProductSkuResponseDtos() {
-		return productSkuResponseDtos;
-	}
-
-	/**
-	 * @param productSkuResponseDtos the productSkuResponseDtos to set
-	 */
-	public void setProductSkuResponseDtos(List<ProductSkuResponseDto> productSkuResponseDtos) {
-		this.productSkuResponseDtos = productSkuResponseDtos;
-	}
 }

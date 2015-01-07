@@ -8,7 +8,7 @@ import com.hbird.common.utils.page.Query;
  * ProductQuery：商品信息查询类
  * 
  * @author ljz
- * @version 2015-1-4 16:09:12
+ * @version 2015-1-7 9:51:31
  * 
  */
 public class ProductQuery extends Query {
@@ -101,6 +101,8 @@ public class ProductQuery extends Query {
 	private String distribution; 
     /** 是否免运费 */
 	private Integer freightFree; 
+    /** 运费 */
+	private Double freight; 
     /** 材质 */
 	private String material; 
     /** 包装清单 */
@@ -914,6 +916,24 @@ public class ProductQuery extends Query {
      */
     public void setFreightFree(Integer freightFree) {
         this.freightFree = freightFree;
+    }
+    
+    /**
+     * get 运费
+     * 
+     * @return the freight
+     */
+    public Double getFreight(){
+        return freight;
+    }
+        
+    /**
+     * set 运费
+     * 
+     * @param freight the freight to set
+     */
+    public void setFreight(Double freight) {
+        this.freight = freight;
     }
     
     /**

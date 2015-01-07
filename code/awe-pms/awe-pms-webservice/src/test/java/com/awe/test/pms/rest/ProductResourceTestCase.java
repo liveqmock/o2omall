@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
+import com.awe.pms.sdk.api.request.ProductSkuRequest;
+import com.awe.pms.sdk.api.request.dto.ProductSkuRequestDto;
 import com.awe.test.pms.rest.request.ProductRequest;
 import com.awe.test.pms.rest.request.dto.ProductRequestDto;
 import com.awe.test.pms.rest.response.ProductResponse;
@@ -41,6 +43,20 @@ public class ProductResourceTestCase extends AbstractClient {
         Assert.notNull(response);
         ProductResponseDto productResponseDto = super.getResult(response);
         Assert.notNull(productResponseDto);
+    }
+    
+    @Test
+    public void testGetProductBySkuNo() {
+    	String url= getServiceUrlDomain() + "/product/getProductBySkuNo";
+    	
+    	ProductSkuRequestDto requestDto = new ProductSkuRequestDto();
+    	requestDto.setSkuNo("sku001");
+		ProductSkuRequest request = new ProductSkuRequest("pms",requestDto );
+    	
+    	ProductResponse response = super.getRestTemplate().postForObject(url, request, ProductResponse.class);
+    	Assert.notNull(response);
+    	ProductResponseDto productResponseDto = super.getResult(response);
+    	Assert.notNull(productResponseDto);
     }
     
     @SuppressWarnings("unchecked")
