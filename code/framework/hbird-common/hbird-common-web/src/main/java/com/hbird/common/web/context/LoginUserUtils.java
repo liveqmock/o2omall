@@ -21,9 +21,7 @@ public class LoginUserUtils {
     private static String userCookieName = "_i_u_cookie_";
 
     public static void setUserCookieName(String userCookieName) {
-        if (LoginUserUtils.userCookieName == null) {
-            LoginUserUtils.userCookieName = userCookieName;
-        }
+        LoginUserUtils.userCookieName = userCookieName;
     }
 
     public static String getUserCookieName() {
