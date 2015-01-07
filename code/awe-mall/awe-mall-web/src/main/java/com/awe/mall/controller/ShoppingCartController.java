@@ -51,6 +51,7 @@ public class ShoppingCartController extends BaseController{
 			ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
 			requestDto.setSkuNo(skuNo);
 			requestDto.setSkuCount(Integer.valueOf(skuCount));
+			requestDto.setStatus(1);
 			requestDto.setUserNo(UserContext.get().getUserId().toString());
 			requestDto.setCreateUser(UserContext.get().getCnName());
 			requestDto.setUpdateUser(UserContext.get().getCnName());

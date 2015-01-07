@@ -4,7 +4,7 @@
       
         <div class="join_l left">
           <div class="cat_con">
-             <p><i class="cat_true"></i>商品已成功加入购物车!<a href="#springUrl('')/shopping/product_details?skuNo='$!skuNo'" class="continue_shop">继续购物</a><a href="#springUrl('')/shopping/listCart" class="bala_btn mt25">去购物车结算<i></i></a></div></p>
+             <p><i class="cat_true"></i>商品已成功加入购物车!<a href="#springUrl('')/shopping/product_details?skuNo='$!skuNo'" class="continue_shop">继续购物</a><a href="#springUrl('')/cart/listCart" class="bala_btn mt25">去购物车结算<i></i></a></div></p>
         <!---------------------- 购买该商品的用户还购买了 ----------------------> 
            <div class="groom clearfix">
               <h3 class="ft14"><span class="right sicon">&gt;</span>购买该商品的用户还购买了</h3>
