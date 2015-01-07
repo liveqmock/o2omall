@@ -78,7 +78,8 @@ function numDec(){
                 <li>运费：8元</li>
                 <li class="size">尺码规格：<span>500g</span><span>600g</span><span>700g</span><span>800g</span></li>
                 <li class="buynum">购买数量：<a href="javascript:" onclick="numDec()" class="reduce ml20">-</a><input type="text" value="1" id="quantity" /><a href="javascript:"  onclick="numAdd()" class="reduce">+</a></li>
-                <li><a class="cat_btn mt15" href="shop_join_cat.html">加入购物车</a></li>
+                <!--此处先写死,等与zhc集成时再把参数改成动态的-->
+				<li><a class="cat_btn mt15" href="#springUrl('')/cart/addCart?skuNo='10001010'&skuCount='1'">加入购物车</a></li>
               </ul>
             </div>
                 

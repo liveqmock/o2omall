@@ -40,10 +40,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	/**
      * {@inheritDoc}
      */
-	public Wrapper<?> deleteShoppingCartById(ShoppingCartRequestDto requestDto) {
+	public Wrapper<?> deleteShoppingCart(ShoppingCartRequestDto requestDto) {
 		Wrapper<?> wrapper = null;
 		try {
-			wrapper = shoppingCartClient.deleteShoppingCartById(requestDto);
+			wrapper = shoppingCartClient.deleteShoppingCart(requestDto);
 		} catch (Exception e) {
 			LOG.error("#ShoppingCartServiceImpl.deleteShoppingCartById# Error:" + e);
 		}

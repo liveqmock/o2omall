@@ -18,6 +18,17 @@
               </tr>
               </thead>
               <tbody>
+			 #foreach( $item in $dataList)
+                  <tr>
+                    <td class="tcenter"><input type="checkbox" /></td>
+                    <td><a href="#springUrl('')/shopping/product_details?skuNo='$!skuNo'" ><img class="my_cat_img" src="#springUrl('')/static/images/m-img2.jpg" /></a></td>
+                    <td><p>$!item.skuName</p></td>
+                    <td>¥$!item.price</td>
+                    <td class="tcenter"><div class="buynum"><a href="#springUrl('')/cart/updateCart?skuNo='$!item.skuNo'&skuCount='$(#$!item.skuNo).val()'" class="reduce ml20">-</a><input type="text" id="$!item.skuNo" value="$!item.skuCount"/><a href="" class="reduce">+</a></div></td>
+                    <td class="tcenter"><a href="#springUrl('')/cart/deleteCart?skuNo='$!item.skuNo'" class="del">删除</a><a href="" class="modify">修改</a></td>
+                  </tr>
+			  #end
+			  <!--
               <tr>
                 <td class="tcenter"><input type="checkbox" /></td>
                 <td><a href="product_details.html" ><img class="my_cat_img" src="#springUrl('')/static/images/m-img2.jpg" /></a></td>
@@ -26,14 +37,7 @@
                 <td class="tcenter"><div class="buynum"><a href="" class="reduce ml20">-</a><input type="text" /><a href="" class="reduce">+</a></div></td>
                 <td class="tcenter"><a href="" class="del">删除</a><a href="" class="modify">修改</a></td>
               </tr>
-              <tr>
-                <td class="tcenter"><input type="checkbox" /></td>
-                <td><a href="product_details.html" ><img class="my_cat_img" src="#springUrl('')/static/images/m-img2.jpg" /></a></td>
-                <td><p>荷兰原装进口诺优能</p><p>幼儿配方奶粉900克</p></td>
-                <td>¥306</td>
-                <td class="tcenter"><div class="buynum"><a href="" class="reduce ml20">-</a><input type="text" /><a href="" class="reduce">+</a></div></td>
-                <td class="tcenter"><a href="" class="del">删除</a><a href="" class="modify">修改</a></td>
-              </tr>
+			  -->
               </tbody>
               <tfoot>
               <tr>
@@ -42,9 +46,9 @@
                 <td class="white" colspan="4"><div class="right total">共计：<span class="reds">2</span>件商品</div></td>
                 </tr>
             </tfoot>
-</table>
+		   </table>
            <div class="settlement">
-             <div class="right"><a href="order_infor.html" class="right">去结算<i></i></a>费用：<span class="reds">712元</span></div>
+             <div class="right"><a href="#springUrl('')/orderinfo/info" class="right">去结算<i></i></a>费用：<span class="reds">712元</span></div>
            </div>
          </div> 
        
