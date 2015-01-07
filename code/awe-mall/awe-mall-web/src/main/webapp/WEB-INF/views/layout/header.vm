@@ -16,7 +16,7 @@
 			<div class="right">
 				<ul class="top_list">
 					<li><i class="top_icon1"></i><a href="#springUrl('')/usercenter/index">我的订单</a></li>
-					<li><i class="top_icon2"></i><a href="member/my_list.html">会员中心</a></li>
+					<li><i class="top_icon2"></i><a href="#springUrl('')/profile/myprofile">会员中心</a></li>
 					<li class="red"><i class="top_icon3"></i>400-960-999</li>
 				</ul>
 			</div>
@@ -39,10 +39,8 @@
 		<div class="nav clearfix">
 			<ul>
                 <li #if(!$!navFlag) class="on" #end><a href="#springUrl('')/index">首页</a></li>
-                <li #if("expert"==$!navFlag) class="on" #end><a href="expert/C-01.html">专家咨询</a></li>
                 <li #if("shopping"==$!navFlag) class="on" #end><a href="#springUrl('')/shopping">商品</a></li>
-                <li #if("service"==$!navFlag) class="on" #end><a href="service/service.html">服务</a></li>
-                <li #if("member"==$!navFlag) class="on" #end><a href="member/my_list.html">我的</a></li>
+                <li #if("member"==$!navFlag) class="on" #end><a href="#springUrl('')/profile/myprofile">我的</a></li>
 			</ul>
 		</div>
 	</div>

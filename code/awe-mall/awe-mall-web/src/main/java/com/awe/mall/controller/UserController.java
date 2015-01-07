@@ -136,6 +136,7 @@ public class UserController extends BaseController {
         LoginUser user = new LoginUser();
         user.setUserId(responseDto.getId());
         user.setUserName(responseDto.getUsername());
+        LoginUserUtils.setUserCookieName("_m_u_c_");
         LoginUserUtils.setCookie(response, user);
     }
 

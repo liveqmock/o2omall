@@ -22,19 +22,6 @@
 			<li><a href="#springUrl('')/myorder/productorderlist"  #if(!$!leftFlag) class="on" #end>商品订单</a></li>
 			<li><a href="#springUrl('')/myorder/serviceorderlist" #if("serviceorderlist"==$!leftFlag) class="on" #end>服务订单</a></li>
 		</ul>
-		<!-- 一期不涉及这些功能，暂时注掉
-		<h3><i class="arti_icon"></i>我关注的</h3>
-		<ul class="article_list">
-			<li><a href="questions.html" #if("questions"==$!leftFlag) class="on" #end>咨询问题</a></li>
-			<li><a href="relevant_experts.html" #if("relevant_experts"==$!leftFlag) class="on" #end>相关专家</a></li>
-		</ul>
-		<h3><i class="arti_icon"></i>我发布的</h3>
-		<ul class="article_list">
-			<li><a href="my_diary.html" #if("my_diary"==$!leftFlag) class="on" #end>我的日记</a></li>
-			<li><a href="my_discussion.html" #if("my_discussion"==$!leftFlag) class="on" #end>我的讨论</a></li>
-			<li><a href="my_baby.html" #if("my_baby"==$!leftFlag) class="on" #end>我的宝宝</a></li>
-		</ul>
-		-->
 		<h3><i class="arti_icon"></i>我的资料</h3>
 		<ul class="article_list">
 			<li><a href="#springUrl('')/profile/myprofile" #if("myprofile"==$!leftFlag) class="on" #end>基础资料</a></li>
