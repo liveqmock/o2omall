@@ -37,9 +37,6 @@
 		        <if test="userNo != null and userNo != ''">
                 	user_no = #{userNo,jdbcType=VARCHAR},
 		        </if>
-		        <if test="skuNo != null and skuNo != ''">
-                	sku_no = #{skuNo,jdbcType=VARCHAR},
-		        </if>
 		        <if test="skuCount != null and skuCount != ''">
                 	sku_count = #{skuCount,jdbcType=DECIMAL},
 		        </if>
@@ -50,7 +47,7 @@
                 	update_user = #{updateUser,jdbcType=VARCHAR},
 		        </if>
                 	update_time = now()
-                where id = #{id}
+                where sku_no = #{skuNo,jdbcType=VARCHAR}
             </if>
         </if>
     </update>
@@ -92,7 +89,7 @@
     <update id="delete" parameterType="ShoppingCart">
 		update shopping_cart 
 		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
-		where id = #{id}
+		where sku_no = #{skuNo,jdbcType=VARCHAR}
     </update>
 
     <!-- 常用的查询Where条件 -->

@@ -26,7 +26,7 @@ public interface ShoppingCartService {
 	 * @param requestDto
 	 * @return
 	 */
-	public Wrapper<?> deleteShoppingCartById(ShoppingCartRequestDto requestDto);
+	public Wrapper<?> deleteShoppingCart(ShoppingCartRequestDto requestDto);
 	
 	/**
 	 * 添加购物车

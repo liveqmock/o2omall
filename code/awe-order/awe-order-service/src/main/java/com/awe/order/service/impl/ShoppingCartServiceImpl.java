@@ -81,7 +81,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public boolean update(ShoppingCart shoppingCart) {
         boolean resultFlag = false;
         try {
-            if (null != shoppingCart && null != shoppingCart.getId()) {
+            if (null != shoppingCart && null != shoppingCart.getSkuNo()) {
                 resultFlag = shoppingCartManager.update(shoppingCart);
             } else {
                 LOG.warn("ShoppingCartServiceImpl#update failed, param is illegal.");
@@ -127,7 +127,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public boolean delete(ShoppingCart shoppingCart) {
         boolean resultFlag = false;
         try {
-            if (null != shoppingCart && null != shoppingCart.getId()) {
+            if (null != shoppingCart && null != shoppingCart.getSkuNo()) {
                 resultFlag = shoppingCartManager.delete(shoppingCart);
             } else {
                 LOG.warn("ShoppingCartServiceImpl#delete param is illegal.");

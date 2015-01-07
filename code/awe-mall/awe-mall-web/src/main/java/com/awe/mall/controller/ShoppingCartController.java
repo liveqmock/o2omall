@@ -92,14 +92,14 @@ public class ShoppingCartController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "deleteCart", method = RequestMethod.GET)
-	public Wrapper<?> deleteCart(Model model,String shoppingCartId){
-		if(StringUtils.isEmpty(shoppingCartId)){
+	public Wrapper<?> deleteCart(Model model,String skuNo){
+		if(StringUtils.isEmpty(skuNo)){
 			return WrapMapper.error();
 		}
 		try {
 			ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
-			requestDto.setId(Long.valueOf(shoppingCartId));
-			Wrapper<?> wrapper = shoppingCartService.deleteShoppingCartById(requestDto);
+			requestDto.setSkuNo(skuNo);
+			Wrapper<?> wrapper = shoppingCartService.deleteShoppingCart(requestDto);
 			if (null != wrapper) {
                 return wrapper;
             } else {
@@ -119,13 +119,13 @@ public class ShoppingCartController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "updateCart", method = RequestMethod.GET)
-	public Wrapper<?> updateCart(Model model,String shoppingCartId,String skuCount){
-		if(StringUtils.isEmpty(shoppingCartId) || StringUtils.isEmpty(skuCount)){
+	public Wrapper<?> updateCart(Model model,String skuNo,String skuCount){
+		if(StringUtils.isEmpty(skuNo) || StringUtils.isEmpty(skuCount)){
 			return WrapMapper.error();
 		}
 		try {
 			ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
-			requestDto.setId(Long.valueOf(shoppingCartId));
+			requestDto.setSkuNo(skuNo);
 			requestDto.setSkuCount(Integer.valueOf(skuCount));
 			Wrapper<?> wrapper = shoppingCartService.updateShoppingCart(requestDto);
 			if (null != wrapper) {

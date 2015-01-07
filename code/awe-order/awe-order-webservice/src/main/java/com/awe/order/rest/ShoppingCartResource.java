@@ -110,21 +110,20 @@ public class ShoppingCartResource {
      * @return
      */
     @POST
-    @Path("/shoppingCart/deleteShoppingCartById")
-    public Wrapper<?> deleteShoppingCartById(ShoppingCartRequest request){
+    @Path("/shoppingCart/deleteShoppingCart")
+    public Wrapper<?> deleteShoppingCart(ShoppingCartRequest request){
     	if (null == request || !request.checkSign()) {
-            this.logger.error("deleteShoppingCartById 拒绝访问");
+            this.logger.error("deleteShoppingCart 拒绝访问");
             return WrapMapper.forbidden();
         }
         
         ShoppingCartRequestDto requestDto = request.getContent();
-        if (null == requestDto || null == requestDto.getId()) {
-            this.logger.error("deleteShoppingCartById 传入参数有误");
+        if (null == requestDto || null == requestDto.getSkuNo()) {
+            this.logger.error("deleteShoppingCart 传入参数有误");
             return WrapMapper.illegalArgument();
         }
         try {
         	ShoppingCart shoppingCart = new ShoppingCart();
-        	shoppingCart.setId(requestDto.getId());
         	shoppingCart.setSkuNo(requestDto.getSkuNo());
         	boolean ret = shoppingCartService.delete(shoppingCart);
         	if(ret){
@@ -184,7 +183,7 @@ public class ShoppingCartResource {
         }
         
         ShoppingCartRequestDto requestDto = request.getContent();
-        if (null == requestDto || null == requestDto.getId()) {
+        if (null == requestDto || null == requestDto.getSkuNo()) {
             this.logger.error("updateShoppingCart 传入参数有误");
             return WrapMapper.illegalArgument();
         }

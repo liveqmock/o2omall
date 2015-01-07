@@ -81,22 +81,22 @@ public class ShoppingCartClient extends AbstractSecureClient {
      * @param requestDto
      * @return
      */
-    public Wrapper<?> deleteShoppingCartById(ShoppingCartRequestDto requestDto){
+    public Wrapper<?> deleteShoppingCart(ShoppingCartRequestDto requestDto){
     	if (LOG.isDebugEnabled()) {
-            LOG.debug("deleteShoppingCartById request: " + JsonHelper.toJson(requestDto));
+            LOG.debug("deleteShoppingCart request: " + JsonHelper.toJson(requestDto));
         }
     	ShoppingCartRequest request = new ShoppingCartRequest(super.getKey(), requestDto);
     	ShoppingCartResponse response = null;
     	String url = null;
     	try {
-    		 url = super.getServiceUrlDomain() + "services/shoppingCart/deleteShoppingCartById";
+    		 url = super.getServiceUrlDomain() + "services/shoppingCart/deleteShoppingCart";
     	     response = super.getRestTemplate().postForObject(url, request, ShoppingCartResponse.class);
 		} catch (Exception e) {
-			LOG.error("#ShoppingCartClient.deleteShoppingCartById# ERROR:" + e);
+			LOG.error("#ShoppingCartClient.deleteShoppingCart# ERROR:" + e);
 		}
 		if (LOG.isDebugEnabled()) {
-            LOG.debug("deleteShoppingCartById url: " + url);
-            LOG.debug("deleteShoppingCartById response: " + JsonHelper.toJson(response));
+            LOG.debug("deleteShoppingCart url: " + url);
+            LOG.debug("deleteShoppingCart response: " + JsonHelper.toJson(response));
         }
 		if (null != response) {
             return WrapMapper.wrap(response.getCode(), response.getMessage());
