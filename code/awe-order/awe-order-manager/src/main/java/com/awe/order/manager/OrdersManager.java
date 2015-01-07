@@ -2,6 +2,7 @@ package com.awe.order.manager;
 
 import java.util.List;
 
+import com.awe.order.domain.OrderDetails;
 import com.awe.order.domain.Orders;
 import com.awe.order.domain.query.FrontOrdersQuery;
 import com.awe.order.domain.query.OrdersQuery;
@@ -125,4 +126,12 @@ public interface OrdersManager {
 	 * @return
 	 */
 	public int queryFrontOrdersCount(FrontOrdersQuery queryBean);
+
+	/**
+	 * 前台商城-生成订单
+	 * Date:2015年1月7日上午10:56:01
+	 * user:js
+	 * @param orders
+	 */
+	public boolean insertDetails(OrderDetails orderDetails);
 }

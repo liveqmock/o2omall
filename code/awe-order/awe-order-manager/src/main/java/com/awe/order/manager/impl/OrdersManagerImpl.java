@@ -4,11 +4,16 @@ import java.util.List;
 
 import com.hbird.common.manager.BaseManager;
 import com.hbird.common.utils.page.PageUtil;
+import com.awe.order.domain.OrderDetails;
+import com.awe.order.domain.OrderLog;
 import com.awe.order.domain.Orders;
+import com.awe.order.domain.OrdersItems;
 import com.awe.order.domain.query.FrontOrdersQuery;
 import com.awe.order.domain.query.OrdersQuery;
 import com.awe.order.dto.OrdersDto;
+import com.awe.order.dao.OrderLogDao;
 import com.awe.order.dao.OrdersDao;
+import com.awe.order.dao.OrdersItemsDao;
 import com.awe.order.manager.OrdersManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +31,10 @@ public class OrdersManagerImpl extends BaseManager implements OrdersManager {
 	
     @Autowired
     private OrdersDao ordersDao;
+    @Autowired
+    private OrdersItemsDao ordersItemsDao;
+    @Autowired
+    private OrderLogDao orderLogDao;
 
     /**
      * {@inheritDoc}
@@ -172,5 +181,34 @@ public class OrdersManagerImpl extends BaseManager implements OrdersManager {
      */
 	public int queryFrontOrdersCount(FrontOrdersQuery queryBean) {
 		return ordersDao.queryFrontOrdersCount(queryBean);
+	}
+
+	/**
+     * {@inheritDoc}
+     */
+	public boolean insertDetails(OrderDetails orderDetails) {
+		 boolean resultFlag = false;
+	        if (null != orderDetails) {
+	        	//1:插入订单
+                resultFlag = ordersDao.insert(orderDetails.getOrders());
+                if (!resultFlag) {
+                    throw new RuntimeException("新增订单异常异常");
+                }
+                //2:插入item
+                if (null != orderDetails.getOrdersItemsList() && orderDetails.getOrdersItemsList().size() > 0) {
+                    for (OrdersItems ordersItems : orderDetails.getOrdersItemsList()) {
+                    	resultFlag = ordersItemsDao.insert(ordersItems);
+                    }
+                    if (!resultFlag) {
+                        throw new RuntimeException("新增订单商品异常异常");
+                    }
+                 }
+                //3:插入日志
+                resultFlag = orderLogDao.insert(orderDetails.getOrderLog());
+                if (!resultFlag) {
+                    throw new RuntimeException("新增订单商品异常异常");
+                }
+	        }
+	        return resultFlag;
 	}
 }

@@ -2,6 +2,7 @@ package com.awe.order.service;
 
 import java.util.List;
 
+import com.awe.order.domain.OrderDetails;
 import com.awe.order.domain.Orders;
 import com.awe.order.domain.query.FrontOrdersQuery;
 import com.awe.order.domain.query.OrdersQuery;
@@ -101,4 +102,13 @@ public interface OrdersService {
 	 * @return
 	 */
 	public List<Orders> queryFrontOrdersListWithPage(FrontOrdersQuery queryBean,PageUtil pageUtil);
+
+	/**
+	 * 前台商城,提交订单
+	 * Date:2015年1月7日上午10:52:16
+	 * user:js
+	 * @param orderDetails
+	 * @return
+	 */
+	public boolean insertDetails(OrderDetails orderDetails);
 }
