@@ -146,6 +146,7 @@ create table product
    support_return       tinyint comment '是否支持退货',
    distribution         varchar(50) comment '配送信息',
    freight_free         tinyint comment '是否免运费',
+   freight              double comment '运费',
    material             varchar(50) comment '材质',
    packing_list         varchar(200) comment '包装清单',
    sale_guarantee       varchar(200) comment '售后保障',
@@ -255,14 +256,18 @@ create table product_sku
    product_no           varchar(30) comment '商品编号',
    sku_no               varchar(30) comment 'sku编号',
    sku_name             varchar(100) comment 'SKU名称',
+   color                tinyint comment '颜色',
+   color_desc           varchar(100) comment '颜色描述',
+   color_order          tinyint comment '颜色顺序',
    size                 varchar(20) comment '尺码',
+   size_desc            varchar(100) comment '尺码描述',
+   size_order           tinyint comment '尺码顺序',
    product_ad           varchar(100) comment '商品广告词',
    sales_promotion      varchar(500) comment '商品促销信息（赠品，多个可分割保存）',
    durability_period    varchar(20) comment '商品保质期',
    production_date      timestamp comment '商品生产日期',
    sale_status          tinyint comment '上下架状态',
-   sale_time_start      timestamp comment '上架时间',
-   sale_time_end        timestamp comment '下架时间',
+   sale_time            timestamp comment '上下架时间',
    img_path             varchar(100) comment 'Sku主图',
    price                double comment '市场价',
    sale_price           double comment '销售价',
@@ -281,6 +286,8 @@ create table product_sku
 );
 
 alter table product_sku comment '商品SKU';
+
+
 
 /*==============================================================*/
 /* Table: product_tax_rate                                      */
