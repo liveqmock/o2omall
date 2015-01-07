@@ -51,8 +51,6 @@ public class LoginCookieInterceptor extends AbstractHandlerInterceptorAdapter {
             LoginUser user = LoginUserUtils.getCookieValue(request);
             if (null != user) {
                 UserContext.set(user);
-                LoginUserUtils.setCookie(response, user);
-
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("getCookieValue has user value");
                 }
