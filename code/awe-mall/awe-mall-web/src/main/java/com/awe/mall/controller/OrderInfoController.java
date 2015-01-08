@@ -2,22 +2,23 @@ package com.awe.mall.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.mall.controller.base.BaseController;
 import com.awe.mall.service.UserAddressService;
-import com.awe.uc.sdk.request.dto.PasswordModifyRequestDto;
+import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
 import com.awe.uc.sdk.request.dto.UserAddressRequestDto;
 import com.awe.uc.sdk.response.dto.UserAddressResponseDto;
+import com.hbird.common.utils.serialize.JsonHelper;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 /**
@@ -39,8 +40,11 @@ public class OrderInfoController extends BaseController{
 	@Autowired
 	private UserAddressService userAddressService;
 	
-	@RequestMapping("info")
-	public String orderInfo(Model model){
+	@RequestMapping(value = "info",method = { RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public String orderInfo(Model model,@RequestBody List<ShoppingCartRequestDto> parameters){
+		LOG.info("#parameters#" + parameters.size());
+		List<ShoppingCartRequestDto> dataList = JsonHelper.toList(parameters.toString(), ShoppingCartRequestDto.class);
 		LOG.info("-- welcome to orderInfo index --");
 		model.addAttribute("userId", getLoginUserId());
 		return VIEW_WORKSPACE + VIEW_order_info;

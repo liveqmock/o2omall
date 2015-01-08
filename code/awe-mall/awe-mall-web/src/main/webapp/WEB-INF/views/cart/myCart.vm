@@ -1,29 +1,3 @@
-<script  type="text/javascript">
-	var skuNo_Array = [];
-	$(function () {  
-		//上部全选 
-		$("#reverse_chkbox_top_id").click(function () {  
-        	$("#product_list_body_id :checkbox").each(function () {  
-        		$(this).attr("checked", !$(this).attr("checked"));  
-            });  
-        });  
-		//下部全选
-		$("#reverse_chkbox_bottom_id").click(function () {  
-        	$("#product_list_body_id :checkbox").each(function () {  
-        		$(this).attr("checked", !$(this).attr("checked"));  
-            });  
-        });
-		
-		
-    }); 
-	//提交当前选中商品去结算
-	function goSettlement(){
-		$("#product_list_body_id :checkbox:checked").each(function () {  
-			skuNo_Array.push($(this).val());
-		}
-		window.location.href = '#springUrl('')/orderinfo/info?parameters='+JSON.stringify(skuNo_Array);
-	}
-</script>
 <!---------------------- 我的购物车  ----------------------> 
     </script>
       <div class="container wid1200 clearfix">
@@ -35,7 +9,7 @@
            <table width="100%" border="0" class="cat_tab" cellspacing="0" cellpadding="0">
            <thead>
               <tr>
-                <th class="tcenter" width="75"><input type="checkbox" id="reverse_chkbox_top_id"/></th>
+                <th class="tcenter" width="75"><input type="checkbox" id="reverseAllT"/></th>
                 <th width="193">全选</th>
                 <th width="247">商品</th>
                 <th width="200">价格</th>
@@ -43,42 +17,71 @@
                 <th class="tcenter" width="129">操作</th>
               </tr>
               </thead>
-              <tbody id="product_list_body_id">
-			 #foreach( $item in $dataList)
-                  <tr>
-                    <td class="tcenter"><input type="checkbox" value="$!item.skuNo"/></td>
-                    <td><a href="#springUrl('')/shopping/product_details?skuNo='$!skuNo'" ><img class="my_cat_img" src="#springUrl('')/static/images/m-img2.jpg" /></a></td>
-                    <td><p>$!item.skuName</p></td>
-                    <td>¥$!item.price</td>
-                    <td class="tcenter"><div class="buynum"><a href="#springUrl('')/cart/updateCart?skuNo='$!item.skuNo'&skuCount='$(#$!item.skuNo).val()'" class="reduce ml20">-</a><input type="text" id="$!item.skuNo" value="$!item.skuCount"/><a href="" class="reduce">+</a></div></td>
-                    <td class="tcenter"><a href="#springUrl('')/cart/deleteCart?skuNo='$!item.skuNo'" class="del">删除</a><a href="" class="modify">修改</a></td>
-                  </tr>
-			  #end
-			  <!--
-              <tr>
-                <td class="tcenter"><input type="checkbox" /></td>
-                <td><a href="product_details.html" ><img class="my_cat_img" src="#springUrl('')/static/images/m-img2.jpg" /></a></td>
-                <td><p>荷兰原装进口诺优能</p><p>幼儿配方奶粉900克</p></td>
-                <td>¥306</td>
-                <td class="tcenter"><div class="buynum"><a href="" class="reduce ml20">-</a><input type="text" /><a href="" class="reduce">+</a></div></td>
-                <td class="tcenter"><a href="" class="del">删除</a><a href="" class="modify">修改</a></td>
-              </tr>
-			  -->
-              </tbody>
+                  <tbody>
+    			 #foreach( $item in $dataList)
+                      <tr>
+                        <td class="tcenter"><input type="checkbox" name="productchk" value="$!item.skuNo|$!item.skuCount"/></td>
+                        <td><a href="#springUrl('')/shopping/product_details?skuNo='$!skuNo'" ><img class="my_cat_img" src="#springUrl('')/static/images/m-img2.jpg" /></a></td>
+                        <td><p>$!item.skuName</p></td>
+                        <td>¥$!item.price</td>
+                        <td class="tcenter"><div class="buynum"><a href="#springUrl('')/cart/updateCart?skuNo='$!item.skuNo'&skuCount='$(#$!item.skuNo).val()'" class="reduce ml20">-</a><input type="text" id="$!item.skuNo" value="$!item.skuCount"/><a href="" class="reduce">+</a></div></td>
+                        <td class="tcenter"><a href="#springUrl('')/cart/deleteCart?skuNo='$!item.skuNo'" class="del">删除</a><a href="" class="modify">修改</a></td>
+                      </tr>
+    			  #end
+                  </tbody>
               <tfoot>
               <tr>
-                <td class="white tcenter"><input type="checkbox" id="reverse_chkbox_bottom_id"/></td>
+                <td class="white tcenter"><input type="checkbox" id="reverseAllB"/></td>
                 <td class="white">全选</td>
                 <td class="white" colspan="4"><div class="right total">共计：<span class="reds">2</span>件商品</div></td>
                 </tr>
             </tfoot>
 		   </table>
            <div class="settlement">
-             <div class="right"><a href="#" class="right" onclick="goSettlement();">去结算<i></i></a>费用：<span class="reds">712元</span></div>
+             <div class="right"><a class="right" onclick="goSettlement();">去结算<i></i></a>费用：<span class="reds">712元</span></div>
            </div>
          </div> 
-       
-       
+       <form id="cartForm">
+			<input type="hidden" id="parameters" name="parameters"/>
+       </form>
       </div>  
     
  <!---------------------- 正文end ----------------------> 
+ 
+ <script  type="text/javascript">
+	var parameters = [];
+	var skuJson = "";
+	$(function () {  
+		//上部全选 
+		$("#reverseAllT").click(function () {  
+        	$('input[name="productchk"]:checkbox').each(function () {
+        		$(this).attr("checked", !$(this).attr("checked"));  
+            });  
+			$('#reverseAllB').attr("checked", !$('#reverseAllB').attr("checked"));  
+        });  
+		//下部全选
+		$("#reverseAllB").click(function () {  
+        	$('input[name="productchk"]:checkbox').each(function () {
+        		$(this).attr("checked", !$(this).attr("checked"));  
+            });  
+			$('#reverseAllT').attr("checked", !$('#reverseAllT').attr("checked"));  
+        });
+    }); 
+	
+	//提交当前选中商品去结算
+	function goSettlement(){
+		$('input[name="productchk"]:checked').each(function () {
+			var _value = $(this).val();
+			var valueArray = _value.split('|');
+			//alert(valueArray[0]);alert(valueArray[1]);
+			skuJson = "{\"skuNo\":" + "\"" + valueArray[0] + "\","  + "\"skuCount\":" + valueArray[1] +"}";
+			parameters.push(skuJson);
+		});
+		$("#parameters").val(parameters);
+		//alert($("#parameters").val());
+		$("#cartForm").attr("action", "#springUrl('')/orderinfo/info");
+        $("#cartForm").attr("method", "POST");
+        $("#cartForm").submit();
+		//window.location.href = '#springUrl('')/orderinfo/info?parameters='+JSON.stringify(parameters);
+	}
+</script>
