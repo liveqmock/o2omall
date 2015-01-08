@@ -77,11 +77,22 @@
 			skuJson = "{\"skuNo\":" + "\"" + valueArray[0] + "\","  + "\"skuCount\":" + valueArray[1] +"}";
 			parameters.push(skuJson);
 		});
-		$("#parameters").val(parameters);
+		$("#parameters").val(JSON.stringify(parameters));
 		//alert($("#parameters").val());
 		$("#cartForm").attr("action", "#springUrl('')/orderinfo/info");
+		$("#cartForm").attr("contentType", "application/json");
         $("#cartForm").attr("method", "POST");
         $("#cartForm").submit();
+		/*jQuery.ajax({ 
+            type:"POST", 
+            url:"#springUrl('')/orderinfo/info", 
+            dataType:"json",      
+            contentType:"application/json",               
+            data:JSON.stringify(parameters), 
+            success:function(data){ 
+            } 
+         }); 
+		*/
 		//window.location.href = '#springUrl('')/orderinfo/info?parameters='+JSON.stringify(parameters);
 	}
 </script>
