@@ -1,3 +1,5 @@
+<script type="text/javascript" src="#springUrl('')/static/js/bootstrap-tooltip.js"></script>
+<script type="text/javascript" src="#springUrl('')/static/js/bootstrap-confirmation.js"></script>
 <!---------------------- 我的购物车  ----------------------> 
     </script>
       <div class="container wid1200 clearfix">
@@ -24,8 +26,8 @@
                         <td><a href="#springUrl('')/shopping/product_details?skuNo='$!skuNo'" ><img class="my_cat_img" src="#springUrl('')/static/images/m-img2.jpg" /></a></td>
                         <td><p>$!item.skuName</p></td>
                         <td>¥$!item.price</td>
-                        <td class="tcenter"><div class="buynum"><a href="#springUrl('')/cart/updateCart?skuNo='$!item.skuNo'&skuCount='$(#$!item.skuNo).val()'" class="reduce ml20">-</a><input type="text" id="$!item.skuNo" value="$!item.skuCount"/><a href="" class="reduce">+</a></div></td>
-                        <td class="tcenter"><a href="#springUrl('')/cart/deleteCart?skuNo='$!item.skuNo'" class="del">删除</a><a href="" class="modify">修改</a></td>
+                        <td class="tcenter"><div class="buynum"><a href="#" class="reduce ml20" onclick="lower('$!item.skuNo');">-</a><input type="text" id="C-$!item.skuNo" value="$!item.skuCount"/><a href="#" class="reduce"  onclick="upper('$!item.skuNo');">+</a></div></td>
+                        <td class="tcenter"><a href="#" class="del" onclick="delete('$!item.skuNo');">删除</a><a href="" class="modify">修改</a></td>
                       </tr>
     			  #end
                   </tbody>
@@ -79,10 +81,12 @@
 		});
 		$("#parameters").val(JSON.stringify(parameters));
 		//alert($("#parameters").val());
+		/*
 		$("#cartForm").attr("action", "#springUrl('')/orderinfo/info");
 		$("#cartForm").attr("contentType", "application/json");
         $("#cartForm").attr("method", "POST");
         $("#cartForm").submit();
+		*/
 		/*jQuery.ajax({ 
             type:"POST", 
             url:"#springUrl('')/orderinfo/info", 
@@ -94,5 +98,48 @@
          }); 
 		*/
 		//window.location.href = '#springUrl('')/orderinfo/info?parameters='+JSON.stringify(parameters);
+		jQuery.post("#springUrl('')/orderinfo/info",JSON.stringify(parameters),"json":)
+	}
+	function delete(skuNo){
+		
+		jQuery.ajax({ 
+            type:"POST", 
+            url:"#springUrl('')/cart/deleteCart", 
+            dataType:"json",      
+            contentType:"application/json",               
+            data:{skuNo:skuNo},
+            success:function(data){ 
+            } 
+         }); 
+	}
+	
+	function upper(skuNo){
+		var currentSkuCount = $("#C-"+skuNo).val();
+		currentSkuCount ++;
+		
+		jQuery.ajax({ 
+            type:"POST", 
+            url:"#springUrl('')/cart/updateCart", 
+            dataType:"json",      
+            contentType:"application/json",               
+            data:{skuNo:skuNo,skuCount:currentSkuCount},
+            success:function(data){ 
+				$("#C-"+skuNo).val(currentSkuCount);
+            } 
+         }); 
+	}
+	function lower(skuNo){
+		var currentSkuCount = $("#C-"+skuNo).val();
+		currentSkuCount --;
+		jQuery.ajax({ 
+            type:"POST", 
+            url:"#springUrl('')/cart/updateCart", 
+            dataType:"json",      
+            contentType:"application/json",               
+            data:{skuNo:skuNo,skuCount:currentSkuCount},
+            success:function(data){ 
+				$("#C-"+skuNo).val(currentSkuCount);
+            } 
+         }); 
 	}
 </script>
