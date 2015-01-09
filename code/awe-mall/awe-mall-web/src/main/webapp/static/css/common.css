@@ -2,7 +2,7 @@
 
 /*-----------------------------------------初始化样式------------------------------------------*/
 body,html{ padding:0; margin:0 auto; font-family:"微软雅黑"; font-size:14px; }
-body{ background:url(../images/index-bg.jpg) repeat; color:#333}
+body{ /*background:url(../images/index-bg.jpg) repeat;*/ color:#333}
 img{ border:none;}
 h1,h2,h3,h4,h5,h6,hr,blockquote,form,ul,ol,li,p,pre,dl,dt,dd,fieldset,legend,button,input,textarea,th,td{ padding:0; margin:0;}
 ul,ol, li{ list-style:none;}
