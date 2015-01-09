@@ -50,6 +50,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
      $("#user_update").hide();
      $("#add_address").hide();
     })
+	
  	function update(){
  		//隐藏
  		$("#user_basic").hide();
@@ -375,6 +376,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
          <div class="clearfix">
            <div class="step2 right"></div>
          </div> 
+		 <br/>
          <div class="clearfix">
            <h3 class="my_cat_con ml10">填写并核对订单信息</h3>
            <div class="order_infro">

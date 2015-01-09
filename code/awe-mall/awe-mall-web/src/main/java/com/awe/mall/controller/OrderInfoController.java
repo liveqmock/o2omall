@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.mall.controller.base.BaseController;
 import com.awe.mall.service.UserAddressService;
+import com.awe.pms.sdk.request.dto.ProductSkuRequestDto;
 import com.awe.uc.sdk.request.dto.PasswordModifyRequestDto;
 import com.awe.uc.sdk.request.dto.UserAddressRequestDto;
 import com.awe.uc.sdk.response.dto.UserAddressResponseDto;
@@ -40,13 +41,13 @@ public class OrderInfoController extends BaseController{
 	private UserAddressService userAddressService;
 	
 	@RequestMapping("info")
-	public String orderInfo(Model model){
+	public String orderInfo(Model model,String[] parameters){
+		String[] arr = {"10001010","10001011","10001010"};
 		LOG.info("-- welcome to orderInfo index --");
 		model.addAttribute("userId", getLoginUserId());
 		return VIEW_WORKSPACE + VIEW_order_info;
 	}
-	
-	
+
 	/**
 	  * 加载用户配送地址 
 	  * Date:2015年1月4日下午4:30:03
