@@ -46,8 +46,8 @@ public class OrderInfoController extends BaseController{
 	
 	@RequestMapping(value = "info",method = { RequestMethod.POST, RequestMethod.GET })
 	@ResponseBody
-	public String orderInfo(Model model,@RequestBody List<ShoppingCartRequestDto> parameters){
-		LOG.info("#parameters#" + parameters.size());
+	public String orderInfo(Model model,String parameters){
+		LOG.info("#parameters#" + parameters);
 		List<ShoppingCartRequestDto> dataList = JsonHelper.toList(parameters.toString(), ShoppingCartRequestDto.class);
 		LOG.info("-- welcome to orderInfo index --");
 		model.addAttribute("userId", getLoginUserId());
