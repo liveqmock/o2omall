@@ -190,6 +190,13 @@
         <if test="skuNo != null and skuNo != ''">
         	and sku_no = #{skuNo,jdbcType=VARCHAR}
         </if>
+        <if test="skuNos != null and skuNos != ''">
+        	and sku_no in
+        	<foreach item="item" index="index" collection="skuNos" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+        </if>
+        
         <if test="skuName != null and skuName != ''">
         	and sku_name = #{skuName,jdbcType=VARCHAR}
         </if>

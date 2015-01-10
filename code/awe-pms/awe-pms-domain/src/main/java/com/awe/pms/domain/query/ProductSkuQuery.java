@@ -1,6 +1,7 @@
 package com.awe.pms.domain.query;
 
 import java.util.Date;
+import java.util.List;
 
 import com.hbird.common.utils.page.Query;
 
@@ -16,9 +17,13 @@ public class ProductSkuQuery extends Query {
     /** 主键 */
 	private Long id; 
     /** 商品编号 */
-	private String productNo; 
+	private String productNo;
     /** sku编号 */
-	private String skuNo; 
+	private String skuNo;
+	/**
+     * 查询的sku集合
+     */
+    private List<String> skuNos;
     /** SKU名称 */
 	private String skuName; 
     /** 颜色 */
@@ -133,6 +138,20 @@ public class ProductSkuQuery extends Query {
     }
     
     /**
+	 * @return the skuNos
+	 */
+	public List<String> getSkuNos() {
+		return skuNos;
+	}
+
+	/**
+	 * @param skuNos the skuNos to set
+	 */
+	public void setSkuNos(List<String> skuNos) {
+		this.skuNos = skuNos;
+	}
+
+	/**
      * get SKU名称
      * 
      * @return the skuName

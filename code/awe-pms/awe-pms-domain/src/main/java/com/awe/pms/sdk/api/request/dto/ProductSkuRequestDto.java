@@ -2,6 +2,7 @@ package com.awe.pms.sdk.api.request.dto;
 
 import com.hbird.common.sdk.api.dto.HbirdDto;
 import java.util.Date;
+import java.util.List;
 
 /**
  * ProductSkuRequestDto：商品SKU请求参数
@@ -18,9 +19,13 @@ public class ProductSkuRequestDto extends HbirdDto {
     /** 主键 */
     private Long id; 
     /** 商品编号 */
-    private String productNo; 
+    private String productNo;
     /** sku编号 */
-    private String skuNo; 
+    private String skuNo;
+    /**
+     * 查询的sku集合
+     */
+    private List<String> skuNos;
     /** SKU名称 */
     private String skuName; 
     /** 颜色 */
@@ -131,6 +136,20 @@ public class ProductSkuRequestDto extends HbirdDto {
     }
     
     /**
+	 * @return the skuNos
+	 */
+	public List<String> getSkuNos() {
+		return skuNos;
+	}
+
+	/**
+	 * @param skuNos the skuNos to set
+	 */
+	public void setSkuNos(List<String> skuNos) {
+		this.skuNos = skuNos;
+	}
+
+	/**
      * get SKU名称
      * 
      * @return the skuName

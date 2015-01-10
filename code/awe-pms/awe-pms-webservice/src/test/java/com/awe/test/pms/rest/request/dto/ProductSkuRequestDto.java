@@ -2,12 +2,13 @@ package com.awe.test.pms.rest.request.dto;
 
 import com.hbird.common.sdk.api.dto.HbirdDto;
 import java.util.Date;
+import java.util.List;
 
 /**
  * ProductSkuRequestDto：商品SKU请求参数
  * 
  * @author ljz
- * @version 2014-12-25 14:47:41
+ * @version 2015-1-7 9:51:31
  * 
  */
 public class ProductSkuRequestDto extends HbirdDto {
@@ -18,13 +19,27 @@ public class ProductSkuRequestDto extends HbirdDto {
     /** 主键 */
     private Long id; 
     /** 商品编号 */
-    private String productNo; 
+    private String productNo;
     /** sku编号 */
-    private String skuNo; 
+    private String skuNo;
+    /**
+     * 查询的sku集合
+     */
+    private List<String> skuNos;
     /** SKU名称 */
     private String skuName; 
+    /** 颜色 */
+    private Integer color; 
+    /** 颜色描述 */
+    private String colorDesc; 
+    /** 颜色顺序 */
+    private Integer colorOrder; 
     /** 尺码 */
     private String size; 
+    /** 尺码描述 */
+    private String sizeDesc; 
+    /** 尺码顺序 */
+    private Integer sizeOrder; 
     /** 商品广告词 */
     private String productAd; 
     /** 商品促销信息（赠品，多个可分割保存） */
@@ -35,10 +50,8 @@ public class ProductSkuRequestDto extends HbirdDto {
     private Date productionDate; 
     /** 上下架状态 */
     private Integer saleStatus; 
-    /** 上架时间 */
-    private Date saleTimeStart; 
-    /** 下架时间 */
-    private Date saleTimeEnd; 
+    /** 上下架时间 */
+    private Date saleTime; 
     /** Sku主图 */
     private String imgPath; 
     /** 市场价 */
@@ -123,6 +136,20 @@ public class ProductSkuRequestDto extends HbirdDto {
     }
     
     /**
+	 * @return the skuNos
+	 */
+	public List<String> getSkuNos() {
+		return skuNos;
+	}
+
+	/**
+	 * @param skuNos the skuNos to set
+	 */
+	public void setSkuNos(List<String> skuNos) {
+		this.skuNos = skuNos;
+	}
+
+	/**
      * get SKU名称
      * 
      * @return the skuName
@@ -141,6 +168,60 @@ public class ProductSkuRequestDto extends HbirdDto {
     }
     
     /**
+     * get 颜色
+     * 
+     * @return the color
+     */
+    public Integer getColor(){
+        return color;
+    }
+        
+    /**
+     * set 颜色
+     * 
+     * @param color the color to set
+     */
+    public void setColor(Integer color) {
+        this.color = color;
+    }
+    
+    /**
+     * get 颜色描述
+     * 
+     * @return the colorDesc
+     */
+    public String getColorDesc(){
+        return colorDesc;
+    }
+        
+    /**
+     * set 颜色描述
+     * 
+     * @param colorDesc the colorDesc to set
+     */
+    public void setColorDesc(String colorDesc) {
+        this.colorDesc = colorDesc;
+    }
+    
+    /**
+     * get 颜色顺序
+     * 
+     * @return the colorOrder
+     */
+    public Integer getColorOrder(){
+        return colorOrder;
+    }
+        
+    /**
+     * set 颜色顺序
+     * 
+     * @param colorOrder the colorOrder to set
+     */
+    public void setColorOrder(Integer colorOrder) {
+        this.colorOrder = colorOrder;
+    }
+    
+    /**
      * get 尺码
      * 
      * @return the size
@@ -156,6 +237,42 @@ public class ProductSkuRequestDto extends HbirdDto {
      */
     public void setSize(String size) {
         this.size = size;
+    }
+    
+    /**
+     * get 尺码描述
+     * 
+     * @return the sizeDesc
+     */
+    public String getSizeDesc(){
+        return sizeDesc;
+    }
+        
+    /**
+     * set 尺码描述
+     * 
+     * @param sizeDesc the sizeDesc to set
+     */
+    public void setSizeDesc(String sizeDesc) {
+        this.sizeDesc = sizeDesc;
+    }
+    
+    /**
+     * get 尺码顺序
+     * 
+     * @return the sizeOrder
+     */
+    public Integer getSizeOrder(){
+        return sizeOrder;
+    }
+        
+    /**
+     * set 尺码顺序
+     * 
+     * @param sizeOrder the sizeOrder to set
+     */
+    public void setSizeOrder(Integer sizeOrder) {
+        this.sizeOrder = sizeOrder;
     }
     
     /**
@@ -249,39 +366,21 @@ public class ProductSkuRequestDto extends HbirdDto {
     }
     
     /**
-     * get 上架时间
+     * get 上下架时间
      * 
-     * @return the saleTimeStart
+     * @return the saleTime
      */
-    public Date getSaleTimeStart(){
-        return saleTimeStart;
+    public Date getSaleTime(){
+        return saleTime;
     }
         
     /**
-     * set 上架时间
+     * set 上下架时间
      * 
-     * @param saleTimeStart the saleTimeStart to set
+     * @param saleTime the saleTime to set
      */
-    public void setSaleTimeStart(Date saleTimeStart) {
-        this.saleTimeStart = saleTimeStart;
-    }
-    
-    /**
-     * get 下架时间
-     * 
-     * @return the saleTimeEnd
-     */
-    public Date getSaleTimeEnd(){
-        return saleTimeEnd;
-    }
-        
-    /**
-     * set 下架时间
-     * 
-     * @param saleTimeEnd the saleTimeEnd to set
-     */
-    public void setSaleTimeEnd(Date saleTimeEnd) {
-        this.saleTimeEnd = saleTimeEnd;
+    public void setSaleTime(Date saleTime) {
+        this.saleTime = saleTime;
     }
     
     /**
