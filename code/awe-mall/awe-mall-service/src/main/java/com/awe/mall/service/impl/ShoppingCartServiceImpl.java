@@ -11,6 +11,9 @@ import com.awe.mall.service.ShoppingCartService;
 import com.awe.order.sdk.ShoppingCartClient;
 import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
 import com.awe.order.sdk.response.dto.ShoppingCartResponseDto;
+import com.awe.pms.sdk.ProductClient;
+import com.awe.pms.sdk.request.dto.ProductSkuRequestDto;
+import com.awe.pms.sdk.response.dto.ProductResponseDto;
 import com.hbird.common.utils.wrap.Wrapper;
 /**
  * 购物车
@@ -25,6 +28,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	
 	@Autowired
 	private ShoppingCartClient shoppingCartClient;
+	@Autowired
+	private ProductClient productClient;
 	/**
      * {@inheritDoc}
      */
@@ -32,6 +37,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		List<ShoppingCartResponseDto> responseDtoList = null;
 		try {
 			responseDtoList = shoppingCartClient.queryShoppingCartList(requestDto);
+			for (ShoppingCartResponseDto shoppingCartResponseDto : responseDtoList) {
+				ProductSkuRequestDto skuRequestDto = new ProductSkuRequestDto();
+				skuRequestDto.setSkuNo(shoppingCartResponseDto.getSkuNo());
+				ProductResponseDto productReponseDto = productClient.getProductBySkuNo(skuRequestDto);
+				//待写完
+			}
 		} catch (Exception e) {
 			LOG.error("#ShoppingCartServiceImpl.queryShoppingCartList# Error:" + e);
 		}

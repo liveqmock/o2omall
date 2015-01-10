@@ -50,8 +50,14 @@ public class OrderInfoController extends BaseController{
 	private OrderInfoService orderInfoService;
 	
 	@RequestMapping(value = "info",method = { RequestMethod.POST, RequestMethod.GET })
+<<<<<<< HEAD
 	public String orderInfo(Model model,@RequestBody List<ShoppingCartRequestDto> parameters){
 		LOG.info("#parameters#" + parameters.size());
+=======
+	@ResponseBody
+	public String orderInfo(Model model,String parameters){
+		LOG.info("#parameters#" + parameters);
+>>>>>>> 7ed79eacd3b5018b0f1e8e551cca909fd27b6408
 		List<ShoppingCartRequestDto> dataList = JsonHelper.toList(parameters.toString(), ShoppingCartRequestDto.class);
 		List<OrderInfo> listOrderInfos = orderInfoService.getOrderInfoBySkuNo(dataList);
 		LOG.info("-- welcome to orderInfo index --");

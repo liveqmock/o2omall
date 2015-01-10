@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.mall.controller.base.BaseController;
 import com.awe.mall.service.ShoppingCartService;
@@ -42,7 +43,7 @@ public class ShoppingCartController extends BaseController{
 	 * @param skuCount
 	 * @return
 	 */
-	@RequestMapping(value = "addCart", method = RequestMethod.GET)
+	@RequestMapping(value = "addCart", method = {RequestMethod.POST, RequestMethod.GET})
 	public String addCart(Model model,String skuNo,String skuCount){
 		if(StringUtils.isEmpty(skuNo) || StringUtils.isEmpty(skuCount)){
 			return "";//转到异常页面
@@ -72,7 +73,7 @@ public class ShoppingCartController extends BaseController{
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "listCart", method = RequestMethod.GET)
+	@RequestMapping(value = "listCart", method = {RequestMethod.POST, RequestMethod.GET})
 	public String listCart(Model model){
 		try {
 			ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
@@ -92,7 +93,8 @@ public class ShoppingCartController extends BaseController{
 	 * @param skuNo
 	 * @return
 	 */
-	@RequestMapping(value = "deleteCart", method = RequestMethod.GET)
+	@RequestMapping(value = "deleteCart", method = {RequestMethod.POST, RequestMethod.GET})
+	@ResponseBody
 	public Wrapper<?> deleteCart(Model model,String skuNo){
 		if(StringUtils.isEmpty(skuNo)){
 			return WrapMapper.error();
@@ -102,10 +104,10 @@ public class ShoppingCartController extends BaseController{
 			requestDto.setSkuNo(skuNo);
 			Wrapper<?> wrapper = shoppingCartService.deleteShoppingCart(requestDto);
 			if (null != wrapper) {
-                return wrapper;
+				return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "删除成功！");
             } else {
             	LOG.error("deleteCart fail.");
-                return WrapMapper.error();
+            	return WrapMapper.wrap(Wrapper.ERROR_CODE, "删除失败！");
             }
 		} catch (Exception e) {
 			LOG.error("#ShoppingCartController.deleteCart# Error:" + e);
@@ -119,25 +121,27 @@ public class ShoppingCartController extends BaseController{
 	 * @param skuCount
 	 * @return
 	 */
-	@RequestMapping(value = "updateCart", method = RequestMethod.GET)
-	public Wrapper<?> updateCart(Model model,String skuNo,String skuCount){
-		if(StringUtils.isEmpty(skuNo) || StringUtils.isEmpty(skuCount)){
-			return WrapMapper.error();
+	@RequestMapping(value = "updateCart", method = {RequestMethod.POST, RequestMethod.GET})
+	public Wrapper<?> updateCart(Model model,ShoppingCartRequestDto requestDto){
+		if(null == requestDto){
+			return WrapMapper.illegalArgument();
 		}
+		if(StringUtils.isEmpty(requestDto.getSkuNo()) || requestDto.getSkuCount()==0){
+			return WrapMapper.illegalArgument();
+		}
+		Wrapper<?> wrapper = null;
 		try {
-			ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
-			requestDto.setSkuNo(skuNo);
-			requestDto.setSkuCount(Integer.valueOf(skuCount));
-			Wrapper<?> wrapper = shoppingCartService.updateShoppingCart(requestDto);
+			wrapper = shoppingCartService.updateShoppingCart(requestDto);
 			if (null != wrapper) {
-                return wrapper;
+				return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "更新成功！");
             } else {
             	LOG.error("updateCart fail.");
-                return WrapMapper.error();
+                return WrapMapper.wrap(Wrapper.ERROR_CODE, "更新失败！");
             }
 		} catch (Exception e) {
 			LOG.error("#ShoppingCartController.updateCart# Error:" + e);
-			return WrapMapper.error();
+			return WrapMapper.wrap(Wrapper.ERROR_CODE, "更新异常！");
 		}
 	}
+	
 }
