@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.mall.controller.base.BaseController;
+import com.awe.mall.service.ProductService;
 import com.awe.mall.service.UserAddressService;
 import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
 import com.awe.pms.sdk.request.dto.ProductSkuRequestDto;
@@ -43,6 +44,8 @@ public class OrderInfoController extends BaseController{
 	
 	@Autowired
 	private UserAddressService userAddressService;
+	@Autowired
+	private ProductService productService;
 	
 	@RequestMapping(value = "info",method = { RequestMethod.POST, RequestMethod.GET })
 	@ResponseBody
@@ -50,6 +53,8 @@ public class OrderInfoController extends BaseController{
 		LOG.info("#parameters#" + parameters.size());
 		List<ShoppingCartRequestDto> dataList = JsonHelper.toList(parameters.toString(), ShoppingCartRequestDto.class);
 		LOG.info("-- welcome to orderInfo index --");
+		//1：根据商品编码查询商品信息
+		//productService.queryProducts(requestDto)
 		model.addAttribute("userId", getLoginUserId());
 		return VIEW_WORKSPACE + VIEW_order_info;
 	}
