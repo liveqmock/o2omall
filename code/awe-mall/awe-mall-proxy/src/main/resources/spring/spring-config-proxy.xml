@@ -72,4 +72,11 @@
 	</bean>
 	<!-- com.awe.uc.sdk end  -->
 	
+	<!-- com.awe.uc.sdk start  -->
+	<bean id="productSkuClient" class="com.awe.pms.sdk.ProductSkuClient">
+		<property name="serviceUrlDomain" value="${service.url.domain.pms}" />
+		<property name="key" value="${mall.common.key}" />
+	</bean>
+	<!-- com.awe.uc.sdk end  -->
+	
 </beans>

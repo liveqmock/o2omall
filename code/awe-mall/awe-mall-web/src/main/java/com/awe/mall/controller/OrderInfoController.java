@@ -46,14 +46,14 @@ public class OrderInfoController extends BaseController{
 	
 	@Autowired
 	private UserAddressService userAddressService;
-	@Autowired
-	private OrderInfoService orderInfoService;
+	//@Autowired
+	//private OrderInfoService orderInfoService;
 	
 	@RequestMapping(value = "info",method = { RequestMethod.POST, RequestMethod.GET })
 	public String orderInfo(Model model,@RequestBody List<ShoppingCartRequestDto> parameters){
 		LOG.info("#parameters#" + parameters.size());
 		List<ShoppingCartRequestDto> dataList = JsonHelper.toList(parameters.toString(), ShoppingCartRequestDto.class);
-		List<OrderInfo> listOrderInfos = orderInfoService.getOrderInfoBySkuNo(dataList);
+		//List<OrderInfo> listOrderInfos = orderInfoService.getOrderInfoBySkuNo(dataList);
 		LOG.info("-- welcome to orderInfo index --");
 		
 		//1：根据商品编码查询商品信息
