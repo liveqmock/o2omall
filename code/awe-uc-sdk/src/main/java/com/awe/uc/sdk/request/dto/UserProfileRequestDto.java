@@ -1,7 +1,8 @@
 package com.awe.uc.sdk.request.dto;
 
-import com.hbird.common.sdk.api.dto.HbirdDto;
 import java.util.Date;
+
+import com.hbird.common.sdk.api.dto.HbirdDto;
 
 /**
  * UserProfileRequestDto：用户基本信息请求参数
@@ -20,7 +21,7 @@ public class UserProfileRequestDto extends HbirdDto {
     /** 用户ID */
     private Long userId; 
     /** 姓名 */
-    private String cnname; 
+    private String cnName; 
     /** 性别 */
     private Integer sex; 
     /** 昵称 */
@@ -113,26 +114,22 @@ public class UserProfileRequestDto extends HbirdDto {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
-    
     /**
-     * get 姓名
-     * 
-     * @return the cnname
+     * 姓名
+     * @return
      */
-    public String getCnname(){
-        return cnname;
-    }
-        
-    /**
-     * set 姓名
-     * 
-     * @param cnname the cnname to set
-     */
-    public void setCnname(String cnname) {
-        this.cnname = cnname;
-    }
-    
-    /**
+    public String getCnName() {
+		return cnName;
+	}
+	/**
+	 * 姓名
+	 * @param cnName
+	 */
+	public void setCnName(String cnName) {
+		this.cnName = cnName;
+	}
+
+	/**
      * get 性别
      * 
      * @return the sex

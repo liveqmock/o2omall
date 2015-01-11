@@ -15,8 +15,8 @@ import com.awe.uc.sdk.response.dto.UserProfileResponseDto;
  * 
  */
 public class UserProfileClientTestCase {
-    String WS_DOMAIN = "http://dev.ucws.shop.hbird.com/";
-    // String WS_DOMAIN = "http://local.ucws.shop.hbird.com:8090/";
+    //String WS_DOMAIN = "http://dev.ucws.shop.hbird.com/";
+     String WS_DOMAIN = "http://local.ucws.shop.hbird.com:8100/";
     private UserProfileClient client;
 
     @Before
