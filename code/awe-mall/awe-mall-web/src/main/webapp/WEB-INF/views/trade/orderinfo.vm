@@ -405,19 +405,9 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 	
 	//提交订单
 	function SubmitOrders(){
-	//生成订单
-	var form = $("#mall_form");	
-	jQuery.post('#springUrl('')/orderinfo/addOrders',
-                form.serialize(),
-                function(data) {
-					if(data!=null && data.code==200){
-					  
-					}else{
-					 alert("修改失败");
-					}
-				 }
-        );
-	
+	$("#mall_form").attr("action", "#springUrl('')/orderinfo/addOrders");
+    $("#mall_form").attr("method", "POST");
+	$("#mall_form").submit();
 	}
  </script>
 <!---------------------- 填写并核对订单信息  ----------------------> 
@@ -607,9 +597,9 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 			#foreach( $item in $orderInfo)
               <tr>
                 <td class="tcenter"><a href="#springUrl('')/shopping/product_details?skuNo='$!item.skuNo'" ><img class="my_cat_img" style="width:80px;height:80px" src="#springUrl('')/static/images/m-img2.jpg" /></a></td>
-				<td class="tcenter"><p>$!item.skuName</p></td>
+				<td class="tcenter"><p>$!item.skuName<input type="hidden" name="skuName" value="$!item.skuName"><input type="hidden" name="skuNo" value="$!item.skuNo"></p></td>
                 <td class="tcenter">¥$!item.salePrice</td>
-				 <td class="tcenter">×$!item.skuCount</td>
+				 <td class="tcenter">×$!item.skuCount<input type="hidden" name="skuCount" value="$!item.skuName"></td>
                 <td class="tcenter">有</td>
               </tr>
 			  #end 

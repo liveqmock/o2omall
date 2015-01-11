@@ -1,0 +1,31 @@
+
+ 
+ <!---------------------- 订单详情  ----------------------> 
+    
+      <div class="container wid1200 clearfix">
+         <div class="clearfix">
+           <div class="step3 right"></div>
+         </div> 
+         <div class="clearfix">
+           <h3 class="my_cat_con ml10">订单详情</h3>
+           <div class="submit_order">
+             <dl class="sub_success">
+               <dt class="reds ft20">感谢您，订单提交成功</dt>
+             </dl>
+             <dl>
+               <dd class="s1">订单号：2189013056</dd>
+               <dd class="s2">货到付款：10.00元</dd>
+               <dd class="s3">圆通快递</dd>
+               <dd>预计今日（10月15日）送达</dd>
+             </dl>
+           </div>
+           <div class="pt30 pl20 ft14 galy3 pb70">您的订单已经在处理中，发货后订单内容会显示承运人联系方式，如有必要您可以联系对方     <span class="pl25">[<a href="" class="reds">查看订单详情</a>]</span></div>
+           
+           
+         </div> 
+       
+       
+      </div>  
+    
+    
+   

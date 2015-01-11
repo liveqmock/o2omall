@@ -46,6 +46,7 @@ public class OrderInfoController extends BaseController{
 	
 	private static final String VIEW_WORKSPACE = "trade/";
 	private static final String VIEW_order_info = "orderinfo";
+	private static final String VIEW_order_submit = "submit_order";
 	
 	@Autowired
 	private UserAddressService userAddressService;
@@ -80,15 +81,27 @@ public class OrderInfoController extends BaseController{
 		return VIEW_WORKSPACE + VIEW_order_info;
 	}
 
-	@RequestMapping("addOrders")
-	 @ResponseBody
-    public Wrapper<?> addOrders(Model model, OrdersRequestDto requestDto) {
+	/**
+	 * 生成订单
+	 * Date:2015年1月11日下午5:12:05
+	 * user:js
+	 * @param model
+	 * @param requestDto
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value ="addOrders",method = { RequestMethod.POST, RequestMethod.GET })
+    public String addOrders(Model model, OrdersRequestDto requestDto,HttpServletRequest request,String skuName,String skuCount,String skuNo) {
        try {
-    	   //OrderCodeUtil.CodeUtil(getLoginUserId(),)
-       	return null;
+    	  String OrderCode =  OrderCodeUtil.CodeUtil(getLoginUserId(),request.getRemoteAddr());
+    	  requestDto.setOrderNo(OrderCode);
+    	  requestDto.setCreateUser(getLoginUserName());
+    	  //1:插入订单
+    	  //boolean  falg = orderInfoService.addOrderDetails(requestDto,skuName,skuNo);
+    	  return VIEW_WORKSPACE + VIEW_order_submit;
        } catch (Exception e) {
            logger.error("modifyPassword has error,", e);
-           return WrapMapper.error();
+           return VIEW_WORKSPACE + VIEW_order_submit;
        }
    }
 	/**

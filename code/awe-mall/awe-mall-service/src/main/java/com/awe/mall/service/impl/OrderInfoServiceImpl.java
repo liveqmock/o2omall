@@ -13,11 +13,16 @@ import org.springframework.stereotype.Service;
 
 import com.awe.mall.domain.dto.OrderInfo;
 import com.awe.mall.service.OrderInfoService;
+import com.awe.order.sdk.OrdersClient;
+import com.awe.order.sdk.request.dto.OrderDetailsRequestDto;
+import com.awe.order.sdk.request.dto.OrdersItemsRequestDto;
+import com.awe.order.sdk.request.dto.OrdersRequestDto;
 import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
 import com.awe.pms.sdk.ProductSkuClient;
 import com.awe.pms.sdk.request.dto.ProductSkuRequestDto;
 import com.awe.pms.sdk.response.dto.ProductResponseDto;
 import com.awe.pms.sdk.response.dto.ProductSkuResponseDto;
+import com.hbird.common.utils.wrap.Wrapper;
 
 @SuppressWarnings("all")
 @Service
@@ -27,6 +32,8 @@ public class OrderInfoServiceImpl implements OrderInfoService{
 	
 	@Autowired
 	private ProductSkuClient productSkuClient;
+	@Autowired
+	private OrdersClient ordersClient;
 	
 	/**
      * {@inheritDoc}
@@ -59,5 +66,37 @@ public class OrderInfoServiceImpl implements OrderInfoService{
 		}
 		return listOrderInfos;
 		
+	}
+
+	/**
+     * {@inheritDoc}
+     */
+	public boolean addOrderDetails(OrdersRequestDto requestDto, String skuName, String skuNo) {
+		//ordersClient
+		OrderDetailsRequestDto detailsRequestDto =  new OrderDetailsRequestDto();
+		OrdersItemsRequestDto itemsRequestDto = new OrdersItemsRequestDto();
+		detailsRequestDto.setOrdersRequestDto(requestDto);
+		List<OrdersItemsRequestDto> listRequestDtos = new ArrayList<OrdersItemsRequestDto>();
+		String[] name=skuName.split(",");
+		String[] skuno=skuNo.split(",");
+		try {
+			for (int i = 0; i < name.length; i++) {
+				itemsRequestDto.setOrderNo(requestDto.getOrderNo());
+				itemsRequestDto.setSkuName(name[i]);
+				itemsRequestDto.setSkuNo(skuno[i]);
+				itemsRequestDto.setCreateUser(requestDto.getCreateUser());
+				listRequestDtos.add(itemsRequestDto);
+			}
+			detailsRequestDto.setListOrdersItemsRequestDto(listRequestDtos);
+			 Wrapper<?> wrapper = ordersClient.addOrdersDetails(detailsRequestDto);
+			 if(wrapper.getCode() == 200){
+				 return true;
+			 }else{
+				 return false;
+			 }
+		} catch (Exception e) {
+			LOG.warn("getOrderInfoBySkuNo has error,", e);
+			return false;
+		}
 	}
 }
