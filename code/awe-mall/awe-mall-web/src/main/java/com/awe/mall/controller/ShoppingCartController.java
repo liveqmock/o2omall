@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.mall.controller.base.BaseController;
+import com.awe.mall.service.ProductService;
 import com.awe.mall.service.ShoppingCartService;
 import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
 import com.awe.order.sdk.response.dto.ShoppingCartResponseDto;
+import com.awe.pms.sdk.request.dto.ProductSkuRequestDto;
+import com.awe.pms.sdk.response.dto.ProductResponseDto;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 import com.hbird.common.web.context.UserContext;
@@ -36,6 +39,8 @@ public class ShoppingCartController extends BaseController{
 	
 	@Autowired
 	private ShoppingCartService shoppingCartService;
+	@Autowired
+	private ProductService productService;
 	/**
 	 * 添加购物车
 	 * @param model
@@ -56,8 +61,15 @@ public class ShoppingCartController extends BaseController{
 			requestDto.setUserNo(UserContext.get().getUserId().toString());
 			requestDto.setCreateUser(UserContext.get().getCnName());
 			requestDto.setUpdateUser(UserContext.get().getCnName());
-			//调用商品接口查出其它字段
 			Wrapper<?> wrapper = shoppingCartService.addShoppingCart(requestDto);
+			
+			//以下字段携带到添加购物车成功页面，用于继续购物按钮使用
+			ProductSkuRequestDto productSkuRequestDto = new ProductSkuRequestDto();
+			productSkuRequestDto.setSkuNo(skuNo);
+			ProductResponseDto productResponseDto = productService.getProductBySkuNo(productSkuRequestDto);
+			model.addAttribute("skuNo", skuNo);
+			model.addAttribute("productNo", productResponseDto.getProductNo());
+			
 			if(wrapper.isSuccess()){
 				return VIEW_ADD_CART_SUCCESS;
 			}else{
@@ -122,6 +134,7 @@ public class ShoppingCartController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "updateCart", method = {RequestMethod.POST, RequestMethod.GET})
+	@ResponseBody
 	public Wrapper<?> updateCart(Model model,ShoppingCartRequestDto requestDto){
 		if(null == requestDto){
 			return WrapMapper.illegalArgument();
