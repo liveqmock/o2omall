@@ -1,8 +1,5 @@
 package com.awe.mall.service;
 
-import java.util.List;
-import com.awe.mall.domain.dto.OrderInfo;
-import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
 
 
 /**
@@ -21,7 +18,7 @@ public interface OrderInfoService {
 	 * @param dataList
 	 * @return
 	 */
-	List<OrderInfo> getOrderInfoBySkuNo(List<ShoppingCartRequestDto> dataList);
+	//List<OrderInfo> getOrderInfoBySkuNo(List<ShoppingCartRequestDto> dataList);
 	
 	
 }

@@ -1,5 +1,7 @@
 package com.awe.mall.controller;
 
+import java.text.SimpleDateFormat;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.mall.controller.base.BaseController;
 import com.awe.mall.service.ProfileService;
 import com.awe.uc.sdk.request.dto.UserProfileRequestDto;
+import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 /**
  * @description 个人基本信息
@@ -25,7 +29,7 @@ public class ProfileController extends BaseController{
 	private static final Log LOG = LogFactory.getLog(ProfileController.class);
 	
 	private static final String VIEW_WORKSPACE = "myorder/";
-	private static final String VIEW_PAGE = " personalProfile";
+	private static final String VIEW_PAGE = "personalProfile";
 //	private static final String VIEW_ADD_SUCCESS = "addCartSuccess";
 	
 	@Autowired
@@ -58,15 +62,22 @@ public class ProfileController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String doAdd(Model model,UserProfileRequestDto profile){
+	@ResponseBody
+	public Wrapper<?> doAdd(Model model,UserProfileRequestDto profile,String birthdayStr){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
 		try {
+			profile.setBirthday(sdf.parse(birthdayStr));
 			Wrapper<?> wrapper = profileService.add(profile);
-			if(null != wrapper && wrapper.isSuccess()){
-				
+			if(null != wrapper){
+				return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "添加成功！");
+			}else{
+				LOG.error("doAdd fail.");
+				return WrapMapper.wrap(Wrapper.ERROR_CODE, "添加失败！");
 			}
 		} catch (Exception e) {
 			LOG.error("#ProfileController.doAdd#ERROR:" + e);
+			return WrapMapper.error();
 		}
-		return "";
 	}
 }

@@ -1,9 +1,11 @@
 package com.awe.mall.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,18 +37,20 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
      */
 	public List<ShoppingCartResponseDto> queryShoppingCartList(ShoppingCartRequestDto requestDto) {
 		List<ShoppingCartResponseDto> responseDtoList = null;
+		List<ShoppingCartResponseDto> dataList = new ArrayList<ShoppingCartResponseDto>();
 		try {
 			responseDtoList = shoppingCartClient.queryShoppingCartList(requestDto);
 			for (ShoppingCartResponseDto shoppingCartResponseDto : responseDtoList) {
 				ProductSkuRequestDto skuRequestDto = new ProductSkuRequestDto();
 				skuRequestDto.setSkuNo(shoppingCartResponseDto.getSkuNo());
 				ProductResponseDto productReponseDto = productClient.getProductBySkuNo(skuRequestDto);
-				//待写完
+				BeanUtils.copyProperties(productReponseDto, shoppingCartResponseDto);
+				dataList.add(shoppingCartResponseDto);
 			}
 		} catch (Exception e) {
 			LOG.error("#ShoppingCartServiceImpl.queryShoppingCartList# Error:" + e);
 		}
-		return responseDtoList;
+		return dataList;
 	}
 	/**
      * {@inheritDoc}

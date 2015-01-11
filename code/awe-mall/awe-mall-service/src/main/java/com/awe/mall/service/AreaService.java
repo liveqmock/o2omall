@@ -2,6 +2,7 @@ package com.awe.mall.service;
 
 import java.util.List;
 
+import com.awe.uc.sdk.request.dto.AreaRequestDto;
 import com.awe.uc.sdk.response.dto.AreaResponseDto;
 
 
@@ -13,7 +14,12 @@ import com.awe.uc.sdk.response.dto.AreaResponseDto;
  * 
  */
 public interface AreaService {
-
+	/**
+	 * 根据级别获取不同的地址信息
+	 * @param requestDto
+	 * @return
+	 */
+	public List<AreaResponseDto> getAreas(AreaRequestDto requestDto);
 	/**
 	 * 获取所有省
 	 * 

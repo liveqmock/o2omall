@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.awe.mall.service.AreaService;
 import com.awe.uc.sdk.AreaClient;
+import com.awe.uc.sdk.request.dto.AreaRequestDto;
 import com.awe.uc.sdk.response.dto.AreaResponseDto;
 
 /**
@@ -25,7 +26,18 @@ public class AreaServiceImpl implements AreaService {
 
 	@Autowired
 	private AreaClient areaClient;
-
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<AreaResponseDto> getAreas(AreaRequestDto requestDto) {
+		List<AreaResponseDto> list = null;
+		try {
+			list = this.areaClient.getArea(requestDto);
+		} catch (Exception e) {
+			LOG.warn("getCities has error,", e);
+		}
+		return list;
+	}
 	/**
 	 * {@inheritDoc}
 	 */

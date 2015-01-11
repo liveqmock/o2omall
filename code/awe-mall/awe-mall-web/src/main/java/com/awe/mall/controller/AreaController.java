@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.mall.controller.base.BaseController;
 import com.awe.mall.service.AreaService;
+import com.awe.uc.sdk.request.dto.AreaRequestDto;
 import com.awe.uc.sdk.response.dto.AreaResponseDto;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
@@ -100,4 +102,26 @@ public class AreaController extends BaseController{
 		}
 	}
 	
+	/**
+     * 地址信息----查询-无分页
+     * 
+     * @param query
+     * @return
+     */
+    @RequestMapping(value = "query",method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public Wrapper<?> query(AreaRequestDto query) {
+        try {
+        	if (query != null && query.getLevel() != null) {
+        		List<AreaResponseDto> list = this.areaService.getAreas(query);
+        		if (!CollectionUtils.isEmpty(list)) {
+        			return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, list);
+        		}
+        	}
+        	return WrapMapper.wrap(Wrapper.ERROR_CODE, "查询地址信息失败！");
+        } catch (Exception e) {
+            LOG.error("productBrand query has error.", e);
+            return WrapMapper.error();
+        }
+    }
 }
