@@ -1,5 +1,10 @@
 package com.awe.mall.service;
 
+import java.util.List;
+
+import com.awe.mall.domain.dto.OrderInfo;
+import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
+
 
 
 /**
@@ -11,6 +16,7 @@ package com.awe.mall.service;
  */
 public interface OrderInfoService {
 
+
 	/**
 	 * 根据skuno查询商品信息
 	 * Date:2015年1月10日下午1:37:01
@@ -18,7 +24,7 @@ public interface OrderInfoService {
 	 * @param dataList
 	 * @return
 	 */
-	//List<OrderInfo> getOrderInfoBySkuNo(List<ShoppingCartRequestDto> dataList);
+	List<OrderInfo> getOrderInfoBySkuNo(List<ShoppingCartRequestDto> dataList);
 	
 	
 }

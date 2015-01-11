@@ -1,9 +1,13 @@
 package com.awe.mall.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,13 +32,30 @@ public class OrderInfoServiceImpl implements OrderInfoService{
      * {@inheritDoc}
      */
 	public List<OrderInfo> getOrderInfoBySkuNo(List<ShoppingCartRequestDto> dataList) {
-		List<ProductSkuResponseDto> listSkuResponseDtos = null;
-		List<OrderInfo> listOrderInfos = null;
-		for(ShoppingCartRequestDto shoppingCartRequestDto : dataList) {
-			ProductSkuRequestDto skuRequestDto = new ProductSkuRequestDto(); 
-			skuRequestDto.setSkuNo(shoppingCartRequestDto.getSkuNo());
-			ProductSkuResponseDto request = productSkuClient.getProductSku(skuRequestDto);
-			listSkuResponseDtos.add(request);
+		List<OrderInfo> listOrderInfos = new ArrayList<OrderInfo>();
+		ProductSkuRequestDto requestDto = new ProductSkuRequestDto();
+		List<String> skunos = new ArrayList<String>();
+		Map<String,Integer> countMap = new HashMap<String, Integer>();
+		try {
+			for(ShoppingCartRequestDto shoppingCartRequestDto : dataList) {
+				countMap.put(shoppingCartRequestDto.getSkuNo(), shoppingCartRequestDto.getSkuCount());
+				skunos.add(shoppingCartRequestDto.getSkuNo());
+			}
+			requestDto.setSkuNos(skunos);
+			List<ProductSkuResponseDto> listSkus = productSkuClient.getProductSkus(requestDto);
+			for (ProductSkuResponseDto productSkuResponseDto : listSkus) {
+				OrderInfo info = new OrderInfo();
+				BeanUtils.copyProperties(productSkuResponseDto,info);
+				listOrderInfos.add(info);
+			}
+			for (OrderInfo orderInfo : listOrderInfos) {
+				if(countMap.get(orderInfo.getSkuNo()) != null){
+					orderInfo.setSkuCount(countMap.get(orderInfo.getSkuNo()));
+				}
+			}
+			
+		} catch (Exception e) {
+			LOG.warn("getOrderInfoBySkuNo has error,", e);
 		}
 		return listOrderInfos;
 		

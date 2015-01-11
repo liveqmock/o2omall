@@ -20,7 +20,10 @@ import com.awe.mall.domain.dto.OrderInfo;
 import com.awe.mall.service.OrderInfoService;
 import com.awe.mall.service.ProductService;
 import com.awe.mall.service.UserAddressService;
+import com.awe.mall.utils.OrderCodeUtil;
+import com.awe.order.sdk.request.dto.OrdersRequestDto;
 import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
+import com.awe.order.sdk.response.dto.OrderDetailsResponseDto;
 import com.awe.pms.sdk.request.dto.ProductSkuRequestDto;
 import com.awe.uc.sdk.request.dto.PasswordModifyRequestDto;
 import com.awe.uc.sdk.request.dto.UserAddressRequestDto;
@@ -46,22 +49,48 @@ public class OrderInfoController extends BaseController{
 	
 	@Autowired
 	private UserAddressService userAddressService;
-	//@Autowired
-	//private OrderInfoService orderInfoService;
+	@Autowired
+	private OrderInfoService orderInfoService;
 	
 	@RequestMapping(value = "info",method = { RequestMethod.POST, RequestMethod.GET })
-	public String orderInfo(Model model,@RequestBody List<ShoppingCartRequestDto> parameters){
-		LOG.info("#parameters#" + parameters.size());
+	public String orderInfo(Model model,String parameters){
+		//商品总数量
+		Integer count = 0;
+		//商品总价格
+		Double countPrice = 0.0;
+		LOG.info("#parameters#" + parameters);
+		parameters = "[{\"skuNo\":\"10001014\",\"skuCount\":1},{\"skuNo\":\"sku003\",\"skuCount\":1},{\"skuNo\":\"10001016\",\"skuCount\":1}]"; 
+		System.out.println(parameters.toString());
 		List<ShoppingCartRequestDto> dataList = JsonHelper.toList(parameters.toString(), ShoppingCartRequestDto.class);
-		//List<OrderInfo> listOrderInfos = orderInfoService.getOrderInfoBySkuNo(dataList);
+		List<OrderInfo> listOrderInfos = orderInfoService.getOrderInfoBySkuNo(dataList);
+		for (OrderInfo orderInfo : listOrderInfos) {
+			count += orderInfo.getSkuCount();
+			countPrice += orderInfo.getSkuCount() * orderInfo.getSalePrice();
+		}
 		LOG.info("-- welcome to orderInfo index --");
 		
 		//1：根据商品编码查询商品信息
 		//productService.queryProducts(requestDto)
 		model.addAttribute("userId", getLoginUserId());
+		model.addAttribute("orderInfo",listOrderInfos);
+		//数量
+		model.addAttribute("count",count);
+		//总价
+		model.addAttribute("countPrice",countPrice);
 		return VIEW_WORKSPACE + VIEW_order_info;
 	}
 
+	@RequestMapping("addOrders")
+	 @ResponseBody
+    public Wrapper<?> addOrders(Model model, OrdersRequestDto requestDto) {
+       try {
+    	   //OrderCodeUtil.CodeUtil(getLoginUserId(),)
+       	return null;
+       } catch (Exception e) {
+           logger.error("modifyPassword has error,", e);
+           return WrapMapper.error();
+       }
+   }
 	/**
 	  * 加载用户配送地址 
 	  * Date:2015年1月4日下午4:30:03
