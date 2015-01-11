@@ -1,7 +1,10 @@
 package com.awe.order.sdk.api.response.dto;
 
-import com.hbird.common.sdk.api.dto.HbirdDto;
 import java.util.Date;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+import com.hbird.common.sdk.api.dto.HbirdDto;
 
 /**
  * ShoppingCartResponseDto：购物车返回对象Dto<br/>
@@ -40,6 +43,29 @@ public class ShoppingCartResponseDto extends HbirdDto {
     private String seller; 
     /** 销售商编号*/
     private String sellerNo;
+    
+    /**----商品相关属性-start---*/
+    /** 商品编号 */
+    @JsonIgnore
+    private String productNo; 
+    /** SKU名称 */
+    @JsonIgnore
+    private String skuName; 
+    /** Sku主图 */
+    @JsonIgnore
+    private String imgPath; 
+    /** 市场价 */
+    @JsonIgnore
+    private Double price; 
+    /** 销售价 */
+    @JsonIgnore
+    private Double salePrice; 
+    /** 可售数量 */
+    @JsonIgnore
+    private Long saleQuantity; 
+    
+    /**----商品相关属性-end---*/
+    
     /**
      * get 自增id
      * 
@@ -254,4 +280,91 @@ public class ShoppingCartResponseDto extends HbirdDto {
 	public void setSellerNo(String sellerNo) {
 		this.sellerNo = sellerNo;
 	}
+	
+
+	/**
+	 * 商品编号
+	 * @return
+	 */
+	public String getProductNo() {
+		return productNo;
+	}
+	/**
+	 * 商品编号
+	 * @param productNo
+	 */
+	public void setProductNo(String productNo) {
+		this.productNo = productNo;
+	}
+	/**
+	 * SKU名称
+	 * @return
+	 */
+	public String getSkuName() {
+		return skuName;
+	}
+	/**
+	 * SKU名称
+	 * @param skuName
+	 */
+	public void setSkuName(String skuName) {
+		this.skuName = skuName;
+	}
+	/**
+	 * Sku主图
+	 * @return
+	 */
+	public String getImgPath() {
+		return imgPath;
+	}
+	/**
+	 * Sku主图
+	 * @param imgPath
+	 */
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
+	/**
+	 * 市场价
+	 * @return
+	 */
+	public Double getPrice() {
+		return price;
+	}
+	/**
+	 * 市场价
+	 * @param price
+	 */
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	/**
+	 * 销售价
+	 * @return
+	 */
+	public Double getSalePrice() {
+		return salePrice;
+	}
+	/**
+	 * 销售价
+	 * @param salePrice
+	 */
+	public void setSalePrice(Double salePrice) {
+		this.salePrice = salePrice;
+	}
+	/**
+	 * 可售数量
+	 * @return
+	 */
+	public Long getSaleQuantity() {
+		return saleQuantity;
+	}
+	/**
+	 * 可售数量
+	 * @param saleQuantity
+	 */
+	public void setSaleQuantity(Long saleQuantity) {
+		this.saleQuantity = saleQuantity;
+	}
+	
 }

@@ -100,4 +100,10 @@ public interface ShoppingCartManager {
      * @return
      */
     public boolean exist(ShoppingCart shoppingCart);
+    /**
+     * 获取购物车实体
+     * @param shoppingCart
+     * @return
+     */
+    public ShoppingCart getShoppingCart(ShoppingCart shoppingCart);
 }
