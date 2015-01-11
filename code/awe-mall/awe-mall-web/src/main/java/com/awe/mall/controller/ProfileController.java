@@ -16,6 +16,7 @@ import com.awe.mall.service.ProfileService;
 import com.awe.uc.sdk.request.dto.UserProfileRequestDto;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
+import com.hbird.common.web.context.UserContext;
 /**
  * @description 个人基本信息
  * @author zyq
@@ -63,12 +64,15 @@ public class ProfileController extends BaseController{
 	 */
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
-	public Wrapper<?> doAdd(Model model,UserProfileRequestDto profile,String birthdayStr){
+	public Wrapper<?> doAdd(Model model,UserProfileRequestDto requestDto,String birthdayStr){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
+		if(null == requestDto){
+			return WrapMapper.illegalArgument();
+		}
 		try {
-			profile.setBirthday(sdf.parse(birthdayStr));
-			Wrapper<?> wrapper = profileService.add(profile);
+			requestDto.setBirthday(sdf.parse(birthdayStr));
+			requestDto.setUserId(UserContext.get().getUserId());
+			Wrapper<?> wrapper = profileService.add(requestDto);
 			if(null != wrapper){
 				return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "添加成功！");
 			}else{
