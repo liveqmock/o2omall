@@ -25,6 +25,7 @@ import com.awe.uc.sdk.api.response.dto.UserProfileResponseDto;
 import com.awe.uc.service.UserProfileService;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
+import com.hbird.common.web.context.UserContext;
 
 /**
  * 用户基本信息REST服务：提供有关用户基本信息的接口
@@ -89,18 +90,7 @@ public class UserProfileResource {
         }
     	try {
     		UserProfile userProfile = new UserProfile();
-    		userProfile.setNickname(requestDto.getNickname());
-    		userProfile.setBirthday(requestDto.getBirthday());
-    		userProfile.setSex(requestDto.getSex());
-    		userProfile.setCnName(requestDto.getCnName());
-    		userProfile.setProvinceNo(requestDto.getProvinceNo());
-    		userProfile.setProvinceName(requestDto.getProvinceName());
-    		userProfile.setCityNo(requestDto.getCityNo());
-    		userProfile.setCityName(requestDto.getCityName());
-    		userProfile.setCountyNo(requestDto.getCountyNo());
-    		userProfile.setCountyName(requestDto.getCountyName());
-    		userProfile.setAddress(requestDto.getAddress());
-    		userProfile.setUserPhoto(requestDto.getUserPhoto());
+    		BeanUtils.copyProperties(requestDto, userProfile);
     		boolean ret = userProfileService.insert(userProfile);
     		if (ret) {
                 return WrapMapper.ok();
@@ -109,7 +99,7 @@ public class UserProfileResource {
                 return WrapMapper.wrap(UserProfileResponse.ERROR_CODE, UserAccountResponse.ERROR_MESSAGE);
             }
 		} catch (Exception e) {
-			LOG.warn("添加基本资料 失败，未知错误， Nickname=" + requestDto.getNickname());
+			LOG.warn("添加基本资料 失败，未知错误， Nickname=" + requestDto.getNickname() + ":" + e);
 			return WrapMapper.error();
 		}
     }
@@ -127,18 +117,7 @@ public class UserProfileResource {
         }
     	try {
     		UserProfile userProfile = userProfileService.getUserProfileById(requestDto.getUserId());
-    		userProfile.setNickname(requestDto.getNickname());
-    		userProfile.setBirthday(requestDto.getBirthday());
-    		userProfile.setSex(requestDto.getSex());
-    		userProfile.setCnName(requestDto.getCnName());
-    		userProfile.setProvinceNo(requestDto.getProvinceNo());
-    		userProfile.setProvinceName(requestDto.getProvinceName());
-    		userProfile.setCityNo(requestDto.getCityNo());
-    		userProfile.setCityName(requestDto.getCityName());
-    		userProfile.setCountyNo(requestDto.getCountyNo());
-    		userProfile.setCountyName(requestDto.getCountyName());
-    		userProfile.setAddress(requestDto.getAddress());
-    		userProfile.setUserPhoto(requestDto.getUserPhoto());
+    		BeanUtils.copyProperties(requestDto, userProfile);
     		boolean ret = userProfileService.update(userProfile);
     		if (ret) {
                 return WrapMapper.ok();
