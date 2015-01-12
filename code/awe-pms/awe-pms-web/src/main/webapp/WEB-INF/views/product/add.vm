@@ -194,7 +194,13 @@
 								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="method">食用方式</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="method" id="method" class="col-xs-10 col-sm-8" />
+										<select id="method" name="method" class="col-xs-10 col-sm-8">
+    										#if(!$null.isNull($!methodTypes))
+                                    			#foreach($item in $methodTypes)
+                                    				<option value="$item.attr">$item.value</option>
+                                    			#end
+                                    		#end
+                                        </select>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="originPlace">商品产地</label>
                                     <div class="col-sm-3">
@@ -306,7 +312,8 @@
 								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="distribution">配送信息</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="distribution" id="distribution" class="col-xs-10 col-sm-8" />
+										<textarea name="distribution" id="distribution">
+                                        </textarea>
                                     </div>
 								</div>
 								<div class="form-group">

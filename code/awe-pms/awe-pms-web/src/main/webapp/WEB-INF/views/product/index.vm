@@ -5,24 +5,34 @@
 		<script src="$basePath/static/js/inner/productBrand.js?v=19"></script>
 		<script language="javascript"> 
 			$(function() {
-				loadProductCategorys(1,0,0,"categoryOneId");
+				$("#type").val("$!query.type");
+				$("#brandCode").val("$!query.brandCode");
+				$("#businessNo").val("$!query.businessNo");
 				
-				$("#categoryOneId").change(function () {
-					initSelected("categoryTwoId");
-					initSelected("categoryThreeId");
-					if (this.value == "") {
-						return;
-					}
-					loadProductCategorys(2,this.value,"","categoryTwoId");
-				});
+				loadProductCategorys(1,0,"$!query.categoryOneId","categoryOneId");
+				if ("$!query.categoryOneId" != "") {
+    				loadProductCategorys(2,"$!query.categoryOneId","$!query.categoryTwoId","categoryTwoId");
+				}
+				if ("$!query.categoryTwoId" != "") {
+					loadProductCategorys(3,"$!query.categoryTwoId","$!query.categoryThreeId","categoryThreeId");
+				}
 				
-				$("#categoryTwoId").change(function () {
-					initSelected("categoryThreeId");
-					if (this.value == "") {
-						return;
-					}
-					loadProductCategorys(3,this.value,"","categoryThreeId");
-				});
+    			$("#categoryOneId").change(function () {
+    				initSelected("categoryTwoId");
+    				initSelected("categoryThreeId");
+    				if (this.value == "") {
+    					return;
+    				}
+    				loadProductCategorys(2,this.value,0,"categoryTwoId");
+    			});
+    			
+    			$("#categoryTwoId").change(function () {
+    				initSelected("categoryThreeId");
+    				if (this.value == "") {
+    					return;
+    				}
+    				loadProductCategorys(3,this.value,0,"categoryThreeId");
+    			});
 				
 				$("#btn-query").click(function() {
         			pageSubmit(1);
@@ -112,6 +122,17 @@
                                     </div>
                                 </div>
 								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="brandCode">品牌</label>
+                                    <div class="col-sm-3">
+										<select id="brandCode" name="brandCode" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+    										#if(!$null.isNull($!productBrands))
+                                    			#foreach($item in $productBrands)
+                                    				<option value="$item.brandCode">$item.brandName</option>
+                                    			#end
+                                    		#end
+                                        </select>
+                                    </div>
 									<label class="col-sm-1 control-label no-padding-right" for="businessName">商家</label>
                                         <div class="col-sm-3">
 										<select id="businessNo" name="businessNo" class="col-xs-10 col-sm-8">
@@ -122,10 +143,6 @@
                                     			#end
                                     		#end
                                         </select>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="saleTimeStart">商品上架时间</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="saleTimeStart" id="saleTimeStart" class="col-xs-10 col-sm-8" value="$!query.saleTimeStart"/>
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="modeName">经营模式</label>
                                     <div class="col-sm-3">

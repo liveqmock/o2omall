@@ -61,7 +61,7 @@ public class ProductSkuController extends BaseController {
             model.addAttribute("query", query);// 查询参数
             model.addAttribute("page", page);// 分页
             
-            model.addAttribute("colorTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.COLOR_TYPE.getType()));// 颜色类型集合
+            this.initDicts(model);
         } catch (Exception e) {
             LOG.error("productSku index has error.", e);
         }
@@ -77,7 +77,8 @@ public class ProductSkuController extends BaseController {
     @RequestMapping(value = "addForward")
     public String addForward(Model model, ProductSku productSku) {
     	model.addAttribute("productSku", productSku);// 查询参数
-    	model.addAttribute("colorTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.COLOR_TYPE.getType()));// 颜色类型集合
+
+    	this.initDicts(model);
         return viewPrefix + "/add";
     }
 
@@ -118,6 +119,8 @@ public class ProductSkuController extends BaseController {
         try {
             ProductSku productSkuResult = productSkuService.getProductSkuById(productSku.getId());
             model.addAttribute("productSku", productSkuResult);
+            
+            this.initDicts(model);
         } catch (Exception e) {
             LOG.error("productSku updateForward has error.", e);
         }
@@ -215,5 +218,10 @@ public class ProductSkuController extends BaseController {
             LOG.warn("detail productSku has error.", e);
             return error();
         }
+    }
+    
+    private void initDicts(Model model) {
+    	model.addAttribute("colorTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.COLOR_TYPE.getType()));// 颜色类型集合
+        model.addAttribute("saleStatusTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.SALE_STATUS_TYPE.getType()));
     }
 }
