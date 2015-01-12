@@ -104,9 +104,7 @@ public class OrdersResource {
 		}
 		try {
 			FrontOrdersQuery queryBean = new FrontOrdersQuery();
-			queryBean.setUserId(requestDto.getUserId());
-			queryBean.setOrderStatus(requestDto.getOrderStatus());
-			queryBean.setCreateTime(requestDto.getCreateTime());
+			BeanUtils.copyProperties(requestDto, queryBean);
 			List<Orders> dataList = ordersService.queryFrontOrdersListWithPage(queryBean, page);
 			List<OrdersResponseDto> responseDto = convertList(dataList);
 			return WrapMapper.ok().result(responseDto);
