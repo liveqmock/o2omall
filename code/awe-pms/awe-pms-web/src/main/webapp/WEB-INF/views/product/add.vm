@@ -304,9 +304,9 @@
                                     		#end
                                         </select>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="skuAttrName">商品SKU属性值</label>
+									<label class="col-sm-1 control-label no-padding-right" for="freight">运费</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="skuAttrName" id="skuAttrName" class="col-xs-10 col-sm-8" />
+                                        <input type="text" name="freight" id="freight" class="col-xs-10 col-sm-8" />
                                     </div>
 								</div>
 								<div class="form-group">
