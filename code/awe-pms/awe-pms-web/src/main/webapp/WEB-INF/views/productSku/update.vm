@@ -2,57 +2,42 @@
 <html lang="zh-cn">
     <head>
 		#parse("/layout/head.vm")
+		<script src="$basePath/static/js/fuelux/fuelux.spinner.min.js"></script>
         <script language="javascript">
             $(function() {
 				$('#updateForm').validate({
 					errorElement:"em",
 					errorClass:"red",
 					rules: {
-												productNo: {required: true},
+						productNo: {required: true},
 						skuNo: {required: true},
 						skuName: {required: true},
-						size: {required: true},
-						productAd: {required: true},
-						salesPromotion: {required: true},
-						durabilityPeriod: {required: true},
-						productionDate: {required: true},
 						saleStatus: {required: true},
-						saleTimeStart: {required: true},
-						saleTimeEnd: {required: true},
 						imgPath: {required: true},
-						price: {required: true},
 						salePrice: {required: true},
 						saleQuantity: {required: true},
-						discount: {required: true},
-						features: {required: true},
-						dimensionCodeOne: {required: true},
-						dimensionCodeTwo: {required: true},
-						priority: {required: true},
 					},
 			
 					messages: {
 						productNo: { required: "请输入商品编号"},
 						skuNo: { required: "请输入sku编号"},
 						skuName: { required: "请输入SKU名称"},
-						size: { required: "请输入尺码"},
-						productAd: { required: "请输入商品广告词"},
-						salesPromotion: { required: "请输入商品促销信息"},
-						durabilityPeriod: { required: "请输入商品保质期"},
-						productionDate: { required: "请输入商品生产日期"},
 						saleStatus: { required: "请输入上下架状态"},
-						saleTimeStart: { required: "请输入上架时间"},
-						saleTimeEnd: { required: "请输入下架时间"},
 						imgPath: { required: "请输入Sku主图"},
-						price: { required: "请输入市场价"},
 						salePrice: { required: "请输入销售价"},
 						saleQuantity: { required: "请输入可售数量"},
-						discount: { required: "请输入折扣（会员）"},
-						features: { required: "请输入描述"},
-						dimensionCodeOne: { required: "请输入一维码"},
-						dimensionCodeTwo: { required: "请输入二维码"},
-						priority: { required: "请输入优先级"},
 					}
 				});
+				
+				$('#colorOrder').ace_spinner({value:10,min:1,max:100,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+				$('#sizeOrder').ace_spinner({value:10,min:1,max:100,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+				$('#saleQuantity').ace_spinner({value:100,min:1,max:10000,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+				
+				$('#color').val("$!productSku.color");
+				$('#colorOrder').val("$!productSku.colorOrder");
+				$('#sizeOrder').val("$!productSku.sizeOrder");
+				$('#saleQuantity').val("$!productSku.saleQuantity");
+				$('#saleStatus').val("$!productSku.saleStatus");
 				
 				$("#btn-back").click(function(){
 					window.location.href=("$basePath/productSku");
@@ -82,89 +67,99 @@
                     </div>
                     <div class="widget-body">
                         <div class="widget-main" style="background-color: #fff;padding:5px;">
-                            <form class="form-horizontal" role="form" id="updateForm">
+							<form class="form-horizontal" role="form" id="updateForm">
                                 <div class="form-group">
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="productNo">商品编号</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="productNo" id="productNo" class="col-xs-12 col-sm-12" value="$!productSku.productNo" />
+									<label class="col-sm-1 control-label no-padding-right" for="productNo">商品编号</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="productNo" id="productNo" class="col-xs-10 col-sm-8" value="$!productSku.productNo" readonly />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="skuNo">sku编号</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="skuNo" id="skuNo" class="col-xs-12 col-sm-12" value="$!productSku.skuNo" />
+									<label class="col-sm-1 control-label no-padding-right" for="skuNo">sku编号</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="skuNo" id="skuNo" class="col-xs-10 col-sm-8" value="$!productSku.skuNo" />
                                     </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="skuName">SKU名称</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="skuName" id="skuName" class="col-xs-12 col-sm-12" value="$!productSku.skuName" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="size">尺码</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="size" id="size" class="col-xs-12 col-sm-12" value="$!productSku.size" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="productAd">商品广告词</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="productAd" id="productAd" class="col-xs-12 col-sm-12" value="$!productSku.productAd" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="salesPromotion">商品促销信息</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="salesPromotion" id="salesPromotion" class="col-xs-12 col-sm-12" value="$!productSku.salesPromotion" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="durabilityPeriod">商品保质期</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="durabilityPeriod" id="durabilityPeriod" class="col-xs-12 col-sm-12" value="$!productSku.durabilityPeriod" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="productionDate">商品生产日期</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="productionDate" id="productionDate" class="col-xs-12 col-sm-12" value="$!productSku.productionDate" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="saleStatus">上下架状态</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="saleStatus" id="saleStatus" class="col-xs-12 col-sm-12" value="$!productSku.saleStatus" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="saleTimeStart">上架时间</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="saleTimeStart" id="saleTimeStart" class="col-xs-12 col-sm-12" value="$!productSku.saleTimeStart" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="saleTimeEnd">下架时间</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="saleTimeEnd" id="saleTimeEnd" class="col-xs-12 col-sm-12" value="$!productSku.saleTimeEnd" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="imgPath">Sku主图</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="imgPath" id="imgPath" class="col-xs-12 col-sm-12" value="$!productSku.imgPath" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="price">市场价</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="price" id="price" class="col-xs-12 col-sm-12" value="$!productSku.price" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="salePrice">销售价</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="salePrice" id="salePrice" class="col-xs-12 col-sm-12" value="$!productSku.salePrice" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="saleQuantity">可售数量</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="saleQuantity" id="saleQuantity" class="col-xs-12 col-sm-12" value="$!productSku.saleQuantity" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="discount">折扣（会员）</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="discount" id="discount" class="col-xs-12 col-sm-12" value="$!productSku.discount" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="features">描述</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="features" id="features" class="col-xs-12 col-sm-12" value="$!productSku.features" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="dimensionCodeOne">一维码</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="dimensionCodeOne" id="dimensionCodeOne" class="col-xs-12 col-sm-12" value="$!productSku.dimensionCodeOne" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="dimensionCodeTwo">二维码</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="dimensionCodeTwo" id="dimensionCodeTwo" class="col-xs-12 col-sm-12" value="$!productSku.dimensionCodeTwo" />
-                                    </div>
-									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="priority">优先级</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="priority" id="priority" class="col-xs-12 col-sm-12" value="$!productSku.priority" />
+									<label class="col-sm-1 control-label no-padding-right" for="skuName">SKU名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="skuName" id="skuName" class="col-xs-10 col-sm-8" value="$!productSku.skuName" />
                                     </div>
                                 </div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="color">颜色</label>
+                                    <div class="col-sm-3">
+										<select id="color" name="color" class="col-xs-10 col-sm-8">
+											<option value="0">请选择</option>
+    										#if(!$null.isNull($!colorTypes))
+                                    			#foreach($item in $colorTypes)
+                                    				<option value="$item.attr">$item.value</option>
+                                    			#end
+                                    		#end
+                                        </select>
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="sizeDesc">颜色说明</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="colorDesc" id="colorDesc" class="col-xs-10 col-sm-8" value="$!productSku.sizeDesc" />
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="colorOrder">颜色顺序</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="colorOrder" id="colorOrder" class="col-xs-10 col-sm-8" />
+										<span class='red'>提示:数值小，排序靠前</span>
+                                    </div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="size">尺码</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="size" id="size" class="col-xs-10 col-sm-8" value="$!productSku.size" />
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="sizeDesc">尺码说明</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="sizeDesc" id="sizeDesc" class="col-xs-10 col-sm-8" value="$!productSku.sizeDesc" />
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="sizeOrder">尺码顺序</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="sizeOrder" id="sizeOrder" class="col-xs-10 col-sm-8" />
+										<span class='red'>提示:数值小，排序靠前</span>
+                                    </div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="price">市场价</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="price" id="price" class="col-xs-10 col-sm-8" value="$!productSku.price" />
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="salePrice">销售价</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="salePrice" id="salePrice" class="col-xs-10 col-sm-8" value="$!productSku.salePrice" />
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="saleQuantity">可售数量</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="saleQuantity" id="saleQuantity" class="col-xs-10 col-sm-8" value="$!productSku.saleQuantity" />
+                                    </div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="dimensionCodeOne">一维码</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="dimensionCodeOne" id="dimensionCodeOne" class="col-xs-10 col-sm-8" value="$!productSku.dimensionCodeOne" />
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="dimensionCodeTwo">二维码</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="dimensionCodeTwo" id="dimensionCodeTwo" class="col-xs-10 col-sm-8" value="$!productSku.dimensionCodeTwo" />
+                                    </div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="imgPath">Sku主图</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="imgPath" id="imgPath" class="col-xs-10 col-sm-8" value="$!productSku.imgPath" />
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="saleStatus">上下架状态</label>
+                                    <div class="col-sm-3">
+										<select id="saleStatus" name="saleStatus" class="col-xs-10 col-sm-8">
+											<option value="0">请选择</option>
+    										#if(!$null.isNull($!saleStatusTypes))
+                                    			#foreach($item in $saleStatusTypes)
+                                    				<option value="$item.attr">$item.value</option>
+                                    			#end
+                                    		#end
+                                        </select>
+                                    </div>
+								</div>
 								<div class="form-group">
 									<input type="hidden" name="id" id="id" value="$!productSku.id" />
 									<div class="col-sm-8 col-sm-offset-4">
