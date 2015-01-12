@@ -53,6 +53,7 @@
         <div class="shopr right">
         
         <!---------------------- 专家推荐 ----------------------> 
+		#*
            <div class="groom clearfix">
               <h3 class="ft14">专家推荐</h3>
               <div class="groom_box">
@@ -74,7 +75,7 @@
                 </dl>
               </div>
            </div>
-           
+         *#
 
         <!---------------------- 奶粉品牌分类 ----------------------> 
            <div class="groom clearfix mt10 hg210">
