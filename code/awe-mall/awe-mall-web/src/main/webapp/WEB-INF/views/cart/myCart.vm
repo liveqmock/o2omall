@@ -1,8 +1,11 @@
 <script type="text/javascript" src="#springUrl('')/static/js/bootstrap-tooltip.js"></script>
 <script type="text/javascript" src="#springUrl('')/static/js/bootstrap-confirmation.js"></script>
  <script  type="text/javascript">
-	var parameters = [];
-	var skuJson = "";
+	var parameters = [];//用于装选中商品行的json数组
+	var skuJson = "";//每一行商品的json
+	var totalAmount = 0.00;//选中商品的总金额
+	var totalCount = 0;//选中商品的总件数
+	var skuNoCountArray = [];//选中商品的sku数组
 	$(function () {  
 		//上部全选 
 		$("#reverseAllT").click(function () {  
@@ -18,9 +21,19 @@
             });  
 			$('#reverseAllT').attr("checked", !$('#reverseAllT').attr("checked"));  
         });
+		
+		//复选框点选后计算选中的商品总金额、总件数
+		$('input[type="checkbox"]').click(function () { 
+			calculateTotalAmount();
+			calculateTotalCount();
+		});
     }); 
-	
-	//提交当前选中商品去结算
+	/**
+	 * @description:提交当前选中商品去结算
+	 * @author:zyq
+	 * @date:2015-1-11
+	 * @version:1.0.0.0
+	 */
 	function goSettlement(){
 		$('input[name="productchk"]:checked').each(function () {
 			var _value = $(this).val();
@@ -35,6 +48,12 @@
         $("#cartForm").attr("method", "POST");
         $("#cartForm").submit();
 	}
+	/**
+	 * @description:删除商品行
+	 * @author:zyq
+	 * @date:2015-1-11
+	 * @version:1.0.0.0
+	 */
 	function deleteProduct(skuNo){
 		
 		jQuery.ajax({ 
@@ -51,7 +70,38 @@
             } 
          }); 
 	}
+	/**
+	 * @description:计算商品总件数
+	 * @author:zyq
+	 * @date:2015-1-12
+	 * @version:1.0.0.0
+	 */
+	function calculateTotalCount(){
+		$("#totalCount").html();
+	}
+	/**
+	 * @description:计算商品总金额
+	 * @author:zyq
+	 * @date:2015-1-12
+	 * @version:1.0.0.0
+	 */
+	function calculateTotalAmount(){
+		$('input[name="productchk"]:checked').each(function () {
+        	$(this).attr("checked", !$(this).attr("checked"));  
+        });  
+		$("[id=pricetd]").each(function(index){
+			totalAmount = parseInt(totalAmount) + parseInt($(this).html());
+		});
+		alert(totalAmount);
+		$("#totalAmount").html();
+	}
 	
+	/**
+	 * @description:加商品数量
+	 * @author:zyq
+	 * @date:2015-1-11
+	 * @version:1.0.0.0
+	 */
 	function upper(skuNo){
 		var currentSkuCount = $("#C-"+skuNo).val();
 		currentSkuCount ++;
@@ -66,6 +116,12 @@
             } 
          }); 
 	}
+	/**
+	 * @description:减商品数量
+	 * @author:zyq
+	 * @date:2015-1-11
+	 * @version:1.0.0.0
+	 */
 	function lower(skuNo){
 		var currentSkuCount = $("#C-"+skuNo).val();
 		
@@ -85,6 +141,69 @@
             } 
          }); 
 	}
+	/**
+	 * @description:选中行的金额计算
+	 * @author:zyq
+	 * @date:2015-1-12
+	 * @version:1.0.0.0
+	 */
+	function calculateTotalAmount(){
+		 $('input[name="productchk"]:checked').each(function () {
+			var _value = $(this).val();
+			skuNoCountArray.push(_value);
+		 });
+		
+		$("[id^='pricetd']").each(function(index){
+			var _value = $(this).attr("id");
+			var valueArray = _value.split('|');
+			for(var i in skuNoCountArray){
+				if(skuNoCountArray[i]==valueArray[1]){
+					totalAmount = parseInt(totalAmount) + parseInt($(this).html());
+					//alert("amount:::"+totalAmount);
+				}
+			}
+		});
+		$("#totalAmount").html(totalAmount);
+		clearValue();
+	}
+	/**
+	 * @description:选中行的件数计算
+	 * @author:zyq
+	 * @date:2015-1-12
+	 * @version:1.0.0.0
+	 */
+	function calculateTotalCount(){
+		 $('input[name="productchk"]:checked').each(function () {
+			var _value = $(this).val();
+			skuNoCountArray.push(_value);
+		 });
+		
+		$("[id^='C-']").each(function(index){
+			var _value = $(this).attr("id");
+			var valueArray = _value.split('-');
+			for(var i in skuNoCountArray){
+				if(skuNoCountArray[i]==valueArray[1]){
+					totalCount = parseInt(totalCount) + parseInt($(this).val());
+					//alert("totalCount:::"+totalCount);
+				}
+			}
+		});
+		//alert(totalCount);
+		$("#totalCount").html(totalCount);
+		clearValue();
+	}
+	/**
+	 * @description:重置变量
+	 * @author:zyq
+	 * @date:2015-1-12
+	 * @version:1.0.0.0
+	 */
+	function clearValue(){
+		totalAmount = 0.00;
+		totalCount = 0;
+		skuNoCountArray = [];
+	}
+	
 </script>
 <!---------------------- 我的购物车  ----------------------> 
     </script>
@@ -108,10 +227,10 @@
                   <tbody>
     			 #foreach( $item in $dataList)
                       <tr>
-                        <td class="tcenter"><input type="checkbox" name="productchk" value="$!item.skuNo|$!item.skuCount"/></td>
+                        <td class="tcenter"><input type="checkbox" name="productchk" value="$!item.skuNo"/></td>
                         <td><a href="#springUrl('')/shopping/product_details?skuNo='$!skuNo'" ><img class="my_cat_img" src="#springUrl('')/static/images/m-img2.jpg" /></a></td>
                         <td><p><a href="#springUrl('')/shopping/product_details?productNo=$!item.productNo&currentSkuNo=$!item.skuNo">$!item.skuName</a></p></td>
-                        <td>¥$!item.salePrice</td>
+                        <td id="pricetd|$!item.skuNo">¥$!item.salePrice</td>
                         <td class="tcenter"><div class="buynum"><a href="#" class="reduce ml20" onclick="lower('$!item.skuNo');">-</a><input type="text" id="C-$!item.skuNo" value="$!item.skuCount"/><a href="#" class="reduce"  onclick="upper('$!item.skuNo');">+</a></div></td>
                         <td class="tcenter"><a href="#" class="del" onclick="deleteProduct('$!item.skuNo');">删除</a></td>
                       </tr>
@@ -121,12 +240,12 @@
               <tr>
                 <td class="white tcenter"><input type="checkbox" id="reverseAllB"/></td>
                 <td class="white">全选</td>
-                <td class="white" colspan="4"><div class="right total">共计：<span class="reds">2</span>件商品</div></td>
+                <td class="white" colspan="4"><div class="right total">共计：<span class="reds" id="totalCount"></span>件商品</div></td>
                 </tr>
             </tfoot>
 		   </table>
            <div class="settlement">
-             <div class="right"><a class="right" onclick="goSettlement();">去结算<i></i></a>费用：<span class="reds">712元</span></div>
+             <div class="right"><a class="right" onclick="goSettlement();">去结算<i></i></a>费用：<span class="reds" id="totalAmount"></span>元</div>
            </div>
          </div> 
        <form id="cartForm">
