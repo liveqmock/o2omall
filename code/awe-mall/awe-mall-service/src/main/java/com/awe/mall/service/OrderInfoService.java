@@ -5,6 +5,7 @@ import java.util.List;
 import com.awe.mall.domain.dto.OrderInfo;
 import com.awe.order.sdk.request.dto.OrdersRequestDto;
 import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
+import com.hbird.common.utils.wrap.Wrapper;
 
 
 
@@ -36,7 +37,7 @@ public interface OrderInfoService {
 	 * @param skuCount
 	 * @return
 	 */
-	boolean addOrderDetails(OrdersRequestDto requestDto, String skuName, String skuNo);
+	Wrapper<?> addOrderDetails(OrdersRequestDto requestDto, String skuName, String skuNo,String skuCount);
 	
 	
 }

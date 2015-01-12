@@ -53,6 +53,10 @@ public class OrderInfoController extends BaseController{
 	@Autowired
 	private OrderInfoService orderInfoService;
 	
+	@RequestMapping(value = "view",method = { RequestMethod.POST, RequestMethod.GET })
+	public String view(Model model,String parameters){
+		return VIEW_WORKSPACE + VIEW_order_info;
+	}
 	@RequestMapping(value = "info",method = { RequestMethod.POST, RequestMethod.GET })
 	public String orderInfo(Model model,String parameters){
 		//商品总数量
@@ -60,8 +64,6 @@ public class OrderInfoController extends BaseController{
 		//商品总价格
 		Double countPrice = 0.0;
 		LOG.info("#parameters#" + parameters);
-		parameters = "[{\"skuNo\":\"10001014\",\"skuCount\":1},{\"skuNo\":\"sku003\",\"skuCount\":1},{\"skuNo\":\"10001016\",\"skuCount\":1}]"; 
-		System.out.println(parameters.toString());
 		List<ShoppingCartRequestDto> dataList = JsonHelper.toList(parameters.toString(), ShoppingCartRequestDto.class);
 		List<OrderInfo> listOrderInfos = orderInfoService.getOrderInfoBySkuNo(dataList);
 		for (OrderInfo orderInfo : listOrderInfos) {
@@ -69,9 +71,7 @@ public class OrderInfoController extends BaseController{
 			countPrice += orderInfo.getSkuCount() * orderInfo.getSalePrice();
 		}
 		LOG.info("-- welcome to orderInfo index --");
-		
 		//1：根据商品编码查询商品信息
-		//productService.queryProducts(requestDto)
 		model.addAttribute("userId", getLoginUserId());
 		model.addAttribute("orderInfo",listOrderInfos);
 		//数量
@@ -92,15 +92,33 @@ public class OrderInfoController extends BaseController{
 	 */
 	@RequestMapping(value ="addOrders",method = { RequestMethod.POST, RequestMethod.GET })
     public String addOrders(Model model, OrdersRequestDto requestDto,HttpServletRequest request,String skuName,String skuCount,String skuNo) {
-       try {
+		//商品总价格
+		Double countPrice = 0.0;
+		try {
     	  String OrderCode =  OrderCodeUtil.CodeUtil(getLoginUserId(),request.getRemoteAddr());
     	  requestDto.setOrderNo(OrderCode);
     	  requestDto.setCreateUser(getLoginUserName());
+    	  requestDto.setOrderStatus(40);
     	  //1:插入订单
-    	  //boolean  falg = orderInfoService.addOrderDetails(requestDto,skuName,skuNo);
+    	  Wrapper<?>  wrapper = orderInfoService.addOrderDetails(requestDto,skuName,skuNo,skuCount);
+    	  List<OrderInfo> listOrderInfos = (List<OrderInfo>) wrapper.getResult();
+    	  for (OrderInfo orderInfo : listOrderInfos) {
+  			countPrice += orderInfo.getSkuCount() * orderInfo.getSalePrice();
+  		  }
+    	  model.addAttribute("OrderCode", OrderCode);
+    	  model.addAttribute("countPrice", countPrice);
+    	  if(wrapper.getCode() == 200){
+    		  model.addAttribute("message", "感谢您，订单提交成功");
+    		  model.addAttribute("code", "200");
+    	  }else{
+    		  model.addAttribute("message", "非常抱歉，提交订单失败");
+    		  model.addAttribute("code", "500");
+    	  }
     	  return VIEW_WORKSPACE + VIEW_order_submit;
        } catch (Exception e) {
-           logger.error("modifyPassword has error,", e);
+           logger.error("addOrders has error,", e);
+           model.addAttribute("message", "非常抱歉，提交订单异常");
+           model.addAttribute("code","500");
            return VIEW_WORKSPACE + VIEW_order_submit;
        }
    }

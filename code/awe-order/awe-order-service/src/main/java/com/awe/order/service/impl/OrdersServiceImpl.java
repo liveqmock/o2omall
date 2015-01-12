@@ -249,7 +249,7 @@ public class OrdersServiceImpl implements OrdersService {
                  if (ordersManager.exist(orderDetails.getOrders())) {
                      throw new ExistedException();
                  }
-                 ordersManager.insertDetails(orderDetails);
+                 resultFlag = ordersManager.insertDetails(orderDetails);
              } else {
                  LOG.warn("OrdersServiceImpl#insert failed, param is illegal.");
              }

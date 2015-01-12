@@ -159,6 +159,7 @@ public class OrdersClient extends AbstractSecureClient {
     	String url = null;
     	try {
     		 url = super.getServiceUrlDomain() + "services/ordersDetails/insert";
+    		//url = "http://local.orderws.shop.hbird.com:8090/services/ordersDetails/insert";
     		 response = super.getRestTemplate().postForObject(url, ordersDetailsRequest, OrderDetailsResponse.class);
 		} catch (Exception e) {
 			LOG.error("#OrdersClient.addOrdersDetails# ERROR:" + e);

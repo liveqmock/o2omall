@@ -38,6 +38,21 @@ public class OrderInfo implements java.io.Serializable{
     private String productAd; 
     /** 商品促销信息（赠品，多个可分割保存） */
     private String salesPromotion;
+    /**商品编号*/
+    private String productNo;
+    
+	/**
+	 * @return the productNo
+	 */
+	public String getProductNo() {
+		return productNo;
+	}
+	/**
+	 * @param productNo the productNo to set
+	 */
+	public void setProductNo(String productNo) {
+		this.productNo = productNo;
+	}
 	/**
 	 * @return the id
 	 */
@@ -193,6 +208,5 @@ public class OrderInfo implements java.io.Serializable{
 	 */
 	public void setSalesPromotion(String salesPromotion) {
 		this.salesPromotion = salesPromotion;
-	} 
-    
+	}
 }
