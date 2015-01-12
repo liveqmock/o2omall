@@ -20,7 +20,7 @@ import com.hbird.common.utils.wrap.Wrapper;
  */
 public class ShoppingCartClientTestCase {
 	//String WS_DOMAIN = "http://dev.orderws.shop.hbird.com/";
-     String WS_DOMAIN = "http://local.orderws.shop.hbird.com:8080/";
+     String WS_DOMAIN = "http://local.orderws.shop.hbird.com:8200/";
     private ShoppingCartClient client;
 
     @Before

@@ -3,6 +3,8 @@ package com.awe.uc.sdk.response.dto;
 import com.hbird.common.sdk.api.dto.HbirdDto;
 import java.util.Date;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * UserProfileResponseDto：用户基本信息返回对象Dto<br/>
  * 提供rest接口时方法的返回对象
@@ -21,7 +23,7 @@ public class UserProfileResponseDto extends HbirdDto {
     /** 用户ID */
     private Long userId; 
     /** 姓名 */
-    private String cnname; 
+    private String cnName; 
     /** 性别 */
     private Integer sex; 
     /** 昵称 */
@@ -114,26 +116,22 @@ public class UserProfileResponseDto extends HbirdDto {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
-    
     /**
-     * get 姓名
-     * 
-     * @return the cnname
+     * 姓名
+     * @return
      */
-    public String getCnname(){
-        return cnname;
-    }
-        
+    public String getCnName() {
+		return cnName;
+	}
     /**
-     * set 姓名
-     * 
-     * @param cnname the cnname to set
+     * 姓名
+     * @param cnName
      */
-    public void setCnname(String cnname) {
-        this.cnname = cnname;
-    }
-    
-    /**
+	public void setCnName(String cnName) {
+		this.cnName = cnName;
+	}
+
+	/**
      * get 性别
      * 
      * @return the sex

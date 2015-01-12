@@ -13,9 +13,9 @@ import com.awe.mall.service.ShoppingCartService;
 import com.awe.order.sdk.ShoppingCartClient;
 import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
 import com.awe.order.sdk.response.dto.ShoppingCartResponseDto;
-import com.awe.pms.sdk.ProductClient;
+import com.awe.pms.sdk.ProductSkuClient;
 import com.awe.pms.sdk.request.dto.ProductSkuRequestDto;
-import com.awe.pms.sdk.response.dto.ProductResponseDto;
+import com.awe.pms.sdk.response.dto.ProductSkuResponseDto;
 import com.hbird.common.utils.wrap.Wrapper;
 /**
  * 购物车
@@ -31,7 +31,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	@Autowired
 	private ShoppingCartClient shoppingCartClient;
 	@Autowired
-	private ProductClient productClient;
+	private ProductSkuClient productSkuClient;
 	/**
      * {@inheritDoc}
      */
@@ -43,8 +43,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 			for (ShoppingCartResponseDto shoppingCartResponseDto : responseDtoList) {
 				ProductSkuRequestDto skuRequestDto = new ProductSkuRequestDto();
 				skuRequestDto.setSkuNo(shoppingCartResponseDto.getSkuNo());
-				ProductResponseDto productReponseDto = productClient.getProductBySkuNo(skuRequestDto);
-				BeanUtils.copyProperties(productReponseDto, shoppingCartResponseDto);
+				ProductSkuResponseDto productSkuResponseDto = productSkuClient.getProductSku(skuRequestDto);
+				BeanUtils.copyProperties(productSkuResponseDto, shoppingCartResponseDto);
 				dataList.add(shoppingCartResponseDto);
 			}
 		} catch (Exception e) {

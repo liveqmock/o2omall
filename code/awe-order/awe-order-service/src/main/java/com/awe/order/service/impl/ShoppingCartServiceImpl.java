@@ -59,9 +59,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         try {
             if (null != shoppingCart) {
                 if (shoppingCartManager.exist(shoppingCart)) {
-                    throw new ExistedException();
+                	ShoppingCart shoppingCartOfExisted = shoppingCartManager.getShoppingCart(shoppingCart);
+                	int skuCount = shoppingCartOfExisted.getSkuCount() + shoppingCart.getSkuCount();
+                	shoppingCart.setSkuCount(skuCount);
+                	resultFlag = shoppingCartManager.update(shoppingCart);
+                }else{
+                	resultFlag = shoppingCartManager.insert(shoppingCart);
                 }
-                resultFlag = shoppingCartManager.insert(shoppingCart);
             } else {
                 LOG.warn("ShoppingCartServiceImpl#insert failed, param is illegal.");
             }

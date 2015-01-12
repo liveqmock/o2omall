@@ -156,7 +156,6 @@ public class ShoppingCartResource {
         }
         try {
         	ShoppingCart shoppingCart = new ShoppingCart();
-
         	BeanUtils.copyProperties(requestDto,shoppingCart);
         	boolean ret = shoppingCartService.insert(shoppingCart);
         	if(ret){

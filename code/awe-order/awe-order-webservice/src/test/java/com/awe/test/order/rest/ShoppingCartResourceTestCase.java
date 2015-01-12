@@ -94,7 +94,7 @@ public class ShoppingCartResourceTestCase extends AbstractClient {
     	String url= getServiceUrlDomain() + "/shoppingCart/updateShoppingCart";
 
         ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
-        requestDto.setId(1l);
+        requestDto.setSkuNo("100010");
         requestDto.setSkuCount(100);
         ShoppingCartRequest request = new ShoppingCartRequest("order",requestDto);
         

@@ -77,4 +77,9 @@ public class ShoppingCartDaoImpl extends BaseDao implements ShoppingCartDao {
         int count = (Integer) queryForObject(namespace +".exist", shoppingCart);
         return count > 0;
     }
+
+	public ShoppingCart getShoppingCart(ShoppingCart shoppingCart) {
+		
+		return (ShoppingCart) queryForObject(namespace +".getShoppingCart", shoppingCart);
+	}
 }

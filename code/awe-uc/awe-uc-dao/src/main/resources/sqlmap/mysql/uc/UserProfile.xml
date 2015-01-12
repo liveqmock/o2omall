@@ -47,7 +47,7 @@
     <!-- 创建信息 -->
     <insert id="insert" parameterType="UserProfile" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user_profile(<include refid="userProfileUsedColumns"/>) 
-        VALUES (#{userId},#{cnName},#{sex},#{nickname},#{email},#{emailValidated},#{birthday},#{constellation},#{userPhoto},#{description},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{mobile},#{phone},#{safeQuestion},#{safeAnswer},#{qq},#{grade},#{payPassword},#{score},now(),now(),#{createUser},#{updateUser},1)
+        VALUES (#{userId},#{cnName},#{sex},#{nickname},#{email},#{emailValidated},#{birthday},#{constellation},#{userPhoto},#{description},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{mobile},#{phone},#{safeQuestion},#{safeAnswer},#{qq},#{grade},#{payPassword},#{score},now(),now(),#{cnName},#{cnName},1)
 	</insert>
 	
     <!-- 修改信息 -->
