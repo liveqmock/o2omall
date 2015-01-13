@@ -73,12 +73,11 @@ public class ProductController extends BaseController {
             
             BusinessInfoQuery queryBeanBusinessInfo = new BusinessInfoQuery();
             model.addAttribute("businessInfos", this.businessInfoService.queryBusinessInfoList(queryBeanBusinessInfo));
-            model.addAttribute("applicableSteps", this.productDictService.getPmsTypeDict(ProductDictEnum.APPLICABLE_STEP_TYPE.getType()));// 适用阶段类型集合
-            model.addAttribute("pmsTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PMS_TYPE.getType()));// 商品类型集合
-            model.addAttribute("auditTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.AUDIT_TYPE.getType()));// 商品审核状态集合
-            model.addAttribute("modeTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.MODE_TYPE.getType()));// 商家模式
-            model.addAttribute("packTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PACK_TYPE.getType()));// 包装方式
-            model.addAttribute("ynTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.YN_TYPE.getType()));
+            
+            ProductBrandQuery queryBeanProductBrand = new ProductBrandQuery();
+    		model.addAttribute("productBrands", this.productBrandService.queryProductBrandList(queryBeanProductBrand));
+            
+            this.initDicts(model);
         } catch (Exception e) {
             LOG.error("product index has error.", e);
         }
@@ -98,12 +97,8 @@ public class ProductController extends BaseController {
 		
 		BusinessInfoQuery queryBeanBusinessInfo = new BusinessInfoQuery();
 		model.addAttribute("businessInfos", this.businessInfoService.queryBusinessInfoList(queryBeanBusinessInfo));
-    	model.addAttribute("applicableSteps", this.productDictService.getPmsTypeDict(ProductDictEnum.APPLICABLE_STEP_TYPE.getType()));// 适用阶段类型集合
-    	model.addAttribute("pmsTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PMS_TYPE.getType()));// 商品类型集合
-        model.addAttribute("auditTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.AUDIT_TYPE.getType()));// 商品审核状态集合
-        model.addAttribute("modeTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.MODE_TYPE.getType()));// 商家模式
-        model.addAttribute("packTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PACK_TYPE.getType()));// 包装方式
-        model.addAttribute("ynTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.YN_TYPE.getType()));
+		
+		this.initDicts(model);
         return viewPrefix + "/add";
     }
 
@@ -144,12 +139,14 @@ public class ProductController extends BaseController {
         try {
             Product productResult = productService.getProductById(product.getId());
             model.addAttribute("product", productResult);
-            model.addAttribute("applicableSteps", this.productDictService.getPmsTypeDict(ProductDictEnum.APPLICABLE_STEP_TYPE.getType()));// 适用阶段类型集合
-            model.addAttribute("pmsTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PMS_TYPE.getType()));// 商品类型集合
-            model.addAttribute("auditTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.AUDIT_TYPE.getType()));// 商品审核状态集合
-            model.addAttribute("modeTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.MODE_TYPE.getType()));// 商家模式
-            model.addAttribute("packTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PACK_TYPE.getType()));// 包装方式
-            model.addAttribute("ynTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.YN_TYPE.getType()));
+            
+            ProductBrandQuery queryBeanProductBrand = new ProductBrandQuery();
+    		model.addAttribute("productBrands", this.productBrandService.queryProductBrandList(queryBeanProductBrand));
+    		
+    		BusinessInfoQuery queryBeanBusinessInfo = new BusinessInfoQuery();
+    		model.addAttribute("businessInfos", this.businessInfoService.queryBusinessInfoList(queryBeanBusinessInfo));
+    		
+    		this.initDicts(model);
         } catch (Exception e) {
             LOG.error("product updateForward has error.", e);
         }
@@ -247,5 +244,15 @@ public class ProductController extends BaseController {
             LOG.warn("detail product has error.", e);
             return error();
         }
+    }
+    
+    private void initDicts(Model model) {
+    	model.addAttribute("applicableSteps", this.productDictService.getPmsTypeDict(ProductDictEnum.APPLICABLE_STEP_TYPE.getType()));// 适用阶段类型集合
+    	model.addAttribute("pmsTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PMS_TYPE.getType()));// 商品类型集合
+        model.addAttribute("auditTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.AUDIT_TYPE.getType()));// 商品审核状态集合
+        model.addAttribute("modeTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.MODE_TYPE.getType()));// 商家模式
+        model.addAttribute("packTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.PACK_TYPE.getType()));// 包装方式
+        model.addAttribute("methodTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.METHOD_TYPE.getType()));// 包装方式
+        model.addAttribute("ynTypes", this.productDictService.getPmsTypeDict(ProductDictEnum.YN_TYPE.getType()));
     }
 }

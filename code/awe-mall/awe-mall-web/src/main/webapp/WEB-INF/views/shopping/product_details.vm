@@ -127,54 +127,46 @@ function numDec(){
         
     <div class="container wid1200 clearfix">
         <div class="rank_title mt10">
-                <ul class="indtr left">
-                  <li class="on">商品介绍</li>
-                  <li>规格参数</li>
-                  <li>包装清单</li>
-                  <li>售后保障</li>
-                </ul>
-              </div>
+            <ul class="indtr left">
+              <li class="on">商品介绍</li>
+              <li>规格参数</li>
+              <li>包装清单</li>
+              <li>售后保障</li>
+            </ul>
+          </div>
               
         
         <div class="shop_scroll clearfix">
-            
              <!---------------------- 商品介绍 ----------------------> 
             <div class="shop_details ml15">
                <ul class="t1">
-                 <li>商品名称：雅培奶粉</li>
-                 <li>商品毛重：1.07kg</li>
-                 <li>类型：进口奶源</li>
+                 <li>商品名称：$!{product.productName}</li>
+                 <li>商品毛重：$!{product.grossWeight}kg</li>
+                 <li>类型：$!{product.type}</li>
                </ul>
                <ul class="t2">
-                 <li>商品编号：1130831</li>
-                 <li>商品产地：中国浙江省嘉兴</li>
-                 <li>分类：牛奶粉</li>
+                 <li>商品编号：$!{product.productNo}</li>
+                 <li>商品产地：$!{product.originPlace}</li>
+                 <li>分类：$!{product.categoryTwo}</li>
                </ul>
                <ul class="t3">
-                 <li>品牌：雅培（Abbott）</li>
-                 <li>适用年龄：1-3岁</li>
-                 <li>包装：桶装</li>
+                 <li>品牌：$!{product.brandName}</li>
+                 <li>适用年龄：$!{product.type}</li>
+                 <li>包装：$!{product.packType}</li>
                </ul>
                <ul class="t4">
-                 <li>上架时间：2014-06-09 19:21:08</li>
-                 <li>段位：3段</li>
+                 <li>上架时间：$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!{product.saleTimeStart})</li>
+                 <li>段位：$!{product.categoryThree}</li>
                </ul>
             </div>
-        
         </div>      
-        
-        
-
     </div>
     
     <div class="container wid1200 clearfix">
-      
       <div class="pro_con mt10">
         <img src="#springUrl('')/static/images/pro_img.jpg" />
       </div>
-    
     </div>
-    
     
  <!---------------------- 正文end ----------------------> 
 <script src="#springUrl('')/static/js/MagicZoom.js" type="text/javascript"></script>

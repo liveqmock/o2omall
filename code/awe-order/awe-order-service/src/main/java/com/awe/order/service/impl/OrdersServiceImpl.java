@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.awe.order.domain.OrderDetails;
-import com.awe.order.domain.OrderLog;
 import com.awe.order.domain.Orders;
 import com.awe.order.domain.OrdersItems;
 import com.awe.order.domain.query.FrontOrdersQuery;
@@ -230,6 +229,7 @@ public class OrdersServiceImpl implements OrdersService {
         		if(!tempMap.containsKey(ordersDto.getOrderNo())){
         			orders.setOrdersItemsList(ordersItemsList);
         		}
+        		dataList.add(orders);
 			}
         } catch (Exception e) {
             LOG.error("OrdersServiceImpl#queryFrontOrdersListWithPage has error.", e);

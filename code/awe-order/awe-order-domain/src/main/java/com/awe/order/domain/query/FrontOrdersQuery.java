@@ -108,6 +108,22 @@ public class FrontOrdersQuery extends Query {
     /** 销售商编号*/
     private String sellerNo;
     
+    /***--------------------------------------------*/
+    /** sku编号 */
+    private String skuNo; 
+    /** 商品编号 */
+    private String productNo; 
+    /** 商品个数 */
+    private Integer count; 
+    /** sku名称 */
+    private String skuName; 
+    /** 商品主图 */
+    private String imgUrl; 
+    /** 商品单价 */
+    private Double skuPrice; 
+    /** 优惠后价格 */
+    private Double finalPrice; 
+    
     /**
      * get 自增id
      * 
@@ -926,6 +942,104 @@ public class FrontOrdersQuery extends Query {
      */
 	public void setSellerNo(String sellerNo) {
 		this.sellerNo = sellerNo;
+	}
+	/**
+	 * sku编号
+	 * @return
+	 */
+	public String getSkuNo() {
+		return skuNo;
+	}
+	/**
+	 * sku编号
+	 * @param skuNo
+	 */
+	public void setSkuNo(String skuNo) {
+		this.skuNo = skuNo;
+	}
+	/**
+	 * 商品编号
+	 * @return
+	 */
+	public String getProductNo() {
+		return productNo;
+	}
+	/**
+	 * 商品编号
+	 * @param productNo
+	 */
+	public void setProductNo(String productNo) {
+		this.productNo = productNo;
+	}
+	/**
+	 * sku名称
+	 * @return
+	 */
+	public String getSkuName() {
+		return skuName;
+	}
+	/**
+	 * sku名称
+	 * @param skuName
+	 */
+	public void setSkuName(String skuName) {
+		this.skuName = skuName;
+	}
+	/**
+	 * 商品主图
+	 * @return
+	 */
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	/**
+	 * 商品主图
+	 * @param imgUrl
+	 */
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+	/**
+	 * 商品单价
+	 * @return
+	 */
+	public Double getSkuPrice() {
+		return skuPrice;
+	}
+	/**
+	 * 商品单价
+	 * @param skuPrice
+	 */
+	public void setSkuPrice(Double skuPrice) {
+		this.skuPrice = skuPrice;
+	}
+	/**
+	 * 优惠后价格
+	 * @return
+	 */
+	public Double getFinalPrice() {
+		return finalPrice;
+	}
+	/**
+	 * 优惠后价格
+	 * @param finalPrice
+	 */
+	public void setFinalPrice(Double finalPrice) {
+		this.finalPrice = finalPrice;
+	}
+	/**
+	 * 商品个数
+	 * @return
+	 */
+	public Integer getCount() {
+		return count;
+	}
+	/**
+	 * 商品个数
+	 * @param count
+	 */
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 
 }

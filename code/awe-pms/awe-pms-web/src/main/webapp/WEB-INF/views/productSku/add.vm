@@ -12,51 +12,26 @@
 						productNo: {required: true},
 						skuNo: {required: true},
 						skuName: {required: true},
-						size: {required: true},
-						productAd: {required: true},
-						salesPromotion: {required: true},
-						durabilityPeriod: {required: true},
-						productionDate: {required: true},
 						saleStatus: {required: true},
-						saleTimeStart: {required: true},
-						saleTimeEnd: {required: true},
 						imgPath: {required: true},
-						price: {required: true},
 						salePrice: {required: true},
 						saleQuantity: {required: true},
-						discount: {required: true},
-						features: {required: true},
-						dimensionCodeOne: {required: true},
-						dimensionCodeTwo: {required: true},
-						priority: {required: true},
 					},
 			
 					messages: {
 						productNo: { required: "请输入商品编号"},
 						skuNo: { required: "请输入sku编号"},
 						skuName: { required: "请输入SKU名称"},
-						size: { required: "请输入尺码"},
-						productAd: { required: "请输入商品广告词"},
-						salesPromotion: { required: "请输入商品促销信息"},
-						durabilityPeriod: { required: "请输入商品保质期"},
-						productionDate: { required: "请输入商品生产日期"},
 						saleStatus: { required: "请输入上下架状态"},
-						saleTimeStart: { required: "请输入上架时间"},
-						saleTimeEnd: { required: "请输入下架时间"},
 						imgPath: { required: "请输入Sku主图"},
-						price: { required: "请输入市场价"},
 						salePrice: { required: "请输入销售价"},
 						saleQuantity: { required: "请输入可售数量"},
-						discount: { required: "请输入折扣（会员）"},
-						features: { required: "请输入描述"},
-						dimensionCodeOne: { required: "请输入一维码"},
-						dimensionCodeTwo: { required: "请输入二维码"},
-						priority: { required: "请输入优先级"},
 					}
 				});
 				
 				$('#colorOrder').ace_spinner({value:10,min:1,max:100,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
 				$('#sizeOrder').ace_spinner({value:10,min:1,max:100,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+				$('#saleQuantity').ace_spinner({value:100,min:1,max:10000,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
 				
 				$("#btn-back").click(function(){
 					window.location.href=("$basePath/productSku?productNo=$!productSku.productNo");
@@ -147,6 +122,10 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="salePrice" id="salePrice" class="col-xs-10 col-sm-8" />
                                     </div>
+									<label class="col-sm-1 control-label no-padding-right" for="saleQuantity">可售数量</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="saleQuantity" id="saleQuantity" class="col-xs-10 col-sm-8"/>
+                                    </div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="dimensionCodeOne">一维码</label>
@@ -165,7 +144,14 @@
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="saleStatus">上下架状态</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="saleStatus" id="saleStatus" class="col-xs-10 col-sm-8" />
+										<select id="saleStatus" name="saleStatus" class="col-xs-10 col-sm-8">
+											<option value="0">请选择</option>
+    										#if(!$null.isNull($!saleStatusTypes))
+                                    			#foreach($item in $saleStatusTypes)
+                                    				<option value="$item.attr">$item.value</option>
+                                    			#end
+                                    		#end
+                                        </select>
                                     </div>
 								</div>
 								<div class="form-group">
