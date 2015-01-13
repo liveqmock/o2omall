@@ -91,14 +91,15 @@ public class OrdersResource {
 	 */
 	@POST
 	@Path("/orders/queryFrontOrdersListWithPage")
-	public Wrapper<?> queryFrontOrdersListWithPage(OrdersRequest request, PageUtil page) {
+	public Wrapper<?> queryFrontOrdersListWithPage(OrdersRequest request) {
 		if (null == request || !request.checkSign()) {
 			this.logger.error("queryFrontOrdersListWithPage 拒绝访问");
 			return WrapMapper.forbidden();
 		}
 
 		OrdersRequestDto requestDto = request.getContent();
-		if (null == requestDto || null == requestDto.getId()) {
+		PageUtil page = request.getPageUtil();
+		if (null == requestDto || null == requestDto.getOrderNo()) {
 			this.logger.error("queryFrontOrdersListWithPage 传入参数有误");
 			return WrapMapper.illegalArgument();
 		}

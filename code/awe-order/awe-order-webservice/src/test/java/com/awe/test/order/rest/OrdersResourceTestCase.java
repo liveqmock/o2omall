@@ -46,9 +46,12 @@ public class OrdersResourceTestCase extends AbstractClient {
     	String url= getServiceUrlDomain() + "/orders/queryFrontOrdersListWithPage";
 
         OrdersRequestDto requestDto = new OrdersRequestDto();
-        requestDto.setId(1l);
+        requestDto.setOrderNo("1");
+        PageUtil page = new PageUtil();
+        page.setPageSize(10);
+        page.setCurPage(0);
         OrdersRequest request = new OrdersRequest("order",requestDto);
-        
+        request.setPageUtil(page);
         OrdersResponseList responseList = super.getRestTemplate().postForObject(url, request, OrdersResponseList.class);
         Assert.notNull(responseList);
         
