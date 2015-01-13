@@ -111,4 +111,13 @@ public interface OrdersDao {
 	 * @return
 	 */
 	public int queryFrontOrdersCount(FrontOrdersQuery queryBean);
+
+	/**
+	 * 查询出下单未支付超过24小时的订单号
+	 * Date:2015年1月13日下午4:37:45
+	 * user:js
+	 * @param yesTerDay
+	 * @return
+	 */
+	public List<Orders> queryOrderListCancel(String yesTerDay);
 }

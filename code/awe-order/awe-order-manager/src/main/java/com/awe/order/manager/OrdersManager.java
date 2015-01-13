@@ -134,4 +134,22 @@ public interface OrdersManager {
 	 * @param orders
 	 */
 	public boolean insertDetails(OrderDetails orderDetails);
+
+	/**
+	 * 查询出下单未支付超过24小时的订单号
+	 * Date:2015年1月13日下午4:36:33
+	 * user:js
+	 * @param yesTerDay
+	 * @return
+	 */
+	public List<Orders> queryOrderListCancel(String yesTerDay);
+
+	/**
+	 * 下单未支付超过24小时的订单转无效
+	 * Date:2015年1月13日下午5:13:43
+	 * user:js
+	 * @param orders
+	 * @return
+	 */
+	public boolean updateorderCancel(Orders orders);
 }

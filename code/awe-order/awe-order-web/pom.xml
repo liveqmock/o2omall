@@ -10,6 +10,12 @@
 	<packaging>war</packaging>
 
 	<dependencies>
+		
+		<dependency>
+	            <groupId>org.opensymphony.quartz</groupId>
+	            <artifactId>quartz</artifactId>
+	    </dependency>
+	
 		<dependency>
 			<groupId>com.hbird.common</groupId>
 			<artifactId>hbird-common-web</artifactId>

@@ -69,6 +69,13 @@
 
 	<dependencyManagement>
 		<dependencies>
+		
+			<dependency>
+	            <groupId>org.opensymphony.quartz</groupId>
+	            <artifactId>quartz</artifactId>
+	            <version>1.6.1</version>
+	        </dependency>
+		
 			<!-- hbird-common dependencies -->
 			<dependency>
 				<groupId>com.hbird.common</groupId>
@@ -592,12 +599,12 @@
 			<properties>
 				<!--数据库配置 -->
 				<database.jdbc.driver>com.mysql.jdbc.Driver</database.jdbc.driver>
-				<database.jdbc.url>jdbc:mysql://test-ip:3306/order?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
-				<database.jdbc.username>username</database.jdbc.username>
-				<database.jdbc.password>password</database.jdbc.password>
+				<database.jdbc.url>jdbc:mysql://test-ip:3306/awe_order?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</database.jdbc.url>
+				<database.jdbc.username>awe</database.jdbc.username>
+				<database.jdbc.password>awe123456</database.jdbc.password>
 
 				<!-- 服务器日志配置 -->
-				<log.root.level>INFO</log.root.level>
+				<log.root.level>BEBUG</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
 				

@@ -108,6 +108,13 @@ public class OrdersDaoImpl extends BaseDao implements OrdersDao {
 	public int queryFrontOrdersCount(FrontOrdersQuery queryBean) {
 		return (Integer) queryForObject(namespace +".queryFrontOrdersCount", queryBean);
 	}
+
+	/**
+     * {@inheritDoc}
+     */
+	public List<Orders> queryOrderListCancel(String yesTerDay) {
+		return (List<Orders>) queryForList(namespace +".queryOrderListCancel", yesTerDay);
+	}
 	
 	
 }

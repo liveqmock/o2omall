@@ -97,7 +97,7 @@
     <!-- 创建信息 -->
     <insert id="insert" parameterType="Orders" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO orders(<include refid="ordersUsedColumns"/>) 
-        VALUES (#{orderNo},#{orderType},#{userId},#{userName},#{orderName},#{consigneeName},#{consigneePhone},#{telephone},#{emil},#{zipCode},#{payName},#{orderDate},#{isTalSure},#{payWay},#{payType},#{isInvoice},#{invoiceType},#{invoiceTitle},#{invoiceContent},#{orderStatus},#{commAmount},#{retCash},#{expenses},#{amountPay},#{parentOrderNo},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{payTime},#{integral},#{remark},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+        VALUES (#{orderNo},#{orderType},#{userId},#{userName},#{orderName},#{consigneeName},#{consigneePhone},#{telephone},#{emil},#{zipCode},#{payName},#{orderDate},#{isTalSure},#{payWay},#{payType},#{isInvoice},#{invoiceType},#{invoiceTitle},#{invoiceContent},#{orderStatus},#{commAmount},#{retCash},#{expenses},#{amountPay},#{parentOrderNo},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{payTime},#{integral},#{remark},#{createTime},#{updateTime},#{createUser},#{updateUser},1)
 	</insert>
 	
     <!-- 修改信息 -->
@@ -234,7 +234,13 @@
         </if>
     </select>
     
-    
+    <!-- 查询出下单未支付超过24小时的订单号 js -->
+    <select id="queryOrderListCancel" resultMap="OrdersMap" parameterType="java.lang.String">
+        <if test="_parameter != null">
+            select order_no from orders
+            where yn = 1 and order_status = 40 and create_time <![CDATA[<=]]> #{_parameter} LIMIT 500
+        </if>
+    </select>
 
     <!-- 根据查询Bean获取数据集合，不带翻页 -->
     <select id="queryOrdersList" resultMap="OrdersMap"

@@ -211,4 +211,37 @@ public class OrdersManagerImpl extends BaseManager implements OrdersManager {
 	        }
 	        return resultFlag;
 	}
+
+	/**
+     * {@inheritDoc}
+     */
+	public List<Orders> queryOrderListCancel(String yesTerDay) {
+		return ordersDao.queryOrderListCancel(yesTerDay);
+		
+	}
+	
+	/**
+     * {@inheritDoc}
+     */
+	public boolean updateorderCancel(Orders orders) {
+		 boolean resultFlag = false;
+		//1:改变订单状态
+		 resultFlag = ordersDao.update(orders);
+		 if(!resultFlag){
+			 throw new RuntimeException("系统取消订单异常");
+		 }
+		 OrderLog log = new OrderLog();
+		 log.setOrderNo(orders.getOrderNo());
+		 log.setStatus(30);
+		 log.setStatusName("系统取消");
+		 log.setLogType(100);
+		 log.setCreateUser("系统操作");
+		 log.setDescription("系统取消订单异常");
+		 //写日志
+		 resultFlag = orderLogDao.insert(log);
+		 if(!resultFlag){
+			 throw new RuntimeException("系统取消订单日志异常");
+		 }
+		return resultFlag;
+	}
 }
