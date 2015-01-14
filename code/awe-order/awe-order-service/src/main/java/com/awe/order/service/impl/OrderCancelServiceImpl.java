@@ -224,22 +224,27 @@ public class OrderCancelServiceImpl implements OrderCancelService {
     	OrderCancel orderCancel = null;
     	OrdersItems ordersItems = null;
     	List<OrdersItems> ordersItemsList = null;
-    	Map<String,OrderCancel> tempMap = new HashMap<String,OrderCancel>();
+    	List<OrdersItems> tempList = null;
+    	boolean isOtherOrder = false;
         try {
         	orderCancelDtoList = orderCancelManager.queryFrontOrderCancelListWithPage(queryBean, pageUtil);
         	Collections.sort(orderCancelDtoList, new OrderCancelComparator());//按订单号排序
         	for (OrderCancelDto orderCancelDto : orderCancelDtoList) {
-        		if(!tempMap.containsKey(orderCancelDto.getOrderNo())){
+        		if(null == orderCancel || !orderCancelDto.getOrderNo().equals(orderCancel.getOrderNo())){
         			orderCancel = new OrderCancel();
-        			BeanUtils.copyProperties(orderCancelDto,orderCancel);
+        			BeanUtils.copyProperties(orderCancelDto, orderCancel);
         			ordersItemsList = new ArrayList<OrdersItems>();
+        			isOtherOrder = true;
         		}
         		ordersItems = new OrdersItems();
-        		BeanUtils.copyProperties(orderCancelDto,ordersItems);
+        		BeanUtils.copyProperties(orderCancelDto, ordersItems);
         		ordersItemsList.add(ordersItems);
-        		if(!tempMap.containsKey(orderCancelDto.getOrderNo())){
-        			orderCancel.setOrdersItemsList(ordersItemsList);
+        		if(!isOtherOrder){
+        			tempList = ordersItemsList;
+        			orderCancel.setOrdersItemsList(tempList);
+        			dataList.add(orderCancel);
         		}
+        		isOtherOrder = false;
 			}
         } catch (Exception e) {
             LOG.error("OrderCancelServiceImpl#queryFrontOrderCancelListWithPage has error.", e);

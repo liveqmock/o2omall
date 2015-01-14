@@ -60,7 +60,7 @@ public class OrderCancelClient extends AbstractSecureClient {
     	if (LOG.isDebugEnabled()) {
             LOG.debug("queryFrontOrderCancelListWithPage request: " + JsonHelper.toJson(requestDto));
         }
-    	OrderCancelRequest request = new OrderCancelRequest(super.getKey(), requestDto);
+    	OrderCancelRequest request = new OrderCancelRequest(super.getKey(), requestDto, pageUtil);
     	List<OrderCancelResponseDto> responseDtoList = null;
     	OrderCancelResponseList responseList = null;
     	String url = null;
