@@ -29,6 +29,8 @@ import com.awe.order.sdk.api.request.dto.OrdersRequestDto;
 import com.awe.order.sdk.api.response.dto.OrdersResponseDto;
 import com.awe.order.service.OrdersService;
 import com.hbird.common.utils.page.PageUtil;
+import com.hbird.common.utils.wrap.PageWrapMapper;
+import com.hbird.common.utils.wrap.PageWrapper;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 
@@ -91,27 +93,26 @@ public class OrdersResource {
 	 */
 	@POST
 	@Path("/orders/queryFrontOrdersListWithPage")
-	public Wrapper<?> queryFrontOrdersListWithPage(OrdersRequest request) {
+	public PageWrapper<?> queryFrontOrdersListWithPage(OrdersRequest request) {
 		if (null == request || !request.checkSign()) {
 			this.logger.error("queryFrontOrdersListWithPage 拒绝访问");
-			return WrapMapper.forbidden();
+			return PageWrapMapper.error();
 		}
-
 		OrdersRequestDto requestDto = request.getContent();
 		PageUtil page = request.getPageUtil();
 		if (null == requestDto || null == requestDto.getOrderNo()) {
 			this.logger.error("queryFrontOrdersListWithPage 传入参数有误");
-			return WrapMapper.illegalArgument();
+			return PageWrapMapper.illegalArgument();
 		}
 		try {
 			FrontOrdersQuery queryBean = new FrontOrdersQuery();
 			BeanUtils.copyProperties(requestDto, queryBean);
 			List<Orders> dataList = ordersService.queryFrontOrdersListWithPage(queryBean, page);
-			List<OrdersResponseDto> responseDto = convertList(dataList);
-			return WrapMapper.ok().result(responseDto);
+			List<OrdersResponseDto> responseDtoList = convertList(dataList);
+			return PageWrapMapper.ok().result(responseDtoList).pageUtil(page);
 		} catch (Exception e) {
 			this.logger.error("查询订单数据异常", e);
-			return WrapMapper.error();
+			return PageWrapMapper.error();
 		}
 	}
 

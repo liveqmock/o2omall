@@ -3,17 +3,17 @@ package com.awe.order.sdk;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.awe.order.sdk.request.OrdersDetailsRequest;
 import com.awe.order.sdk.request.dto.OrderDetailsRequestDto;
 import com.awe.order.sdk.request.dto.OrdersItemsRequestDto;
 import com.awe.order.sdk.request.dto.OrdersRequestDto;
-import com.awe.order.sdk.response.OrderDetailsResponse;
-import com.awe.order.sdk.response.dto.OrderDetailsResponseDto;
 import com.awe.order.sdk.response.dto.OrdersResponseDto;
+import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.wrap.Wrapper;
 
 /**
@@ -24,8 +24,11 @@ import com.hbird.common.utils.wrap.Wrapper;
  * 
  */
 public class OrdersClientTestCase {
-    String WS_DOMAIN = "http://dev.orderws.shop.hbird.com/";
-    // String WS_DOMAIN = "http://local.orderws.shop.hbird.com:8090/";
+	
+	private Log log = LogFactory.getLog(this.getClass());
+	
+    //String WS_DOMAIN = "http://dev.orderws.shop.hbird.com/";
+     String WS_DOMAIN = "http://local.orderws.shop.hbird.com:8100/";
     private OrdersClient client;
 
     @Before
@@ -82,4 +85,14 @@ public class OrdersClientTestCase {
     	
     }
 
+    @Test
+    public void queryFrontOrdersListWithPage(){
+    	OrdersRequestDto requestDto = new OrdersRequestDto();
+    	requestDto.setOrderNo("1");
+    	PageUtil pageUtil = new PageUtil();
+    	pageUtil.setPageSize(10);
+    	pageUtil.setCurPage(0);
+    	List<OrdersResponseDto> responseDtoList = client.queryFrontOrdersListWithPage(requestDto, pageUtil);
+    	log.debug("#size:::#" + responseDtoList.size());
+    }
 }
