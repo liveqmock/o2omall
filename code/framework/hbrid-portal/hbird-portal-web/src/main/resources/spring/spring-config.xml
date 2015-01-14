@@ -17,11 +17,8 @@
 
 	<context:property-placeholder location="classpath*:conf/app.properties" ignore-unresolvable="true"/>
 	<context:property-placeholder location="classpath*:conf/important.properties" ignore-unresolvable="true"/>
-	<context:property-placeholder location="classpath*:conf/redis.properties" ignore-unresolvable="true"/>
 
-    <import resource="classpath*:spring/spring-config-service.xml"/>
     <import resource="spring-config-datasource-dbcp.xml"/>
-    <import resource="spring-config-redis.xml"/>
-   <!-- <import resource="spring-config-shiro.xml"/>-->
+    <import resource="classpath*:spring/spring-config-service.xml"/>
     
 </beans>

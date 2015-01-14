@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
-import com.hbird.common.core.util.DateUtil;
+import com.hbird.common.utils.DateHelper;
 import com.hbird.common.web.context.LoginUser;
 import com.hbird.common.web.context.UserContext;
 import com.hbird.portal.domain.User;
@@ -87,9 +87,9 @@ public abstract class BaseController extends WrapController {
      */
     protected void initDateTimePicker(Model model) {
         Date date = new Date();
-        String startTime = DateUtil.date2String(date, DATE_TIME_FORMAT_START);
+        String startTime =DateHelper.format(date, DATE_TIME_FORMAT_START);
         model.addAttribute("startTime", startTime);
-        String endTime = DateUtil.date2String(date, DATE_TIME_FORMAT_END);
+        String endTime = DateHelper.format(date, DATE_TIME_FORMAT_END);
         model.addAttribute("endTime", endTime);
     }
 

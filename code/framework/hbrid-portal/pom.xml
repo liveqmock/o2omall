@@ -17,7 +17,7 @@
 		<module>hbird-portal-proxy</module>
 		<module>hbird-portal-service</module>
 		<module>hbird-portal-web</module>
-		<module>hbird-portal-webservice</module> 
+		<module>hbird-portal-webservice</module>
 	</modules>
 
 	<properties>
@@ -58,13 +58,13 @@
 		<jackson-smile.version>1.9.13</jackson-smile.version>
 		<jackson-core-asl.version>1.9.13</jackson-core-asl.version>
 		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
-		
+
 
 		<aspectj.version>1.6.11</aspectj.version>
 		<aspectjweaver.version>1.6.9</aspectjweaver.version>
-		
+
 		<jedis.version>2.0.0</jedis.version>
-		
+
 		<resteasy-spring.version>2.2.2.GA</resteasy-spring.version>
 		<jsr311-api.version>1.1.1</jsr311-api.version>
 		<commons-httpclient.version>3.1</commons-httpclient.version>
@@ -177,6 +177,13 @@
 				<version>${spring.version}</version>
 			</dependency>
 
+			<!-- if you use fileupload in spring mvc -->
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${commons-fileupload.version}</version>
+			</dependency>
+
 			<!-- mysql dependencies -->
 			<dependency>
 				<groupId>mysql</groupId>
@@ -187,103 +194,6 @@
 				<groupId>commons-dbcp</groupId>
 				<artifactId>commons-dbcp</artifactId>
 				<version>${commons-dbcp.version}</version>
-			</dependency>
-
-			<!-- if you use fileupload in spring mvc -->
-			<dependency>
-				<groupId>commons-fileupload</groupId>
-				<artifactId>commons-fileupload</artifactId>
-				<version>${commons-fileupload.version}</version>
-			</dependency>
-
-			<!-- shiro begin -->
-			<dependency>
-				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-core</artifactId>
-				<version>${shiro.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-web</artifactId>
-				<version>${shiro.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-aspectj</artifactId>
-				<version>${shiro.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-cas</artifactId>
-				<version>${shiro.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-guice</artifactId>
-				<version>${shiro.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-spring</artifactId>
-				<version>${shiro.version}</version>
-			</dependency>
-			<!-- shiro end -->
-
-			<!-- cxf dependencies -->
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-frontend-jaxws</artifactId>
-				<version>${cxf.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-transports-http</artifactId>
-				<version>${cxf.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.springframework</groupId>
-						<artifactId>spring-web</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-ws-rm</artifactId>
-				<version>${cxf.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-ws-security</artifactId>
-				<version>${cxf.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-ws-addr</artifactId>
-				<version>${cxf.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-ws-policy</artifactId>
-				<version>${cxf.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-common-utilities</artifactId>
-				<version>${cxf.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.springframework</groupId>
-						<artifactId>spring-core</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.springframework</groupId>
-						<artifactId>spring-beans</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.springframework</groupId>
-						<artifactId>spring-context</artifactId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 
 			<!-- velocity dependencies -->
@@ -303,44 +213,44 @@
 				<artifactId>commons-httpclient</artifactId>
 				<version>${commons-httpclient.version}</version>
 			</dependency>
-			
+
 			<!-- RESTEasy -->
 			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
 				<artifactId>resteasy-spring</artifactId>
 				<version>${resteasy-spring.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>javax.ws.rs</groupId>
 				<artifactId>jsr311-api</artifactId>
 				<version>${jsr311-api.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
 				<artifactId>resteasy-jaxrs</artifactId>
 				<version>${resteasy-spring.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
 				<artifactId>resteasy-jaxb-provider</artifactId>
 				<version>${resteasy-spring.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
 				<artifactId>resteasy-jackson-provider</artifactId>
 				<version>${resteasy-spring.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
 				<artifactId>resteasy-multipart-provider</artifactId>
 				<version>${resteasy-spring.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
 				<artifactId>resteasy-cache-core</artifactId>
@@ -370,12 +280,6 @@
 				<groupId>jstl</groupId>
 				<artifactId>jstl</artifactId>
 				<version>${jstl.version}</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>org.opensymphony.quartz</groupId>
-				<artifactId>quartz</artifactId>
-				<version>${quartz.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-configuration</groupId>
@@ -456,13 +360,12 @@
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-core-asl</artifactId>
 				<version>${jackson-core-asl.version}</version>
-				</dependency>
+			</dependency>
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-mapper-asl</artifactId>
 				<version>${jackson-mapper-asl.version}</version>
 			</dependency>
-			
 
 			<dependency>
 				<groupId>org.aspectj</groupId>
@@ -474,20 +377,12 @@
 				<artifactId>aspectjweaver</artifactId>
 				<version>${aspectjweaver.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>commons-jexl</groupId>
 				<artifactId>commons-jexl</artifactId>
 				<version>1.1</version>
 			</dependency>
-            
-            <!-- Redis Begin -->
-	        <dependency>
-				<groupId>redis.clients</groupId>
-				<artifactId>jedis</artifactId>
-				<version>${jedis.version}</version>
-			</dependency>
-			<!-- Redis End -->
 
 			<dependency>
 				<groupId>junit</groupId>
@@ -497,7 +392,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -551,7 +446,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<reporting>
 		<plugins>
 			<plugin>
@@ -564,7 +459,7 @@
 					<xmlOutput>true</xmlOutput>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>3.1</version>
@@ -622,10 +517,10 @@
 				<!-- 域名配置-日志父路径 -->
 				<domain.web>its</domain.web>
 				<domain.webservice>itsws</domain.webservice>
-				
+
 				<!-- Portal权限认证信息 -->
 				<portal.web.domain.name>local.its.shop.hbird.com:8080</portal.web.domain.name>
-				<portal.api.domain.name>dev.itsws.shop.hbird.com</portal.api.domain.name>
+				<portal.api.domain.name>local.itsws.shop.hbird.com:8090</portal.api.domain.name>
 				<my.web.domain.name>local.its.shop.hbird.com:8080</my.web.domain.name>
 			</properties>
 		</profile>
@@ -647,7 +542,7 @@
 				<!-- 域名配置-日志父路径 -->
 				<domain.web>its</domain.web>
 				<domain.webservice>itsws</domain.webservice>
-				
+
 				<!-- Portal权限认证信息 -->
 				<portal.web.domain.name>dev.its.shop.hbird.com</portal.web.domain.name>
 				<portal.api.domain.name>dev.itsws.shop.hbird.com</portal.api.domain.name>
@@ -673,7 +568,7 @@
 				<!-- 域名配置-日志父路径 -->
 				<domain.web>its</domain.web>
 				<domain.webservice>itsws</domain.webservice>
-				
+
 				<!-- Portal权限认证信息 -->
 				<portal.web.domain.name>test.its.shop.hbird.com</portal.web.domain.name>
 				<portal.api.domain.name>test.itsws.shop.hbird.com</portal.api.domain.name>
@@ -699,7 +594,7 @@
 				<!-- 域名配置-日志父路径 -->
 				<domain.web>its</domain.web>
 				<domain.webservice>itsws</domain.webservice>
-				
+
 				<!-- Portal权限认证信息 -->
 				<portal.web.domain.name>its.shop.hbird.com</portal.web.domain.name>
 				<portal.api.domain.name>itsws.shop.hbird.com</portal.api.domain.name>

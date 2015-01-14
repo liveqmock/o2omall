@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +25,6 @@ import com.hbird.portal.domain.constant.CommonConstants;
 import com.hbird.portal.domain.dto.MenuDto;
 import com.hbird.portal.domain.dto.SubMenuDto;
 import com.hbird.portal.service.MenuService;
-import com.hbird.portal.service.SSOService;
-import com.hbird.portal.service.SyncDataService;
 import com.hbird.portal.service.UserService;
 
 /**
@@ -52,13 +49,9 @@ public class IndexController extends BaseController {
     private static final String VIEW_403 = "403";
 
     @Autowired
-    private SSOService ssoService;
-    @Autowired
     private UserService userService;
     @Autowired
     private MenuService menuService;
-    @Autowired
-    private SyncDataService syncDataService;
 
     private final Log logger = LogFactory.getLog(this.getClass());
 
@@ -67,7 +60,6 @@ public class IndexController extends BaseController {
         return index(model);
     }
 
-    @RequiresPermissions("index")
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String index(Model model) {
         // User loginUser = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
@@ -162,37 +154,14 @@ public class IndexController extends BaseController {
         this.logger.info("loginSys: user name=" + name);
 
         try {
-            User loginUser = userService.getUserByName(name);
-
-            if (loginUser == null) {
-                boolean isReturn = Boolean.TRUE;
-                String tempUserName = name;
-                if (!tempUserName.toLowerCase().endsWith("@hbird.com")) {
-                    tempUserName += "@hbird.com";
-                }
-
-                User result = this.syncDataService.syncUser(tempUserName);
-                if (null != result) {
-                    this.logger.info("补全用户[" + tempUserName + "]信息成功");
-                    isReturn = Boolean.FALSE;
-                    loginUser = userService.getUserByName(name);
-                }
-
-                if (isReturn) {
-                    this.logger.warn("补全用户[" + tempUserName + "]信息不成功");
-                    model.addAttribute(LOGIN_MSG_KEY, LOGIN_MSG_VALUE_ERROR);
-                    return VIEW_LOGIN;
-                }
+            String tempUserName = name;
+            if (!tempUserName.toLowerCase().endsWith("@hbird.com")) {
+                tempUserName += "@hbird.com";
             }
+            User loginUser = userService.getUserByName(tempUserName);
 
-            boolean checkResult = false;
-            if (loginUser != null) {
-                if (CommonConstants.USER_TYPE_INNER == loginUser.getUserType()) { // 内部用户
-                    checkResult = ssoService.checkUser(name, password);
-                } else { // 其他：外派
-                    checkResult = MD5Util.md5Hex(password).equals(loginUser.getPassword());
-                }
-            }
+            boolean checkResult = null != loginUser && CommonConstants.USER_TYPE_OUTER == loginUser.getUserType()
+                    && MD5Util.md5Hex(password).equals(loginUser.getPassword());
 
             if (checkResult) {
                 setCookie(response, loginUser);

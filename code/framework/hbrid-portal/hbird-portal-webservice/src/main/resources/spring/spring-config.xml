@@ -13,7 +13,6 @@
             http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	default-autowire="byName">
 	
-	<context:component-scan base-package="com.hbird.portal.job"/>
 	<context:component-scan base-package="com.hbird.portal.rest"/>
 	<context:property-placeholder location="classpath*:conf/app.properties" ignore-unresolvable="true"/>
 	<context:property-placeholder location="classpath*:conf/important.properties" ignore-unresolvable="true"/>
@@ -21,5 +20,4 @@
 	<import resource="classpath*:spring/spring-config-datasource-dbcp.xml" />
 	<import resource="classpath*:spring/spring-config-service.xml" />
 	<import resource="spring-config-resteasy.xml" />
-	<import resource="spring-config-quartz.xml" />
 </beans>
