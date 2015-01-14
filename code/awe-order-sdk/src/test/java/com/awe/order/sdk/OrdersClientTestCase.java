@@ -28,7 +28,7 @@ public class OrdersClientTestCase {
 	private Log log = LogFactory.getLog(this.getClass());
 	
     //String WS_DOMAIN = "http://dev.orderws.shop.hbird.com/";
-     String WS_DOMAIN = "http://local.orderws.shop.hbird.com:8100/";
+     String WS_DOMAIN = "http://local.orderws.shop.hbird.com:8200/";
     private OrdersClient client;
 
     @Before
