@@ -1,7 +1,8 @@
 package com.awe.rems.sdk.request.dto;
 
-import com.hbird.common.sdk.api.dto.HbirdDto;
 import java.util.Date;
+
+import com.hbird.common.sdk.api.dto.HbirdDto;
 
 /**
  * RefundRequestDto：退款表请求参数
@@ -23,11 +24,11 @@ public class RefundRequestDto extends HbirdDto {
     private String orderNo; 
     /** 商品分类编号 */
     private Long categoryId; 
-    /** 产品id */
-    private Long productId; 
     /** 商品编号 */
-    private Long skuNo; 
-    /** 商品名称 */
+    private String productNo; 
+    /** SKU编号 */
+    private String skuNo; 
+    /** SKU名称 */
     private String skuName; 
     /** 退款金额 */
     private Double refundAmount; 
@@ -332,19 +333,20 @@ public class RefundRequestDto extends HbirdDto {
 		this.categoryId = categoryId;
 	}
 
-	public Long getProductId() {
-		return productId;
+
+	public String getProductNo() {
+		return productNo;
 	}
 
-	public void setProductId(Long productId) {
-		this.productId = productId;
+	public void setProductNo(String productNo) {
+		this.productNo = productNo;
 	}
 
-	public Long getSkuNo() {
+	public String getSkuNo() {
 		return skuNo;
 	}
 
-	public void setSkuNo(Long skuNo) {
+	public void setSkuNo(String skuNo) {
 		this.skuNo = skuNo;
 	}
 

@@ -1,7 +1,8 @@
 package com.awe.rems.sdk.api.request.dto;
 
-import com.hbird.common.sdk.api.dto.HbirdDto;
 import java.util.Date;
+
+import com.hbird.common.sdk.api.dto.HbirdDto;
 
 /**
  * ReturnExchangeRequestDto：退换货请求参数
@@ -27,12 +28,12 @@ public class ReturnExchangeRequestDto extends HbirdDto {
     private String orderNo; 
     /** 商品分类编号 */
     private Long categoryId; 
-    /** 产品id */
-    private Long productId; 
     /** 商品编号 */
-    private Long skuNo; 
-    /** 商品名称 */
-    private String skuName; 
+    private String productNo; 
+    /** SKU编号 */
+    private String skuNo; 
+    /** SKU名称 */
+    private String skuName;  
     /** 服务类型:1:退货:2:换货:3维修 */
     private Integer serviceType; 
     /** 申请的商品数量 */
@@ -208,43 +209,25 @@ public class ReturnExchangeRequestDto extends HbirdDto {
         this.categoryId = categoryId;
     }
     
-    /**
-     * get 产品id
-     * 
-     * @return the productId
-     */
-    public Long getProductId(){
-        return productId;
-    }
-        
-    /**
-     * set 产品id
-     * 
-     * @param productId the productId to set
-     */
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
     
-    /**
-     * get 商品编号
-     * 
-     * @return the skuNo
-     */
-    public Long getSkuNo(){
-        return skuNo;
-    }
-        
-    /**
-     * set 商品编号
-     * 
-     * @param skuNo the skuNo to set
-     */
-    public void setSkuNo(Long skuNo) {
-        this.skuNo = skuNo;
-    }
     
-    /**
+    public String getProductNo() {
+		return productNo;
+	}
+
+	public void setProductNo(String productNo) {
+		this.productNo = productNo;
+	}
+
+	public String getSkuNo() {
+		return skuNo;
+	}
+
+	public void setSkuNo(String skuNo) {
+		this.skuNo = skuNo;
+	}
+
+	/**
      * get 商品名称
      * 
      * @return the skuName
