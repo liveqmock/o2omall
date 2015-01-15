@@ -1,8 +1,9 @@
 package com.awe.order.sdk.response.dto;
 
-import com.hbird.common.sdk.api.dto.HbirdDto;
-
 import java.util.Date;
+import java.util.List;
+
+import com.hbird.common.sdk.api.dto.HbirdDto;
 
 /**
  * OrdersResponseDto：订单返回对象Dto<br/>
@@ -107,7 +108,8 @@ public class OrdersResponseDto extends HbirdDto {
     private String seller; 
     /** 销售商编号*/
     private String sellerNo;
-    
+    /**订单明细数据集*/
+    private List<OrdersItemsResponseDto> ordersItemsList;  
     /**
      * get 自增id
      * 
@@ -890,4 +892,19 @@ public class OrdersResponseDto extends HbirdDto {
 	public void setSellerNo(String sellerNo) {
 		this.sellerNo = sellerNo;
 	}
+	/**
+	 * 订单明细
+	 * @return
+	 */
+	public List<OrdersItemsResponseDto> getOrdersItemsList() {
+		return ordersItemsList;
+	}
+	/**
+	 * 订单明细
+	 * @param ordersItemsList
+	 */
+	public void setOrdersItemsList(List<OrdersItemsResponseDto> ordersItemsList) {
+		this.ordersItemsList = ordersItemsList;
+	}
+	
 }

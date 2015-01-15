@@ -23,6 +23,8 @@ import com.awe.order.sdk.api.request.dto.OrderCancelRequestDto;
 import com.awe.order.sdk.api.response.dto.OrderCancelResponseDto;
 import com.awe.order.service.OrderCancelService;
 import com.hbird.common.utils.page.PageUtil;
+import com.hbird.common.utils.wrap.PageWrapMapper;
+import com.hbird.common.utils.wrap.PageWrapper;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 
@@ -84,26 +86,27 @@ public class OrderCancelResource {
      */
     @POST
     @Path("/orderCancel/queryFrontOrderCancelListWithPage")
-    public Wrapper<?> queryFrontOrderCancelListWithPage(OrderCancelRequest request,PageUtil pageUtil){
+    public PageWrapper<?> queryFrontOrderCancelListWithPage(OrderCancelRequest request){
     	if (null == request || !request.checkSign()) {
             this.logger.error("queryFrontOrderCancelListWithPage 拒绝访问");
-            return WrapMapper.forbidden();
+            return PageWrapMapper.error();
         }
         
         OrderCancelRequestDto requestDto = request.getContent();
-        if (null == requestDto || null == requestDto.getId()) {
+        PageUtil pageUtil = request.getPageUtil();
+        if (null == requestDto || null == requestDto.getOrderNo()) {
             this.logger.error("queryFrontOrderCancelListWithPage 传入参数有误");
-            return WrapMapper.illegalArgument();
+            return PageWrapMapper.illegalArgument();
         }
         try {
         	FrontOrderCancelQuery queryBean = new FrontOrderCancelQuery();
         	queryBean.setUserId(requestDto.getUserId());
         	List<OrderCancel> dataList = orderCancelService.queryFrontOrderCancelListWithPage(queryBean, pageUtil);
         	List<OrderCancelResponseDto> responseDtoList = convertList(dataList);
-        	return WrapMapper.ok().result(responseDtoList);
+        	return PageWrapMapper.ok().result(responseDtoList).pageUtil(pageUtil);
 		} catch (Exception e) {
 			this.logger.error("#OrderCancelResource.queryFrontOrderCancelListWithPage# Error:" + e);
-			return WrapMapper.error();
+			return PageWrapMapper.error();
 		}
     }
     

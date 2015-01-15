@@ -2,9 +2,7 @@ package com.awe.order.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
@@ -213,24 +211,29 @@ public class OrdersServiceImpl implements OrdersService {
     	Orders orders = null;
     	OrdersItems ordersItems = null;
     	List<OrdersItems> ordersItemsList = null;
-    	Map<String,Orders> tempMap = new HashMap<String,Orders>();
+    	List<OrdersItems> tempList = null;
+    	boolean isOtherOrder = false;
         try {
         	ordersDtoList = ordersManager.queryFrontOrdersListWithPage(queryBean, pageUtil);
         	Collections.sort(ordersDtoList, new OrdersComparator());//按订单号排序
         	for (OrdersDto ordersDto : ordersDtoList) {
-        		if(!tempMap.containsKey(ordersDto.getOrderNo())){
+        		if(null == orders || !ordersDto.getOrderNo().equals(orders.getOrderNo())){
         			orders = new Orders();
-        			BeanUtils.copyProperties(ordersDto,orders);
+        			BeanUtils.copyProperties(ordersDto, orders);
         			ordersItemsList = new ArrayList<OrdersItems>();
+        			isOtherOrder = true;
         		}
         		ordersItems = new OrdersItems();
-        		BeanUtils.copyProperties(ordersDto,ordersItems);
+        		BeanUtils.copyProperties(ordersDto, ordersItems);
         		ordersItemsList.add(ordersItems);
-        		if(!tempMap.containsKey(ordersDto.getOrderNo())){
-        			orders.setOrdersItemsList(ordersItemsList);
+        		if(!isOtherOrder){
+        			tempList = ordersItemsList;
+        			orders.setOrdersItemsList(tempList);
+        			dataList.add(orders);
         		}
-        		dataList.add(orders);
+        		isOtherOrder = false;
 			}
+        	
         } catch (Exception e) {
             LOG.error("OrdersServiceImpl#queryFrontOrdersListWithPage has error.", e);
         }

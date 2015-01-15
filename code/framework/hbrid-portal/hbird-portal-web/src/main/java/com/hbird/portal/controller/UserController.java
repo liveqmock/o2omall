@@ -21,7 +21,6 @@ import com.hbird.portal.controller.base.BaseController;
 import com.hbird.portal.domain.User;
 import com.hbird.portal.domain.constant.CommonConstants;
 import com.hbird.portal.domain.query.UserQuery;
-import com.hbird.portal.service.SyncDataService;
 import com.hbird.portal.service.UserService;
 import com.hbird.portal.web.util.JsonReader;
 import com.hbird.portal.web.util.JsonResult;
@@ -41,8 +40,6 @@ public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private SyncDataService syncDataService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model) {
@@ -261,14 +258,9 @@ public class UserController extends BaseController {
         this.logger.info("补全用户，操作人：" + getLoginUserName());
 
         try {
-            User result = this.syncDataService.syncUser(user.getName());
-            if (null != result) {
-                this.logger.info("补全用户[" + name + "]信息成功");
-                jsonResult.setResult(result);
-            } else {
-                jsonResult.setFail();
-                this.logger.info("补全用户[" + name + "]信息失败");
-            }
+            // do nothing
+            jsonResult.setFail();
+            this.logger.info("补全用户[" + name + "]信息失败");
         } catch (Exception e) {
             jsonResult.setError();
             this.logger.warn("补全用户[" + name + "]信息异常，", e);
