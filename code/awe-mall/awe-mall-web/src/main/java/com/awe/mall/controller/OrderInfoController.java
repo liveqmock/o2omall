@@ -59,6 +59,7 @@ public class OrderInfoController extends BaseController{
 	}
 	@RequestMapping(value = "info",method = { RequestMethod.POST, RequestMethod.GET })
 	public String orderInfo(Model model,String parameters){
+		parameters = "[{\"skuNo\":\"sku001\",\"skuCount\":13},{\"skuNo\":\"sku002\",\"skuCount\":2},{\"skuNo\":\"sku003\",\"skuCount\":1},{\"skuNo\":\"sku004\",\"skuCount\":7}]";
 		//商品总数量
 		Integer count = 0;
 		//商品总价格
