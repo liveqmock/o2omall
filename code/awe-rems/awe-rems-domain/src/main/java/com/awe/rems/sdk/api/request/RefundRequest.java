@@ -1,7 +1,8 @@
 package com.awe.rems.sdk.api.request;
 
-import com.hbird.common.sdk.api.request.HbirdSecureRequest;
 import com.awe.rems.sdk.api.request.dto.RefundRequestDto;
+import com.hbird.common.sdk.api.request.HbirdPageSecureRequest;
+import com.hbird.common.utils.page.PageUtil;
 
 /**
  * RefundRequest：退款表请求参数
@@ -10,7 +11,7 @@ import com.awe.rems.sdk.api.request.dto.RefundRequestDto;
  * @version 2014-12-25 9:16:21
  * 
  */
-public class RefundRequest extends HbirdSecureRequest<RefundRequestDto> {
+public class RefundRequest extends HbirdPageSecureRequest<RefundRequestDto> {
 
     /** 序列化标识 */
     private static final long serialVersionUID = 1L;
@@ -28,5 +29,14 @@ public class RefundRequest extends HbirdSecureRequest<RefundRequestDto> {
      */
     public RefundRequest(String key, RefundRequestDto content) {
         super(key, content);
+    }
+    /**
+     * 
+     * @param key
+     * @param content
+     * @param pageUtil
+     */
+    public RefundRequest(String key, RefundRequestDto content, PageUtil pageUtil) {
+        super(key, content, pageUtil);
     }
 }
