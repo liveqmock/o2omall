@@ -1,5 +1,7 @@
 package com.awe.rems.sdk;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Assert;
@@ -7,11 +9,11 @@ import org.springframework.util.Assert;
 import com.awe.rems.sdk.request.RefundRequest;
 import com.awe.rems.sdk.request.dto.RefundRequestDto;
 import com.awe.rems.sdk.response.RefundResponse;
+import com.awe.rems.sdk.response.RefundResponseList;
 import com.awe.rems.sdk.response.dto.RefundResponseDto;
 import com.hbird.common.client.AbstractSecureClient;
+import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.serialize.JsonHelper;
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 退款表服务的客户端
@@ -54,28 +56,30 @@ public class RefundClient extends AbstractSecureClient {
      * @param requestDto
      * @return
      */
-    public Wrapper<?> queryRefundListWithPage(RefundRequestDto requestDto){
+    public List<RefundResponseDto> queryRefundListWithPage(RefundRequestDto requestDto,PageUtil pageUtil){
     	if (LOG.isDebugEnabled()) {
             LOG.debug("queryRefundListWithPage request: " + JsonHelper.toJson(requestDto));
         }
     	RefundRequest request = new RefundRequest(super.getKey(), requestDto);
-    	RefundResponse response = null;
+    	List<RefundResponseDto> responseDtoList = null;
+    	RefundResponseList responseList = null;
     	String url = null;
     	try {
+    		int totalRow;
     		 url = super.getServiceUrlDomain() + "services/refund/queryRefundListWithPage";
-    	     response = super.getRestTemplate().postForObject(url, request, RefundResponse.class);
+    		 responseList = super.getRestTemplate().postForObject(url, request, RefundResponseList.class);
+    		 responseDtoList = responseList.getResult();
+    		 totalRow = responseList.getPageUtil().getTotalRow();
+    		 pageUtil.setTotalRow(totalRow);
+    		 pageUtil.init();
 		} catch (Exception e) {
 			LOG.error("#RefundClient.queryRefundListWithPage# ERROR:" + e);
 		}
 		if (LOG.isDebugEnabled()) {
             LOG.debug("queryRefundListWithPage url: " + url);
-            LOG.debug("queryRefundListWithPage response: " + JsonHelper.toJson(response));
+            LOG.debug("queryRefundListWithPage response: " + JsonHelper.toJson(responseDtoList));
         }
-		if (null != response) {
-            return WrapMapper.wrap(response.getCode(), response.getMessage());
-        } else {
-            return WrapMapper.error();
-        }
+		return responseDtoList;
     }
     
 }

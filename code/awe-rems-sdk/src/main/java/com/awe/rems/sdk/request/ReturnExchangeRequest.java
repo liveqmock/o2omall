@@ -1,7 +1,8 @@
 package com.awe.rems.sdk.request;
 
-import com.hbird.common.sdk.api.request.HbirdSecureRequest;
 import com.awe.rems.sdk.request.dto.ReturnExchangeRequestDto;
+import com.hbird.common.sdk.api.request.HbirdPageSecureRequest;
+import com.hbird.common.utils.page.PageUtil;
 
 /**
  * ReturnExchangeRequest：退换货请求参数
@@ -10,7 +11,7 @@ import com.awe.rems.sdk.request.dto.ReturnExchangeRequestDto;
  * @version 2014-12-25 9:16:23
  * 
  */
-public class ReturnExchangeRequest extends HbirdSecureRequest<ReturnExchangeRequestDto> {
+public class ReturnExchangeRequest extends HbirdPageSecureRequest<ReturnExchangeRequestDto> {
 
     /** 序列化标识 */
     private static final long serialVersionUID = 1L;
@@ -28,5 +29,9 @@ public class ReturnExchangeRequest extends HbirdSecureRequest<ReturnExchangeRequ
      */
     public ReturnExchangeRequest(String key, ReturnExchangeRequestDto content) {
         super(key, content);
+    }
+    
+    public ReturnExchangeRequest(String key, ReturnExchangeRequestDto content,PageUtil pageUtil) {
+        super(key, content, pageUtil);
     }
 }

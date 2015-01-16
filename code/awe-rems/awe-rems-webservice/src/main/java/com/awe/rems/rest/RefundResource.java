@@ -16,15 +16,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.hbird.common.utils.page.PageUtil;
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.rems.domain.Refund;
 import com.awe.rems.domain.query.RefundQuery;
 import com.awe.rems.sdk.api.request.RefundRequest;
 import com.awe.rems.sdk.api.request.dto.RefundRequestDto;
 import com.awe.rems.sdk.api.response.dto.RefundResponseDto;
 import com.awe.rems.service.RefundService;
+import com.hbird.common.utils.page.PageUtil;
+import com.hbird.common.utils.wrap.PageWrapMapper;
+import com.hbird.common.utils.wrap.PageWrapper;
+import com.hbird.common.utils.wrap.WrapMapper;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 退款表REST服务：提供有关退款表的接口
@@ -82,16 +84,17 @@ public class RefundResource {
      */
     @POST
     @Path("/refund/queryRefundListWithPage")
-    public Wrapper<?> queryRefundListWithPage(RefundRequest request,PageUtil pageUtil){
+    public PageWrapper<?> queryRefundListWithPage(RefundRequest request){
     	if (null == request || !request.checkSign()) {
             this.logger.error("queryRefundListWithPage 拒绝访问");
-            return WrapMapper.forbidden();
+            return PageWrapMapper.error();
         }
         
         RefundRequestDto requestDto = request.getContent();
-        if (null == requestDto || null == requestDto.getId()) {
+        PageUtil pageUtil = request.getPageUtil();
+        if (null == requestDto || null == requestDto.getServiceNo()) {
             this.logger.error("queryRefundListWithPage 传入参数有误");
-            return WrapMapper.illegalArgument();
+            return PageWrapMapper.illegalArgument();
         }
 
         try {
@@ -100,10 +103,10 @@ public class RefundResource {
         	queryBean.setServiceNo(requestDto.getServiceNo());
         	List<Refund> dataList = refundService.queryRefundListWithPage(queryBean, pageUtil);
             List<RefundResponseDto> responseDtoList = convertList(dataList);
-            return WrapMapper.ok().result(responseDtoList);
+            return PageWrapMapper.ok().result(responseDtoList).pageUtil(pageUtil);
         } catch (Exception e) {
             this.logger.error("查询退款表数据异常", e);
-            return WrapMapper.error();
+            return PageWrapMapper.error();
         }
     }
     

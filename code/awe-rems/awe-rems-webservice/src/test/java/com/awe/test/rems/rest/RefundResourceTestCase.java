@@ -7,8 +7,10 @@ import org.springframework.util.Assert;
 import com.awe.test.rems.rest.request.RefundRequest;
 import com.awe.test.rems.rest.request.dto.RefundRequestDto;
 import com.awe.test.rems.rest.response.RefundResponse;
+import com.awe.test.rems.rest.response.RefundResponseList;
 import com.awe.test.rems.rest.response.dto.RefundResponseDto;
 import com.hbird.common.client.AbstractClient;
+import com.hbird.common.utils.page.PageUtil;
 
 /**
  * RefundResource单元测试
@@ -37,5 +39,19 @@ public class RefundResourceTestCase extends AbstractClient {
         Assert.notNull(response);
         RefundResponseDto refundResponseDto = super.getResult(response);
         Assert.notNull(refundResponseDto);
+    }
+    @Test
+    public void queryRefundListWithPage(){
+    	 String url= getServiceUrlDomain() + "/refund/queryRefundListWithPage";
+
+         RefundRequestDto requestDto = new RefundRequestDto();
+         requestDto.setServiceNo("T000000001");
+         PageUtil page = new PageUtil();
+         page.setPageSize(10);
+         page.setCurPage(0);
+         RefundRequest request = new RefundRequest("rems",requestDto);
+         request.setPageUtil(page);
+         RefundResponseList responseList = super.getRestTemplate().postForObject(url, request, RefundResponseList.class);
+         Assert.notNull(responseList);
     }
 }
