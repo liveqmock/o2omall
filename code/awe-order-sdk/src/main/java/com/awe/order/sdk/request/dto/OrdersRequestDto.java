@@ -1,8 +1,8 @@
 package com.awe.order.sdk.request.dto;
 
-import com.hbird.common.sdk.api.dto.HbirdDto;
-
 import java.util.Date;
+
+import com.hbird.common.sdk.api.dto.HbirdDto;
 
 /**
  * OrdersRequestDto：订单请求参数
@@ -106,6 +106,14 @@ public class OrdersRequestDto extends HbirdDto {
     private String seller; 
     /** 销售商编号*/
     private String sellerNo;
+    
+    /** sku编号 */
+    private String skuNo; 
+    /** 商品编号 */
+    private String productNo; 
+    /** sku名称 */
+    private String skuName; 
+
     
     /**
      * get 自增id
@@ -889,4 +897,29 @@ public class OrdersRequestDto extends HbirdDto {
 	public void setSellerNo(String sellerNo) {
 		this.sellerNo = sellerNo;
 	}
+
+	public String getSkuNo() {
+		return skuNo;
+	}
+
+	public void setSkuNo(String skuNo) {
+		this.skuNo = skuNo;
+	}
+
+	public String getProductNo() {
+		return productNo;
+	}
+
+	public void setProductNo(String productNo) {
+		this.productNo = productNo;
+	}
+
+	public String getSkuName() {
+		return skuName;
+	}
+
+	public void setSkuName(String skuName) {
+		this.skuName = skuName;
+	}
+	
 }

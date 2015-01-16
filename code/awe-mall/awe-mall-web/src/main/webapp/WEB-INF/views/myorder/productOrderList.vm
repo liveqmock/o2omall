@@ -29,69 +29,22 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <th colspan="6" class="th">订单编号：21890382020</th>
-  </tr>
-  <tr>
-    <td width="260" class="tcenter"><img src="#springUrl('')/static/images/m-img2.jpg" /></td>
-    <td width="130">张先生</td>
-    <td width="123"><p>¥198.00</p><p>货到付款 </p></td>
-    <td width="172"><p>2014-10-15</p><p>10:58:31  </p></td>
-    <td width="165">等待收货</td>
-    <td class="tcenter"><a href="">查看</a><br /><a href="">取消订单</a></td>
-  </tr>
+           <table width="100%" border="0" class="mt10" cellspacing="0" cellpadding="0">
+				#foreach( $item in $dataList)
+				  <th colspan="5" class="tt">订单编号：$!item.orderNo</th>
+                  <th class="tt del "><a href=""></a></th>
+                  <tr>
+                    <td width="260" class="tcenter">#foreach( $orderItem in $dataList.ordersItemsList)<img src="#springUrl('')/static/images/m-img2.jpg" />#end</td>
+                    <td width="130">$!item.consigneeName</td>
+                    <td width="123"><p>¥$!item.amountPay</p><p>货到付款 </p></td>
+                    <td width="172"><p>$!item.createTime</p></td>
+                    <td width="165">$!item.orderStatus</td>
+                    <td class="tcenter"><a href="">查看</a><br /><a href="">申请返修</a><br /><a href="">退换货</a></td>
+                  </tr>
+				#end
+			</table>
+			#pageBarPost($page.totalRow $page.curPage $page.totalPage)
   </tbody>
-</table>
-
-           <table width="100%" border="0" class="mt10" cellspacing="0" cellpadding="0">
-
-  <tr>
-    <th colspan="6" class="th">订单编号：21890382020</th>
-  </tr>
-  <tr>
-    <td width="260" class="tcenter"><img src="#springUrl('')/static/images/m-img2.jpg" /></td>
-    <td width="130">张先生</td>
-    <td width="123"><p>¥198.00</p><p>货到付款 </p></td>
-    <td width="172"><p>2014-10-15</p><p>10:58:31  </p></td>
-    <td width="165">等待收货</td>
-    <td class="tcenter"><a href="">查看</a><br /><a href="">取消订单</a></td>
-  </tr>
-
-</table>
-           <table width="100%" border="0" class="mt10" cellspacing="0" cellpadding="0">
-
-  <tr>
-    <th colspan="6" class="th">订单编号：21890382020</th>
-  </tr>
-  <tr>
-    <td width="260" class="tcenter"><img src="#springUrl('')/static/images/m-img2.jpg" /></td>
-    <td width="130">张先生</td>
-    <td width="123"><p>¥198.00</p><p>货到付款 </p></td>
-    <td width="172"><p>2014-10-15</p><p>10:58:31  </p></td>
-    <td width="165">等待收货</td>
-    <td class="tcenter"><a href="">查看</a><br /><a href="">取消订单</a></td>
-  </tr>
-  <tr>
-    <td width="260" class="tcenter"><img src="#springUrl('')/static/images/m-img2.jpg" /></td>
-    <td width="130">张先生</td>
-    <td width="123"><p>¥198.00</p><p>货到付款 </p></td>
-    <td width="172"><p>2014-10-15</p><p>10:58:31  </p></td>
-    <td width="165">等待收货</td>
-    <td class="tcenter"><a href="">查看</a><br /><a href="">取消订单</a></td>
-  </tr>
-    <th colspan="5" class="tt">订单编号：21890382020</th>
-    <th class="tt del "><a href=""></a></th>
-  <tr>
-    <td width="260" class="tcenter"><img src="#springUrl('')/static/images/m-img2.jpg" /></td>
-    <td width="130">张先生</td>
-    <td width="123"><p>¥198.00</p><p>货到付款 </p></td>
-    <td width="172"><p>2014-10-15</p><p>10:58:31  </p></td>
-    <td width="165">已完成</td>
-    <td class="tcenter"><a href="">查看</a><br /><a href="">申请返修</a><br /><a href="">退换货</a></td>
-  </tr>
-</table>
-
-         
          </div>
       
       </div>
