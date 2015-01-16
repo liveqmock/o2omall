@@ -176,4 +176,40 @@ public class OrdersClient extends AbstractSecureClient {
     	
     }
     
+    /**
+     * 订单取消
+     * Date:2015年1月16日下午5:06:22
+     * user:js
+     * @param ordersRequestDto
+     * @return
+     */
+    public Wrapper<?> updateOrderCancel(OrdersRequestDto ordersRequestDto){
+    	if (LOG.isDebugEnabled()) {
+            LOG.debug("updateOrderCancel request: " + JsonHelper.toJson(ordersRequestDto));
+        }
+    	OrdersRequest ordersRequest = new OrdersRequest(super.getKey(),ordersRequestDto);
+    	OrdersResponse ordersResponse = null;
+    	String url = null;
+    	try {
+    		 //url = super.getServiceUrlDomain() + "services/orders/cancelOrders";
+    		url = "http://local.orderws.shop.hbird.com:8090/services/orders/cancelOrders";
+    		 ordersResponse = super.getRestTemplate().postForObject(url, ordersRequest, OrdersResponse.class);
+		} catch (Exception e) {
+			LOG.error("#OrdersClient.updateOrderCancel# ERROR:" + e);
+		}
+    	if (LOG.isDebugEnabled()) {
+            LOG.debug("updateOrderCancel url: " + url);
+            LOG.debug("updateOrderCancel response: " + JsonHelper.toJson(ordersResponse));
+        }
+		if (null != ordersResponse) {
+            return WrapMapper.wrap(ordersResponse.getCode(),ordersResponse.getMessage());
+        } else {
+            return WrapMapper.error();
+        }
+    	
+    }
+    
+    
+    
+    
 }

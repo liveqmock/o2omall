@@ -152,4 +152,13 @@ public interface OrdersManager {
 	 * @return
 	 */
 	public boolean updateorderCancel(Orders orders);
+
+	/**
+	 * 订单取消
+	 * Date:2015年1月16日下午3:43:05
+	 * user:js
+	 * @param orders
+	 * @return
+	 */
+	public boolean cancelOrders(Orders orders);
 }

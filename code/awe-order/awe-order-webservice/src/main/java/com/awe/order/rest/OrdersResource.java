@@ -21,6 +21,7 @@ import com.awe.order.domain.OrderLog;
 import com.awe.order.domain.Orders;
 import com.awe.order.domain.OrdersItems;
 import com.awe.order.domain.query.FrontOrdersQuery;
+import com.awe.order.domain.query.OrdersQuery;
 import com.awe.order.sdk.api.request.OrderDetailsRequest;
 import com.awe.order.sdk.api.request.OrdersRequest;
 import com.awe.order.sdk.api.request.dto.OrderDetailsRequestDto;
@@ -131,13 +132,14 @@ public class OrdersResource {
 		}
 
 		OrdersRequestDto requestDto = request.getContent();
-		if (null == requestDto || null == requestDto.getId()) {
+		if (null == requestDto || null == requestDto.getOrderNo() || null == requestDto.getUpdateUser() || null == requestDto.getUserId()) {
 			this.logger.error("cancelOrders 传入参数有误");
 			return WrapMapper.illegalArgument();
 		}
 		try {
 			Orders orders = new Orders();
-			boolean ret = ordersService.update(orders);
+			BeanUtils.copyProperties(requestDto, orders);
+			boolean ret = ordersService.cancelOrders(orders);
 			if (ret) {
 				return WrapMapper.ok();
 			} else {

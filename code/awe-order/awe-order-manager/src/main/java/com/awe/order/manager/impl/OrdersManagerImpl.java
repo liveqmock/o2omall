@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hbird.common.manager.BaseManager;
 import com.hbird.common.utils.page.PageUtil;
+import com.awe.order.domain.OrderCancel;
 import com.awe.order.domain.OrderDetails;
 import com.awe.order.domain.OrderLog;
 import com.awe.order.domain.Orders;
@@ -236,12 +237,59 @@ public class OrdersManagerImpl extends BaseManager implements OrdersManager {
 		 log.setStatusName("系统取消");
 		 log.setLogType(100);
 		 log.setCreateUser("系统操作");
-		 log.setDescription("系统取消订单异常");
+		 log.setDescription("系统取消订单");
 		 //写日志
 		 resultFlag = orderLogDao.insert(log);
 		 if(!resultFlag){
 			 throw new RuntimeException("系统取消订单日志异常");
 		 }
+		return resultFlag;
+	}
+
+	/**
+     * {@inheritDoc}
+     */
+	public boolean cancelOrders(Orders orders) {
+		 boolean resultFlag = false;
+		 int count = 0;
+		/**
+		 * 订单取消要用分2步
+		 */
+        if (null != orders) {
+        	OrderLog log = new OrderLog();
+        	// 1：改变订单表状态
+            //1.1 判断订单是否支付，如果没有支付，就直接取消，支付的话，需要走后台审核
+        	count = ordersDao.queryOrderCancelStatus(orders.getOrderNo());
+        	if(count == 0){//已支付 状态改待审核
+        		orders.setOrderStatus(110);
+        		orders.setRemark("订单已支付,取消需要审核！");
+        		resultFlag = ordersDao.update(orders);
+        		
+        		log.setStatusName("订单审核");
+        		log.setStatus(110);
+        		log.setDescription("用户取消订单,已支付");
+        	}else{//木有支付 乃就取消
+        		orders.setOrderStatus(10);
+        		orders.setRemark("用户取消订单！");
+        		resultFlag = ordersDao.update(orders);
+        		
+        		log.setStatusName("用户取消");
+        		log.setStatus(10);
+        		log.setDescription("用户取消订单,未支付");
+        	}
+        	if (!resultFlag) {
+                throw new RuntimeException("取消订单异常");
+            }
+        	// 2：写日志
+    		 log.setOrderNo(orders.getOrderNo());
+    		 log.setLogType(100);
+    		 log.setCreateUser(orders.getUpdateUser());
+    		 //写日志
+    		 resultFlag = orderLogDao.insert(log);
+    		 if (!resultFlag) {
+                 throw new RuntimeException("取消订单异常");
+             }
+        }
 		return resultFlag;
 	}
 }

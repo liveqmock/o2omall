@@ -217,6 +217,11 @@
         </if>
     </update>
 
+	<!-- 根据订单号查询 此订单号是否支付过 -->
+	<select id="queryOrderCancelStatus" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(1) from orders where order_no = #{_parameter} and  yn = 1 and order_status = 40
+	</select>
+
     <!-- 根据主键获取对象信息 -->
     <select id="getOrdersById" resultMap="OrdersMap" parameterType="java.lang.Long">
         <if test="_parameter != null">

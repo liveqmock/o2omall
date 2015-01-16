@@ -264,5 +264,20 @@ public class OrdersServiceImpl implements OrdersService {
          }
          return resultFlag;
 	}
+
+    /**
+     * {@inheritDoc}
+     */
+    @Profiled(tag = "OrdersService.cancelOrders")
+	public boolean cancelOrders(Orders orders) {
+    	 boolean resultFlag = false;
+    	 try {
+    		 resultFlag = ordersManager.cancelOrders(orders);
+		} catch (Exception e) {
+			LOG.error("OrdersServiceImpl#cancelOrders has error.", e);
+		}
+		return resultFlag;
+		
+	}
 }
 

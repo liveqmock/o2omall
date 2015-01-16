@@ -111,4 +111,13 @@ public interface OrdersService {
 	 * @return
 	 */
 	public boolean insertDetails(OrderDetails orderDetails);
+
+	/**
+	 * 订单取消
+	 * Date:2015年1月16日下午3:40:08
+	 * user:js
+	 * @param orders
+	 * @return
+	 */
+	public boolean cancelOrders(Orders orders);
 }

@@ -84,6 +84,22 @@ public class OrdersClientTestCase {
     	Wrapper<?> wrapper= client.addOrdersDetails(detailsRequestDto);
     	
     }
+    
+    /**
+     * 订单取消
+     * Date:2015年1月16日下午5:08:08
+     * user:js
+     */
+    @Test
+    public void updateOrderCancel(){
+    	OrdersRequestDto dto =  new OrdersRequestDto();
+    	dto.setOrderNo("142105095786182051");
+    	dto.setUserId(123456l);
+    	dto.setUpdateUser("jss");
+    	Wrapper<?> wrapper= client.updateOrderCancel(dto);
+    	
+    }
+    
 
     @Test
     public void queryFrontOrdersListWithPage(){

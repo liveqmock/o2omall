@@ -120,4 +120,13 @@ public interface OrdersDao {
 	 * @return
 	 */
 	public List<Orders> queryOrderListCancel(String yesTerDay);
+
+	/**
+	 * 查询当前订单状态是否支付
+	 * Date:2015年1月16日下午4:04:17
+	 * user:js
+	 * @param orderNo
+	 * @return
+	 */
+	public int queryOrderCancelStatus(String orderNo);
 }

@@ -115,6 +115,13 @@ public class OrdersDaoImpl extends BaseDao implements OrdersDao {
 	public List<Orders> queryOrderListCancel(String yesTerDay) {
 		return (List<Orders>) queryForList(namespace +".queryOrderListCancel", yesTerDay);
 	}
-	
-	
+
+	/**
+     * {@inheritDoc}
+     */
+	public int queryOrderCancelStatus(String orderNo) {
+		int count = 0;
+		count = (Integer) queryForObject(namespace +".queryOrderCancelStatus", orderNo);
+		return count;
+	}
 }
