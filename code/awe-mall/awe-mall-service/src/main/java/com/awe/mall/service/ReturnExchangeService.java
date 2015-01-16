@@ -1,6 +1,10 @@
 package com.awe.mall.service;
 
+import java.util.List;
+
 import com.awe.rems.sdk.request.dto.ReturnExchangeRequestDto;
+import com.awe.rems.sdk.response.dto.ReturnExchangeResponseDto;
+import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.wrap.Wrapper;
 
 /**
@@ -25,9 +29,10 @@ public interface ReturnExchangeService {
 	/**
 	 * 我的退换货列表
 	 * @param requestDto
+	 * @param pageUtil
 	 * @return
 	 */
-	public Wrapper<?> queryReturnExchangeListWithPage(ReturnExchangeRequestDto requestDto);
+	public List<ReturnExchangeResponseDto> queryReturnExchangeListWithPage(ReturnExchangeRequestDto requestDto, PageUtil pageUtil);
 	
 	
 }

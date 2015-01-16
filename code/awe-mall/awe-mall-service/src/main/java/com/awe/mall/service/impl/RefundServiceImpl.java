@@ -1,5 +1,7 @@
 package com.awe.mall.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import com.awe.mall.service.RefundService;
 import com.awe.rems.sdk.RefundClient;
 import com.awe.rems.sdk.request.dto.RefundRequestDto;
 import com.awe.rems.sdk.response.dto.RefundResponseDto;
+import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 /**
@@ -40,14 +43,14 @@ public class RefundServiceImpl implements RefundService {
 	/**
      * {@inheritDoc}
      */
-	public Wrapper<?> queryRefundListWithPage(RefundRequestDto requestDto) {
-		Wrapper<?> wrapper = null;
+	public List<RefundResponseDto> queryRefundListWithPage(RefundRequestDto requestDto, PageUtil pageUtil) {
+		List<RefundResponseDto> responseDtoList = null;
 		try {
-			wrapper = refundClient.queryRefundListWithPage(requestDto);
+			responseDtoList = refundClient.queryRefundListWithPage(requestDto,pageUtil);
 		} catch (Exception e) {
 			LOG.error("#RefundServiceImpl.queryRefundListWithPage# Error:" + e);
 		}
-		return wrapper;
+		return responseDtoList;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.awe.mall.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import com.awe.mall.service.ReturnExchangeService;
 import com.awe.rems.sdk.ReturnExchangeClient;
 import com.awe.rems.sdk.request.dto.ReturnExchangeRequestDto;
 import com.awe.rems.sdk.response.dto.ReturnExchangeResponseDto;
+import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 /**
@@ -52,14 +55,14 @@ public class ReturnExchangeServiceImpl implements ReturnExchangeService {
 	/**
      * {@inheritDoc}
      */
-	public Wrapper<?> queryReturnExchangeListWithPage(ReturnExchangeRequestDto requestDto) {
-		Wrapper<?> wrapper = null;
+	public List<ReturnExchangeResponseDto> queryReturnExchangeListWithPage(ReturnExchangeRequestDto requestDto, PageUtil pageUtil) {
+		List<ReturnExchangeResponseDto> responseDtoList = null;
 		try {
-			wrapper = returnExchangeClient.queryReturnExchangeListWithPage(requestDto);
+			responseDtoList = returnExchangeClient.queryReturnExchangeListWithPage(requestDto,pageUtil);
 		} catch (Exception e) {
 			LOG.error("#ReturnExchangeServiceImpl.queryReturnExchangeListWithPage# Error:" + e);
 		}
-		return wrapper;
+		return responseDtoList;
 	}
 
 }

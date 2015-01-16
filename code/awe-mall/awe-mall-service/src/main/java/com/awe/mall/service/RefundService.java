@@ -1,6 +1,10 @@
 package com.awe.mall.service;
 
+import java.util.List;
+
 import com.awe.rems.sdk.request.dto.RefundRequestDto;
+import com.awe.rems.sdk.response.dto.RefundResponseDto;
+import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.wrap.Wrapper;
 
 /**
@@ -19,8 +23,9 @@ public interface RefundService {
 	/**
 	 * 查询退款列表
 	 * @param requestDto
+	 * @param pageUtil
 	 * @return
 	 */
-	public Wrapper<?> queryRefundListWithPage(RefundRequestDto requestDto);
+	public List<RefundResponseDto> queryRefundListWithPage(RefundRequestDto requestDto, PageUtil pageUtil);
 	
 }
