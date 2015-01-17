@@ -16,13 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.pms.domain.ProductDict;
+import com.awe.pms.domain.query.ProductDictQuery;
 import com.awe.pms.sdk.api.request.ProductDictRequest;
 import com.awe.pms.sdk.api.request.dto.ProductDictRequestDto;
 import com.awe.pms.sdk.api.response.dto.ProductDictResponseDto;
 import com.awe.pms.service.ProductDictService;
+import com.hbird.common.utils.wrap.WrapMapper;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 配置表REST服务：提供有关配置表的接口
@@ -72,7 +73,37 @@ public class ProductDictResource {
             this.logger.error("查询配置表数据异常", e);
             return WrapMapper.error();
         }
-    } 
+    }
+    
+    /**
+     * 查询配置表信息
+     * 
+     * @param request
+     *            配置表请求参数
+     * @return 配置表返回对象
+     * 
+     */
+    @POST
+    @Path("/productDict/getAllProductDict")
+    public Wrapper<?> getAllProductDict(ProductDictRequest request) {
+    	if (null == request || !request.checkSign()) {
+    		this.logger.error("getAllProductDict 拒绝访问");
+    		return WrapMapper.forbidden();
+    	}
+    	
+    	ProductDictRequestDto requestDto = request.getContent();
+    	
+    	try {
+    		ProductDictQuery queryBean = new ProductDictQuery();
+    		BeanUtils.copyProperties(requestDto, queryBean);
+    		List<ProductDict> productDicts = this.productDictService.queryProductDictList(queryBean);
+    		List<ProductDictResponseDto> responseDto = convertList(productDicts);
+    		return WrapMapper.ok().result(responseDto);
+    	} catch (Exception e) {
+    		this.logger.error("查询配置表数据异常", e);
+    		return WrapMapper.error();
+    	}
+    }
 
     // 数据转换
     private ProductDictResponseDto convert(ProductDict productDict) {
