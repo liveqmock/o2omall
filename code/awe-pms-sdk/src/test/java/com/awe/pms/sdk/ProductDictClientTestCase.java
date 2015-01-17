@@ -1,5 +1,7 @@
 package com.awe.pms.sdk;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
@@ -15,8 +17,8 @@ import com.awe.pms.sdk.response.dto.ProductDictResponseDto;
  * 
  */
 public class ProductDictClientTestCase {
-    String WS_DOMAIN = "http://dev.pmsws.shop.hbird.com/";
-    // String WS_DOMAIN = "http://local.pmsws.shop.hbird.com:8090/";
+//    String WS_DOMAIN = "http://dev.pmsws.shop.hbird.com/";
+    String WS_DOMAIN = "http://local.pmsws.shop.hbird.com:8100/";
     private ProductDictClient client;
 
     @Before
@@ -36,6 +38,15 @@ public class ProductDictClientTestCase {
         
         ProductDictResponseDto productDictResponseDto = client.getProductDict(requestDto);
         Assert.notNull(productDictResponseDto);
+    } 
+    
+    @Test
+    public void testGetAllProductDict() {
+    	ProductDictRequestDto requestDto = new ProductDictRequestDto();
+//    	requestDto.setId(1l);
+    	
+    	List<ProductDictResponseDto> productDictResponseDtos = client.getAllProductDict(requestDto);
+    	Assert.notNull(productDictResponseDtos);
     } 
 
 }
