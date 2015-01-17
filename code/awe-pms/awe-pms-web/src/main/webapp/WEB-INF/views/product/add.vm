@@ -70,6 +70,19 @@
 				});
 				$("#btn-submit").click(function(){
             		var form = $("#addForm");
+					var distribution = CKEDITOR.instances.distribution.getData();
+					$("#distribution").text(distribution);
+					var service = CKEDITOR.instances.service.getData();
+					$("#service").text(service);
+					var kindlyReminder = CKEDITOR.instances.kindlyReminder.getData();
+					$("#kindlyReminder").text(kindlyReminder);
+					var features = CKEDITOR.instances.features.getData();
+					$("#features").text(features);
+					var introduce = CKEDITOR.instances.introduce.getData();
+					$("#introduce").text(introduce);
+					var saleGuarantee = CKEDITOR.instances.saleGuarantee.getData();
+					$("#saleGuarantee").text(saleGuarantee);
+					
 					if(form.valid()==false){
 						return;
 					}
@@ -319,31 +332,36 @@
 								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="service">服务（配送信息等）</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="service" id="service" class="col-xs-10 col-sm-8" />
+										<textarea name="service" id="service">
+                                        </textarea>
                                     </div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="kindlyReminder">温馨提示</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="kindlyReminder" id="kindlyReminder" class="col-xs-10 col-sm-8" />
+										<textarea name="kindlyReminder" id="kindlyReminder">
+                                        </textarea>
                                     </div>
                                 </div>
 								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="features">商品描述</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="features" id="features" class="col-xs-10 col-sm-8" />
+										<textarea name="features" id="features">
+                                        </textarea>
                                     </div>
                                 </div>
 								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="introduce">商品介绍</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="introduce" id="introduce" class="col-xs-10 col-sm-8" />
+										<textarea name="introduce" id="introduce">
+                                        </textarea>
                                     </div>
                                 </div>
 								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="saleGuarantee">售后保障</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="saleGuarantee" id="saleGuarantee" class="col-xs-10 col-sm-8" />
+										<textarea name="saleGuarantee" id="saleGuarantee">
+                                        </textarea>
                                     </div>
 								</div>
 								<div class="form-group">
