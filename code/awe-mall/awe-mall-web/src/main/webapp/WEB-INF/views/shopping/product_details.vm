@@ -193,6 +193,7 @@ function numDec(){
 								$!item.value
     						#end
 						#end
+					 </li>
                      <li>商品保质期：$!{currentProductSku.durabilityPeriod}</li>
                    </ul>
                 </div>
