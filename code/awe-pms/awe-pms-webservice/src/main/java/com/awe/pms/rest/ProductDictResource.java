@@ -95,7 +95,9 @@ public class ProductDictResource {
     	
     	try {
     		ProductDictQuery queryBean = new ProductDictQuery();
-    		BeanUtils.copyProperties(requestDto, queryBean);
+    		if (requestDto != null) {
+    			BeanUtils.copyProperties(requestDto, queryBean);
+    		}
     		List<ProductDict> productDicts = this.productDictService.queryProductDictList(queryBean);
     		List<ProductDictResponseDto> responseDto = convertList(productDicts);
     		return WrapMapper.ok().result(responseDto);
