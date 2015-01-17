@@ -109,7 +109,7 @@ function numDec(){
          <h3>咨询社区</h3>
 			<div class="star_expert_con tcm">
 				<dl class="clearfix">
-                    <span class="center"><font color="blue" >即将开通，敬请期待...</font></span>
+                    <span class="center"><font color="blue">&nbsp;&nbsp;即将开通，敬请期待...</font></span>
                 </dl>
             </div>
 		 #*
@@ -151,7 +151,13 @@ function numDec(){
                    <ul class="t1">
                      <li>商品名称：$!{product.productName}</li>
                      <li>商品毛重：$!{product.grossWeight}kg</li>
-                     <li>类型：$!{product.type}</li>
+                     <li>类型：
+						#foreach($item in $!{pmsTypes})
+        					#if("$!item.attr" == "$!product.type")
+								$!item.value
+    						#end
+						#end
+					</li>
                    </ul>
                    <ul class="t2">
                      <li>商品编号：$!{product.productNo}</li>
@@ -160,8 +166,14 @@ function numDec(){
                    </ul>
                    <ul class="t3">
                      <li>品牌：$!{product.brandName}</li>
-                     <li>适用年龄：$!{product.type}</li>
-                     <li>包装：$!{product.packType}</li>
+                     <li>适用年龄：$!{product.applicableAge}</li>
+                     <li>包装：
+						#foreach($item in $!{packTypes})
+        					#if("$!item.attr" == "$!product.packType")
+								$!item.value
+    						#end
+						#end
+					</li>
                    </ul>
                    <ul class="t4">
                      <li>上架时间：$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!{product.saleTimeStart})</li>
@@ -175,7 +187,12 @@ function numDec(){
                 <div class="shop_details ml15">
                    <ul class="t1">
                      <li>适用人群：$!{product.applicableCrowd}</li>
-                     <li>适用阶段：$!{product.applicableStep}</li>
+                     <li>适用阶段：
+						#foreach($item in $!{applicableStepTypes})
+        					#if("$!item.attr" == "$!product.applicableStep")
+								$!item.value
+    						#end
+						#end
                      <li>商品保质期：$!{currentProductSku.durabilityPeriod}</li>
                    </ul>
                 </div>
