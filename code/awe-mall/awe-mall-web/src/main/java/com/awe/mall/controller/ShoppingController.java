@@ -39,6 +39,8 @@ public class ShoppingController extends BaseController {
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
     public String welcome(Model model) {
+		initNavFlag(model);
+		
 		model.addAttribute("productCategorys", this.productCategoryService.queryProductCategoryList(null));
 		model.addAttribute("productBrands", this.productBrandService.queryProductBrandList(null));
         return index(model);
@@ -47,14 +49,14 @@ public class ShoppingController extends BaseController {
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String index(Model model) {
         logger.debug("go to index page");
-        model.addAttribute("navFlag", VIEW_PRODUCT_INDEX_PAGE);
+        initNavFlag(model);
         return VIEW_WORKSPACE + VIEW_PRODUCT_INDEX_PAGE;
     }
     
     @RequestMapping(value = "shopping_list", method = RequestMethod.GET)
     public String list(Model model, ProductRequestDto requestDto) {
     	logger.debug("go to list page");
-    	model.addAttribute("navFlag", VIEW_PRODUCT_INDEX_PAGE);
+    	initNavFlag(model);
     	
 		model.addAttribute("products", this.productService.queryProducts(requestDto));
     	model.addAttribute("productCategorys", this.productCategoryService.queryProductCategoryList(null));
@@ -65,7 +67,7 @@ public class ShoppingController extends BaseController {
     @RequestMapping(value = "product_details", method = RequestMethod.GET)
     public String detail(Model model, ProductRequestDto requestDto, String currentSkuNo) {
     	logger.debug("go to detail page");
-    	model.addAttribute("navFlag", VIEW_PRODUCT_INDEX_PAGE);
+    	initNavFlag(model);
     	
     	ProductResponseDto responseDto = this.productService.getProduct(requestDto);
     	for (ProductSkuResponseDto skuResponseDto : responseDto.getProductSkuResponseDtos()) {
@@ -78,5 +80,9 @@ public class ShoppingController extends BaseController {
     	model.addAttribute("productCategorys", this.productCategoryService.queryProductCategoryList(null));
     	model.addAttribute("productBrands", this.productBrandService.queryProductBrandList(null));
     	return VIEW_WORKSPACE + VIEW_PRODUCT_DETAIL_PAGE;
+    }
+    
+    private void initNavFlag(Model model) {
+    	model.addAttribute("navFlag", VIEW_PRODUCT_INDEX_PAGE);
     }
 }

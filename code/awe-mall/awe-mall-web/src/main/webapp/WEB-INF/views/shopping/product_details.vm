@@ -2,11 +2,6 @@
 <link href="#springUrl('')/static/css/login.css" rel="stylesheet"  type="text/css"/>
 <script type="text/javascript" src="#springUrl('')/static/js/jquery-1.8.3.min.js"></script>
 <script>
-  $(function(){
-    $('.size span').bind('click',function(){
-	  $(this).attr('class','on').siblings().removeAttr('class','on');
-	});
-  });
 $(function(){
 	$("#quantity").keyup(function(){
 		if(isNaN($(this).val()) || parseInt($(this).val())<1){
@@ -18,6 +13,18 @@ $(function(){
 		$("#totalPrice").html(total.toFixed(2));
 	})
 	
+	// 尺寸选择
+	$('.size span').bind('click',function(){
+		window.location.href = "#springUrl('')/shopping/product_details?id=$!{product.id}&currentSkuNo=" + $(this).attr("id");
+	  	//$(this).attr('class','on').siblings().removeAttr('class','on');
+	});
+	
+	// 商品信息切换
+	$('.indtr li').bind('click',function(){
+	  	$(this).attr('class','on').siblings().removeAttr('class','on');
+		$('.rank_content > div').hide();
+		$('.rank_content > div[id=' + $(this).attr("name") + ']').show();
+	});
 })
 
 /*商品数量+1*/
@@ -56,7 +63,6 @@ function numDec(){
  
  <!---------------------- 商品介绍          规格参数          包装清单           售后保障        ----------------------> 
     <div class="container wid1200 clearfix">
-       
        <div class="product_l">
             <div id="tsShopContainer">
                 <div id="tsImgS"><a href="#springUrl('')/static/images/01.jpg" title="Images" class="MagicZoom" id="MagicZoom"><img width="352" height="351" src="#springUrl('')/static/images/01.jpg" /></a></div>
@@ -88,7 +94,7 @@ function numDec(){
                 <li>运费：$!{product.freight}</li>
                 <li class="size">尺码规格：
 					#foreach($productSku in $!{product.productSkuResponseDtos})						
-					<span>$!{productSku.size}</span>
+					<span id="$!{productSku.skuNo}" #if("$!{productSku.size}" == "$!{currentProductSku.size}") class="on" #end>$!{productSku.size}</span>
 					#end
 				</li>
                 <li class="buynum">购买数量：<a href="javascript:" onclick="numDec()" class="reduce ml20">-</a><input type="text" value="1" id="quantity" /><a href="javascript:"  onclick="numAdd()" class="reduce">+</a></li>
@@ -101,69 +107,103 @@ function numDec(){
        <div class="product_r right">
         <div class="hots_consult pdr ">
          <h3>咨询社区</h3>
-             <div class="star_expert_con tcm">
-               <dl class="clearfix">
-                 <dt><a href="#springUrl('')/static/expert/C-07.html"><img src="#springUrl('')/static/images/m_img1.jpg" /></a></dt>
-                 <dd>
-                   <p>专家：<a href="#springUrl('')/static/expert/C-07.html">王翔</a></p>
-                   <p><span class="right">母婴养育 营养搭配</span>特长：</p>
-                 </dd>
-               </dl>             
-           
-             </div>
+			<div class="star_expert_con tcm">
+				<dl class="clearfix">
+                    <span class="center"><font color="blue" >即将开通，敬请期待...</font></span>
+                </dl>
+            </div>
+		 #*
+         <div class="star_expert_con tcm">
+           <dl class="clearfix">
+             <dt><a href="#springUrl('')/static/expert/C-07.html"><img src="#springUrl('')/static/images/m_img1.jpg" /></a></dt>
+             <dd>
+               <p>专家：<a href="#springUrl('')/static/expert/C-07.html">王翔</a></p>
+               <p><span class="right">母婴养育 营养搭配</span>特长：</p>
+             </dd>
+           </dl>             
+         </div>
          <h4>咨询社区</h4>
          <div class="pdr_box clearfix">
              <span><a href="#springUrl('')/static/expert/C-08.html"><img src="#springUrl('')/static/images/m_img1.jpg" /></a></span>
          </div>   
          <div class="edit_profile ft14 clearfix"><a href="">进入卖家店铺</a></div>
+		 *#
        </div>
        </div>  
    
         <!---------------------- 明星专家 广告部分 ----------------------> 
-        
-
-        
      </div>
         
     <div class="container wid1200 clearfix">
         <div class="rank_title mt10">
-            <ul class="indtr left">
-              <li class="on">商品介绍</li>
-              <li>规格参数</li>
-              <li>包装清单</li>
-              <li>售后保障</li>
+            <ul class="indtr">
+              <li name="shop_introduce" class="on">商品介绍</li>
+              <li name="param">规格参数</li>
+              <li name="packing_list">包装清单</li>
+              <li name="sale_guarantee">售后保障</li>
             </ul>
-          </div>
-              
-        
-        <div class="shop_scroll clearfix">
-             <!---------------------- 商品介绍 ----------------------> 
-            <div class="shop_details ml15">
-               <ul class="t1">
-                 <li>商品名称：$!{product.productName}</li>
-                 <li>商品毛重：$!{product.grossWeight}kg</li>
-                 <li>类型：$!{product.type}</li>
-               </ul>
-               <ul class="t2">
-                 <li>商品编号：$!{product.productNo}</li>
-                 <li>商品产地：$!{product.originPlace}</li>
-                 <li>分类：$!{product.categoryTwo}</li>
-               </ul>
-               <ul class="t3">
-                 <li>品牌：$!{product.brandName}</li>
-                 <li>适用年龄：$!{product.type}</li>
-                 <li>包装：$!{product.packType}</li>
-               </ul>
-               <ul class="t4">
-                 <li>上架时间：$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!{product.saleTimeStart})</li>
-                 <li>段位：$!{product.categoryThree}</li>
-               </ul>
+        </div>
+		
+        <div class="rank_content">
+            <div id="shop_introduce" class="shop_introduce clearfix">
+                 <!---------------------- 商品介绍 ----------------------> 
+                <div class="shop_details ml15">
+                   <ul class="t1">
+                     <li>商品名称：$!{product.productName}</li>
+                     <li>商品毛重：$!{product.grossWeight}kg</li>
+                     <li>类型：$!{product.type}</li>
+                   </ul>
+                   <ul class="t2">
+                     <li>商品编号：$!{product.productNo}</li>
+                     <li>商品产地：$!{product.originPlace}</li>
+                     <li>分类：$!{product.categoryTwo}</li>
+                   </ul>
+                   <ul class="t3">
+                     <li>品牌：$!{product.brandName}</li>
+                     <li>适用年龄：$!{product.type}</li>
+                     <li>包装：$!{product.packType}</li>
+                   </ul>
+                   <ul class="t4">
+                     <li>上架时间：$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!{product.saleTimeStart})</li>
+                     <li>段位：$!{product.categoryThree}</li>
+                   </ul>
+                </div>
             </div>
-        </div>      
+    		
+            <div id="param" class="param clearfix" style="display:none">
+                 <!---------------------- 规格参数 ----------------------> 
+                <div class="shop_details ml15">
+                   <ul class="t1">
+                     <li>适用人群：$!{product.applicableCrowd}</li>
+                     <li>适用阶段：$!{product.applicableStep}</li>
+                     <li>商品保质期：$!{currentProductSku.durabilityPeriod}</li>
+                   </ul>
+                </div>
+            </div> 
+    		
+            <div id="packing_list" class="packing_list clearfix" style="display:none">
+                 <!---------------------- 包装清单 ----------------------> 
+                <div class="shop_details ml15">
+                   <ul class="t1">
+                     <li>$!{product.packingList}</li>
+                   </ul>
+                </div>
+            </div>
+    		
+            <div id="sale_guarantee" class="sale_guarantee clearfix" style="display:none">
+                 <!---------------------- 售后保障 ----------------------> 
+                <div class="shop_details ml15">
+                   <ul class="t1">
+                     <li>$!{product.saleGuarantee}</li>
+                   </ul>
+                </div>
+            </div> 
+		</div>
     </div>
     
     <div class="container wid1200 clearfix">
       <div class="pro_con mt10">
+		$!{product.features}
         <img src="#springUrl('')/static/images/pro_img.jpg" />
       </div>
     </div>

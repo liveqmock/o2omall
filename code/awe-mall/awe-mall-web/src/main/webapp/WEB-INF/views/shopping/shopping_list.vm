@@ -82,7 +82,7 @@
               <h3 class="ft14">奶粉品牌分类</h3>
               <ul class="fication">
 				#foreach($item in $!productBrands)
-					<li><a href="#springUrl('')/shopping/shopping_list?$item.id">$item.brandName</a></li>
+					<li><a href="#springUrl('')/shopping/shopping_list?brandCode=$!item.brandCode">$item.brandName</a></li>
     			#end
               </ul>
            </div>
