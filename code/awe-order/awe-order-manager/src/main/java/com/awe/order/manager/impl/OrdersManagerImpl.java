@@ -2,8 +2,13 @@ package com.awe.order.manager.impl;
 
 import java.util.List;
 
-import com.hbird.common.manager.BaseManager;
-import com.hbird.common.utils.page.PageUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.awe.order.dao.OrderCancelDao;
+import com.awe.order.dao.OrderLogDao;
+import com.awe.order.dao.OrdersDao;
+import com.awe.order.dao.OrdersItemsDao;
 import com.awe.order.domain.OrderCancel;
 import com.awe.order.domain.OrderDetails;
 import com.awe.order.domain.OrderLog;
@@ -12,13 +17,9 @@ import com.awe.order.domain.OrdersItems;
 import com.awe.order.domain.query.FrontOrdersQuery;
 import com.awe.order.domain.query.OrdersQuery;
 import com.awe.order.dto.OrdersDto;
-import com.awe.order.dao.OrderLogDao;
-import com.awe.order.dao.OrdersDao;
-import com.awe.order.dao.OrdersItemsDao;
 import com.awe.order.manager.OrdersManager;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.hbird.common.manager.BaseManager;
+import com.hbird.common.utils.page.PageUtil;
 
 /**
  * OrdersManager接口的实现类
@@ -36,6 +37,8 @@ public class OrdersManagerImpl extends BaseManager implements OrdersManager {
     private OrdersItemsDao ordersItemsDao;
     @Autowired
     private OrderLogDao orderLogDao;
+    @Autowired
+    private OrderCancelDao cancelDao;
 
     /**
      * {@inheritDoc}
@@ -257,26 +260,40 @@ public class OrdersManagerImpl extends BaseManager implements OrdersManager {
 		 */
         if (null != orders) {
         	OrderLog log = new OrderLog();
+        	OrderCancel cancel = new OrderCancel();
         	// 1：改变订单表状态
             //1.1 判断订单是否支付，如果没有支付，就直接取消，支付的话，需要走后台审核
         	count = ordersDao.queryOrderCancelStatus(orders.getOrderNo());
-        	if(count == 0){//已支付 状态改待审核
+        	if(count != 0){//已支付 状态改待审核
+        		//--订单信息
         		orders.setOrderStatus(110);
-        		orders.setRemark("订单已支付,取消需要审核！");
+        		orders.setRemark(orders.getRemark()+",订单已支付,取消需要审核！");
         		resultFlag = ordersDao.update(orders);
-        		
+        		//--取消表信息
+        		cancel.setStatus(501);
+        		//--日志信息
         		log.setStatusName("订单审核");
         		log.setStatus(110);
-        		log.setDescription("用户取消订单,已支付");
         	}else{//木有支付 乃就取消
+        		//--订单信息
         		orders.setOrderStatus(10);
-        		orders.setRemark("用户取消订单！");
+        		orders.setRemark(orders.getRemark()+",用户取消订单！");
         		resultFlag = ordersDao.update(orders);
-        		
+        		//--取消表信息
+        		cancel.setStatus(506);
+        		//--日志信息
         		log.setStatusName("用户取消");
         		log.setStatus(10);
-        		log.setDescription("用户取消订单,未支付");
         	}
+        	if (!resultFlag) {
+                throw new RuntimeException("取消订单订单异常");
+            }
+        	//--写取消表
+        	cancel.setOrderNo(orders.getOrderNo());
+        	cancel.setCancelReason(orders.getRemark());
+        	cancel.setCreateUser(orders.getUpdateUser());
+        	cancel.setUserId(orders.getUserId());
+        	resultFlag = cancelDao.insert(cancel);
         	if (!resultFlag) {
                 throw new RuntimeException("取消订单异常");
             }
@@ -284,10 +301,11 @@ public class OrdersManagerImpl extends BaseManager implements OrdersManager {
     		 log.setOrderNo(orders.getOrderNo());
     		 log.setLogType(100);
     		 log.setCreateUser(orders.getUpdateUser());
+     		 log.setDescription(orders.getRemark());
     		 //写日志
     		 resultFlag = orderLogDao.insert(log);
     		 if (!resultFlag) {
-                 throw new RuntimeException("取消订单异常");
+                 throw new RuntimeException("取消订单日志异常");
              }
         }
 		return resultFlag;

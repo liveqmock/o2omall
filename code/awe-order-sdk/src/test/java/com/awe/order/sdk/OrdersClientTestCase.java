@@ -93,9 +93,10 @@ public class OrdersClientTestCase {
     @Test
     public void updateOrderCancel(){
     	OrdersRequestDto dto =  new OrdersRequestDto();
-    	dto.setOrderNo("142105095786182051");
+    	dto.setOrderNo("142105106328582051");
     	dto.setUserId(123456l);
     	dto.setUpdateUser("jss");
+    	dto.setRemark("这是取消原因");
     	Wrapper<?> wrapper= client.updateOrderCancel(dto);
     	
     }

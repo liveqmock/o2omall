@@ -132,7 +132,7 @@ public class OrdersResource {
 		}
 
 		OrdersRequestDto requestDto = request.getContent();
-		if (null == requestDto || null == requestDto.getOrderNo() || null == requestDto.getUpdateUser() || null == requestDto.getUserId()) {
+		if (null == requestDto || null == requestDto.getOrderNo() || null == requestDto.getUpdateUser() || null == requestDto.getUserId()|| null == requestDto.getRemark()) {
 			this.logger.error("cancelOrders 传入参数有误");
 			return WrapMapper.illegalArgument();
 		}

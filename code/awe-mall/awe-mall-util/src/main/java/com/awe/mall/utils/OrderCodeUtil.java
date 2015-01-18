@@ -8,7 +8,7 @@ public class  OrderCodeUtil {
 		Ip =String.valueOf( Ip.hashCode());
 		Ip = Ip.substring(Ip.length()-4, Ip.length());
 		long tiem = System.currentTimeMillis();
-		String orderNo = tiem+""+Ip;
+		String orderNo = tiem+Ip;
 		return orderNo;
 	}
 }

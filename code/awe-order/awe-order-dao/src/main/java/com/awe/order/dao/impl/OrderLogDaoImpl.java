@@ -5,6 +5,7 @@ import com.awe.order.dao.OrderLogDao;
 import com.awe.order.domain.OrderLog;
 import com.awe.order.domain.query.OrderLogQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public class OrderLogDaoImpl extends BaseDao implements OrderLogDao {
      * {@inheritDoc}
      */
     public List<OrderLog> queryOrderLogList(OrderLogQuery queryBean) {
-        return (List<OrderLog>) queryForList(namespace +".queryOrderLogList", queryBean);
+        return queryForList(namespace +".queryOrderLogList", queryBean);
     }
 
     /**

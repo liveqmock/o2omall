@@ -1,5 +1,6 @@
 package com.awe.order.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -98,7 +99,7 @@ public class OrderLogServiceImpl implements OrderLogService {
      */
     @Profiled(tag = "OrderLogService.queryOrderLogList")
     public List<OrderLog> queryOrderLogList(OrderLogQuery queryBean) {
-        List<OrderLog> orderLogList = null;
+        List<OrderLog> orderLogList = new ArrayList<OrderLog>();;
         try {
             orderLogList = orderLogManager.queryOrderLogList(queryBean);
         } catch (Exception e) {

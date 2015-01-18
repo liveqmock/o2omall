@@ -113,7 +113,7 @@
 
     <!-- 常用的查询Where条件 -->
     <sql id="queryOrderLogListWhere">
-    	yn = 1
+    	yn = 1  
         <if test="id != null and id != ''">
         	and id = #{id,jdbcType=DECIMAL}
         </if>
@@ -143,9 +143,6 @@
         </if>
         <if test="updateUser != null and updateUser != ''">
         	and update_user = #{updateUser,jdbcType=VARCHAR}
-        </if>
-        <if test="yn != null and yn != ''">
-        	and yn = #{yn,jdbcType=DECIMAL}
         </if>
     </sql>
 </mapper>

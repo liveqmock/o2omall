@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.order.controller.base.BaseController;
 import com.awe.order.enums.EnumInvoiceType;
+import com.awe.order.enums.EnumOrderCancelStatus;
 import com.awe.order.enums.EnumOrderStauts;
 import com.awe.order.enums.EnumOrderType;
 import com.awe.order.enums.EnumPayType;
@@ -134,6 +135,28 @@ public class EnumController extends BaseController{
 	public Wrapper<?> queryInvoiceType(){
 		try {
 			Map<String, String> map = (Map<String, String>) EnumInvoiceType.MapEnum();
+			if (!CollectionUtils.isEmpty(map)) {
+                return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, map);
+            } else {
+                return WrapMapper.wrap(Wrapper.ERROR_CODE, "查询配置信息失败！");
+            }
+		} catch (Exception e) {
+			 LOG.error("Enum queryOrderStauts has error.", e);
+	         return WrapMapper.error();
+		}
+	}
+	
+	/**
+	 * 发票类型
+	 * Date:2014年12月31日下午3:58:39
+	 * user:js
+	 * @return
+	 */
+	@RequestMapping(value = "queryCanSta")
+	@ResponseBody
+	public Wrapper<?> queryCanSta(){
+		try {
+			Map<String, String> map = (Map<String, String>) EnumOrderCancelStatus.MapEnum();
 			if (!CollectionUtils.isEmpty(map)) {
                 return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, map);
             } else {

@@ -4,6 +4,8 @@
         #parse("/layout/head.vm")
 		<script language="javascript"> 
 			$(function() {
+			//加载退款单状态
+			OnqueryCanSta();
 				$("#btn-query").click(function() {
         			pageSubmit(1);
    				});
@@ -39,6 +41,27 @@
                  toAuditModal(orderNo);
         	}
         	
+				//退款单状态
+	function OnqueryCanSta(){
+		jQuery.ajax({
+			type: "GET",
+			url: basePath + "/enums/queryCanSta",
+			dataType : 'json',
+			success: function(data){
+				if(data!=null && data.code==200 && data.result!=null){
+					$.each(data.result,function(i,item){
+					  	 $('#orderCancelStatus').append("<option value='" + i + "'>" + item + "</option>");
+					});
+				}else{
+				alert("获取发票类型失败");
+				} 
+			},
+			error : function(data) {
+				alert("获取发票类型失败");
+			}
+		}); 
+	}
+			
         </script>
 	</head>
     <body>
@@ -67,7 +90,9 @@
 									
 									<label class="col-sm-1 control-label no-padding-right" for="status">退款单状态</label>
                                     <div class="col-sm-2">
-                                        <input type="text" name="status" id="status" class="col-xs-10 col-sm-8" value="$!query.status"/>
+                                        <select id="orderCancelStatus" name="status" class="col-xs-10 col-sm-8" value="$!query.status">
+											<option value="">-请选择-</option>
+										</select>
                                     </div>
 									
 									<label class="col-sm-1 control-label no-padding-right" for="orderNo">订单编号</label>
@@ -210,6 +235,7 @@
 				#pageBarPost($page.totalRow $page.curPage $page.totalPage)
 			</div>
         </div>
+		<script src="#springUrl('')/static/js/inner/utils/EnumUtils.js"></script>
 		#parse("/orderCancel/AuditModal.vm")
     </body>
 </html>

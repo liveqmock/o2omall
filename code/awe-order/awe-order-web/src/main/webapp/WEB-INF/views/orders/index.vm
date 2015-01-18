@@ -174,7 +174,7 @@
                         #foreach( $item in $dataList)
                             <tr>
                                 <td>$!item.id</td>
-                                <td><a href="javascript:void(0)" onclick="OrderLog($!item.orderNo);"><font color='red'>$!item.orderNo</font></a></td>
+                                <td><a href="javascript:void(0)" onclick="OrderLog('$!item.orderNo');"><font color='red'>$!item.orderNo</font></a></td>
                                 <td>$!item.orderType</td>
                                 <td>$!item.orderName</td>
                                 <td>$!item.consigneeName</td>
@@ -211,7 +211,6 @@
 		#parse("/orders/UpdateModal.vm")
 		<!--订单日志-->
 		#parse("/orders/OrderLogModal.vm")
-		
 		<script src="#springUrl('')/static/js/inner/utils/EnumUtils.js"></script>
     </body>
 </html>

@@ -1,4 +1,4 @@
-	//加载订单状态
+	//加载订单状态OnCancelStatus  OnOrderStatus
 	function OnOrderStatus(){
 		jQuery.ajax({
 			type: "GET",
@@ -92,6 +92,27 @@
 				if(data!=null && data.code==200 && data.result!=null){
 					$.each(data.result,function(i,item){
 					  	 $('#InvoiceType').append("<option value='" + i + "'>" + item + "</option>");
+					});
+				}else{
+				alert("获取发票类型失败");
+				} 
+			},
+			error : function(data) {
+				alert("获取发票类型失败");
+			}
+		}); 
+	}
+	
+	//退款单状态
+	function OnqueryCanSta(){
+		jQuery.ajax({
+			type: "GET",
+			url: basePath + "/enums/queryCanSta",
+			dataType : 'json',
+			success: function(data){
+				if(data!=null && data.code==200 && data.result!=null){
+					$.each(data.result,function(i,item){
+					  	 $('#orderCancelStatus').append("<option value='" + i + "'>" + item + "</option>");
 					});
 				}else{
 				alert("获取发票类型失败");
