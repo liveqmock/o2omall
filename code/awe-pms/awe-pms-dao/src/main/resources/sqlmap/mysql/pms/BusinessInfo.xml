@@ -198,14 +198,16 @@
     <!-- 根据查询Bean获取数据集合，不带翻页 -->
     <select id="queryBusinessInfoList" resultMap="BusinessInfoMap"
             parameterType="com.awe.pms.domain.query.BusinessInfoQuery">
-        select <include refid="businessInfoColumns"/> from business_info where <include refid="queryBusinessInfoListWhere"/>
+        select <include refid="businessInfoColumns"/> from business_info 
+        	where <include refid="queryBusinessInfoListWhere"/>
+        		order by priority asc,create_time desc
     </select>
 
     <!-- 根据查询Bean获取数据集合，翻页 -->
     <select id="queryBusinessInfoListWithPage" resultMap="BusinessInfoMap"
             parameterType="com.awe.pms.domain.query.BusinessInfoQuery">
         select <include refid="businessInfoColumns"/> from business_info where <include refid="queryBusinessInfoListWhere"/>
-        order by create_time desc 
+        order by priority asc,create_time desc
         limit #{startIndex},#{pageSize}
     </select>
 

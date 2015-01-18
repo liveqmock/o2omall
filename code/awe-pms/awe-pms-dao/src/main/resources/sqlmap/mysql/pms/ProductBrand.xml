@@ -122,14 +122,16 @@
     <!-- 根据查询Bean获取数据集合，不带翻页 -->
     <select id="queryProductBrandList" resultMap="ProductBrandMap"
             parameterType="com.awe.pms.domain.query.ProductBrandQuery">
-        select <include refid="productBrandColumns"/> from product_brand where <include refid="queryProductBrandListWhere"/>
+        select <include refid="productBrandColumns"/> from product_brand 
+        	where <include refid="queryProductBrandListWhere"/>
+        		order by priority asc,create_time desc 
     </select>
 
     <!-- 根据查询Bean获取数据集合，翻页 -->
     <select id="queryProductBrandListWithPage" resultMap="ProductBrandMap"
             parameterType="com.awe.pms.domain.query.ProductBrandQuery">
         select <include refid="productBrandColumns"/> from product_brand where <include refid="queryProductBrandListWhere"/>
-        order by create_time desc 
+        order by priority asc,create_time desc 
         limit #{startIndex},#{pageSize}
     </select>
 

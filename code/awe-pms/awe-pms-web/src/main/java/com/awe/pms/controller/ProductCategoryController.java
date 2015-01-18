@@ -163,7 +163,7 @@ public class ProductCategoryController extends BaseController {
             if (productCategoryService.delete(productCategory)) {
                 return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "删除成功！");
             } else {
-                return WrapMapper.wrap(Wrapper.ERROR_CODE, "删除失败！");
+                return WrapMapper.wrap(Wrapper.ERROR_CODE, "无法删除，请确认该分类没有子分类且没有关联品牌、商家、商品或税率！");
             }
         } catch (Exception e) {
             LOG.error("productCategory delete has error.", e);

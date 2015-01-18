@@ -33,8 +33,8 @@
         		window.location.href=("$basePath/productCategory/updateForward?id="+parameterId);
         	}
         	
-        	function toDelete(parameterId){
-        		MyPopWindow.ExecuteDelete("$basePath/productCategory/delete",{ id : parameterId });
+        	function toDelete(parameterId, parameterLevel){
+        		MyPopWindow.ExecuteDelete("$basePath/productCategory/delete",{ id : parameterId, level: parameterLevel });
         	}
         	
         </script>
@@ -83,6 +83,7 @@
 							<th class="center">品类级别</th>
 							<th class="center">描述</th>
 							<th class="center">关键字</th>
+							<th class="center">优先级</th>
 							<th class="center">创建时间</th>
 							<th class="center">创建人</th>
     						<th class="center">操作</th>
@@ -95,11 +96,12 @@
                                 <td>$!productCategoryEnumMap.get($!item.level).value</td>
                                 <td>$!item.features</td>
                                 <td>$!item.keyword</td>
+								<td>$!item.priority</td>
                                 <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.createTime)</td>
                                 <td>$!item.createUser</td>
                                 <td>
 									<a href="javascript:void(0)" onclick="toUpdate($!item.id)"><i class="icon-pencil pink">修改</i></a>
-									<a href="javascript:void(0)" onclick="toDelete($!item.id)"><i class="icon-remove red">删除</i></a>
+									<a href="javascript:void(0)" onclick="toDelete($!item.id, $!item.level)"><i class="icon-remove red">删除</i></a>
 								</td>
                             </tr>
                         #end

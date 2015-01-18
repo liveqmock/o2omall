@@ -160,7 +160,7 @@ public class ProductBrandController extends BaseController {
             if (productBrandService.delete(productBrand)) {
                 return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "删除成功！");
             } else {
-                return WrapMapper.wrap(Wrapper.ERROR_CODE, "删除失败！");
+                return WrapMapper.wrap(Wrapper.ERROR_CODE, "无法删除，请确认该品牌没有关联商品！");
             }
         } catch (Exception e) {
             LOG.error("productBrand delete has error.", e);
