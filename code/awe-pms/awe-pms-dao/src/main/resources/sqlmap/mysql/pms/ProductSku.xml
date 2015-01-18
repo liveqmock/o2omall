@@ -149,14 +149,16 @@
     <!-- 根据查询Bean获取数据集合，不带翻页 -->
     <select id="queryProductSkuList" resultMap="ProductSkuMap"
             parameterType="com.awe.pms.domain.query.ProductSkuQuery">
-        select <include refid="productSkuColumns"/> from product_sku where <include refid="queryProductSkuListWhere"/>
+        select <include refid="productSkuColumns"/> from product_sku 
+        	where <include refid="queryProductSkuListWhere"/>
+        		order by sku_no asc,create_time desc
     </select>
 
     <!-- 根据查询Bean获取数据集合，翻页 -->
     <select id="queryProductSkuListWithPage" resultMap="ProductSkuMap"
             parameterType="com.awe.pms.domain.query.ProductSkuQuery">
         select <include refid="productSkuColumns"/> from product_sku where <include refid="queryProductSkuListWhere"/>
-        order by create_time desc 
+        order by sku_no asc,create_time desc 
         limit #{startIndex},#{pageSize}
     </select>
 

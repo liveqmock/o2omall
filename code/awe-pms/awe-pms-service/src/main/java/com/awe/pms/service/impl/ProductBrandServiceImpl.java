@@ -3,12 +3,15 @@ package com.awe.pms.service.impl;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.awe.pms.domain.ProductBrand;
 import com.awe.pms.domain.query.ProductBrandQuery;
+import com.awe.pms.domain.query.ProductQuery;
 import com.awe.pms.manager.ProductBrandManager;
+import com.awe.pms.manager.ProductManager;
 import com.awe.pms.service.ProductBrandService;
 import com.awe.pms.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
@@ -26,6 +29,9 @@ import org.perf4j.aop.Profiled;
  */
 @Service
 public class ProductBrandServiceImpl implements ProductBrandService {
+	
+	@Autowired
+	private ProductManager productManager;
 
     /** LOG */
     private static final Log LOG = LogFactory.getLog(ProductBrandServiceImpl.class);
@@ -128,8 +134,13 @@ public class ProductBrandServiceImpl implements ProductBrandService {
     public boolean delete(ProductBrand productBrand) {
         boolean resultFlag = false;
         try {
-            if (null != productBrand && null != productBrand.getId()) {
-                resultFlag = productBrandManager.delete(productBrand);
+            if (null != productBrand && null != productBrand.getId() && StringUtils.isNotBlank(productBrand.getBrandCode())) {
+        		ProductQuery queryBean = new ProductQuery();
+        		queryBean.setBrandCode(productBrand.getBrandCode());
+				int resultCount = this.productManager.queryProductCount(queryBean);
+				if (resultCount == 0) {
+					resultFlag = productBrandManager.delete(productBrand);
+				}
             } else {
                 LOG.warn("ProductBrandServiceImpl#delete param is illegal.");
             }
