@@ -1,5 +1,6 @@
 package com.awe.order.rest;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ import com.hbird.common.utils.wrap.Wrapper;
 public class OrderCancelResource {
 
     private final Log logger = LogFactory.getLog(this.getClass());
-
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd#HH:mm:SS");
     @Autowired
     private OrderCancelService orderCancelService; 
 
@@ -94,7 +95,7 @@ public class OrderCancelResource {
         
         OrderCancelRequestDto requestDto = request.getContent();
         PageUtil pageUtil = request.getPageUtil();
-        if (null == requestDto || null == requestDto.getOrderNo()) {
+        if (null == requestDto) {
             this.logger.error("queryFrontOrderCancelListWithPage 传入参数有误");
             return PageWrapMapper.illegalArgument();
         }
@@ -103,6 +104,17 @@ public class OrderCancelResource {
         	queryBean.setUserId(requestDto.getUserId());
         	List<OrderCancel> dataList = orderCancelService.queryFrontOrderCancelListWithPage(queryBean, pageUtil);
         	List<OrderCancelResponseDto> responseDtoList = convertList(dataList);
+        	List<OrderCancelResponseDto> ret = null;
+        	if(null != responseDtoList){
+				ret = new ArrayList<OrderCancelResponseDto>();
+				for (OrderCancelResponseDto orderCancelResponseDto : responseDtoList) {
+					String createTimeStr = sdf.format(orderCancelResponseDto.getCreateTime());
+					String[] array = createTimeStr.split("#");
+					orderCancelResponseDto.setCreateTimeDay(array[0]);
+					orderCancelResponseDto.setCreateTimeTime(array[1]);
+					ret.add(orderCancelResponseDto);
+				}
+			}
         	return PageWrapMapper.ok().result(responseDtoList).pageUtil(pageUtil);
 		} catch (Exception e) {
 			this.logger.error("#OrderCancelResource.queryFrontOrderCancelListWithPage# Error:" + e);

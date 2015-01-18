@@ -51,8 +51,9 @@ public class Refund implements java.io.Serializable {
     /** 是否有效:1有效;0:无效 */
     private Integer yn; 
     /** 主表id */
-    private Long returnExchangeId; 
-    
+    private Long returnExchangeId;
+    /**用户id*/
+    private Long userId;
     /**
      * get id自增
      * 
@@ -354,5 +355,12 @@ public class Refund implements java.io.Serializable {
 	public void setSkuName(String skuName) {
 		this.skuName = skuName;
 	}
-    
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 }

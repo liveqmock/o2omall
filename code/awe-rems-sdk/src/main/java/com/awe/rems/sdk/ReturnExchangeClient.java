@@ -90,7 +90,7 @@ public class ReturnExchangeClient extends AbstractSecureClient {
     	if (LOG.isDebugEnabled()) {
             LOG.debug("queryReturnExchangeListWithPage request: " + JsonHelper.toJson(requestDto));
         }
-    	ReturnExchangeRequest request = new ReturnExchangeRequest(super.getKey(), requestDto);
+    	ReturnExchangeRequest request = new ReturnExchangeRequest(super.getKey(), requestDto, pageUtil);
     	List<ReturnExchangeResponseDto> responseDtoList = null;
     	ReturnExchangeResponseList responseList = null;
     	String url = null;

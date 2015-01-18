@@ -322,6 +322,9 @@
         <if test="skuName != null and skuName != ''">
         	and oi.sku_name = #{skuName,jdbcType=VARCHAR}
         </if>
+        <if test="orderType != null and orderType != ''">
+        	and o.order_type = #{orderType,jdbcType=DECIMAL}
+        </if>
     </sql>
 
     <!-- 常用的查询Where条件 -->

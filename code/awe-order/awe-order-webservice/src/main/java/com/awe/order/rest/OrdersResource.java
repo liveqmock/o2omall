@@ -1,5 +1,6 @@
 package com.awe.order.rest;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,7 @@ import com.hbird.common.utils.wrap.Wrapper;
 public class OrdersResource {
 
 	private final Log logger = LogFactory.getLog(this.getClass());
-
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd#HH:mm:SS");
 	@Autowired
 	private OrdersService ordersService;
 
@@ -101,7 +102,7 @@ public class OrdersResource {
 		}
 		OrdersRequestDto requestDto = request.getContent();
 		PageUtil page = request.getPageUtil();
-		if (null == requestDto || null == requestDto.getOrderNo()) {
+		if (null == requestDto) {
 			this.logger.error("queryFrontOrdersListWithPage 传入参数有误");
 			return PageWrapMapper.illegalArgument();
 		}
@@ -110,7 +111,18 @@ public class OrdersResource {
 			BeanUtils.copyProperties(requestDto, queryBean);
 			List<Orders> dataList = ordersService.queryFrontOrdersListWithPage(queryBean, page);
 			List<OrdersResponseDto> responseDtoList = convertList(dataList);
-			return PageWrapMapper.ok().result(responseDtoList).pageUtil(page);
+			List<OrdersResponseDto> ret = null;
+			if(null != responseDtoList){
+				ret = new ArrayList<OrdersResponseDto>();
+				for (OrdersResponseDto ordersResponseDto : responseDtoList) {
+					String createTimeStr = sdf.format(ordersResponseDto.getCreateTime());
+					String[] array = createTimeStr.split("#");
+					ordersResponseDto.setCreateTimeDay(array[0]);
+					ordersResponseDto.setCreateTimeTime(array[1]);
+					ret.add(ordersResponseDto);
+				}
+			}
+			return PageWrapMapper.ok().result(ret).pageUtil(page);
 		} catch (Exception e) {
 			this.logger.error("查询订单数据异常", e);
 			return PageWrapMapper.error();

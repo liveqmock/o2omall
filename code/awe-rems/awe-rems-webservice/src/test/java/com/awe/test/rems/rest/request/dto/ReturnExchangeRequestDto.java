@@ -28,7 +28,7 @@ public class ReturnExchangeRequestDto extends HbirdDto {
     /** 商品分类编号 */
     private Long categoryId; 
     /** 产品id */
-    private Long productId; 
+    private String productNo; 
     /** 商品编号 */
     private Long skuNo; 
     /** 商品名称 */
@@ -208,25 +208,16 @@ public class ReturnExchangeRequestDto extends HbirdDto {
         this.categoryId = categoryId;
     }
     
-    /**
-     * get 产品id
-     * 
-     * @return the productId
-     */
-    public Long getProductId(){
-        return productId;
-    }
-        
-    /**
-     * set 产品id
-     * 
-     * @param productId the productId to set
-     */
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
     
-    /**
+    public String getProductNo() {
+		return productNo;
+	}
+
+	public void setProductNo(String productNo) {
+		this.productNo = productNo;
+	}
+
+	/**
      * get 商品编号
      * 
      * @return the skuNo

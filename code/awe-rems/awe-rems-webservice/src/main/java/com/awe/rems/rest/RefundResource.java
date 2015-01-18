@@ -92,7 +92,7 @@ public class RefundResource {
         
         RefundRequestDto requestDto = request.getContent();
         PageUtil pageUtil = request.getPageUtil();
-        if (null == requestDto || null == requestDto.getServiceNo()) {
+        if (null == requestDto) {
             this.logger.error("queryRefundListWithPage 传入参数有误");
             return PageWrapMapper.illegalArgument();
         }
