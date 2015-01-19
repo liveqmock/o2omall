@@ -1,0 +1,42 @@
+<!---------------------- 正文 ----------------------> 
+<div class="container wid1200 clearfix">
+	#parse("/myorder/common/left.vm")
+   <!---------------------- 右则内容 ----------------------> 
+      <div class="section right">
+       
+         <h2 class="my_order"><span class="my_order_icon"></span>取消订单记录</h2>
+         <div class="order_tab clearfix mt25">
+         
+           <table width="100%" border="0"  cellspacing="0" cellpadding="0">
+           <thead>
+  <tr>
+    <th class="title th">订单编号 </th>
+    <th class="title">订单商品</th>
+    <th class="title">提交时间</th>
+    <th class="title">支付明细</th>
+    <th class="title">退款状态</th>
+    <th class="title tcenter">操作</th>
+  </tr>
+  </thead>
+  <tbody>
+           <table width="100%" border="0" class="mt10" cellspacing="0" cellpadding="0">
+				#foreach( $item in $dataList)
+                  <tr>
+					<td width="260" class="tcenter">$!item.orderNo</td>
+					<td width="130" class="tcenter">#foreach( $subItem in $item.ordersItemsList)<img src="#springUrl('')/static/images/m-img2.jpg" alt="$subItem.skuName"/>#end</td>
+                    <td width="123"><p>$!item.createTimeDay</p><p>$!item.createTimeTime</p></td>
+                    <td width="172"><p>订单支持金额:<font color="color">￥$!item.refundAmount</font></p></td>
+                    <td width="165">$!OrderCancelStatusMap.get($!item.status)</td>
+                    <td class="tcenter"><a href="">查看</a></td>
+                  </tr>
+				#end
+			</table>
+			#pageBarPost($page.totalRow $page.curPage $page.totalPage)
+  </tbody>
+         </div>
+      
+      </div>
+      
+   <!---------------------- 右则内容end ----------------------> 
+    </div>
+ <!---------------------- 正文end ----------------------> 
