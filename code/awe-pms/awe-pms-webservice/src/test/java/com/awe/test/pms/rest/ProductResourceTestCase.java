@@ -1,5 +1,6 @@
 package com.awe.test.pms.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -57,6 +58,31 @@ public class ProductResourceTestCase extends AbstractClient {
     	Assert.notNull(response);
     	ProductResponseDto productResponseDto = super.getResult(response);
     	Assert.notNull(productResponseDto);
+    }
+    
+    @SuppressWarnings("unchecked")
+	@Test
+    public void testGetProductBySkuNos() {
+    	String url= getServiceUrlDomain() + "/product/getProductBySkuNos";
+    	
+    	ProductSkuRequestDto requestDto = new ProductSkuRequestDto();
+//    	requestDto.setSkuNo("sku003");
+    	List<String> skuNos = new ArrayList<String>();
+    	skuNos.add("sku001");
+    	skuNos.add("sku002");
+    	skuNos.add("sku005");
+//    	skuNos.add("sku004");
+    	requestDto.setSkuNos(skuNos);
+    	ProductSkuRequest request = new ProductSkuRequest("pms",requestDto );
+    	
+    	
+    	HbirdResponse<List> response = super.getRestTemplate().postForObject(url, request, HbirdResponse.class);
+    	
+    	List<ProductResponseDto> responseResult = JsonHelper.toList(JsonHelper.toJson(response.getResult()), ProductResponseDto.class);
+    	Assert.notNull(response);
+    	response.setResult(responseResult);
+    	List<ProductResponseDto> result = super.getResult(response);
+    	Assert.notNull(result);
     }
     
     @SuppressWarnings("unchecked")

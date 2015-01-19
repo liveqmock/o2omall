@@ -29,18 +29,18 @@
 					}
 				});
 				
-				$('#colorOrder').ace_spinner({value:10,min:1,max:100,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
-				$('#sizeOrder').ace_spinner({value:10,min:1,max:100,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
-				$('#saleQuantity').ace_spinner({value:100,min:1,max:10000,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+				$('#colorOrder').ace_spinner({value:$!productSku.colorOrder,min:1,max:100,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+				$('#sizeOrder').ace_spinner({value:$!productSku.sizeOrder,min:1,max:100,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+				$('#saleQuantity').ace_spinner({value:$!productSku.saleQuantity,min:1,max:10000,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
 				
 				$('#color').val("$!productSku.color");
-				$('#colorOrder').val("$!productSku.colorOrder");
-				$('#sizeOrder').val("$!productSku.sizeOrder");
-				$('#saleQuantity').val("$!productSku.saleQuantity");
+				//$('#colorOrder').val("$!productSku.colorOrder");
+				//$('#sizeOrder').val("$!productSku.sizeOrder");
+				//$('#saleQuantity').val("$!productSku.saleQuantity");
 				$('#saleStatus').val("$!productSku.saleStatus");
 				
 				$("#btn-back").click(function(){
-					window.location.href=("$basePath/productSku");
+					window.location.href=("$basePath/productSku?productNo=$!productSku.productNo");
 				});
 				$("#btn-submit").click(function(){
             		var form = $("#updateForm");
@@ -49,7 +49,7 @@
 					}
 					jQuery.post('$basePath/productSku/update',
             			form.serialize(),
-            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/productSku"); }
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/productSku?productNo=$!productSku.productNo"); }
             		);
             	});
             });
@@ -94,9 +94,9 @@
                                     		#end
                                         </select>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="sizeDesc">颜色说明</label>
+									<label class="col-sm-1 control-label no-padding-right" for="colorDesc">颜色说明</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="colorDesc" id="colorDesc" class="col-xs-10 col-sm-8" value="$!productSku.sizeDesc" />
+                                        <input type="text" name="colorDesc" id="colorDesc" class="col-xs-10 col-sm-8" value="$!productSku.colorDesc" />
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="colorOrder">颜色顺序</label>
                                     <div class="col-sm-3">

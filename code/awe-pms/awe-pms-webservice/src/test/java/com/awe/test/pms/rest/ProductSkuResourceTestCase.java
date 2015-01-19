@@ -10,7 +10,6 @@ import org.springframework.util.Assert;
 import com.awe.test.pms.rest.request.ProductSkuRequest;
 import com.awe.test.pms.rest.request.dto.ProductSkuRequestDto;
 import com.awe.test.pms.rest.response.ProductSkuResponse;
-import com.awe.test.pms.rest.response.dto.ProductBrandResponseDto;
 import com.awe.test.pms.rest.response.dto.ProductSkuResponseDto;
 import com.hbird.common.client.AbstractClient;
 import com.hbird.common.sdk.api.response.HbirdResponse;
@@ -65,7 +64,7 @@ public class ProductSkuResourceTestCase extends AbstractClient {
     	List<ProductSkuResponseDto> responseResult = JsonHelper.toList(JsonHelper.toJson(response.getResult()), ProductSkuResponseDto.class);
     	Assert.notNull(response);
     	response.setResult(responseResult);
-    	List<ProductBrandResponseDto> result = super.getResult(response);
+    	List<ProductSkuResponseDto> result = super.getResult(response);
     	Assert.notNull(result);
     }
 }

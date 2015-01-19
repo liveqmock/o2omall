@@ -140,6 +140,58 @@ public class ProductResource {
     }
     
     /**
+     * 根据 SKU_NO 查询商品信息信息
+     * 
+     * @param request
+     *            商品信息请求参数
+     * @return 商品信息返回对象
+     * 
+     */
+    @POST
+    @Path("/product/getProductBySkuNos")
+    public Wrapper<?> getProductBySkuNos(ProductSkuRequest request) {
+    	if (null == request || !request.checkSign()) {
+    		this.logger.error("getProduct 拒绝访问");
+    		return WrapMapper.forbidden();
+    	}
+    	
+    	ProductSkuRequestDto requestDto = request.getContent();
+    	if (null == requestDto || requestDto.getSkuNos() == null || requestDto.getSkuNos().size() == 0) {
+    		this.logger.error("getProductBySkuNos 传入参数有误");
+    		return WrapMapper.illegalArgument();
+    	}
+    	
+    	try {
+    		ProductSkuQuery queryBean = new ProductSkuQuery();
+    		queryBean.setSkuNos(requestDto.getSkuNos());
+    		List<ProductSku> productSkus = this.productSkuService.queryProductSkuList(queryBean);
+    		
+    		List<Product> resultProducts = new ArrayList<Product>();
+    		Product product = null;
+    		if (null != productSkus && productSkus.size() > 0) {
+    			for (ProductSku productSku : productSkus) {
+    				ProductQuery productQueryBean = new ProductQuery();
+    				productQueryBean.setProductNo(productSku.getProductNo());
+    				List<Product> products = this.productService.queryProductList(productQueryBean);
+    				if (null != products && products.size() > 0) {
+    					product = products.get(0);
+    					List<ProductSku> tempProductSkuList = new ArrayList<ProductSku>();
+    					tempProductSkuList.add(productSku);
+    					product.setProductSkus(tempProductSkuList);
+    					resultProducts.add(product);
+    				}
+    			}
+    		}
+    		
+    		List<ProductResponseDto> responseDtos = convertList(resultProducts);
+    		return WrapMapper.ok().result(responseDtos);
+    	} catch (Exception e) {
+    		this.logger.error("根据 SKU_NO【" + requestDto.getSkuNo() + "】 查询商品信息信息数据异常", e);
+    		return WrapMapper.error();
+    	}
+    }
+    
+    /**
      * 根据条件查询商品信息信息
      * 
      * @param request

@@ -71,16 +71,16 @@
 		        <if test="color != null">
                 	color = #{color,jdbcType=DECIMAL},
 		        </if>
-		        <if test="colorDesc != null and colorDesc != ''">
+		        <if test="colorDesc != null">
                 	color_desc = #{colorDesc,jdbcType=VARCHAR},
 		        </if>
 		        <if test="colorOrder != null">
                 	color_order = #{colorOrder,jdbcType=DECIMAL},
 		        </if>
-		        <if test="size != null and size != ''">
+		        <if test="size != null">
                 	size = #{size,jdbcType=VARCHAR},
 		        </if>
-		        <if test="sizeDesc != null and sizeDesc != ''">
+		        <if test="sizeDesc != null">
                 	size_desc = #{sizeDesc,jdbcType=VARCHAR},
 		        </if>
 		        <if test="sizeOrder != null">
