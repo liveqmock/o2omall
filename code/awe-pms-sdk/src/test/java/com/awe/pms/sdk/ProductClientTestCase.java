@@ -1,5 +1,6 @@
 package com.awe.pms.sdk;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -19,7 +20,7 @@ import com.awe.pms.sdk.response.dto.ProductResponseDto;
  */
 public class ProductClientTestCase {
 //    String WS_DOMAIN = "http://dev.pmsws.shop.hbird.com/";
-    String WS_DOMAIN = "http://local.pmsws.shop.hbird.com:8120/";
+    String WS_DOMAIN = "http://local.pmsws.shop.hbird.com:8100/";
     private ProductClient client;
 
     @Before
@@ -48,6 +49,20 @@ public class ProductClientTestCase {
     	
     	ProductResponseDto productResponseDto = client.getProductBySkuNo(requestDto);
     	Assert.notNull(productResponseDto);
+    }
+    
+    @Test
+    public void testGetProductBySkuNos() {
+    	ProductSkuRequestDto requestDto = new ProductSkuRequestDto();
+    	List<String> skuNos = new ArrayList<String>();
+    	skuNos.add("sku001");
+//    	skuNos.add("sku002");
+    	skuNos.add("sku005");
+    	skuNos.add("sku004");
+    	requestDto.setSkuNos(skuNos);
+    	
+    	List<ProductResponseDto> productResponseDtos = client.getProductBySkuNos(requestDto);
+    	Assert.notNull(productResponseDtos);
     }
     
     @Test

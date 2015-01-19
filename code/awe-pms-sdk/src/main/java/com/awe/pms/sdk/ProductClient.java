@@ -80,6 +80,37 @@ public class ProductClient extends AbstractSecureClient {
     }
     
     /**
+     * 根据 SKU_NO 查询商品信息信息集合
+     * 
+     * @param request
+     *            查询请求对象
+     * @return List<ProductResponseDto> 接口返回的数据对象
+     */
+    @SuppressWarnings("unchecked")
+	public List<ProductResponseDto> getProductBySkuNos(ProductSkuRequestDto requestDto) {
+    	Assert.notNull(requestDto);
+    	
+    	ProductSkuRequest request = new ProductSkuRequest(super.getKey(), requestDto);
+    	
+    	if (LOG.isDebugEnabled()) {
+    		LOG.debug("getProductBySkuNo request: " + JsonHelper.toJson(request));
+    	}
+    	
+    	String url = super.getServiceUrlDomain() + "services/product/getProductBySkuNos";
+    	
+    	HbirdResponse<List> response = super.getRestTemplate().postForObject(url, request, HbirdResponse.class);
+    	
+    	List<ProductResponseDto> responseResult = JsonHelper.toList(JsonHelper.toJson(response.getResult()), ProductResponseDto.class);
+    	response.setResult(responseResult);
+    	
+    	if (LOG.isDebugEnabled()) {
+    		LOG.debug("getProductBySkuNo url: " + url);
+    		LOG.debug("getProductBySkuNo response: " + JsonHelper.toJson(response));
+    	}
+    	return super.getResult(response);
+    }
+    
+    /**
      * 根据条件查询商品信息服务
      * 
      * @param request
