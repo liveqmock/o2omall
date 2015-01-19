@@ -41,7 +41,8 @@ public class ServiceAuditRequestDto extends HbirdDto {
     private String updateUser; 
     /** 是否有效:1有效;0:无效 */
     private Integer yn; 
-    
+    /**用户id*/
+    private Long userId;
     /**
      * get id自增
      * 
@@ -275,4 +276,12 @@ public class ServiceAuditRequestDto extends HbirdDto {
     public void setYn(Integer yn) {
         this.yn = yn;
     }
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 }

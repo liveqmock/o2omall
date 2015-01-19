@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.awe.mall.controller.base.BaseController;
 import com.awe.mall.service.OrdersService;
+import com.awe.order.enums.EnumOrderStauts;
+import com.awe.order.enums.EnumPayType;
 import com.awe.order.sdk.request.dto.OrdersRequestDto;
 import com.awe.order.sdk.response.dto.OrdersResponseDto;
 import com.hbird.common.utils.page.PageUtil;
+import com.hbird.common.web.context.UserContext;
 /**
  * @description 我的订单
  * @author zyq
@@ -42,10 +45,15 @@ public class MyOrderController extends BaseController {
 		List<OrdersResponseDto> dataList = null;
 		try {
 			requestDto.setOrderType(100);
+			requestDto.setUserId(UserContext.get().getUserId());
 			dataList = ordersService.queryFrontOrdersListWithPage(requestDto, page);
 			if(null == dataList){
 				dataList = new ArrayList<OrdersResponseDto>();
 			}
+			model.addAttribute("PayTypeMap",EnumPayType.getMap());
+			LOG.info("#####" + EnumPayType.getMap().get("1"));
+			model.addAttribute("OrderStautsMap", EnumOrderStauts.getMap());
+			LOG.info("@@@@" + EnumOrderStauts.getMap().get("60"));
 			model.addAttribute("dataList", dataList);
 		} catch (Exception e) {
 			LOG.error("#MyOrderController.productOrderList#Fail:::" + e);
@@ -61,10 +69,15 @@ public class MyOrderController extends BaseController {
         List<OrdersResponseDto> dataList = null;
 		try {
 			requestDto.setOrderType(200);
+			requestDto.setUserId(UserContext.get().getUserId());
 			dataList = ordersService.queryFrontOrdersListWithPage(requestDto, page);
 			if(null == dataList){
 				dataList = new ArrayList<OrdersResponseDto>();
 			}
+			model.addAttribute("PayTypeMap",EnumPayType.getMap());
+			LOG.info("#####" + EnumPayType.getMap().get("1"));
+			model.addAttribute("OrderStautsMap", EnumOrderStauts.getMap());
+			LOG.info("@@@@" + EnumOrderStauts.getMap().get("60"));
 			model.addAttribute("dataList", dataList);
 		} catch (Exception e) {
 			LOG.error("#MyOrderController.serviceOrderList#Fail:::" + e);

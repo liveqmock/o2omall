@@ -43,7 +43,8 @@ public class ServiceAuditQuery extends Query {
     private Date startTime; 
     /** 结束时间 */
     private Date endTime; 
-    
+    /**用户id*/
+    private Long userId;
     /**
      * get id自增
      * 
@@ -315,4 +316,12 @@ public class ServiceAuditQuery extends Query {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 }

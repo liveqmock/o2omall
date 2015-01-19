@@ -40,7 +40,8 @@ public class ServiceAudit implements java.io.Serializable {
     private String updateUser; 
     /** 是否有效:1有效;0:无效 */
     private Integer yn; 
-    
+    /**用户ID*/
+    private Long userId;
     /**
      * get id自增
      * 
@@ -274,4 +275,14 @@ public class ServiceAudit implements java.io.Serializable {
     public void setYn(Integer yn) {
         this.yn = yn;
     }
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+    
+    
 }

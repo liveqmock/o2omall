@@ -1,7 +1,8 @@
 package com.awe.rems.sdk.request.dto;
 
-import com.hbird.common.sdk.api.dto.HbirdDto;
 import java.util.Date;
+
+import com.hbird.common.sdk.api.dto.HbirdDto;
 
 /**
  * ReturnExchangeRequestDto：退换货请求参数
@@ -99,7 +100,8 @@ public class ReturnExchangeRequestDto extends HbirdDto {
     private String updateUser; 
     /** 是否有效:1有效;0:无效 */
     private Integer yn; 
-    
+    /** 用户ID */
+    private Long userId; 
     /**
      * get id自增
      * 
@@ -836,4 +838,12 @@ public class ReturnExchangeRequestDto extends HbirdDto {
     public void setYn(Integer yn) {
         this.yn = yn;
     }
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 }

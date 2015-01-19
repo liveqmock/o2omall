@@ -26,7 +26,7 @@ public class ReturnExchangeQuery extends Query {
     /** 商品分类编号 */
 	private Long categoryId; 
     /** 产品id */
-	private Long productId; 
+	private String productNo; 
     /** 商品编号 */
 	private Long skuNo; 
     /** 商品名称 */
@@ -101,7 +101,8 @@ public class ReturnExchangeQuery extends Query {
     private Date startTime; 
     /** 结束时间 */
     private Date endTime; 
-    
+    /**用户id*/
+    private Long userId;
     /**
      * get id自增
      * 
@@ -210,23 +211,6 @@ public class ReturnExchangeQuery extends Query {
         this.categoryId = categoryId;
     }
     
-    /**
-     * get 产品id
-     * 
-     * @return the productId
-     */
-    public Long getProductId(){
-        return productId;
-    }
-        
-    /**
-     * set 产品id
-     * 
-     * @param productId the productId to set
-     */
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
     
     /**
      * get 商品编号
@@ -895,4 +879,20 @@ public class ReturnExchangeQuery extends Query {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
+
+	public String getProductNo() {
+		return productNo;
+	}
+
+	public void setProductNo(String productNo) {
+		this.productNo = productNo;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 }

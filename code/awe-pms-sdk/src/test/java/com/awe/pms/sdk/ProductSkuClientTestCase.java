@@ -19,7 +19,7 @@ import com.awe.pms.sdk.response.dto.ProductSkuResponseDto;
  */
 public class ProductSkuClientTestCase {
 //    String WS_DOMAIN = "http://dev.pmsws.shop.hbird.com/";
-    String WS_DOMAIN = "http://local.pmsws.shop.hbird.com:8120/";
+    String WS_DOMAIN = "http://local.pmsws.shop.hbird.com:8100/";
     private ProductSkuClient client;
 
     @Before

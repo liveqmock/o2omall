@@ -75,7 +75,40 @@ public class ProductSku implements java.io.Serializable {
     /** 是否有效 */
     private Integer yn; 
     
+    /** 商家编号 */
+    private String businessNo; 
+    /** 商家名称 */
+    private String businessName;
+    
     /**
+	 * @return the businessNo
+	 */
+	public String getBusinessNo() {
+		return businessNo;
+	}
+
+	/**
+	 * @param businessNo the businessNo to set
+	 */
+	public void setBusinessNo(String businessNo) {
+		this.businessNo = businessNo;
+	}
+
+	/**
+	 * @return the businessName
+	 */
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	/**
+	 * @param businessName the businessName to set
+	 */
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
+	}
+
+	/**
      * get 主键
      * 
      * @return the id

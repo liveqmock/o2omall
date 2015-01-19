@@ -9,7 +9,7 @@
 		<result column="service_audit_status" property="serviceAuditStatus" jdbcType="DECIMAL" />
 		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
 		<result column="category_id" property="categoryId" jdbcType="DECIMAL" />
-		<result column="product_id" property="productId" jdbcType="DECIMAL" />
+		<result column="product_no" property="productNo" jdbcType="VARCHAR" />
 		<result column="sku_no" property="skuNo" jdbcType="DECIMAL" />
 		<result column="sku_name" property="skuName" jdbcType="VARCHAR" />
 		<result column="service_type" property="serviceType" jdbcType="DECIMAL" />
@@ -48,17 +48,17 @@
     </resultMap>
     
     <sql id="returnExchangeColumns">
-    	id,service_no,pickup_no,service_audit_status,order_no,category_id,product_id,sku_no,sku_name,service_type,quantity,evidence_type,problem_description,pickup_type,pickup_province_no,pickup_province_name,pickup_city_no,pickup_city_name,pickup_county_no,pickup_cuounty_name,pickup_detailed_address,reservation_pickup_time,province_no,province_name,city_no,city_name,county_no,cuounty_name,detailed_address,consignee,mobile_no,telephone_no,express_name,express_no,waybill_no,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn
+    	id,service_no,pickup_no,service_audit_status,order_no,category_id,product_no,sku_no,sku_name,service_type,quantity,evidence_type,problem_description,pickup_type,pickup_province_no,pickup_province_name,pickup_city_no,pickup_city_name,pickup_county_no,pickup_cuounty_name,pickup_detailed_address,reservation_pickup_time,province_no,province_name,city_no,city_name,county_no,cuounty_name,detailed_address,consignee,mobile_no,telephone_no,express_name,express_no,waybill_no,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn
     </sql>
     
      <sql id="returnExchangeUsedColumns">
-    	service_no,pickup_no,service_audit_status,order_no,category_id,product_id,sku_no,sku_name,service_type,quantity,evidence_type,problem_description,pickup_type,pickup_province_no,pickup_province_name,pickup_city_no,pickup_city_name,pickup_county_no,pickup_cuounty_name,pickup_detailed_address,reservation_pickup_time,province_no,province_name,city_no,city_name,county_no,cuounty_name,detailed_address,consignee,mobile_no,telephone_no,express_name,express_no,waybill_no,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn
+    	service_no,pickup_no,service_audit_status,order_no,category_id,product_no,sku_no,sku_name,service_type,quantity,evidence_type,problem_description,pickup_type,pickup_province_no,pickup_province_name,pickup_city_no,pickup_city_name,pickup_county_no,pickup_cuounty_name,pickup_detailed_address,reservation_pickup_time,province_no,province_name,city_no,city_name,county_no,cuounty_name,detailed_address,consignee,mobile_no,telephone_no,express_name,express_no,waybill_no,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="ReturnExchange" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO return_exchange(<include refid="returnExchangeUsedColumns"/>) 
-        VALUES (#{serviceNo},#{pickupNo},#{serviceAuditStatus},#{orderNo},#{categoryId},#{productId},#{skuNo},#{skuName},#{serviceType},#{quantity},#{evidenceType},#{problemDescription},#{pickupType},#{pickupProvinceNo},#{pickupProvinceName},#{pickupCityNo},#{pickupCityName},#{pickupCountyNo},#{pickupCuountyName},#{pickupDetailedAddress},#{reservationPickupTime},#{provinceNo},#{provinceName},#{cityNo},#{cityName},#{countyNo},#{cuountyName},#{detailedAddress},#{consignee},#{mobileNo},#{telephoneNo},#{expressName},#{expressNo},#{waybillNo},#{createTime},#{updateTime},#{createUserId},#{createUser},#{updateUserId},#{updateUser},#{yn})
+        VALUES (#{serviceNo},#{pickupNo},#{serviceAuditStatus},#{orderNo},#{categoryId},#{productNo},#{skuNo},#{skuName},#{serviceType},#{quantity},#{evidenceType},#{problemDescription},#{pickupType},#{pickupProvinceNo},#{pickupProvinceName},#{pickupCityNo},#{pickupCityName},#{pickupCountyNo},#{pickupCuountyName},#{pickupDetailedAddress},#{reservationPickupTime},#{provinceNo},#{provinceName},#{cityNo},#{cityName},#{countyNo},#{cuountyName},#{detailedAddress},#{consignee},#{mobileNo},#{telephoneNo},#{expressName},#{expressNo},#{waybillNo},#{createTime},#{updateTime},#{createUserId},#{createUser},#{updateUserId},#{updateUser},#{yn})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -81,8 +81,8 @@
 		        <if test="categoryId != null and categoryId != ''">
                 	category_id = #{categoryId,jdbcType=DECIMAL},
 		        </if>
-		        <if test="productId != null and productId != ''">
-                	product_id = #{productId,jdbcType=DECIMAL},
+		        <if test="productNo != null and productNo != ''">
+                	product_no = #{productNo,jdbcType=VARCHAR},
 		        </if>
 		        <if test="skuNo != null and skuNo != ''">
                 	sku_no = #{skuNo,jdbcType=DECIMAL},
@@ -250,8 +250,8 @@
         <if test="categoryId != null and categoryId != ''">
         	and category_id = #{categoryId,jdbcType=DECIMAL}
         </if>
-        <if test="productId != null and productId != ''">
-        	and product_id = #{productId,jdbcType=DECIMAL}
+        <if test="productNo != null and productNo != ''">
+        	and product_no = #{productNo,jdbcType=VARCHAR}
         </if>
         <if test="skuNo != null and skuNo != ''">
         	and sku_no = #{skuNo,jdbcType=DECIMAL}

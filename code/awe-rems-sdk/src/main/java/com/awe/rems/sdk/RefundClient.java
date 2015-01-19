@@ -60,7 +60,7 @@ public class RefundClient extends AbstractSecureClient {
     	if (LOG.isDebugEnabled()) {
             LOG.debug("queryRefundListWithPage request: " + JsonHelper.toJson(requestDto));
         }
-    	RefundRequest request = new RefundRequest(super.getKey(), requestDto);
+    	RefundRequest request = new RefundRequest(super.getKey(), requestDto, pageUtil);
     	List<RefundResponseDto> responseDtoList = null;
     	RefundResponseList responseList = null;
     	String url = null;

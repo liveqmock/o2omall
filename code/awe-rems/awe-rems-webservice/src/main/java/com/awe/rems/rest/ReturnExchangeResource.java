@@ -126,7 +126,7 @@ public class ReturnExchangeResource {
         
         ReturnExchangeRequestDto requestDto = request.getContent();
         PageUtil pageUtil = request.getPageUtil();
-        if (null == requestDto || null == requestDto.getServiceNo()) {
+        if (null == requestDto) {
             this.logger.error("queryReturnExchangeListWithPage 传入参数有误");
             return PageWrapMapper.illegalArgument();
         }

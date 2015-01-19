@@ -111,6 +111,11 @@ public class OrdersResponseDto extends HbirdDto {
 
     /**订单明细数据集*/
     private List<OrdersItems> ordersItemsList;    
+    
+    /**订单创建日期-用于商城页面显示 */
+    String createTimeDay;
+    /**订单创建时间-用于商城页面显示 */
+    String createTimeTime;
     /**
      * get 自增id
      * 
@@ -906,6 +911,21 @@ public class OrdersResponseDto extends HbirdDto {
 	public void setOrdersItemsList(List<OrdersItems> ordersItemsList) {
 		this.ordersItemsList = ordersItemsList;
 	}
-	
+
+	public String getCreateTimeDay() {
+		return createTimeDay;
+	}
+
+	public void setCreateTimeDay(String createTimeDay) {
+		this.createTimeDay = createTimeDay;
+	}
+
+	public String getCreateTimeTime() {
+		return createTimeTime;
+	}
+
+	public void setCreateTimeTime(String createTimeTime) {
+		this.createTimeTime = createTimeTime;
+	}
 	
 }

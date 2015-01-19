@@ -54,7 +54,8 @@ public class RefundRequestDto extends HbirdDto {
     private Integer yn; 
     /** 主表id */
     private Long returnExchangeId; 
-    
+    /**用户id*/
+    private Long userId;
     /**
      * get id自增
      * 
@@ -355,6 +356,14 @@ public class RefundRequestDto extends HbirdDto {
 
 	public void setSkuName(String skuName) {
 		this.skuName = skuName;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
     
 }
