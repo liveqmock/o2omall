@@ -1,0 +1,128 @@
+ <script type="text/javascript" src="#springUrl('')/static/js/inner/birthday.js"></script>
+ <script  type="text/javascript">
+    $(function () {  
+		address();
+		birthday();
+    });
+
+	function address(){
+		loadAreas(1,0,0,"province");
+		$("#province").change(function () {
+			initSelected("city");
+			initSelected("county");
+			if (this.value == "") {
+				return;
+			}
+			loadAreas(2,this.value,"","city");
+			$("#provinceName").val($("#province option:selected").text());
+			$("#provinceNo").val($("#province option:selected").val());
+		});
+		$("#city").change(function () {
+    		initSelected("county");
+    		if (this.value == "") {
+    			return;
+    		}
+    		loadAreas(3,this.value,"","county");
+    		$("#cityName").val($("#city option:selected").text());
+			$("#cityNo").val($("#city option:selected").val());
+		});
+		$("#county").change(function () {
+			$("#countyName").val($("#county option:selected").text());
+			$("#countyNo").val($("#county option:selected").val());
+		});	
+	}
+	/**
+     * @description three level address
+     * @author zhc
+     * @since 2015-1-10
+     */
+    function loadAreas(levelParam,parentAreaCode,currentAreaCode,idAttr){
+    	initSelected(idAttr);
+    	jQuery.ajax({
+    		type: "POST",
+    		url: "#springUrl('')/area/query",
+    		dataType:"json",
+    		data: "level=" + levelParam + "&parentCode=" + parentAreaCode,
+    		success: function(data){
+    			if(data!=null && data.code==200 && data.result!=null){
+    				$.each(data.result, function(i,n){
+    					if(n.code == currentAreaCode){
+    						$("<option></option>").attr("value",n.code).text(n.name).appendTo("#" + idAttr).attr("selected","selected");
+    					} else {
+    						$("<option></option>").attr("value",n.code).text(n.name).appendTo("#" + idAttr);
+    					}
+    				});
+    			}
+    		}
+    	});
+    }
+    
+    function initSelected(idAttr) {
+    	$("#" + idAttr).empty();
+    	$("<option></option>").attr("value","").text("请选择").appendTo("#" + idAttr);
+    }
+	
+	function submitbtn(){
+		var birthday = $("#birthdayYear option:selected").val() + "-" + $("#birthdayMonth option:selected").val() + "-" + $("#birthdayDay option:selected").val();  
+		$("#birthday").val(birthday);
+		var form = $("#profileForm");
+		jQuery.post(basePath+'/profile/add',
+    		form.serialize(),
+    		function(data) { 
+				if(data.code=='200'){
+					alert("保存成功!");
+				}
+			}
+		);
+	}
+	
+ </script>
+<!---------------------- 正文 ----------------------> 
+<div class="container wid1200 clearfix">
+	#parse("/myorder/common/left.vm")
+	<!---------------------- 右则内容 ----------------------> 
+  	<div class="section right">
+       
+         <h2 class="my_order"><span class="my_order_icon"></span>基础资料</h2>
+         <form id="profileForm" name="profileForm" action="#">
+         <div class="basic mt30 ml15 relative">
+           <div class="person-img"><img src="#springUrl('')/static/images/tt.jpg" /><p><a href="">修改头像</a></p></div>
+           <dl class="clearfix">
+             <dt>昵称:</dt>
+             <dd><input type="text" class="basic_input" name="nickname" /></dd>
+           </dl> 
+           <dl class="clearfix">
+             <dt>性别:</dt>
+             <dd><input type="radio" name="sex" value="1" checked /> 男 &nbsp;&nbsp;&nbsp;<input type="radio" name="sex" value="0" /> 女</dd>
+           </dl> 
+           <dl class="clearfix">
+             <dt>出生日期:</dt>
+             <dd>
+				<select class="data_select" id="birthdayYear"><option></option></select>年 &nbsp;&nbsp;<select class="data_select" id="birthdayMonth"><option></option></select>月 &nbsp;&nbsp;<select class="data_select" id="birthdayDay"><option></option></select>日
+				<input type="hidden" id="birthday" name="birthdayStr"/>
+			 </dd>
+           </dl> 
+           <dl class="clearfix">
+             <dt>真实姓名:</dt>
+             <dd><input type="text" class="basic_input" name="cnName"/></dd>
+           </dl> 
+           <dl class="clearfix">
+             <dt>所在地:</dt>
+             <dd>
+				省：<select class="data_select" id="province"><option value="">请选择</option></select><input type="hidden" id="provinceName" name="provinceName"/><input type="hidden" id="provinceNo" name="provinceNo"/>
+				市：<select class="data_select" id="city"><option value="">请选择</option>></select><input type="hidden" id="cityName" name="cityName"/><input type="hidden" id="cityNo" name="cityNo"/>
+				区：<select class="data_select" id="county"><option value="">请选择</option></select><input type="hidden" id="countyName" name="countyName"/><input type="hidden" id="countyNo" name="countyNo"/>
+			</dd>
+           </dl> 
+           <dl class="clearfix">
+             <dt>详细地址:</dt>
+             <dd><input type="text" class="basic_area" name="address"/></dd>
+           </dl> 
+        
+         </div>
+         <div class="basic_btn"><a href="#" class="mt40" onclick="submitbtn();">提交</a></div>
+		 </form>
+	</div>
+   <!---------------------- 右则内容end ----------------------> 
+</div>
+<!---------------------- 正文end ----------------------> 
