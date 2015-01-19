@@ -1,0 +1,66 @@
+<script  type="text/javascript">
+$(function () {  
+		$("#applyBtn").click(function () {  
+        	window.location.href="#springUrl('')/returnExchange/orderList";
+        }); 
+		$("#repairBtn").click(function () {  
+        	window.location.href="#springUrl('')/returnExchange/returnExchangeList";
+        }); 
+		$("#refundBtn").click(function () {  
+        	window.location.href="#springUrl('')/returnExchange/refundList";
+        }); 
+		
+    });
+</script>	
+<!---------------------- 正文 ----------------------> 
+<div class="container wid1200 clearfix">
+	#parse("/myorder/common/left.vm")
+   <!---------------------- 右则内容 ----------------------> 
+      <div class="section right">
+       
+         <h2 class="my_order"><span class="my_order_icon"></span>我的订单</h2>
+         <ul class="my_order_list">
+            <li>待付款（<span>0</span>）</li>
+            <li>待确认收货（<span>2</span>）</li>
+         </ul>
+         <div class="my_order_form clearfix">
+            <form>
+               <button type="button" class="order_btn" id="applyBtn">申请返修/退换货</button><button type="button" class="order_btn" id="repairBtn">查看返修/退换货记录</button><button type="button" class="order_btn" id="refundBtn">查看退款记录</button><input type="text" class="order_input" value="商品名称、商品编号、订单编号" />
+               <input type="button"  class="order_btn" value="查询"/>
+            </form>
+         </div>
+         <div class="order_tab clearfix mt25">
+         
+           <table width="100%" border="0"  cellspacing="0" cellpadding="0">
+           <thead>
+  <tr>
+    <th class="title th">返修/退换货编号 </th>
+    <th class="title">订单编号</th>
+    <th class="title">商品名称</th>
+    <th class="title"><select name="" class="order_select"><option>申请时间</option></select></th>
+    <th class="title"><select name="" class="order_select"><option>全部状态</option></select></th>
+    <th class="title tcenter">操作</th>
+  </tr>
+  </thead>
+  <tbody>
+           <table width="100%" border="0" class="mt10" cellspacing="0" cellpadding="0">
+				#foreach( $item in $dataList)
+                  <tr>
+					<td width="200">$!item.serviceNo</th>
+					<td width="200">$!item.orderNo</td>
+                    <td width="130">$!item.skuName</td>
+                    <td width="123"><p>$!date.format('yyyy-MM-dd',$!item.createTime)</p></td>
+                    <td width="165"></td>
+                    <td width="260"><a href="">查看</a>|<a href="">退款明细</a></td>
+                  </tr>
+				#end
+			</table>
+			#pageBarPost($page.totalRow $page.curPage $page.totalPage)
+  </tbody>
+         </div>
+      
+      </div>
+      
+   <!---------------------- 右则内容end ----------------------> 
+    </div>
+ <!---------------------- 正文end ----------------------> 
