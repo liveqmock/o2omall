@@ -45,7 +45,8 @@ public class RefundResourceTestCase extends AbstractClient {
     	 String url= getServiceUrlDomain() + "/refund/queryRefundListWithPage";
 
          RefundRequestDto requestDto = new RefundRequestDto();
-         requestDto.setServiceNo("T000000001");
+         //requestDto.setServiceNo("T000000001");
+         requestDto.setUserId(1L);
          PageUtil page = new PageUtil();
          page.setPageSize(10);
          page.setCurPage(0);

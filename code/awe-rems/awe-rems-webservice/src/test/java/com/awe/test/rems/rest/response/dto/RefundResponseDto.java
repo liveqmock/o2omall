@@ -55,6 +55,9 @@ public class RefundResponseDto extends HbirdDto {
     private String skuNo; 
     /** SKU名称 */
     private String skuName; 
+    /**用户id*/
+    private Long userId;
+    
     /**
      * get id自增
      * 
@@ -356,6 +359,12 @@ public class RefundResponseDto extends HbirdDto {
 	public void setSkuName(String skuName) {
 		this.skuName = skuName;
 	}
-    
-    
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 }

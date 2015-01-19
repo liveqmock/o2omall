@@ -45,7 +45,8 @@ public class ReturnExchangeResourceTestCase extends AbstractClient {
     	String url= getServiceUrlDomain() + "/returnExchange/queryReturnExchangeListWithPage";
 
         ReturnExchangeRequestDto requestDto = new ReturnExchangeRequestDto();
-        requestDto.setServiceNo("T000000001");
+        //requestDto.setServiceNo("T000000001");
+        requestDto.setUserId(1l);
         PageUtil page = new PageUtil();
         page.setPageSize(10);
         page.setCurPage(0);

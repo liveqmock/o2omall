@@ -91,7 +91,7 @@ public class ReturnExchangeResource {
         }
         
         ReturnExchangeRequestDto requestDto = request.getContent();
-        if (null == requestDto || null == requestDto.getId()) {
+        if (null == requestDto) {
             this.logger.error("addReturnExchange 传入参数有误");
             return WrapMapper.illegalArgument();
         }

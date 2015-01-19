@@ -27,7 +27,7 @@ public class ReturnExchange implements java.io.Serializable {
     /** 商品分类编号 */
     private Long categoryId; 
     /** 商品编号 */
-    private Long productNo; 
+    private String productNo; 
     /** SKU编号 */
     private String skuNo; 
     /** SKU名称 */
@@ -209,12 +209,11 @@ public class ReturnExchange implements java.io.Serializable {
         this.categoryId = categoryId;
     }
     
-    
-    public Long getProductNo() {
+	public String getProductNo() {
 		return productNo;
 	}
 
-	public void setProductNo(Long productNo) {
+	public void setProductNo(String productNo) {
 		this.productNo = productNo;
 	}
 
