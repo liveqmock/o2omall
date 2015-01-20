@@ -5,17 +5,17 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.perf4j.aop.Profiled;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.awe.pms.domain.Product;
 import com.awe.pms.domain.query.ProductQuery;
 import com.awe.pms.manager.ProductManager;
 import com.awe.pms.service.ProductService;
+import com.awe.pms.utils.enums.CodeEnum;
 import com.awe.pms.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.perf4j.aop.Profiled;
  
 /**
  * ProductService接口的实现类
@@ -174,5 +174,17 @@ public class ProductServiceImpl implements ProductService {
         }
         return product;
     }
+
+	public String queryMaxProductNo(int mode) {
+		if (mode == 0) {
+    		mode = CodeEnum.PRODUCT_NO_S.getType();
+    	}
+		Long productNo = CodeEnum.getCode(mode);
+		Product product = this.productManager.queryMaxProductNo(mode);
+		if (product != null) {
+			productNo = Long.parseLong(product.getProductNo()) + 1;
+		}
+		return productNo.toString();
+	}
 }
 

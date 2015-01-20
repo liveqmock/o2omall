@@ -38,6 +38,12 @@ public interface ProductSkuManager {
      * @return false：失败 true：成功
      */
     public boolean update(ProductSku productSku);
+    
+    /**
+     * 获取当前商品Sku编码最大值，若没有则选择默认的
+     * @return
+     */
+    public ProductSku queryMaxSkuNo(String productNo);
 
     /**
      * 根据查询Bean获取对象集合，无翻页

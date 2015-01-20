@@ -32,6 +32,17 @@
 					}
 				});
 				
+				$("#mode").change(function () {
+					jQuery.get('$basePath/product/queryMaxProductNo',
+            			{mode: $(this).val()},
+            			function(data) {
+							if(data!=null && data.code==200 && data.result!=null){
+								$("#productNo").val(data.result);
+							}
+						}
+            		);
+				});
+				
 				loadProductCategorys(1,0,0,"categoryOneId");
 				
 				$("#categoryOneId").change(function () {
@@ -167,7 +178,7 @@
 								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="productNo">商品编号</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="productNo" id="productNo" class="col-xs-10 col-sm-8" />
+                                        <input type="text" name="productNo" id="productNo" class="col-xs-10 col-sm-8" value="$!productNo" readonly />
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="productName">商品名称</label>
                                     <div class="col-sm-3">

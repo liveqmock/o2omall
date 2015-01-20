@@ -3,6 +3,7 @@ package com.awe.pms.service.impl;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -174,5 +175,17 @@ public class ProductSkuServiceImpl implements ProductSkuService {
         }
         return productSku;
     }
+
+	public String queryMaxSkuNo(String productNo) {
+		if (StringUtils.isBlank(productNo)) {
+			return null;
+		}
+		Long skuNo = 1L;
+		ProductSku productSku = this.productSkuManager.queryMaxSkuNo(productNo);
+		if (productSku != null) {
+			skuNo = 1 + Long.parseLong(productSku.getSkuNo().substring(productSku.getSkuNo().length() - 4));
+		}
+		return productNo + String.format("%04d", skuNo);
+	}
 }
 

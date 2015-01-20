@@ -69,7 +69,7 @@
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="skuNo">sku编号</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="skuNo" id="skuNo" class="col-xs-10 col-sm-8" />
+                                        <input type="text" name="skuNo" id="skuNo" class="col-xs-10 col-sm-8" value="$!productSku.skuNo" readonly />
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="skuName">SKU名称</label>
                                     <div class="col-sm-3">
@@ -136,12 +136,6 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="dimensionCodeTwo" id="dimensionCodeTwo" class="col-xs-10 col-sm-8" />
                                     </div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="imgPath">Sku主图</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="imgPath" id="imgPath" class="col-xs-10 col-sm-8" />
-                                    </div>
 									<label class="col-sm-1 control-label no-padding-right" for="saleStatus">上下架状态</label>
                                     <div class="col-sm-3">
 										<select id="saleStatus" name="saleStatus" class="col-xs-10 col-sm-8">
@@ -152,6 +146,12 @@
                                     			#end
                                     		#end
                                         </select>
+                                    </div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="imgPath">Sku主图</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="imgPath" id="imgPath" class="col-xs-10 col-sm-8" />
                                     </div>
 								</div>
 								<div class="form-group">

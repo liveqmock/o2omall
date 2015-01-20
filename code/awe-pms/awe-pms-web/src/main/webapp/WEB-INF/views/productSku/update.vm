@@ -75,7 +75,7 @@
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="skuNo">sku编号</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="skuNo" id="skuNo" class="col-xs-10 col-sm-8" value="$!productSku.skuNo" />
+                                        <input type="text" name="skuNo" id="skuNo" class="col-xs-10 col-sm-8" value="$!productSku.skuNo" readonly />
                                     </div>
 									<label class="col-sm-1 control-label no-padding-right" for="skuName">SKU名称</label>
                                     <div class="col-sm-3">

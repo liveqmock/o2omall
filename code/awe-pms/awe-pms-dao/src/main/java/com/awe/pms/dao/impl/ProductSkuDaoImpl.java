@@ -77,4 +77,8 @@ public class ProductSkuDaoImpl extends BaseDao implements ProductSkuDao {
         int count = (Integer) queryForObject(namespace +".exist", productSku);
         return count > 0;
     }
+
+	public ProductSku queryMaxSkuNo(String productNo) {
+		return (ProductSku) queryForObject(namespace +".queryMaxSkuNo", productNo);
+	}
 }

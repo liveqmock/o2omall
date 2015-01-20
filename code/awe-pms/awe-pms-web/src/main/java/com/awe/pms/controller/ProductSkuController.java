@@ -76,6 +76,8 @@ public class ProductSkuController extends BaseController {
      */
     @RequestMapping(value = "addForward")
     public String addForward(Model model, ProductSku productSku) {
+    	String skuNo = this.productSkuService.queryMaxSkuNo(productSku.getProductNo());
+    	productSku.setSkuNo(skuNo);
     	model.addAttribute("productSku", productSku);// 查询参数
 
     	this.initDicts(model);
@@ -218,6 +220,25 @@ public class ProductSkuController extends BaseController {
             LOG.warn("detail productSku has error.", e);
             return error();
         }
+    }
+    
+    /**
+     * 查询商品SKU信息详情
+     * 
+     * @param query
+     * @return
+     */
+    @RequestMapping(value = "queryMaxSkuNo", method = RequestMethod.GET)
+    @ResponseBody
+    public Wrapper<?> queryMaxSkuNo(String productNo) {
+    	
+    	try {
+			String skuNo = this.productSkuService.queryMaxSkuNo(productNo);
+			return new Wrapper<String>().result(skuNo);
+    	} catch (Exception e) {
+    		LOG.warn("queryMaxSkuNo has error.", e);
+    		return error();
+    	}
     }
     
     private void initDicts(Model model) {

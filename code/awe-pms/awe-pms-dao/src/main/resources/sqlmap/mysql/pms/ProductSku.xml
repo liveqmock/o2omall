@@ -147,6 +147,16 @@
             where id = #{_parameter} and yn = 1
         </if>
     </select>
+    
+    <!-- 获取当前商品SKU编码最大值对象信息 -->
+    <select id="queryMaxSkuNo" resultMap="ProductSkuMap" parameterType="java.lang.String">
+    	<if test="_parameter != null">
+         select <include refid="productSkuColumns"/> from product_sku
+         	where yn = 1 
+         		and product_no = #{_parameter}
+         		order by sku_no desc limit 0,1
+        </if>
+    </select>
 
     <!-- 根据查询Bean获取数据集合，不带翻页 -->
     <select id="queryProductSkuList" resultMap="ProductSkuMap"
@@ -175,7 +185,12 @@
 
     <!-- 根据查询Bean查询-判断是否存在 -->
     <select id="exist" resultType="java.lang.Integer" parameterType="ProductSku">
-        select count(1) from product_sku where yn = 1 and sku_no = #{skuNo,jdbcType=VARCHAR}
+        select count(1) from product_sku 
+        	where yn = 1 
+        	and sku_no = #{skuNo,jdbcType=VARCHAR}  or 
+        		(product_no = #{productNo,jdbcType=VARCHAR} 
+        			and color = #{color,jdbcType=DECIMAL} 
+        			and size = #{size,jdbcType=VARCHAR}) 
     </select>
 
     <!-- 根据查询Bean获取集合总数 -->
