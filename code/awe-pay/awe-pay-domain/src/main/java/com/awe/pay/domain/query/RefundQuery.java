@@ -49,6 +49,10 @@ public class RefundQuery extends Query {
     private Date startTime; 
     /** 结束时间 */
     private Date endTime; 
+    /**商家编号*/
+    private String businessNo;
+    /**商家名称*/
+    private String businessName;
     
     /**
      * get id自增
@@ -375,4 +379,20 @@ public class RefundQuery extends Query {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
+
+	public String getBusinessNo() {
+		return businessNo;
+	}
+
+	public void setBusinessNo(String businessNo) {
+		this.businessNo = businessNo;
+	}
+
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
+	}
 }

@@ -40,6 +40,10 @@
 			<artifactId>awe-rems-sdk</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.awe.pay</groupId>
+			<artifactId>awe-pay-sdk</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.awe.pms</groupId>
 			<artifactId>awe-pms-sdk</artifactId>
 		</dependency>

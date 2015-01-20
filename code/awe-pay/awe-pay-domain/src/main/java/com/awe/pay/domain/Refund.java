@@ -46,6 +46,10 @@ public class Refund implements java.io.Serializable {
     private String updateUser; 
     /** 是否有效:1有效;0:无效 */
     private Integer yn; 
+    /**商家编号*/
+    private String businessNo;
+    /**商家名称*/
+    private String businessName;
     
     /**
      * get id自增
@@ -334,4 +338,20 @@ public class Refund implements java.io.Serializable {
     public void setYn(Integer yn) {
         this.yn = yn;
     }
+
+	public String getBusinessNo() {
+		return businessNo;
+	}
+
+	public void setBusinessNo(String businessNo) {
+		this.businessNo = businessNo;
+	}
+
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
+	}
 }

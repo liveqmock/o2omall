@@ -19,20 +19,22 @@
 		<result column="update_user_id" property="updateUserId" jdbcType="DECIMAL" />
 		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
 		<result column="yn" property="yn" jdbcType="DECIMAL" />
+		<result column="business_no" property="businessNo" jdbcType="VARCHAR" />
+		<result column="business_name" property="businessName" jdbcType="VARCHAR" />
     </resultMap>
     
     <sql id="refundColumns">
-    	id,service_no,order_no,refund_amount,account_no,account_name,refund_date,serial_no,status,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn
+    	id,service_no,order_no,refund_amount,account_no,account_name,refund_date,serial_no,status,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn,business_no,business_name
     </sql>
     
      <sql id="refundUsedColumns">
-    	service_no,order_no,refund_amount,account_no,account_name,refund_date,serial_no,status,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn
+    	service_no,order_no,refund_amount,account_no,account_name,refund_date,serial_no,status,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn,business_no,business_name
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="Refund" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO refund(<include refid="refundUsedColumns"/>) 
-        VALUES (#{serviceNo},#{orderNo},#{refundAmount},#{accountNo},#{accountName},#{refundDate},#{serialNo},#{status},#{createTime},#{updateTime},#{createUserId},#{createUser},#{updateUserId},#{updateUser},#{yn})
+        VALUES (#{serviceNo},#{orderNo},#{refundAmount},#{accountNo},#{accountName},now(),#{serialNo},#{status},now(),now(),#{createUserId},#{createUser},#{updateUserId},#{updateUser},1,#{businessNo},#{businessName})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -103,7 +105,7 @@
 
     <!-- 根据查询Bean查询-判断是否存在 -->
     <select id="exist" resultType="java.lang.Integer" parameterType="Refund">
-        select count(1) from refund where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+        select count(1) from refund where yn = 1 and order_no = #{orderNo,jdbcType=VARCHAR}
     </select>
 
     <!-- 根据查询Bean获取集合总数 -->
@@ -169,6 +171,12 @@
         </if>
         <if test="yn != null and yn != ''">
         	and yn = #{yn,jdbcType=DECIMAL}
+        </if>
+        <if test="businessNo != null and businessNo != ''">
+        	and business_no = #{businessNo,jdbcType=VARCHAR}
+        </if>
+        <if test="businessName != null and businessName != ''">
+        	and business_name = #{businessName,jdbcType=VARCHAR}
         </if>
     </sql>
 </mapper>

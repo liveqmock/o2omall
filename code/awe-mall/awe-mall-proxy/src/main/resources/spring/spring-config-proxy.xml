@@ -47,7 +47,16 @@
 		<property name="serviceUrlDomain" value="${service.url.domain.rems}" />
 	</bean>
 	<!--awe-rems-sdk end-->
-	
+	<!--awe-pay-sdk start-->
+	<bean id="payRefundClient" class="com.awe.pay.sdk.RefundClient">
+		<property name="key" value="${mall.common.key}" />
+		<property name="serviceUrlDomain" value="${service.url.domain.pay}" />
+	</bean>
+	<bean id="tradeClient" class="com.awe.pay.sdk.TradeClient">
+		<property name="key" value="${mall.common.key}" />
+		<property name="serviceUrlDomain" value="${service.url.domain.pay}" />
+	</bean>
+	<!--awe-pay-sdk end-->
 	<!-- awe-pms-sdk start -->
 	<bean id="productBrandClient" class="com.awe.pms.sdk.ProductBrandClient">
 		<property name="key" value="${mall.common.key}" />

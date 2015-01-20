@@ -114,6 +114,11 @@
 				<version>1.0.0.1</version>
 			</dependency>
 			<dependency>
+				<groupId>com.awe.pay</groupId>
+				<artifactId>awe-pay-sdk</artifactId>
+				<version>1.0.0.1</version>
+			</dependency>
+			<dependency>
 				<groupId>com.awe.pms</groupId>
 				<artifactId>awe-pms-sdk</artifactId>
 				<version>${awe-pms-sdk.version}</version>

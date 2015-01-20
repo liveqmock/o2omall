@@ -73,7 +73,11 @@ public class RefundResource {
             return WrapMapper.error();
         }
     } 
-
+    /**
+     * 逆向退款
+     * @param request
+     * @return
+     */
     @POST
     @Path("/refund/addRefund")
     public Wrapper<?> addRefund(RefundRequest request) {
