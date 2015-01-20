@@ -63,13 +63,13 @@ public class ReturnExchangeResource {
         }
         
         ReturnExchangeRequestDto requestDto = request.getContent();
-        if (null == requestDto || null == requestDto.getId()) {
+        if (null == requestDto || null == requestDto.getServiceNo()) {
             this.logger.error("getReturnExchange 传入参数有误");
             return WrapMapper.illegalArgument();
         }
 
         try {
-            ReturnExchange returnExchange = returnExchangeService.getReturnExchangeById(requestDto.getId());
+            ReturnExchange returnExchange = returnExchangeService.getReturnExchangeByServiceNo(requestDto.getServiceNo());
             ReturnExchangeResponseDto responseDto = convert(returnExchange);
             return WrapMapper.ok().result(responseDto);
         } catch (Exception e) {

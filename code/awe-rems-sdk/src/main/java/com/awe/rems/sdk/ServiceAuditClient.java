@@ -1,15 +1,18 @@
 package com.awe.rems.sdk;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Assert;
 
-import com.hbird.common.client.AbstractSecureClient;
-import com.hbird.common.utils.serialize.JsonHelper;
 import com.awe.rems.sdk.request.ServiceAuditRequest;
 import com.awe.rems.sdk.request.dto.ServiceAuditRequestDto;
 import com.awe.rems.sdk.response.ServiceAuditResponse;
+import com.awe.rems.sdk.response.ServiceAuditResponseList;
 import com.awe.rems.sdk.response.dto.ServiceAuditResponseDto;
+import com.hbird.common.client.AbstractSecureClient;
+import com.hbird.common.utils.serialize.JsonHelper;
 
 /**
  * 退换货审核流表服务的客户端
@@ -46,5 +49,29 @@ public class ServiceAuditClient extends AbstractSecureClient {
             LOG.debug("getServiceAudit response: " + JsonHelper.toJson(response));
         }
         return super.getResult(response);
+    }
+    
+    /**
+     * 获取审核信息集合
+     * @param requestDto
+     * @return
+     */
+    public List<ServiceAuditResponseDto> queryServiceAuditList(ServiceAuditRequestDto requestDto){
+    	Assert.notNull(requestDto);
+
+        ServiceAuditRequest request = new ServiceAuditRequest(super.getKey(), requestDto);
+        ServiceAuditResponseList responseList = null;
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("getServiceAudit request: " + JsonHelper.toJson(request));
+        }
+
+        String url = super.getServiceUrlDomain() + "services/serviceAudit/queryServiceAuditList";
+        responseList = super.getRestTemplate().postForObject(url, request, ServiceAuditResponseList.class);
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("getServiceAudit url: " + url);
+            LOG.debug("getServiceAudit response: " + JsonHelper.toJson(responseList));
+        }
+        return super.getResult(responseList);
     }
 }

@@ -16,13 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.rems.domain.ServiceAudit;
+import com.awe.rems.domain.query.ServiceAuditQuery;
 import com.awe.rems.sdk.api.request.ServiceAuditRequest;
 import com.awe.rems.sdk.api.request.dto.ServiceAuditRequestDto;
 import com.awe.rems.sdk.api.response.dto.ServiceAuditResponseDto;
 import com.awe.rems.service.ServiceAuditService;
+import com.hbird.common.utils.wrap.WrapMapper;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 退换货审核流表REST服务：提供有关退换货审核流表的接口
@@ -74,6 +75,33 @@ public class ServiceAuditResource {
         }
     } 
 
+    @POST
+    @Path("/serviceAudit/queryServiceAuditList")
+    public Wrapper<?> queryServiceAuditList(ServiceAuditRequest request) {
+        if (null == request || !request.checkSign()) {
+            this.logger.error("getServiceAudit 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        ServiceAuditRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getUserId()) {
+            this.logger.error("getServiceAudit 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+
+        try {
+        	ServiceAuditQuery queryBean = new ServiceAuditQuery();
+        	BeanUtils.copyProperties(requestDto, queryBean);
+        	List<ServiceAudit> serviceAuditList = serviceAuditService.queryServiceAuditList(queryBean);
+            List<ServiceAuditResponseDto> responseDtoList = convertList(serviceAuditList);
+            return WrapMapper.ok().result(responseDtoList);
+        } catch (Exception e) {
+            this.logger.error("查询退换货审核流表数据异常", e);
+            return WrapMapper.error();
+        }
+    } 
+    
+    
     // 数据转换
     private ServiceAuditResponseDto convert(ServiceAudit serviceAudit) {
         if (null == serviceAudit) {
