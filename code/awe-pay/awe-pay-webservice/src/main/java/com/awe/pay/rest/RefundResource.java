@@ -74,6 +74,34 @@ public class RefundResource {
         }
     } 
 
+    @POST
+    @Path("/refund/addRefund")
+    public Wrapper<?> addRefund(RefundRequest request) {
+        if (null == request || !request.checkSign()) {
+            this.logger.error("addRefund 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        RefundRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getServiceNo()) {
+            this.logger.error("addRefund 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+
+        try {
+        	Refund refund = new Refund();
+        	BeanUtils.copyProperties(requestDto, refund);
+            boolean ret = refundService.insert(refund);
+            if(ret){
+            	return WrapMapper.ok();
+            }else{
+            	return WrapMapper.error();
+            }
+        } catch (Exception e) {
+            this.logger.error("申请退款数据异常", e);
+            return WrapMapper.error();
+        }
+    } 
     // 数据转换
     private RefundResponseDto convert(Refund refund) {
         if (null == refund) {

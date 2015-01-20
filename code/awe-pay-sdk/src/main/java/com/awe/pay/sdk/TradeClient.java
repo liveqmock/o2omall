@@ -4,12 +4,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Assert;
 
-import com.hbird.common.client.AbstractSecureClient;
-import com.hbird.common.utils.serialize.JsonHelper;
 import com.awe.pay.sdk.request.TradeRequest;
 import com.awe.pay.sdk.request.dto.TradeRequestDto;
 import com.awe.pay.sdk.response.TradeResponse;
 import com.awe.pay.sdk.response.dto.TradeResponseDto;
+import com.hbird.common.client.AbstractSecureClient;
+import com.hbird.common.utils.serialize.JsonHelper;
+import com.hbird.common.utils.wrap.WrapMapper;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 正向交易服务的客户端
@@ -46,5 +48,36 @@ public class TradeClient extends AbstractSecureClient {
             LOG.debug("getTrade response: " + JsonHelper.toJson(response));
         }
         return super.getResult(response);
+    }
+    /**
+     * 正向交易接口
+     * @param requestDto
+     * @return
+     */
+    public Wrapper<?> addTrade(TradeRequestDto requestDto) {
+        Assert.notNull(requestDto);
+
+        TradeRequest request = new TradeRequest(super.getKey(), requestDto);
+        TradeResponse response = null;
+        String url = null;
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("addTrade request: " + JsonHelper.toJson(request));
+        }
+        try {
+        	url = super.getServiceUrlDomain() + "services/trade/addTrade";
+        	response = super.getRestTemplate().postForObject(url, request, TradeResponse.class);
+		} catch (Exception e) {
+			LOG.error("#TradeClient.addTrade# ERROR:" + e);
+		}
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("addTrade url: " + url);
+            LOG.debug("addTrade response: " + JsonHelper.toJson(response));
+        }
+        if (null != response) {
+            return WrapMapper.wrap(response.getCode(), response.getMessage());
+        } else {
+            return WrapMapper.error();
+        }
     }
 }
