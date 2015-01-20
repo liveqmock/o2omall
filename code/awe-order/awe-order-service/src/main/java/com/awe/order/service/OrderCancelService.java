@@ -99,4 +99,13 @@ public interface OrderCancelService {
      * @return
      */
     public List<OrderCancel> queryFrontOrderCancelListWithPage(FrontOrderCancelQuery queryBean,PageUtil pageUtil);
+
+    /**
+     * 根据订单号查询Bean对象
+     * Date:2015年1月20日下午1:08:05
+     * user:js
+     * @param orderNo
+     * @return
+     */
+	public OrderCancel getOrderCancelByOrderNo(String orderNo);
 }

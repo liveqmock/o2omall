@@ -6,6 +6,7 @@ import com.awe.order.domain.OrderCancel;
 import com.awe.order.domain.query.FrontOrderCancelQuery;
 import com.awe.order.domain.query.OrderCancelQuery;
 import com.awe.order.dto.OrderCancelDto;
+import com.awe.order.sdk.api.request.dto.OrderCancelRequestDto;
 
 import java.util.List;
 import java.util.Map;

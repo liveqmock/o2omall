@@ -123,4 +123,13 @@ public interface OrderCancelManager {
 	 * @return
 	 */
 	public int queryFrontOrderCancelCount(FrontOrderCancelQuery queryBean);
+
+	/**
+	 * 根据订单号查询取消订单数据
+	 * Date:2015年1月20日下午1:09:37
+	 * user:js
+	 * @param orderNo
+	 * @return
+	 */
+	public OrderCancel getOrderCancelByOrderNo(String orderNo);
 }

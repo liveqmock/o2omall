@@ -64,13 +64,13 @@ public class OrderCancelResource {
         }
         
         OrderCancelRequestDto requestDto = request.getContent();
-        if (null == requestDto || null == requestDto.getId()) {
+        if (null == requestDto || null == requestDto.getOrderNo()) {
             this.logger.error("getOrderCancel 传入参数有误");
             return WrapMapper.illegalArgument();
         }
 
         try {
-            OrderCancel orderCancel = orderCancelService.getOrderCancelById(requestDto.getId());
+            OrderCancel orderCancel = orderCancelService.getOrderCancelByOrderNo(requestDto.getOrderNo());
             OrderCancelResponseDto responseDto = convert(orderCancel);
             return WrapMapper.ok().result(responseDto);
         } catch (Exception e) {
@@ -78,7 +78,6 @@ public class OrderCancelResource {
             return WrapMapper.error();
         }
     } 
-
     /**
      * 获取取消了的订单列表
      * @param page

@@ -20,6 +20,7 @@ import com.awe.order.domain.query.FrontOrderCancelQuery;
 import com.awe.order.domain.query.OrderCancelQuery;
 import com.awe.order.dto.OrderCancelDto;
 import com.awe.order.manager.OrderCancelManager;
+import com.awe.order.sdk.api.request.dto.OrderCancelRequestDto;
 import com.awe.order.service.OrderCancelService;
 import com.awe.order.service.helper.OrderCancelComparator;
 import com.awe.order.utils.exceptions.ExistedException;
@@ -250,6 +251,24 @@ public class OrderCancelServiceImpl implements OrderCancelService {
             LOG.error("OrderCancelServiceImpl#queryFrontOrderCancelListWithPage has error.", e);
         }
         return dataList;
+	}
+
+    /**
+     * {@inheritDoc}
+     */
+	public OrderCancel getOrderCancelByOrderNo(String orderNo) {
+		 OrderCancel orderCancel = null;
+	        try {
+	            if (null != orderNo) {
+	                orderCancel = orderCancelManager.getOrderCancelByOrderNo(orderNo);
+	            } else {
+	                LOG.warn("OrderCancelServiceImpl#getOrderCancelByOrderNo failed, param is illegal.");
+	            }
+	        } catch (Exception e) {
+	            LOG.error("OrderCancelServiceImpl#getOrderCancelByOrderNo has error.", e);
+	        }
+	        return orderCancel;
+		
 	}
 
 }

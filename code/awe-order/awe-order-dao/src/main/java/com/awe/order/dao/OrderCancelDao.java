@@ -7,6 +7,7 @@ import com.awe.order.domain.OrderCancel;
 import com.awe.order.domain.query.FrontOrderCancelQuery;
 import com.awe.order.domain.query.OrderCancelQuery;
 import com.awe.order.dto.OrderCancelDto;
+import com.awe.order.sdk.api.request.dto.OrderCancelRequestDto;
 /**
  * OrderCancelDao接口<br/>
  * 对'订单取消'表进行基本的操作
@@ -105,4 +106,5 @@ public interface OrderCancelDao {
 	 * @return
 	 */
 	public int queryFrontOrderCancelCount(FrontOrderCancelQuery queryBean);
+
 }

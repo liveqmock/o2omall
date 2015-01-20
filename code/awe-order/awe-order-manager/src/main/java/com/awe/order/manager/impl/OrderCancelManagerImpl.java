@@ -14,6 +14,7 @@ import com.awe.order.domain.query.FrontOrderCancelQuery;
 import com.awe.order.domain.query.OrderCancelQuery;
 import com.awe.order.dto.OrderCancelDto;
 import com.awe.order.manager.OrderCancelManager;
+import com.awe.order.sdk.api.request.dto.OrderCancelRequestDto;
 import com.hbird.common.manager.BaseManager;
 import com.hbird.common.utils.page.PageUtil;
 
@@ -191,5 +192,12 @@ public class OrderCancelManagerImpl extends BaseManager implements OrderCancelMa
      */
 	public int queryFrontOrderCancelCount(FrontOrderCancelQuery queryBean) {
 		return orderCancelDao.queryFrontOrderCancelCount(queryBean);
+	}
+
+	/**
+     * {@inheritDoc}
+     */
+	public OrderCancel getOrderCancelByOrderNo(String orderNo) {
+		return orderCancelDao.getOrderCancelByOrderNo(orderNo);
 	}
 }
