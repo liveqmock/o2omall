@@ -23,6 +23,7 @@ import com.awe.pms.service.BusinessInfoService;
 import com.awe.pms.service.ProductBrandService;
 import com.awe.pms.service.ProductDictService;
 import com.awe.pms.service.ProductService;
+import com.awe.pms.utils.enums.CodeEnum;
 import com.awe.pms.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.wrap.WrapMapper;
@@ -92,6 +93,8 @@ public class ProductController extends BaseController {
      */
     @RequestMapping(value = "addForward")
     public String addForward(Model model) {
+    	model.addAttribute("productNo", this.productService.queryMaxProductNo(CodeEnum.PRODUCT_NO_S.getType()));
+    	
     	ProductBrandQuery queryBeanProductBrand = new ProductBrandQuery();
 		model.addAttribute("productBrands", this.productBrandService.queryProductBrandList(queryBeanProductBrand));
 		
@@ -244,6 +247,25 @@ public class ProductController extends BaseController {
             LOG.warn("detail product has error.", e);
             return error();
         }
+    }
+    
+    /**
+     * 查询商品信息详情
+     * 
+     * @param query
+     * @return
+     */
+    @RequestMapping(value = "queryMaxProductNo", method = RequestMethod.GET)
+    @ResponseBody
+    public Wrapper<?> queryMaxProductNo(Integer mode) {
+    	
+    	try {
+    		String productNo = this.productService.queryMaxProductNo(mode);
+			return new Wrapper<String>().result(productNo);
+    	} catch (Exception e) {
+    		LOG.warn("queryMaxProductNo has error.", e);
+    		return error();
+    	}
     }
     
     private void initDicts(Model model) {

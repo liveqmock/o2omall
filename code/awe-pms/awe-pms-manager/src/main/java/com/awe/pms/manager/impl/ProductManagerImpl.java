@@ -134,4 +134,8 @@ public class ProductManagerImpl extends BaseManager implements ProductManager {
     public boolean exist(Product product) {
         return productDao.exist(product);
     }
+
+	public Product queryMaxProductNo(int mode) {
+		return this.productDao.queryMaxProductNo(mode);
+	}
 }

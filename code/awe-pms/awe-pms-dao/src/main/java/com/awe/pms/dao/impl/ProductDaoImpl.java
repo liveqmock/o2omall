@@ -77,4 +77,8 @@ public class ProductDaoImpl extends BaseDao implements ProductDao {
         int count = (Integer) queryForObject(namespace +".exist", product);
         return count > 0;
     }
+
+	public Product queryMaxProductNo(int mode) {
+		return (Product) queryForObject(namespace +".queryMaxProductNo", mode);
+	}
 }

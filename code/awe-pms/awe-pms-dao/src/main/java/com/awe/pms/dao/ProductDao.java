@@ -29,6 +29,12 @@ public interface ProductDao {
      * @return
      */
     public boolean update(Product product);
+    
+    /**
+     * 获取当前商品编码最大值，若没有则选择默认的
+     * @return
+     */
+    public Product queryMaxProductNo(int mode);
 
     /**
      * 根据查询Bean获取对象集合，不带翻页

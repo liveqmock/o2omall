@@ -134,4 +134,8 @@ public class ProductSkuManagerImpl extends BaseManager implements ProductSkuMana
     public boolean exist(ProductSku productSku) {
         return productSkuDao.exist(productSku);
     }
+
+	public ProductSku queryMaxSkuNo(String productNo) {
+		return this.productSkuDao.queryMaxSkuNo(productNo);
+	}
 }

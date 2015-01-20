@@ -250,6 +250,14 @@
             where id = #{_parameter} and yn = 1
         </if>
     </select>
+    
+    <!-- 获取当前商品编码最大值对象信息 -->
+    <select id="queryMaxProductNo" resultMap="ProductMap" parameterType="java.lang.Long">
+    	<if test="_parameter != null">
+         select <include refid="productColumns"/> from product
+         	where yn = 1 and mode = #{_parameter} order by product_no desc limit 0,1
+        </if>
+    </select>
 
     <!-- 根据查询Bean获取数据集合，不带翻页 -->
     <select id="queryProductList" resultMap="ProductMap"

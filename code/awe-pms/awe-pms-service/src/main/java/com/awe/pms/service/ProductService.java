@@ -39,6 +39,13 @@ public interface ProductService {
      * @return false：失败 true：成功
      */
     public boolean update(Product product);
+    
+    /**
+     * 获取当前商品编码最大值，若没有则选择默认的
+     * @param mode 
+     * @return
+     */
+    public String queryMaxProductNo(int mode);
 
     /**
      * 根据查询Bean获取对象集合，无翻页
