@@ -100,7 +100,6 @@ public class ReturnExchange implements java.io.Serializable {
     private Integer yn; 
     /**用户id*/
     private Long userId;
-    
     /**
      * get id自增
      * 
@@ -844,6 +843,4 @@ public class ReturnExchange implements java.io.Serializable {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-    
-    
 }

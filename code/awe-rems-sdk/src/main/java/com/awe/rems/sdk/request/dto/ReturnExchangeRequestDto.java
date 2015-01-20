@@ -846,4 +846,5 @@ public class ReturnExchangeRequestDto extends HbirdDto {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+	
 }
