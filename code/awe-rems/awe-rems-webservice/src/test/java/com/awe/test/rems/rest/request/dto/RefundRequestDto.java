@@ -55,6 +55,10 @@ public class RefundRequestDto extends HbirdDto {
     private Long returnExchangeId;
     /**用户id*/
     private Long userId;
+    /**退款状态*/
+    private Integer status;
+    /**差额原因*/
+    private String balanceReason;
     /**
      * get id自增
      * 
@@ -364,5 +368,20 @@ public class RefundRequestDto extends HbirdDto {
 	public void setSkuName(String skuName) {
 		this.skuName = skuName;
 	}
-    
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public String getBalanceReason() {
+		return balanceReason;
+	}
+
+	public void setBalanceReason(String balanceReason) {
+		this.balanceReason = balanceReason;
+	}
 }
