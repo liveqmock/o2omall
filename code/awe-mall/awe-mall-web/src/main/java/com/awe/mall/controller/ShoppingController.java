@@ -16,8 +16,10 @@ import com.awe.mall.domain.enums.ProductDictEnum;
 import com.awe.mall.service.ProductBrandService;
 import com.awe.mall.service.ProductCategoryService;
 import com.awe.mall.service.ProductDictService;
+import com.awe.mall.service.ProductSelectService;
 import com.awe.mall.service.ProductService;
 import com.awe.pms.sdk.request.dto.ProductRequestDto;
+import com.awe.pms.sdk.request.dto.ProductSelectRequestDto;
 import com.awe.pms.sdk.response.dto.ProductDictResponseDto;
 import com.awe.pms.sdk.response.dto.ProductResponseDto;
 import com.awe.pms.sdk.response.dto.ProductSkuResponseDto;
@@ -38,6 +40,9 @@ public class ShoppingController extends BaseController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private ProductSelectService productSelectService;
 	
 	@Autowired
     private ProductBrandService productBrandService;
@@ -65,11 +70,12 @@ public class ShoppingController extends BaseController {
     }
     
     @RequestMapping(value = "shopping_list", method = RequestMethod.GET)
-    public String list(Model model, ProductRequestDto requestDto) {
+    public String list(Model model, ProductSelectRequestDto requestDto) {
     	logger.debug("go to list page");
     	initNavFlag(model);
     	
-		model.addAttribute("products", this.productService.queryProducts(requestDto));
+//		model.addAttribute("products", this.productService.queryProducts(requestDto));
+		model.addAttribute("productSelects", this.productSelectService.queryProductSelects(requestDto));
     	model.addAttribute("productCategorys", this.productCategoryService.queryProductCategoryList(null));
 		model.addAttribute("productBrands", this.productBrandService.queryProductBrandList(null));
     	return VIEW_WORKSPACE + VIEW_PRODUCT_LIST_PAGE;
@@ -81,14 +87,14 @@ public class ShoppingController extends BaseController {
     	initNavFlag(model);
     	initAllProductDict(model);
     	
-    	ProductResponseDto responseDto = this.productService.getProduct(requestDto);
+		ProductResponseDto responseDto = this.productService.getProduct(requestDto);
     	for (ProductSkuResponseDto skuResponseDto : responseDto.getProductSkuResponseDtos()) {
     		if (skuResponseDto.getSkuNo().equals(currentSkuNo)) {
     			model.addAttribute("currentProductSku", skuResponseDto);
     		}
     	}
     	
-		model.addAttribute("product", this.productService.getProduct(requestDto));
+		model.addAttribute("product", responseDto);
     	model.addAttribute("productCategorys", this.productCategoryService.queryProductCategoryList(null));
     	model.addAttribute("productBrands", this.productBrandService.queryProductBrandList(null));
     	return VIEW_WORKSPACE + VIEW_PRODUCT_DETAIL_PAGE;

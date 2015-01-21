@@ -107,16 +107,14 @@
               <div class="bf rank_lb">
                   <div class="shop_lb clearfix">
                    <ul>
-					 #foreach($product in $!products)
-						#foreach($productSku in $!{product.productSkuResponseDtos})
+					 #foreach($productSelect in $!productSelects)
                          <li class="pl">
-                             <div><a href="#springUrl('')/shopping/product_details?id=$!{product.id}&currentSkuNo=$!{productSku.skuNo}"><img src="#springUrl('')/static/images/m_img6.jpg" /></a></div>
-                             <p><a href="#springUrl('')/shopping/product_details?id=$!{product.id}&currentSkuNo=$!{productSku.skuNo}">$!{product.productName} $!{productSku.skuName}</a></p>
+                             <div><a href="#springUrl('')/shopping/product_details?productNo=$!{productSelect.productNo}&currentSkuNo=$!{productSelect.skuNo}"><img src="#springUrl('')/static/images/m_img6.jpg" /></a></div>
+                             <p><a href="#springUrl('')/shopping/product_details?productNo=$!{productSelect.productNo}&currentSkuNo=$!{productSelect.skuNo}">$!{productSelect.productName}</a></p>
                              <p>优质配方工艺</p>
-                             <p class="reds"><s>¥$!{productSku.price}元</s></p>
-                             <p class="reds">¥$!{productSku.salePrice}元</p>
+                             <p class="reds"><s>¥$!{productSelect.price}元</s></p>
+                             <p class="reds">¥$!{productSelect.salePrice}元</p>
                          </li>
-						#end
 					 #end
                    </ul>
                  </div>
