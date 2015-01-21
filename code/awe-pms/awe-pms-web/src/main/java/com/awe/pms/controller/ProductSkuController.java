@@ -18,6 +18,7 @@ import com.awe.pms.domain.ProductSku;
 import com.awe.pms.domain.enums.ProductDictEnum;
 import com.awe.pms.domain.query.ProductSkuQuery;
 import com.awe.pms.service.ProductDictService;
+import com.awe.pms.service.ProductSelectService;
 import com.awe.pms.service.ProductSkuService;
 import com.awe.pms.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
@@ -39,6 +40,9 @@ public class ProductSkuController extends BaseController {
     
     @Autowired
     private ProductDictService productDictService;
+    
+    @Autowired
+    private ProductSelectService productSelectService;
 
     /** 视图前缀 */
     private static final String viewPrefix ="productSku";
@@ -96,6 +100,9 @@ public class ProductSkuController extends BaseController {
         try {
             productSku.setCreateUser(getLoginUserCnName());
             if (productSkuService.insert(productSku)) {
+            	if (productSku.getSaleStatus().equals(1)) {
+            		this.addOrDeleteProductSelect(productSku);
+            	}
                 return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "添加成功！");
             } else {
                 return WrapMapper.wrap(Wrapper.ERROR_CODE, "添加失败！");
@@ -142,6 +149,7 @@ public class ProductSkuController extends BaseController {
         try {
             productSku.setUpdateUser(getLoginUserCnName());
             if (productSkuService.update(productSku)) {
+            	this.addOrDeleteProductSelect(productSku);
                 return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "更新成功！");
             } else {
                 return WrapMapper.wrap(Wrapper.ERROR_CODE, "更新失败！");
@@ -164,6 +172,8 @@ public class ProductSkuController extends BaseController {
         try {
             productSku.setUpdateUser(getLoginUserCnName());
             if (productSkuService.delete(productSku)) {
+            	productSku.setSaleStatus(0);
+            	this.addOrDeleteProductSelect(productSku);
                 return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "删除成功！");
             } else {
                 return WrapMapper.wrap(Wrapper.ERROR_CODE, "删除失败！");
@@ -238,6 +248,13 @@ public class ProductSkuController extends BaseController {
     	} catch (Exception e) {
     		LOG.warn("queryMaxSkuNo has error.", e);
     		return error();
+    	}
+    }
+    
+    public void addOrDeleteProductSelect(ProductSku productSku) {
+    	// 开启线程处理
+    	if (productSku != null) {
+    		this.productSelectService.addOrDelete(productSku);
     	}
     }
     

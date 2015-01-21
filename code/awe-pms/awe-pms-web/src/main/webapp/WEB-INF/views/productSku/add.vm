@@ -33,8 +33,32 @@
 				$('#sizeOrder').ace_spinner({value:10,min:1,max:100,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
 				$('#saleQuantity').ace_spinner({value:100,min:1,max:10000,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
 				
+				$("#btn-submit-img").click(function(){
+					$("#sku_form").ajaxSubmit({ 
+                		cache: false,
+                		type: 'post',
+                		data:{paramNo:$("#skuNo").val()},
+                		 error:function(data){
+                		 	//hideWait();
+                			alert("上传图片出错！");
+                	     },
+                		beforeSubmit:function(){
+                				//showWait();
+                			},
+                        success:function(data){
+                            //var obj = eval('(' + data + ')');
+                            showSkuPics(data);
+                			 hideWait();
+                        }
+                	});
+				});
+				
 				$("#btn-back").click(function(){
 					window.location.href=("$basePath/productSku?productNo=$!productSku.productNo");
+				});
+				$("#btn-submit-ok").click(function(){
+					$("#saleStatus").val(1);
+					$("#btn-submit").click();
 				});
 				$("#btn-submit").click(function(){
             		var form = $("#addForm");
@@ -47,6 +71,28 @@
             		);
             	});
             });
+			
+			/**
+             * @description:回显商品主图片
+             * @date 2014-2-11
+             */
+            function showSkuPics(data){
+            	if(data.indexOf("<pre>") > -1 ){
+            		data = jQuery.parseJSON(jQuery(data).text());
+            	} else {
+            		data = eval('(' + data + ')');
+            	}
+            	var htmlContent = "";
+            	var path = data.imgUrl;
+            	//~----从图片路径中截取唯一编号，做为图片的imgId
+                //~----从图片路径中截取唯一编号，做为图片的imgId
+                var imgId = data.imgNo;
+                htmlContent ="<div><img src='http://imgmain.hdletv.com/"+ path +"' width='200px' height='130px'/><br><span><a href='javaScript:void()' id='"+imgId+"' onclick='delSkuPic(\""+imgId+"\");'>删除</a></span></div>";
+                $('#mainpreview').append(htmlContent);
+                //添加隐藏域的数据
+                var input="<input id='fig"+imgId+"' name='FigImg' value='"+imgId+";"+path+"' />";
+                $('#fig').append(input);
+            }
         </script>
     </head>
 	<body>
@@ -77,6 +123,21 @@
                                     </div>
                                 </div>
 								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="size">尺码</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="size" id="size" class="col-xs-10 col-sm-8" />
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="sizeDesc">尺码说明</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="sizeDesc" id="sizeDesc" class="col-xs-10 col-sm-8" />
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="sizeOrder">尺码顺序</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="sizeOrder" id="sizeOrder" class="col-xs-10 col-sm-8" />
+										<span class='red'>提示:数值小，排序靠前</span>
+                                    </div>
+								</div>
+								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="color">颜色</label>
                                     <div class="col-sm-3">
 										<select id="color" name="color" class="col-xs-10 col-sm-8">
@@ -95,21 +156,6 @@
 									<label class="col-sm-1 control-label no-padding-right" for="colorOrder">颜色顺序</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="colorOrder" id="colorOrder" class="col-xs-10 col-sm-8" />
-										<span class='red'>提示:数值小，排序靠前</span>
-                                    </div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="size">尺码</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="size" id="size" class="col-xs-10 col-sm-8" />
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="sizeDesc">尺码说明</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="sizeDesc" id="sizeDesc" class="col-xs-10 col-sm-8" />
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="sizeOrder">尺码顺序</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="sizeOrder" id="sizeOrder" class="col-xs-10 col-sm-8" />
 										<span class='red'>提示:数值小，排序靠前</span>
                                     </div>
 								</div>
@@ -136,31 +182,48 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="dimensionCodeTwo" id="dimensionCodeTwo" class="col-xs-10 col-sm-8" />
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="saleStatus">上下架状态</label>
-                                    <div class="col-sm-3">
-										<select id="saleStatus" name="saleStatus" class="col-xs-10 col-sm-8">
-											<option value="0">请选择</option>
-    										#if(!$null.isNull($!saleStatusTypes))
-                                    			#foreach($item in $saleStatusTypes)
-                                    				<option value="$item.attr">$item.value</option>
-                                    			#end
-                                    		#end
-                                        </select>
-                                    </div>
+                                    <input type="hidden" name="saleStatus" id="saleStatus" value="0" />
 								</div>
-								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="imgPath">Sku主图</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="imgPath" id="imgPath" class="col-xs-10 col-sm-8" />
+                            </form>
+							<form class="form-horizontal" id="sku_form" method="post" action="$basePath/picture/upload" enctype="multipart/form-data">
+    							<div class="form-group">
+    								<label class="col-sm-1 control-label no-padding-right" for="imgPath">商品主图</label>
+    								<div class="col-sm-11">
+										<input type="hidden" name="filefolder" value="product" />
+                                        <input type="file" name="file" class="col-sm-2" />
+                                        <input class="col-sm-1" type="button" id="btn-submit-img" value="发布图片" />
+    									<span class="col-sm-8">图片尺寸宽440PX，高自适应</span>
                                     </div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-8 col-sm-offset-4">
+    							</div>
+    							<div class="form-group">
+        							<label class="col-sm-1 control-label no-padding-right" for="mainpreview">主图预览</label>
+        							<div class="col-sm-11" id="mainpreview">
+                                    </div>
+    						    </div>
+                            </form>
+							<form class="form-horizontal" id="sku_list_form" method="post" action="upload.do" enctype="multipart/form-data">
+    							<div class="form-group">
+    								<label class="col-sm-1 control-label no-padding-right" for="skuListImgPath">商品展示</label>
+    								<div class="col-sm-11" id="skuListImgPath">
+                                        <input type="file" name="file" class="col-sm-2" />
+                                        <input class="col-sm-1" type="button" id="btn-submit-sku-list" value="发布图片" />
+    									<span class="col-sm-8">图片尺寸宽440PX，高自适应</span>
+                                    </div>
+    							</div>
+    							<div class="form-group">
+        							<label class="col-sm-1 control-label no-padding-right" for="skuListpreview">展示预览</label>
+        							<div class="col-sm-11" id="skuListpreview">
+                                    </div>
+    						    </div>
+    							<div class="form-group">
+    								<div class="col-sm-8 col-sm-offset-3">
                                         <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
                                         &nbsp; &nbsp; &nbsp;
                                         <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
-										 &nbsp; &nbsp; &nbsp;
-              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+    									 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>保存</button>
+    									 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit-ok"><i class="icon-ok"></i>保存并上架</button>
                                     </div>
                                 </div>
                             </form>

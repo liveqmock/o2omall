@@ -84,6 +84,9 @@
 				<li id="subMenu-201">
 					<a href="javascript:void(0)" onclick="link('201','商品类别品牌','productBrand','20','pms系统');">商品类别品牌</a>
 				</li>
+				<li id="subMenu-209">
+					<a href="javascript:void(0)" onclick="link('209','商品查询综合表','productSelect','20','pms系统');">商品查询综合表</a>
+				</li>
 				<li id="subMenu-207">
 					<a href="javascript:void(0)" onclick="link('207','商品信息','product','20','pms系统');">商品信息</a>
 				</li>

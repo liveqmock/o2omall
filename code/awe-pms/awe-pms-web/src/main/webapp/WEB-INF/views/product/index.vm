@@ -175,7 +175,6 @@
                 <table class="table table-striped table-bordered table-condensed table-hover">
                     <thead>
                         <tr>
-							<th class="center">主键</th>
 							<th class="center">一级分类</th>
 							<th class="center">二级分类</th>
 							<th class="center">三级分类</th>
@@ -196,7 +195,6 @@
                     <tbody>
                         #foreach( $item in $dataList)
                             <tr>
-                                <td>$!item.id</td>
                                 <td>$!item.categoryOne</td>
                                 <td>$!item.categoryTwo</td>
                                 <td>$!item.categoryThree</td>

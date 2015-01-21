@@ -94,7 +94,7 @@
 							<th class="center">尺码</th>
 							<th class="center">尺码说明</th>
 							<th class="center">尺码顺序</th>
-							<th class="center">上下架状态</th>
+							<th class="center">是否上架</th>
 							<th class="center">上下架时间</th>
 							<th class="center">Sku主图</th>
 							<th class="center">市场价</th>

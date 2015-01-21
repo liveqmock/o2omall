@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		#parse("/layout/head.vm")
+        <script language="javascript">
+            $(function() {
+				$('#updateForm').validate({
+					errorElement:"em",
+					errorClass:"red",
+					rules: {
+												productNo: {required: true},
+						productName: {required: true},
+						skuNo: {required: true},
+						skuName: {required: true},
+						categoryOneId: {required: true},
+						categoryTwoId: {required: true},
+						categoryThreeId: {required: true},
+						applicableStep: {required: true},
+						brandCode: {required: true},
+						mode: {required: true},
+						salePrice: {required: true},
+						price: {required: true},
+						imgPath: {required: true},
+						saleQuantityTotal: {required: true},
+						saleQuantityWeek: {required: true},
+						recommendAmount: {required: true},
+						isRecommend: {required: true},
+						isHot: {required: true},
+						hitCountTotal: {required: true},
+						saleStatus: {required: true},
+						hitCountWeek: {required: true},
+					},
+			
+					messages: {
+						productNo: { required: "请输入商品编号"},
+						productName: { required: "请输入商品名称"},
+						skuNo: { required: "请输入sku编号"},
+						skuName: { required: "请输入SKU名称"},
+						categoryOneId: { required: "请输入一级分类"},
+						categoryTwoId: { required: "请输入二级分类"},
+						categoryThreeId: { required: "请输入三级分类"},
+						applicableStep: { required: "请输入适用阶段"},
+						brandCode: { required: "请输入品牌编号"},
+						mode: { required: "请输入经营模式"},
+						salePrice: { required: "请输入销售价"},
+						price: { required: "请输入市场价"},
+						imgPath: { required: "请输入Sku主图"},
+						saleQuantityTotal: { required: "请输入总销售量"},
+						saleQuantityWeek: { required: "请输入每周销售量"},
+						recommendAmount: { required: "请输入推荐数量"},
+						isRecommend: { required: "请输入是否推荐"},
+						isHot: { required: "请输入是否热门"},
+						hitCountTotal: { required: "请输入总浏览次数"},
+						saleStatus: { required: "请输入上下架状态"},
+						hitCountWeek: { required: "请输入每周浏览次数"},
+					}
+				});
+				
+				$("#btn-back").click(function(){
+					window.location.href=("$basePath/productSelect");
+				});
+				$("#btn-submit").click(function(){
+            		var form = $("#updateForm");
+					if(form.valid()==false){
+						return;
+					}
+					jQuery.post('$basePath/productSelect/update',
+            			form.serialize(),
+            			function(data) { MyPopWindow.SubmitCompletedCallback2(data, "$basePath/productSelect"); }
+            		);
+            	});
+            });
+        </script>
+    </head>
+	<body>
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-plus green"></i>商品查询综合表&nbsp;&gt;&nbsp;修改
+                        </h5>
+                        <div class="widget-toolbar"></div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main" style="background-color: #fff;padding:5px;">
+                            <form class="form-horizontal" role="form" id="updateForm">
+                                <div class="form-group">
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="productNo">商品编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="productNo" id="productNo" class="col-xs-12 col-sm-12" value="$!productSelect.productNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="productName">商品名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="productName" id="productName" class="col-xs-12 col-sm-12" value="$!productSelect.productName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="skuNo">sku编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="skuNo" id="skuNo" class="col-xs-12 col-sm-12" value="$!productSelect.skuNo" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="skuName">SKU名称</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="skuName" id="skuName" class="col-xs-12 col-sm-12" value="$!productSelect.skuName" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="categoryOneId">一级分类</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="categoryOneId" id="categoryOneId" class="col-xs-12 col-sm-12" value="$!productSelect.categoryOneId" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="categoryTwoId">二级分类</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="categoryTwoId" id="categoryTwoId" class="col-xs-12 col-sm-12" value="$!productSelect.categoryTwoId" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="categoryThreeId">三级分类</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="categoryThreeId" id="categoryThreeId" class="col-xs-12 col-sm-12" value="$!productSelect.categoryThreeId" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="applicableStep">适用阶段</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="applicableStep" id="applicableStep" class="col-xs-12 col-sm-12" value="$!productSelect.applicableStep" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="brandCode">品牌编号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="brandCode" id="brandCode" class="col-xs-12 col-sm-12" value="$!productSelect.brandCode" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="mode">经营模式</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="mode" id="mode" class="col-xs-12 col-sm-12" value="$!productSelect.mode" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="salePrice">销售价</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="salePrice" id="salePrice" class="col-xs-12 col-sm-12" value="$!productSelect.salePrice" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="price">市场价</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="price" id="price" class="col-xs-12 col-sm-12" value="$!productSelect.price" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="imgPath">Sku主图</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="imgPath" id="imgPath" class="col-xs-12 col-sm-12" value="$!productSelect.imgPath" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="saleQuantityTotal">总销售量</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="saleQuantityTotal" id="saleQuantityTotal" class="col-xs-12 col-sm-12" value="$!productSelect.saleQuantityTotal" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="saleQuantityWeek">每周销售量</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="saleQuantityWeek" id="saleQuantityWeek" class="col-xs-12 col-sm-12" value="$!productSelect.saleQuantityWeek" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="recommendAmount">推荐数量</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="recommendAmount" id="recommendAmount" class="col-xs-12 col-sm-12" value="$!productSelect.recommendAmount" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="isRecommend">是否推荐</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="isRecommend" id="isRecommend" class="col-xs-12 col-sm-12" value="$!productSelect.isRecommend" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="isHot">是否热门</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="isHot" id="isHot" class="col-xs-12 col-sm-12" value="$!productSelect.isHot" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="hitCountTotal">总浏览次数</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="hitCountTotal" id="hitCountTotal" class="col-xs-12 col-sm-12" value="$!productSelect.hitCountTotal" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="saleStatus">上下架状态</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="saleStatus" id="saleStatus" class="col-xs-12 col-sm-12" value="$!productSelect.saleStatus" />
+                                    </div>
+									<label class="col-sm-offset-1 col-sm-1 control-label no-padding-right" for="hitCountWeek">每周浏览次数</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="hitCountWeek" id="hitCountWeek" class="col-xs-12 col-sm-12" value="$!productSelect.hitCountWeek" />
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<input type="hidden" name="id" id="id" value="$!productSelect.id" />
+									<div class="col-sm-8 col-sm-offset-4">
+                                        <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
+										 &nbsp; &nbsp; &nbsp;
+              							<button class="btn btn-success btn-sm" type="button" id="btn-submit"><i class="icon-ok"></i>提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+	</body>
+</html>

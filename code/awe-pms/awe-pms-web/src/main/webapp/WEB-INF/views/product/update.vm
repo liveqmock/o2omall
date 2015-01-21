@@ -50,6 +50,24 @@
 				$("#supportReturn").val("$product.supportReturn");
 				$("#freightFree").val("$product.freightFree");
 				
+				$("#mode").change(function () {
+					var modeValue = $(this).val();
+					jQuery.get('$basePath/product/queryMaxProductNo',
+            			{mode: modeValue},
+            			function(data) {
+							if(data!=null && data.code==200 && data.result!=null){
+								$("#productNo").val(data.result);
+							}
+						}
+            		);
+					
+					if (modeValue == 10) {
+						$("#modeSpan").show();
+					} else {
+						$("#modeSpan").hide();
+					}
+				});
+				
 				$("#categoryOneId").change(function () {
 					initSelected("categoryTwoId");
 					initSelected("categoryThreeId");
@@ -108,16 +126,14 @@
 				$("#btn-submit").click(function(){
             		var form = $("#updateForm");
 					
-					var distribution = CKEDITOR.instances.distribution.getData();
-					$("#distribution").text(distribution);
-					var service = CKEDITOR.instances.service.getData();
-					$("#service").text(service);
-					var kindlyReminder = CKEDITOR.instances.kindlyReminder.getData();
-					$("#kindlyReminder").text(kindlyReminder);
 					var features = CKEDITOR.instances.features.getData();
 					$("#features").text(features);
 					var introduce = CKEDITOR.instances.introduce.getData();
 					$("#introduce").text(introduce);
+					var kindlyReminder = CKEDITOR.instances.kindlyReminder.getData();
+					$("#kindlyReminder").text(kindlyReminder);
+					var packingList = CKEDITOR.instances.packingList.getData();
+					$("#packingList").text(packingList);
 					var saleGuarantee = CKEDITOR.instances.saleGuarantee.getData();
 					$("#saleGuarantee").text(saleGuarantee);
 					
@@ -169,17 +185,6 @@
                                     </div>
                                 </div>
 								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="applicableStep">适用阶段</label>
-                                    <div class="col-sm-3">
-										<select id="applicableStep" name="applicableStep" class="col-xs-10 col-sm-8">
-											<option value="">请选择</option>
-    										#if(!$null.isNull($!applicableSteps))
-                                    			#foreach($item in $applicableSteps)
-                                    				<option value="$item.attr">$item.value</option>
-                                    			#end
-                                    		#end
-                                        </select>
-                                    </div>
 									<label class="col-sm-1 control-label no-padding-right" for="type">类型</label>
                                     <div class="col-sm-3">
 										<select id="type" name="type" class="col-xs-10 col-sm-8">
@@ -201,34 +206,6 @@
                                     		#end
                                         </select>
                                     </div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="productNo">商品编号</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="productNo" id="productNo" class="col-xs-10 col-sm-8" value="$!product.productNo" />
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="productName">商品名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="productName" id="productName" class="col-xs-10 col-sm-8" value="$!product.productName" />
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="enName">商品英文名称</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="enName" id="enName" class="col-xs-10 col-sm-8" value="$!product.enName" />
-                                    </div>
-                                </div>
-								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="brandCode">品牌</label>
-                                    <div class="col-sm-3">
-										<select id="brandCode" name="brandCode" class="col-xs-10 col-sm-8">
-											<option value="">请选择</option>
-    										#if(!$null.isNull($!productBrands))
-                                    			#foreach($item in $productBrands)
-                                    				<option value="$item.brandCode">$item.brandName</option>
-                                    			#end
-                                    		#end
-                                        </select>
-										<input type="hidden" name="brandName" id="brandName" class="col-xs-10 col-sm-8" />
-                                    </div>
 									<label class="col-sm-1 control-label no-padding-right" for="businessNo">商家</label>
                                     <div class="col-sm-3">
 										<select id="businessNo" name="businessNo" class="col-xs-10 col-sm-8">
@@ -242,6 +219,28 @@
                                         <input type="hidden" name="businessName" id="businessName" class="col-xs-10 col-sm-8" value="$!product.businessName" readonly />
                                     </div>
 								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="productNo">商品编号</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="productNo" id="productNo" class="col-xs-10 col-sm-8" value="$!product.productNo" readonly />
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="productName">商品名称</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="productName" id="productName" class="col-xs-10 col-sm-8" value="$!product.productName" />
+                                    </div>
+									<label class="col-sm-1 control-label no-padding-right" for="brandCode">品牌</label>
+                                    <div class="col-sm-3">
+										<select id="brandCode" name="brandCode" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+    										#if(!$null.isNull($!productBrands))
+                                    			#foreach($item in $productBrands)
+                                    				<option value="$item.brandCode">$item.brandName</option>
+                                    			#end
+                                    		#end
+                                        </select>
+										<input type="hidden" name="brandName" id="brandName" class="col-xs-10 col-sm-8" />
+                                    </div>
+                                </div>
 								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="method">食用方式</label>
                                     <div class="col-sm-3">
@@ -257,12 +256,23 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="originPlace" id="originPlace" class="col-xs-10 col-sm-8" value="$!product.originPlace" />
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="saleTimeStart">商品上架时间</label>
+									<label class="col-sm-1 control-label no-padding-right" for="saleTimeStart">上架时间</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="saleTimeStart" id="saleTimeStart" class="col-xs-10 col-sm-8" value="$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!product.saleTimeStart)" />
+                                        <input type="text" name="saleTimeStart" id="saleTimeStart" class="col-xs-10 col-sm-8" value="$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!product.saleTimeStart)" disabled  />
                                     </div>
 								</div>
 								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="applicableStep">适用阶段</label>
+                                    <div class="col-sm-3">
+										<select id="applicableStep" name="applicableStep" class="col-xs-10 col-sm-8">
+											<option value="">请选择</option>
+    										#if(!$null.isNull($!applicableSteps))
+                                    			#foreach($item in $applicableSteps)
+                                    				<option value="$item.attr">$item.value</option>
+                                    			#end
+                                    		#end
+                                        </select>
+                                    </div>
 									<label class="col-sm-1 control-label no-padding-right" for="applicableCrowd">适用人群</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="applicableCrowd" id="applicableCrowd" class="col-xs-10 col-sm-8" value="$!product.applicableCrowd" />
@@ -283,59 +293,37 @@
                                     		#end
                                         </select>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="packingList">包装清单</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="packingList" id="packingList" class="col-xs-10 col-sm-8" value="$!product.packingList" />
-                                    </div>
+									#*
 									<label class="col-sm-1 control-label no-padding-right" for="material">材质</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="material" id="material" class="col-xs-10 col-sm-8" value="$!product.material" />
                                     </div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="weight">商品净重</label>
+									*#
+									<label class="col-sm-1 control-label no-padding-right" for="weight">净重(kg)</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="weight" id="weight" class="col-xs-10 col-sm-8" value="$!product.weight" />
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="grossWeight">毛重</label>
+									<label class="col-sm-1 control-label no-padding-right" for="grossWeight">毛重(kg)</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="grossWeight" id="grossWeight" class="col-xs-10 col-sm-8" value="$!product.grossWeight" />
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="diameter">直径</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="diameter" id="diameter" class="col-xs-10 col-sm-8" value="$!product.diameter" />
-                                    </div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="length">长</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="length" id="length" class="col-xs-10 col-sm-8" value="$!product.length" />
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="width">宽</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="width" id="width" class="col-xs-10 col-sm-8" value="$!product.width" />
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="height">高</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="height" id="height" class="col-xs-10 col-sm-8" value="$!product.height" />
-                                    </div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="packLength">包装长</label>
+									<label class="col-sm-1 control-label no-padding-right" for="packLength">包装长(mm)</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="packLength" id="packLength" class="col-xs-10 col-sm-8" value="$!product.packLength" />
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="packWidth">包装宽</label>
+									<label class="col-sm-1 control-label no-padding-right" for="packWidth">包装宽(mm)</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="packWidth" id="packWidth" class="col-xs-10 col-sm-8" value="$!product.packWidth" />
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="packHeight">包装高</label>
+									<label class="col-sm-1 control-label no-padding-right" for="packHeight">包装高(mm)</label>
                                     <div class="col-sm-3">
                                         <input type="text" name="packHeight" id="packHeight" class="col-xs-10 col-sm-8" value="$!product.packHeight" />
                                     </div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="supportReturn">是否支持退货</label>
+									<label class="col-sm-1 control-label no-padding-right" for="supportReturn">支持退货</label>
                                     <div class="col-sm-3">
 										<select id="supportReturn" name="supportReturn" class="col-xs-10 col-sm-8">
     										#if(!$null.isNull($!ynTypes))
@@ -345,7 +333,7 @@
                                     		#end
                                         </select>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="freightFree">是否免运费</label>
+									<label class="col-sm-1 control-label no-padding-right" for="freightFree">免运费</label>
                                     <div class="col-sm-3">
 										<select id="freightFree" name="freightFree" class="col-xs-10 col-sm-8">
     										#if(!$null.isNull($!ynTypes))
@@ -360,30 +348,6 @@
                                         <input type="text" name="freight" id="freight" class="col-xs-10 col-sm-8" value="$!product.freight"/>
                                     </div>
 								</div>
-								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="distribution">配送信息</label>
-                                    <div class="col-sm-9">
-										<textarea name="distribution" id="distribution">
-											 $!product.distribution
-                                        </textarea>
-                                    </div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="service">服务（配送信息等）</label>
-                                    <div class="col-sm-9">
-										<textarea name="service" id="service">
-											$!product.service
-                                        </textarea>
-                                    </div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-1 control-label no-padding-right" for="kindlyReminder">温馨提示</label>
-                                    <div class="col-sm-9">
-										<textarea name="kindlyReminder" id="kindlyReminder">
-											$!product.kindlyReminder
-                                        </textarea>
-                                    </div>
-                                </div>
 								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="features">商品描述</label>
                                     <div class="col-sm-9">
@@ -400,6 +364,22 @@
                                         </textarea>
                                     </div>
                                 </div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="kindlyReminder">温馨提示</label>
+                                    <div class="col-sm-9">
+										<textarea name="kindlyReminder" id="kindlyReminder">
+											$!product.kindlyReminder
+                                        </textarea>
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="packingList">包装清单</label>
+                                    <div class="col-sm-9">
+										<textarea name="packingList" id="packingList">
+											$!product.packingList
+                                        </textarea>
+                                    </div>
+								</div>
 								<div class="form-group">
 									<label class="col-sm-1 control-label no-padding-right" for="saleGuarantee">售后保障</label>
                                     <div class="col-sm-9">
@@ -428,7 +408,7 @@
 </html>
 <script type="text/javascript">
 //<![CDATA[
- CKEDITOR.replace( 'distribution',//editor1是你文本域的ID
+ CKEDITOR.replace( 'features',//editor1是你文本域的ID
   {
    skin : 'kama',//想要使用的皮肤
 	// 图片上传配置 
@@ -462,7 +442,7 @@
 </script>
 <script type="text/javascript">
 //<![CDATA[
- CKEDITOR.replace( 'service',//editor1是你文本域的ID
+ CKEDITOR.replace( 'introduce',//editor1是你文本域的ID
   {
    skin : 'kama',//想要使用的皮肤
 	// 图片上传配置 
@@ -530,41 +510,7 @@
 </script>
 <script type="text/javascript">
 //<![CDATA[
- CKEDITOR.replace( 'features',//editor1是你文本域的ID
-  {
-   skin : 'kama',//想要使用的皮肤
-	// 图片上传配置 
-   filebrowserImageUploadUrl : 'upload.do?type=Image',
-	// 图片浏览配置filebrowserImageUploadUrl 
-   filebrowserUploadUrl : 'upload.do?type=File',
-   filebrowserImageUploadUrl:'$basePath/file/skuckeditor',//上传的路径
-   toolbar :
-	   [
-       ['Source','-','NewPage','Preview','-','Templates'],
-	   //加粗     斜体，     下划线      穿过线      下标字        上标字
-	   ['Bold','Italic','Underline','Strike','Subscript','Superscript'],
-	   //数字列表          实体列表            减小缩进    增大缩进
-	   ['NumberedList','BulletedList','-','Outdent','Indent'],
-	   //左对齐             居中对齐          右对齐          两端对齐
-	   ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-	   //超链接 取消超链接 锚点
-	   ['Link','Unlink','Anchor'],
-	   //图片    flash    表格       水平线            表情       特殊字符        分页符
-	   ['Image','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
-	   '/',
-	   //样式       格式      字体    字体大小
-	   ['Styles','Format','Font','FontSize'],
-	   //文本颜色     背景颜色
-	   ['TextColor','BGColor'],
-	   //全屏           显示区块
-	   ['Maximize', 'ShowBlocks','-']
-	   ]
-  });
-//]]>
-</script>
-<script type="text/javascript">
-//<![CDATA[
- CKEDITOR.replace( 'introduce',//editor1是你文本域的ID
+ CKEDITOR.replace( 'packingList',//editor1是你文本域的ID
   {
    skin : 'kama',//想要使用的皮肤
 	// 图片上传配置 

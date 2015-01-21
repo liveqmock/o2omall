@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.awe.pms.dao.impl.ProductSelectDaoImpl">
+    <resultMap id="ProductSelectMap" type="ProductSelect">
+		<result column="id" property="id" jdbcType="DECIMAL" />
+		<result column="product_no" property="productNo" jdbcType="VARCHAR" />
+		<result column="product_name" property="productName" jdbcType="VARCHAR" />
+		<result column="sku_no" property="skuNo" jdbcType="VARCHAR" />
+		<result column="sku_name" property="skuName" jdbcType="VARCHAR" />
+		<result column="category_one_id" property="categoryOneId" jdbcType="DECIMAL" />
+		<result column="category_two_id" property="categoryTwoId" jdbcType="DECIMAL" />
+		<result column="category_three_id" property="categoryThreeId" jdbcType="DECIMAL" />
+		<result column="applicable_step" property="applicableStep" jdbcType="DECIMAL" />
+		<result column="brand_code" property="brandCode" jdbcType="VARCHAR" />
+		<result column="mode" property="mode" jdbcType="DECIMAL" />
+		<result column="sale_price" property="salePrice" jdbcType="DECIMAL" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+		<result column="img_path" property="imgPath" jdbcType="VARCHAR" />
+		<result column="sale_quantity_total" property="saleQuantityTotal" jdbcType="DECIMAL" />
+		<result column="sale_quantity_week" property="saleQuantityWeek" jdbcType="DECIMAL" />
+		<result column="recommend_amount" property="recommendAmount" jdbcType="DECIMAL" />
+		<result column="is_recommend" property="isRecommend" jdbcType="DECIMAL" />
+		<result column="is_hot" property="isHot" jdbcType="DECIMAL" />
+		<result column="hit_count_total" property="hitCountTotal" jdbcType="DECIMAL" />
+		<result column="sale_status" property="saleStatus" jdbcType="DECIMAL" />
+		<result column="hit_count_week" property="hitCountWeek" jdbcType="DECIMAL" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+		<result column="yn" property="yn" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <sql id="productSelectColumns">
+    	id,product_no,product_name,sku_no,sku_name,category_one_id,category_two_id,category_three_id,applicable_step,
+    	brand_code,mode,sale_price,price,img_path,sale_quantity_total,sale_quantity_week,recommend_amount,is_recommend,
+    	is_hot,hit_count_total,sale_status,hit_count_week,create_time,update_time,create_user,update_user,yn
+    </sql>
+    
+     <sql id="productSelectUsedColumns">
+    	product_no,product_name,sku_no,sku_name,category_one_id,category_two_id,category_three_id,applicable_step,
+    	brand_code,mode,sale_price,price,img_path,sale_quantity_total,sale_quantity_week,recommend_amount,is_recommend,
+    	is_hot,hit_count_total,sale_status,hit_count_week,create_time,update_time,create_user,update_user,yn
+    </sql>
+
+    <!-- 创建信息 -->
+    <insert id="insert" parameterType="ProductSelect" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO product_select(<include refid="productSelectUsedColumns"/>) 
+        VALUES (#{productNo},#{productName},#{skuNo},#{skuName},#{categoryOneId},#{categoryTwoId},#{categoryThreeId},
+        #{applicableStep},#{brandCode},#{mode},#{salePrice},#{price},#{imgPath},#{saleQuantityTotal},#{saleQuantityWeek},
+        #{recommendAmount},#{isRecommend},#{isHot},#{hitCountTotal},#{saleStatus},#{hitCountWeek},now(),now(),#{createUser},#{updateUser},1)
+	</insert>
+	
+    <!-- 修改信息 -->
+    <update id="update" parameterType="ProductSelect">
+        <if test="_parameter != null">
+            <if test="id != null and id > 0">
+                update product_select set
+		        <if test="productNo != null and productNo != ''">
+                	product_no = #{productNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="productName != null and productName != ''">
+                	product_name = #{productName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="skuNo != null and skuNo != ''">
+                	sku_no = #{skuNo,jdbcType=VARCHAR},
+		        </if>
+		        <if test="skuName != null and skuName != ''">
+                	sku_name = #{skuName,jdbcType=VARCHAR},
+		        </if>
+		        <if test="categoryOneId != null">
+                	category_one_id = #{categoryOneId,jdbcType=DECIMAL},
+		        </if>
+		        <if test="categoryTwoId != null and categoryTwoId != ''">
+                	category_two_id = #{categoryTwoId,jdbcType=DECIMAL},
+		        </if>
+		        <if test="categoryThreeId != null">
+                	category_three_id = #{categoryThreeId,jdbcType=DECIMAL},
+		        </if>
+		        <if test="applicableStep != null">
+                	applicable_step = #{applicableStep,jdbcType=DECIMAL},
+		        </if>
+		        <if test="brandCode != null and brandCode != ''">
+                	brand_code = #{brandCode,jdbcType=VARCHAR},
+		        </if>
+		        <if test="mode != null">
+                	mode = #{mode,jdbcType=DECIMAL},
+		        </if>
+		        <if test="salePrice != null">
+                	sale_price = #{salePrice,jdbcType=DECIMAL},
+		        </if>
+		        <if test="price != null">
+                	price = #{price,jdbcType=DECIMAL},
+		        </if>
+		        <if test="imgPath != null and imgPath != ''">
+                	img_path = #{imgPath,jdbcType=VARCHAR},
+		        </if>
+		        <if test="saleQuantityTotal != null">
+                	sale_quantity_total = #{saleQuantityTotal,jdbcType=DECIMAL},
+		        </if>
+		        <if test="saleQuantityWeek != null">
+                	sale_quantity_week = #{saleQuantityWeek,jdbcType=DECIMAL},
+		        </if>
+		        <if test="recommendAmount != null">
+                	recommend_amount = #{recommendAmount,jdbcType=DECIMAL},
+		        </if>
+		        <if test="isRecommend != null">
+                	is_recommend = #{isRecommend,jdbcType=DECIMAL},
+		        </if>
+		        <if test="isHot != null">
+                	is_hot = #{isHot,jdbcType=DECIMAL},
+		        </if>
+		        <if test="hitCountTotal != null">
+                	hit_count_total = #{hitCountTotal,jdbcType=DECIMAL},
+		        </if>
+		        <if test="saleStatus != null">
+                	sale_status = #{saleStatus,jdbcType=DECIMAL},
+		        </if>
+		        <if test="hitCountWeek != null">
+                	hit_count_week = #{hitCountWeek,jdbcType=DECIMAL},
+		        </if>
+		        <if test="updateUser != null and updateUser != ''">
+                	update_user = #{updateUser,jdbcType=VARCHAR},
+		        </if>
+                	update_time = now()
+                where id = #{id}
+            </if>
+        </if>
+    </update>
+
+    <!-- 根据主键获取对象信息 -->
+    <select id="getProductSelectById" resultMap="ProductSelectMap" parameterType="java.lang.Long">
+        <if test="_parameter != null">
+            select <include refid="productSelectColumns"/> from product_select
+            where id = #{_parameter} and yn = 1
+        </if>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，不带翻页 -->
+    <select id="queryProductSelectList" resultMap="ProductSelectMap"
+            parameterType="com.awe.pms.domain.query.ProductSelectQuery">
+        select <include refid="productSelectColumns"/> from product_select where <include refid="queryProductSelectListWhere"/>
+    </select>
+
+    <!-- 根据查询Bean获取数据集合，翻页 -->
+    <select id="queryProductSelectListWithPage" resultMap="ProductSelectMap"
+            parameterType="com.awe.pms.domain.query.ProductSelectQuery">
+        select <include refid="productSelectColumns"/> from product_select where <include refid="queryProductSelectListWhere"/>
+        order by create_time desc 
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 根据查询Bean查询-判断是否存在 -->
+    <select id="exist" resultType="java.lang.Integer" parameterType="ProductSelect">
+        select count(1) from product_select where yn = 1 and product_no = #{productNo,jdbcType=VARCHAR} and sku_no = #{skuNo,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据查询Bean获取集合总数 -->
+    <select id="queryProductSelectCount" resultType="java.lang.Integer"
+            parameterType="com.awe.pms.domain.query.ProductSelectQuery">
+        select count(1) from product_select where <include refid="queryProductSelectListWhere"/>
+    </select>
+
+    <!-- 删除信息-逻辑删除 -->
+    <update id="delete" parameterType="ProductSelect">
+		update product_select 
+		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
+		where yn = 1
+	        <if test="id != null and id != ''">
+	        	and id = #{id,jdbcType=DECIMAL}
+	        </if>
+	        <if test="skuNo != null and skuNo != ''">
+	        	and sku_no = #{skuNo,jdbcType=VARCHAR}
+	        </if>
+    </update>
+
+    <!-- 常用的查询Where条件 -->
+    <sql id="queryProductSelectListWhere">
+    	yn = 1
+        <if test="id != null and id != ''">
+        	and id = #{id,jdbcType=DECIMAL}
+        </if>
+        <if test="productNo != null and productNo != ''">
+        	and product_no = #{productNo,jdbcType=VARCHAR}
+        </if>
+        <if test="productName != null and productName != ''">
+        	and product_name = #{productName,jdbcType=VARCHAR}
+        </if>
+        <if test="skuNo != null and skuNo != ''">
+        	and sku_no = #{skuNo,jdbcType=VARCHAR}
+        </if>
+        <if test="skuName != null and skuName != ''">
+        	and sku_name = #{skuName,jdbcType=VARCHAR}
+        </if>
+        <if test="categoryOneId != null">
+        	and category_one_id = #{categoryOneId,jdbcType=DECIMAL}
+        </if>
+        <if test="categoryTwoId != null">
+        	and category_two_id = #{categoryTwoId,jdbcType=DECIMAL}
+        </if>
+        <if test="categoryThreeId != null">
+        	and category_three_id = #{categoryThreeId,jdbcType=DECIMAL}
+        </if>
+        <if test="applicableStep != null">
+        	and applicable_step = #{applicableStep,jdbcType=DECIMAL}
+        </if>
+        <if test="brandCode != null and brandCode != ''">
+        	and brand_code = #{brandCode,jdbcType=VARCHAR}
+        </if>
+        <if test="mode != null">
+        	and mode = #{mode,jdbcType=DECIMAL}
+        </if>
+        <if test="salePrice != null">
+        	and sale_price = #{salePrice,jdbcType=DECIMAL}
+        </if>
+        <if test="price != null">
+        	and price = #{price,jdbcType=DECIMAL}
+        </if>
+        <if test="imgPath != null and imgPath != ''">
+        	and img_path = #{imgPath,jdbcType=VARCHAR}
+        </if>
+        <if test="saleQuantityTotal != null">
+        	and sale_quantity_total = #{saleQuantityTotal,jdbcType=DECIMAL}
+        </if>
+        <if test="saleQuantityWeek != null">
+        	and sale_quantity_week = #{saleQuantityWeek,jdbcType=DECIMAL}
+        </if>
+        <if test="recommendAmount != null">
+        	and recommend_amount = #{recommendAmount,jdbcType=DECIMAL}
+        </if>
+        <if test="isRecommend != null">
+        	and is_recommend = #{isRecommend,jdbcType=DECIMAL}
+        </if>
+        <if test="isHot != null">
+        	and is_hot = #{isHot,jdbcType=DECIMAL}
+        </if>
+        <if test="hitCountTotal != null">
+        	and hit_count_total = #{hitCountTotal,jdbcType=DECIMAL}
+        </if>
+        <if test="saleStatus != null">
+        	and sale_status = #{saleStatus,jdbcType=DECIMAL}
+        </if>
+        <if test="hitCountWeek != null">
+        	and hit_count_week = #{hitCountWeek,jdbcType=DECIMAL}
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createUser != null and createUser != ''">
+        	and create_user = #{createUser,jdbcType=VARCHAR}
+        </if>
+        <if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
+        </if>
+    </sql>
+</mapper>

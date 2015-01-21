@@ -148,10 +148,9 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="imgPath" id="imgPath" class="col-xs-10 col-sm-8" value="$!productSku.imgPath" />
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="saleStatus">上下架状态</label>
+									<label class="col-sm-1 control-label no-padding-right" for="saleStatus">是否上架</label>
                                     <div class="col-sm-3">
 										<select id="saleStatus" name="saleStatus" class="col-xs-10 col-sm-8">
-											<option value="0">请选择</option>
     										#if(!$null.isNull($!saleStatusTypes))
                                     			#foreach($item in $saleStatusTypes)
                                     				<option value="$item.attr">$item.value</option>

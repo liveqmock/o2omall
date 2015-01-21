@@ -159,7 +159,7 @@
 		        <if test="originPlace != null and originPlace != ''">
                 	origin_place = #{originPlace,jdbcType=VARCHAR},
 		        </if>
-		        <if test="saleTimeStart != null and saleTimeStart != ''">
+		        <if test="saleTimeStart != null">
                 	sale_time_start = #{saleTimeStart,jdbcType=TIMESTAMP},
 		        </if>
 		        <if test="applicableCrowd != null and applicableCrowd != ''">
@@ -368,7 +368,7 @@
         <if test="originPlace != null and originPlace != ''">
         	and origin_place = #{originPlace,jdbcType=VARCHAR}
         </if>
-        <if test="saleTimeStart != null and saleTimeStart != ''">
+        <if test="saleTimeStart != null">
         	and sale_time_start = #{saleTimeStart,jdbcType=TIMESTAMP}
         </if>
         <if test="applicableCrowd != null and applicableCrowd != ''">

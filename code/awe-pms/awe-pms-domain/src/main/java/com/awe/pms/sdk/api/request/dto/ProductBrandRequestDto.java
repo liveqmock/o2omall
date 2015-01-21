@@ -37,6 +37,8 @@ public class ProductBrandRequestDto extends HbirdDto {
     private String enName; 
     /** 品牌简称 */
     private String brandAbbr; 
+    /** 品牌图片 */
+    private String brandImg; 
     /** 关键字 */
     private String keyword; 
     /** 商品类型（国内、进口） */
@@ -65,6 +67,20 @@ public class ProductBrandRequestDto extends HbirdDto {
     private Integer yn; 
     
     /**
+	 * @return the brandImg
+	 */
+	public String getBrandImg() {
+		return brandImg;
+	}
+
+	/**
+	 * @param brandImg the brandImg to set
+	 */
+	public void setBrandImg(String brandImg) {
+		this.brandImg = brandImg;
+	}
+
+	/**
      * get 主键
      * 
      * @return the id
