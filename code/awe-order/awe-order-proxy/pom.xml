@@ -25,6 +25,12 @@
 			<groupId>com.awe.uc</groupId>
 			<artifactId>awe-uc-sdk</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.awe.pms</groupId>
+			<artifactId>awe-pms-sdk</artifactId>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.awe.order</groupId>
 			<artifactId>awe-order-util</artifactId>

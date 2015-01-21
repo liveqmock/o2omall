@@ -1,6 +1,7 @@
 package com.awe.mall.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -59,7 +60,7 @@ public class OrderInfoController extends BaseController{
 	}
 	@RequestMapping(value = "info",method = { RequestMethod.POST, RequestMethod.GET })
 	public String orderInfo(Model model,String parameters){
-		//parameters = "[{\"skuNo\":\"sku001\",\"skuCount\":13},{\"skuNo\":\"sku002\",\"skuCount\":2},{\"skuNo\":\"sku003\",\"skuCount\":1},{\"skuNo\":\"sku004\",\"skuCount\":7}]";
+		//parameters = "[{\"skuNo\":\"10000000000001\",\"skuCount\":13},{\"skuNo\":\"10000000000002\",\"skuCount\":2}]";
 		//商品总数量
 		Integer count = 0;
 		//商品总价格
@@ -94,23 +95,21 @@ public class OrderInfoController extends BaseController{
 	@RequestMapping(value ="addOrders",method = { RequestMethod.POST, RequestMethod.GET })
     public String addOrders(Model model, OrdersRequestDto requestDto,HttpServletRequest request,String skuName,String skuCount,String skuNo) {
 		//商品总价格
-		Double countPrice = 0.0;
+		double countPrice = 0.0;
 		try {
-    	  String OrderCode =  OrderCodeUtil.CodeUtil(getLoginUserId(),request.getRemoteAddr());
-    	  requestDto.setOrderNo(OrderCode);
     	  requestDto.setCreateUser(getLoginUserName());
     	  requestDto.setOrderStatus(40);
     	  //1:插入订单
-    	  Wrapper<?>  wrapper = orderInfoService.addOrderDetails(requestDto,skuName,skuNo,skuCount);
-    	  List<OrderInfo> listOrderInfos = (List<OrderInfo>) wrapper.getResult();
-    	  for (OrderInfo orderInfo : listOrderInfos) {
-  			countPrice += orderInfo.getSkuCount() * orderInfo.getSalePrice();
-  		  }
-    	  model.addAttribute("OrderCode", OrderCode);
-    	  model.addAttribute("countPrice", countPrice);
+    	  Wrapper<?>  wrapper = orderInfoService.addOrderDetails(requestDto,skuName,skuNo,skuCount,request.getRemoteAddr());
     	  if(wrapper.getCode() == 200){
+    		  Map<String,Double> map=  (Map<String, Double>) wrapper.getResult();
+    		  for (String key : map.keySet()) {
+    			  countPrice += map.get(key);
+    		  }
     		  model.addAttribute("message", "感谢您，订单提交成功");
-    		  model.addAttribute("code", "200");
+    		  model.addAttribute("mapResult", map);
+    		  model.addAttribute("countPrice", countPrice);
+    		  model.addAttribute("code", "200"); 
     	  }else{
     		  model.addAttribute("message", "非常抱歉，提交订单失败");
     		  model.addAttribute("code", "500");

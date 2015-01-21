@@ -15,4 +15,15 @@
 		<property name="serviceUrlDomain" value="${service.url.domain.uc}" />
 		<property name="key" value="${key.common.order}" />
 	</bean>
+	
+	<bean id="productClient" class="com.awe.pms.sdk.ProductClient">
+		<property name="key" value="${key.common.order}" />
+		<property name="serviceUrlDomain" value="${service.url.domain.pms}" />
+	</bean>
+	
+	<!-- com.awe.uc.sdk start  -->
+	<bean id="productSkuClient" class="com.awe.pms.sdk.ProductSkuClient">
+		<property name="serviceUrlDomain" value="${service.url.domain.pms}" />
+		<property name="key" value="${key.common.order}" />
+	</bean>
 </beans>

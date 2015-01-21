@@ -177,8 +177,8 @@
                                 <td><a href="javascript:void(0)" onclick="OrderLog('$!item.orderNo');"><font color='red'>$!item.orderNo</font></a></td>
                                 <td>$!item.orderType</td>
                                 <td>$!item.orderName</td>
-                                <td>$!item.consigneeName</td>
-                                <td>$!item.consigneePhone</td>
+								<td>$!item.consigneeName</td>
+								<td>$!item.consigneePhone</td>
                                 <td>$!item.payName</td>
                                 <td>$!item.orderDate</td>
                                 <td>$!item.isTalSure</td>

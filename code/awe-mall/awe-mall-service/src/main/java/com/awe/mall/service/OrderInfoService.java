@@ -37,7 +37,7 @@ public interface OrderInfoService {
 	 * @param skuCount
 	 * @return
 	 */
-	Wrapper<?> addOrderDetails(OrdersRequestDto requestDto, String skuName, String skuNo,String skuCount);
+	Wrapper<?> addOrderDetails(OrdersRequestDto requestDto, String skuName, String skuNo,String skuCount,String ip);
 	
 	
 }

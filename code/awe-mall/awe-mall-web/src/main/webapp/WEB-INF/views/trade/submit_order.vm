@@ -21,9 +21,17 @@
 			   <input type="hidden" name="code" id="code" value="$!code"/>
              </dl>
              <dl id="success">
-               <dd class="s1">订单号：$!OrderCode</dd>
-               <dd class="s2">应付金额：$!countPrice</dd>
+				 #foreach($param in ${mapResult.entrySet()})  
+				    <dd class="s1">订单号：$param.key</dd>
+                    <dd class="s2">应付金额：￥${mapResult.get($param.key)}元</dd>
+                 #end 
              </dl>
+			 <dl style="background:#90EE90; color:#FFF">
+				<dd class="red">总金额：￥${countPrice}元</dd>
+             </dl>
+			  <div class="settlement">
+             <div class="right"><a href="javascript:void(0)" onclick="SubmitOrders();" class="right">去支付<i></i></a>总金额：<span class="reds">￥${countPrice}元</span></div>
+           </div>
            </div>
            <div class="pt30 pl20 ft14 galy3 pb70">您的订单已经在处理中，发货后订单内容会显示承运人联系方式，如有必要您可以联系对方     <span class="pl25">[<a href="" class="reds">查看订单详情</a>]</span></div>
          </div> 

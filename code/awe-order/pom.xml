@@ -19,6 +19,7 @@
 	</modules>
 	
 	<properties>
+		<awe-pms-sdk.version>1.0.0.1</awe-pms-sdk.version>
 		<hbird-common.version>2.0.0.0</hbird-common.version>
 		<spring.version>3.1.0.RELEASE</spring.version>
 		<ojdbc14.version>10.2.0.4</ojdbc14.version>
@@ -111,6 +112,11 @@
 				<groupId>com.awe.uc</groupId>
 				<artifactId>awe-uc-sdk</artifactId>
 				<version>1.0.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>com.awe.pms</groupId>
+				<artifactId>awe-pms-sdk</artifactId>
+				<version>${awe-pms-sdk.version}</version>
 			</dependency>
 			<!-- awe-order dependencies -->
 			<dependency>
@@ -604,7 +610,7 @@
 				<database.jdbc.password>awe123456</database.jdbc.password>
 
 				<!-- 服务器日志配置 -->
-				<log.root.level>INFO</log.root.level>
+				<log.root.level>DEBUG</log.root.level>
 				<log.logs.path>/hbird/server/logs</log.logs.path>
 				<log.maxfilesize>100MB</log.maxfilesize>
 				
@@ -612,6 +618,7 @@
 				<domain.web>test.order.shop.hbird.com</domain.web>
 				<domain.webservice>test.orderws.shop.hbird.com</domain.webservice>
 				<domain.worker>test.order-worker.shop.hbird.com</domain.worker>
+				<service.url.domain.pms>http\://local.pmsws.shop.hbird.com\:8120/</service.url.domain.pms>
 			</properties>
 		</profile>
 

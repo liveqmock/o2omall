@@ -155,21 +155,20 @@ public class OrdersClient extends AbstractSecureClient {
             LOG.debug("addOrdersDetails request: " + JsonHelper.toJson(orderDetailsRequestDto));
         }
     	OrdersDetailsRequest ordersDetailsRequest = new OrdersDetailsRequest(super.getKey(),orderDetailsRequestDto);
-    	OrderDetailsResponse response = null;
+    	Wrapper<?> wrapper = null;
     	String url = null;
     	try {
-    		 url = super.getServiceUrlDomain() + "services/ordersDetails/insert";
-    		//url = "http://local.orderws.shop.hbird.com:8090/services/ordersDetails/insert";
-    		 response = super.getRestTemplate().postForObject(url, ordersDetailsRequest, OrderDetailsResponse.class);
+    		   url = super.getServiceUrlDomain() + "services/ordersDetails/insert";
+    		 //url = "http://local.orderws.shop.hbird.com:8090/services/ordersDetails/insert";
+    		 wrapper = super.getRestTemplate().postForObject(url, ordersDetailsRequest, OrderDetailsResponse.class);
 		} catch (Exception e) {
 			LOG.error("#OrdersClient.addOrdersDetails# ERROR:" + e);
 		}
     	if (LOG.isDebugEnabled()) {
             LOG.debug("addOrdersDetails url: " + url);
-            LOG.debug("addOrdersDetails response: " + JsonHelper.toJson(response));
         }
-		if (null != response) {
-            return WrapMapper.wrap(response.getCode(),response.getMessage());
+		if (wrapper.getCode() == 200) {
+            return wrapper;
         } else {
             return WrapMapper.error();
         }

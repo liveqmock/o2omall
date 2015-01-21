@@ -79,7 +79,7 @@ public class OrdersClientTestCase {
     	dto2.setProductNo("6666");
     	list.add(dto2);
     	}
-    	detailsRequestDto.setListOrdersItemsRequestDto(list);
+    	//detailsRequestDto.setListOrdersItemsRequestDto(list);
     	
     	Wrapper<?> wrapper= client.addOrdersDetails(detailsRequestDto);
     	

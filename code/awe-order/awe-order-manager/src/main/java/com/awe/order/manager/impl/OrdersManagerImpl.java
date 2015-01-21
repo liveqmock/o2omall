@@ -190,17 +190,18 @@ public class OrdersManagerImpl extends BaseManager implements OrdersManager {
 	/**
      * {@inheritDoc}
      */
-	public boolean insertDetails(OrderDetails orderDetails) {
+	public boolean insertDetails(List<OrderDetails> orderDetails) {
 		 boolean resultFlag = false;
 	        if (null != orderDetails) {
+	        	for (OrderDetails orders : orderDetails) {
 	        	//1:插入订单
-                resultFlag = ordersDao.insert(orderDetails.getOrders());
+                resultFlag = ordersDao.insert(orders.getOrders());
                 if (!resultFlag) {
                     throw new RuntimeException("新增订单异常异常");
                 }
                 //2:插入item
-                if (null != orderDetails.getOrdersItemsList() && orderDetails.getOrdersItemsList().size() > 0) {
-                    for (OrdersItems ordersItems : orderDetails.getOrdersItemsList()) {
+                if (null != orders.getOrdersItemsList() && orders.getOrdersItemsList().size() > 0) {
+                    for (OrdersItems ordersItems : orders.getOrdersItemsList()) {
                     	resultFlag = ordersItemsDao.insert(ordersItems);
                     }
                     if (!resultFlag) {
@@ -208,10 +209,11 @@ public class OrdersManagerImpl extends BaseManager implements OrdersManager {
                     }
                  }
                 //3:插入日志
-                resultFlag = orderLogDao.insert(orderDetails.getOrderLog());
+                resultFlag = orderLogDao.insert(orders.getOrderLog());
                 if (!resultFlag) {
                     throw new RuntimeException("新增订单商品异常异常");
                 }
+	        }
 	        }
 	        return resultFlag;
 	}

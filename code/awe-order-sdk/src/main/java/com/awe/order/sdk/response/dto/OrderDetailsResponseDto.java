@@ -1,6 +1,6 @@
 package com.awe.order.sdk.response.dto;
 
-import java.util.List;
+import java.util.Map;
 
 import com.hbird.common.sdk.api.dto.HbirdDto;
 /**
@@ -17,23 +17,34 @@ public class OrderDetailsResponseDto extends HbirdDto{
 	
 	/**订单表*/
 	private OrdersResponseDto ordersResponseDto;
-	/**订单详情表*/
-	private List<OrdersItemsResponseDto> listOrdersItemsesponseDto;
-
-
-
+	/**存放skuNO和数据*/
+	private Map<String,String> mapSC; 
+	/**当前用户登录IP*/
+	private String ipString;
+	
 	/**
-	 * @return the listOrdersItemsesponseDto
+	 * @return the ipString
 	 */
-	public List<OrdersItemsResponseDto> getListOrdersItemsesponseDto() {
-		return listOrdersItemsesponseDto;
+	public String getIpString() {
+		return ipString;
 	}
 	/**
-	 * @param listOrdersItemsesponseDto the listOrdersItemsesponseDto to set
+	 * @param ipString the ipString to set
 	 */
-	public void setListOrdersItemsesponseDto(
-			List<OrdersItemsResponseDto> listOrdersItemsesponseDto) {
-		this.listOrdersItemsesponseDto = listOrdersItemsesponseDto;
+	public void setIpString(String ipString) {
+		this.ipString = ipString;
+	}
+	/**
+	 * @return the mapSC
+	 */
+	public Map<String, String> getMapSC() {
+		return mapSC;
+	}
+	/**
+	 * @param mapSC the mapSC to set
+	 */
+	public void setMapSC(Map<String, String> mapSC) {
+		this.mapSC = mapSC;
 	}
 	/**
 	 * @return the ordersResponseDto

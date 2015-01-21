@@ -17,12 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.awe.order.domain.OrderDetails;
 import com.awe.order.domain.OrderLog;
 import com.awe.order.domain.Orders;
 import com.awe.order.domain.OrdersItems;
 import com.awe.order.domain.query.FrontOrdersQuery;
-import com.awe.order.domain.query.OrdersQuery;
 import com.awe.order.sdk.api.request.OrderDetailsRequest;
 import com.awe.order.sdk.api.request.OrdersRequest;
 import com.awe.order.sdk.api.request.dto.OrderDetailsRequestDto;
@@ -47,6 +45,7 @@ import com.hbird.common.utils.wrap.Wrapper;
 @Path("services")
 @Produces({ MediaType.APPLICATION_JSON })
 @Consumes({ MediaType.APPLICATION_JSON })
+@SuppressWarnings("all")
 public class OrdersResource {
 
 	private final Log logger = LogFactory.getLog(this.getClass());
@@ -211,19 +210,18 @@ public class OrdersResource {
 		}
 		OrderDetailsRequestDto requestDto = request.getContent();
 		if (null == requestDto || null == requestDto.getOrdersRequestDto()
-				|| null == requestDto.getOrdersRequestDto().getOrderNo()
-				|| CollectionUtils.isEmpty(requestDto.getListOrdersItemsRequestDto())) {
+				|| null == requestDto.getOrdersRequestDto().getUserId()) {
 			this.logger.error("insert 传入参数有误");
 			return WrapMapper.illegalArgument();
 		}
 		try {
-			Orders orders = convertOrders(requestDto.getOrdersRequestDto());
-			List<OrdersItems> ordersItemsList = convertOrdersItemsList(requestDto.getListOrdersItemsRequestDto());
+			Orders orders = new Orders();
+			BeanUtils.copyProperties(requestDto.getOrdersRequestDto(), orders);
 			OrderLog orderLog = convertLog(orders);
-			OrderDetails orderDetails = new OrderDetails(orders, ordersItemsList, orderLog);
-			boolean ret = ordersService.insertDetails(orderDetails);
-			if (ret) {
-				return WrapMapper.ok();
+			boolean ret = false;
+			Wrapper<?> wrapper = ordersService.insertDetails(orders,requestDto.getMapSC(),requestDto.getIpString());
+			if (wrapper.getCode() == 200) {
+				return wrapper;
 			} else {
 				return WrapMapper.error();
 			}

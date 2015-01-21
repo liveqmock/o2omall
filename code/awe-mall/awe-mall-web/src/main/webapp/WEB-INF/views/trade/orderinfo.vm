@@ -510,7 +510,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
                                 <em><font color="#FF0000">*&nbsp;&nbsp;</font></em>收货人:
                                 </span>
                             </td>
-                            <td width="456">&nbsp;&nbsp;<input type="text" name="name" id="mall_name" style="width:300px;height:25px;" onblur="Verific('user')" />
+                            <td width="456">&nbsp;&nbsp;<input type="text" name="consigneeName" id="mall_name" style="width:300px;height:25px;" onblur="Verific('user')" />
 								<input type="hidden" name="id" id="mall_id"/>
 								<input type="hidden" name="isdefault" id="isdefault" value="1"/>
 								<input type="hidden" value="${userId}" id="userId" name="userId"/>
@@ -552,7 +552,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
                                 <em><font color="#FF0000">*&nbsp;&nbsp;</font></em>手机号码:
                                 </span>
                             </td>
-                             <td width="456">&nbsp;&nbsp;<input type="text" name="mobile" id="mall_mobile" style="width:300px;height:25px;" onblur="Verific('mobile')"/></td>
+                             <td width="456">&nbsp;&nbsp;<input type="text" name="consigneePhone" id="mall_mobile" style="width:300px;height:25px;" onblur="Verific('mobile')"/></td>
                         </tr>
                           <tr><td><br/></td><td id="VerificPhoneText" class="reds"></td></tr>
                     </table>
@@ -626,7 +626,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 							<div id="electronic">
 							<span class="reds">收票人手机:</span>
 							&nbsp;&nbsp;
-							<input type="text" name="consigneePhone" id="mall_consigneePhone" style="width:300px;height:25px;"/>
+							<input type="text" name="consigneePhones" id="mall_consigneePhone" style="width:300px;height:25px;"/>
 							<br/>
 							<br/>
 							<span class="reds">收票人邮箱:</span>

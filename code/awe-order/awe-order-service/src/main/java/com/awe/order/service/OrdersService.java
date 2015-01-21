@@ -1,12 +1,14 @@
 package com.awe.order.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.awe.order.domain.OrderDetails;
 import com.awe.order.domain.Orders;
 import com.awe.order.domain.query.FrontOrdersQuery;
 import com.awe.order.domain.query.OrdersQuery;
 import com.hbird.common.utils.page.PageUtil;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * OrdersService接口
@@ -110,7 +112,7 @@ public interface OrdersService {
 	 * @param orderDetails
 	 * @return
 	 */
-	public boolean insertDetails(OrderDetails orderDetails);
+	public Wrapper<?> insertDetails(Orders orders,Map<String,String> mapSC,String ip);
 
 	/**
 	 * 订单取消

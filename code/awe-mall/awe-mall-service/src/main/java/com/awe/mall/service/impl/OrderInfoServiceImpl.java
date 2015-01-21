@@ -18,6 +18,7 @@ import com.awe.order.sdk.request.dto.OrderDetailsRequestDto;
 import com.awe.order.sdk.request.dto.OrdersItemsRequestDto;
 import com.awe.order.sdk.request.dto.OrdersRequestDto;
 import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
+import com.awe.pms.sdk.ProductClient;
 import com.awe.pms.sdk.ProductSkuClient;
 import com.awe.pms.sdk.request.dto.ProductSkuRequestDto;
 import com.awe.pms.sdk.response.dto.ProductResponseDto;
@@ -33,6 +34,8 @@ public class OrderInfoServiceImpl implements OrderInfoService{
 	
 	@Autowired
 	private ProductSkuClient productSkuClient;
+	@Autowired
+	private ProductClient productClient;
 	@Autowired
 	private OrdersClient ordersClient;
 	
@@ -72,56 +75,26 @@ public class OrderInfoServiceImpl implements OrderInfoService{
 	/**
      * {@inheritDoc}
      */
-	public Wrapper<?> addOrderDetails(OrdersRequestDto requestDto, String skuName, String skuNo,String skuCount) {
-		String[] name=skuName.split(",");
+	public Wrapper<?> addOrderDetails(OrdersRequestDto requestDto, String skuName, String skuNo,String skuCount,String ip) {
 		String[] skuno=skuNo.split(",");
 		String[] count=skuCount.split(",");
-		OrderDetailsRequestDto detailsRequestDto =  new OrderDetailsRequestDto();
-		//订单基本属性
-		detailsRequestDto.setOrdersRequestDto(requestDto);
-		//订单item集合
-		List<OrdersItemsRequestDto> listRequestDtos = new ArrayList<OrdersItemsRequestDto>();
-		//把skuno封装到list中
-		List<String> skunos = new ArrayList<String>();
-		//调用恒冲商品接口对象
-		ProductSkuRequestDto skuRequestDto= new ProductSkuRequestDto();
-		//存放skuno 和 数量
+		OrderDetailsRequestDto detailsRequestDto = new OrderDetailsRequestDto();
+
 		Map<String,String> countMap = new HashMap<String, String>();
 		List<OrderInfo> listOrderInfos = new ArrayList<OrderInfo>();
 		for (int i = 0; i < skuno.length; i++) {
-			skunos.add(skuno[i]);
 			countMap.put(skuno[i], count[i]);
 		}
-		skuRequestDto.setSkuNos(skunos);
-		List<ProductSkuResponseDto> listSkus = productSkuClient.getProductSkus(skuRequestDto);
+		detailsRequestDto.setOrdersRequestDto(requestDto);
+		detailsRequestDto.setMapSC(countMap);
+		detailsRequestDto.setIpString(ip);
+		
 		try {
-			for (int i = 0; i < skuno.length; i++) {
-				OrdersItemsRequestDto itemsRequestDto = new OrdersItemsRequestDto();
-				itemsRequestDto.setOrderNo(requestDto.getOrderNo());
-				itemsRequestDto.setSkuName(name[i]);
-				itemsRequestDto.setSkuNo(skuno[i]);
-				itemsRequestDto.setSkuPrice(queryOrderPrice(listSkus,skuno[i]));
-				System.out.println(count[i]);
-				itemsRequestDto.setCount(Integer.valueOf(count[i]));
-				itemsRequestDto.setCreateUser(requestDto.getCreateUser());
-				listRequestDtos.add(itemsRequestDto);
-			}
-			detailsRequestDto.setListOrdersItemsRequestDto(listRequestDtos);
-			 Wrapper<?> wrapper = ordersClient.addOrdersDetails(detailsRequestDto);
+			Wrapper<?> wrapper = ordersClient.addOrdersDetails(detailsRequestDto);
 			 if(wrapper.getCode() == 200){
-			 for (ProductSkuResponseDto productSkuResponseDto : listSkus) {
-				 OrderInfo info = new OrderInfo();
-				 BeanUtils.copyProperties(productSkuResponseDto,info);
-				 listOrderInfos.add(info);
-			  }
-			 for (OrderInfo orderInfo : listOrderInfos) {
-					if(countMap.get(orderInfo.getSkuNo()) != null){
-						orderInfo.setSkuCount(Integer.valueOf(countMap.get(orderInfo.getSkuNo())));
-					}
-				}
-			 return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, listOrderInfos);
-			 }else{
-			  return WrapMapper.wrap(Wrapper.ERROR_CODE, Wrapper.SUCCESS_MESSAGE, "提交失败");
+				 return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, wrapper.getResult());
+				}else{
+			     return WrapMapper.wrap(Wrapper.ERROR_CODE, Wrapper.SUCCESS_MESSAGE, "提交失败");
 			 }
 		} catch (Exception e) {
 			return WrapMapper.wrap(Wrapper.ERROR_CODE, Wrapper.SUCCESS_MESSAGE, "提交异常");

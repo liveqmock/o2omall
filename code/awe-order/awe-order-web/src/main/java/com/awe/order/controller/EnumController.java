@@ -1,6 +1,5 @@
 package com.awe.order.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -17,7 +16,6 @@ import com.awe.order.enums.EnumOrderStauts;
 import com.awe.order.enums.EnumOrderType;
 import com.awe.order.enums.EnumPayType;
 import com.awe.order.enums.EnumPayWay;
-import com.awe.uc.sdk.response.dto.AreaResponseDto;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 

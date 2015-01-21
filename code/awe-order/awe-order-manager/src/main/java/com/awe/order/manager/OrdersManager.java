@@ -133,7 +133,7 @@ public interface OrdersManager {
 	 * user:js
 	 * @param orders
 	 */
-	public boolean insertDetails(OrderDetails orderDetails);
+	public boolean insertDetails(List<OrderDetails> orderDetails);
 
 	/**
 	 * 查询出下单未支付超过24小时的订单号

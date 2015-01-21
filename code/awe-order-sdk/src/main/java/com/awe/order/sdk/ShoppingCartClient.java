@@ -65,8 +65,8 @@ public class ShoppingCartClient extends AbstractSecureClient {
     	ShoppingCartResponseList responseList = null;
     	String url = null;
     	try {
-    		 url = super.getServiceUrlDomain() + "services/shoppingCart/queryShoppingCartList";
-    		//url = "http://local.orderws.shop.hbird.com:8090/services/shoppingCart/queryShoppingCartList"; 
+    		   url = super.getServiceUrlDomain() + "services/shoppingCart/queryShoppingCartList";
+    		   //url = "http://local.orderws.shop.hbird.com:8090/services/shoppingCart/queryShoppingCartList"; 
     		 responseList = super.getRestTemplate().postForObject(url, request, ShoppingCartResponseList.class);
 		} catch (Exception e) {
 			LOG.error("#ShoppingCartClient.queryShoppingCartList# ERROR:" + e);
