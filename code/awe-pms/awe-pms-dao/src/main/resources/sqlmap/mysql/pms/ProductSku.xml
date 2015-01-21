@@ -162,17 +162,9 @@
     <select id="queryProductSkuList" resultMap="ProductSkuMap"
             parameterType="com.awe.pms.domain.query.ProductSkuQuery">
         select 
-        	ps.*,p.business_no as businessNo, p.business_name as businessName
-        from product_sku ps
-        	left join product p on p.product_no = ps.product_no and p.yn = 1
-        	where ps.yn = 1
-        		<if test="skuNos != null and skuNos != ''">
-		        	and ps.sku_no in
-		        	<foreach item="item" index="index" collection="skuNos" open="(" separator="," close=")">
-						#{item}
-					</foreach>
-		        </if>
-        		order by ps.sku_no asc,ps.create_time desc
+        	<include refid="productSkuColumns"/>
+        from product_sku where <include refid="queryProductSkuListWhere"/>
+        		order by sku_no asc,create_time desc
     </select>
 
     <!-- 根据查询Bean获取数据集合，翻页 -->
@@ -224,7 +216,6 @@
 				#{item}
 			</foreach>
         </if>
-        
         <if test="skuName != null and skuName != ''">
         	and sku_name = #{skuName,jdbcType=VARCHAR}
         </if>
