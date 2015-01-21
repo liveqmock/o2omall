@@ -53,7 +53,7 @@ public class ReturnExchange implements java.io.Serializable {
     /** 取件县编码 */
     private String pickupCountyNo; 
     /** 取件县名称 */
-    private String pickupCuountyName; 
+    private String pickupCountyName; 
     /** 取件详细地址 */
     private String pickupDetailedAddress; 
     /** 预约取件时间 */
@@ -69,7 +69,7 @@ public class ReturnExchange implements java.io.Serializable {
     /** 收货县编码 */
     private String countyNo; 
     /** 收货县名称 */
-    private String cuountyName; 
+    private String countyName; 
     /** 收货详细地址 */
     private String detailedAddress; 
     /** 收货人 */
@@ -422,25 +422,15 @@ public class ReturnExchange implements java.io.Serializable {
         this.pickupCountyNo = pickupCountyNo;
     }
     
-    /**
-     * get 取件县名称
-     * 
-     * @return the pickupCuountyName
-     */
-    public String getPickupCuountyName(){
-        return pickupCuountyName;
-    }
-        
-    /**
-     * set 取件县名称
-     * 
-     * @param pickupCuountyName the pickupCuountyName to set
-     */
-    public void setPickupCuountyName(String pickupCuountyName) {
-        this.pickupCuountyName = pickupCuountyName;
-    }
-    
-    /**
+    public String getPickupCountyName() {
+		return pickupCountyName;
+	}
+
+	public void setPickupCountyName(String pickupCountyName) {
+		this.pickupCountyName = pickupCountyName;
+	}
+
+	/**
      * get 取件详细地址
      * 
      * @return the pickupDetailedAddress
@@ -566,23 +556,6 @@ public class ReturnExchange implements java.io.Serializable {
         this.countyNo = countyNo;
     }
     
-    /**
-     * get 收货县名称
-     * 
-     * @return the cuountyName
-     */
-    public String getCuountyName(){
-        return cuountyName;
-    }
-        
-    /**
-     * set 收货县名称
-     * 
-     * @param cuountyName the cuountyName to set
-     */
-    public void setCuountyName(String cuountyName) {
-        this.cuountyName = cuountyName;
-    }
     
     /**
      * get 收货详细地址

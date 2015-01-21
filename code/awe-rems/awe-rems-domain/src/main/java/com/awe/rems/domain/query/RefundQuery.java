@@ -53,6 +53,14 @@ public class RefundQuery extends Query {
     private Integer status;
     /**差额原因*/
     private String balanceReason;
+    /** 商品分类编号 */
+	private Long categoryId; 
+    /** 产品id */
+	private String productNo; 
+    /** 商品编号 */
+	private String skuNo; 
+    /** 商品名称 */
+	private String skuName; 
     /**
      * get id自增
      * 
@@ -384,5 +392,36 @@ public class RefundQuery extends Query {
 	public void setBalanceReason(String balanceReason) {
 		this.balanceReason = balanceReason;
 	}
-    
+
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getProductNo() {
+		return productNo;
+	}
+
+	public void setProductNo(String productNo) {
+		this.productNo = productNo;
+	}
+
+	public String getSkuNo() {
+		return skuNo;
+	}
+
+	public void setSkuNo(String skuNo) {
+		this.skuNo = skuNo;
+	}
+
+	public String getSkuName() {
+		return skuName;
+	}
+
+	public void setSkuName(String skuName) {
+		this.skuName = skuName;
+	}
 }

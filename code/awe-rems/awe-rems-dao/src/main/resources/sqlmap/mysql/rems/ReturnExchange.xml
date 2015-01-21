@@ -10,7 +10,7 @@
 		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
 		<result column="category_id" property="categoryId" jdbcType="DECIMAL" />
 		<result column="product_no" property="productNo" jdbcType="VARCHAR" />
-		<result column="sku_no" property="skuNo" jdbcType="DECIMAL" />
+		<result column="sku_no" property="skuNo" jdbcType="VARCHAR" />
 		<result column="sku_name" property="skuName" jdbcType="VARCHAR" />
 		<result column="service_type" property="serviceType" jdbcType="DECIMAL" />
 		<result column="quantity" property="quantity" jdbcType="DECIMAL" />
@@ -22,7 +22,7 @@
 		<result column="pickup_city_no" property="pickupCityNo" jdbcType="VARCHAR" />
 		<result column="pickup_city_name" property="pickupCityName" jdbcType="VARCHAR" />
 		<result column="pickup_county_no" property="pickupCountyNo" jdbcType="VARCHAR" />
-		<result column="pickup_cuounty_name" property="pickupCuountyName" jdbcType="VARCHAR" />
+		<result column="pickup_county_name" property="pickupCountyName" jdbcType="VARCHAR" />
 		<result column="pickup_detailed_address" property="pickupDetailedAddress" jdbcType="VARCHAR" />
 		<result column="reservation_pickup_time" property="reservationPickupTime" jdbcType="TIMESTAMP" />
 		<result column="province_no" property="provinceNo" jdbcType="VARCHAR" />
@@ -30,7 +30,7 @@
 		<result column="city_no" property="cityNo" jdbcType="VARCHAR" />
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 		<result column="county_no" property="countyNo" jdbcType="VARCHAR" />
-		<result column="cuounty_name" property="cuountyName" jdbcType="VARCHAR" />
+		<result column="county_name" property="countyName" jdbcType="VARCHAR" />
 		<result column="detailed_address" property="detailedAddress" jdbcType="VARCHAR" />
 		<result column="consignee" property="consignee" jdbcType="VARCHAR" />
 		<result column="mobile_no" property="mobileNo" jdbcType="VARCHAR" />
@@ -49,11 +49,11 @@
     </resultMap>
     
     <sql id="returnExchangeColumns">
-    	id,service_no,pickup_no,service_audit_status,order_no,category_id,product_no,sku_no,sku_name,service_type,quantity,evidence_type,problem_description,pickup_type,pickup_province_no,pickup_province_name,pickup_city_no,pickup_city_name,pickup_county_no,pickup_cuounty_name,pickup_detailed_address,reservation_pickup_time,province_no,province_name,city_no,city_name,county_no,cuounty_name,detailed_address,consignee,mobile_no,telephone_no,express_name,express_no,waybill_no,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn,user_id
+    	id,service_no,pickup_no,service_audit_status,order_no,category_id,product_no,sku_no,sku_name,service_type,quantity,evidence_type,problem_description,pickup_type,pickup_province_no,pickup_province_name,pickup_city_no,pickup_city_name,pickup_county_no,pickup_county_name,pickup_detailed_address,reservation_pickup_time,province_no,province_name,city_no,city_name,county_no,county_name,detailed_address,consignee,mobile_no,telephone_no,express_name,express_no,waybill_no,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn,user_id
     </sql>
     
      <sql id="returnExchangeUsedColumns">
-    	service_no,pickup_no,service_audit_status,order_no,category_id,product_no,sku_no,sku_name,service_type,quantity,evidence_type,problem_description,pickup_type,pickup_province_no,pickup_province_name,pickup_city_no,pickup_city_name,pickup_county_no,pickup_cuounty_name,pickup_detailed_address,reservation_pickup_time,province_no,province_name,city_no,city_name,county_no,cuounty_name,detailed_address,consignee,mobile_no,telephone_no,express_name,express_no,waybill_no,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn,user_id
+    	service_no,pickup_no,service_audit_status,order_no,category_id,product_no,sku_no,sku_name,service_type,quantity,evidence_type,problem_description,pickup_type,pickup_province_no,pickup_province_name,pickup_city_no,pickup_city_name,pickup_county_no,pickup_county_name,pickup_detailed_address,reservation_pickup_time,province_no,province_name,city_no,city_name,county_no,county_name,detailed_address,consignee,mobile_no,telephone_no,express_name,express_no,waybill_no,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn,user_id
     </sql>
 
     <!-- 创建信息 -->
@@ -62,7 +62,7 @@
       		SELECT LAST_INSERT_ID()
       	</selectKey>
         INSERT INTO return_exchange(<include refid="returnExchangeUsedColumns"/>) 
-        VALUES (#{serviceNo},#{pickupNo},#{serviceAuditStatus},#{orderNo},#{categoryId},#{productNo},#{skuNo},#{skuName},#{serviceType},#{quantity},#{evidenceType},#{problemDescription},#{pickupType},#{pickupProvinceNo},#{pickupProvinceName},#{pickupCityNo},#{pickupCityName},#{pickupCountyNo},#{pickupCuountyName},#{pickupDetailedAddress},#{reservationPickupTime},#{provinceNo},#{provinceName},#{cityNo},#{cityName},#{countyNo},#{cuountyName},#{detailedAddress},#{consignee},#{mobileNo},#{telephoneNo},#{expressName},#{expressNo},#{waybillNo},now(),now(),#{createUserId},#{createUser},#{updateUserId},#{updateUser},1,#{userId})
+        VALUES (#{serviceNo},#{pickupNo},#{serviceAuditStatus},#{orderNo},#{categoryId},#{productNo},#{skuNo},#{skuName},#{serviceType},#{quantity},#{evidenceType},#{problemDescription},#{pickupType},#{pickupProvinceNo},#{pickupProvinceName},#{pickupCityNo},#{pickupCityName},#{pickupCountyNo},#{pickupCountyName},#{pickupDetailedAddress},#{reservationPickupTime},#{provinceNo},#{provinceName},#{cityNo},#{cityName},#{countyNo},#{countyName},#{detailedAddress},#{consignee},#{mobileNo},#{telephoneNo},#{expressName},#{expressNo},#{waybillNo},now(),now(),#{createUserId},#{createUser},#{updateUserId},#{updateUser},1,#{userId})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -124,8 +124,8 @@
 		        <if test="pickupCountyNo != null and pickupCountyNo != ''">
                 	pickup_county_no = #{pickupCountyNo,jdbcType=VARCHAR},
 		        </if>
-		        <if test="pickupCuountyName != null and pickupCuountyName != ''">
-                	pickup_cuounty_name = #{pickupCuountyName,jdbcType=VARCHAR},
+		        <if test="pickupCountyName != null and pickupCountyName != ''">
+                	pickup_county_name = #{pickupCountyName,jdbcType=VARCHAR},
 		        </if>
 		        <if test="pickupDetailedAddress != null and pickupDetailedAddress != ''">
                 	pickup_detailed_address = #{pickupDetailedAddress,jdbcType=VARCHAR},
@@ -148,8 +148,8 @@
 		        <if test="countyNo != null and countyNo != ''">
                 	county_no = #{countyNo,jdbcType=VARCHAR},
 		        </if>
-		        <if test="cuountyName != null and cuountyName != ''">
-                	cuounty_name = #{cuountyName,jdbcType=VARCHAR},
+		        <if test="countyName != null and countyName != ''">
+                	county_name = #{countyName,jdbcType=VARCHAR},
 		        </if>
 		        <if test="detailedAddress != null and detailedAddress != ''">
                 	detailed_address = #{detailedAddress,jdbcType=VARCHAR},
@@ -258,7 +258,7 @@
         	and product_no = #{productNo,jdbcType=VARCHAR}
         </if>
         <if test="skuNo != null and skuNo != ''">
-        	and sku_no = #{skuNo,jdbcType=DECIMAL}
+        	and sku_no = #{skuNo,jdbcType=VARCHAR}
         </if>
         <if test="skuName != null and skuName != ''">
         	and sku_name = #{skuName,jdbcType=VARCHAR}
@@ -293,8 +293,8 @@
         <if test="pickupCountyNo != null and pickupCountyNo != ''">
         	and pickup_county_no = #{pickupCountyNo,jdbcType=VARCHAR}
         </if>
-        <if test="pickupCuountyName != null and pickupCuountyName != ''">
-        	and pickup_cuounty_name = #{pickupCuountyName,jdbcType=VARCHAR}
+        <if test="pickupCountyName != null and pickupCountyName != ''">
+        	and pickup_county_name = #{pickupCountyName,jdbcType=VARCHAR}
         </if>
         <if test="pickupDetailedAddress != null and pickupDetailedAddress != ''">
         	and pickup_detailed_address = #{pickupDetailedAddress,jdbcType=VARCHAR}
@@ -317,8 +317,8 @@
         <if test="countyNo != null and countyNo != ''">
         	and county_no = #{countyNo,jdbcType=VARCHAR}
         </if>
-        <if test="cuountyName != null and cuountyName != ''">
-        	and cuounty_name = #{cuountyName,jdbcType=VARCHAR}
+        <if test="countyName != null and countyName != ''">
+        	and county_name = #{countyName,jdbcType=VARCHAR}
         </if>
         <if test="detailedAddress != null and detailedAddress != ''">
         	and detailed_address = #{detailedAddress,jdbcType=VARCHAR}

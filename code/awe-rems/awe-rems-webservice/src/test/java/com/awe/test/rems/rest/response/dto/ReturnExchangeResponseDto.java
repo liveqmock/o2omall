@@ -55,7 +55,7 @@ public class ReturnExchangeResponseDto extends HbirdDto {
     /** 取件县编码 */
     private String pickupCountyNo; 
     /** 取件县名称 */
-    private String pickupCuountyName; 
+    private String pickupCountyName; 
     /** 取件详细地址 */
     private String pickupDetailedAddress; 
     /** 预约取件时间 */
@@ -71,7 +71,7 @@ public class ReturnExchangeResponseDto extends HbirdDto {
     /** 收货县编码 */
     private String countyNo; 
     /** 收货县名称 */
-    private String cuountyName; 
+    private String countyName; 
     /** 收货详细地址 */
     private String detailedAddress; 
     /** 收货人 */
@@ -425,24 +425,6 @@ public class ReturnExchangeResponseDto extends HbirdDto {
     }
     
     /**
-     * get 取件县名称
-     * 
-     * @return the pickupCuountyName
-     */
-    public String getPickupCuountyName(){
-        return pickupCuountyName;
-    }
-        
-    /**
-     * set 取件县名称
-     * 
-     * @param pickupCuountyName the pickupCuountyName to set
-     */
-    public void setPickupCuountyName(String pickupCuountyName) {
-        this.pickupCuountyName = pickupCuountyName;
-    }
-    
-    /**
      * get 取件详细地址
      * 
      * @return the pickupDetailedAddress
@@ -568,25 +550,23 @@ public class ReturnExchangeResponseDto extends HbirdDto {
         this.countyNo = countyNo;
     }
     
-    /**
-     * get 收货县名称
-     * 
-     * @return the cuountyName
-     */
-    public String getCuountyName(){
-        return cuountyName;
-    }
-        
-    /**
-     * set 收货县名称
-     * 
-     * @param cuountyName the cuountyName to set
-     */
-    public void setCuountyName(String cuountyName) {
-        this.cuountyName = cuountyName;
-    }
-    
-    /**
+    public String getPickupCountyName() {
+		return pickupCountyName;
+	}
+
+	public void setPickupCountyName(String pickupCountyName) {
+		this.pickupCountyName = pickupCountyName;
+	}
+
+	public String getCountyName() {
+		return countyName;
+	}
+
+	public void setCountyName(String countyName) {
+		this.countyName = countyName;
+	}
+
+	/**
      * get 收货详细地址
      * 
      * @return the detailedAddress

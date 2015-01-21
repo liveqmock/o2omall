@@ -21,20 +21,24 @@
 		<result column="user_id" property="userId" jdbcType="DECIMAL" />
 		<result column="status" property="status" jdbcType="DECIMAL" />
 		<result column="balance_reason" property="balanceReason" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="DECIMAL" />
+		<result column="product_no" property="productNo" jdbcType="VARCHAR" />
+		<result column="sku_no" property="skuNo" jdbcType="VARCHAR" />
+		<result column="sku_name" property="skuName" jdbcType="VARCHAR" />
     </resultMap>
     
     <sql id="refundColumns">
-    	id,service_no,order_no,refund_amount,account_no,account_name,refund_date,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn,return_exchange_id,user_id,status,balance_reason
+    	id,service_no,order_no,refund_amount,account_no,account_name,refund_date,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn,return_exchange_id,user_id,status,balance_reason,category_id,product_no,sku_no,sku_name
     </sql>
     
      <sql id="refundUsedColumns">
-    	service_no,order_no,refund_amount,account_no,account_name,refund_date,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn,return_exchange_id,user_id,status,balance_reason
+    	service_no,order_no,refund_amount,account_no,account_name,refund_date,create_time,update_time,create_user_id,create_user,update_user_id,update_user,yn,return_exchange_id,user_id,status,balance_reason,category_id,product_no,sku_no,sku_name
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="Refund" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO refund(<include refid="refundUsedColumns"/>) 
-        VALUES (#{serviceNo},#{orderNo},#{refundAmount},#{accountNo},#{accountName},#{refundDate},#{createTime},#{updateTime},#{createUserId},#{createUser},#{updateUserId},#{updateUser},#{yn},#{returnExchangeId},#{userId},#{status},#{balanceReason})
+        VALUES (#{serviceNo},#{orderNo},#{refundAmount},#{accountNo},#{accountName},now(),now(),now(),#{createUserId},#{createUser},#{updateUserId},#{updateUser},#{yn},#{returnExchangeId},#{userId},#{status},#{balanceReason},#{categoryId},#{productNo},#{skuNo},#{skuName})
 	</insert>
 	
     <!-- 修改信息 -->
@@ -181,5 +185,17 @@
 		<if test="balanceReason != null and balanceReason != ''">
         	and balance_reason = #{balanceReason,jdbcType=VARCHAR}
 		</if>
+		<if test="categoryId != null and categoryId != ''">
+        	and category_id = #{categoryId,jdbcType=DECIMAL}
+        </if>
+        <if test="productNo != null and productNo != ''">
+        	and product_no = #{productNo,jdbcType=VARCHAR}
+        </if>
+        <if test="skuNo != null and skuNo != ''">
+        	and sku_no = #{skuNo,jdbcType=VARCHAR}
+        </if>
+        <if test="skuName != null and skuName != ''">
+        	and sku_name = #{skuName,jdbcType=VARCHAR}
+        </if>
     </sql>
 </mapper>

@@ -28,7 +28,7 @@ public class ReturnExchangeQuery extends Query {
     /** 产品id */
 	private String productNo; 
     /** 商品编号 */
-	private Long skuNo; 
+	private String skuNo; 
     /** 商品名称 */
 	private String skuName; 
     /** 服务类型:1:退货:2:换货:3维修 */
@@ -52,7 +52,7 @@ public class ReturnExchangeQuery extends Query {
     /** 取件县编码 */
 	private String pickupCountyNo; 
     /** 取件县名称 */
-	private String pickupCuountyName; 
+	private String pickupCountyName; 
     /** 取件详细地址 */
 	private String pickupDetailedAddress; 
     /** 预约取件时间 */
@@ -68,7 +68,7 @@ public class ReturnExchangeQuery extends Query {
     /** 收货县编码 */
 	private String countyNo; 
     /** 收货县名称 */
-	private String cuountyName; 
+	private String countyName; 
     /** 收货详细地址 */
 	private String detailedAddress; 
     /** 收货人 */
@@ -211,26 +211,15 @@ public class ReturnExchangeQuery extends Query {
         this.categoryId = categoryId;
     }
     
-    
-    /**
-     * get 商品编号
-     * 
-     * @return the skuNo
-     */
-    public Long getSkuNo(){
-        return skuNo;
-    }
-        
-    /**
-     * set 商品编号
-     * 
-     * @param skuNo the skuNo to set
-     */
-    public void setSkuNo(Long skuNo) {
-        this.skuNo = skuNo;
-    }
-    
-    /**
+    public String getSkuNo() {
+		return skuNo;
+	}
+
+	public void setSkuNo(String skuNo) {
+		this.skuNo = skuNo;
+	}
+
+	/**
      * get 商品名称
      * 
      * @return the skuName
@@ -427,26 +416,15 @@ public class ReturnExchangeQuery extends Query {
     public void setPickupCountyNo(String pickupCountyNo) {
         this.pickupCountyNo = pickupCountyNo;
     }
-    
-    /**
-     * get 取件县名称
-     * 
-     * @return the pickupCuountyName
-     */
-    public String getPickupCuountyName(){
-        return pickupCuountyName;
-    }
-        
-    /**
-     * set 取件县名称
-     * 
-     * @param pickupCuountyName the pickupCuountyName to set
-     */
-    public void setPickupCuountyName(String pickupCuountyName) {
-        this.pickupCuountyName = pickupCuountyName;
-    }
-    
-    /**
+    public String getPickupCountyName() {
+		return pickupCountyName;
+	}
+
+	public void setPickupCountyName(String pickupCountyName) {
+		this.pickupCountyName = pickupCountyName;
+	}
+
+	/**
      * get 取件详细地址
      * 
      * @return the pickupDetailedAddress
@@ -571,25 +549,6 @@ public class ReturnExchangeQuery extends Query {
     public void setCountyNo(String countyNo) {
         this.countyNo = countyNo;
     }
-    
-    /**
-     * get 收货县名称
-     * 
-     * @return the cuountyName
-     */
-    public String getCuountyName(){
-        return cuountyName;
-    }
-        
-    /**
-     * set 收货县名称
-     * 
-     * @param cuountyName the cuountyName to set
-     */
-    public void setCuountyName(String cuountyName) {
-        this.cuountyName = cuountyName;
-    }
-    
     /**
      * get 收货详细地址
      * 
@@ -895,4 +854,13 @@ public class ReturnExchangeQuery extends Query {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+
+	public String getCountyName() {
+		return countyName;
+	}
+
+	public void setCountyName(String countyName) {
+		this.countyName = countyName;
+	}
+	
 }

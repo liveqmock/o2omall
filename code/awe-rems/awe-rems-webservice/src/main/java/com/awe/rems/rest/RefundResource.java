@@ -1,5 +1,6 @@
 package com.awe.rems.rest;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ import com.hbird.common.utils.wrap.Wrapper;
 public class RefundResource {
 
     private final Log logger = LogFactory.getLog(this.getClass());
-
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd#HH:mm:SS");
     @Autowired
     private RefundService refundService; 
 
@@ -96,14 +97,24 @@ public class RefundResource {
             this.logger.error("queryRefundListWithPage 传入参数有误");
             return PageWrapMapper.illegalArgument();
         }
-
+        List<RefundResponseDto> ret = null;
         try {
         	RefundQuery queryBean = new RefundQuery();
         	queryBean.setOrderNo(requestDto.getOrderNo());
         	queryBean.setServiceNo(requestDto.getServiceNo());
         	List<Refund> dataList = refundService.queryRefundListWithPage(queryBean, pageUtil);
             List<RefundResponseDto> responseDtoList = convertList(dataList);
-            return PageWrapMapper.ok().result(responseDtoList).pageUtil(pageUtil);
+            if(null != responseDtoList){
+            	ret = new ArrayList<RefundResponseDto>();
+            	for (RefundResponseDto refundResponseDto : responseDtoList) {
+            		String createTimeStr = sdf.format(refundResponseDto.getCreateTime());
+            		String[] array = createTimeStr.split("#");
+            		refundResponseDto.setCreateTimeDay(array[0]);
+            		refundResponseDto.setCreateTimeTime(array[1]);
+            		ret.add(refundResponseDto);
+				}
+            }
+            return PageWrapMapper.ok().result(ret).pageUtil(pageUtil);
         } catch (Exception e) {
             this.logger.error("查询退款表数据异常", e);
             return PageWrapMapper.error();
