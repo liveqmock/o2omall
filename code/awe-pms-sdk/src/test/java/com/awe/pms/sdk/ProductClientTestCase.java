@@ -19,8 +19,8 @@ import com.awe.pms.sdk.response.dto.ProductResponseDto;
  * 
  */
 public class ProductClientTestCase {
-//    String WS_DOMAIN = "http://dev.pmsws.shop.hbird.com/";
-    String WS_DOMAIN = "http://local.pmsws.shop.hbird.com:8100/";
+    String WS_DOMAIN = "http://test.pmsws.shop.hbird.com:8100/";
+//    String WS_DOMAIN = "http://local.pmsws.shop.hbird.com:8100/";
     private ProductClient client;
 
     @Before
