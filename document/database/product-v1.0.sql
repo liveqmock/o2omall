@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2014/12/25 14:42:43                          */
+/* Created on:     2015/1/21 10:39:28                           */
 /*==============================================================*/
 
 
@@ -15,6 +15,8 @@ drop table if exists product_brand;
 drop table if exists product_category;
 
 drop table if exists product_dict;
+
+drop table if exists product_select;
 
 drop table if exists product_sku;
 
@@ -31,11 +33,11 @@ create table business_audit
    business_no          varchar(30) comment '商家编号',
    business_name        varchar(100) comment '商家名称',
    operator             varchar(30) comment '操作人',
-   operate_time         timestamp comment '操作时间',
+   operate_time         timestamp default NULL comment '操作时间',
    check_result         tinyint comment '审核结果',
    features             varchar(200) comment '审核描述',
-   create_time          timestamp comment '创建时间',
-   update_time          timestamp comment '修改时间',
+   create_time          timestamp default NULL comment '创建时间',
+   update_time          timestamp default NULL comment '修改时间',
    create_user          varchar(30) comment '创建人',
    update_user          varchar(30) comment '修改人',
    yn                   tinyint comment '是否有效',
@@ -76,9 +78,9 @@ create table business_info
    features             varchar(2000) comment '描述',
    remark               varchar(2000) comment '备注',
    check_status         tinyint comment '审核状态',
-   enter_time           timestamp comment '入驻时间',
-   contract_time_start  timestamp comment '有效合同开始时间',
-   contract_time_end    timestamp comment '有效合同结束时间',
+   enter_time           timestamp default NULL comment '入驻时间',
+   contract_time_start  timestamp default NULL comment '有效合同开始时间',
+   contract_time_end    timestamp default NULL comment '有效合同结束时间',
    level                tinyint comment '商家级别',
    has_card             tinyint comment '是否有证件',
    legal_person         varchar(100) comment '法定人身份证（图片地址）',
@@ -87,8 +89,8 @@ create table business_info
    credit_level         tinyint comment '信用等级',
    credit_limit         double comment '信用额度',
    priority             tinyint comment '优先级',
-   create_time          timestamp comment '创建时间',
-   update_time          timestamp comment '修改时间',
+   create_time          timestamp default NULL comment '创建时间',
+   update_time          timestamp default NULL comment '修改时间',
    create_user          varchar(30) comment '创建人',
    update_user          varchar(30) comment '修改人',
    yn                   tinyint comment '是否有效',
@@ -126,7 +128,7 @@ create table product
    business_name        varchar(100) comment '商家名称',
    method               bigint comment '食用方式（枚举）',
    origin_place         varchar(30) comment '商品产地',
-   sale_time_start      timestamp comment '商品上架时间',
+   sale_time_start      timestamp default NULL comment '商品上架时间',
    applicable_crowd     varchar(30) comment '适用人群（配置表）',
    applicable_age       varchar(30) comment '适用年龄（配置表）',
    applicable_step      tinyint comment '适用阶段',
@@ -151,8 +153,8 @@ create table product
    packing_list         varchar(200) comment '包装清单',
    sale_guarantee       varchar(200) comment '售后保障',
    kindly_reminder      varchar(200) comment '温馨提示',
-   create_time          timestamp comment '创建时间',
-   update_time          timestamp comment '修改时间',
+   create_time          timestamp default NULL comment '创建时间',
+   update_time          timestamp default NULL comment '修改时间',
    create_user          varchar(30) comment '创建人',
    update_user          varchar(30) comment '修改人',
    yn                   tinyint comment '是否有效',
@@ -160,7 +162,6 @@ create table product
 );
 
 alter table product comment '商品信息';
-
 
 /*==============================================================*/
 /* Table: product_brand                                         */
@@ -178,6 +179,7 @@ create table product_brand
    brand_name           varchar(100) comment '品牌名称',
    en_name              varchar(50) comment '品牌英文名称',
    brand_abbr           varchar(30) comment '品牌简称',
+   brand_img            varchar(200) comment '品牌图片',
    keyword              varchar(200) comment '关键字',
    type                 tinyint comment '商品类型（国内、进口）',
    type_name            varchar(20) comment '商品类型名称',
@@ -186,8 +188,8 @@ create table product_brand
    city_name            varchar(30) comment '地区-市-名称',
    city_no              varchar(30) comment '地区-市-编号',
    priority             tinyint comment '优先级',
-   create_time          timestamp comment '创建时间',
-   update_time          timestamp comment '修改时间',
+   create_time          timestamp default NULL comment '创建时间',
+   update_time          timestamp default NULL comment '修改时间',
    create_user          varchar(30) comment '创建人',
    update_user          varchar(30) comment '修改人',
    yn                   tinyint comment '是否有效',
@@ -209,8 +211,8 @@ create table product_category
    features             varchar(2000) comment '描述',
    level                tinyint comment '级别',
    priority             tinyint comment '优先级',
-   create_time          timestamp comment '创建时间',
-   update_time          timestamp comment '修改时间',
+   create_time          timestamp default NULL comment '创建时间',
+   update_time          timestamp default NULL comment '修改时间',
    create_user          varchar(30) comment '创建人',
    update_user          varchar(30) comment '修改人',
    yn                   tinyint comment '是否有效',
@@ -229,8 +231,8 @@ create table product_dict
    attr                 varchar(32) comment '属性',
    value                varchar(128) comment '值',
    remark               varchar(256) comment '备注',
-   create_time          timestamp comment '创建时间',
-   update_time          timestamp comment '修改时间',
+   create_time          timestamp default NULL comment '创建时间',
+   update_time          timestamp default NULL comment '修改时间',
    create_user          varchar(30) comment '创建人',
    update_user          varchar(30) comment '修改人',
    yn                   tinyint comment '是否有效',
@@ -240,12 +242,41 @@ create table product_dict
 alter table product_dict comment '商品信息配置表';
 
 /*==============================================================*/
-/* Index: index_create_time                                     */
+/* Table: product_select                                        */
 /*==============================================================*/
-create index index_create_time on product_dict
+create table product_select
 (
-   create_time
+   id                   bigint not null auto_increment comment '主键',
+   product_no           varchar(30) comment '商品编号',
+   product_name         varchar(100) comment '商品名称',
+   sku_no               varchar(30) comment 'sku编号',
+   sku_name             varchar(100) comment 'SKU名称',
+   category_one_id      bigint comment '一级分类',
+   category_two_id      bigint comment '二级分类',
+   category_three_id    bigint comment '三级分类',
+   applicable_step      tinyint comment '适用阶段',
+   brand_code           varchar(50) comment '品牌编号',
+   mode                 tinyint comment '经营模式（自营、三方）',
+   sale_price           double comment '销售价',
+   price                double comment '市场价',
+   img_path             varchar(100) comment 'Sku主图',
+   sale_quantity_total  bigint comment '总销售量',
+   sale_quantity_week   bigint comment '每周销售量',
+   recommend_amount     bigint comment '推荐数量（客户）',
+   is_recommend         tinyint comment '是否推荐（专家）',
+   is_hot               tinyint comment '是否热门',
+   hit_count_total      bigint comment '浏览次数',
+   sale_status          tinyint comment '上下架状态',
+   hit_count_week       bigint comment '每周浏览次数',
+   create_time          timestamp default NULL comment '创建时间',
+   update_time          timestamp default NULL comment '修改时间',
+   create_user          varchar(30) comment '创建人',
+   update_user          varchar(30) comment '修改人',
+   yn                   tinyint comment '是否有效',
+   primary key (id)
 );
+
+alter table product_select comment '商品查询综合表';
 
 /*==============================================================*/
 /* Table: product_sku                                           */
@@ -265,9 +296,9 @@ create table product_sku
    product_ad           varchar(100) comment '商品广告词',
    sales_promotion      varchar(500) comment '商品促销信息（赠品，多个可分割保存）',
    durability_period    varchar(20) comment '商品保质期',
-   production_date      timestamp comment '商品生产日期',
+   production_date      timestamp default NULL comment '商品生产日期',
    sale_status          tinyint comment '上下架状态',
-   sale_time            timestamp comment '上下架时间',
+   sale_time            timestamp default NULL comment '上下架时间',
    img_path             varchar(100) comment 'Sku主图',
    price                double comment '市场价',
    sale_price           double comment '销售价',
@@ -277,8 +308,8 @@ create table product_sku
    dimension_code_one   varchar(2000) comment '一维码',
    dimension_code_two   varchar(2000) comment '二维码',
    priority             tinyint comment '优先级',
-   create_time          timestamp comment '创建时间',
-   update_time          timestamp comment '修改时间',
+   create_time          timestamp default NULL comment '创建时间',
+   update_time          timestamp default NULL comment '修改时间',
    create_user          varchar(30) comment '创建人',
    update_user          varchar(30) comment '修改人',
    yn                   tinyint comment '是否有效',
@@ -286,8 +317,6 @@ create table product_sku
 );
 
 alter table product_sku comment '商品SKU';
-
-
 
 /*==============================================================*/
 /* Table: product_tax_rate                                      */
@@ -308,8 +337,8 @@ create table product_tax_rate
    tax_rate             double comment '税率',
    features             varchar(2000) comment '描述',
    priority             tinyint comment '优先级',
-   create_time          timestamp comment '创建时间',
-   update_time          timestamp comment '修改时间',
+   create_time          timestamp default NULL comment '创建时间',
+   update_time          timestamp default NULL comment '修改时间',
    create_user          varchar(30) comment '创建人',
    update_user          varchar(30) comment '修改人',
    yn                   tinyint comment '是否有效',
@@ -317,7 +346,6 @@ create table product_tax_rate
 );
 
 alter table product_tax_rate comment '税率';
-
 
 /*==============================================================*/
 /* Table: sku_images                                            */
@@ -331,8 +359,8 @@ create table sku_images
    is_primary_path      tinyint comment '是否主图',
    features             varchar(2000) comment '描述',
    priority             tinyint comment '优先级',
-   create_time          timestamp comment '创建时间',
-   update_time          timestamp comment '修改时间',
+   create_time          timestamp default NULL comment '创建时间',
+   update_time          timestamp default NULL comment '修改时间',
    create_user          varchar(30) comment '创建人',
    update_user          varchar(30) comment '修改人',
    yn                   tinyint comment '是否有效',
