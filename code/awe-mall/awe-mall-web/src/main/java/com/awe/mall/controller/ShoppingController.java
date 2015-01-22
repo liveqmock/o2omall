@@ -23,6 +23,7 @@ import com.awe.pms.sdk.request.dto.ProductSelectRequestDto;
 import com.awe.pms.sdk.response.dto.ProductDictResponseDto;
 import com.awe.pms.sdk.response.dto.ProductResponseDto;
 import com.awe.pms.sdk.response.dto.ProductSkuResponseDto;
+import com.hbird.common.utils.page.PageUtil;
 
 /**
  * @author zhc
@@ -70,12 +71,24 @@ public class ShoppingController extends BaseController {
     }
     
     @RequestMapping(value = "shopping_list", method = RequestMethod.GET)
-    public String list(Model model, ProductSelectRequestDto requestDto) {
+    public String list(Model model, ProductSelectRequestDto requestDto, PageUtil pageUtil) {
     	logger.debug("go to list page");
     	initNavFlag(model);
     	
 //		model.addAttribute("products", this.productService.queryProducts(requestDto));
-		model.addAttribute("productSelects", this.productSelectService.queryProductSelects(requestDto));
+    	
+    	if (pageUtil == null) {
+    		pageUtil = new PageUtil();
+    	}
+    	if (pageUtil.getCurPage() == 0) {
+    		pageUtil.setCurPage(1);
+    	}
+    	if (pageUtil.getPageSize() == 0) {
+    		pageUtil.setPageSize(15);
+    	}
+    	
+    	model.addAttribute("pageUtil", pageUtil);
+		model.addAttribute("productSelects", this.productSelectService.getProductSelectsWithPage(requestDto, pageUtil));
     	model.addAttribute("productCategorys", this.productCategoryService.queryProductCategoryList(null));
 		model.addAttribute("productBrands", this.productBrandService.queryProductBrandList(null));
     	return VIEW_WORKSPACE + VIEW_PRODUCT_LIST_PAGE;

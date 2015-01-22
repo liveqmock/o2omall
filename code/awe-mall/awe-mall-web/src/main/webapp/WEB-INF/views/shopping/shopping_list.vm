@@ -98,10 +98,18 @@
                   <li>推荐数</li>
                 </ul>
                 <ul class="rank_r right">
-                  <li>共800个商品</li>
-                  <li><span class="reds">1</span>/15</li>
-                  <li>上一页</li>
-                  <li>下一页</li>
+                  <li>共$!{pageUtil.totalRow}个商品</li>
+                  <li><span class="reds">$!{pageUtil.curPage}</span>/$!{pageUtil.totalPage}</li>
+    				#if($!{pageUtil.curPage}>1)
+                        <li onclick="pageSubmit($!{pageUtil.curPage} - 1)"><a href="#">上一页</a></li>
+                    #else
+                        <li>上一页</li>
+                    #end
+                    #if($!{pageUtil.curPage}<$!{pageUtil.totalPage})
+                        <li><a href="#" onclick="pageSubmit($!{pageUtil.curPage} + 1)">下一页</a></li>
+                    #else
+                        <li>下一页</li>
+                    #end
                 </ul>
               </div>
               <div class="bf rank_lb">
@@ -120,10 +128,8 @@
                  </div>
               </div>   
             </div>
-
         </div> 
      </div>
-
 
     </div>
  <!---------------------- 正文end ----------------------> 
