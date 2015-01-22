@@ -2,6 +2,7 @@
 <html lang="zh-cn">
     <head>
 		#parse("/layout/head.vm")
+		<script src="$basePath/static/js/jquery.form.js"></script>
 		<script src="$basePath/static/js/fuelux/fuelux.spinner.min.js"></script>
         <script language="javascript">
             $(function() {
@@ -34,22 +35,57 @@
 				$('#saleQuantity').ace_spinner({value:100,min:1,max:10000,step:1, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
 				
 				$("#btn-submit-img").click(function(){
+					if($('#skuName').val() == null || $('#skuName').val() == ""){
+                		alert('请填写商品名称');
+                		return;
+                	}
+		
 					$("#sku_form").ajaxSubmit({ 
                 		cache: false,
                 		type: 'post',
-                		data:{paramNo:$("#skuNo").val()},
-                		 error:function(data){
-                		 	//hideWait();
+                		error:function(data){
                 			alert("上传图片出错！");
-                	     },
-                		beforeSubmit:function(){
-                				//showWait();
-                			},
+            	    	},
                         success:function(data){
-                            //var obj = eval('(' + data + ')');
-                            showSkuPics(data);
-                			 hideWait();
-                        }
+							if(data.indexOf("<pre>") > -1 ){
+                        		data = jQuery.parseJSON(jQuery(data).text());
+                        	} else {
+                        		data = eval('(' + data + ')');
+                        	}
+                            var htmlContent = getShowPic(data.result, 1);
+							//添加主图数据
+							$('#mainpreview').append(htmlContent);
+							if ($('#imgPath').val() == null || $('#imgPath').val() == '') {
+            					$('#imgPath').val(data.result);
+							}
+                    	}
+                	});
+				});
+				
+				$("#btn-submit-sku-list").click(function(){
+					if($('#skuName').val() == null || $('#skuName').val() == ""){
+                		alert('请填写商品名称');
+                		return;
+                	}
+		
+					$("#sku_list_form").ajaxSubmit({ 
+                		cache: false,
+                		type: 'post',
+                		error:function(data){
+                			alert("上传图片出错！");
+            	    	},
+                        success:function(data){
+							if(data.indexOf("<pre>") > -1 ){
+                        		data = jQuery.parseJSON(jQuery(data).text());
+                        	} else {
+                        		data = eval('(' + data + ')');
+                        	}
+                            var htmlContent = getShowPic(data.result, 2);
+							//添加展示图数据
+							$('#skuListpreview').append(htmlContent);
+							var skuImgs = $("#skuImgPaths").val();
+							$("#skuImgPaths").val(skuImgs + ";" + data.result);
+                    	}
                 	});
 				});
 				
@@ -76,22 +112,18 @@
              * @description:回显商品主图片
              * @date 2014-2-11
              */
-            function showSkuPics(data){
-            	if(data.indexOf("<pre>") > -1 ){
-            		data = jQuery.parseJSON(jQuery(data).text());
-            	} else {
-            		data = eval('(' + data + ')');
-            	}
-            	var htmlContent = "";
-            	var path = data.imgUrl;
-            	//~----从图片路径中截取唯一编号，做为图片的imgId
-                //~----从图片路径中截取唯一编号，做为图片的imgId
-                var imgId = data.imgNo;
-                htmlContent ="<div><img src='http://imgmain.hdletv.com/"+ path +"' width='200px' height='130px'/><br><span><a href='javaScript:void()' id='"+imgId+"' onclick='delSkuPic(\""+imgId+"\");'>删除</a></span></div>";
-                $('#mainpreview').append(htmlContent);
-                //添加隐藏域的数据
-                var input="<input id='fig"+imgId+"' name='FigImg' value='"+imgId+";"+path+"' />";
-                $('#fig').append(input);
+            function getShowPic(path, type){
+				var widthVal;
+				var heightVal;
+				if (type == 1) {
+					widthVal = "200px";
+					heightVal = "130px";
+				} else {
+					widthVal = "440px";
+					heightVal = "450px";
+				}
+            	var htmlContent = "<div><img src='$basePath"+ path +"' width='" + widthVal + "' height='" + heightVal + "'/><br><span><a href='javaScript:void()' onclick='delSkuPic(\""+path+"\");'>删除</a></span></div>";
+                return htmlContent;
             }
         </script>
     </head>
@@ -184,15 +216,19 @@
                                     </div>
                                     <input type="hidden" name="saleStatus" id="saleStatus" value="0" />
 								</div>
+								
+								<input type="hidden" id="imgPath" name="imgPath" />
+								<input type="hidden" id="skuImgPaths" name="skuImgPaths" />
                             </form>
 							<form class="form-horizontal" id="sku_form" method="post" action="$basePath/picture/upload" enctype="multipart/form-data">
     							<div class="form-group">
     								<label class="col-sm-1 control-label no-padding-right" for="imgPath">商品主图</label>
     								<div class="col-sm-11">
 										<input type="hidden" name="filefolder" value="product" />
+										<input type="hidden" name="type" value="1" />
                                         <input type="file" name="file" class="col-sm-2" />
                                         <input class="col-sm-1" type="button" id="btn-submit-img" value="发布图片" />
-    									<span class="col-sm-8">图片尺寸宽440PX，高自适应</span>
+    									<span class="col-sm-8">图片尺寸宽200PX，高自适应</span>
                                     </div>
     							</div>
     							<div class="form-group">
@@ -201,11 +237,12 @@
                                     </div>
     						    </div>
                             </form>
-							<form class="form-horizontal" id="sku_list_form" method="post" action="upload.do" enctype="multipart/form-data">
+							<form class="form-horizontal" id="sku_list_form" method="post" action="$basePath/picture/upload" enctype="multipart/form-data">
     							<div class="form-group">
     								<label class="col-sm-1 control-label no-padding-right" for="skuListImgPath">商品展示</label>
     								<div class="col-sm-11" id="skuListImgPath">
                                         <input type="file" name="file" class="col-sm-2" />
+										<input type="hidden" name="type" value="2" />
                                         <input class="col-sm-1" type="button" id="btn-submit-sku-list" value="发布图片" />
     									<span class="col-sm-8">图片尺寸宽440PX，高自适应</span>
                                     </div>

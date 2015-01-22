@@ -1,8 +1,10 @@
 package com.awe.pms.controller;
    
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.pms.controller.base.BaseController;
 import com.awe.pms.domain.ProductSku;
+import com.awe.pms.domain.SkuImages;
 import com.awe.pms.domain.enums.ProductDictEnum;
 import com.awe.pms.domain.query.ProductSkuQuery;
 import com.awe.pms.service.ProductDictService;
 import com.awe.pms.service.ProductSelectService;
 import com.awe.pms.service.ProductSkuService;
+import com.awe.pms.service.SkuImagesService;
 import com.awe.pms.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.wrap.WrapMapper;
@@ -43,6 +47,9 @@ public class ProductSkuController extends BaseController {
     
     @Autowired
     private ProductSelectService productSelectService;
+    
+    @Autowired
+    private SkuImagesService skuImagesService;
 
     /** 视图前缀 */
     private static final String viewPrefix ="productSku";
@@ -96,13 +103,18 @@ public class ProductSkuController extends BaseController {
      */
     @RequestMapping(value = "add")
     @ResponseBody
-    public Wrapper<?> add(ProductSku productSku) {
+    public Wrapper<?> add(ProductSku productSku, String skuImgPaths) {
         try {
             productSku.setCreateUser(getLoginUserCnName());
             if (productSkuService.insert(productSku)) {
             	if (productSku.getSaleStatus().equals(1)) {
             		this.addOrDeleteProductSelect(productSku);
             	}
+            	if (StringUtils.isNotBlank(skuImgPaths)) {
+            		// 增加商品展示图信息
+            		this.addSkuImages(productSku.getSkuNo(), skuImgPaths);
+            	}
+            	
                 return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "添加成功！");
             } else {
                 return WrapMapper.wrap(Wrapper.ERROR_CODE, "添加失败！");
@@ -251,7 +263,32 @@ public class ProductSkuController extends BaseController {
     	}
     }
     
-    public void addOrDeleteProductSelect(ProductSku productSku) {
+    /**
+     * 批量增加商品展示图信息
+     * @param skuNo
+     * @param skuImgPathStr
+     */
+    private void addSkuImages(String skuNo, String skuImgPathStr) {
+    	String[] skuImgPaths = skuImgPathStr.substring(1).split(";");
+    	List<SkuImages> skuImagesList = new ArrayList<SkuImages>();
+    	for (int i = 0; i < skuImgPaths.length; i++) {
+    		if (StringUtils.isNotBlank(skuImgPaths[i])) {
+    			SkuImages skuImages = new SkuImages();
+    			skuImages.setSkuNo(skuNo);
+    			skuImages.setImgPath(skuImgPaths[i]);
+    			// 不是主图
+    			skuImages.setIsPrimaryPath(0);
+    			skuImages.setImgType(2);
+    			skuImages.setPriority(i);
+    			skuImagesList.add(skuImages);
+    		}
+    	}
+    	if (skuImagesList.size() > 0) {
+    		this.skuImagesService.insert(skuImagesList);
+    	}
+    }
+    
+    private void addOrDeleteProductSelect(ProductSku productSku) {
     	// 开启线程处理
     	if (productSku != null) {
     		this.productSelectService.addOrDelete(productSku);

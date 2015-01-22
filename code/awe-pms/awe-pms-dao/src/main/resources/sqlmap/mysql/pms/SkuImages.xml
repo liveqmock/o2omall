@@ -28,7 +28,7 @@
     <!-- 创建信息 -->
     <insert id="insert" parameterType="SkuImages" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO sku_images(<include refid="skuImagesUsedColumns"/>) 
-        VALUES (#{skuNo},#{imgType},#{imgPath},#{isPrimaryPath},#{features},#{priority},#{createTime},#{updateTime},#{createUser},#{updateUser},#{yn})
+        VALUES (#{skuNo},#{imgType},#{imgPath},#{isPrimaryPath},#{features},#{priority},now(),now(),#{createUser},#{updateUser},1)
 	</insert>
 	
     <!-- 修改信息 -->
@@ -39,19 +39,19 @@
 		        <if test="skuNo != null and skuNo != ''">
                 	sku_no = #{skuNo,jdbcType=VARCHAR},
 		        </if>
-		        <if test="imgType != null and imgType != ''">
+		        <if test="imgType != null">
                 	img_type = #{imgType,jdbcType=DECIMAL},
 		        </if>
 		        <if test="imgPath != null and imgPath != ''">
                 	img_path = #{imgPath,jdbcType=VARCHAR},
 		        </if>
-		        <if test="isPrimaryPath != null and isPrimaryPath != ''">
+		        <if test="isPrimaryPath != null">
                 	is_primary_path = #{isPrimaryPath,jdbcType=DECIMAL},
 		        </if>
 		        <if test="features != null and features != ''">
                 	features = #{features,jdbcType=VARCHAR},
 		        </if>
-		        <if test="priority != null and priority != ''">
+		        <if test="priority != null">
                 	priority = #{priority,jdbcType=DECIMAL},
 		        </if>
 		        <if test="updateUser != null and updateUser != ''">
@@ -87,7 +87,10 @@
 
     <!-- 根据查询Bean查询-判断是否存在 -->
     <select id="exist" resultType="java.lang.Integer" parameterType="SkuImages">
-        select count(1) from sku_images where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+        select count(1) from sku_images 
+        	where yn = 1 
+        		and sku_no = #{skuNo,jdbcType=VARCHAR}
+        		and img_path = #{imgPath,jdbcType=VARCHAR}
     </select>
 
     <!-- 根据查询Bean获取集合总数 -->
@@ -112,19 +115,19 @@
         <if test="skuNo != null and skuNo != ''">
         	and sku_no = #{skuNo,jdbcType=VARCHAR}
         </if>
-        <if test="imgType != null and imgType != ''">
+        <if test="imgType != null">
         	and img_type = #{imgType,jdbcType=DECIMAL}
         </if>
         <if test="imgPath != null and imgPath != ''">
         	and img_path = #{imgPath,jdbcType=VARCHAR}
         </if>
-        <if test="isPrimaryPath != null and isPrimaryPath != ''">
+        <if test="isPrimaryPath != null">
         	and is_primary_path = #{isPrimaryPath,jdbcType=DECIMAL}
         </if>
         <if test="features != null and features != ''">
         	and features = #{features,jdbcType=VARCHAR}
         </if>
-        <if test="priority != null and priority != ''">
+        <if test="priority != null">
         	and priority = #{priority,jdbcType=DECIMAL}
         </if>
         <if test="createTime != null and createTime != ''">
@@ -138,9 +141,6 @@
         </if>
         <if test="updateUser != null and updateUser != ''">
         	and update_user = #{updateUser,jdbcType=VARCHAR}
-        </if>
-        <if test="yn != null and yn != ''">
-        	and yn = #{yn,jdbcType=DECIMAL}
         </if>
     </sql>
 </mapper>

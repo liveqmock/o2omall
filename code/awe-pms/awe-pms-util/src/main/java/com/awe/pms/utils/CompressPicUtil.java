@@ -67,7 +67,7 @@ public class CompressPicUtil {
 				 * Image.SCALE_SMOOTH 的缩略算法 生成缩略图片的平滑度的 优先级比速度高 生成的图片质量比较好 但速度慢
 				 */
 				tag.getGraphics().drawImage(img.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH), 0, 0, null);
-				OutputStream out = new FileOutputStream(outputDir + outputFileName);
+				OutputStream out = new FileOutputStream(outputDir + "/" + outputFileName);
 				// JPEGImageEncoder可适用于其他图片类型的转换
 				JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
 				encoder.encode(tag);

@@ -1,6 +1,5 @@
 package com.awe.pms.controller;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -12,11 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.awe.pms.controller.base.BaseController;
 import com.awe.pms.utils.CompressPicUtil;
 import com.hbird.common.utils.DateHelper;
+import com.hbird.common.utils.wrap.WrapMapper;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * ImgController ：图片控制器
@@ -31,7 +33,8 @@ public class PictureController extends BaseController {
 	private static final Log LOG = LogFactory.getLog(PictureController.class);
 	
 	@RequestMapping(value = "upload", method = RequestMethod.POST)
-	public String upload(MultipartFile file, HttpSession session, Model model) throws IOException {
+	@ResponseBody
+	public Wrapper<?> upload(MultipartFile file, String filefolder, Integer type, HttpSession session, Model model) throws IOException {
 		// 得到上传的文件
 		// 得到上传服务器的路径
 		String path = session.getServletContext().getRealPath("/upload/");
@@ -39,7 +42,7 @@ public class PictureController extends BaseController {
 		String filename = DateHelper.getCurrentDateStr("yyyyMMddHHmmssSSS") + file.getOriginalFilename();
 		InputStream inputStream = file.getInputStream();
 		
-		CompressPicUtil.compressPic(inputStream, path, filename);
+		CompressPicUtil.compressPic(inputStream, path, filename, type);
 		/*byte[] b = new byte[1048576];
 		int length = inputStream.read(b);
 		path += "\\" + filename;
@@ -49,6 +52,6 @@ public class PictureController extends BaseController {
 		inputStream.close();
 		outputStream.close();*/
 		LOG.info(path + filename);
-		return "/upload/" + filename;
+		return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, "/upload/" + filename);
 	}
 }

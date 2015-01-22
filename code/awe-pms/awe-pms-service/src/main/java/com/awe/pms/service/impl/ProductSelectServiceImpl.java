@@ -16,6 +16,7 @@ import com.awe.pms.manager.ProductSelectManager;
 import com.awe.pms.service.ProductSelectService;
 import com.awe.pms.service.ProductService;
 import com.awe.pms.utils.exceptions.ExistedException;
+import com.hbird.common.utils.DateHelper;
 import com.hbird.common.utils.page.PageUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -185,6 +186,7 @@ public class ProductSelectServiceImpl implements ProductSelectService {
 
 	public boolean addOrDelete(ProductSku productSku) {
 		if (productSku != null && productSku.getSaleStatus() != null && StringUtils.isNotBlank(productSku.getProductNo())) {
+			
 			ProductSelect productSelect = new ProductSelect();
 			if (productSku.getSaleStatus().equals(0)) {
 				// 下架，删除信息
@@ -199,6 +201,13 @@ public class ProductSelectServiceImpl implements ProductSelectService {
 				List<Product> products = this.productService.queryProductList(queryBean);
 				if (products != null && products.size() > 0) {
 					Product product = products.get(0);
+					
+					// 更新商品表上下架信息
+					Product p = new Product();
+					p.setId(product.getId());
+					p.setSaleTimeStart(DateHelper.getServerTime(null));
+					this.productService.update(p);
+					
 					// 设置商品对象
 					productSelect.setProductNo(product.getProductNo());
 					productSelect.setProductName(product.getProductName());
