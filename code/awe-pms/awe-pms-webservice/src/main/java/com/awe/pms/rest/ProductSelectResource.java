@@ -16,14 +16,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.pms.domain.ProductSelect;
 import com.awe.pms.domain.query.ProductSelectQuery;
 import com.awe.pms.sdk.api.request.ProductSelectRequest;
 import com.awe.pms.sdk.api.request.dto.ProductSelectRequestDto;
 import com.awe.pms.sdk.api.response.dto.ProductSelectResponseDto;
 import com.awe.pms.service.ProductSelectService;
+import com.hbird.common.utils.page.PageUtil;
+import com.hbird.common.utils.wrap.PageWrapMapper;
+import com.hbird.common.utils.wrap.PageWrapper;
+import com.hbird.common.utils.wrap.WrapMapper;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 商品查询综合表REST服务：提供有关商品查询综合表的接口
@@ -104,6 +107,44 @@ public class ProductSelectResource {
     	} catch (Exception e) {
     		this.logger.error("查询商品综合表数据集合异常", e);
     		return WrapMapper.error();
+    	}
+    } 
+    
+    /**
+     * 分页查询商品综合表数据集合
+     * 
+     * @param request
+     *            商品查询综合表请求参数
+     * @return 商品查询综合表返回对象
+     * 
+     */
+    @POST
+    @Path("/productSelect/getProductSelectsWithPage")
+    public PageWrapper<?> getProductSelectsWithPage(ProductSelectRequest request) {
+    	if (null == request || !request.checkSign()) {
+    		this.logger.error("getProductSelectsWithPage 拒绝访问");
+    		return PageWrapMapper.error();
+    	}
+    	
+    	ProductSelectRequestDto requestDto = request.getContent();
+        PageUtil pageUtil = request.getPageUtil();
+        if (null == requestDto || null == pageUtil) {
+            this.logger.error("getProductSelectsWithPage 传入参数有误");
+            return PageWrapMapper.illegalArgument();
+        }
+    	
+    	ProductSelectQuery queryBean = new ProductSelectQuery();
+    	if (requestDto != null) {
+    		BeanUtils.copyProperties(requestDto, queryBean);
+    	}
+    	
+    	try {
+    		List<ProductSelect> productSelects = this.productSelectService.queryProductSelectListWithPage(queryBean, pageUtil);
+    		List<ProductSelectResponseDto> responseDtos = convertList(productSelects);
+    		return PageWrapMapper.ok().result(responseDtos).pageUtil(pageUtil);
+    	} catch (Exception e) {
+    		this.logger.error("分页查询商品综合表数据集合异常", e);
+    		return PageWrapMapper.error();
     	}
     } 
 
