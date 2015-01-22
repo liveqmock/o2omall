@@ -1,7 +1,8 @@
 package com.awe.pms.sdk.request;
 
-import com.hbird.common.sdk.api.request.HbirdSecureRequest;
 import com.awe.pms.sdk.request.dto.ProductSelectRequestDto;
+import com.hbird.common.sdk.api.request.HbirdPageSecureRequest;
+import com.hbird.common.utils.page.PageUtil;
 
 /**
  * ProductSelectRequest：商品查询综合表请求参数
@@ -10,7 +11,7 @@ import com.awe.pms.sdk.request.dto.ProductSelectRequestDto;
  * @version 2015-1-21 10:47:35
  * 
  */
-public class ProductSelectRequest extends HbirdSecureRequest<ProductSelectRequestDto> {
+public class ProductSelectRequest extends HbirdPageSecureRequest<ProductSelectRequestDto> {
 
     /** 序列化标识 */
     private static final long serialVersionUID = 1L;
@@ -28,5 +29,14 @@ public class ProductSelectRequest extends HbirdSecureRequest<ProductSelectReques
      */
     public ProductSelectRequest(String key, ProductSelectRequestDto content) {
         super(key, content);
+    }
+    
+    /**
+     * @param key
+     * @param content
+     * @param pageUtil
+     */
+    public ProductSelectRequest(String key, ProductSelectRequestDto content,PageUtil pageUtil) {
+        super(key, content, pageUtil);
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.util.Assert;
 
 import com.awe.pms.sdk.request.dto.ProductSelectRequestDto;
 import com.awe.pms.sdk.response.dto.ProductSelectResponseDto;
+import com.hbird.common.utils.page.PageUtil;
 
 /**
  * ProductSelectClient测试用例
@@ -46,6 +47,19 @@ public class ProductSelectClientTestCase {
 //    	requestDto.setId(1l);
     	
     	List<ProductSelectResponseDto> productSelectResponseDtos = client.getProductSelects(requestDto);
+    	Assert.notNull(productSelectResponseDtos);
+    } 
+    
+    @Test
+    public void testGetProductSelectsWithPage() {
+    	ProductSelectRequestDto requestDto = new ProductSelectRequestDto();
+//    	requestDto.setId(1l);
+    	
+    	PageUtil pageUtil = new PageUtil();
+    	pageUtil.setPageSize(10);
+    	pageUtil.setCurPage(1);
+    	
+    	List<ProductSelectResponseDto> productSelectResponseDtos = client.getProductSelectsWithPage(requestDto, pageUtil);
     	Assert.notNull(productSelectResponseDtos);
     } 
 

@@ -9,9 +9,11 @@ import org.springframework.util.Assert;
 import com.awe.pms.sdk.request.ProductSelectRequest;
 import com.awe.pms.sdk.request.dto.ProductSelectRequestDto;
 import com.awe.pms.sdk.response.ProductSelectResponse;
+import com.awe.pms.sdk.response.ProductSelectResponseList;
 import com.awe.pms.sdk.response.dto.ProductSelectResponseDto;
 import com.hbird.common.client.AbstractSecureClient;
 import com.hbird.common.sdk.api.response.HbirdResponse;
+import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.serialize.JsonHelper;
 
 /**
@@ -80,5 +82,37 @@ public class ProductSelectClient extends AbstractSecureClient {
     		LOG.debug("getProductSelects response: " + JsonHelper.toJson(response));
     	}
     	return super.getResult(response);
+    }
+    
+    /**
+     * 分页根据条件查询商品信息服务
+     * 
+     * @param request
+     *            查询请求对象
+     * @return List<ProductSelectResponseDto> 接口返回的数据对象
+     */
+    public List<ProductSelectResponseDto> getProductSelectsWithPage(ProductSelectRequestDto requestDto, PageUtil pageUtil) {
+//    	Assert.notNull(requestDto);
+    	
+    	ProductSelectRequest request = new ProductSelectRequest(super.getKey(), requestDto, pageUtil);
+    	
+    	if (LOG.isDebugEnabled()) {
+    		LOG.debug("getProductSelectsWithPage request: " + JsonHelper.toJson(request));
+    	}
+    	
+    	String url = super.getServiceUrlDomain() + "services/productSelect/getProductSelectsWithPage";
+    	
+    	ProductSelectResponseList responseList = super.getRestTemplate().postForObject(url, request, ProductSelectResponseList.class);
+    	
+    	List<ProductSelectResponseDto> responseResult = responseList.getResult();
+    	int totalRow = responseList.getPageUtil().getTotalRow();
+		pageUtil.setTotalRow(totalRow);
+		pageUtil.init();
+    	
+    	if (LOG.isDebugEnabled()) {
+    		LOG.debug("getProductSelectsWithPage url: " + url);
+    		LOG.debug("getProductSelectsWithPage response: " + JsonHelper.toJson(responseList));
+    	}
+    	return responseResult;
     }
 }
