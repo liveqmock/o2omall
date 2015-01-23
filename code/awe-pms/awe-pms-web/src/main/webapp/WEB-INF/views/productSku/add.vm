@@ -122,7 +122,7 @@
 					widthVal = "440px";
 					heightVal = "450px";
 				}
-            	var htmlContent = "<div><img src='$basePath"+ path +"' width='" + widthVal + "' height='" + heightVal + "'/><br><span><a href='javaScript:void()' onclick='delSkuPic(\""+path+"\");'>删除</a></span></div>";
+            	var htmlContent = "<div><img src='http://test.picture.shop.hbird.com/"+ path +"' width='" + widthVal + "' height='" + heightVal + "'/><br><span><a href='javaScript:void()' onclick='delSkuPic(\""+path+"\");'>删除</a></span></div>";
                 return htmlContent;
             }
         </script>

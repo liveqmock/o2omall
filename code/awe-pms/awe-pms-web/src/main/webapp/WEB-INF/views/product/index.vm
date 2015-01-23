@@ -198,7 +198,7 @@
                                 <td>$!item.categoryOne</td>
                                 <td>$!item.categoryTwo</td>
                                 <td>$!item.categoryThree</td>
-                                <td>$!item.productNo</td>
+                                <td><a href="javascript:void(0)" onclick="toDetail($!item.id);" data-toggle="modal">$!item.productNo</a></td>
                                 <td>$!item.productName</td>
                                 <td>$!item.brandName</td>
                                 <td>
@@ -226,7 +226,6 @@
                                 <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.createTime)</td>
                                 <td>$!item.createUser</td>
                                 <td>
-									<a href="javascript:void(0)" onclick="toDetail($!item.id);" data-toggle="modal"><i class="icon-list">详情</i></a>
 									<a href="javascript:void(0)" onclick="toSetSku('$!item.productNo');"><i class="icon-list">设置SKU</i></a>
 									<a href="javascript:void(0)" onclick="toUpdate($!item.id)"><i class="icon-pencil pink">修改</i></a>
 									<a href="javascript:void(0)" onclick="toDelete($!item.id)"><i class="icon-remove red">删除</i></a>

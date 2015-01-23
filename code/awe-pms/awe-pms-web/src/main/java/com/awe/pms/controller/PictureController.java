@@ -37,12 +37,12 @@ public class PictureController extends BaseController {
 	public Wrapper<?> upload(MultipartFile file, String filefolder, Integer type, HttpSession session, Model model) throws IOException {
 		// 得到上传的文件
 		// 得到上传服务器的路径
-		String path = session.getServletContext().getRealPath("/upload/");
+//		String path = session.getServletContext().getRealPath("/upload/");
 		// 得到上传的文件的文件名
-		String filename = DateHelper.getCurrentDateStr("yyyyMMddHHmmssSSS") + file.getOriginalFilename();
+		String filename = DateHelper.getCurrentDateStr("yyyyMMddHHmmssSSS") + "_" + System.currentTimeMillis() + "_" + file.getOriginalFilename();
 		InputStream inputStream = file.getInputStream();
 		
-		CompressPicUtil.compressPic(inputStream, path, filename, type);
+		CompressPicUtil.compressPic(inputStream, filefolder, filename, type);
 		/*byte[] b = new byte[1048576];
 		int length = inputStream.read(b);
 		path += "\\" + filename;
@@ -51,7 +51,7 @@ public class PictureController extends BaseController {
 		outputStream.write(b, 0, length);
 		inputStream.close();
 		outputStream.close();*/
-		LOG.info(path + filename);
-		return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, "/upload/" + filename);
+		LOG.info(filefolder + filename);
+		return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, filefolder + "/" + filename);
 	}
 }
