@@ -4,6 +4,7 @@
      var code = $("#code").val();
 	 if(code != 200){
 	 	$("#success").hide();
+		$("#settlement").hide();
 	 }
    });
 </script>
@@ -33,7 +34,7 @@
              <div class="right"><a href="javascript:void(0)" onclick="SubmitOrders();" class="right">去支付<i></i></a>总金额：<span class="reds">￥${countPrice}元</span></div>
            </div>
            </div>
-           <div class="pt30 pl20 ft14 galy3 pb70">您的订单已经在处理中，发货后订单内容会显示承运人联系方式，如有必要您可以联系对方     <span class="pl25">[<a href="" class="reds">查看订单详情</a>]</span></div>
+           <div class="pt30 pl20 ft14 galy3 pb70">您的订单已经在处理中，发货后订单内容会显示承运人联系方式，如有必要您可以联系对方     <span class="pl25">[<a href="javascript:void(0)" class="reds">查看订单详情</a>]</span></div>
          </div> 
        
        

@@ -263,15 +263,25 @@ public class OrdersServiceImpl implements OrdersService {
 		boolean resultFlag = false;
 		// 调用恒冲商品接口对象
 		ProductSkuRequestDto skuRequestDto = new ProductSkuRequestDto();
-		// 把skuno封装到list中
-		List<String> skunos = new ArrayList<String>();
-		for (String key : mapSC.keySet()) {
-			skunos.add(key);
-		}
-		skuRequestDto.setSkuNos(skunos);
 		try {
+			// 把skuno封装到list中
+			List<String> skunos = new ArrayList<String>();
+			for (String key : mapSC.keySet()) {
+				skunos.add(key);
+			}
+			skuRequestDto.setSkuNos(skunos);
+			//判断skuno参数是否为空
+			if(skuRequestDto.getSkuNos() == null || skuRequestDto.getSkuNos().isEmpty()){
+				this.LOG.error("insertDetails 传入参数有误");
+				return WrapMapper.illegalArgument();
+			}
 			// zhc商品信息
 			List<ProductResponseDto> responseDtos = productClient.getProductBySkuNos(skuRequestDto);
+			if(skuRequestDto.getSkuNos().size() != responseDtos.size()){
+				LOG.info("insertDetails 调用productClient.getProductBySkuNos返回数据异常:"+skuRequestDto.getSkuNos().size()+"===接口数据"+responseDtos.size());
+				return WrapMapper.illegalArgument();
+			}
+			
 			List<OrdersResponseDto> ordersResponseDtos = new ArrayList<OrdersResponseDto>();
 			Map<String, OrdersResponseDto> mapList = new HashMap<String, OrdersResponseDto>();
 			for (ProductResponseDto productResponseDto : responseDtos) {
@@ -333,6 +343,7 @@ public class OrdersServiceImpl implements OrdersService {
 					}
 					details = new OrderDetails(o, listItems, log);
 				}
+				//把订单号和对应的价格存放在map里面，返回给前台
 				orderMessageMap.put(o.getOrderNo(), o.getCommAmount());
 				orderDetails.add(details);
 			}
