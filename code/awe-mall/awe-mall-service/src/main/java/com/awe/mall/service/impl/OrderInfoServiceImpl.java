@@ -86,8 +86,8 @@ public class OrderInfoServiceImpl implements OrderInfoService{
 			countMap.put(skuno[i], count[i]);
 		}
 		detailsRequestDto.setOrdersRequestDto(requestDto);
-		//detailsRequestDto.setMapSC(countMap);
-		//detailsRequestDto.setIpString(ip);
+		detailsRequestDto.setMapSC(countMap);
+		detailsRequestDto.setIpString(ip);
 		
 		try {
 			Wrapper<?> wrapper = ordersClient.addOrdersDetails(detailsRequestDto);

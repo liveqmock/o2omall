@@ -33,7 +33,7 @@ public class ProductSelectServiceImpl implements ProductSelectService {
 		} catch (Exception e) {
 			LOG.warn("queryProductSelects has error,", e);
 		}
-		return list;
+		return list;  
 	}
 
 	public List<ProductSelectResponseDto> getProductSelectsWithPage(ProductSelectRequestDto requestDto,
