@@ -61,7 +61,10 @@ public class RefundResponseDto extends HbirdDto {
     private Integer status;
     /**差额原因*/
     private String balanceReason;
-    
+    /**申请创建日期-用于商城页面显示 */
+    private String createTimeDay;
+    /**申请订单创建时间-用于商城页面显示 */
+    private String createTimeTime;
     /**
      * get id自增
      * 
@@ -386,6 +389,22 @@ public class RefundResponseDto extends HbirdDto {
 
 	public void setBalanceReason(String balanceReason) {
 		this.balanceReason = balanceReason;
+	}
+
+	public String getCreateTimeDay() {
+		return createTimeDay;
+	}
+
+	public void setCreateTimeDay(String createTimeDay) {
+		this.createTimeDay = createTimeDay;
+	}
+
+	public String getCreateTimeTime() {
+		return createTimeTime;
+	}
+
+	public void setCreateTimeTime(String createTimeTime) {
+		this.createTimeTime = createTimeTime;
 	}
 	
 }

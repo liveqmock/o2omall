@@ -7,6 +7,7 @@ import org.springframework.util.Assert;
 import com.awe.test.rems.rest.request.ServiceAuditRequest;
 import com.awe.test.rems.rest.request.dto.ServiceAuditRequestDto;
 import com.awe.test.rems.rest.response.ServiceAuditResponse;
+import com.awe.test.rems.rest.response.ServiceAuditResponseList;
 import com.awe.test.rems.rest.response.dto.ServiceAuditResponseDto;
 import com.hbird.common.client.AbstractClient;
 
@@ -37,5 +38,17 @@ public class ServiceAuditResourceTestCase extends AbstractClient {
         Assert.notNull(response);
         ServiceAuditResponseDto serviceAuditResponseDto = super.getResult(response);
         Assert.notNull(serviceAuditResponseDto);
+    }
+    
+    @Test
+    public void queryServiceAuditList(){
+    	String url= getServiceUrlDomain() + "/serviceAudit/queryServiceAuditList";
+
+        ServiceAuditRequestDto requestDto = new ServiceAuditRequestDto();
+        requestDto.setServiceNo("T000000001");
+        requestDto.setUserId(1l);
+        ServiceAuditRequest request = new ServiceAuditRequest("rems",requestDto);
+        ServiceAuditResponseList responseList = super.getRestTemplate().postForObject(url, request, ServiceAuditResponseList.class);
+        Assert.notNull(responseList);
     }
 }
