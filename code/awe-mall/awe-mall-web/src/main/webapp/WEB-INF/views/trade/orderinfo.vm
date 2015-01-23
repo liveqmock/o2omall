@@ -84,9 +84,10 @@ background: linear-gradient(top,#b11a1a,#bf2626);
  	}
  	//---------------------------------------点击保存新地址-----------------------------------------------
  	function saveAddress(){
- 		
+	  //
+	  $("#user_address_name").val($("#mall_name").val());
+	  $("#user_address_mobile").val($("#mall_mobile").val());
 		var form = $("#mall_form");	
-		
 		var raId = $('input[id="radioaddress"]').filter(':checked').val();
 		if(raId != 0){
 			$("#mall_id").val(raId);
@@ -94,8 +95,6 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 			$("#mall_id").val('');
 		}
 		var type = $("#mall_id").val();
-		alert(type);
-		alert(newadd);
 		if(type != ''){
 		//1:隐藏新增框
  		$("#add_address").hide();
@@ -121,10 +120,6 @@ background: linear-gradient(top,#b11a1a,#bf2626);
                 );
 		}
 		
-		//数据验证----start
-		
-		//数据验证----end
-		
 		//获取select的值
 		var provinceName=$("#provinceNo").find("option:selected").text();  //获取Select选择的Text
         var provinceNo=$("#provinceNo").val();  //获取Select选择的Value
@@ -144,7 +139,6 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 		$("#mall_countyNo").val(countyNo);
 		
 		if(newadd == 'add' && type == ''){
-		alert(Verific("save"));
     		if(Verific("save")){
 			 //1:隐藏新增框
      		$("#add_address").hide();
@@ -184,8 +178,8 @@ background: linear-gradient(top,#b11a1a,#bf2626);
  	}
 	
 	//加载当前用户地址数据
-	function user_address(){
 	var txt="";
+	function user_address(){
 	 var userId = $("#userId").val();
 		jQuery.ajax({
     		type: "GET",
@@ -219,7 +213,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 						cityNo = item.cityNo;
 						countyName = item.countyName;
 						countyNo = item.countyNo;
-						name = item.cityName;
+						name = item.name;
 						address = item.address;
 						mobile = item.mobile;
 						$('#user_radio').append("<input checked type='radio' name='address-old' value='"+item.id+"' id='radioaddress' onchange='myradio();'/> "+txtRadio+"  <a href='javascript:void(0)' onclick='queryAddress("+item.id+")'><font color='blue'>编辑</font></a>   | <a href='javascript:void(0)' onclick='deleteAddress("+item.id+")'><font color='blue'>删除</font></a>  <p><br/> ");
@@ -336,7 +330,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
     		}
     	});
 	}
-	//-------
+	//-------修改地址时加载地址-js
 	function queryAddress(id){
 		jQuery.ajax({
     		type: "GET",
@@ -351,12 +345,7 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 				$("#mall_email").val(data.result.email);//邮箱
 				$("#mall_id").val(data.result.id);//id
 				//给省市县 select 赋值
-				alert(data.result.provinceName);
-				alert(data.result.provinceNo);
-				$("#provinceNo").find("option[text='陕西']").attr("selected","selected");
-				// $("#provinceNo option[text='北京']").attr("selected",true);
-				//$("#provinceNo").find("option").eq(100).attr("select","selected")
-				//$('#provinceNo').append("<option selected value='" + data.result.provinceNo + "'>" + data.result.provinceName + "</option>");
+				$("#provinceNo").find("option[value='100']").attr("selected",true);
 				//----------------------------------------------------------
 				 $('#cityNo').append("<option selected value='" + data.result.cityNo + "'>" + data.result.cityName + "</option>");
 				 $('#countyNo').append("<option selected value='" + data.result.countyNo + "'>" + data.result.countyName + "</option>");
@@ -370,7 +359,6 @@ background: linear-gradient(top,#b11a1a,#bf2626);
     		}
     	});
 	}
-
 	function deleteAddress(id){
 		jQuery.ajax({
     		type: "GET",
@@ -404,7 +392,6 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 		   $("#electronic").hide();
 		}
 	}
-	
 	//单击发票抬头
 	function OninvoiceTitle(title){
 		//当title=1 隐藏文本框     等于2时显示
@@ -414,15 +401,17 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 		 $("#mall_companyName").show();
 		}
 	}
-	
 	//提交订单
 	function SubmitOrders(){
+    	if(txt == ''){
+    		alert("请填写收货人信息");
+    		return;
+    	}
 	//提交之前，验证各种参数
 	$("#mall_form").attr("action", "#springUrl('')/orderinfo/addOrders");
     $("#mall_form").attr("method", "POST");
 	$("#mall_form").submit();
 	}
-	
 	function Verific(value){
 		//验证收货人不能为空
 		if(value == 'user' || value == 'save'){
@@ -437,8 +426,6 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 				return true;
         	}
 		}
-	
-		
 		//验证省和市不能为空
 		if(value == 'province' || value == 'save'  || value == 'city'){
 			if($("#provinceNo").val() == '' || $("#cityNo").val() == ''){
@@ -449,8 +436,6 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 				return true;
         	}
 		}
-		
-		
 		if(value == 'add' || value == 'save'){
 			//收货地址 不能为空
     		if($("#mall_address").val() == ''){
@@ -464,7 +449,6 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 				return true;
         	}
 		}
-	    
 	    if(value == 'mobile' || value == 'save'){
 			//验证手机号
         	if(!$("#mall_mobile").val().match(/^1[3|4|5|8][0-9]\d{4,8}$/)){
@@ -476,7 +460,6 @@ background: linear-gradient(top,#b11a1a,#bf2626);
     		}
 		}
 	}
-	
  </script>
 <!---------------------- 填写并核对订单信息  ----------------------> 
       <div class="container wid1200 clearfix">
@@ -514,6 +497,8 @@ background: linear-gradient(top,#b11a1a,#bf2626);
 								<input type="hidden" name="id" id="mall_id"/>
 								<input type="hidden" name="isdefault" id="isdefault" value="1"/>
 								<input type="hidden" value="${userId}" id="userId" name="userId"/>
+								<input type="hidden" name="name" id="user_address_name"/><!--收货人-->
+								<input type="hidden" name="mobile" id="user_address_mobile"/><!--收货人手机号-->
 							</td>
                         </tr>
                           <tr ><td><br/></td><td id="VerificUserText" class="reds"></td></tr>
