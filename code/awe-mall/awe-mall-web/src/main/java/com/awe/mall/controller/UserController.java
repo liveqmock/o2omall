@@ -2,7 +2,6 @@ package com.awe.mall.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.mall.controller.base.BaseController;
 import com.awe.mall.service.UserAccountService;
-import com.awe.mall.utils.CodeUtil;
+import com.awe.mall.web.utils.CheckCodeUtils;
 import com.awe.uc.sdk.request.dto.PasswordModifyRequestDto;
 import com.awe.uc.sdk.response.dto.UserAccountResponseDto;
 import com.hbird.common.utils.wrap.WrapMapper;
@@ -89,7 +88,7 @@ public class UserController extends BaseController {
         String message = null;
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             message = MSG_VALUE_ILLEGAL;
-        } else if (!validateCheckCode(checkCode, request)) {
+        } else if (!CheckCodeUtils.validateCheckCode(checkCode, request)) {
             message = MSG_CHECK_CODE_ERROR;
         } else {
             this.logger.info("doLogin: username=" + username);
@@ -172,7 +171,7 @@ public class UserController extends BaseController {
 
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             message = MSG_VALUE_ILLEGAL;
-        } else if (!validateCheckCode(checkCode, request)) {
+        } else if (!CheckCodeUtils.validateCheckCode(checkCode, request)) {
             message = MSG_CHECK_CODE_ERROR;
         } else {
             this.logger.info("doRegister: username=" + username);
@@ -252,7 +251,8 @@ public class UserController extends BaseController {
         if (StringUtils.isBlank(username) || StringUtils.isBlank(oldPassword) || StringUtils.isBlank(newPassword)
                 || StringUtils.isBlank(smsCode) || StringUtils.isBlank(checkCode)) {
             return WrapMapper.error().message(MSG_VALUE_ILLEGAL);
-        } else if (!validateCheckCode(checkCode, request) || !validateSmsCode(smsCode, request)) {
+        } else if (!CheckCodeUtils.validateCheckCode(checkCode, request)
+                || !CheckCodeUtils.validateSmsCode(smsCode, request)) {
             return WrapMapper.error().message(MSG_CHECK_CODE_ERROR);
         }
 
@@ -310,7 +310,8 @@ public class UserController extends BaseController {
         if (StringUtils.isBlank(username) || StringUtils.isBlank(newPassword) || StringUtils.isBlank(smsCode)
                 || StringUtils.isBlank(checkCode)) {
             return WrapMapper.error().message(MSG_VALUE_ILLEGAL);
-        } else if (!validateCheckCode(checkCode, request) || !validateSmsCode(smsCode, request)) {
+        } else if (!CheckCodeUtils.validateCheckCode(checkCode, request)
+                || !CheckCodeUtils.validateSmsCode(smsCode, request)) {
             return WrapMapper.error().message(MSG_CHECK_CODE_ERROR);
         }
 
@@ -331,46 +332,6 @@ public class UserController extends BaseController {
             logger.error("resetPassword has error,", e);
             return WrapMapper.error();
         }
-    }
-
-    /**
-     * 校验用户输入的随机图片验证码
-     * 
-     * @param checkCode
-     * @param request
-     * @return
-     */
-    boolean validateCheckCode(String checkCode, HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            return false;
-        }
-
-        String code = (String) session.getAttribute(CodeUtil.KEY_CHECK_CODE);
-        session.removeAttribute(CodeUtil.KEY_CHECK_CODE);      
-        logger.info(checkCode);
-        logger.info(code);
-
-        return StringUtils.isNotBlank(checkCode) && checkCode.toUpperCase().equals(code);
-    }
-
-    /**
-     * 校验用户输入的短信验证码
-     * 
-     * @param checkCode
-     * @param request
-     * @return
-     */
-    boolean validateSmsCode(String checkCode, HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            return false;
-        }
-        String code = (String) session.getAttribute(CodeUtil.KEY_SMS_CODE);
-        session.removeAttribute(CodeUtil.KEY_SMS_CODE);
-        logger.info(checkCode);
-        logger.info(code);
-        return StringUtils.isNotBlank(checkCode) && checkCode.toUpperCase().equals(code);
     }
 
 }
