@@ -1,0 +1,37 @@
+<script  type="text/javascript">
+	$(function () {  
+    });
+</script>	
+<!---------------------- 正文 ----------------------> 
+<div class="container wid1200 clearfix">
+	#parse("/myorder/common/left.vm")
+   <!---------------------- 右则内容 ----------------------> 
+      <div class="section right">
+       
+         <div class="my_order_form clearfix">
+			<table><tr><td>服务单号:$!ReturnExchange.serviceNo</td><td>【$!ReturnExchange.businessName】$!ReturnExchange.skuName </td></tr></table>
+			跟踪消息:
+			<table>
+				<tr><td>处理时间</td><td>处理信息</td><td>操作人</td></tr>
+				#foreach( $item in $dataList)
+				<tr><td>$!dateTool.format('yyyy-MM-dd HH:mm:SS',$!item.createTime)</td><td>$!AuditStatusMap.get($!item.status)</td><td>$!item.createUser</td></tr>
+				#end
+			</table>
+         </div>
+         <div class="order_tab clearfix mt25">
+         <table border="1">
+				<tr><td>退款方式</td><td></td></tr>
+				<tr><td>商品处理方式</td><td>$!ReturnExchange.serviceType</td></tr>
+				<tr><td>问题描述</td><td>$!ReturnExchange.problemDescription</td></tr>
+				<tr><td>收货地址</td><td>$!ReturnExchange.provinceName $!ReturnExchange.cityName $!ReturnExchange.countyName $!ReturnExchange.detailedAddress</td></tr>
+				<tr><td>联系信息</td><td>联系人：$!ReturnExchange.consignee 手机： $!ReturnExchange.mobileNo</td></tr>
+				<tr><td><p>发货单信息</p><p>$!dateTool.format('yyyy-MM-dd',$!item.reservationPickupTime)</p></td><td>快递公司:$!ReturnExchange.expressName 运单号:$!ReturnExchange.waybillNo</td></tr>
+			</table>
+
+         </div>
+      
+      </div>
+      
+   <!---------------------- 右则内容end ----------------------> 
+    </div>
+ <!---------------------- 正文end ----------------------> 
