@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeanUtils;
@@ -19,6 +20,7 @@ import org.springframework.util.CollectionUtils;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 import com.awe.pms.domain.SkuImages;
+import com.awe.pms.domain.query.SkuImagesQuery;
 import com.awe.pms.sdk.api.request.SkuImagesRequest;
 import com.awe.pms.sdk.api.request.dto.SkuImagesRequestDto;
 import com.awe.pms.sdk.api.response.dto.SkuImagesResponseDto;
@@ -72,6 +74,40 @@ public class SkuImagesResource {
             this.logger.error("查询sku图片数据异常", e);
             return WrapMapper.error();
         }
+    } 
+    
+    /**
+     * 查询sku图片信息
+     * 
+     * @param request
+     *            sku图片请求参数
+     * @return sku图片返回对象
+     * 
+     */
+    @POST
+    @Path("/skuImages/getSkuImageList")
+    public Wrapper<?> getSkuImageList(SkuImagesRequest request) {
+    	if (null == request || !request.checkSign()) {
+    		this.logger.error("getSkuImageList 拒绝访问");
+    		return WrapMapper.forbidden();
+    	}
+    	
+    	SkuImagesRequestDto requestDto = request.getContent();
+    	if (null == requestDto || (null == requestDto.getId() && StringUtils.isBlank(requestDto.getSkuNo()))) {
+    		this.logger.error("getSkuImageList 传入参数有误");
+    		return WrapMapper.illegalArgument();
+    	}
+    	
+    	try {
+    		SkuImagesQuery queryBean = new SkuImagesQuery();
+    		BeanUtils.copyProperties(requestDto, queryBean);
+    		List<SkuImages> list = this.skuImagesService.querySkuImagesList(queryBean);
+    		List<SkuImagesResponseDto> responseDtos = convertList(list);
+    		return WrapMapper.ok().result(responseDtos);
+    	} catch (Exception e) {
+    		this.logger.error("查询sku图片list数据异常", e);
+    		return WrapMapper.error();
+    	}
     } 
 
     // 数据转换

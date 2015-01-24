@@ -20,6 +20,7 @@ import com.awe.pms.domain.ProductSku;
 import com.awe.pms.domain.SkuImages;
 import com.awe.pms.domain.enums.ProductDictEnum;
 import com.awe.pms.domain.query.ProductSkuQuery;
+import com.awe.pms.domain.query.SkuImagesQuery;
 import com.awe.pms.service.ProductDictService;
 import com.awe.pms.service.ProductSelectService;
 import com.awe.pms.service.ProductSkuService;
@@ -140,6 +141,17 @@ public class ProductSkuController extends BaseController {
         try {
             ProductSku productSkuResult = productSkuService.getProductSkuById(productSku.getId());
             model.addAttribute("productSku", productSkuResult);
+            SkuImagesQuery queryBean = new SkuImagesQuery();
+            queryBean.setSkuNo(productSkuResult.getSkuNo());
+            List<SkuImages> skuImagesList = this.skuImagesService.querySkuImagesList(queryBean);
+            
+            StringBuffer skuImgPaths = new StringBuffer();
+            for (SkuImages skuImages : skuImagesList) {
+            	skuImgPaths.append(";").append(skuImages.getImgPath());
+            }
+            if (skuImgPaths.toString().length() > 0) {
+            	model.addAttribute("skuImgPaths", skuImgPaths.toString().substring(1));
+            }
             
             this.initDicts(model);
         } catch (Exception e) {

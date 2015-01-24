@@ -2,6 +2,7 @@
 	window.basePath = "#springUrl('')";
 </script>
 #set($basePath=$request.getContextPath())
+#set($imgUrl="http://test.picture.shop.hbird.com/")
 <title>乐视电商管理平台</title>
 <meta charset="utf-8" />
 <meta http-equiv="pragma" content="no-cache">

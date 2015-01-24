@@ -124,6 +124,7 @@
 							<th class="center">总浏览次数</th>
 							<th class="center">上下架状态</th>
 							<th class="center">每周浏览次数</th>
+							<th class="center">操作</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -139,7 +140,7 @@
                                 <td>$!item.mode</td>
                                 <td>$!item.salePrice</td>
                                 <td>$!item.price</td>
-                                <td>$!item.imgPath</td>
+                                <td><img src="$!{imgUrl}$!item.imgPath"></img></td>
                                 <td>$!item.saleQuantityTotal</td>
                                 <td>$!item.saleQuantityWeek</td>
                                 <td>$!item.recommendAmount</td>
@@ -148,6 +149,9 @@
                                 <td>$!item.hitCountTotal</td>
                                 <td>$!item.saleStatus</td>
                                 <td>$!item.hitCountWeek</td>
+								<td>
+									<a href="javascript:void(0)" onclick="toDelete($!item.id)"><i class="icon-remove red">删除</i></a>
+								</td>
                             </tr>
                         #end
                     </tbody>

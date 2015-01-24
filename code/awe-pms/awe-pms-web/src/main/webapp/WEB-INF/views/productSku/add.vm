@@ -122,7 +122,7 @@
 					widthVal = "440px";
 					heightVal = "450px";
 				}
-            	var htmlContent = "<div><img src='http://test.picture.shop.hbird.com/"+ path +"' width='" + widthVal + "' height='" + heightVal + "'/><br><span><a href='javaScript:void()' onclick='delSkuPic(\""+path+"\");'>删除</a></span></div>";
+            	var htmlContent = "<div><img src='$!{imgUrl}"+ path +"' width='" + widthVal + "' height='" + heightVal + "'/><br><span><a href='javaScript:void()' onclick='delSkuPic(\""+path+"\");'>删除</a></span></div>";
                 return htmlContent;
             }
         </script>
@@ -241,6 +241,7 @@
     							<div class="form-group">
     								<label class="col-sm-1 control-label no-padding-right" for="skuListImgPath">商品展示</label>
     								<div class="col-sm-11" id="skuListImgPath">
+										<input type="hidden" name="filefolder" value="product" />
                                         <input type="file" name="file" class="col-sm-2" />
 										<input type="hidden" name="type" value="2" />
                                         <input class="col-sm-1" type="button" id="btn-submit-sku-list" value="发布图片" />
