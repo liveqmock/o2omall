@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.awe.mall.service.CheckCodeService;
 import com.awe.mall.service.SmsService;
 import com.awe.mall.utils.CodeUtil;
+import com.awe.mall.web.utils.CheckCodeUtils;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 
@@ -42,7 +42,7 @@ public class CheckCodeController {
      * @throws IOException
      */
     @RequestMapping("createImage")
-    public void createImage(HttpSession session, HttpServletResponse response) throws IOException {
+    public void createImage(HttpServletResponse response) throws IOException {
         // 禁止缓存
         response.setHeader("Pragma", "No-cache");
         response.setHeader("Cache-Control", "No-cache");
@@ -51,8 +51,8 @@ public class CheckCodeController {
         response.setContentType("image/jpeg");
 
         String code = checkCodeService.generateRandomMixedCode(CodeUtil.PICTURE_CODE_LENGTH);
-        // 将生成的验证码保存到Session中
-        session.setAttribute(CodeUtil.KEY_CHECK_CODE, code);
+        // 将生成的验证码加密后保存到Cookie中
+        CheckCodeUtils.storeCheckCode(response, code);
         BufferedImage image = checkCodeService.getImage(code, CodeUtil.PICTURE_WIDTH, CodeUtil.PICTURE_HEIGHT);
         ImageIO.write(image, "JPEG", response.getOutputStream());
     }
@@ -67,14 +67,13 @@ public class CheckCodeController {
      */
     @RequestMapping(value = "createSms", method = RequestMethod.POST)
     @ResponseBody
-    public Wrapper<?> createSms(HttpSession session, String mobile) {
+    public Wrapper<?> createSms(HttpServletResponse response, String mobile) {
         try {
-
             String code = checkCodeService.generateRandomNumberCode(CodeUtil.SMS_CODE_LENGTH);
-            // 将生成的验证码保存到Session中
-            session.setAttribute(CodeUtil.KEY_SMS_CODE, code);
+            // 将生成的验证码加密后保存到Cookie中
+            CheckCodeUtils.storeSmsCode(response, code);
             String content = String.format("您申请的手机验证码是：%s，请输入后进行验证，谢谢！", code);
-            //发短信到手机
+            // 发短信到手机
             smsService.send(mobile, content);
             return WrapMapper.ok();
         } catch (Exception e) {
