@@ -1,5 +1,7 @@
 package com.awe.pms.sdk;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
@@ -15,8 +17,8 @@ import com.awe.pms.sdk.response.dto.SkuImagesResponseDto;
  * 
  */
 public class SkuImagesClientTestCase {
-    String WS_DOMAIN = "http://dev.pmsws.shop.hbird.com/";
-    // String WS_DOMAIN = "http://local.pmsws.shop.hbird.com:8090/";
+//    String WS_DOMAIN = "http://dev.pmsws.shop.hbird.com/";
+	String WS_DOMAIN = "http://local.pmsws.shop.hbird.com:8100/";
     private SkuImagesClient client;
 
     @Before
@@ -36,6 +38,16 @@ public class SkuImagesClientTestCase {
         
         SkuImagesResponseDto skuImagesResponseDto = client.getSkuImages(requestDto);
         Assert.notNull(skuImagesResponseDto);
+    } 
+    
+    @Test
+    public void testGetSkuImageList() {
+    	SkuImagesRequestDto requestDto = new SkuImagesRequestDto();
+//    	requestDto.setId(1l);
+    	requestDto.setSkuNo("10000000020001");
+    	
+    	List<SkuImagesResponseDto> skuImagesResponseDtos = client.getSkuImageList(requestDto);
+    	Assert.notNull(skuImagesResponseDtos);
     } 
 
 }
