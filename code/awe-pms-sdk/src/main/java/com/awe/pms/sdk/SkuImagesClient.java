@@ -6,14 +6,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Assert;
 
-import com.hbird.common.client.AbstractSecureClient;
-import com.hbird.common.sdk.api.response.HbirdResponse;
-import com.hbird.common.utils.serialize.JsonHelper;
 import com.awe.pms.sdk.request.SkuImagesRequest;
 import com.awe.pms.sdk.request.dto.SkuImagesRequestDto;
 import com.awe.pms.sdk.response.SkuImagesResponse;
-import com.awe.pms.sdk.response.dto.ProductSkuResponseDto;
 import com.awe.pms.sdk.response.dto.SkuImagesResponseDto;
+import com.hbird.common.client.AbstractSecureClient;
+import com.hbird.common.sdk.api.response.HbirdResponse;
+import com.hbird.common.utils.serialize.JsonHelper;
 
 /**
  * sku图片服务的客户端
