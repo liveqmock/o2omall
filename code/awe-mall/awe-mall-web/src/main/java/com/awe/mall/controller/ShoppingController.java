@@ -18,11 +18,14 @@ import com.awe.mall.service.ProductCategoryService;
 import com.awe.mall.service.ProductDictService;
 import com.awe.mall.service.ProductSelectService;
 import com.awe.mall.service.ProductService;
+import com.awe.mall.service.SkuImagesService;
 import com.awe.pms.sdk.request.dto.ProductRequestDto;
 import com.awe.pms.sdk.request.dto.ProductSelectRequestDto;
+import com.awe.pms.sdk.request.dto.SkuImagesRequestDto;
 import com.awe.pms.sdk.response.dto.ProductDictResponseDto;
 import com.awe.pms.sdk.response.dto.ProductResponseDto;
 import com.awe.pms.sdk.response.dto.ProductSkuResponseDto;
+import com.awe.pms.sdk.response.dto.SkuImagesResponseDto;
 import com.hbird.common.utils.page.PageUtil;
 
 /**
@@ -53,6 +56,9 @@ public class ShoppingController extends BaseController {
     
     @Autowired
     private ProductDictService productDictService;
+    
+    @Autowired
+    private SkuImagesService skuImagesService;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
     public String welcome(Model model) {
@@ -110,6 +116,15 @@ public class ShoppingController extends BaseController {
 		model.addAttribute("product", responseDto);
     	model.addAttribute("productCategorys", this.productCategoryService.queryProductCategoryList(null));
     	model.addAttribute("productBrands", this.productBrandService.queryProductBrandList(null));
+    	
+    	SkuImagesRequestDto skuImagesRequestDto = new SkuImagesRequestDto();
+    	skuImagesRequestDto.setSkuNo(currentSkuNo);
+    	List<SkuImagesResponseDto> skuImagesResponseDtos = this.skuImagesService.querySkuImageList(skuImagesRequestDto);
+    	if (skuImagesResponseDtos != null && skuImagesResponseDtos.size() > 0) {
+    		model.addAttribute("primarySkuImage", skuImagesResponseDtos.get(0));
+    		model.addAttribute("skuImageList", skuImagesResponseDtos);
+    	}
+    	
     	return VIEW_WORKSPACE + VIEW_PRODUCT_DETAIL_PAGE;
     }
     

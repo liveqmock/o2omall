@@ -1,3 +1,4 @@
+#set($imgUrl="http://test.picture.shop.hbird.com/")
 <link href="#springUrl('')/static/css/common.css" rel="stylesheet"  type="text/css"/>
 <link href="#springUrl('')/static/css/login.css" rel="stylesheet"  type="text/css"/>
 <script type="text/javascript" src="#springUrl('')/static/js/jquery-1.8.3.min.js"></script>
@@ -65,7 +66,21 @@ function numDec(){
     <div class="container wid1200 clearfix">
        <div class="product_l">
             <div id="tsShopContainer">
-                <div id="tsImgS"><a href="#springUrl('')/static/images/01.jpg" title="Images" class="MagicZoom" id="MagicZoom"><img width="352" height="351" src="#springUrl('')/static/images/01.jpg" /></a></div>
+                <div id="tsImgS"><a href="$!{imgUrl}$!{primarySkuImage.imgPath}" title="Images" class="MagicZoom" id="MagicZoom"><img width="352" height="351" src="$!{imgUrl}$!{primarySkuImage.imgPath}" /></a></div>
+                <div id="tsPicContainer">
+                    <div id="tsImgSArrL" onclick="tsScrollArrLeft()"></div>
+                    <div id="tsImgSCon">
+                        <ul>
+							#foreach($skuImage in $!{skuImageList})						
+                            <li onclick="showPic($velocityCount - 1)" rel="MagicZoom" #if($velocityCount == 1) class="tsSelectImg" #end><img  src="$!{imgUrl}$!{skuImage.imgPath}" tsImgS="$!{imgUrl}$!{skuImage.imgPath}" /></li>
+							#end
+                        </ul>
+                    </div>
+                    <div id="tsImgSArrR" onclick="tsScrollArrRight()"></div>
+                </div>
+				
+				#*
+				<div id="tsImgS"><a href="#springUrl('')/static/images/01.jpg" title="Images" class="MagicZoom" id="MagicZoom"><img width="352" height="351" src="#springUrl('')/static/images/01.jpg" /></a></div>
                 <div id="tsPicContainer">
                     <div id="tsImgSArrL" onclick="tsScrollArrLeft()"></div>
                     <div id="tsImgSCon">
@@ -85,6 +100,8 @@ function numDec(){
                     </div>
                     <div id="tsImgSArrR" onclick="tsScrollArrRight()"></div>
                 </div>
+				*#
+				
             </div>   
             
             <div class="product_con">

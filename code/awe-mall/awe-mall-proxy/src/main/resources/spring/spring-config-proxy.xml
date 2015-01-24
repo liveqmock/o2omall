@@ -77,6 +77,11 @@
 		<property name="serviceUrlDomain" value="${service.url.domain.pms}" />
 	</bean>
 	
+	<bean id="skuImagesClient" class="com.awe.pms.sdk.SkuImagesClient">
+		<property name="key" value="${mall.common.key}" />
+		<property name="serviceUrlDomain" value="${service.url.domain.pms}" />
+	</bean>
+	
 	<bean id="productSelectClient" class="com.awe.pms.sdk.ProductSelectClient">
 		<property name="key" value="${mall.common.key}" />
 		<property name="serviceUrlDomain" value="${service.url.domain.pms}" />
