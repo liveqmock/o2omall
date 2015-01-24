@@ -31,7 +31,7 @@
     <!-- 创建信息 -->
     <insert id="insert" parameterType="OrdersItems" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO orders_items(<include refid="ordersItemsUsedColumns"/>) 
-        VALUES (#{orderNo},#{skuNo},#{productNo},#{count},#{skuName},#{imgUrl},#{discount},#{skuPrice},#{finalPrice},#{createUser},#{updateUser},#{createTime},#{updateTime},#{yn})
+        VALUES (#{orderNo},#{skuNo},#{productNo},#{count},#{skuName},#{imgUrl},#{discount},#{skuPrice},#{finalPrice},#{createUser},#{updateUser},#{createTime},#{updateTime},1)
 	</insert>
 	
     <!-- 修改信息 -->

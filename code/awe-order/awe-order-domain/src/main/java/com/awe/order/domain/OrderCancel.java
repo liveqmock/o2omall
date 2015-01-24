@@ -21,6 +21,7 @@ public class OrderCancel implements java.io.Serializable {
     private String refund; 
     /** 501:待审核;502:退款中;503:已退款;503:审核驳回;504:退款失败; */
     private Integer status; 
+    private String statusName; 
     /** 订单编号 */
     private String orderNo; 
     /** 退款金额 */
@@ -490,5 +491,13 @@ public class OrderCancel implements java.io.Serializable {
      */
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public String getStatusName() {
+		return statusName;
+	}
+
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
 	}
 }

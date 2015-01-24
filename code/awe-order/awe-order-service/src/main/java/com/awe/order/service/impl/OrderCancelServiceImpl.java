@@ -19,6 +19,7 @@ import com.awe.order.domain.OrdersItems;
 import com.awe.order.domain.query.FrontOrderCancelQuery;
 import com.awe.order.domain.query.OrderCancelQuery;
 import com.awe.order.dto.OrderCancelDto;
+import com.awe.order.enums.EnumOrderCancelStatus;
 import com.awe.order.manager.OrderCancelManager;
 import com.awe.order.sdk.api.request.dto.OrderCancelRequestDto;
 import com.awe.order.service.OrderCancelService;
@@ -124,6 +125,14 @@ public class OrderCancelServiceImpl implements OrderCancelService {
         List<OrderCancel> orderCancelList = null;
         try {
             orderCancelList = orderCancelManager.queryOrderCancelListWithPage(queryBean, pageUtil);
+            if(orderCancelList !=null && orderCancelList.size() != 0){
+            	for (OrderCancel orderCancel : orderCancelList) {
+					 if(orderCancel.getStatus() != null){
+						 orderCancel.setStatusName(EnumOrderCancelStatus.getName(String.valueOf(orderCancel.getStatus())));
+					 }
+				}
+            }
+            
         } catch (Exception e) {
             LOG.error("OrderCancelServiceImpl#queryOrderCancelListWithPage has error.", e);
         }
@@ -195,14 +204,17 @@ public class OrderCancelServiceImpl implements OrderCancelService {
     	String noStr = orderCancel.getOrderNo();
     	String orderNo[] = noStr.split(",");
     	map.put("orderList", orderNo);
-    	map.put("statusName", "先写死");
     	map.put("isAuditing", orderCancel.getIsAuditing());
     	map.put("remark", orderCancel.getRemark());
     	map.put("updateUser", orderCancel.getUpdateUser());
     	if(orderCancel.getIsAuditing() == 1){
-    		map.put("status", "5");//待退款
+    		map.put("status", "502");//待退款
+    		map.put("statusName", "退款中");
+    		map.put("orderStatus", "140");
     	}else{
-    		map.put("status", "6");//审核驳回
+    		map.put("status", "504");//审核驳回
+    		map.put("statusName", "审核驳回");
+    		map.put("orderStatus", "107");
     	}
         try {
             if (null != orderCancel && null != orderCancel.getOrderNo()) {

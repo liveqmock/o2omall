@@ -21,6 +21,8 @@ public class Orders implements java.io.Serializable {
     private String orderNo; 
     /** 100:事物订单;200:虚拟订单 */
     private Integer orderType; 
+    /** 100:事物订单;200:虚拟订单 */
+    private String orderTypeName;
     /** 用户ID */
     private Long userId; 
     /** 下单用户账号 */
@@ -43,24 +45,34 @@ public class Orders implements java.io.Serializable {
 2-工作日、双休日与假日均可送货
 3-只双休日、假日送货(工作日不用送)
  */
-    private Integer orderDate; 
+    private Integer orderDate;
+    private String orderDateName; 
+    
     /** 0-否;1-确定 */
-    private Integer isTalSure; 
+    private Integer isTalSure;
+    private String isTalSureName;
     /** 1-现金;2-Pos刷卡 */
     private Integer payWay; 
+    private String payWayName;
     /** 1-货到付款;2-在线支付;3-公司转账;4-邮件汇款 */
-    private Integer payType; 
+    private Integer payType;
+    private String payTypeName;
     /** 0:不要;1:要 */
     private Integer isInvoice; 
     /** 1-普通发票;2-增值税发票 */
-    private Integer invoiceType; 
+    private Integer invoiceType;
+    private String invoiceTypeName; 
     /** 1-个人;2-单位 */
-    private Integer invoiceTitle; 
-    /** 1-明细;2-办公用品;3-电脑配件;4-耗材； */
-    private Integer invoiceContent; 
+    private Integer invoiceTitle;
+    private String invoiceTitleName;
+    
+	/** 1-明细;2-办公用品;3-电脑配件;4-耗材； */
+    private Integer invoiceContent;
+    private String invoiceContentName;
     /** 10-用户取消;20-用户删除;30-系统取消;40-待付款;50-已收款;60-已发货;70-已签收;80-订单完成;90-待拆单;100-拆单完成;110-订单审核;120-待退货;130-已退货;140-待换货;150-已换货;160-已退款;
  */
-    private Integer orderStatus; 
+    private Integer orderStatus;
+    private String orderStatusName;
     /** 总商品金额 */
     private Double commAmount; 
     /** 返现 */
@@ -143,6 +155,76 @@ public class Orders implements java.io.Serializable {
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
     }
+    
+    /**
+	 * @return the orderTypeName
+	 */
+	public String getOrderTypeName() {
+		return orderTypeName;
+	}
+
+	/**
+	 * @param orderTypeName the orderTypeName to set
+	 */
+	public void setOrderTypeName(String orderTypeName) {
+		this.orderTypeName = orderTypeName;
+	}
+
+	/**
+	 * @return the orderDateName
+	 */
+	public String getOrderDateName() {
+		return orderDateName;
+	}
+
+	/**
+	 * @param orderDateName the orderDateName to set
+	 */
+	public void setOrderDateName(String orderDateName) {
+		this.orderDateName = orderDateName;
+	}
+
+	/**
+	 * @return the payTypeName
+	 */
+	public String getPayTypeName() {
+		return payTypeName;
+	}
+
+	/**
+	 * @param payTypeName the payTypeName to set
+	 */
+	public void setPayTypeName(String payTypeName) {
+		this.payTypeName = payTypeName;
+	}
+
+	/**
+	 * @return the invoiceContentName
+	 */
+	public String getInvoiceContentName() {
+		return invoiceContentName;
+	}
+
+	/**
+	 * @param invoiceContentName the invoiceContentName to set
+	 */
+	public void setInvoiceContentName(String invoiceContentName) {
+		this.invoiceContentName = invoiceContentName;
+	}
+
+	/**
+	 * @return the orderStatusName
+	 */
+	public String getOrderStatusName() {
+		return orderStatusName;
+	}
+
+	/**
+	 * @param orderStatusName the orderStatusName to set
+	 */
+	public void setOrderStatusName(String orderStatusName) {
+		this.orderStatusName = orderStatusName;
+	}
     
     /**
      * get 100:事物订单;200:虚拟订单
@@ -901,6 +983,38 @@ public class Orders implements java.io.Serializable {
 	 */
 	public void setOrdersItemsList(List<OrdersItems> ordersItemsList) {
 		this.ordersItemsList = ordersItemsList;
+	}
+
+	public String getIsTalSureName() {
+		return isTalSureName;
+	}
+
+	public void setIsTalSureName(String isTalSureName) {
+		this.isTalSureName = isTalSureName;
+	}
+
+	public String getPayWayName() {
+		return payWayName;
+	}
+
+	public void setPayWayName(String payWayName) {
+		this.payWayName = payWayName;
+	}
+
+	public String getInvoiceTypeName() {
+		return invoiceTypeName;
+	}
+
+	public void setInvoiceTypeName(String invoiceTypeName) {
+		this.invoiceTypeName = invoiceTypeName;
+	}
+
+	public String getInvoiceTitleName() {
+		return invoiceTitleName;
+	}
+
+	public void setInvoiceTitleName(String invoiceTitleName) {
+		this.invoiceTitleName = invoiceTitleName;
 	}
     
     }

@@ -78,7 +78,7 @@
 	<update id="orderAudit" parameterType="java.util.Map">
 		update orders set
 	      <if test="status != null and status != ''">
-               	order_status = #{status,jdbcType=DECIMAL},
+               	order_status = #{orderStatus,jdbcType=DECIMAL},
 	      </if>
 	      <if test="updateUser != null and updateUser != ''">
                 	update_user = #{updateUser,jdbcType=VARCHAR},

@@ -15,7 +15,7 @@
 						</tr>
 						<tr>
 							<td class="center">
-							 <textarea id='remark' name='remark' style="width:90%;height:100px;" ></textarea>
+							 <textarea id='remarks' name='remark' style="width:90%;height:100px;" ></textarea>
 							 <input type="hidden" id="AuditOrderNo" name="orderNo"/>
 							 <input type="hidden" id="audit_is_auditing" name="isAuditing"/>
 							</td>
@@ -42,40 +42,26 @@
 	$(function() {
 	    //审核拒绝
 		$("#btn-result-cancel").click(function(){
-    		var auditIdea = $('#auditIdea').val();
-    		var suiteName = $('#AuditOrderNo').val();
-    		var suiteNo = $('#suiteNo').val();
-    		var id = $('#id').val();
-    		var uid = $('#uid').val();
-		   if($('#auditIdea').val() == null || $('#auditIdea').val() == ""){
+		   if($('#remarks').val() == null || $('#remarks').val() == ""){
 			   alert('系统信息,请先填写审核拒绝原因');
 			   return;
 		   }
-		   jQuery.ajax({
-				 type: 'post',
-				 dataType:'json',
-				 data:{id:id,status:109,suiteNo:suiteNo,auditIdea:auditIdea,suiteName:suiteName,auditType:1,astatus:0,uid:uid},
-				 url: '$basePath/suite/auditSuite',//后台请求修改套装状态为审核拒绝，记录审核日志
-				 success:function(msg){
-					 if(msg.status == "1"){
-						 alert('系统信息,操作成功');
-						 $('#myTestConfirmModal').modal('hide');//隐藏模态窗口
-						 window.location.href=("$basePath/suite/querysuite");
-						 return;
-					 }else{
-						 alert('系统信息,操作失败');
-						 $('#myTestConfirmModal').modal('hide');//隐藏模态窗口
-						 return;
-					 }
-				 }
-			});
-		   
+		    var form = $("#cancelForm");
+			  $("#audit_is_auditing").val('0');
+			  $("#btn-result-submit").attr("disabled","true");
+			  $("#btn-result-cancel").attr("disabled","true");
+			  jQuery.post('$basePath/orderCancel/Cancelupdate',
+                    form.serialize(),
+                    function(data) {
+                    $('#myAuditModal').modal('hide');
+					 MyPopWindow.SubmitCompletedCallback2(data, "$basePath/orderCancel"); }
+            );
 		});
+		
 		//审核通过
 		$("#btn-result-submit").click(function() {
 			 var form = $("#cancelForm");
 			  $("#audit_is_auditing").val('1');
-			  alert($("#audit_is_auditing").val());
 			  $("#btn-result-submit").attr("disabled","true");
 			  $("#btn-result-cancel").attr("disabled","true");
 			  jQuery.post('$basePath/orderCancel/Cancelupdate',

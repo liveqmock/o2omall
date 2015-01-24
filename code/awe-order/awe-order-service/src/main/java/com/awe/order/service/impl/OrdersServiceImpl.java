@@ -3,6 +3,7 @@ package com.awe.order.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,14 @@ import com.awe.order.domain.OrdersItems;
 import com.awe.order.domain.query.FrontOrdersQuery;
 import com.awe.order.domain.query.OrdersQuery;
 import com.awe.order.dto.OrdersDto;
+import com.awe.order.enums.EnumDate;
+import com.awe.order.enums.EnumInvoiceType;
+import com.awe.order.enums.EnumIsTal;
+import com.awe.order.enums.EnumOrderStauts;
+import com.awe.order.enums.EnumOrderType;
+import com.awe.order.enums.EnumPayType;
+import com.awe.order.enums.EnumPayWay;
+import com.awe.order.enums.EnuminvoiceTitle;
 import com.awe.order.manager.OrdersManager;
 import com.awe.order.sdk.api.response.dto.OrdersResponseDto;
 import com.awe.order.service.OrdersService;
@@ -138,6 +147,37 @@ public class OrdersServiceImpl implements OrdersService {
 		List<Orders> ordersList = null;
 		try {
 			ordersList = ordersManager.queryOrdersListWithPage(queryBean, pageUtil);
+			if(ordersList !=null && ordersList.size() != 0){
+				for (Orders orders : ordersList) {
+					//订单状态
+					 if(orders.getOrderStatus() != null){
+						 orders.setOrderStatusName(EnumOrderStauts.getName(String.valueOf(orders.getOrderStatus())));
+					 }
+					 //订单类型
+					 if(orders.getOrderType() != null){
+						 orders.setOrderTypeName(EnumOrderType.getName(String.valueOf(orders.getOrderType())));
+					 }
+					 //是否电话确定
+					 if(orders.getIsTalSure() != null){
+						 orders.setIsTalSureName(EnumIsTal.getName(String.valueOf(orders.getIsTalSure())));
+					 }
+					 if(orders.getPayWay()!= null){
+						 orders.setPayWayName(EnumPayWay.getName(String.valueOf(orders.getPayWay())));
+					 }
+					 if(orders.getPayType() != null){
+						 orders.setPayTypeName(EnumPayType.getName(String.valueOf(orders.getPayType())));
+					 }
+					 if(orders.getInvoiceType() != null){
+						 orders.setInvoiceTypeName(EnumInvoiceType.getName(String.valueOf(orders.getInvoiceType())));
+					 }
+					 if(orders.getOrderDate() != null){
+						 orders.setOrderDateName(EnumDate.getName(String.valueOf(orders.getOrderDate())));
+					 }
+					 if(orders.getInvoiceTitle() != null){
+						 orders.setInvoiceTitleName(EnuminvoiceTitle.getName(String.valueOf(orders.getInvoiceTitle())));
+					 }
+				}
+			}
 		} catch (Exception e) {
 			LOG.error("OrdersServiceImpl#queryOrdersListWithPage has error.", e);
 		}

@@ -159,7 +159,6 @@ public class OrderCancelManagerImpl extends BaseManager implements OrderCancelMa
 		 if(resultFlag){
 		 resultFlag	= logDao.orderLogAudit(map);
 		 }
-		
 		return resultFlag;
 	}
 	/**

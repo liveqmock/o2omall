@@ -195,7 +195,6 @@
 							<th class="center">审核时间</th>
 							<th class="center">退款完成时间</th>
 							<th class="center">审核意见</th>
-							<th class="center">是否需要退款</th>
 							<th class="center">创建人姓名</th>
 							<th class="center">创建时间</th>
     						<th class="center">操作</th>
@@ -206,7 +205,7 @@
                             <tr>
                                 <td><input type="checkbox"  value="$!item.orderNo"  name="orderNocheckbox" id="id$!item.orderNo"/></td>
                                 <td>$!item.refund</td>
-                                <td>$!item.status</td>
+                                <td>$!item.statusName</td>
                                 <td>$!item.orderNo</td>
                                 <td>$!item.refundAmount</td>
                                 <td>$!item.cancelReason</td>
@@ -214,10 +213,9 @@
                                 <td>$!item.currentAuditName</td>
                                 <td>$!item.currentAuditNo</td>
                                 <td>$!item.isAuditing</td>
-                                <td>$!item.auditingTime</td>
-                                <td>$!item.finishTime</td>
+                                <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.auditingTime)</td>
+                                <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.finishTime)</td>
                                 <td>$!item.remark</td>
-                                <td>$!item.isRefund</td>
                                 <td>$!item.createUser</td>
                                 <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.createTime)</td>
                                 <td>

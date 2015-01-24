@@ -18,6 +18,12 @@
 			});
         	// 提交分页查询
         	function pageSubmit(pageNoParam) {
+			
+			if(!timeLessThan("createTimeBegin","createTimeEnd")){
+        	        alert("开始时间必须早于于结束时间！"); 
+        			return;
+        	    }
+			alert("==");
                 $("#curPage").val(pageNoParam);
             	$("#queryForm").attr("action", "$basePath/orders");
                 $("#queryForm").attr("method", "POST");
@@ -68,47 +74,6 @@
                                         <input type="text" name="orderName" id="orderName" class="col-xs-10 col-sm-8" value="$!query.orderName"/>
                                     </div>
 
-									<label class="col-sm-1 control-label no-padding-right" for="payName">支付名称</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" name="payName" id="payName" class="col-xs-10 col-sm-8" value="$!query.payName"/>
-                                    </div>
-                                </div>	
-									
-								<div class="form-group">	
-									
-									<label class="col-sm-1 control-label no-padding-right" for="orderDate">送货日期</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" name="orderDate" id="orderDate" class="col-xs-10 col-sm-8" value="$!query.orderDate"/>
-                                    </div>
-									
-									<label class="col-sm-1 control-label no-padding-right" for="isTalSure">是否送货前电话确定</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" name="isTalSure" id="isTalSure" class="col-xs-10 col-sm-8" value="$!query.isTalSure"/>
-                                    </div>
-									
-									<label class="col-sm-1 control-label no-padding-right" for="payWay">付款方式</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" name="payWay" id="payWay" class="col-xs-10 col-sm-8" value="$!query.payWay"/>
-                                    </div>
-									
-									<label class="col-sm-1 control-label no-padding-right" for="payType">付款类型</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" name="payType" id="payType" class="col-xs-10 col-sm-8" value="$!query.payType"/>
-                                    </div>
-									
-                                </div>
-								
-								<div class="form-group">	
-									
-									<label class="col-sm-1 control-label no-padding-right" for="isInvoice">是否要发票</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" name="isInvoice" id="isInvoice" class="col-xs-10 col-sm-8" value="$!query.isInvoice"/>
-                                    </div>
-									
-									<label class="col-sm-1 control-label no-padding-right" for="invoiceType">发票类型</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" name="invoiceType" id="invoiceType" class="col-xs-10 col-sm-8" value="$!query.invoiceType"/>
-                                    </div>
 									
 									<label class="col-sm-1 control-label no-padding-right" for="orderStatus">订单状态</label>
                                     <div class="col-sm-2">
@@ -117,15 +82,20 @@
 										</select>
                                     </div>
 									
-                                </div>
+									
+                                </div>	
 								
 								<div class="form-group">	
-									
-									<label class="col-sm-1 control-label no-padding-right" for="payTime">支付时间</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" name="payTime" id="payTime" class="col-xs-10 col-sm-8" value="$!query.payTime"/>
-                                    </div>
-								</div>
+									<label class="col-sm-1 control-label no-padding-right" for="orderStatus">送货日期</label>
+                                        <div class="col-sm-2">
+    										<select id="orderDate" name="orderDate" class="col-xs-10 col-sm-8">
+    											<option value="">-请选择-</option>
+    											<option value="1">-只工作日送货(双休日、假日不用送)-</option>
+    											<option value="2">-工作日、双休日与假日均可送货-</option>
+    											<option value="3">-只双休日、假日送货(工作日不用送)-</option>
+    										</select>
+                                        </div>
+                                  </div>								
 								
 								<div class="form-group">
 									<div class="col-sm-4 col-sm-offset-8">
@@ -133,8 +103,6 @@
                                         <button class="btn btn-info btn-sm" type="button" id="btn-query"><i class="icon-search"></i>查询</button>
                                         &nbsp; &nbsp; &nbsp;
                                         <button class="btn btn-sm" type="reset" id="btn-reset"><i class="icon-undo"></i>重置</button>
-										 &nbsp; &nbsp; &nbsp;
-              							<button class="btn btn-success btn-sm" type="button" id="btn-add"><i class="icon-plus"></i>新增</button>
                                     </div>
                                 </div>
                             </form>
@@ -175,18 +143,18 @@
                             <tr>
                                 <td>$!item.id</td>
                                 <td><a href="javascript:void(0)" onclick="OrderLog('$!item.orderNo');"><font color='red'>$!item.orderNo</font></a></td>
-                                <td>$!item.orderType</td>
+                                <td>$!item.orderTypeName</td>
                                 <td>$!item.orderName</td>
 								<td>$!item.consigneeName</td>
 								<td>$!item.consigneePhone</td>
                                 <td>$!item.payName</td>
-                                <td>$!item.orderDate</td>
-                                <td>$!item.isTalSure</td>
-                                <td>$!item.payWay</td>
-                                <td>$!item.isInvoice</td>
-                                <td>$!item.invoiceType</td>
-                                <td>$!item.invoiceTitle</td>
-                                <td>$!item.orderStatus</td>
+                                <td>$!item.orderDateName</td>
+                                <td>$!item.isTalSureName</td>
+                                <td>$!item.payWayName</td>
+                                <td>$!item.isInvoiceName</td>
+                                <td>$!item.invoiceTypeName</td>
+                                <td>$!item.invoiceTitleName</td>
+                                <td>$!item.orderStatusName</td>
                                 <td>$!item.commAmount</td>
                                 <td>$!item.retCash</td>
                                 <td>$!item.expenses</td>
@@ -194,9 +162,9 @@
                                 <td>$!item.address</td>
                                 <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.payTime)</td>
                                 <td>
-									<a href="javascript:void(0)" onclick="toDetail($!item.orderNo);" data-toggle="modal"><i class="icon-list">详情</i></a>
-									<a href="javascript:void(0)" onclick="toUpdateModal($!item.id)"><i class="icon-pencil pink">修改</i></a>
-									<a href="javascript:void(0)" onclick="toDelete($!item.id)"><i class="icon-remove red">删除</i></a>
+									<a href="javascript:void(0)" onclick="toDetail('$!item.orderNo');" data-toggle="modal"><i class="icon-list">详情</i></a>
+									<a href="javascript:void(0)" onclick="toUpdateModal('$!item.id')"><i class="icon-pencil pink">修改</i></a>
+									<a href="javascript:void(0)" onclick="toDelete('$!item.id')"><i class="icon-remove red">删除</i></a>
 								</td>
                             </tr>
                         #end

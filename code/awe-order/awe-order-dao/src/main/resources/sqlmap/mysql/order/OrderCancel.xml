@@ -53,7 +53,7 @@
     <!-- 创建信息 -->
     <insert id="insert" parameterType="OrderCancel" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO order_cancel(<include refid="orderCancelUsedColumns"/>) 
-        VALUES (#{refund},#{status},#{orderNo},#{refundAmount},#{cancelReason},#{cancelType},#{currentAuditName},#{currentAuditNo},#{isAuditing},#{auditingTime},#{finishTime},#{remark},#{isRefund},#{createUser},#{updateUser},#{createTime},#{updateTime},#{yn})
+        VALUES (#{refund},#{status},#{orderNo},#{refundAmount},#{cancelReason},#{cancelType},#{currentAuditName},#{currentAuditNo},#{isAuditing},#{auditingTime},#{finishTime},#{remark},#{isRefund},#{createUser},#{updateUser},#{createTime},#{updateTime},1)
 	</insert>
 	
 	<!-- 批量修改  -->
