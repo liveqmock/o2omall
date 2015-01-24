@@ -60,6 +60,10 @@ public class RefundRequestDto extends HbirdDto {
     private Integer status;
     /**差额原因*/
     private String balanceReason;
+    /**商家编号*/
+    private String businessNo;
+    /**商家名称*/
+    private String businessName;
     /**
      * get id自增
      * 
@@ -386,4 +390,21 @@ public class RefundRequestDto extends HbirdDto {
 	public void setBalanceReason(String balanceReason) {
 		this.balanceReason = balanceReason;
 	}
+
+	public String getBusinessNo() {
+		return businessNo;
+	}
+
+	public void setBusinessNo(String businessNo) {
+		this.businessNo = businessNo;
+	}
+
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
+	}
+	
 }

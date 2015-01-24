@@ -65,6 +65,10 @@ public class RefundResponseDto extends HbirdDto {
     private String createTimeDay;
     /**申请订单创建时间-用于商城页面显示 */
     private String createTimeTime;
+    /**商家编号*/
+    private String businessNo;
+    /**商家名称*/
+    private String businessName;
     /**
      * get id自增
      * 
@@ -406,5 +410,20 @@ public class RefundResponseDto extends HbirdDto {
 	public void setCreateTimeTime(String createTimeTime) {
 		this.createTimeTime = createTimeTime;
 	}
-	
+
+	public String getBusinessNo() {
+		return businessNo;
+	}
+
+	public void setBusinessNo(String businessNo) {
+		this.businessNo = businessNo;
+	}
+
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
+	}
 }

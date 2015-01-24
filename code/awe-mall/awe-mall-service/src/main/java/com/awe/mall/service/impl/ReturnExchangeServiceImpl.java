@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.awe.mall.service.ReturnExchangeService;
 import com.awe.rems.sdk.ReturnExchangeClient;
 import com.awe.rems.sdk.request.dto.ReturnExchangeRequestDto;
+import com.awe.rems.sdk.request.dto.ServiceAuditRequestDto;
 import com.awe.rems.sdk.response.dto.ReturnExchangeResponseDto;
+import com.awe.rems.sdk.response.dto.ServiceAuditResponseDto;
 import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
@@ -30,15 +32,14 @@ public class ReturnExchangeServiceImpl implements ReturnExchangeService {
 	/**
      * {@inheritDoc}
      */
-	public Wrapper<?> getReturnExchange(ReturnExchangeRequestDto requestDto) {
-		Wrapper<?> wrapper = null;
+	public ReturnExchangeResponseDto getReturnExchange(ReturnExchangeRequestDto requestDto) {
+		ReturnExchangeResponseDto responseDto = null;
 		try {
-			ReturnExchangeResponseDto responseDto = returnExchangeClient.getReturnExchange(requestDto);
-			return WrapMapper.ok().result(responseDto);
+			responseDto = returnExchangeClient.getReturnExchange(requestDto);
 		} catch (Exception e) {
 			LOG.error("#ReturnExchangeServiceImpl.getReturnExchange# Error:" + e);
 		}
-		return wrapper;
+		return responseDto;
 	}
 	/**
      * {@inheritDoc}
@@ -64,5 +65,4 @@ public class ReturnExchangeServiceImpl implements ReturnExchangeService {
 		}
 		return responseDtoList;
 	}
-
 }

@@ -84,7 +84,7 @@ public class ServiceAuditResource {
         }
         
         ServiceAuditRequestDto requestDto = request.getContent();
-        if (null == requestDto || null == requestDto.getUserId()) {
+        if (null == requestDto || null == requestDto.getServiceNo()) {
             this.logger.error("getServiceAudit 传入参数有误");
             return WrapMapper.illegalArgument();
         }

@@ -18,11 +18,6 @@ $(function () {
    <!---------------------- 右则内容 ----------------------> 
       <div class="section right">
        
-         <h2 class="my_order"><span class="my_order_icon"></span>我的订单</h2>
-         <ul class="my_order_list">
-            <li>待付款（<span>0</span>）</li>
-            <li>待确认收货（<span>2</span>）</li>
-         </ul>
          <div class="my_order_form clearfix">
             <form>
                <button type="button" class="order_btn" id="applyBtn">申请返修/退换货</button><button type="button" class="order_btn" id="repairBtn">查看返修/退换货记录</button><button type="button" class="order_btn" id="refundBtn">查看退款记录</button>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="order_input" value="商品名称、商品编号、订单编号" />

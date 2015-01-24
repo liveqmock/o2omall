@@ -102,6 +102,10 @@ public class ReturnExchangeResponseDto extends HbirdDto {
     private Integer yn; 
     /**用户id*/
     private Long userId;
+    /**商家编号*/
+    private String businessNo;
+    /**商家名称*/
+    private String businessName;
     /**
      * get id自增
      * 
@@ -825,4 +829,21 @@ public class ReturnExchangeResponseDto extends HbirdDto {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+
+	public String getBusinessNo() {
+		return businessNo;
+	}
+
+	public void setBusinessNo(String businessNo) {
+		this.businessNo = businessNo;
+	}
+
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
+	}
+	
 }

@@ -46,6 +46,10 @@
 		<property name="key" value="${mall.common.key}" />
 		<property name="serviceUrlDomain" value="${service.url.domain.rems}" />
 	</bean>
+	<bean id="serviceAuditClient" class="com.awe.rems.sdk.ServiceAuditClient">
+		<property name="key" value="${mall.common.key}" />
+		<property name="serviceUrlDomain" value="${service.url.domain.rems}" />
+	</bean>
 	<!--awe-rems-sdk end-->
 	<!--awe-pay-sdk start-->
 	<bean id="payRefundClient" class="com.awe.pay.sdk.RefundClient">

@@ -19,7 +19,7 @@ public interface ReturnExchangeService {
 	 * @param requestDto
 	 * @return
 	 */
-	public Wrapper<?> getReturnExchange(ReturnExchangeRequestDto requestDto);
+	public ReturnExchangeResponseDto getReturnExchange(ReturnExchangeRequestDto requestDto);
 	/**
 	 * 申请退换货
 	 * @param requestDto
@@ -33,6 +33,4 @@ public interface ReturnExchangeService {
 	 * @return
 	 */
 	public List<ReturnExchangeResponseDto> queryReturnExchangeListWithPage(ReturnExchangeRequestDto requestDto, PageUtil pageUtil);
-	
-	
 }

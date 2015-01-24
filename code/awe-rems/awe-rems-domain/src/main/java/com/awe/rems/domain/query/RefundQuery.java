@@ -61,6 +61,10 @@ public class RefundQuery extends Query {
 	private String skuNo; 
     /** 商品名称 */
 	private String skuName; 
+    /**商家编号*/
+    private String businessNo;
+    /**商家名称*/
+    private String businessName;
     /**
      * get id自增
      * 
@@ -423,5 +427,21 @@ public class RefundQuery extends Query {
 
 	public void setSkuName(String skuName) {
 		this.skuName = skuName;
+	}
+
+	public String getBusinessNo() {
+		return businessNo;
+	}
+
+	public void setBusinessNo(String businessNo) {
+		this.businessNo = businessNo;
+	}
+
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
 	}
 }

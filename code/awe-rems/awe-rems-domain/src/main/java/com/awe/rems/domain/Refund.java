@@ -58,6 +58,10 @@ public class Refund implements java.io.Serializable {
     private Integer status;
     /**差额原因*/
     private String balanceReason;
+    /**商家编号*/
+    private String businessNo;
+    /**商家名称*/
+    private String businessName;
     /**
      * get id自增
      * 
@@ -383,4 +387,22 @@ public class Refund implements java.io.Serializable {
 	public void setBalanceReason(String balanceReason) {
 		this.balanceReason = balanceReason;
 	}
+
+	public String getBusinessNo() {
+		return businessNo;
+	}
+
+	public void setBusinessNo(String businessNo) {
+		this.businessNo = businessNo;
+	}
+
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
+	}
+	
+	
 }

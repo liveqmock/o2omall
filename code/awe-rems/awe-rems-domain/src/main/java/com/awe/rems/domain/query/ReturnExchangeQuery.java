@@ -103,6 +103,10 @@ public class ReturnExchangeQuery extends Query {
     private Date endTime; 
     /**用户id*/
     private Long userId;
+    /**商家编号*/
+    private String businessNo;
+    /**商家名称*/
+    private String businessName;
     /**
      * get id自增
      * 
@@ -861,6 +865,22 @@ public class ReturnExchangeQuery extends Query {
 
 	public void setCountyName(String countyName) {
 		this.countyName = countyName;
+	}
+
+	public String getBusinessNo() {
+		return businessNo;
+	}
+
+	public void setBusinessNo(String businessNo) {
+		this.businessNo = businessNo;
+	}
+
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
 	}
 	
 }
