@@ -48,16 +48,15 @@
             	    	},
                         success:function(data){
 							if(data.indexOf("<pre>") > -1 ){
-                        		data = jQuery.parseJSON(jQuery(data).text());
-                        	} else {
-                        		data = eval('(' + data + ')');
+                        		data = data.replace("<pre>", "").replace("</pre>", "");
                         	}
+                    		data = eval('(' + data + ')');
                             var htmlContent = getShowPic(data.result, 1);
 							//添加主图数据
 							$('#mainpreview').append(htmlContent);
-							if ($('#imgPath').val() == null || $('#imgPath').val() == '') {
-            					$('#imgPath').val(data.result);
-							}
+							//if ($('#imgPath').val() == null || $('#imgPath').val() == '') {
+            				//	$('#imgPath').val(data.result);
+							//}
                     	}
                 	});
 				});
@@ -76,15 +75,14 @@
             	    	},
                         success:function(data){
 							if(data.indexOf("<pre>") > -1 ){
-                        		data = jQuery.parseJSON(jQuery(data).text());
-                        	} else {
-                        		data = eval('(' + data + ')');
+                        		data = data.replace("<pre>", "").replace("</pre>", "");
                         	}
+                    		data = eval('(' + data + ')');
                             var htmlContent = getShowPic(data.result, 2);
 							//添加展示图数据
 							$('#skuListpreview').append(htmlContent);
-							var skuImgs = $("#skuImgPaths").val();
-							$("#skuImgPaths").val(skuImgs + ";" + data.result);
+							//var skuImgs = $("#skuImgPaths").val();
+							//$("#skuImgPaths").val(skuImgs + ";" + data.result);
                     	}
                 	});
 				});
@@ -97,6 +95,17 @@
 					$("#btn-submit").click();
 				});
 				$("#btn-submit").click(function(){
+					
+					$("#mainpreview > div > img").each(function() {
+						$('#imgPath').val(this.src);
+						return;
+					});
+					var skuImgPathStr = "";
+					$("#skuListpreview > div > img").each(function() {
+						skuImgPathStr += ";" + this.src;
+					});
+					$("#skuImgPaths").val(skuImgPathStr);
+				
             		var form = $("#addForm");
 					if(form.valid()==false){
 						return;
@@ -109,7 +118,7 @@
             });
 			
 			/**
-             * @description:回显商品主图片
+             * @description:回显商品图片
              * @date 2014-2-11
              */
             function getShowPic(path, type){
@@ -122,8 +131,31 @@
 					widthVal = "440px";
 					heightVal = "450px";
 				}
-            	var htmlContent = "<div><img src='$!{imgUrl}"+ path +"' width='" + widthVal + "' height='" + heightVal + "'/><br><span><a href='javaScript:void()' onclick='delSkuPic(\""+path+"\");'>删除</a></span></div>";
+				var imgId = path.substring().split("\/\.")[1];
+            	var htmlContent = "<div><img src='$!{imgUrl}"+ path +"' width='" + widthVal + "' height='" + heightVal + "'/><br><span><a href='javaScript:void(0);' id='" + imgId + "' onclick='delSkuPic(\""+imgId+"\");'>删除</a></span></div>";
                 return htmlContent;
+            }
+			
+			/**
+             * @description:删除商品图片
+             * @date 2014-2-11
+             */
+            function delSkuPic(imgId){
+				/*
+               jQuery.ajax({
+            		 cache: false,
+            		 type: 'post',
+            		 dataType:'json',
+            		 url: '$basePath/file/delPic',
+            		 data:{paramNo:$("#skuNo").val(),imgNo:imgId,imgCategory:1},
+            		 error:function(data){
+            	     },
+            	     success:function(data){
+            	    	  $('#' + imgId).parent().parent().remove();
+            		 }
+            	});
+				*/
+			    $('#' + imgId).parent().parent().remove();
             }
         </script>
     </head>
@@ -215,10 +247,10 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="dimensionCodeTwo" id="dimensionCodeTwo" class="col-xs-10 col-sm-8" />
                                     </div>
-                                    <input type="hidden" name="saleStatus" id="saleStatus" value="0" />
 								</div>
 								*#
 								
+                                <input type="hidden" name="saleStatus" id="saleStatus" value="0" />
 								<input type="hidden" id="imgPath" name="imgPath" />
 								<input type="hidden" id="skuImgPaths" name="skuImgPaths" />
                             </form>

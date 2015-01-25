@@ -3,6 +3,7 @@ package com.awe.pms.service.impl;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -41,6 +42,9 @@ public class SkuImagesServiceImpl implements SkuImagesService {
         boolean resultFlag = false;
         try {
             if (CollectionUtils.isNotEmpty(skuImagesList)) {
+            	// 先删除相关数据 
+            	this.delete(skuImagesList.get(0));
+            	
                 resultFlag = skuImagesManager.insert(skuImagesList);
             } else {
                 LOG.warn("SkuImagesServiceImpl#batchInsert failed, param is illegal.");
@@ -128,7 +132,7 @@ public class SkuImagesServiceImpl implements SkuImagesService {
     public boolean delete(SkuImages skuImages) {
         boolean resultFlag = false;
         try {
-            if (null != skuImages && null != skuImages.getId()) {
+            if (null != skuImages && (null != skuImages.getId() || StringUtils.isNotBlank(skuImages.getSkuNo()))) {
                 resultFlag = skuImagesManager.delete(skuImages);
             } else {
                 LOG.warn("SkuImagesServiceImpl#delete param is illegal.");

@@ -140,7 +140,7 @@
                                 <td>$!item.mode</td>
                                 <td>$!item.salePrice</td>
                                 <td>$!item.price</td>
-                                <td><img src="$!{imgUrl}$!item.imgPath"></img></td>
+                                <td><img src="$!item.imgPath"></img></td>
                                 <td>$!item.saleQuantityTotal</td>
                                 <td>$!item.saleQuantityWeek</td>
                                 <td>$!item.recommendAmount</td>

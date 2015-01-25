@@ -137,7 +137,7 @@
                                 <td>$!item.sizeOrder</td>
                                 <td>$!item.saleStatus</td>
                                 <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!item.saleTime)</td>
-                                <td>$!item.imgPath</td>
+                                <td><img src="$!item.imgPath"></img></td>
                                 <td>$!item.price</td>
                                 <td>$!item.salePrice</td>
                                 <td>$!item.saleQuantity</td>

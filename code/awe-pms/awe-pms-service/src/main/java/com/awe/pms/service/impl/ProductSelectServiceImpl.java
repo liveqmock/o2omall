@@ -188,11 +188,12 @@ public class ProductSelectServiceImpl implements ProductSelectService {
 		if (productSku != null && productSku.getSaleStatus() != null && StringUtils.isNotBlank(productSku.getProductNo())) {
 			
 			ProductSelect productSelect = new ProductSelect();
+			// 先删除 productSelect 信息，后增加
+			productSelect.setSkuNo(productSku.getSkuNo());
+			this.productSelectManager.delete(productSelect);
 			if (productSku.getSaleStatus().equals(0)) {
 				// 下架，删除信息
-				productSelect.setSkuNo(productSku.getSkuNo());
 				LOG.info("ProductSelectServiceImpl#addOrDelete 删除商品信息，SkuNo【" + productSku.getSkuNo() + "】");
-				return this.productSelectManager.delete(productSelect);
 			} else {
 				LOG.info("ProductSelectServiceImpl#addOrDelete 增加商品信息，SkuNo【" + productSku.getSkuNo() + "】");
 				// 获取商品对象
@@ -237,7 +238,7 @@ public class ProductSelectServiceImpl implements ProductSelectService {
 				}
 			}
 		}
-		return Boolean.FALSE;
+		return Boolean.TRUE;
 	}
 }
 

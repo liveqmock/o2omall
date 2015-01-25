@@ -145,13 +145,7 @@ public class ProductSkuController extends BaseController {
             queryBean.setSkuNo(productSkuResult.getSkuNo());
             List<SkuImages> skuImagesList = this.skuImagesService.querySkuImagesList(queryBean);
             
-            StringBuffer skuImgPaths = new StringBuffer();
-            for (SkuImages skuImages : skuImagesList) {
-            	skuImgPaths.append(";").append(skuImages.getImgPath());
-            }
-            if (skuImgPaths.toString().length() > 0) {
-            	model.addAttribute("skuImgPaths", skuImgPaths.toString().substring(1));
-            }
+        	model.addAttribute("skuImagesList", skuImagesList);
             
             this.initDicts(model);
         } catch (Exception e) {
@@ -169,11 +163,15 @@ public class ProductSkuController extends BaseController {
      */
     @RequestMapping(value = "update")
     @ResponseBody
-    public Wrapper<?> update(Model model, ProductSku productSku) {
+    public Wrapper<?> update(Model model, ProductSku productSku, String skuImgPaths) {
         try {
             productSku.setUpdateUser(getLoginUserCnName());
             if (productSkuService.update(productSku)) {
             	this.addOrDeleteProductSelect(productSku);
+            	if (StringUtils.isNotBlank(skuImgPaths)) {
+            		// 增加商品展示图信息
+            		this.addSkuImages(productSku.getSkuNo(), skuImgPaths);
+            	}
                 return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "更新成功！");
             } else {
                 return WrapMapper.wrap(Wrapper.ERROR_CODE, "更新失败！");

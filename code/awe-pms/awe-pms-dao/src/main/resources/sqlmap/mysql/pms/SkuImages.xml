@@ -103,7 +103,13 @@
     <update id="delete" parameterType="SkuImages">
 		update sku_images 
 		set yn = 0, update_time = now(), update_user = #{updateUser,jdbcType=VARCHAR}
-		where id = #{id}
+		where yn = 1
+			<if test="id != null and id != ''">
+	        	and id = #{id,jdbcType=DECIMAL}
+	        </if>
+	        <if test="skuNo != null and skuNo != ''">
+	        	and sku_no = #{skuNo,jdbcType=VARCHAR}
+	        </if>
     </update>
 
     <!-- 常用的查询Where条件 -->

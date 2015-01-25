@@ -37,6 +37,7 @@
 				$('#color').val("$!productSku.color");
 				$('#saleStatus').val("$!productSku.saleStatus");
 				
+				/*
 				if ("$!productSku.imgPath" != "") {
 					var htmlContent = getShowPic("$!productSku.imgPath", 1);
 					//主图数据
@@ -57,6 +58,7 @@
     					$("#skuImgPaths").val(skuImgs + ";" + skuImgPaths[i]);
 					}
 				}
+				*/
 				
 				$("#btn-submit-img").click(function(){
 					if($('#skuName').val() == null || $('#skuName').val() == ""){
@@ -72,10 +74,9 @@
             	    	},
                         success:function(data){
 							if(data.indexOf("<pre>") > -1 ){
-                        		data = jQuery.parseJSON(jQuery(data).text());
-                        	} else {
-                        		data = eval('(' + data + ')');
+                        		data = data.replace("<pre>", "").replace("</pre>", "");
                         	}
+                    		data = eval('(' + data + ')');
                             var htmlContent = getShowPic(data.result, 1);
 							//添加主图数据
 							$('#mainpreview').append(htmlContent);
@@ -100,10 +101,9 @@
             	    	},
                         success:function(data){
 							if(data.indexOf("<pre>") > -1 ){
-                        		data = jQuery.parseJSON(jQuery(data).text());
-                        	} else {
-                        		data = eval('(' + data + ')');
+                        		data = data.replace("<pre>", "").replace("</pre>", "");
                         	}
+                    		data = eval('(' + data + ')');
                             var htmlContent = getShowPic(data.result, 2);
 							//添加展示图数据
 							$('#skuListpreview').append(htmlContent);
@@ -117,6 +117,17 @@
 					window.location.href=("$basePath/productSku?productNo=$!productSku.productNo");
 				});
 				$("#btn-submit").click(function(){
+				
+					$("#mainpreview > div > img").each(function() {
+						$('#imgPath').val(this.src);
+						return;
+					});
+					var skuImgPathStr = "";
+					$("#skuListpreview > div > img").each(function() {
+						skuImgPathStr += ";" + this.src;
+					});
+					$("#skuImgPaths").val(skuImgPathStr);
+					
             		var form = $("#updateForm");
 					if(form.valid()==false){
 						return;
@@ -142,8 +153,31 @@
 					widthVal = "440px";
 					heightVal = "450px";
 				}
-            	var htmlContent = "<div><img src='$!{imgUrl}"+ path +"' width='" + widthVal + "' height='" + heightVal + "'/><br><span><a href='javaScript:void()' onclick='delSkuPic(\""+path+"\");'>删除</a></span></div>";
+				var imgId = path.split("\/\.")[1];
+            	var htmlContent = "<div><img src='$!{imgUrl}"+ path +"' width='" + widthVal + "' height='" + heightVal + "'/><br><span><a href='javaScript:void(0);' id='" + imgId + "' onclick='delSkuPic(\"" + imgId + "\");'>删除</a></span></div>";
                 return htmlContent;
+            }
+			
+			/**
+             * @description:删除商品图片
+             * @date 2014-2-11
+             */
+            function delSkuPic(imgId){
+				/*
+               jQuery.ajax({
+            		 cache: false,
+            		 type: 'post',
+            		 dataType:'json',
+            		 url: '$basePath/file/delPic',
+            		 data:{paramNo:$("#skuNo").val(),imgNo:imgId,imgCategory:1},
+            		 error:function(data){
+            	     },
+            	     success:function(data){
+            	    	  $('#' + imgId).parent().parent().remove();
+            		 }
+            	});
+				*/
+			    $('#' + imgId).parent().parent().remove();
             }
         </script>
     </head>
@@ -252,6 +286,7 @@
 								
 								<input type="hidden" id="imgPath" name="imgPath" />
 								<input type="hidden" id="skuImgPaths" name="skuImgPaths" />
+								<input type="hidden" name="id" id="id" value="$!productSku.id" />
                             </form>
 							<form class="form-horizontal" id="sku_form" method="post" action="$basePath/picture/upload" enctype="multipart/form-data">
     							<div class="form-group">
@@ -267,6 +302,12 @@
     							<div class="form-group">
         							<label class="col-sm-1 control-label no-padding-right" for="mainpreview">主图预览</label>
         							<div class="col-sm-11" id="mainpreview">
+										#if("$!productSku" != "")
+											<div>
+												<img src='$!{productSku.imgPath}' width='200px' height='130px'/><br>
+												<span><a href='javaScript:void(0);' id='img_update_$!{productSku.id}' onclick='delSkuPic("img_update_$!{productSku.id}");'>删除</a></span>
+											</div>
+										#end
                                     </div>
     						    </div>
                             </form>
@@ -284,10 +325,17 @@
     							<div class="form-group">
         							<label class="col-sm-1 control-label no-padding-right" for="skuListpreview">展示预览</label>
         							<div class="col-sm-11" id="skuListpreview">
+										#if("$!skuImagesList" != "")
+											#foreach($skuImages in $!skuImagesList)
+												<div>
+    												<img src='$!{skuImages.imgPath}' width='440px' height='450px'/><br>
+    												<span><a href='javaScript:void(0);' id='img_update_$!{skuImages.id}' onclick='delSkuPic("img_update_$!{skuImages.id}");'>删除</a></span>
+    											</div>
+                                			#end
+										#end
                                     </div>
     						    </div>
     							<div class="form-group">
-									<input type="hidden" name="id" id="id" value="$!productSku.id" />
     								<div class="col-sm-8 col-sm-offset-3">
                                         <button class="btn btn-info btn-sm" type="button" id="btn-back"><i class="icon-arrow-left"></i>返回</button>
                                         &nbsp; &nbsp; &nbsp;
