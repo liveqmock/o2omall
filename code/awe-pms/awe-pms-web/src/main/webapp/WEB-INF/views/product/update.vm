@@ -23,10 +23,10 @@
 					messages: {
 						productNo: { required: "请输入商品编号"},
 						productName: { required: "请输入商品名称"},
-						categoryOneId: { required: "请输入一级分类"},
+						categoryOneId: { required: "请选择一级分类"},
 						brandCode: { required: "请输入品牌编号"},
-						type: { required: "请输入商品类型（国内、进口）"},
-						mode: { required: "请输入经营模式（自营。。）"},
+						type: { required: "请选择商品类型"},
+						mode: { required: "请选择经营模式"},
 						businessNo: { required: "请输入商家编号"},
 						applicableStep: { required: "请选择适用阶段"},
 					}

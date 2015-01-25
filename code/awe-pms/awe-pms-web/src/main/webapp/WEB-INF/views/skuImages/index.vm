@@ -35,7 +35,7 @@
                 <div class="widget-box">
                     <div class="widget-header">
                         <h5 class="lighter">
-                            <i class="icon-search green"></i>sku图片查询
+                            <i class="icon-search green"></i>商品sku展示图查询
                         </h5>
                         <div class="widget-toolbar">
                             <a href="#" data-action="collapse">
@@ -51,29 +51,7 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="skuNo" id="skuNo" class="col-xs-10 col-sm-8" value="$!query.skuNo"/>
                                     </div>
-									<label class="col-sm-1 control-label no-padding-right" for="imgType">图片类型</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="imgType" id="imgType" class="col-xs-10 col-sm-8" value="$!query.imgType"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="imgPath">图片路径</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="imgPath" id="imgPath" class="col-xs-10 col-sm-8" value="$!query.imgPath"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="isPrimaryPath">是否主图</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="isPrimaryPath" id="isPrimaryPath" class="col-xs-10 col-sm-8" value="$!query.isPrimaryPath"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="features">描述</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="features" id="features" class="col-xs-10 col-sm-8" value="$!query.features"/>
-                                    </div>
-									<label class="col-sm-1 control-label no-padding-right" for="priority">优先级</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="priority" id="priority" class="col-xs-10 col-sm-8" value="$!query.priority"/>
-                                    </div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-4 col-sm-offset-8">
+									<div class="col-sm-4 col-sm-offset-2">
     									#parse("/layout/page.vm")
                                         <button class="btn btn-info btn-sm" type="button" id="btn-query"><i class="icon-search"></i>查询</button>
                                         &nbsp; &nbsp; &nbsp;
@@ -91,7 +69,6 @@
                 <table class="table table-striped table-bordered table-condensed table-hover">
                     <thead>
                         <tr>
-							<th class="center">主键</th>
 							<th class="center">sku编号</th>
 							<th class="center">图片类型</th>
 							<th class="center">图片路径</th>
@@ -106,10 +83,9 @@
                     <tbody>
                         #foreach( $item in $dataList)
                             <tr>
-                                <td>$!item.id</td>
                                 <td>$!item.skuNo</td>
                                 <td>$!item.imgType</td>
-                                <td>$!item.imgPath</td>
+                                <td><img src="$!{imgUrl}$!item.imgPath"></img></td>
                                 <td>$!item.isPrimaryPath</td>
                                 <td>$!item.features</td>
                                 <td>$!item.priority</td>
@@ -117,7 +93,6 @@
                                 <td>$!item.createUser</td>
                                 <td>
 									<a href="javascript:void(0)" onclick="toDetail($!item.id);" data-toggle="modal"><i class="icon-list">详情</i></a>
-									<a href="javascript:void(0)" onclick="toUpdate($!item.id)"><i class="icon-pencil pink">修改</i></a>
 									<a href="javascript:void(0)" onclick="toDelete($!item.id)"><i class="icon-remove red">删除</i></a>
 								</td>
                             </tr>
