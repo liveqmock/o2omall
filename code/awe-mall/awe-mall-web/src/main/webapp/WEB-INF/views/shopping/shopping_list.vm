@@ -1,4 +1,3 @@
-#set($imgUrl="http://test.picture.shop.hbird.com/")
  <!---------------------- 正文 ----------------------> 
     <div class="container wid1200 clearfix">
     
@@ -117,7 +116,7 @@
                    <ul>
 					 #foreach($productSelect in $!productSelects)
                          <li class="pl">
-                             <div><a href="#springUrl('')/shopping/product_details?productNo=$!{productSelect.productNo}&currentSkuNo=$!{productSelect.skuNo}"><img src="$!{imgUrl}$!{productSelect.imgPath}" /></a></div>
+                             <div><a href="#springUrl('')/shopping/product_details?productNo=$!{productSelect.productNo}&currentSkuNo=$!{productSelect.skuNo}"><img src="$!{productSelect.imgPath}" /></a></div>
                              <p><a href="#springUrl('')/shopping/product_details?productNo=$!{productSelect.productNo}&currentSkuNo=$!{productSelect.skuNo}">$!{productSelect.productName}</a></p>
                              <p>优质配方工艺</p>
                              <p class="reds"><s>¥$!{productSelect.price}元</s></p>
