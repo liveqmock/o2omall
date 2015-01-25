@@ -174,5 +174,21 @@ public class UserProfileServiceImpl implements UserProfileService {
         }
         return userProfile;
     }
+    /**
+     * {@inheritDoc}
+     */
+	public UserProfile getUserProfileByBean(UserProfile userProfileBean) {
+		UserProfile userProfile = null;
+        try {
+            if (null != userProfileBean) {
+                userProfile = userProfileManager.getUserProfileByBean(userProfileBean);
+            } else {
+                LOG.warn("UserProfileServiceImpl#getUserProfileByBean failed, param is illegal.");
+            }
+        } catch (Exception e) {
+            LOG.error("UserProfileServiceImpl#getUserProfileByBean has error.", e);
+        }
+        return userProfile;
+	}
 }
 

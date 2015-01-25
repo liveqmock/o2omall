@@ -134,4 +134,10 @@ public class UserProfileManagerImpl extends BaseManager implements UserProfileMa
     public boolean exist(UserProfile userProfile) {
         return userProfileDao.exist(userProfile);
     }
+    /**
+     * {@inheritDoc}
+     */
+	public UserProfile getUserProfileByBean(UserProfile userProfile) {
+		return userProfileDao.getUserProfileByBean(userProfile);
+	}
 }

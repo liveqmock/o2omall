@@ -55,9 +55,6 @@
         <if test="_parameter != null">
             <if test="id != null and id > 0">
                 update user_profile set
-		        <if test="userId != null">
-                	user_id = #{userId,jdbcType=DECIMAL},
-		        </if>
 		        <if test="cnName != null and cnName != ''">
                 	cn_name = #{cnName,jdbcType=VARCHAR},
 		        </if>
@@ -134,7 +131,7 @@
                 	update_user = #{updateUser,jdbcType=VARCHAR},
 		        </if>
                 	update_time = now()
-                where id = #{id}
+                where id = #{id} and user_id = #{userId}
             </if>
         </if>
     </update>
@@ -146,7 +143,13 @@
             where id = #{_parameter} and yn = 1
         </if>
     </select>
-
+	<!-- 根据主键获取对象信息 -->
+    <select id="getUserProfileByBean" resultMap="UserProfileMap" parameterType="UserProfile">
+        <if test="_parameter != null">
+            select <include refid="userProfileColumns"/> from user_profile
+            where user_id = #{userId} and yn = 1
+        </if>
+    </select>
     <!-- 根据查询Bean获取数据集合，不带翻页 -->
     <select id="queryUserProfileList" resultMap="UserProfileMap"
             parameterType="com.awe.uc.domain.query.UserProfileQuery">

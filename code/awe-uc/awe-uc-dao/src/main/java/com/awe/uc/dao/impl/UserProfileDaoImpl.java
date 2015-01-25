@@ -77,4 +77,8 @@ public class UserProfileDaoImpl extends BaseDao implements UserProfileDao {
         int count = (Integer) queryForObject(namespace +".exist", userProfile);
         return count > 0;
     }
+
+	public UserProfile getUserProfileByBean(UserProfile userProfile) {
+		return (UserProfile) queryForObject(namespace +".getUserProfileByBean", userProfile);
+	}
 }

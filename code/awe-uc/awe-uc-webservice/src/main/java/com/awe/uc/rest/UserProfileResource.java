@@ -25,7 +25,6 @@ import com.awe.uc.sdk.api.response.dto.UserProfileResponseDto;
 import com.awe.uc.service.UserProfileService;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
-import com.hbird.common.web.context.UserContext;
 
 /**
  * 用户基本信息REST服务：提供有关用户基本信息的接口
@@ -62,7 +61,7 @@ public class UserProfileResource {
         }
         
         UserProfileRequestDto requestDto = request.getContent();
-        if (null == requestDto || null == requestDto.getId()) {
+        if (null == requestDto || null == requestDto.getUserId()) {
         	LOG.error("getUserProfile 传入参数有误");
             return WrapMapper.illegalArgument();
         }
@@ -76,6 +75,40 @@ public class UserProfileResource {
             return WrapMapper.error();
         }
     } 
+    
+    /**
+     * 查询用户基本信息信息根据Bean
+     * 
+     * @param request
+     *            用户基本信息请求参数
+     * @return 用户基本信息返回对象
+     * 
+     */
+    @POST
+    @Path("/userProfile/getUserProfileByBean")
+    public Wrapper<?> getUserProfileByBean(UserProfileRequest request) {
+        if (null == request || !request.checkSign()) {
+        	LOG.error("getUserProfile 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        UserProfileRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getUserId()) {
+        	LOG.error("getUserProfile 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
+        try {
+        	UserProfile bean = new UserProfile();
+        	bean.setUserId(requestDto.getUserId());
+            UserProfile userProfile = userProfileService.getUserProfileByBean(bean);
+            UserProfileResponseDto responseDto = convert(userProfile);
+            return WrapMapper.ok().result(responseDto);
+        } catch (Exception e) {
+        	LOG.error("查询用户基本信息数据异常", e);
+            return WrapMapper.error();
+        }
+    } 
+    
     @POST
     @Path("/userProfile/add")
     public Wrapper<?> add(UserProfileRequest request){
@@ -116,8 +149,21 @@ public class UserProfileResource {
             return WrapMapper.illegalArgument();
         }
     	try {
-    		UserProfile userProfile = userProfileService.getUserProfileById(requestDto.getUserId());
-    		BeanUtils.copyProperties(requestDto, userProfile);
+    		UserProfile bean = new UserProfile();
+    		bean.setUserId(requestDto.getUserId());
+    		UserProfile userProfile = userProfileService.getUserProfileByBean(bean);
+    		userProfile.setCnName(requestDto.getCnName());
+    		userProfile.setBirthday(requestDto.getBirthday());
+    		userProfile.setProvinceName(requestDto.getProvinceName());
+    		userProfile.setProvinceNo(requestDto.getProvinceNo());
+    		userProfile.setCityName(requestDto.getCityName());
+    		userProfile.setCityNo(requestDto.getCityNo());
+    		userProfile.setCountyName(requestDto.getCountyName());
+    		userProfile.setCountyNo(requestDto.getCountyNo());
+    		userProfile.setAddress(requestDto.getAddress());
+    		userProfile.setNickname(requestDto.getNickname());
+    		userProfile.setSex(requestDto.getSex());
+    		//BeanUtils.copyProperties(requestDto, userProfile);
     		boolean ret = userProfileService.update(userProfile);
     		if (ret) {
                 return WrapMapper.ok();

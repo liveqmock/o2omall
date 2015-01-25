@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.awe.mall.service.ProfileService;
 import com.awe.uc.sdk.UserProfileClient;
 import com.awe.uc.sdk.request.dto.UserProfileRequestDto;
+import com.awe.uc.sdk.response.dto.UserProfileResponseDto;
 import com.hbird.common.utils.wrap.Wrapper;
 /**
  * 
@@ -45,6 +46,18 @@ public class ProfileServiceImpl implements ProfileService {
 			LOG.error("#ProfileServiceImpl.add# Error:" + e);
 		}
 		return wrapper;
+	}
+	/**
+     * {@inheritDoc}
+     */
+	public UserProfileResponseDto getUserProfileByBean(UserProfileRequestDto profile) {
+		UserProfileResponseDto responseDto = null;
+		try {
+			responseDto = userProfileClient.getUserProfileByBean(profile);
+		} catch (Exception e) {
+			LOG.error("#ProfileServiceImpl.getUserProfileByBean# Error:" + e);
+		}
+		return responseDto;
 	}
 
 }

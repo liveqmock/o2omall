@@ -1,6 +1,7 @@
 package com.awe.mall.service;
 
 import com.awe.uc.sdk.request.dto.UserProfileRequestDto;
+import com.awe.uc.sdk.response.dto.UserProfileResponseDto;
 import com.hbird.common.utils.wrap.Wrapper;
 
 /**
@@ -22,4 +23,9 @@ public interface ProfileService {
 	 * @return
 	 */
 	public Wrapper<?> add(UserProfileRequestDto profile);
+	/**
+	 * 根据bean获取个人基本资料
+	 * @return
+	 */
+	public UserProfileResponseDto getUserProfileByBean(UserProfileRequestDto profile);
 }

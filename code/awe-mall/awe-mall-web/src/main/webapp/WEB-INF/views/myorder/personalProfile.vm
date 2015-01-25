@@ -3,8 +3,40 @@
     $(function () {  
 		address();
 		birthday();
+		init();
     });
 
+	function init(){
+		var sex = $!UserProfile.sex;
+		if(sex==1){
+			$("#male").attr("checked",true); 
+		}else if(sex==0){
+			$("#female").attr("checked",true); 
+		}
+		var birthday = '$!dateTool.format('yyyy-MM-dd',$!UserProfile.birthday)';
+		var arrayBirthday = birthday.split('-');
+		
+		var birthdayYear = parseInt(arrayBirthday[0]);
+		$("#birthdayYear").find("option[value='"+birthdayYear+"']").attr("selected","selected");
+		
+		var birthdayMonth = parseInt(arrayBirthday[1]);
+		$("#birthdayMonth").find("option[value='"+birthdayMonth+"']").attr("selected","selected");
+		
+		var birthdayDay = parseInt(arrayBirthday[2]);
+		changeSelectBrithdayDay();
+		$("#birthdayDay").find("option[value='"+birthdayDay+"']").attr("selected","selected");
+		
+		var provinceNo = $!UserProfile.provinceNo; 	 
+		loadAreas(1,0,"$!UserProfile.provinceNo","province");
+		
+		var cityNo = $!UserProfile.cityNo;
+		loadAreas(2,"$!UserProfile.provinceNo","$!UserProfile.cityNo","city");
+		
+		var countyNo = $!UserProfile.countyNo;
+		loadAreas(3,"$!UserProfile.cityNo","$!UserProfile.countyNo","county");
+	}
+	
+	
 	function address(){
 		loadAreas(1,0,0,"province");
 		$("#province").change(function () {
@@ -65,6 +97,7 @@
 	function submitbtn(){
 		var birthday = $("#birthdayYear option:selected").val() + "-" + $("#birthdayMonth option:selected").val() + "-" + $("#birthdayDay option:selected").val();  
 		$("#birthday").val(birthday);
+		getSelectAddress();
 		var form = $("#profileForm");
 		jQuery.post(basePath+'/profile/add',
     		form.serialize(),
@@ -76,6 +109,17 @@
 		);
 	}
 	
+	function getSelectAddress(){
+		$("#provinceName").val($("#province option:selected").text());
+		$("#provinceNo").val($("#province option:selected").val());
+		
+		$("#cityName").val($("#city option:selected").text());
+		$("#cityNo").val($("#city option:selected").val());
+		
+		$("#countyName").val($("#county option:selected").text());
+		$("#countyNo").val($("#county option:selected").val());
+	}
+	
  </script>
 <!---------------------- 正文 ----------------------> 
 <div class="container wid1200 clearfix">
@@ -85,15 +129,17 @@
        
          <h2 class="my_order"><span class="my_order_icon"></span>基础资料</h2>
          <form id="profileForm" name="profileForm" action="#">
+		 <input type="hidden" id="profileId"  name="id" value="$!UserProfile.id"/>
+		 <input type="hidden" id="userId"  name="userId" value="$!UserProfile.userId"/>
          <div class="basic mt30 ml15 relative">
            <div class="person-img"><img src="#springUrl('')/static/images/tt.jpg" /><p><a href="">修改头像</a></p></div>
            <dl class="clearfix">
              <dt>昵称:</dt>
-             <dd><input type="text" class="basic_input" name="nickname" /></dd>
+             <dd><input type="text" class="basic_input" name="nickname" value="$!UserProfile.nickname"/></dd>
            </dl> 
            <dl class="clearfix">
              <dt>性别:</dt>
-             <dd><input type="radio" name="sex" value="1" checked /> 男 &nbsp;&nbsp;&nbsp;<input type="radio" name="sex" value="0" /> 女</dd>
+             <dd><input type="radio" name="sex" id="male" value="1" checked /> 男 &nbsp;&nbsp;&nbsp;<input type="radio" id="female" name="sex" value="0" /> 女</dd>
            </dl> 
            <dl class="clearfix">
              <dt>出生日期:</dt>
@@ -104,7 +150,7 @@
            </dl> 
            <dl class="clearfix">
              <dt>真实姓名:</dt>
-             <dd><input type="text" class="basic_input" name="cnName"/></dd>
+             <dd><input type="text" class="basic_input" name="cnName" value="$!UserProfile.cnName"/></dd>
            </dl> 
            <dl class="clearfix">
              <dt>所在地:</dt>
@@ -116,7 +162,7 @@
            </dl> 
            <dl class="clearfix">
              <dt>详细地址:</dt>
-             <dd><input type="text" class="basic_area" name="address"/></dd>
+             <dd><input type="text" class="basic_area" name="address" value="$!UserProfile.address"/></dd>
            </dl> 
         
          </div>

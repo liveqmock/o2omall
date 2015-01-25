@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.awe.mall.controller.base.BaseController;
 import com.awe.mall.service.ProfileService;
 import com.awe.uc.sdk.request.dto.UserProfileRequestDto;
+import com.awe.uc.sdk.response.dto.UserProfileResponseDto;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 import com.hbird.common.web.context.UserContext;
@@ -43,6 +44,14 @@ public class ProfileController extends BaseController{
 		LOG.info("-- welcome to myProfile page --");
         model.addAttribute("navFlag", "member"); // 页面主要导航标识，‘我的‘
         model.addAttribute("leftFlag", "myprofile");//我的订单-左边菜单标志
+        try {
+        	UserProfileRequestDto profile = new UserProfileRequestDto();
+        	profile.setUserId(UserContext.get().getUserId());
+        	UserProfileResponseDto responseDto = profileService.getUserProfileByBean(profile);
+        	model.addAttribute("UserProfile", responseDto);
+		} catch (Exception e) {
+			LOG.error("#ProfileController.profile#ERROR:" + e);
+		}
 		return VIEW_WORKSPACE + VIEW_PAGE;
 	}
 	/**
@@ -66,13 +75,18 @@ public class ProfileController extends BaseController{
 	@ResponseBody
 	public Wrapper<?> doAdd(Model model,UserProfileRequestDto requestDto,String birthdayStr){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Wrapper<?> wrapper = null;
 		if(null == requestDto){
 			return WrapMapper.illegalArgument();
 		}
 		try {
-			requestDto.setBirthday(sdf.parse(birthdayStr));
-			requestDto.setUserId(UserContext.get().getUserId());
-			Wrapper<?> wrapper = profileService.add(requestDto);
+			if(null != requestDto.getId()){
+				wrapper = profileService.edit(requestDto);
+			}else{
+				requestDto.setBirthday(sdf.parse(birthdayStr));
+				requestDto.setUserId(UserContext.get().getUserId());
+				wrapper = profileService.add(requestDto);
+			}
 			if(null != wrapper){
 				return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "添加成功！");
 			}else{

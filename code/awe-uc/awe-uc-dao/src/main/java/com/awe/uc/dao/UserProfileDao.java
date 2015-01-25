@@ -78,5 +78,11 @@ public interface UserProfileDao {
      * @return
      */
     public boolean exist(UserProfile userProfile);
+    /**
+     * 根据UserProfile bean获取UserProfile
+     * @param userProfile
+     * @return
+     */
+    public UserProfile getUserProfileByBean(UserProfile userProfile);
 
 }

@@ -84,4 +84,10 @@ public interface UserProfileService {
      * @return
      */
     public boolean delete(UserProfile[] userProfiles);
+    /**
+     * 根据UserProfile bean获取UserProfile
+     * @param userProfile
+     * @return
+     */
+    public UserProfile getUserProfileByBean(UserProfile userProfile);
 }

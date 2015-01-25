@@ -50,6 +50,31 @@ public class UserProfileClient extends AbstractSecureClient {
         return super.getResult(response);
     }
     /**
+     * 用户基本信息查询服务根据bean
+     * 
+     * @param request
+     *            查询请求对象
+     * @return UserProfileResponseDto 接口返回的数据对象
+     */
+    public UserProfileResponseDto getUserProfileByBean(UserProfileRequestDto requestDto) {
+        Assert.notNull(requestDto);
+
+        UserProfileRequest request = new UserProfileRequest(super.getKey(), requestDto);
+        
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("getUserProfile request: " + JsonHelper.toJson(request));
+        }
+
+        String url = super.getServiceUrlDomain() + "services/userProfile/getUserProfileByBean";
+        UserProfileResponse response = super.getRestTemplate().postForObject(url, request, UserProfileResponse.class);
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("getUserProfile url: " + url);
+            LOG.debug("getUserProfile response: " + JsonHelper.toJson(response));
+        }
+        return super.getResult(response);
+    }
+    /**
      * 添加个人基本资料
      * @param requestDto
      * @return
