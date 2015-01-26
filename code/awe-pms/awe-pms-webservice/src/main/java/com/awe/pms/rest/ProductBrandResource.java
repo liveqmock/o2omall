@@ -94,10 +94,7 @@ public class ProductBrandResource {
     	ProductBrandRequestDto requestDto = request.getContent();
     	ProductBrandQuery queryBean = new ProductBrandQuery();
     	if (null != requestDto) {
-    		queryBean.setId(requestDto.getId());
-    		queryBean.setCategoryOneId(requestDto.getCategoryOneId());
-    		queryBean.setCategoryTwoId(requestDto.getCategoryTwoId());
-    		queryBean.setCategoryThreeId(requestDto.getCategoryThreeId());
+    		BeanUtils.copyProperties(requestDto, queryBean);
     	}
     	
     	try {

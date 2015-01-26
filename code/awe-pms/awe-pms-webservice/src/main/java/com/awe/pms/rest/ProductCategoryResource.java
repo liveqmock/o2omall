@@ -94,8 +94,7 @@ public class ProductCategoryResource {
     	ProductCategoryRequestDto requestDto = request.getContent();
     	ProductCategoryQuery queryBean = new ProductCategoryQuery();
     	if (null != requestDto) {
-    		queryBean.setId(requestDto.getId());
-    		queryBean.setFid(requestDto.getFid());
+    		BeanUtils.copyProperties(requestDto, queryBean);
     	}
     	
     	try {

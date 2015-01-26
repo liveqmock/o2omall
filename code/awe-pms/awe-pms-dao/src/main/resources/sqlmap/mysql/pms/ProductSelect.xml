@@ -147,7 +147,17 @@
     <select id="queryProductSelectListWithPage" resultMap="ProductSelectMap"
             parameterType="com.awe.pms.domain.query.ProductSelectQuery">
         select <include refid="productSelectColumns"/> from product_select where <include refid="queryProductSelectListWhere"/>
-        order by create_time desc 
+        <if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
+        </if>
+        <choose>
+        	<when test="orderDesc != null and orderDesc != ''">
+        		order by #{orderDesc} desc 
+        	</when>
+        	<otherwise>
+		        order by create_time desc 
+        	</otherwise>
+        </choose>
         limit #{startIndex},#{pageSize}
     </select>
 
