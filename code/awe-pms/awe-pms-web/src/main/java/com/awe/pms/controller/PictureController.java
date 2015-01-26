@@ -44,17 +44,28 @@ public class PictureController extends BaseController {
 		InputStream inputStream = file.getInputStream();
 		
 		CompressPicUtil.compressPic(inputStream, filefolder, filename, type);
-		/*byte[] b = new byte[1048576];
-		int length = inputStream.read(b);
-		path += "\\" + filename;
-		// 文件流写到服务器端
-		FileOutputStream outputStream = new FileOutputStream(path);
-		outputStream.write(b, 0, length);
-		inputStream.close();
-		outputStream.close();*/
+		
 		String pictureUrl = PropertiesHelper.newInstance().getValue("picture.url");
 		String imgPath = pictureUrl + filefolder + "/" + filename;
 		LOG.info(imgPath);
 		return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, imgPath);
+	}
+	
+	@RequestMapping(value = "uploadProduct", method = RequestMethod.POST)
+	@ResponseBody
+	public String uploadProduct(MultipartFile upload, String filefolder, String CKEditorFuncNum) throws IOException {
+		filefolder = "product" + "/" + filefolder;
+		InputStream inputStream = upload.getInputStream();
+		String filename = DateHelper.getCurrentDateStr("yyyyMMddHHmmssSSS") + "_" + System.currentTimeMillis() + "_" + upload.getOriginalFilename();
+		CompressPicUtil.compressPic(inputStream, filefolder, filename, 3);
+		String pictureUrl = PropertiesHelper.newInstance().getValue("picture.url");
+		String imgPath = pictureUrl + filefolder + "/" + filename;
+		
+		StringBuffer result = new StringBuffer();
+		result.append("<script type=\"text/javascript\">")
+				.append("window.parent.CKEDITOR.tools.callFunction("+ CKEditorFuncNum + ",'" + imgPath + "','')") 
+				.append("</script>");
+		
+		return result.toString();
 	}
 }

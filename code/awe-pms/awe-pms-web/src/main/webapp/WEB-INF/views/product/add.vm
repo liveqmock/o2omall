@@ -361,16 +361,14 @@
         </div>
 	</body>
 </html>
+#set($imgUploadPath = '$basePath/picture/uploadProduct?filefolder=$!productNo')
 <script type="text/javascript">
 //<![CDATA[
  CKEDITOR.replace( 'features',//editor1是你文本域的ID
   {
    skin : 'kama',//想要使用的皮肤
 	// 图片上传配置 
-   filebrowserImageUploadUrl : 'upload.do?type=Image',
-	// 图片浏览配置filebrowserImageUploadUrl 
-   filebrowserUploadUrl : 'upload.do?type=File',
-   filebrowserImageUploadUrl:'$basePath/file/skuckeditor',//上传的路径
+   filebrowserImageUploadUrl:'$!imgUploadPath',//上传的路径
    toolbar :
 	   [
        ['Source','-','NewPage','Preview','-','Templates'],
@@ -401,10 +399,7 @@
   {
    skin : 'kama',//想要使用的皮肤
 	// 图片上传配置 
-   filebrowserImageUploadUrl : 'upload.do?type=Image',
-	// 图片浏览配置filebrowserImageUploadUrl 
-   filebrowserUploadUrl : 'upload.do?type=File',
-   filebrowserImageUploadUrl:'$basePath/file/skuckeditor',//上传的路径
+	filebrowserImageUploadUrl:'$!imgUploadPath',//上传的路径
    toolbar :
 	   [
        ['Source','-','NewPage','Preview','-','Templates'],
@@ -435,10 +430,7 @@
   {
    skin : 'kama',//想要使用的皮肤
 	// 图片上传配置 
-   filebrowserImageUploadUrl : 'upload.do?type=Image',
-	// 图片浏览配置filebrowserImageUploadUrl 
-   filebrowserUploadUrl : 'upload.do?type=File',
-   filebrowserImageUploadUrl:'$basePath/file/skuckeditor',//上传的路径
+   filebrowserImageUploadUrl:'$!imgUploadPath',//上传的路径
    toolbar :
 	   [
        ['Source','-','NewPage','Preview','-','Templates'],
@@ -469,10 +461,7 @@
   {
    skin : 'kama',//想要使用的皮肤
 	// 图片上传配置 
-   filebrowserImageUploadUrl : 'upload.do?type=Image',
-	// 图片浏览配置filebrowserImageUploadUrl 
-   filebrowserUploadUrl : 'upload.do?type=File',
-   filebrowserImageUploadUrl:'$basePath/file/skuckeditor',//上传的路径
+   filebrowserImageUploadUrl:'$!imgUploadPath',//上传的路径
    toolbar :
 	   [
        ['Source','-','NewPage','Preview','-','Templates'],
@@ -503,10 +492,7 @@
   {
    skin : 'kama',//想要使用的皮肤
 	// 图片上传配置 
-   filebrowserImageUploadUrl : 'upload.do?type=Image',
-	// 图片浏览配置filebrowserImageUploadUrl 
-   filebrowserUploadUrl : 'upload.do?type=File',
-   filebrowserImageUploadUrl:'$basePath/file/skuckeditor',//上传的路径
+   filebrowserImageUploadUrl:'$!imgUploadPath',//上传的路径
    toolbar :
 	   [
        ['Source','-','NewPage','Preview','-','Templates'],
