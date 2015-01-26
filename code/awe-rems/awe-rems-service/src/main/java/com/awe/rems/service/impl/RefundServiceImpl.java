@@ -174,5 +174,22 @@ public class RefundServiceImpl implements RefundService {
         }
         return refund;
     }
+    /**
+     * {@inheritDoc}
+     */
+    @Profiled(tag = "RefundService.getRefundByBean")
+	public Refund getRefundByBean(RefundQuery queryBean) {
+		Refund refund = null;
+        try {
+            if (null != queryBean.getServiceNo()) {
+                refund = refundManager.getRefundByBean(queryBean);
+            } else {
+                LOG.warn("RefundServiceImpl#getRefundByBean failed, param is illegal.");
+            }
+        } catch (Exception e) {
+            LOG.error("RefundServiceImpl#getRefundByBean has error.", e);
+        }
+        return refund;
+	}
 }
 

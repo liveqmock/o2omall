@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        #parse("/layout/head.vm")
+		<script language="javascript"> 
+			$(function() {
+				$("#btn-query").click(function() {
+        			pageSubmit(1);
+   				});
+				$("#btn-add").click(function() {
+        			window.location.href=("$basePath/serviceAudit/addForward");
+   				});
+			});
+        	// 提交分页查询
+        	function pageSubmit(pageNoParam) {
+                $("#curPage").val(pageNoParam);
+            	$("#queryForm").attr("action", "$basePath/serviceAudit");
+                $("#queryForm").attr("method", "POST");
+                $("#queryForm").submit();
+        	}
+        	
+        	function toUpdate(parameterId){
+        		window.location.href=("$basePath/serviceAudit/updateForward?id="+parameterId);
+        	}
+        	
+        </script>
+	</head>
+    <body>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h5 class="lighter">
+                            <i class="icon-search green"></i>售后审核页面
+                        </h5>
+                        <div class="widget-toolbar">
+                           <!--->
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div class="col-xs-12 col-sm-12 table-responsive">
+				<div class="panel panel-default">
+                  <div class="panel-heading">
+					<i class="icon-th blue"></i>售后服务
+				  </div>
+    			<div class="panel-body" ><!--最外层面板body-start-->
+    				<div class="widget-box">
+    					<div class="widget-header">
+        					<h3 class="panel-title">售后服务详情</h3>
+        					<div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+            						<i class="1 icon-chevron-up bigger-100"></i>
+                                </a>
+                            </div>
+    					</div>
+        				<div class="widget-body">
+        					<div class="alert alert-warning">
+								服务单号: $!ReturnExchange.serviceNo 【$!ReturnExchange.businessName】$!ReturnExchange.skuNo
+                            </div>
+
+        				</div>
+                    </div>
+    			</div><!--最外层面板body-end-->
+    			<div class="panel-body" ><!--最外层面板body-start-->
+    				<div class="widget-box">
+    					<div class="widget-header">
+        					<h3 class="panel-title">售后服务进度条</h3>
+        					<div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+            						<i class="1 icon-chevron-up bigger-100"></i>
+                                </a>
+                            </div>
+    					</div>
+        				<div class="widget-body">
+        					<!--内容-->	
+        				</div>
+                    </div>
+    			</div><!--最外层面板body-end-->
+    			<div class="panel-body" ><!--最外层面板body-start-->
+    				<div class="widget-box">
+    					<div class="widget-header">
+        					<h3 class="panel-title">跟踪信息</h3>
+        					<div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+            						<i class="1 icon-chevron-up bigger-100"></i>
+                                </a>
+                            </div>
+    					</div>
+        				<div class="widget-body">
+        					<table class="table table-hover">
+                               <thead>
+                                  <tr>
+                                     <th>处理时间</th>
+                                     <th>处理信息</th>
+                                     <th>操作人</th>
+                                  </tr>
+                               </thead>
+                               <tbody>
+								#foreach( $item in $ServiceAuditList)
+                                  <tr>
+                                     <td>$!dateTool.format('yyyy-MM-dd',$!item.createTime)</td>
+                                     <td>$!item.comment</td>
+                                     <td>$!item.createUser</td>
+                                  </tr>
+								  #end
+                               </tbody>
+                            </table>
+
+        				</div>
+                    </div>
+    			</div><!--最外层面板body-end-->
+    			<div class="panel-body" ><!--最外层面板body-start-->
+    				<div class="widget-box">
+    					<div class="widget-header">
+        					<h3 class="panel-title">服务单信息</h3>
+        					<div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+            						<i class="1 icon-chevron-up bigger-100"></i>
+                                </a>
+                            </div>
+    					</div>
+        				<div class="widget-body">
+        					<table class="table">
+                               <tbody>
+                                  <tr class="active">
+                                     <td>退款方式</td>
+                                     <td>退款金额:$!Refund.refundAmount</td>
+                                  </tr>
+                                  <tr class="success">
+                                     <td>商品处理方式</td>
+                                     <td>客户期望处理方式为:$!ReturnExchange.serviceType</td>
+                                  </tr>
+                                  <tr  class="warning">
+                                     <td>问题描述</td>
+                                     <td>$!ReturnExchange.problemDescription</td>
+                                  </tr>
+                                  <tr  class="danger">
+                                     <td>收货地址</td>
+                                     <td>$!ReturnExchange.provinceName $!ReturnExchange.cityName $!ReturnExchange.countyName $!ReturnExchange.detailedAddress</td>
+                                  </tr>
+								  <tr  class="danger">
+                                     <td>联系信息</td>
+                                     <td>$!ReturnExchange.consignee $!ReturnExchange.mobileNo / $!ReturnExchange.telephoneNo</td>
+                                  </tr>
+								  <tr  class="danger">
+                                     <td>发货单信息 </td>
+                                     <td>快递公司:$!ReturnExchange.expressName 运单号:$!ReturnExchange.waybillNo</td>
+                                  </tr>
+                               </tbody>
+                            </table>
+	
+        				</div>
+                    </div>
+    			</div><!--最外层面板body-end-->
+    			<div class="panel-body" ><!--最外层面板body-start-->
+    				<div class="widget-box">
+    					<div class="widget-header">
+        					<h3 class="panel-title">审核</h3>
+        					<div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+            						<i class="1 icon-chevron-up bigger-100"></i>
+                                </a>
+                            </div>
+    					</div>
+        				<div class="widget-body">
+        					<form id="auditForm">
+                                <texarea ></texarea>
+									同意:<radio id="agree"  name="result"/>
+									不同意:<radio id="degree" name="result"/>
+								<button id="submitBtn" type="button">提交<button>
+							</form>
+        				</div>
+                    </div>
+    			</div><!--最外层面板body-end-->
+			</div>
+           </div>
+        </div>
+    </body>
+</html>

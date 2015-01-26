@@ -134,4 +134,10 @@ public class RefundManagerImpl extends BaseManager implements RefundManager {
     public boolean exist(Refund refund) {
         return refundDao.exist(refund);
     }
+    /**
+     * {@inheritDoc}
+     */
+	public Refund getRefundByBean(RefundQuery queryBean) {
+		return refundDao.getRefundByBean(queryBean);
+	}
 }

@@ -103,7 +103,13 @@
             where id = #{_parameter} and yn = 1
         </if>
     </select>
-
+    <!-- 根据bean获取对象信息 -->
+	<select id="getRefundByBean" resultMap="RefundMap" parameterType="com.awe.rems.domain.query.RefundQuery">
+        <if test="_parameter != null">
+            select <include refid="refundColumns"/> from refund
+            where service_no = #{serviceNo} and yn = 1
+        </if>
+    </select>
     <!-- 根据查询Bean获取数据集合，不带翻页 -->
     <select id="queryRefundList" resultMap="RefundMap"
             parameterType="com.awe.rems.domain.query.RefundQuery">

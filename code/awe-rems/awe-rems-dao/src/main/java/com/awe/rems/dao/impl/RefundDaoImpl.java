@@ -1,12 +1,13 @@
 package com.awe.rems.dao.impl;
 
-import com.hbird.common.dao.mybatis.BaseDao;
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
 import com.awe.rems.dao.RefundDao;
 import com.awe.rems.domain.Refund;
 import com.awe.rems.domain.query.RefundQuery;
-
-import java.util.List;
-import org.springframework.stereotype.Repository;
+import com.hbird.common.dao.mybatis.BaseDao;
 
 /**
  * RefundDAO实现类<br/>
@@ -77,4 +78,10 @@ public class RefundDaoImpl extends BaseDao implements RefundDao {
         int count = (Integer) queryForObject(namespace +".exist", refund);
         return count > 0;
     }
+    /**
+     * {@inheritDoc}
+     */
+	public Refund getRefundByBean(RefundQuery queryBean) {
+		return (Refund) queryForObject(namespace +".getRefundByBean", queryBean);
+	}
 }

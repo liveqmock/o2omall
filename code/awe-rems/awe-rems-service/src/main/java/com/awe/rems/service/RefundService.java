@@ -83,4 +83,11 @@ public interface RefundService {
      * @return
      */
     public boolean delete(Refund[] refunds);
+    
+    /**
+     * 根据queryBean获取对象
+     * @param queryBean
+     * @return
+     */
+    public Refund getRefundByBean(RefundQuery queryBean);
 }

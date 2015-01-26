@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awe.rems.controller.base.BaseController;
+import com.awe.rems.domain.Refund;
 import com.awe.rems.domain.ReturnExchange;
 import com.awe.rems.domain.ServiceAudit;
+import com.awe.rems.domain.query.RefundQuery;
 import com.awe.rems.domain.query.ServiceAuditQuery;
 import com.awe.rems.enums.AuditStatusEnum;
+import com.awe.rems.service.RefundService;
 import com.awe.rems.service.ReturnExchangeService;
 import com.awe.rems.service.ServiceAuditService;
 import com.awe.rems.utils.exceptions.ExistedException;
@@ -39,7 +42,8 @@ public class ServiceAuditController extends BaseController {
     private ServiceAuditService serviceAuditService;
     @Autowired
     private ReturnExchangeService returnExchangeService;
-    
+    @Autowired
+    private RefundService refundService;
     
     /** 视图前缀 */
     private static final String viewPrefix ="serviceAudit";
@@ -199,12 +203,18 @@ public class ServiceAuditController extends BaseController {
      * @param query
      * @return
      */
-    @RequestMapping(value = "getApply", method = RequestMethod.GET)
-    public String getApply(Model model,ServiceAuditQuery query){
+    @RequestMapping(value = "toAudit", method = RequestMethod.GET)
+    public String toAudit(Model model,ServiceAuditQuery query){
     	//获取return_exchange表数据
     	try {
     		ReturnExchange re = returnExchangeService.getReturnExchangeByServiceNo(query.getServiceNo());
+    		List<ServiceAudit> auditDataList = serviceAuditService.queryServiceAuditList(query);
+    		RefundQuery bean = new RefundQuery();
+    		bean.setServiceNo(query.getServiceNo());
+    		Refund refund = refundService.getRefundByBean(bean);
     		model.addAttribute("ReturnExchange", re);
+    		model.addAttribute("ServiceAuditList", auditDataList);
+    		model.addAttribute("Refund", refund);
 		} catch (Exception e) {
 			LOG.error("serviceAudit getApply has error.", e);
 		}
@@ -214,8 +224,8 @@ public class ServiceAuditController extends BaseController {
      * @description:售后审核
      * @param query
      */
-    @RequestMapping(value = "getApply", method = RequestMethod.POST)
-    public Wrapper<?> audit(ServiceAudit serviceAudit){
+    @RequestMapping(value = "doAudit", method = RequestMethod.POST)
+    public Wrapper<?> doAudit(ServiceAudit serviceAudit){
     	if(null == serviceAudit){
     		return WrapMapper.wrap(Wrapper.ILLEGAL_ARGUMENT_CODE_, "售后审核参数为空!");
     	}
