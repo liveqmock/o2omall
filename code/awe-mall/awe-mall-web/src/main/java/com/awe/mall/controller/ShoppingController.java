@@ -76,24 +76,15 @@ public class ShoppingController extends BaseController {
         return VIEW_WORKSPACE + VIEW_PRODUCT_INDEX_PAGE;
     }
     
-    @RequestMapping(value = "shopping_list", method = RequestMethod.GET)
+    @RequestMapping(value = "shopping_list", method = {RequestMethod.GET, RequestMethod.POST})
     public String list(Model model, ProductSelectRequestDto requestDto, PageUtil pageUtil) {
     	logger.debug("go to list page");
     	initNavFlag(model);
     	
 //		model.addAttribute("products", this.productService.queryProducts(requestDto));
     	
-    	if (pageUtil == null) {
-    		pageUtil = new PageUtil();
-    	}
-    	if (pageUtil.getCurPage() == 0) {
-    		pageUtil.setCurPage(1);
-    	}
-    	if (pageUtil.getPageSize() == 0) {
-    		pageUtil.setPageSize(15);
-    	}
-    	
     	model.addAttribute("pageUtil", pageUtil);
+    	model.addAttribute("requestDto", requestDto);
 		model.addAttribute("productSelects", this.productSelectService.getProductSelectsWithPage(requestDto, pageUtil));
     	model.addAttribute("productCategorys", this.productCategoryService.queryProductCategoryList(null));
 		model.addAttribute("productBrands", this.productBrandService.queryProductBrandList(null));

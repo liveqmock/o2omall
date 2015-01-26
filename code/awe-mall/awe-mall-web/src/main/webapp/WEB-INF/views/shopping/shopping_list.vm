@@ -1,3 +1,13 @@
+<script language="javascript">
+    // 提交分页查询
+    function pageSubmit(pageNoParam) {
+        $("#curPage").val(pageNoParam);
+    	$("#queryForm").attr("action", "#springUrl('')/shopping/shopping_list");
+        $("#queryForm").attr("method", "POST");
+        $("#queryForm").submit();
+    }
+</script>
+ 
  <!---------------------- 正文 ----------------------> 
     <div class="container wid1200 clearfix">
     
@@ -38,7 +48,7 @@
              </div>
 
         <!---------------------- 一周畅销排行 ----------------------> 
-             <div class="powder mt10">
+        <div class="powder mt10">
                <h3>一周畅销排行</h3>
                <ul class="bestseller">
                  <li><span class="reds">1,</span><a href="product_details.html">雅培奶粉</a></li>
@@ -87,8 +97,12 @@
            </div>
            
         <!---------------------- 综合排序 ----------------------> 
-            <div class="ranking">
-             
+           <div class="ranking">
+			<form id="queryForm">
+				#parse("#springUrl('')/layout/page.vm")
+				<input type="hidden" id="categoryTwoId" name="categoryTwoId" value="$!requestDto.categoryTwoId"/>
+				<input type="hidden" id="brandCode" name="brandCode" value="$!requestDto.brandCode"/>
+				<input type="hidden" id="orderDesc" name="orderDesc" value="$!requestDto.orderDesc"/>
               <div class="rank_title mt10">
                 <ul class="rank_l left">
                   <li class="on">综合排序</li>
@@ -100,17 +114,20 @@
                   <li>共$!{pageUtil.totalRow}个商品</li>
                   <li><span class="reds">$!{pageUtil.curPage}</span>/$!{pageUtil.totalPage}</li>
     				#if($!{pageUtil.curPage}>1)
-                        <li onclick="pageSubmit($!{pageUtil.curPage} - 1)"><a href="#">上一页</a></li>
+						#set($prePage = $!{pageUtil.curPage} - 1)
+                        <li onclick="pageSubmit($!prePage)"><a href="#">上一页</a></li>
                     #else
                         <li>上一页</li>
                     #end
                     #if($!{pageUtil.curPage}<$!{pageUtil.totalPage})
-                        <li><a href="#" onclick="pageSubmit($!{pageUtil.curPage} + 1)">下一页</a></li>
+						#set($nextPage = $!{pageUtil.curPage} + 1)
+                        <li><a href="#" onclick="pageSubmit($!{nextPage})">下一页</a></li>
                     #else
                         <li>下一页</li>
                     #end
                 </ul>
               </div>
+			  </form>
               <div class="bf rank_lb">
                   <div class="shop_lb clearfix">
                    <ul>
@@ -119,7 +136,9 @@
                              <div><a href="#springUrl('')/shopping/product_details?productNo=$!{productSelect.productNo}&currentSkuNo=$!{productSelect.skuNo}"><img src="$!{productSelect.imgPath}" /></a></div>
                              <p><a href="#springUrl('')/shopping/product_details?productNo=$!{productSelect.productNo}&currentSkuNo=$!{productSelect.skuNo}">$!{productSelect.productName}</a></p>
                              <p>优质配方工艺</p>
+							 #*
                              <p class="reds"><s>¥$!{productSelect.price}元</s></p>
+							 *#
                              <p class="reds">¥$!{productSelect.salePrice}元</p>
                          </li>
 					 #end

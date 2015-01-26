@@ -9,18 +9,18 @@
                    <h3><i class="goods_icon"><a href="#springUrl('')/shopping/shopping_list" class="reds">&gt;</a></i>品牌</h3>
                    <ul class="goods_tl pt5 clearfix">
 					 #foreach($item in $!productBrands)
-						<li><a href="#springUrl('')/shopping/shopping_list?$item.id">$item.brandName</a></li>
+						<li><a href="#springUrl('')/shopping/shopping_list?brandCode=$!item.brandCode">$item.brandName</a></li>
 					 #end
                    </ul>
                 </div>
 				#foreach($item in $!productCategorys)
 					#if("$item.fid" == "0")
                     <div class="goods_con">
-                       <h3><i class="goods_icon"><a href="#springUrl('')/shopping/shopping_list?$item.id" class="reds">&gt;</a></i>$item.name</h3>
+                       <h3><i class="goods_icon"><a href="#springUrl('')/shopping/shopping_list?categoryOneId=$item.id" class="reds">&gt;</a></i>$item.name</h3>
                        <ul class="goods_tl pt5 clearfix">
     					#foreach($item_child in $!productCategorys)
 							#if("$item_child.fid" == "$item.id")
-								<li><a href="#springUrl('')/shopping/shopping_list?$item_child.id">$item_child.name</a></li>
+								<li><a href="#springUrl('')/shopping/shopping_list?categoryTwoId=$item_child.id">$item_child.name</a></li>
 							#end
     					 #end
                        </ul>
