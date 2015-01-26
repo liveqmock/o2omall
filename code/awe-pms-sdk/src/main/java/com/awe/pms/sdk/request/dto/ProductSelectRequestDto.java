@@ -71,6 +71,25 @@ public class ProductSelectRequestDto extends HbirdDto {
     private Integer yn; 
     
     /**
+     * 排序
+     */
+    private String orderDesc;
+    
+    /**
+	 * @return the orderDesc
+	 */
+	public String getOrderDesc() {
+		return orderDesc;
+	}
+
+	/**
+	 * @param orderDesc the orderDesc to set
+	 */
+	public void setOrderDesc(String orderDesc) {
+		this.orderDesc = orderDesc;
+	}
+
+	/**
      * get 主键
      * 
      * @return the id
