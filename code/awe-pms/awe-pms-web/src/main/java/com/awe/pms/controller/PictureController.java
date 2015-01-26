@@ -3,12 +3,10 @@ package com.awe.pms.controller;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.servlet.http.HttpSession;
-
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,31 +33,18 @@ public class PictureController extends BaseController {
 	
 	@RequestMapping(value = "upload", method = RequestMethod.POST)
 	@ResponseBody
-	public Wrapper<?> upload(MultipartFile file, String filefolder, Integer type, HttpSession session, Model model) throws IOException {
-		// 得到上传的文件
-		// 得到上传服务器的路径
-//		String path = session.getServletContext().getRealPath("/upload/");
-		// 得到上传的文件的文件名
-		String filename = DateHelper.getCurrentDateStr("yyyyMMddHHmmssSSS") + "_" + System.currentTimeMillis() + "_" + file.getOriginalFilename();
-		InputStream inputStream = file.getInputStream();
+	public Wrapper<?> upload(MultipartFile file, String keyFolder, String fileFolder, Integer type) throws IOException {
 		
-		CompressPicUtil.compressPic(inputStream, filefolder, filename, type);
-		
-		String pictureUrl = PropertiesHelper.newInstance().getValue("picture.url");
-		String imgPath = pictureUrl + filefolder + "/" + filename;
+		String imgPath = this.uploadImgFile(file, keyFolder, fileFolder, type);
 		LOG.info(imgPath);
 		return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, imgPath);
 	}
 	
 	@RequestMapping(value = "uploadProduct", method = RequestMethod.POST)
 	@ResponseBody
-	public String uploadProduct(MultipartFile upload, String filefolder, String CKEditorFuncNum) throws IOException {
-		filefolder = "product" + "/" + filefolder;
-		InputStream inputStream = upload.getInputStream();
-		String filename = DateHelper.getCurrentDateStr("yyyyMMddHHmmssSSS") + "_" + System.currentTimeMillis() + "_" + upload.getOriginalFilename();
-		CompressPicUtil.compressPic(inputStream, filefolder, filename, 3);
-		String pictureUrl = PropertiesHelper.newInstance().getValue("picture.url");
-		String imgPath = pictureUrl + filefolder + "/" + filename;
+	public String uploadProduct(MultipartFile upload, String keyFolder, String fileFolder, Integer type, String CKEditorFuncNum) throws IOException {
+		
+		String imgPath = this.uploadImgFile(upload, keyFolder, fileFolder, type);
 		
 		StringBuffer result = new StringBuffer();
 		result.append("<script type=\"text/javascript\">")
@@ -67,5 +52,22 @@ public class PictureController extends BaseController {
 				.append("</script>");
 		
 		return result.toString();
+	}
+	
+	private String uploadImgFile(MultipartFile file, String keyFolder, String fileFolder, Integer type) throws IOException {
+		if (file == null) {
+			LOG.error("PictureController#uploadImgFile file is null");
+			return null;
+		}
+		if (StringUtils.isNotBlank(keyFolder)) {
+			fileFolder = keyFolder + "/" + fileFolder;
+		}
+		
+		InputStream inputStream = file.getInputStream();
+		String filename = DateHelper.getCurrentDateStr("yyyyMMddHHmmssSSS") + "_" + System.currentTimeMillis() + "_" + file.getOriginalFilename();
+		CompressPicUtil.compressPic(inputStream, fileFolder, filename, type);
+		String pictureUrl = PropertiesHelper.newInstance().getValue("picture.url");
+		String imgPath = pictureUrl + fileFolder + "/" + filename;
+		return imgPath;
 	}
 }

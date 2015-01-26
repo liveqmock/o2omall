@@ -361,7 +361,7 @@
         </div>
 	</body>
 </html>
-#set($imgUploadPath = '$basePath/picture/uploadProduct?filefolder=$!productNo')
+#set($imgUploadPath = $!basePath + '/picture/uploadProduct?keyFolder=product&type=2&fileFolder=' + $!productNo)
 <script type="text/javascript">
 //<![CDATA[
  CKEDITOR.replace( 'features',//editor1是你文本域的ID
