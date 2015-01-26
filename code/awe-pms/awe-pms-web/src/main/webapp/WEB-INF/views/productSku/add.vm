@@ -258,7 +258,8 @@
     							<div class="form-group">
     								<label class="col-sm-1 control-label no-padding-right" for="imgPath">商品主图</label>
     								<div class="col-sm-11">
-										<input type="hidden" name="filefolder" value="product" />
+										<input type="hidden" name="keyFolder" value="product" />
+										<input type="hidden" name="fileFolder" value="$!productSku.skuNo" />
 										<input type="hidden" name="type" value="1" />
                                         <input type="file" name="file" class="col-sm-2" />
                                         <input class="col-sm-1" type="button" id="btn-submit-img" value="发布图片" />
@@ -275,7 +276,8 @@
     							<div class="form-group">
     								<label class="col-sm-1 control-label no-padding-right" for="skuListImgPath">商品展示</label>
     								<div class="col-sm-11" id="skuListImgPath">
-										<input type="hidden" name="filefolder" value="product" />
+										<input type="hidden" name="keyFolder" value="product" />
+										<input type="hidden" name="fileFolder" value="$!productSku.skuNo" />
                                         <input type="file" name="file" class="col-sm-2" />
 										<input type="hidden" name="type" value="2" />
                                         <input class="col-sm-1" type="button" id="btn-submit-sku-list" value="发布图片" />
