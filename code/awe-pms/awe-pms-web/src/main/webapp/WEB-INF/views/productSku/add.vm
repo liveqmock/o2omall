@@ -132,7 +132,7 @@
 					heightVal = "450px";
 				}
 				var imgId = path.substring().split("\/\.")[1];
-            	var htmlContent = "<div><img src='$!{imgUrl}"+ path +"' width='" + widthVal + "' height='" + heightVal + "'/><br><span><a href='javaScript:void(0);' id='" + imgId + "' onclick='delSkuPic(\""+imgId+"\");'>删除</a></span></div>";
+            	var htmlContent = "<div><img src='"+ path +"' width='" + widthVal + "' height='" + heightVal + "'/><br><span><a href='javaScript:void(0);' id='" + imgId + "' onclick='delSkuPic(\""+imgId+"\");'>删除</a></span></div>";
                 return htmlContent;
             }
 			

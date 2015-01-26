@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.awe.pms.controller.base.BaseController;
 import com.awe.pms.utils.CompressPicUtil;
 import com.hbird.common.utils.DateHelper;
+import com.hbird.common.utils.config.PropertiesHelper;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
 
@@ -51,7 +52,9 @@ public class PictureController extends BaseController {
 		outputStream.write(b, 0, length);
 		inputStream.close();
 		outputStream.close();*/
-		LOG.info(filefolder + filename);
-		return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, filefolder + "/" + filename);
+		String pictureUrl = PropertiesHelper.newInstance().getValue("picture.url");
+		String imgPath = pictureUrl + filefolder + "/" + filename;
+		LOG.info(imgPath);
+		return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, imgPath);
 	}
 }
