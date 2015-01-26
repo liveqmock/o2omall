@@ -24,7 +24,7 @@
         	}
         	
 			function toAudit(parameter){
-				window.location.href=("$basePath/serviceAudit/getApply?serviceNo="+parameter);
+				window.location.href=("$basePath/serviceAudit/toAudit?serviceNo="+parameter);
 			}
 			
         </script>

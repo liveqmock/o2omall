@@ -218,7 +218,7 @@ public class ServiceAuditController extends BaseController {
 		} catch (Exception e) {
 			LOG.error("serviceAudit getApply has error.", e);
 		}
-    	return viewPrefix + "/applyDetail";
+    	return viewPrefix + "/audit";
     }
     /**
      * @description:售后审核
