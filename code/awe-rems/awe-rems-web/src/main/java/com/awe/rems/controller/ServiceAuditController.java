@@ -17,6 +17,7 @@ import com.awe.rems.controller.base.BaseController;
 import com.awe.rems.domain.ReturnExchange;
 import com.awe.rems.domain.ServiceAudit;
 import com.awe.rems.domain.query.ServiceAuditQuery;
+import com.awe.rems.enums.AuditStatusEnum;
 import com.awe.rems.service.ReturnExchangeService;
 import com.awe.rems.service.ServiceAuditService;
 import com.awe.rems.utils.exceptions.ExistedException;
@@ -60,6 +61,8 @@ public class ServiceAuditController extends BaseController {
             model.addAttribute("dataList", dataList);// 数据集合
             model.addAttribute("query", query);// 查询参数
             model.addAttribute("page", page);// 分页
+            model.addAttribute("AuditStatusMap", AuditStatusEnum.getMap());
+            model.addAttribute("AuditStatusDataList", AuditStatusEnum.getDataList());
         } catch (Exception e) {
             LOG.error("serviceAudit index has error.", e);
         }

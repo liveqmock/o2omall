@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.awe.rems.controller.base.BaseController;
 import com.awe.rems.domain.ReturnExchange;
 import com.awe.rems.domain.query.ReturnExchangeQuery;
+import com.awe.rems.enums.AuditStatusEnum;
+import com.awe.rems.enums.ServiceTypeEnum;
 import com.awe.rems.service.ReturnExchangeService;
 import com.awe.rems.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
@@ -55,6 +57,10 @@ public class ReturnExchangeController extends BaseController {
             model.addAttribute("dataList", dataList);// 数据集合
             model.addAttribute("query", query);// 查询参数
             model.addAttribute("page", page);// 分页
+            model.addAttribute("AuditStatusMap", AuditStatusEnum.getMap());
+            model.addAttribute("ServiceTypeMap", ServiceTypeEnum.getMap());
+            model.addAttribute("AuditStatusDataList", AuditStatusEnum.getDataList());
+            model.addAttribute("ServiceTypeDataList", ServiceTypeEnum.getDataList());
         } catch (Exception e) {
             LOG.error("returnExchange index has error.", e);
         }
