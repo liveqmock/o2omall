@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
+	<link rel="stylesheet" href="#springUrl('')/static/css/one-debug.css" />
     <head>
         #parse("/layout/head.vm")
 		<script language="javascript"> 
@@ -73,7 +74,52 @@
                             </div>
     					</div>
         				<div class="widget-body">
-        					<!--内容-->	
+							<table class="table">
+                               <tbody>
+        					<ol class="ui-step ui-step-blue ui-step-5">
+                                <li #if("10"==$!ReturnExchange.serviceAuditStatus) class="ui-step-start ui-step-active"  #else class="ui-step-start ui-step-done" #end >
+                                    <div class="ui-step-line">-</div>
+                                    <div class="ui-step-icon">
+                                        <i class="iconfont">&#xf02f;</i>
+                                        <i class="ui-step-number">10</i>
+                                        <span class="ui-step-text">用户已提交</span>
+                                    </div>
+                                </li>
+                                <li #if("20"==$!ReturnExchange.serviceAuditStatus) class="ui-step-active" #elseif(20>$!ReturnExchange.serviceAuditStatus) class="" #else class="ui-step-done" #end>
+                                    <div class="ui-step-line">-</div>
+                                    <div class="ui-step-icon">
+                                        <i class="iconfont">&#xf02f;</i>
+                                        <i class="ui-step-number">20</i>
+                                        <span class="ui-step-text">客服或商家审核通过</span>
+                                    </div>
+                                </li>
+                                <li #if("25"==$!ReturnExchange.serviceAuditStatus) class="ui-step-active" #elseif(25>$!ReturnExchange.serviceAuditStatus) class=""  #else class="ui-step-done" #end>
+                                    <div class="ui-step-line">-</div>
+                                    <div class="ui-step-icon">
+                                        <i class="iconfont">&#xf02f;</i>
+                                        <i class="ui-step-number">25</i>
+                                        <span class="ui-step-text">审核不通过</span>
+                                    </div>
+                                </li>
+                                <li #if("30"==$!ReturnExchange.serviceAuditStatus) class="ui-step-active" #elseif(30>$!ReturnExchange.serviceAuditStatus) class=""  #else class="ui-step-done" #end>
+                                    <div class="ui-step-line">-</div>
+                                    <div class="ui-step-icon">
+                                        <i class="iconfont">&#xf02f;</i>
+                                        <i class="ui-step-number">30</i>
+                                        <span class="ui-step-text">退款已提交</span>
+                                    </div>
+                                </li>
+                                <li #if("40"==$!ReturnExchange.serviceAuditStatus) class="ui-step-end ui-step-done"  #else class="ui-step-end" #end>
+                                    <div class="ui-step-line">-</div>
+                                    <div class="ui-step-icon">
+                                        <i class="iconfont">&#xf02f;</i>
+                                        <i class="iconfont ui-step-number">&#xF029;</i>
+                                        <span class="ui-step-text">完成</span>
+                                    </div>
+                                </li>
+                            </ol>
+                               </tbody>
+                            </table>
         				</div>
                     </div>
     			</div><!--最外层面板body-end-->
@@ -167,12 +213,13 @@
         					<form id="auditForm">
                                 <form role="form">
 								<label class="checkbox-inline">
-									<input type="radio" name="optionsRadiosinline" id="agree" value="1" checked>同意
-									<input type="radio" name="optionsRadiosinline" id="ungree"  value="0">不同意
+									<input type="radio" name="status" id="agree" value="10" checked>通过
+									<input type="radio" name="status" id="ungree"  value="20">驳回
+									<input type="hidden" name="serviceNo" id="serviceNo"  value="$!ReturnExchange.serviceNo">
                                 </label>
                                   <div class="form-group">
                                     <label for="name">审核信息</label>
-                                    <textarea class="form-control" rows="3"></textarea>
+                                    <textarea class="form-control" rows="3" id="comment" name="comment"></textarea>
                                   </div>
                                 </form>
 

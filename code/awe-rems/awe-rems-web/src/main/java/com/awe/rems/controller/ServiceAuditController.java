@@ -27,6 +27,7 @@ import com.awe.rems.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.wrap.WrapMapper;
 import com.hbird.common.utils.wrap.Wrapper;
+import com.hbird.common.web.context.UserContext;
 
 /**
  * ServiceAuditController ：退换货审核流表控制器
@@ -230,6 +231,8 @@ public class ServiceAuditController extends BaseController {
     		return WrapMapper.wrap(Wrapper.ILLEGAL_ARGUMENT_CODE_, "售后审核参数为空!");
     	}
     	try {
+    		serviceAudit.setUserId(UserContext.get().getUserId());
+    		
     		if(serviceAuditService.update(serviceAudit)){
     			return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "审核成功!");
     		}else{
