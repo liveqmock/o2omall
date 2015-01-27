@@ -30,6 +30,15 @@
         VALUES (#{orderNo},#{status},#{statusName},#{description},#{logType},#{createTime},#{createUser},#{updateTime},#{updateUser},1)
 	</insert>
 	
+	<!-- 批量插入日志 -->
+    <insert id="insertBatchLogDao" parameterType="OrderLog" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO order_log(<include refid="orderLogUsedColumns"/>) 
+        VALUES
+        <foreach collection="orderList" index="index" item="item" open="(" separator="," close=")">  
+           #{item,jdbcType=VARCHAR},#{status},#{statusName},#{description},#{logType},NOW(),#{updateName},NOW(),#{updateName},1   
+        </foreach>  
+	</insert>
+	
 	<!-- 审核时写日志 批量  -->
 	<insert id="orderLogAudit" parameterType="java.util.Map">
         INSERT INTO order_log(<include refid="orderLogUsedColumns"/>) 

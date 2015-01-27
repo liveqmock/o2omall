@@ -124,4 +124,11 @@ public class OrdersDaoImpl extends BaseDao implements OrdersDao {
 		count = (Integer) queryForObject(namespace +".queryOrderCancelStatus", orderNo);
 		return count;
 	}
+
+	/**
+     * {@inheritDoc}
+     */
+	public boolean updateOrder(Map<String, Object> map) {
+		return update(namespace +".updateOrder", map);
+	}
 }

@@ -1,6 +1,7 @@
 package com.awe.order.manager;
 
 import java.util.List;
+import java.util.Map;
 
 import com.awe.order.domain.OrderDetails;
 import com.awe.order.domain.Orders;
@@ -161,4 +162,14 @@ public interface OrdersManager {
 	 * @return
 	 */
 	public boolean cancelOrders(Orders orders);
+
+	/**
+	 * 批量修改订单状态
+	 * Date:2015年1月27日下午3:31:05
+	 * user:js
+	 * @param map
+	 * @return
+	 */
+	public boolean updateOrder(Map<String, Object> map);
+
 }

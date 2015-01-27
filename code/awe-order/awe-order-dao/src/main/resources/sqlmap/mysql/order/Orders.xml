@@ -92,6 +92,20 @@
                  #{item,jdbcType=VARCHAR}   
              </foreach>  
 	</update>
+	
+	<!-- 批量修改订单状态 -->
+	<update id="updateOrder" parameterType="java.util.Map">
+		update orders set
+               	order_status = 50,
+	      <if test="updateName != null and updateName != ''">
+                	update_user = #{updateName,jdbcType=VARCHAR},
+		  </if>
+		    update_time = now()
+			where order_no in 
+			 <foreach collection="orderList" index="index" item="item" open="(" separator="," close=")">  
+                 #{item,jdbcType=VARCHAR}   
+             </foreach>  
+	</update>
 
 
     <!-- 创建信息 -->

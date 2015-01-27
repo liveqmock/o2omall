@@ -88,4 +88,12 @@ public class OrderLogDaoImpl extends BaseDao implements OrderLogDao {
 	public boolean orderLogAudit(Map map) {
 		return insert(namespace +".orderLogAudit", map);
 	}
+
+	 /**
+     * {@inheritDoc}
+     */
+	public boolean insertBatchLogDao(Map<String, Object> map) {
+		return insert(namespace +".insertBatchLogDao", map);
+		
+	}
 }

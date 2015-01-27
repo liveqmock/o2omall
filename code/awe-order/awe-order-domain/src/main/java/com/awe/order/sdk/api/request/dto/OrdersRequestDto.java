@@ -1,6 +1,7 @@
 package com.awe.order.sdk.api.request.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import com.hbird.common.sdk.api.dto.HbirdDto;
 
@@ -106,8 +107,9 @@ public class OrdersRequestDto extends HbirdDto {
     private String seller; 
     /** 销售商编号*/
     private String sellerNo;
-    
-    /**-----------------------------------------**/
+    /** 批量订单号*/
+    private List<String> listOrders; 
+	/**-----------------------------------------**/
     /** sku编号 */
     private String skuNo; 
     /** 商品编号 */
@@ -320,6 +322,23 @@ public class OrdersRequestDto extends HbirdDto {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
+    
+    
+
+    /**
+	 * @return the listOrders
+	 */
+	public List<String> getListOrders() {
+		return listOrders;
+	}
+
+	/**
+	 * @param listOrders the listOrders to set
+	 */
+	public void setListOrders(List<String> listOrders) {
+		this.listOrders = listOrders;
+	}
+    
     
     /**
      * get 支付名称

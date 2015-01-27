@@ -60,7 +60,7 @@ public class OrderInfoController extends BaseController{
 	}
 	@RequestMapping(value = "info",method = { RequestMethod.POST, RequestMethod.GET })
 	public String orderInfo(Model model,String parameters){
-		//parameters = "[{\"skuNo\":\"10000000000001\",\"skuCount\":13},{\"skuNo\":\"10000000000002\",\"skuCount\":2}]";
+		parameters = "[{\"skuNo\":\"10000000000001\",\"skuCount\":13},{\"skuNo\":\"10000000000002\",\"skuCount\":2}]";
 		//商品总数量
 		Integer count = 0;
 		//商品总价格
@@ -97,7 +97,9 @@ public class OrderInfoController extends BaseController{
 		//商品总价格
 		double countPrice = 0.0;
 		try {
-    	  requestDto.setCreateUser(getLoginUserName());
+    	  requestDto.setCreateUser(getLoginUserName());//创建人也就是下单人
+    	  requestDto.setUserName(getLoginUserName());//下单账号
+    	  requestDto.setOrderName(getLoginUserName());//下单姓名
     	  requestDto.setOrderStatus(40);
     	  //1:插入订单
     	  Wrapper<?>  wrapper = orderInfoService.addOrderDetails(requestDto,skuName,skuNo,skuCount,request.getRemoteAddr());
@@ -116,7 +118,7 @@ public class OrderInfoController extends BaseController{
     	  }
     	  return VIEW_WORKSPACE + VIEW_order_submit;
        } catch (Exception e) {
-           logger.error("addOrders has error,", e);
+           logger.error("OrderInfoController addOrders has error,", e);
            model.addAttribute("message", "非常抱歉，提交订单异常");
            model.addAttribute("code","500");
            return VIEW_WORKSPACE + VIEW_order_submit;
@@ -142,7 +144,7 @@ public class OrderInfoController extends BaseController{
                 return WrapMapper.wrap(Wrapper.ERROR_CODE, "没有查询到信息！");
             }
         } catch (Exception e) {
-            logger.error("modifyPassword has error,", e);
+            logger.error("OrderInfoController modifyPassword has error,", e);
             return WrapMapper.error();
         }
     }
@@ -168,7 +170,7 @@ public class OrderInfoController extends BaseController{
                 return WrapMapper.wrap(Wrapper.ERROR_CODE, "没有查询到信息！");
             }
         } catch (Exception e) {
-            logger.error("modifyPassword has error,", e);
+            logger.error("OrderInfoController modifyPassword has error,", e);
             return WrapMapper.error();
         }
     } 
@@ -188,7 +190,7 @@ public class OrderInfoController extends BaseController{
 			try {
 				wrapper = userAddressService.update(requestDto);
 			} catch (Exception e) {
-				LOG.error("#UserAddressServiceImpl.update# Error:" + e);
+				LOG.error("#OrderInfoController.update# Error:" + e);
 			}
 			return wrapper;
 		}
@@ -207,7 +209,7 @@ public class OrderInfoController extends BaseController{
 			try {
 				wrapper = userAddressService.insert(requestDto);
 			} catch (Exception e) {
-				LOG.error("#UserAddressServiceImpl.update# Error:" + e);
+				LOG.error("#OrderInfoController.update# Error:" + e);
 			}
 			return wrapper;
 		}
@@ -226,10 +228,33 @@ public class OrderInfoController extends BaseController{
 			try {
 				wrapper = userAddressService.delete(requestDto);
 			} catch (Exception e) {
-				LOG.error("#UserAddressServiceImpl.update# Error:" + e);
+				LOG.error("#OrderInfoController.update# Error:" + e);
 			}
 			return wrapper;
-		}
+	}
 	
+	
+	 /***
+	  * 订单支付,正向流程
+	  * Date:2015年1月26日下午2:43:54
+	  * user:js
+	  * @param requestDto
+	  * @return
+	  */
+	 @RequestMapping("payOrders")
+	 @ResponseBody
+	 public Wrapper<?> payOrders(OrdersRequestDto requestDto) {
+			Wrapper<?> wrapper = null;
+			String[] orderNo=requestDto.getOrderNo().split(",");
+			if(orderNo.length == 0) {
+				return WrapMapper.wrap(Wrapper.ERROR_CODE, "参数异常。。。");
+			}
+			try {
+				wrapper = orderInfoService.payOrders(requestDto);
+			} catch (Exception e) {
+				LOG.error("#OrderInfoController.payOrders# Error:" + e);
+			}
+			return wrapper;
+	} 
 	
 }

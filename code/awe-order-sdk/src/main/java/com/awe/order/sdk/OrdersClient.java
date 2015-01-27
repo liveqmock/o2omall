@@ -13,6 +13,7 @@ import com.awe.order.sdk.request.dto.OrdersRequestDto;
 import com.awe.order.sdk.response.OrderDetailsResponse;
 import com.awe.order.sdk.response.OrdersResponse;
 import com.awe.order.sdk.response.OrdersResponseList;
+import com.awe.order.sdk.response.PayOrderUpdateResponse;
 import com.awe.order.sdk.response.dto.OrdersResponseDto;
 import com.hbird.common.client.AbstractSecureClient;
 import com.hbird.common.utils.page.PageUtil;
@@ -144,6 +145,73 @@ public class OrdersClient extends AbstractSecureClient {
     }
     
     /**
+     * 订单支付
+     * Date:2015年1月27日上午9:50:45
+     * user:js
+     * @param requestDto
+     * @return
+     */
+    public Wrapper<?> payOrders(OrdersRequestDto requestDto){
+    	if (LOG.isDebugEnabled()) {
+            LOG.debug("payOrders request: " + JsonHelper.toJson(requestDto));
+        }
+    	OrdersRequest request = new OrdersRequest(super.getKey(), requestDto);
+    	OrdersResponse response = null;
+    	String url = null;
+    	try {
+    		 //url = "http://local.orderws.shop.hbird.com:8090/services/orders/payOrders";
+    		   url = super.getServiceUrlDomain() + "services/orders/payOrders";
+    	     response = super.getRestTemplate().postForObject(url, request, OrdersResponse.class);
+		} catch (Exception e) {
+			LOG.error("#OrdersClient.payOrders# ERROR:" + e);
+		}
+		if (LOG.isDebugEnabled()) {
+            LOG.debug("payOrders url: " + url);
+            LOG.debug("payOrders response: " + JsonHelper.toJson(response));
+        }
+		if (null != response) {
+            return WrapMapper.wrap(response.getCode(), response.getMessage());
+        } else {
+            return WrapMapper.error();
+        }
+    }
+    
+    /**
+     * 批量写改变订单状态
+     * Date:2015年1月27日下午3:52:37
+     * user:js
+     * @param requestDto
+     * @return
+     */
+    public Wrapper<?> updateBatchOrders(OrdersRequestDto requestDto){
+    	if (LOG.isDebugEnabled()) {
+            LOG.debug("payOrders request: " + JsonHelper.toJson(requestDto));
+        }
+    	OrdersRequest request = new OrdersRequest(super.getKey(), requestDto);
+    	OrdersResponse response = null;
+    	String url = null;
+    	Wrapper<?> wrapper = null;
+    	try {
+    		 //url = "http://local.orderws.shop.hbird.com:8090/services/orders/updateOrder";
+    		 url = super.getServiceUrlDomain() + "services/orders/updateOrder";
+    		 wrapper = super.getRestTemplate().postForObject(url, request, PayOrderUpdateResponse.class);
+		} catch (Exception e) {
+			LOG.error("#OrdersClient.payOrders# ERROR:" + e);
+		}
+		if (LOG.isDebugEnabled()) {
+            LOG.debug("payOrders url: " + url);
+            LOG.debug("payOrders response: " + JsonHelper.toJson(response));
+        }
+		if (wrapper.getCode() == 200) {
+            return wrapper;
+        } else {
+            return WrapMapper.error();
+        }
+    }
+    
+    
+    
+    /**
      * 添加订单基础数据，订单日志，订单item
      * Date:2015年1月7日下午2:44:20
      * user:js
@@ -158,8 +226,8 @@ public class OrdersClient extends AbstractSecureClient {
     	Wrapper<?> wrapper = null;
     	String url = null;
     	try {
-    		   url = super.getServiceUrlDomain() + "services/ordersDetails/insert";
-    		 //url = "http://local.orderws.shop.hbird.com:8090/services/ordersDetails/insert";
+    		 url = super.getServiceUrlDomain() + "services/ordersDetails/insert";
+    		// url = "http://local.orderws.shop.hbird.com:8090/services/ordersDetails/insert";
     		 wrapper = super.getRestTemplate().postForObject(url, ordersDetailsRequest, OrderDetailsResponse.class);
 		} catch (Exception e) {
 			LOG.error("#OrdersClient.addOrdersDetails# ERROR:" + e);
@@ -190,8 +258,8 @@ public class OrdersClient extends AbstractSecureClient {
     	OrdersResponse ordersResponse = null;
     	String url = null;
     	try {
-    		 //url = super.getServiceUrlDomain() + "services/orders/cancelOrders";
-    		url = "http://local.orderws.shop.hbird.com:8090/services/orders/cancelOrders";
+    		 url = super.getServiceUrlDomain() + "services/orders/cancelOrders";
+    		//url = "http://local.orderws.shop.hbird.com:8090/services/orders/cancelOrders";
     		 ordersResponse = super.getRestTemplate().postForObject(url, ordersRequest, OrdersResponse.class);
 		} catch (Exception e) {
 			LOG.error("#OrdersClient.updateOrderCancel# ERROR:" + e);

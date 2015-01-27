@@ -2,7 +2,9 @@ package com.awe.order.rest;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -70,13 +72,13 @@ public class OrdersResource {
 		}
 
 		OrdersRequestDto requestDto = request.getContent();
-		if (null == requestDto || null == requestDto.getId()) {
+		if (null == requestDto || null == requestDto.getOrderNo()) {
 			this.logger.error("getOrders 传入参数有误");
 			return WrapMapper.illegalArgument();
 		}
 
 		try {
-			Orders orders = ordersService.getOrdersById(requestDto.getId());
+			Orders orders = ordersService.getOrdersByOrderNO(requestDto.getOrderNo());
 			OrdersResponseDto responseDto = convert(orders);
 			return WrapMapper.ok().result(responseDto);
 		} catch (Exception e) {
@@ -85,6 +87,46 @@ public class OrdersResource {
 		}
 	}
 
+	
+	/**
+	 * 批量修改订单状态
+	 * 
+	 * @param request
+	 *            订单请求参数
+	 * @return 订单返回对象
+	 * 
+	 */
+	@POST
+	@Path("/orders/updateOrder")
+	public Wrapper<?> updateOrder(OrdersRequest request) {
+		if (null == request || !request.checkSign()) {
+			this.logger.error("getOrders 拒绝访问");
+			return WrapMapper.forbidden();
+		}
+
+		OrdersRequestDto requestDto = request.getContent();
+		if (null == requestDto 
+				|| requestDto.getListOrders() == null 
+				|| requestDto.getListOrders().size() == 0) {
+			this.logger.error("getOrders 传入参数有误");
+			return WrapMapper.illegalArgument();
+		}
+		try {
+			boolean flag = ordersService.updateOrder(requestDto);
+			if(flag){
+				Map<String, Object> map =new HashMap<String,Object>();
+				return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, map);
+			}else{
+				return WrapMapper.wrap(Wrapper.ERROR_CODE, Wrapper.ERROR_MESSAGE);
+			}
+		} catch (Exception e) {
+			this.logger.error("查询订单数据异常", e);
+			return WrapMapper.error();
+		}
+	}
+	
+	
+	
 	/**
 	 * 获取已下单订单列表
 	 * 
@@ -194,7 +236,7 @@ public class OrdersResource {
 			return WrapMapper.error();
 		}
 	}
-
+	
 	/**
 	 * 生成订单 Date:2015年1月7日上午10:17:44 user:js
 	 * 

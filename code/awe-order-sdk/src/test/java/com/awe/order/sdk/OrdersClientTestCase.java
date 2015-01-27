@@ -48,6 +48,21 @@ public class OrdersClientTestCase {
         
         OrdersResponseDto ordersResponseDto = client.getOrders(requestDto);
         Assert.notNull(ordersResponseDto);
+    }
+    
+    /**
+     * 订单支付时，改变订单状态和写订单日志
+     * Date:2015年1月27日下午5:50:31
+     * user:js
+     */
+    @Test
+    public void testUpdate() {
+        OrdersRequestDto requestDto = new OrdersRequestDto();
+        requestDto.setUpdateUser("我就是我");
+        List<String> list = new ArrayList<String>();
+        list.add("14223266003908205");
+        requestDto.setListOrders(list);
+        Wrapper<?> wrapper= client.updateBatchOrders(requestDto);
     } 
     
     /**

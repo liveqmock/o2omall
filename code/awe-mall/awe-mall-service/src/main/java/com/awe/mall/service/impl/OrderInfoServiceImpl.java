@@ -18,6 +18,10 @@ import com.awe.order.sdk.request.dto.OrderDetailsRequestDto;
 import com.awe.order.sdk.request.dto.OrdersItemsRequestDto;
 import com.awe.order.sdk.request.dto.OrdersRequestDto;
 import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
+import com.awe.order.sdk.response.OrdersResponse;
+import com.awe.order.sdk.response.dto.OrdersResponseDto;
+import com.awe.pay.sdk.TradeClient;
+import com.awe.pay.sdk.request.dto.TradeRequestDto;
 import com.awe.pms.sdk.ProductClient;
 import com.awe.pms.sdk.ProductSkuClient;
 import com.awe.pms.sdk.request.dto.ProductSkuRequestDto;
@@ -38,6 +42,8 @@ public class OrderInfoServiceImpl implements OrderInfoService{
 	private ProductClient productClient;
 	@Autowired
 	private OrdersClient ordersClient;
+	@Autowired
+	private TradeClient tradeClient;
 	
 	/**
      * {@inheritDoc}
@@ -111,5 +117,23 @@ public class OrderInfoServiceImpl implements OrderInfoService{
 			}
 		}
 		return priceStr;
+	}
+
+	/**
+     * {@inheritDoc}
+     */
+	public Wrapper<?> payOrders(OrdersRequestDto requestDto) {
+		//1:根据订单号查询订单信息
+		try {
+			LOG.info("OrderInfoServiceImpl payOrders====》param》orderNo》"+requestDto.getOrderNo());
+			Wrapper<?> wrapper =  ordersClient.payOrders(requestDto);
+			if(wrapper.getCode() == 200){
+			 return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, wrapper.getResult());
+			}else{
+			 return WrapMapper.wrap(Wrapper.ERROR_CODE, Wrapper.SUCCESS_MESSAGE, "提交失败");
+			}
+		} catch (Exception e) {
+			 return WrapMapper.wrap(Wrapper.ERROR_CODE, Wrapper.SUCCESS_MESSAGE, "提交异常");
+		}
 	}
 }

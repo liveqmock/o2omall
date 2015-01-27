@@ -7,37 +7,43 @@
 		$("#settlement").hide();
 	 }
    });
+   
+   function submitPayOrders(){
+    $("#payOrderFrom").attr("action", "#springUrl('')/orderinfo/payOrders");
+    $("#payOrderFrom").attr("method", "POST");
+	$("#payOrderFrom").submit();
+   }
 </script>
  <!---------------------- 订单详情  ----------------------> 
-    
       <div class="container wid1200 clearfix">
          <div class="clearfix">
            <div class="step3 right"></div>
          </div> 
          <div class="clearfix">
            <h3 class="my_cat_con ml10">订单详情</h3>
-           <div class="submit_order">
-             <dl class="sub_success">
-               <dt class="reds ft20">$!message</dt>
-			   <input type="hidden" name="code" id="code" value="$!code"/>
-             </dl>
-             <dl id="success">
-				 #foreach($param in ${mapResult.entrySet()})  
-				    <dd class="s1">订单号：$param.key</dd>
-                    <dd class="s2">应付金额：￥${mapResult.get($param.key)}元</dd>
-                 #end 
-             </dl>
-			 <dl style="background:#90EE90; color:#FFF">
-				<dd class="red">总金额：￥${countPrice}元</dd>
-             </dl>
-			  <div class="settlement">
-             <div class="right"><a href="javascript:void(0)" onclick="SubmitOrders();" class="right">去支付<i></i></a>总金额：<span class="reds">￥${countPrice}元</span></div>
-           </div>
-           </div>
+		   <form id="payOrderFrom">
+               <div class="submit_order">
+                 <dl class="sub_success">
+                   <dt class="reds ft20">$!message</dt>
+    			   <input type="hidden" name="code" id="code" value="$!code"/>
+                 </dl>
+                 <dl id="success">
+    				 #foreach($param in ${mapResult.entrySet()})  
+    				    <dd class="s1">订单号：$param.key</dd>
+                        <dd class="s2">应付金额：￥${mapResult.get($param.key)}元</dd>
+    					<input type="hidden" name="orderNo" id="order_pay" value="$param.key"/>
+                     #end 
+                 </dl>
+    			 <dl style="background:#90EE90; color:#FFF">
+    				<dd class="red">总金额：￥${countPrice}元</dd>
+                 </dl>
+				 <div class="settlement">
+                    <div class="right"><a href="javascript:void(0)" onclick="submitPayOrders();" class="right">去支付<i></i></a>总金额：<span class="reds">￥${countPrice}元</span></div>
+				 </div>
+               </div>
+		   </form>
            <div class="pt30 pl20 ft14 galy3 pb70">您的订单已经在处理中，发货后订单内容会显示承运人联系方式，如有必要您可以联系对方     <span class="pl25">[<a href="javascript:void(0)" class="reds">查看订单详情</a>]</span></div>
          </div> 
-       
-       
       </div>  
     
     

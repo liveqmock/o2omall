@@ -129,4 +129,13 @@ public interface OrdersDao {
 	 * @return
 	 */
 	public int queryOrderCancelStatus(String orderNo);
+
+	/**
+	 * 批量修改订单状态
+	 * Date:2015年1月27日下午3:38:44
+	 * user:js
+	 * @param map
+	 * @return
+	 */
+	public boolean updateOrder(Map<String, Object> map);
 }

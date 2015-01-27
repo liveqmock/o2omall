@@ -1,6 +1,7 @@
 package com.awe.order.manager.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -309,6 +310,26 @@ public class OrdersManagerImpl extends BaseManager implements OrdersManager {
     		 if (!resultFlag) {
                  throw new RuntimeException("取消订单日志异常");
              }
+        }
+		return resultFlag;
+	}
+
+	/**
+     * {@inheritDoc}
+     */
+	public boolean updateOrder(Map<String, Object> map) {
+		boolean resultFlag = false;
+		resultFlag = ordersDao.updateOrder(map);
+		if (!resultFlag) {
+            throw new RuntimeException("修改订单状态异常");
+        }
+		map.put("status", 50);
+		map.put("statusName", "已付款");
+		map.put("description", "订单支付成功!");
+		map.put("logType", "100");
+		resultFlag = orderLogDao.insertBatchLogDao(map);
+		if (!resultFlag) {
+            throw new RuntimeException("订单日志异常");
         }
 		return resultFlag;
 	}

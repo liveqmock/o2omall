@@ -3,10 +3,10 @@ package com.awe.order.service;
 import java.util.List;
 import java.util.Map;
 
-import com.awe.order.domain.OrderDetails;
 import com.awe.order.domain.Orders;
 import com.awe.order.domain.query.FrontOrdersQuery;
 import com.awe.order.domain.query.OrdersQuery;
+import com.awe.order.sdk.api.request.dto.OrdersRequestDto;
 import com.hbird.common.utils.page.PageUtil;
 import com.hbird.common.utils.wrap.Wrapper;
 
@@ -122,4 +122,14 @@ public interface OrdersService {
 	 * @return
 	 */
 	public boolean cancelOrders(Orders orders);
+
+	/**
+	 * 批量修改订单状态
+	 * Date:2015年1月27日下午3:18:39
+	 * user:js
+	 * @param requestDto
+	 * @return
+	 */
+	public boolean updateOrder(OrdersRequestDto requestDto);
+
 }

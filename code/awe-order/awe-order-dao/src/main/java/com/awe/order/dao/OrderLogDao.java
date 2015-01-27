@@ -88,4 +88,13 @@ public interface OrderLogDao {
      */
 	public boolean orderLogAudit(Map map);
 
+	/**
+	 * 批量写日志
+	 * Date:2015年1月27日下午4:59:00
+	 * user:js
+	 * @param map
+	 * @return
+	 */
+	public boolean insertBatchLogDao(Map<String, Object> map);
+
 }

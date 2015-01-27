@@ -38,6 +38,15 @@ public interface OrderInfoService {
 	 * @return
 	 */
 	Wrapper<?> addOrderDetails(OrdersRequestDto requestDto, String skuName, String skuNo,String skuCount,String ip);
+
+	/**
+	 * 正向支付
+	 * Date:2015年1月26日下午2:49:40
+	 * user:js
+	 * @param requestDto
+	 * @return
+	 */
+	Wrapper<?> payOrders(OrdersRequestDto requestDto);
 	
 	
 }

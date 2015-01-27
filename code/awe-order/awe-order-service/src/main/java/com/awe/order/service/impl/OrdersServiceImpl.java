@@ -3,7 +3,6 @@ package com.awe.order.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -31,11 +30,14 @@ import com.awe.order.enums.EnumPayType;
 import com.awe.order.enums.EnumPayWay;
 import com.awe.order.enums.EnuminvoiceTitle;
 import com.awe.order.manager.OrdersManager;
+import com.awe.order.sdk.api.request.dto.OrdersRequestDto;
 import com.awe.order.sdk.api.response.dto.OrdersResponseDto;
 import com.awe.order.service.OrdersService;
 import com.awe.order.service.helper.OrdersComparator;
 import com.awe.order.utils.exceptions.ExistedException;
 import com.awe.order.utils.exceptions.OrderCodeUtil;
+import com.awe.pay.sdk.TradeClient;
+import com.awe.pay.sdk.request.dto.TradeRequestDto;
 import com.awe.pms.sdk.ProductClient;
 import com.awe.pms.sdk.request.dto.ProductSkuRequestDto;
 import com.awe.pms.sdk.response.dto.ProductResponseDto;
@@ -62,6 +64,8 @@ public class OrdersServiceImpl implements OrdersService {
 	private OrdersManager ordersManager;
 	@Autowired
 	private ProductClient productClient;
+	@Autowired
+	private TradeClient tradeClient;
 
 	/**
 	 * {@inheritDoc}
@@ -425,5 +429,17 @@ public class OrdersServiceImpl implements OrdersService {
 		}
 		return resultFlag;
 
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Profiled(tag = "OrdersService.updateOrder")
+	public boolean updateOrder(OrdersRequestDto requestDto) {
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("updateName", requestDto.getUpdateUser());
+		map.put("orderList", requestDto.getListOrders());
+		return ordersManager.updateOrder(map);
+		
 	}
 }

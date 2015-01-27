@@ -32,6 +32,11 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>com.awe.pay</groupId>
+			<artifactId>awe-pay-sdk</artifactId>
+		</dependency>
+		
+		<dependency>
 			<groupId>com.awe.order</groupId>
 			<artifactId>awe-order-util</artifactId>
 		</dependency>
