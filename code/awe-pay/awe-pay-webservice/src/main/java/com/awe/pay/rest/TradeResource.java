@@ -106,7 +106,44 @@ public class TradeResource {
             return WrapMapper.error();
         }
     } 
+    /**
+     * 批量-正向交易接口
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/trade/addBatchTrade")
+    public Wrapper<?> addBatchTrade(TradeRequest request) {
+        if (null == request || !request.checkSign()) {
+            this.logger.error("addBatchTrade 拒绝访问");
+            return WrapMapper.forbidden();
+        }
+        
+        TradeRequestDto requestDto = request.getContent();
+        if (null == requestDto || null == requestDto.getTradeRequestDtoList()) {
+            this.logger.error("addBatchTrade 传入参数有误");
+            return WrapMapper.illegalArgument();
+        }
 
+        try {
+        	Trade trade = null;
+        	List<Trade> tradeList = new ArrayList<Trade>();
+        	for (TradeRequestDto tradeRequestDto : requestDto.getTradeRequestDtoList()) {
+        		trade = new Trade();
+        		BeanUtils.copyProperties(tradeRequestDto, trade);
+        		tradeList.add(trade);
+			}
+            boolean ret = tradeService.insert(tradeList);
+            if(ret){
+            	return WrapMapper.ok();
+            }else{
+            	return WrapMapper.error();
+            }
+        } catch (Exception e) {
+            this.logger.error("批量-正向交易数据异常", e);
+            return WrapMapper.error();
+        }
+    } 
     // 数据转换
     private TradeResponseDto convert(Trade trade) {
         if (null == trade) {

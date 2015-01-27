@@ -22,4 +22,11 @@ public interface PayTradeService {
 	 * @return
 	 */
 	public Wrapper<?> addTrade(TradeRequestDto requestDto);
+	
+	/**
+	 * 正向交易接口
+	 * @param requestDto
+	 * @return
+	 */
+	public Wrapper<?> addBatchTrade(TradeRequestDto requestDto);
 }

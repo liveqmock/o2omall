@@ -80,4 +80,35 @@ public class TradeClient extends AbstractSecureClient {
             return WrapMapper.error();
         }
     }
+    /**
+     * 批量-正向交易接口
+     * @param requestDto
+     * @return
+     */
+    public Wrapper<?> addBatchTrade(TradeRequestDto requestDto) {
+        Assert.notNull(requestDto);
+
+        TradeRequest request = new TradeRequest(super.getKey(), requestDto);
+        TradeResponse response = null;
+        String url = null;
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("addBatchTrade request: " + JsonHelper.toJson(request));
+        }
+        try {
+        	url = super.getServiceUrlDomain() + "services/trade/addBatchTrade";
+        	response = super.getRestTemplate().postForObject(url, request, TradeResponse.class);
+		} catch (Exception e) {
+			LOG.error("#TradeClient.addBatchTrade# ERROR:" + e);
+		}
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("addBatchTrade url: " + url);
+            LOG.debug("addBatchTrade response: " + JsonHelper.toJson(response));
+        }
+        if (null != response) {
+            return WrapMapper.wrap(response.getCode(), response.getMessage());
+        } else {
+            return WrapMapper.error();
+        }
+    }
 }

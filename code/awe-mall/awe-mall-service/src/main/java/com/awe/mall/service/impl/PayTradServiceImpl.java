@@ -42,5 +42,17 @@ public class PayTradServiceImpl implements PayTradeService {
 		}
 		return wrapper;
 	}
+	/**
+     * {@inheritDoc}
+     */
+	public Wrapper<?> addBatchTrade(TradeRequestDto requestDto) {
+		Wrapper<?> wrapper = null;
+		try {
+			wrapper = tradeClient.addBatchTrade(requestDto);
+		} catch (Exception e) {
+			LOG.error("#PayTradServiceImpl.addBatchTrade# Error:" + e);
+		}
+		return wrapper;
+	}
 
 }
