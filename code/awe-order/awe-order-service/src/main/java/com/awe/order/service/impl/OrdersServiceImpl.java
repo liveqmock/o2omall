@@ -333,14 +333,16 @@ public class OrdersServiceImpl implements OrdersService {
 				if (mapList.containsKey(key)) {
 					// 虚拟商品
 					mapList.get(key).getOrdersItemsList().add(toOrdersItems(productResponseDto, mapSC));
+					//dto.setOrderNo(OrderCodeUtil.CodeUtil(ip));// 创建订单号
 				} else {
 					// 订单基本信息
 					OrdersResponseDto dto = new OrdersResponseDto();
 					BeanUtils.copyProperties(orders, dto);
 					// 订单基本信息
 					int orderType = productResponseDto.getCategoryOneId() == 10 ? 100 : 200;
-					dto.setOrderType(orderType);// type=100虚拟商品 //type=200实物
+					dto.setOrderType(orderType);// type=100实物 //type=200实物 虚拟商品
 					dto.setOrderNo(OrderCodeUtil.CodeUtil(ip));// 创建订单号
+					Thread.sleep(1);
 					dto.setSeller(productResponseDto.getProductSkuResponseDtos().get(0).getBusinessName());// 商家名称
 					dto.setSellerNo(productResponseDto.getProductSkuResponseDtos().get(0).getBusinessNo());// 商家编号
 					List<OrdersItems> dtos = new ArrayList<OrdersItems>();

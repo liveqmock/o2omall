@@ -1,0 +1,27 @@
+
+<script language="javascript">
+
+</script>
+ <!---------------------- 订单详情  ----------------------> 
+      <div class="container wid1200 clearfix">
+         <div class="clearfix">
+           <div class="step3 right"></div>
+         </div> 
+         <div class="clearfix">
+           <h3 class="my_cat_con ml10">支付信息</h3>
+		   <form id="payOrderFrom">
+			<div id="orderNoDiv">
+            </div>
+               <div class="submit_order">
+                 <dl class="sub_success">
+                   <dt class="reds ft20">$!message</dt>
+                 </dl>      
+				
+               </div>
+		   </form>
+           <div class="pt30 pl20 ft14 galy3 pb70">您的订单已经在处理中，发货后订单内容会显示承运人联系方式，如有必要您可以联系对方     <span class="pl25">[<a href="javascript:void(0)" class="reds">查看订单详情</a>]</span></div>
+         </div> 
+      </div>  
+    
+    
+   

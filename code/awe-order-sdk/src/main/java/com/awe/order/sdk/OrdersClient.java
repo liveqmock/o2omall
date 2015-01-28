@@ -49,6 +49,7 @@ public class OrdersClient extends AbstractSecureClient {
         }
 
         String url = super.getServiceUrlDomain() + "services/orders/getOrders";
+        //String url = "http://local.orderws.shop.hbird.com:8090/services/orders/getOrders";
         OrdersResponse response = super.getRestTemplate().postForObject(url, request, OrdersResponse.class);
 
         if (LOG.isDebugEnabled()) {
@@ -227,7 +228,7 @@ public class OrdersClient extends AbstractSecureClient {
     	String url = null;
     	try {
     		 url = super.getServiceUrlDomain() + "services/ordersDetails/insert";
-    		// url = "http://local.orderws.shop.hbird.com:8090/services/ordersDetails/insert";
+    		//url = "http://local.orderws.shop.hbird.com:8090/services/ordersDetails/insert";
     		 wrapper = super.getRestTemplate().postForObject(url, ordersDetailsRequest, OrderDetailsResponse.class);
 		} catch (Exception e) {
 			LOG.error("#OrdersClient.addOrdersDetails# ERROR:" + e);
@@ -259,7 +260,7 @@ public class OrdersClient extends AbstractSecureClient {
     	String url = null;
     	try {
     		 url = super.getServiceUrlDomain() + "services/orders/cancelOrders";
-    		//url = "http://local.orderws.shop.hbird.com:8090/services/orders/cancelOrders";
+    		   //url = "http://local.orderws.shop.hbird.com:8090/services/orders/cancelOrders";
     		 ordersResponse = super.getRestTemplate().postForObject(url, ordersRequest, OrdersResponse.class);
 		} catch (Exception e) {
 			LOG.error("#OrdersClient.updateOrderCancel# ERROR:" + e);

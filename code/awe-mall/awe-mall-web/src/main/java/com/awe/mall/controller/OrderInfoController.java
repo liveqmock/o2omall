@@ -1,5 +1,6 @@
 package com.awe.mall.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +49,7 @@ public class OrderInfoController extends BaseController{
 	private static final String VIEW_WORKSPACE = "trade/";
 	private static final String VIEW_order_info = "orderinfo";
 	private static final String VIEW_order_submit = "submit_order";
+	private static final String VIEW_pay_submit = "submit_pay";
 	
 	@Autowired
 	private UserAddressService userAddressService;
@@ -60,7 +62,7 @@ public class OrderInfoController extends BaseController{
 	}
 	@RequestMapping(value = "info",method = { RequestMethod.POST, RequestMethod.GET })
 	public String orderInfo(Model model,String parameters){
-		parameters = "[{\"skuNo\":\"10000000000001\",\"skuCount\":13},{\"skuNo\":\"10000000000002\",\"skuCount\":2}]";
+		//parameters = "[{\"skuNo\":\"10000000000001\",\"skuCount\":13}]";
 		//商品总数量
 		Integer count = 0;
 		//商品总价格
@@ -174,6 +176,31 @@ public class OrderInfoController extends BaseController{
             return WrapMapper.error();
         }
     } 
+	
+	 /**
+	  * 查询订单信息
+	  * Date:2015年1月28日下午3:06:13
+	  * user:js
+	  * @param model
+	  * @param requestDto
+	  * @return
+	  */
+	 @RequestMapping("queryOrderNo")
+	 @ResponseBody
+     public Wrapper<?> queryOrderNo(Model model, OrdersRequestDto requestDto) {
+		 List<OrdersRequestDto> listOrder = new ArrayList<OrdersRequestDto>();
+        try {
+        	Wrapper<?> wrapper = orderInfoService.queryOrderNo(requestDto);
+        	if (wrapper.getCode() == 200 && wrapper.getResult() != null) {
+                return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, wrapper.getResult());
+            } else {
+                return WrapMapper.wrap(Wrapper.ERROR_CODE, "没有查询到信息！");
+            }
+        } catch (Exception e) {
+            logger.error("OrderInfoController modifyPassword has error,", e);
+            return WrapMapper.error();
+        }
+    }
 	 
 
 	 /**
@@ -242,19 +269,22 @@ public class OrderInfoController extends BaseController{
 	  * @return
 	  */
 	 @RequestMapping("payOrders")
-	 @ResponseBody
-	 public Wrapper<?> payOrders(OrdersRequestDto requestDto) {
+	 public String payOrders(OrdersRequestDto requestDto,Model model) {
 			Wrapper<?> wrapper = null;
 			String[] orderNo=requestDto.getOrderNo().split(",");
 			if(orderNo.length == 0) {
-				return WrapMapper.wrap(Wrapper.ERROR_CODE, "参数异常。。。");
+				 model.addAttribute("message", "参数有误");
 			}
-			try {
-				wrapper = orderInfoService.payOrders(requestDto);
+			try {//
+				wrapper = orderInfoService.payOrders(requestDto,getLoginUserName(),getLoginUserId());
+				if(wrapper.getCode() == 200){
+					model.addAttribute("message", "支付成功！我们会最快发货");
+				}
 			} catch (Exception e) {
+				 model.addAttribute("message", "支付异常");
 				LOG.error("#OrderInfoController.payOrders# Error:" + e);
 			}
-			return wrapper;
+			return VIEW_WORKSPACE + VIEW_pay_submit;
 	} 
 	
 }

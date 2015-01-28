@@ -46,7 +46,16 @@ public interface OrderInfoService {
 	 * @param requestDto
 	 * @return
 	 */
-	Wrapper<?> payOrders(OrdersRequestDto requestDto);
+	Wrapper<?> payOrders(OrdersRequestDto requestDto,String name,Long userId);
+
+	/**
+	 * 根据订单号查询订单信息
+	 * Date:2015年1月28日下午3:09:23
+	 * user:js
+	 * @param requestDto
+	 * @return
+	 */
+	Wrapper<?> queryOrderNo(OrdersRequestDto requestDto);
 	
 	
 }

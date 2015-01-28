@@ -1,17 +1,45 @@
 
 <script language="javascript">
    $(function(){
+   //第一次加载全部选中
+   $("input[name='orderCheckBox']").attr("checked",true);
      var code = $("#code").val();
 	 if(code != 200){
 	 	$("#success").hide();
 		$("#settlement").hide();
+		$("#submit_order").hide();
+		
 	 }
    });
    
    function submitPayOrders(){
+   $("input[name='orderCheckBox'][checked]").each(function () {
+		  $("#orderNoDiv").append("<input type='hidden' name='orderNo' id='order_pay' value='"+this.value+"'/>")
+     });
+	 alert($("#order_pay").val());
+   alert("立即支付");
     $("#payOrderFrom").attr("action", "#springUrl('')/orderinfo/payOrders");
     $("#payOrderFrom").attr("method", "POST");
 	$("#payOrderFrom").submit();
+   }
+   //选中订单支付
+   function onSelectOrder()
+   {
+      $("#orderNoDiv").empty();
+   	 $("input[name='orderCheckBox'][checked]").each(function () {
+		  $("#orderNoDiv").append("<input type='hidden' name='orderNo' id='order_pay' value='this.value'/>")
+      });
+	  jQuery.post('#springUrl('')/orderinfo/updateAdress',
+                        form.serialize(),
+                        function(data) {
+        	 if(data!=null && data.code==200){
+			 $("#totalPrice").html("￥"+data.result+"元");
+        	    $("#orderNoDiv").empty();
+             }else{
+        	  	alert("修改失败");
+             }
+    	  }
+      );
    }
 </script>
  <!---------------------- 订单详情  ----------------------> 
@@ -22,23 +50,59 @@
          <div class="clearfix">
            <h3 class="my_cat_con ml10">订单详情</h3>
 		   <form id="payOrderFrom">
+			<div id="orderNoDiv">
+            </div>
                <div class="submit_order">
                  <dl class="sub_success">
                    <dt class="reds ft20">$!message</dt>
     			   <input type="hidden" name="code" id="code" value="$!code"/>
-                 </dl>
-                 <dl id="success">
-    				 #foreach($param in ${mapResult.entrySet()})  
-    				    <dd class="s1">订单号：$param.key</dd>
-                        <dd class="s2">应付金额：￥${mapResult.get($param.key)}元</dd>
-    					<input type="hidden" name="orderNo" id="order_pay" value="$param.key"/>
-                     #end 
-                 </dl>
-    			 <dl style="background:#90EE90; color:#FFF">
-    				<dd class="red">总金额：￥${countPrice}元</dd>
-                 </dl>
-				 <div class="settlement">
-                    <div class="right"><a href="javascript:void(0)" onclick="submitPayOrders();" class="right">去支付<i></i></a>总金额：<span class="reds">￥${countPrice}元</span></div>
+                 </dl>      
+					<!-- <input type="hidden" name="orderNo" id="order_pay" value="$param.key"/> -->
+				  <div id="success" style="background-color:#F0FFF0">
+					 <br/>
+					<table width="737"  >
+                        <thead>
+                            <tr>
+                                <th class="">选择</th>
+    							<th class="center">订单号</th>
+    							<th class="center">金额</th>
+    						</tr>
+							<tr><th></th><th></th><th>&nbsp;</th></th>
+						</thead>
+						<tbody>
+							#foreach($param in ${mapResult.entrySet()})
+							<tr>
+    								<td align="center"><input type="checkbox" onchange="onSelectOrder();" value="$param.key" name="orderCheckBox" id="id$param.key"/></td>
+    								<td align="center">$param.key</td>
+    								<td align="center" class="reds">￥  ${mapResult.get($param.key)} 元</td>
+                            </tr>
+                            <tr><td></td><td></td><td>&nbsp;</td></tr>
+							#end
+                        </tbody>
+					</table>
+                  </div>
+                    <dd class="sub_success">
+                       <dl>
+							<div>
+                                <table>
+                                    <tr>
+										<td >&nbsp;</td>
+										<td align="center" width="30"><input type="radio" name="PayTypeRadio"/></td>
+										<td><img style="width:50px;height:50px" src="#springUrl('')/static/images/bank/c.png"/></td>
+                                        <td align="center" width="30"><input type="radio" /></td>
+										<td><img style="width:50px;height:50px" src="#springUrl('')/static/images/bank/a.png"/></td>
+										<td align="center" width="30"><input type="radio" /></td>
+										<td><img style="width:50px;height:50px" src="#springUrl('')/static/images/bank/b.png"/></td>
+									</tr>
+								</table>
+							</div>
+						</dl>
+				
+					</dd>
+				
+				  
+				 <div id="settlement" class="settlement">
+                    <div class="right"><a href="javascript:void(0)" onclick="submitPayOrders();" class="right">立即支付<i></i></a>总金额：<span id="totalPrice" class="reds">￥${countPrice}元</span></div>
 				 </div>
                </div>
 		   </form>
