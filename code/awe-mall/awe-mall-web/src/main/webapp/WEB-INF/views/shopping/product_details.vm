@@ -56,7 +56,7 @@ function numDec(){
  function addShoppingCart(){
  	var skuCount = $("#quantity").val();
 	var skuNo = '$!{currentProductSku.skuNo}';
-	alert(skuCount);alert(skuNo);
+	//alert(skuCount);alert(skuNo);
  	window.location.href = "#springUrl('')/cart/addCart?skuNo=" + skuNo + "&skuCount=" + skuCount;
  }
 </script>
