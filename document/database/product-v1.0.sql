@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2015/1/21 15:20:05                           */
+/* Created on:     2015/1/28 14:53:14                           */
 /*==============================================================*/
 
 
@@ -299,7 +299,7 @@ create table product_sku
    production_date      datetime comment '商品生产日期',
    sale_status          tinyint comment '上下架状态',
    sale_time            datetime comment '上下架时间',
-   img_path             varchar(100) comment 'Sku主图',
+   img_path             varchar(200) comment 'Sku主图',
    price                double comment '市场价',
    sale_price           double comment '销售价',
    sale_quantity        bigint comment '可售数量',
