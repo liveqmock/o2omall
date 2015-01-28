@@ -1,0 +1,5 @@
+#if($!pageUtil)
+    <input type="hidden" id="totalRow" name="totalRow" value="$!pageUtil.totalRow" />
+    <input type="hidden" id="totalPage" name="totalPage" value="$!pageUtil.totalPage" />
+    <input type="hidden" id="curPage" name="curPage" value="$!pageUtil.curPage" />
+#end
