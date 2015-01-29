@@ -3,7 +3,7 @@
 </script>
 #set($basePath=$request.getContextPath())
 #set($imgUrl="http://test.picture.shop.hbird.com/")
-<title>母婴商城/title>
+<title>母婴商城</title>
 <meta charset="utf-8" />
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
