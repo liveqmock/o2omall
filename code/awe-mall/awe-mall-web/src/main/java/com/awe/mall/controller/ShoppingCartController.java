@@ -58,7 +58,7 @@ public class ShoppingCartController extends BaseController{
 			requestDto.setSkuNo(skuNo);
 			requestDto.setSkuCount(Integer.valueOf(skuCount));
 			requestDto.setStatus(1);
-			requestDto.setUserNo(UserContext.get().getUserId().toString());
+			requestDto.setUserId(getLoginUserId());
 			requestDto.setCreateUser(UserContext.get().getCnName());
 			requestDto.setUpdateUser(UserContext.get().getCnName());
 			Wrapper<?> wrapper = shoppingCartService.addShoppingCart(requestDto);
@@ -89,7 +89,7 @@ public class ShoppingCartController extends BaseController{
 	public String listCart(Model model){
 		try {
 			ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
-			requestDto.setUserNo(UserContext.get().getUserId().toString());
+			requestDto.setUserId(getLoginUserId());
 			//调用商品接口查出其它字段
 			List<ShoppingCartResponseDto> responseDtoList = shoppingCartService.queryShoppingCartList(requestDto);
 			model.addAttribute("dataList", responseDtoList);

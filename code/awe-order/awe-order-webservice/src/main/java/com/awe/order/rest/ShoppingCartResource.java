@@ -9,7 +9,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeanUtils;
@@ -89,13 +88,13 @@ public class ShoppingCartResource {
         }
         
         ShoppingCartRequestDto requestDto = request.getContent();
-        if (null == requestDto || StringUtils.isEmpty(requestDto.getUserNo())) {
+        if (null == requestDto || null == requestDto.getUserId()) {
             this.logger.error("queryShoppingCartList 传入参数有误");
             return WrapMapper.illegalArgument();
         }
         try {
         	ShoppingCartQuery queryBean = new ShoppingCartQuery();
-        	queryBean.setUserNo(requestDto.getUserNo());
+        	queryBean.setUserId(requestDto.getUserId());
         	List<ShoppingCart> dataList = shoppingCartService.queryShoppingCartList(queryBean);
         	List<ShoppingCartResponseDto> responseDtoList = convertList(dataList);
         	return WrapMapper.ok().result(responseDtoList);
@@ -150,7 +149,7 @@ public class ShoppingCartResource {
         }
         
         ShoppingCartRequestDto requestDto = request.getContent();
-        if (null == requestDto || StringUtils.isEmpty(requestDto.getUserNo())) {
+        if (null == requestDto || null == requestDto.getUserId()) {
             this.logger.error("addShoppingCart 传入参数有误");
             return WrapMapper.illegalArgument();
         }

@@ -16,7 +16,7 @@ public class ShoppingCartQuery extends Query {
     /** 自增id */
 	private Long id; 
     /** 用户编号 */
-	private String userNo; 
+	private Long userId; 
     /** 商品编号 */
 	private String skuNo; 
     /** 商品数量 */
@@ -59,25 +59,15 @@ public class ShoppingCartQuery extends Query {
         this.id = id;
     }
     
-    /**
-     * get 用户编号
-     * 
-     * @return the userNo
-     */
-    public String getUserNo(){
-        return userNo;
-    }
-        
-    /**
-     * set 用户编号
-     * 
-     * @param userNo the userNo to set
-     */
-    public void setUserNo(String userNo) {
-        this.userNo = userNo;
-    }
-    
-    /**
+    public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	/**
      * get 商品编号
      * 
      * @return the skuNo

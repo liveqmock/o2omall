@@ -39,8 +39,8 @@ public class ShoppingCartServiceTestCase extends BaseTransactionTestCase {
     public void testInsert() {
         Assert.notNull(shoppingCartService);
         ShoppingCart shoppingCart = new ShoppingCart();
-        String userNo = null; //TODO 初始化
-        shoppingCart.setUserNo(userNo);
+        Long userId = null; //TODO 初始化
+        shoppingCart.setUserId(userId);
         String skuNo = null; //TODO 初始化
         shoppingCart.setSkuNo(skuNo);
         shoppingCart.setCreateUser(TestConstants.UER_NAME);
@@ -55,8 +55,8 @@ public class ShoppingCartServiceTestCase extends BaseTransactionTestCase {
     public void testInsertFailure() {
         Assert.notNull(shoppingCartService);
         ShoppingCart shoppingCart = new ShoppingCart();
-        String userNo = null; //TODO 初始化// 已经存在的
-        shoppingCart.setUserNo(userNo);
+        Long userId = null; //TODO 初始化// 已经存在的
+        shoppingCart.setUserId(userId);
         String skuNo = null; //TODO 初始化// 已经存在的
         shoppingCart.setSkuNo(skuNo);
         shoppingCart.setCreateUser(TestConstants.UER_NAME);
@@ -78,8 +78,8 @@ public class ShoppingCartServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(shoppingCartService);
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setId(TEST_DEFAULT_EXIST_ID);
-        String userNo = null; //TODO 初始化
-        shoppingCart.setUserNo(userNo);
+        Long userId = null; //TODO 初始化
+        shoppingCart.setUserId(userId);
         String skuNo = null; //TODO 初始化
         shoppingCart.setSkuNo(skuNo);
         shoppingCart.setUpdateUser(TestConstants.UER_NAME);
@@ -95,8 +95,8 @@ public class ShoppingCartServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(shoppingCartService);
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setId(TEST_NOT_EXIST_ID);// 不存在的ID
-        String userNo = null; //TODO 初始化
-        shoppingCart.setUserNo(userNo);
+        Long userId = null; //TODO 初始化
+        shoppingCart.setUserId(userId);
         String skuNo = null; //TODO 初始化
         shoppingCart.setSkuNo(skuNo);
         shoppingCart.setUpdateUser(TestConstants.UER_NAME);
@@ -112,8 +112,8 @@ public class ShoppingCartServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(shoppingCartService);
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setId(TEST_DEFAULT_EXIST_ID);
-        String userNo = null; //TODO 初始化
-        shoppingCart.setUserNo(userNo);
+        Long userId = null; //TODO 初始化
+        shoppingCart.setUserId(userId);
         String skuNo = null; //TODO 初始化
         shoppingCart.setSkuNo(skuNo);
         shoppingCart.setUpdateUser(TestConstants.UER_NAME);
@@ -129,8 +129,8 @@ public class ShoppingCartServiceTestCase extends BaseTransactionTestCase {
         Assert.notNull(shoppingCartService);
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setId(TEST_NOT_EXIST_ID);// 不存在的ID
-        String userNo = null; //TODO 初始化
-        shoppingCart.setUserNo(userNo);
+        Long userId = null; //TODO 初始化
+        shoppingCart.setUserId(userId);
         String skuNo = null; //TODO 初始化
         shoppingCart.setSkuNo(skuNo);
         shoppingCart.setUpdateUser(TestConstants.UER_NAME);
@@ -179,8 +179,8 @@ public class ShoppingCartServiceTestCase extends BaseTransactionTestCase {
     public void testQueryList() {
         Assert.notNull(shoppingCartService);
         ShoppingCartQuery queryBean = new ShoppingCartQuery();
-        String userNo = null; //TODO 初始化
-        queryBean.setUserNo(userNo);
+        Long userId = null; //TODO 初始化
+        queryBean.setUserId(userId);
         String skuNo = null; //TODO 初始化
         queryBean.setSkuNo(skuNo);
         List<ShoppingCart> list = shoppingCartService.queryShoppingCartList(queryBean);

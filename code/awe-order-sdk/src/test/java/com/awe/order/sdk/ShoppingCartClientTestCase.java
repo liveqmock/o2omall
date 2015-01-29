@@ -65,7 +65,7 @@ public class ShoppingCartClientTestCase {
         requestDto.setSkuCount(1);
         requestDto.setSkuNo("1245214");
         requestDto.setStatus(1);
-        requestDto.setUserNo("5");
+        requestDto.setUserId(5L);
         requestDto.setCreateUser("张三");
         requestDto.setUpdateUser("张三");
         Wrapper<?> wrapper = client.addShoppingCart(requestDto);
@@ -77,7 +77,7 @@ public class ShoppingCartClientTestCase {
     @Test
     public void queryShoppingCartList(){
     	ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
-    	requestDto.setUserNo("1");
+    	requestDto.setUserId(1L);
     	List<ShoppingCartResponseDto> responseDtoList = client.queryShoppingCartList(requestDto);
     	Assert.notNull(responseDtoList);
     }

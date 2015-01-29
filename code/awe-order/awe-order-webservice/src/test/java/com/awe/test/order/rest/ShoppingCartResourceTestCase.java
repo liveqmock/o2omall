@@ -38,7 +38,7 @@ public class ShoppingCartResourceTestCase extends AbstractClient {
     	String url= getServiceUrlDomain() + "/shoppingCart/queryShoppingCartList";
 
         ShoppingCartRequestDto requestDto = new ShoppingCartRequestDto();
-        requestDto.setUserNo("1");
+        requestDto.setUserId(1L);
         ShoppingCartRequest request = new ShoppingCartRequest("order",requestDto);
         
         ShoppingCartResponseList responseList = super.getRestTemplate().postForObject(url, request, ShoppingCartResponseList.class);
@@ -76,7 +76,7 @@ public class ShoppingCartResourceTestCase extends AbstractClient {
         requestDto.setSkuCount(1);
         requestDto.setSkuNo("1245214");
         requestDto.setStatus(1);
-        requestDto.setUserNo("2");
+        requestDto.setUserId(2L);
         requestDto.setCreateUser("张三");
         requestDto.setUpdateUser("张三");
         ShoppingCartRequest request = new ShoppingCartRequest("order",requestDto);

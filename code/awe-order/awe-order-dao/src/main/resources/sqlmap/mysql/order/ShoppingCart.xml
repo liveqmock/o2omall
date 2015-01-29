@@ -4,7 +4,7 @@
 <mapper namespace="com.awe.order.dao.impl.ShoppingCartDaoImpl">
     <resultMap id="ShoppingCartMap" type="ShoppingCart">
 		<result column="id" property="id" jdbcType="DECIMAL" />
-		<result column="user_no" property="userNo" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="DECIMAL" />
 		<result column="sku_no" property="skuNo" jdbcType="VARCHAR" />
 		<result column="sku_count" property="skuCount" jdbcType="DECIMAL" />
 		<result column="status" property="status" jdbcType="DECIMAL" />
@@ -16,25 +16,25 @@
     </resultMap>
     
     <sql id="shoppingCartColumns">
-    	id,user_no,sku_no,sku_count,status,create_time,update_time,create_user,update_user,yn
+    	id,user_id,sku_no,sku_count,status,create_time,update_time,create_user,update_user,yn
     </sql>
     
      <sql id="shoppingCartUsedColumns">
-    	user_no,sku_no,sku_count,status,create_time,update_time,create_user,update_user,yn
+    	user_id,sku_no,sku_count,status,create_time,update_time,create_user,update_user,yn
     </sql>
 
     <!-- 创建信息 -->
     <insert id="insert" parameterType="ShoppingCart" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO shopping_cart(<include refid="shoppingCartUsedColumns"/>) 
-        VALUES (#{userNo},#{skuNo},#{skuCount},#{status},now(),now(),#{createUser},#{updateUser},1)
+        VALUES (#{userId},#{skuNo},#{skuCount},#{status},now(),now(),#{createUser},#{updateUser},1)
 	</insert>
 	
     <!-- 修改信息 -->
     <update id="update" parameterType="ShoppingCart">
         <if test="_parameter != null">
             update shopping_cart set
-		        <if test="userNo != null and userNo != ''">
-                	user_no = #{userNo,jdbcType=VARCHAR},
+		        <if test="userId != null and userId != ''">
+                	user_id = #{userId,jdbcType=DECIMAL},
 		        </if>
 		        <if test="skuCount != null and skuCount != ''">
                 	sku_count = #{skuCount,jdbcType=DECIMAL},
@@ -60,7 +60,7 @@
     <select id="getShoppingCart" resultMap="ShoppingCartMap" parameterType="ShoppingCart">
         <if test="_parameter != null">
             select <include refid="shoppingCartColumns"/> from shopping_cart
-            where  yn = 1 and user_no = #{userNo,jdbcType=VARCHAR}  and  sku_no = #{skuNo,jdbcType=VARCHAR}
+            where  yn = 1 and user_id = #{userId}  and  sku_no = #{skuNo,jdbcType=VARCHAR}
         </if>
     </select>
     
@@ -103,8 +103,8 @@
         <if test="id != null and id != ''">
         	and id = #{id,jdbcType=DECIMAL}
         </if>
-        <if test="userNo != null and userNo != ''">
-        	and user_no = #{userNo,jdbcType=VARCHAR}
+        <if test="userId != null and userId != ''">
+        	and user_id = #{userId,jdbcType=DECIMAL}
         </if>
         <if test="skuNo != null and skuNo != ''">
         	and sku_no = #{skuNo,jdbcType=VARCHAR}
