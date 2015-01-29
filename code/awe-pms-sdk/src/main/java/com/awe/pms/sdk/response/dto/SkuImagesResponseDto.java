@@ -23,7 +23,11 @@ public class SkuImagesResponseDto extends HbirdDto {
     /** 图片类型 */
     private Integer imgType; 
     /** 图片路径 */
-    private String imgPath; 
+    private String imgPath;
+    /**
+     * 小图路径
+     */
+    private String imgPathLetter;
     /** 是否主图 */
     private Integer isPrimaryPath; 
     /** 描述 */
@@ -114,6 +118,20 @@ public class SkuImagesResponseDto extends HbirdDto {
     }
     
     /**
+	 * @return the imgPathLetter
+	 */
+	public String getImgPathLetter() {
+		return imgPathLetter;
+	}
+
+	/**
+	 * @param imgPathLetter the imgPathLetter to set
+	 */
+	public void setImgPathLetter(String imgPathLetter) {
+		this.imgPathLetter = imgPathLetter;
+	}
+
+	/**
      * get 是否主图
      * 
      * @return the isPrimaryPath
