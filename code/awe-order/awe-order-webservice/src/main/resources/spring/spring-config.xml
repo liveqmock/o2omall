@@ -20,4 +20,8 @@
 	<import resource="classpath*:spring/spring-config-service.xml" />
 	<import resource="classpath*:spring/spring-config-datasource.xml" />
 	<import resource="classpath*:spring/spring-config-resteasy.xml" />
+	
+	
+	<!-- spring 定时器 -->
+	<!--  <import resource="classpath*:spring/spring-config-quartz.xml" />  -->
 </beans>

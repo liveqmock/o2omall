@@ -172,8 +172,8 @@ public class OrderInfoServiceImpl implements OrderInfoService{
 			requestDto.setUpdateUser(name);
 			if(wrapper.getCode() == 200){
 				//改变订单状态
-				ordersClient.updateBatchOrders(requestDto);
-				
+				Wrapper<?> wrappers = ordersClient.updateBatchOrders(requestDto);
+				System.out.println(">>>>>>>>>>>>>>>================================>>>>>>>>>>>"+wrappers.getCode());
 			 return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, wrapper.getResult());
 			}else{
 			 return WrapMapper.wrap(Wrapper.ERROR_CODE, Wrapper.SUCCESS_MESSAGE, "提交失败");
