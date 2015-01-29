@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2015/1/28 14:53:14                           */
+/* Created on:     2015/1/29 15:14:51                           */
 /*==============================================================*/
 
 
@@ -150,9 +150,9 @@ create table product
    freight_free         tinyint comment '是否免运费',
    freight              double comment '运费',
    material             varchar(50) comment '材质',
-   packing_list         varchar(200) comment '包装清单',
-   sale_guarantee       varchar(200) comment '售后保障',
-   kindly_reminder      varchar(200) comment '温馨提示',
+   packing_list         varchar(2000) comment '包装清单',
+   sale_guarantee       varchar(2000) comment '售后保障',
+   kindly_reminder      varchar(2000) comment '温馨提示',
    create_time          datetime comment '创建时间',
    update_time          datetime comment '修改时间',
    create_user          varchar(30) comment '创建人',

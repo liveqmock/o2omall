@@ -56,7 +56,7 @@ function numDec(){
  function addShoppingCart(){
  	var skuCount = $("#quantity").val();
 	var skuNo = '$!{currentProductSku.skuNo}';
-	alert(skuCount);alert(skuNo);
+	//alert(skuCount);alert(skuNo);
  	window.location.href = "#springUrl('')/cart/addCart?skuNo=" + skuNo + "&skuCount=" + skuCount;
  }
 </script>
@@ -65,13 +65,13 @@ function numDec(){
     <div class="container wid1200 clearfix">
        <div class="product_l">
             <div id="tsShopContainer">
-                <div id="tsImgS"><a href="$!{primarySkuImage.imgPath}" title="Images" class="MagicZoom" id="MagicZoom"><img width="352" height="351" src="$!{primarySkuImage.imgPath}" /></a></div>
+                <div id="tsImgS"><a href="$!{primarySkuImage.imgPath}" title="Images" class="MagicZoom" id="MagicZoom"><img width="352" height="351" src="$!{primarySkuImage.ImgPathLetter}" /></a></div>
                 <div id="tsPicContainer">
                     <div id="tsImgSArrL" onclick="tsScrollArrLeft()"></div>
                     <div id="tsImgSCon">
                         <ul>
 							#foreach($skuImage in $!{skuImageList})						
-                            <li onclick="showPic($velocityCount - 1)" rel="MagicZoom" #if($velocityCount == 1) class="tsSelectImg" #end><img  src="$!{skuImage.imgPath}" tsImgS="$!{skuImage.imgPath}" /></li>
+                            <li onclick="showPic($velocityCount - 1)" rel="MagicZoom" #if($velocityCount == 1) class="tsSelectImg" #end><img  src="$!{skuImage.imgPathLetter}" tsImgS="$!{skuImage.ImgPath}" /></li>
 							#end
                         </ul>
                     </div>

@@ -103,6 +103,11 @@ public class SkuImagesResource {
     		BeanUtils.copyProperties(requestDto, queryBean);
     		List<SkuImages> list = this.skuImagesService.querySkuImagesList(queryBean);
     		List<SkuImagesResponseDto> responseDtos = convertList(list);
+    		// 按照图片格式设置图片路径
+    		for (SkuImagesResponseDto tempResponseDto : responseDtos) {
+    			String tempImgPath = tempResponseDto.getImgPath();
+    			tempResponseDto.setImgPathLetter(tempImgPath.replace("/800/", "/200/"));
+        	}
     		return WrapMapper.ok().result(responseDtos);
     	} catch (Exception e) {
     		this.logger.error("查询sku图片list数据异常", e);

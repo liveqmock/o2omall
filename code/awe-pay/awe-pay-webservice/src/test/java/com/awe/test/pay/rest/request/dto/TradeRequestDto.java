@@ -1,7 +1,9 @@
 package com.awe.test.pay.rest.request.dto;
 
-import com.hbird.common.sdk.api.dto.HbirdDto;
 import java.util.Date;
+import java.util.List;
+
+import com.hbird.common.sdk.api.dto.HbirdDto;
 
 /**
  * TradeRequestDto：正向交易请求参数
@@ -57,7 +59,8 @@ public class TradeRequestDto extends HbirdDto {
     private String businessNo;
     /**商家名称*/
     private String businessName;
-    
+    /**需要批量处理的支付*/
+    private List<TradeRequestDto> tradeRequestDtoList;
     /**
      * get id自增
      * 
@@ -414,5 +417,13 @@ public class TradeRequestDto extends HbirdDto {
 
 	public void setBusinessName(String businessName) {
 		this.businessName = businessName;
+	}
+
+	public List<TradeRequestDto> getTradeRequestDtoList() {
+		return tradeRequestDtoList;
+	}
+
+	public void setTradeRequestDtoList(List<TradeRequestDto> tradeRequestDtoList) {
+		this.tradeRequestDtoList = tradeRequestDtoList;
 	}
 }

@@ -111,6 +111,7 @@ public class ShoppingController extends BaseController {
     	SkuImagesRequestDto skuImagesRequestDto = new SkuImagesRequestDto();
     	skuImagesRequestDto.setSkuNo(currentSkuNo);
     	List<SkuImagesResponseDto> skuImagesResponseDtos = this.skuImagesService.querySkuImageList(skuImagesRequestDto);
+    	
     	if (skuImagesResponseDtos != null && skuImagesResponseDtos.size() > 0) {
     		model.addAttribute("primarySkuImage", skuImagesResponseDtos.get(0));
     		model.addAttribute("skuImageList", skuImagesResponseDtos);
