@@ -36,7 +36,6 @@ public class PictureController extends BaseController {
 	public Wrapper<?> upload(MultipartFile file, String keyFolder, String fileFolder, Integer type) throws IOException {
 		
 		String imgPath = this.uploadImgFile(file, keyFolder, fileFolder, type);
-		LOG.info(imgPath);
 		return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, imgPath);
 	}
 	
@@ -45,7 +44,6 @@ public class PictureController extends BaseController {
 	public String uploadProduct(MultipartFile upload, String keyFolder, String fileFolder, Integer type, String CKEditorFuncNum) throws IOException {
 		
 		String imgPath = this.uploadImgFile(upload, keyFolder, fileFolder, type);
-		
 		StringBuffer result = new StringBuffer();
 		result.append("<script type=\"text/javascript\">")
 				.append("window.parent.CKEDITOR.tools.callFunction("+ CKEditorFuncNum + ",'" + imgPath + "','')") 
@@ -60,14 +58,17 @@ public class PictureController extends BaseController {
 			return null;
 		}
 		if (StringUtils.isNotBlank(keyFolder)) {
-			fileFolder = keyFolder + "/" + fileFolder;
+			fileFolder = keyFolder + "/" + fileFolder + "/";
 		}
 		
 		InputStream inputStream = file.getInputStream();
-		String filename = DateHelper.getCurrentDateStr("yyyyMMddHHmmssSSS") + "_" + System.currentTimeMillis() + "_" + file.getOriginalFilename();
-		CompressPicUtil.compressPic(inputStream, fileFolder, filename, type);
+		String originalFilename = file.getOriginalFilename();
+		fileFolder += originalFilename.substring(0, originalFilename.lastIndexOf(".")) + "/";
+		String filename = DateHelper.getCurrentDateStr("yyyyMMddHHmmssSSS") + "_" + originalFilename;
+		CompressPicUtil.newInstance().compressPic(inputStream, fileFolder, filename);
 		String pictureUrl = PropertiesHelper.newInstance().getValue("picture.url");
-		String imgPath = pictureUrl + fileFolder + "/" + filename;
+		String imgPath = pictureUrl + fileFolder + type + "/" + filename;
+		LOG.info(imgPath);
 		return imgPath;
 	}
 }

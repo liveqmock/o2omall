@@ -11,9 +11,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.net.ftp.FTPClient;
@@ -30,25 +33,66 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 public class CompressPicUtil {
 	
 	private static final Log LOG = LogFactory.getLog(CompressPicUtil.class);
-
-	public static String compressPic(InputStream inputStream, String outputDir, String outputFileName) {
-		return compressPic(inputStream, outputDir, outputFileName, 1);
+	
+	private List<Integer> compressTypeList = new ArrayList<Integer>();
+	
+	private static CompressPicUtil compressPicUtil;
+	
+	private CompressPicUtil() {
+		compressTypeList.add(200);
+		compressTypeList.add(750);
+		compressTypeList.add(800);
+	}
+	
+	public static CompressPicUtil newInstance() {
+		if (null == CompressPicUtil.compressPicUtil) {
+			CompressPicUtil.compressPicUtil = new CompressPicUtil();
+		}
+		
+		return CompressPicUtil.compressPicUtil;
 	}
 
-	public static String compressPic(InputStream inputStream, String outputDir, String outputFileName, int type) {
+	public boolean compressPic(InputStream inputStream, String outputDir, String outputFileName) {
+		// 生成三种形式
+		ByteArrayOutputStream tempOut = new ByteArrayOutputStream();
+		byte[] buff = new byte[1024];
+		int tempByte = 0;
+		try {
+			while ((tempByte = inputStream.read(buff, 0, 1024)) > 0) {  
+				tempOut.write(buff, 0, tempByte);  
+			}
+			for (Integer type : compressTypeList) {
+				ByteArrayInputStream in = new ByteArrayInputStream(tempOut.toByteArray());
+				BufferedInputStream inStream = new BufferedInputStream(in);
+				compressPic(inStream, outputDir + type + "/", outputFileName, type,
+						type, Boolean.TRUE);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			LOG.error("compressPic boolean ERROR:", e);
+		} finally {
+			if (tempOut != null) {
+				try {
+					tempOut.close();
+				} catch (IOException e) {
+					LOG.error("compressPic tempOut.close ERROR:", e);
+				}
+			}
+		}
+		
+		return Boolean.TRUE;
+	}
+
+	public String compressPic(InputStream inputStream, String outputDir, String outputFileName, int type) {
 		String result = null;
-		if (type == 1) {
-			result = compressPic(inputStream, outputDir, outputFileName, 200, 200, Boolean.TRUE);
-		} else if (type == 2) {
-			result = compressPic(inputStream, outputDir, outputFileName, 440, 450, Boolean.TRUE);
-		} else if (type == 3) {
-			result = compressPic(inputStream, outputDir, outputFileName, 800, 600, Boolean.TRUE);
+		if (type != 0) {
+			result = compressPic(inputStream, outputDir, outputFileName, type, type, Boolean.TRUE);
 		}
 		return result;
 	}
 
 	// 图片处理
-	public static String compressPic(InputStream inputStream, String outputDir, String outputFileName, int width,
+	public String compressPic(InputStream inputStream, String outputDir, String outputFileName, int width,
 			int height, boolean proportion) {
 		try {
 			// 获得源文件
@@ -94,12 +138,12 @@ public class CompressPicUtil {
 				out.close();
 			}
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			LOG.error("compressPic ERROR:", ex);
 		}
 		return "ok";
 	}
 
-	public static void sendFtp(InputStream inputStream, String outputDir, String outputFileName) {
+	public void sendFtp(InputStream inputStream, String outputDir, String outputFileName) {
 		// 创建ftp客户端
 		FTPClient ftpClient = new FTPClient();
 		ftpClient.setControlEncoding("UTF-8");
@@ -123,12 +167,19 @@ public class CompressPicUtil {
 			ftpClient.enterLocalPassiveMode();
 
 			// 在root目录下创建文件夹
-			ftpClient.makeDirectory("/hbird/deployment/picture/" + outputDir + "/");
+			String outputPath = "/hbird/deployment/picture/";
+			if (StringUtils.isNotBlank(outputDir)) {
+				String[] outputDirs = outputDir.split("/");
+				for (String output : outputDirs) {
+					outputPath += output + "/";
+					ftpClient.makeDirectory(outputPath);
+				}
+			}
 			
 			// set timeout to 5 minutes
 			ftpClient.setControlKeepAliveTimeout(300);
 
-			String remoteFileName = "./" + outputDir + "/" + outputFileName;
+			String remoteFileName = "./" + outputDir + outputFileName;
 			// 文件你若是不指定就会上传到root目录下
 			boolean result = ftpClient.storeFile(remoteFileName, inputStream);
 //			boolean result = ftpClient.storeFile(new String(remoteFileName.getBytes("UTF-8"),"ISO-8859-1"), inputStream);
@@ -160,7 +211,7 @@ public class CompressPicUtil {
 		InputStream inputStream = new FileInputStream(file);
 		
 		String outputDir = "product";
-		sendFtp(inputStream, outputDir, file.getName());
+		CompressPicUtil.newInstance().sendFtp(inputStream, outputDir, file.getName());
 	}
 
 }

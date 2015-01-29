@@ -260,7 +260,7 @@
     								<div class="col-sm-11">
 										<input type="hidden" name="keyFolder" value="product" />
 										<input type="hidden" name="fileFolder" value="$!productSku.skuNo" />
-										<input type="hidden" name="type" value="1" />
+										<input type="hidden" name="type" value="200" />
                                         <input type="file" name="file" class="col-sm-2" />
                                         <input class="col-sm-1" type="button" id="btn-submit-img" value="发布图片" />
     									<span class="col-sm-8">图片尺寸宽200PX，高自适应</span>
@@ -279,7 +279,7 @@
 										<input type="hidden" name="keyFolder" value="product" />
 										<input type="hidden" name="fileFolder" value="$!productSku.skuNo" />
                                         <input type="file" name="file" class="col-sm-2" />
-										<input type="hidden" name="type" value="2" />
+										<input type="hidden" name="type" value="750" />
                                         <input class="col-sm-1" type="button" id="btn-submit-sku-list" value="发布图片" />
     									<span class="col-sm-8">图片尺寸宽440PX，高自适应</span>
                                     </div>
