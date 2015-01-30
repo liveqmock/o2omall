@@ -1,7 +1,9 @@
 package com.awe.order.sdk.response.dto;
 
 import com.hbird.common.sdk.api.dto.HbirdDto;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * TaskOrdersResponseDto：作业表返回对象Dto<br/>
@@ -48,8 +50,24 @@ public class TaskOrdersResponseDto extends HbirdDto {
     private String remark; 
     /** 是否有效(0:无效;1:有效) */
     private Integer yn; 
+    /** 批量订单号*/
+    private List<String> listOrders; 
     
     /**
+	 * @return the listOrders
+	 */
+	public List<String> getListOrders() {
+		return listOrders;
+	}
+
+	/**
+	 * @param listOrders the listOrders to set
+	 */
+	public void setListOrders(List<String> listOrders) {
+		this.listOrders = listOrders;
+	}
+
+	/**
      * get 自增ID
      * 
      * @return the id

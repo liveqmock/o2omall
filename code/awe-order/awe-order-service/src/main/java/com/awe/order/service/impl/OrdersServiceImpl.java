@@ -343,8 +343,8 @@ public class OrdersServiceImpl implements OrdersService {
 					dto.setOrderType(orderType);// type=100实物 //type=200实物 虚拟商品
 					dto.setOrderNo(OrderCodeUtil.CodeUtil(ip));// 创建订单号
 					Thread.sleep(1);
-					dto.setSeller(productResponseDto.getProductSkuResponseDtos().get(0).getBusinessName());// 商家名称
-					dto.setSellerNo(productResponseDto.getProductSkuResponseDtos().get(0).getBusinessNo());// 商家编号
+					dto.setSeller(productResponseDto.getBusinessName());// 商家名称
+					dto.setSellerNo(productResponseDto.getBusinessNo());// 商家编号
 					List<OrdersItems> dtos = new ArrayList<OrdersItems>();
 					dtos.add(toOrdersItems(productResponseDto, mapSC));
 					dto.setOrdersItemsList(dtos);
@@ -442,6 +442,5 @@ public class OrdersServiceImpl implements OrdersService {
 		map.put("updateName", requestDto.getUpdateUser());
 		map.put("orderList", requestDto.getListOrders());
 		return ordersManager.updateOrder(map);
-		
 	}
 }

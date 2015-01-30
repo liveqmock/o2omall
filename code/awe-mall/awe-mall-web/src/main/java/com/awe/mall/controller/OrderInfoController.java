@@ -62,7 +62,7 @@ public class OrderInfoController extends BaseController{
 	}
 	@RequestMapping(value = "info",method = { RequestMethod.POST, RequestMethod.GET })
 	public String orderInfo(Model model,String parameters){
-		//parameters = "[{\"skuNo\":\"10000000000001\",\"skuCount\":13}]";
+		parameters = "[{\"skuNo\":\"10000000000001\",\"skuCount\":13}]";
 		//商品总数量
 		Integer count = 0;
 		//商品总价格
@@ -278,10 +278,14 @@ public class OrderInfoController extends BaseController{
 			try {//
 				wrapper = orderInfoService.payOrders(requestDto,getLoginUserName(),getLoginUserId());
 				if(wrapper.getCode() == 200){
+					LOG.info("=======>>payOrders-->>>支付成功");
 					model.addAttribute("message", "支付成功！我们会最快发货");
+				}else{
+					LOG.info("=======>>payOrders-->>>支付失败");
+					model.addAttribute("message", "支付异常！请重新支付");
 				}
 			} catch (Exception e) {
-				 model.addAttribute("message", "支付异常");
+				 model.addAttribute("message", "支付异常！请重新支付");
 				LOG.error("#OrderInfoController.payOrders# Error:" + e);
 			}
 			return VIEW_WORKSPACE + VIEW_pay_submit;

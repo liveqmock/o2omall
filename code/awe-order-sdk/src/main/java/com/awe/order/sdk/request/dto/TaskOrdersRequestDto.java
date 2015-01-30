@@ -1,7 +1,9 @@
 package com.awe.order.sdk.request.dto;
 
 import com.hbird.common.sdk.api.dto.HbirdDto;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * TaskOrdersRequestDto：作业表请求参数
@@ -48,7 +50,25 @@ public class TaskOrdersRequestDto extends HbirdDto {
     /** 是否有效(0:无效;1:有效) */
     private Integer yn; 
     
+    /** 批量订单号*/
+    private List<String> listOrders; 
+    
+    
     /**
+	 * @return the listOrders
+	 */
+	public List<String> getListOrders() {
+		return listOrders;
+	}
+
+	/**
+	 * @param listOrders the listOrders to set
+	 */
+	public void setListOrders(List<String> listOrders) {
+		this.listOrders = listOrders;
+	}
+
+	/**
      * get 自增ID
      * 
      * @return the id

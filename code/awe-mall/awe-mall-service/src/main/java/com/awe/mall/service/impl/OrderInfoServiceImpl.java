@@ -17,10 +17,12 @@ import org.springframework.stereotype.Service;
 import com.awe.mall.domain.dto.OrderInfo;
 import com.awe.mall.service.OrderInfoService;
 import com.awe.order.sdk.OrdersClient;
+import com.awe.order.sdk.TaskOrdersClient;
 import com.awe.order.sdk.request.dto.OrderDetailsRequestDto;
 import com.awe.order.sdk.request.dto.OrdersItemsRequestDto;
 import com.awe.order.sdk.request.dto.OrdersRequestDto;
 import com.awe.order.sdk.request.dto.ShoppingCartRequestDto;
+import com.awe.order.sdk.request.dto.TaskOrdersRequestDto;
 import com.awe.order.sdk.response.OrdersResponse;
 import com.awe.order.sdk.response.dto.OrdersResponseDto;
 import com.awe.pay.sdk.TradeClient;
@@ -47,6 +49,8 @@ public class OrderInfoServiceImpl implements OrderInfoService{
 	private OrdersClient ordersClient;
 	@Autowired
 	private TradeClient tradeClient;
+	@Autowired
+	private TaskOrdersClient taskOrdersClient;
 	
 	/**
      * {@inheritDoc}
@@ -142,7 +146,6 @@ public class OrderInfoServiceImpl implements OrderInfoService{
 				responseDto = ordersClient.getOrders(dto);
 				list.add(responseDto);
 			}
-			
 			//处理数据
 			for(OrdersResponseDto ordersResponseDto : list) {
 				TradeRequestDto trade = new TradeRequestDto();
@@ -173,7 +176,18 @@ public class OrderInfoServiceImpl implements OrderInfoService{
 			if(wrapper.getCode() == 200){
 				//改变订单状态
 				Wrapper<?> wrappers = ordersClient.updateBatchOrders(requestDto);
-				System.out.println(">>>>>>>>>>>>>>>================================>>>>>>>>>>>"+wrappers.getCode());
+				LOG.info(">>>>>>>>>>>>>>>================================>>>>>>>>>>>"+wrappers.getCode());
+				if(wrappers.getCode() == 200){
+					LOG.info(">>>>>>>>>>>>>>>================================>>>>>>>>>>>支付成功,订单修改状态也成功");
+					return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, "支付成功");
+				}else{
+					TaskOrdersRequestDto dto = new TaskOrdersRequestDto();
+						dto.setListOrders(listOrders);
+						dto.setCreateUser(name);
+						dto.setBusinessno("000000");
+						dto.setBusinesstype("payTask");
+					taskOrdersClient.addBatchTask(dto);
+				}
 			 return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, wrapper.getResult());
 			}else{
 			 return WrapMapper.wrap(Wrapper.ERROR_CODE, Wrapper.SUCCESS_MESSAGE, "提交失败");

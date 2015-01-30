@@ -32,7 +32,7 @@
     <!-- 创建信息 -->
     <insert id="insert" parameterType="TaskOrders" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO task_orders(<include refid="taskOrdersUsedColumns"/>) 
-        VALUES (#{businesstype},#{businessno},#{keyword1},#{keyword2},#{keyword3},#{keyword4},#{keyword5},#{taskStatus},#{executeCount},#{createTime},#{createUser},#{updateTime},#{updateUser},#{remark},#{yn})
+        VALUES (#{businesstype},#{businessno},#{keyword1},#{keyword2},#{keyword3},#{keyword4},#{keyword5},#{taskStatus},#{executeCount},NOW(),#{createUser},NOW(),#{updateUser},#{remark},1)
 	</insert>
 	
     <!-- 修改信息 -->
@@ -90,7 +90,14 @@
     <!-- 根据查询Bean获取数据集合，不带翻页 -->
     <select id="queryTaskOrdersList" resultMap="TaskOrdersMap"
             parameterType="com.awe.order.domain.query.TaskOrdersQuery">
-        select <include refid="taskOrdersColumns"/> from task_orders where <include refid="queryTaskOrdersListWhere"/>
+        select <include refid="taskOrdersColumns"/> from task_orders 
+        WHERE
+	        yn = 1 
+	        and execute_count <![CDATA[ <= ]]> 6
+	        <if test="taskStatus != null and taskStatus != ''">
+	        	and task_status = #{taskStatus,jdbcType=DECIMAL}
+	        </if>
+	    limit 1,100    
     </select>
 
     <!-- 根据查询Bean获取数据集合，翻页 -->
@@ -103,7 +110,7 @@
 
     <!-- 根据查询Bean查询-判断是否存在 -->
     <select id="exist" resultType="java.lang.Integer" parameterType="TaskOrders">
-        select count(1) from task_orders where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+        select count(1) from task_orders where yn = 1 and keyword1 = #{keyword1,jdbcType=VARCHAR}
     </select>
 
     <!-- 根据查询Bean获取集合总数 -->

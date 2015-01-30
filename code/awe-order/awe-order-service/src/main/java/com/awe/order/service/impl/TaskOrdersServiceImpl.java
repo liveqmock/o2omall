@@ -1,5 +1,6 @@
 package com.awe.order.service.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -13,6 +14,7 @@ import com.awe.order.service.TaskOrdersService;
 import com.awe.order.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.perf4j.aop.Profiled;
@@ -56,23 +58,29 @@ public class TaskOrdersServiceImpl implements TaskOrdersService {
      */
     @Profiled(tag = "TaskOrdersService.insert")
     public boolean insert(TaskOrders taskOrders) {
-        boolean resultFlag = false;
-        try {
-            if (null != taskOrders) {
-                if (taskOrdersManager.exist(taskOrders)) {
-                    throw new ExistedException();
-                }
-                resultFlag = taskOrdersManager.insert(taskOrders);
-            } else {
-                LOG.warn("TaskOrdersServiceImpl#insert failed, param is illegal.");
-            }
-        } catch (ExistedException e) {
-            LOG.warn("TaskOrdersServiceImpl#insert failed, taskOrders has existed.");
-            throw e;
-        } catch (Exception e) {
-            LOG.error("TaskOrdersServiceImpl#insert has error.", e);
-        }
-        return resultFlag;
+    	boolean resultFlag = false;
+    	List<String> orderNo = taskOrders.getListOrders();
+    	for (String no : orderNo) {
+    		TaskOrders orders = new TaskOrders();
+    		BeanUtils.copyProperties(taskOrders, orders);
+    		orders.setKeyword1(no);
+    		 try {
+    	            if (null != taskOrders) {
+    	                if (taskOrdersManager.exist(orders)) {
+    	                    throw new ExistedException();
+    	                }
+    	                resultFlag = taskOrdersManager.insert(orders);
+    	            } else {
+    	                LOG.warn("TaskOrdersServiceImpl#insert failed, param is illegal.");
+    	            }
+    	        } catch (ExistedException e) {
+    	            LOG.warn("TaskOrdersServiceImpl#insert failed, taskOrders has existed.");
+    	            throw e;
+    	        } catch (Exception e) {
+    	            LOG.error("TaskOrdersServiceImpl#insert has error.", e);
+    	        }
+		}
+    	return resultFlag;
     }
 
     /**

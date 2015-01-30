@@ -86,15 +86,15 @@ public class TaskOrdersResource {
      * @return
      */
     @POST
-	@Path("/taskOrders/insert")
-	public Wrapper<?> insert(TaskOrdersRequest request) {
+	@Path("/taskOrders/insertBatch")
+	public Wrapper<?> insertBatch(TaskOrdersRequest request) {
 		if (null == request || !request.checkSign()) {
 			this.logger.error("deleteOrders 拒绝访问");
 			return WrapMapper.forbidden();
 		}
 		TaskOrdersRequestDto requestDto = request.getContent();
-		if (null == requestDto || null == requestDto.getKeyword1()
-				|| null == requestDto.getKeyword2() || requestDto.getBusinessno() == null || requestDto.getBusinesstype() == null) {
+		if (null == requestDto || null == requestDto.getListOrders()
+				|| requestDto.getBusinessno() == null || requestDto.getBusinesstype() == null) {
 			this.logger.error("insert 传入参数有误");
 			return WrapMapper.illegalArgument();
 		}
@@ -111,8 +111,8 @@ public class TaskOrdersResource {
 			this.logger.error("新增作业失败", e);
 			return WrapMapper.error();
 		}
-
 	}
+    
     
     
     // 数据转换

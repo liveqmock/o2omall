@@ -625,7 +625,7 @@
 				<domain.web>test.order.shop.hbird.com</domain.web>
 				<domain.webservice>test.orderws.shop.hbird.com</domain.webservice>
 				<domain.worker>test.order-worker.shop.hbird.com</domain.worker>
-				<service.url.domain.pms>http\://local.pmsws.shop.hbird.com\:8120/</service.url.domain.pms>
+				<service.url.domain.pms>test.pmsws.shop.hbird.com</service.url.domain.pms>
 			</properties>
 		</profile>
 

@@ -172,4 +172,13 @@ public interface OrdersManager {
 	 */
 	public boolean updateOrder(Map<String, Object> map);
 
+	/**
+	 * 修改订单状态
+	 * Date:2015年1月30日上午11:22:23
+	 * user:js
+	 * @param queryOrders
+	 * @return
+	 */
+	public boolean updateOrderLog(Orders queryOrders);
+
 }

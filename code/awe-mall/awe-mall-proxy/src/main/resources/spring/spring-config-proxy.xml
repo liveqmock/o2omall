@@ -32,6 +32,12 @@
 		<property name="key" value="${mall.common.key}" />
 		<property name="serviceUrlDomain" value="${service.url.domain.order}" />
 	</bean>
+	
+	<bean id="taskOrdersClient" class="com.awe.order.sdk.TaskOrdersClient">
+		<property name="key" value="${mall.common.key}" />
+		<property name="serviceUrlDomain" value="${service.url.domain.order}" />
+	</bean>
+	
 	<bean id="shoppingCartClient" class="com.awe.order.sdk.ShoppingCartClient">
 		<property name="key" value="${mall.common.key}" />
 		<property name="serviceUrlDomain" value="${service.url.domain.order}" />

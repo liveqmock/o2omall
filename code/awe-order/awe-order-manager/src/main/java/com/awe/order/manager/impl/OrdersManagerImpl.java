@@ -338,4 +338,26 @@ public class OrdersManagerImpl extends BaseManager implements OrdersManager {
         }
 		return resultFlag;
 	}
+
+	/**
+     * {@inheritDoc}
+     */
+	public boolean updateOrderLog(Orders queryOrders) {
+		boolean resultFlag = false;
+		OrderLog orderLog = new OrderLog();
+		resultFlag = ordersDao.update(queryOrders);
+		if (!resultFlag) {
+            throw new RuntimeException("修改订单状态异常");
+        }
+		orderLog.setOrderNo(queryOrders.getOrderNo());//订单号
+		orderLog.setStatus(50);//订单状态
+		orderLog.setStatusName("已付款");//状态中文名
+		orderLog.setDescription("task--->订单支付成功!");
+		orderLog.setLogType(100);//前台日志
+		resultFlag = orderLogDao.insert(orderLog);
+		if (!resultFlag) {
+            throw new RuntimeException("订单日志异常");
+        }
+		return resultFlag;
+	}
 }

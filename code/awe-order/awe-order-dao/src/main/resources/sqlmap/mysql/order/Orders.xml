@@ -36,6 +36,8 @@
 		<result column="county_name" property="countyName" jdbcType="VARCHAR" />
 		<result column="county_no" property="countyNo" jdbcType="VARCHAR" />
 		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="seller" property="seller" jdbcType="VARCHAR" />
+		<result column="seller_no" property="sellerNo" jdbcType="VARCHAR" />
 		<result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
 		<result column="Integral" property="integral" jdbcType="DECIMAL" />
 		<result column="remark" property="remark" jdbcType="VARCHAR" />
@@ -67,11 +69,11 @@
     
     
     <sql id="ordersColumns">
-    	id,order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,Integral,remark,create_time,update_time,create_user,update_user,yn
+    	id,order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,seller,seller_no,pay_time,Integral,remark,create_time,update_time,create_user,update_user,yn
     </sql>
     
      <sql id="ordersUsedColumns">
-    	order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,pay_time,Integral,remark,create_time,update_time,create_user,update_user,yn
+    	order_no,order_type,user_id,user_name,order_name,consignee_name,consignee_phone,telephone,emil,zip_code,pay_name,order_date,is_tal_sure,pay_way,pay_type,is_invoice,invoice_type,invoice_title,invoice_content,order_status,comm_amount,ret_cash,expenses,amount_pay,parent_order_no,province_name,province_no,city_name,city_no,county_name,county_no,address,seller,seller_no,pay_time,Integral,remark,create_time,update_time,create_user,update_user,yn
     </sql>
 
 	<!-- 审核时修改订单状态  -->
@@ -111,7 +113,7 @@
     <!-- 创建信息 -->
     <insert id="insert" parameterType="Orders" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO orders(<include refid="ordersUsedColumns"/>) 
-        VALUES (#{orderNo},#{orderType},#{userId},#{userName},#{orderName},#{consigneeName},#{consigneePhone},#{telephone},#{emil},#{zipCode},#{payName},#{orderDate},#{isTalSure},#{payWay},#{payType},#{isInvoice},#{invoiceType},#{invoiceTitle},#{invoiceContent},#{orderStatus},#{commAmount},#{retCash},#{expenses},#{amountPay},#{parentOrderNo},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{payTime},#{integral},#{remark},#{createTime},#{updateTime},#{createUser},#{updateUser},1)
+        VALUES (#{orderNo},#{orderType},#{userId},#{userName},#{orderName},#{consigneeName},#{consigneePhone},#{telephone},#{emil},#{zipCode},#{payName},#{orderDate},#{isTalSure},#{payWay},#{payType},#{isInvoice},#{invoiceType},#{invoiceTitle},#{invoiceContent},#{orderStatus},#{commAmount},#{retCash},#{expenses},#{amountPay},#{parentOrderNo},#{provinceName},#{provinceNo},#{cityName},#{cityNo},#{countyName},#{countyNo},#{address},#{seller},#{sellerNo},#{payTime},#{integral},#{remark},#{createTime},#{updateTime},#{createUser},#{updateUser},1)
 	</insert>
 	
     <!-- 修改信息 -->

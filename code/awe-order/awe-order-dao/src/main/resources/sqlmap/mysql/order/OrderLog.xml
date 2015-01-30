@@ -27,7 +27,7 @@
     <!-- 创建信息 -->
     <insert id="insert" parameterType="OrderLog" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO order_log(<include refid="orderLogUsedColumns"/>) 
-        VALUES (#{orderNo},#{status},#{statusName},#{description},#{logType},#{createTime},#{createUser},#{updateTime},#{updateUser},1)
+        VALUES (#{orderNo},#{status},#{statusName},#{description},#{logType},NOW(),#{createUser},NOW(),#{updateUser},1)
 	</insert>
 	
 	<!-- 批量插入日志 -->

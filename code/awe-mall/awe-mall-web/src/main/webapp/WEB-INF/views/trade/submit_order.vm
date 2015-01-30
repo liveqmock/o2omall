@@ -16,8 +16,6 @@
    $("input[name='orderCheckBox'][checked]").each(function () {
 		  $("#orderNoDiv").append("<input type='hidden' name='orderNo' id='order_pay' value='"+this.value+"'/>")
      });
-	 alert($("#order_pay").val());
-   alert("立即支付");
     $("#payOrderFrom").attr("action", "#springUrl('')/orderinfo/payOrders");
     $("#payOrderFrom").attr("method", "POST");
 	$("#payOrderFrom").submit();
