@@ -16,17 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.hbird.common.utils.wrap.WrapMapper;
-import com.hbird.common.utils.wrap.Wrapper;
-import com.awe.order.domain.OrderLog;
-import com.awe.order.domain.Orders;
 import com.awe.order.domain.TaskOrders;
-import com.awe.order.sdk.api.request.OrderDetailsRequest;
 import com.awe.order.sdk.api.request.TaskOrdersRequest;
-import com.awe.order.sdk.api.request.dto.OrderDetailsRequestDto;
 import com.awe.order.sdk.api.request.dto.TaskOrdersRequestDto;
 import com.awe.order.sdk.api.response.dto.TaskOrdersResponseDto;
 import com.awe.order.service.TaskOrdersService;
+import com.hbird.common.utils.wrap.WrapMapper;
+import com.hbird.common.utils.wrap.Wrapper;
 
 /**
  * 作业表REST服务：提供有关作业表的接口
