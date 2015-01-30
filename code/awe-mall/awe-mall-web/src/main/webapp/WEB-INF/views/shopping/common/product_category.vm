@@ -1,0 +1,20 @@
+<!---------------------- 商品分类 ----------------------> 
+<div class="goods_l">
+    <h1>商品分类</h1>
+    <div class="goods_lb">
+    #foreach($item in $!productCategorys)
+    	#if("$item.fid" == "0")
+        <div class="gl_box">
+    		<h3><i class="cz_icon"></i>$item.name</h3>
+    		<ul class="article_list">
+    		#foreach($item_child in $!productCategorys)
+    			#if("$item_child.fid" == "$item.id")
+    				<li><a href="#springUrl('')/shopping/shopping_list?categoryTwoId=$item_child.id">$item_child.name</a></li>
+    			#end
+    		 #end
+           </ul>
+        </div>
+    	#end
+    #end
+    </div>
+</div>
