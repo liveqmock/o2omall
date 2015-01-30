@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2015/1/29 15:14:51                           */
+/* Created on:     2015/1/30 15:47:52                           */
 /*==============================================================*/
 
 
@@ -179,7 +179,7 @@ create table product_brand
    brand_name           varchar(100) comment '品牌名称',
    en_name              varchar(50) comment '品牌英文名称',
    brand_abbr           varchar(30) comment '品牌简称',
-   brand_img            varchar(200) comment '品牌图片',
+   brand_img            varchar(500) comment '品牌图片',
    keyword              varchar(200) comment '关键字',
    type                 tinyint comment '商品类型（国内、进口）',
    type_name            varchar(20) comment '商品类型名称',
@@ -259,7 +259,7 @@ create table product_select
    mode                 tinyint comment '经营模式（自营、三方）',
    sale_price           double comment '销售价',
    price                double comment '市场价',
-   img_path             varchar(100) comment 'Sku主图',
+   img_path             varchar(500) comment 'Sku主图',
    sale_quantity_total  bigint comment '总销售量',
    sale_quantity_week   bigint comment '每周销售量',
    recommend_amount     bigint comment '推荐数量（客户）',
@@ -355,7 +355,7 @@ create table sku_images
    id                   bigint not null auto_increment comment '主键',
    sku_no               varchar(30) comment 'sku编号',
    img_type             tinyint comment '图片类型',
-   img_path             varchar(200) comment '图片路径',
+   img_path             varchar(500) comment '图片路径',
    is_primary_path      tinyint comment '是否主图',
    features             varchar(2000) comment '描述',
    priority             tinyint comment '优先级',
