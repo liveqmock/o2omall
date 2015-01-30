@@ -54,10 +54,17 @@ function numDec(){
  * 添加购物车
  */
  function addShoppingCart(){
- 	var skuCount = $("#quantity").val();
-	var skuNo = '$!{currentProductSku.skuNo}';
+ 	//var skuCount = $("#quantity").val();
+	//var skuNo = '$!{currentProductSku.skuNo}';
 	//alert(skuCount);alert(skuNo);
- 	window.location.href = "#springUrl('')/cart/addCart?skuNo=" + skuNo + "&skuCount=" + skuCount;
+ 	//window.location.href = "#springUrl('')/cart/addCart?skuNo=" + skuNo + "&skuCount=" + skuCount;
+	$("#skuNo-cart").val($!{currentProductSku.skuNo});
+	$("#skuCount-cart").val($("#quantity").val());
+	
+	$("#addShoppingCartForm").attr("action", "#springUrl('')/cart/addCart");
+	$("#addShoppingCartForm").attr("contentType", "application/json");
+    $("#addShoppingCartForm").attr("method", "POST");
+    $("#addShoppingCartForm").submit();
  }
 </script>
  
@@ -123,6 +130,7 @@ function numDec(){
                 <li class="buynum">购买数量：<a href="javascript:" onclick="numDec()" class="reduce ml20">-</a><input type="text" value="1" id="quantity" /><a href="javascript:"  onclick="numAdd()" class="reduce">+</a></li>
                 <!--商品添加购物车-->
 				<li><a class="cat_btn mt15" href="javascript:" onclick="javascript:addShoppingCart();">加入购物车</a></li>
+				<form id="addShoppingCartForm"><input type="hidden" id="skuNo-cart" name="skuNo"/><input type="hidden" id="skuCount-cart" name="skuCount"/></form>
               </ul>
             </div>
                 
