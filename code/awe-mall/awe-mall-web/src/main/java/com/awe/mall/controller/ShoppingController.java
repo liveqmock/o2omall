@@ -19,11 +19,15 @@ import com.awe.mall.service.ProductDictService;
 import com.awe.mall.service.ProductSelectService;
 import com.awe.mall.service.ProductService;
 import com.awe.mall.service.SkuImagesService;
+import com.awe.pms.sdk.request.dto.ProductBrandRequestDto;
 import com.awe.pms.sdk.request.dto.ProductRequestDto;
 import com.awe.pms.sdk.request.dto.ProductSelectRequestDto;
 import com.awe.pms.sdk.request.dto.SkuImagesRequestDto;
+import com.awe.pms.sdk.response.dto.ProductBrandResponseDto;
+import com.awe.pms.sdk.response.dto.ProductCategoryResponseDto;
 import com.awe.pms.sdk.response.dto.ProductDictResponseDto;
 import com.awe.pms.sdk.response.dto.ProductResponseDto;
+import com.awe.pms.sdk.response.dto.ProductSelectResponseDto;
 import com.awe.pms.sdk.response.dto.ProductSkuResponseDto;
 import com.awe.pms.sdk.response.dto.SkuImagesResponseDto;
 import com.hbird.common.utils.page.PageUtil;
@@ -81,13 +85,54 @@ public class ShoppingController extends BaseController {
     	logger.debug("go to list page");
     	initNavFlag(model);
     	
-//		model.addAttribute("products", this.productService.queryProducts(requestDto));
-    	
     	model.addAttribute("pageUtil", pageUtil);
     	model.addAttribute("requestDto", requestDto);
-		model.addAttribute("productSelects", this.productSelectService.getProductSelectsWithPage(requestDto, pageUtil));
-    	model.addAttribute("productCategorys", this.productCategoryService.queryProductCategoryList(null));
-		model.addAttribute("productBrands", this.productBrandService.queryProductBrandList(null));
+    	// 商品列表
+    	List<ProductSelectResponseDto> responseDtos = this.productSelectService.getProductSelectsWithPage(requestDto, pageUtil);
+		model.addAttribute("productSelects", responseDtos);
+		
+		// tempQuery
+		ProductSelectRequestDto tempDto = new ProductSelectRequestDto();
+		// 每周热销排行
+		tempDto.setOrderDesc("saleQuantityWeek");
+		model.addAttribute("productSaleQuantityWeeks", this.productSelectService.getProductSelectsWithPage(tempDto, new PageUtil(1, 10)));
+		
+		// 热点排行
+//		tempDto.setBrandCode(requestDto.getBrandCode());
+		tempDto.setCategoryOneId(requestDto.getCategoryOneId());
+		tempDto.setCategoryTwoId(requestDto.getCategoryTwoId());
+		tempDto.setOrderDesc("hitCountTotal");
+		PageUtil tempPageUtil = new PageUtil(1, 3);
+		model.addAttribute("productHitCounts", this.productSelectService.getProductSelectsWithPage(tempDto, tempPageUtil));
+    	model.addAttribute("tempPageUtil", tempPageUtil);
+		
+    	// 类别
+    	List<ProductCategoryResponseDto> categoryResponseDtos = this.productCategoryService.queryProductCategoryList(null);
+    	for (ProductCategoryResponseDto categoryResponseDto : categoryResponseDtos) {
+    		if (categoryResponseDto.getId().equals(requestDto.getCategoryTwoId())) {
+    			model.addAttribute("categoryTwo", categoryResponseDto.getName());
+    			break;
+    		}
+    	}
+    	model.addAttribute("productCategorys", categoryResponseDtos);
+    	
+    	// 品牌
+    	ProductBrandRequestDto brandRequestDto = new ProductBrandRequestDto();
+    	brandRequestDto.setCategoryOneId(requestDto.getCategoryOneId());
+    	brandRequestDto.setCategoryTwoId(requestDto.getCategoryTwoId());
+    	List<ProductBrandResponseDto> productBrands = this.productBrandService.queryProductBrandList(brandRequestDto);
+    	
+    	String brandName = null;
+    	if (productBrands != null && productBrands.size() > 0) {
+    		for (ProductBrandResponseDto responseDto : productBrands) {
+				if (responseDto.getBrandCode().equals(requestDto.getBrandCode())) {
+					brandName = responseDto.getBrandName();
+					break;
+				}
+    		}
+    	}
+    	model.addAttribute("brandName", brandName);
+		model.addAttribute("productBrands", productBrands);
     	return VIEW_WORKSPACE + VIEW_PRODUCT_LIST_PAGE;
     }
     

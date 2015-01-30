@@ -1,62 +1,48 @@
 <script language="javascript">
-    // 提交分页查询
+    // 提交查询
     function pageSubmit(pageNoParam) {
         $("#curPage").val(pageNoParam);
-    	$("#queryForm").attr("action", "#springUrl('')/shopping/shopping_list");
-        $("#queryForm").attr("method", "POST");
         $("#queryForm").submit();
+    }
+    function brandSubmit(brandCode) {
+        $("#brandCode").val(brandCode);
+        pageSubmit(1);
     }
 </script>
  
  <!---------------------- 正文 ----------------------> 
     <div class="container wid1200 clearfix">
-    
         <!---------------------- 商品分类 ----------------------> 
         <div class="shopl">
-             <div class="goods_l">
-                <h1>商品分类</h1>
-                <div class="goods_lb">
-					#foreach($item in $!productCategorys)
-    					#if("$item.fid" == "0")
-                        <div class="gl_box">
-							<h3><i class="cz_icon"></i>$item.name</h3>
-							<ul class="article_list">
-        					#foreach($item_child in $!productCategorys)
-    							#if("$item_child.fid" == "$item.id")
-    								<li><a href="#springUrl('')/shopping/shopping_list?categoryTwoId=$item_child.id">$item_child.name</a></li>
-    							#end
-        					 #end
-                           </ul>
-                        </div>
-    					#end
-    				#end
-                </div>
-             
-             </div>  
-             
-        <!---------------------- 浏览奶粉最终购买 ----------------------> 
+             #parse("#springUrl('')/shopping/common/product_category.vm")
+			 <!---------------------- 浏览奶粉最终购买 ----------------------> 
              <div class="powder mt10">
-               <h3>浏览<b class="reds">奶粉</b>最终购买</h3>
+               <h3>浏览<b class="reds">$!{categoryTwo}</b>的用户最终购买</h3>
                <ul class="pdcon">
-                 <li>
-                   <div><a href="#springUrl('')/shopping/product_details?id=1"><img src="#springUrl('')/static/images/m_img8.jpg" /></a></div>
-                   <p><span class="galy2 normal">9%会买：</span>雅培(Similac) </p>
-                   <p><a href="#springUrl('')/shopping/product_details">美国雅培精装奶粉</a></p>
-                   <p class="galy2">¥98.00</p>
-                 </li>
+				 #foreach($productSelect in $!productHitCounts)
+                     <li>
+                         <div><a href="#springUrl('')/shopping/product_details?productNo=$!{productSelect.productNo}&currentSkuNo=$!{productSelect.skuNo}"><img src="$!{productSelect.imgPath}" width="90" height="90"/></a></div>
+						 <p><span class="galy2 normal">9%会买：</span>$!{brandName}</p>
+                         <p><a href="#springUrl('')/shopping/product_details?productNo=$!{productSelect.productNo}&currentSkuNo=$!{productSelect.skuNo}">$!{productSelect.productName}</a></p>
+						 #*
+                         <p class="reds"><s>¥$!{productSelect.price}元</s></p>
+						 *#
+                         <p class="galy2">¥$!{productSelect.salePrice}元</p>
+                     </li>
+				 #end
                </ul>
              </div>
 
-        <!---------------------- 一周畅销排行 ----------------------> 
-        <div class="powder mt10">
+            <!---------------------- 一周畅销排行 ----------------------> 
+            <div class="powder mt10">
                <h3>一周畅销排行</h3>
                <ul class="bestseller">
-                 <li><span class="reds">1,</span><a href="product_details.html">雅培奶粉</a></li>
-                 <li><span class="reds">2,</span><a href="product_details.html">雅培奶粉</a></li>
-                 <li><span class="reds">3,</span><a href="product_details.html">雅培奶粉</a></li>
+				#foreach($productSelect in $!productSaleQuantityWeeks)
+					<li><span class="reds">$velocityCount, </span><a href="#springUrl('')/shopping/product_details?productNo=$!{productSelect.productNo}&currentSkuNo=$!{productSelect.skuNo}">$productSelect.productName</a></li>
+    			#end
                </ul>
              </div>
-        </div>
+		</div>
         
         
         <div class="shopr right">
@@ -88,17 +74,17 @@
 
         <!---------------------- 奶粉品牌分类 ----------------------> 
            <div class="groom clearfix mt10 hg210">
-              <h3 class="ft14">奶粉品牌分类</h3>
+              <h3 class="ft14">$!{categoryTwo}品牌分类</h3>
               <ul class="fication">
 				#foreach($item in $!productBrands)
-					<li><a href="#springUrl('')/shopping/shopping_list?brandCode=$!item.brandCode">$item.brandName</a></li>
+					<li><a href="javascript:void(0)" onclick="brandSubmit('$!{item.brandCode}')">$item.brandName</a></li>
     			#end
               </ul>
            </div>
            
         <!---------------------- 综合排序 ----------------------> 
            <div class="ranking">
-			<form id="queryForm">
+			<form id="queryForm" method="POST" action="#springUrl('')/shopping/shopping_list">
 				#parse("#springUrl('')/layout/page.vm")
 				<input type="hidden" id="categoryTwoId" name="categoryTwoId" value="$!requestDto.categoryTwoId"/>
 				<input type="hidden" id="brandCode" name="brandCode" value="$!requestDto.brandCode"/>
@@ -132,7 +118,7 @@
                   <div class="shop_lb clearfix">
                    <ul>
 					 #foreach($productSelect in $!productSelects)
-                         <li class="pl">
+                         <li #if($velocityCount % 6 == 1) class="pl" #end>
                              <div><a href="#springUrl('')/shopping/product_details?productNo=$!{productSelect.productNo}&currentSkuNo=$!{productSelect.skuNo}"><img src="$!{productSelect.imgPath}" /></a></div>
                              <p><a href="#springUrl('')/shopping/product_details?productNo=$!{productSelect.productNo}&currentSkuNo=$!{productSelect.skuNo}">$!{productSelect.productName}</a></p>
                              <p>优质配方工艺</p>
