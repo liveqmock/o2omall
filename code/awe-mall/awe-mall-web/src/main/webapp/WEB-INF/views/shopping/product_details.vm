@@ -108,6 +108,13 @@ function numDec(){
               <ul>
                 <li>品牌价：<span class="reds ft18">￥$!{currentProductSku.salePrice}元</span></li>
                 <li>运费：$!{product.freight}</li>
+				#*
+                <li>颜色：
+					#foreach($productSku in $!{product.productSkuResponseDtos})						
+					<span id="$!{productSku.skuNo}" #if("$!{productSku.color}" == "$!{currentProductSku.color}") class="on" #end>$!{productSku.color}</span>
+					#end
+				</li>
+				*#
                 <li class="size">尺码规格：
 					#foreach($productSku in $!{product.productSkuResponseDtos})						
 					<span id="$!{productSku.skuNo}" #if("$!{productSku.size}" == "$!{currentProductSku.size}") class="on" #end>$!{productSku.size}</span>
@@ -164,7 +171,7 @@ function numDec(){
             <div id="shop_introduce" class="shop_introduce clearfix">
                  <!---------------------- 商品介绍 ----------------------> 
                 <div class="shop_details ml15">
-                   <ul class="t1">
+                   <ul class="t5">
                      <li>商品名称：$!{product.productName}</li>
                      <li>商品毛重：$!{product.grossWeight}kg</li>
                      <li>类型：
@@ -175,7 +182,7 @@ function numDec(){
 						#end
 					</li>
                    </ul>
-                   <ul class="t2">
+                   <ul class="t3">
                      <li>商品编号：$!{product.productNo}</li>
                      <li>商品产地：$!{product.originPlace}</li>
                      <li>分类：$!{product.categoryTwo}</li>
@@ -191,7 +198,7 @@ function numDec(){
 						#end
 					</li>
                    </ul>
-                   <ul class="t4">
+                   <ul class="t2">
                      <li>上架时间：$!dateTool.format('yyyy-MM-dd HH:mm:ss ',$!{product.saleTimeStart})</li>
                      <li>段位：$!{product.categoryThree}</li>
                    </ul>
@@ -201,7 +208,7 @@ function numDec(){
             <div id="param" class="param clearfix" style="display:none">
                  <!---------------------- 规格参数 ----------------------> 
                 <div class="shop_details ml15">
-                   <ul class="t1">
+                   <ul class="t5">
                      <li>适用人群：$!{product.applicableCrowd}</li>
                      <li>适用阶段：
 						#foreach($item in $!{applicableStepTypes})
@@ -218,7 +225,7 @@ function numDec(){
             <div id="packing_list" class="packing_list clearfix" style="display:none">
                  <!---------------------- 包装清单 ----------------------> 
                 <div class="shop_details ml15">
-                   <ul class="t1">
+					<ul class="t5">
                      <li>$!{product.packingList}</li>
                    </ul>
                 </div>
@@ -227,16 +234,18 @@ function numDec(){
             <div id="sale_guarantee" class="sale_guarantee clearfix" style="display:none">
                  <!---------------------- 售后保障 ----------------------> 
                 <div class="shop_details ml15">
-                   <ul class="t1">
+                   <ul class="t5">
                      <li>$!{product.saleGuarantee}</li>
                    </ul>
                 </div>
             </div> 
 		</div>
     </div>
+	
+	<br/>
     
     <div class="container wid1200 clearfix">
-      <div class="pro_con mt10">
+      <div class="pro_left mt10">
 		$!{product.introduce}
 		#*
         <img src="#springUrl('')/static/images/pro_img.jpg" />
