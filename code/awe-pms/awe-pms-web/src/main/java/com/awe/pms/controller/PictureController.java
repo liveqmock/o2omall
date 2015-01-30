@@ -65,10 +65,16 @@ public class PictureController extends BaseController {
 		String originalFilename = file.getOriginalFilename();
 		fileFolder += originalFilename.substring(0, originalFilename.lastIndexOf(".")) + "/";
 		String filename = DateHelper.getCurrentDateStr("yyyyMMddHHmmssSSS") + "_" + originalFilename;
-		CompressPicUtil.newInstance().compressPic(inputStream, fileFolder, filename);
 		String pictureUrl = PropertiesHelper.newInstance().getValue("picture.url");
-		String imgPath = pictureUrl + fileFolder + type + "/" + filename;
+		StringBuffer imgPath = new StringBuffer(pictureUrl + fileFolder);
+		if (type == null || type.equals(0)) {
+			CompressPicUtil.newInstance().sendFtp(inputStream, fileFolder, filename);
+		} else {
+			CompressPicUtil.newInstance().compressPic(inputStream, fileFolder, filename);
+			imgPath.append(type).append("/");
+		}
+		imgPath.append(filename);
 		LOG.info(imgPath);
-		return imgPath;
+		return imgPath.toString();
 	}
 }

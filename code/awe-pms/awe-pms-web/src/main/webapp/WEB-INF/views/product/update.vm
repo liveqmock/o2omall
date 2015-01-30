@@ -406,7 +406,7 @@
         </div>
 	</body>
 </html>
-#set($imgUploadPath = $!basePath + '/picture/uploadProduct?keyFolder=product&type=800&fileFolder=' + $!product.productNo)
+#set($imgUploadPath = $!basePath + '/picture/uploadProduct?keyFolder=product&fileFolder=' + $!product.productNo)
 <script type="text/javascript">
 //<![CDATA[
  CKEDITOR.replace( 'features',//editor1是你文本域的ID
