@@ -38,10 +38,19 @@
 	function goSettlement(){
 		$('input[name="productchk"]:checked').each(function () {
 			var _value = $(this).val();
-			var valueArray = _value.split('|');
-			//alert(valueArray[0]);alert(valueArray[1]);
-			skuJson = "{\"skuNo\":" + "\"" + valueArray[0] + "\","  + "\"skuCount\":" + valueArray[1] +"}";
-			parameters.push(jQuery.parseJSON(skuJson));
+			skuNoCountArray.push(_value);
+		 });
+		
+		$("[id^='C-']").each(function(index){
+			var _value = $(this).attr("id");
+			var valueArray = _value.split('-');
+			for(var i in skuNoCountArray){
+				if(skuNoCountArray[i]==valueArray[1]){
+					skuJson = "{\"skuNo\":" + "\"" + skuNoCountArray[i] + "\","  + "\"skuCount\":" + parseInt($(this).val()) +"}";
+					//alert(skuJson);
+					parameters.push(jQuery.parseJSON(skuJson));
+				}
+			}
 		});
 		$("#parameters").val(JSON.stringify(parameters));
 		$("#cartForm").attr("action", "#springUrl('')/orderinfo/info");
