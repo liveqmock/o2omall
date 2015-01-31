@@ -134,9 +134,11 @@ public class ShoppingCartManagerImpl extends BaseManager implements ShoppingCart
     public boolean exist(ShoppingCart shoppingCart) {
         return shoppingCartDao.exist(shoppingCart);
     }
-
+    /**
+     * {@inheritDoc}
+     */
 	public ShoppingCart getShoppingCart(ShoppingCart shoppingCart) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return shoppingCartDao.getShoppingCart(shoppingCart);
 	}
 }
