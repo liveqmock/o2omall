@@ -34,7 +34,7 @@
 				<input type="text" class="search_input" />
 				<button class="search_btn"></button>
 			</form>
-			<span class="shop_cat"><i></i>购物车</span>
+			<span><a href="#springUrl('')/cart/listCart" class="shop_cat"><i></i>购物车</a></span>
 		</div>
 		<div class="nav clearfix">
 			<ul>
