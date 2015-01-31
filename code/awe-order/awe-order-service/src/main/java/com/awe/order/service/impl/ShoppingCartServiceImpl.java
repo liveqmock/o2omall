@@ -60,6 +60,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             if (null != shoppingCart) {
                 if (shoppingCartManager.exist(shoppingCart)) {
                 	ShoppingCart shoppingCartOfExisted = shoppingCartManager.getShoppingCart(shoppingCart);
+                	if(null == shoppingCartOfExisted){
+                		LOG.warn("ShoppingCartServiceImpl#insert failed, shoppingCartOfExisted is null.");
+                		return resultFlag;
+                	}
                 	int skuCount = shoppingCartOfExisted.getSkuCount() + shoppingCart.getSkuCount();
                 	shoppingCart.setSkuCount(skuCount);
                 	resultFlag = shoppingCartManager.update(shoppingCart);
