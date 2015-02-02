@@ -5,17 +5,19 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.perf4j.aop.Profiled;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.awe.rems.domain.ReturnExchange;
 import com.awe.rems.domain.ServiceAudit;
+import com.awe.rems.domain.constant.CommonConstant;
 import com.awe.rems.domain.query.ServiceAuditQuery;
+import com.awe.rems.manager.ReturnExchangeManager;
 import com.awe.rems.manager.ServiceAuditManager;
 import com.awe.rems.service.ServiceAuditService;
 import com.awe.rems.utils.exceptions.ExistedException;
 import com.hbird.common.utils.page.PageUtil;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.perf4j.aop.Profiled;
  
 /**
  * ServiceAuditService接口的实现类
@@ -32,7 +34,8 @@ public class ServiceAuditServiceImpl implements ServiceAuditService {
 
     @Autowired
     private ServiceAuditManager serviceAuditManager;
-
+    @Autowired
+    private ReturnExchangeManager returnExchangeManager;
     /**
      * {@inheritDoc}
      */
@@ -139,5 +142,52 @@ public class ServiceAuditServiceImpl implements ServiceAuditService {
         }
         return serviceAudit;
     }
+
+	public boolean audit(ServiceAudit serviceAudit) {
+		if(null == serviceAudit.getStatus() || null == serviceAudit.getServiceNo()){
+			LOG.warn("ServiceAuditServiceImpl#audit failed, serviceAudit`s status or serviceNo is null");
+			return false;
+		}
+		//ServiceAudit _serviceAudit = getServiceAuditByBean(serviceAudit);
+		ReturnExchange returnExchange = returnExchangeManager.getReturnExchangeByServiceNo(serviceAudit.getServiceNo());
+		switch (returnExchange.getServiceAuditStatus()) {
+		case CommonConstant.ReturnExchangeStatus.USER_SUBMIT_STATUS:
+			serviceAudit = saveAudit(serviceAudit,CommonConstant.ReturnExchangeStatus.AUDIT_SUCCESS_STATUS);
+			break;
+		case CommonConstant.ReturnExchangeStatus.AUDIT_SUCCESS_STATUS:
+			serviceAudit = saveAudit(serviceAudit,CommonConstant.ReturnExchangeStatus.REFUND_SUBMIT_STATUS);
+			break;
+		case CommonConstant.ReturnExchangeStatus.REFUND_SUBMIT_STATUS:
+			serviceAudit = saveAudit(serviceAudit,CommonConstant.ReturnExchangeStatus.COMPLETE_STATUS);
+			break;
+		case CommonConstant.ReturnExchangeStatus.COMPLETE_STATUS:
+			break;
+		}
+		//todo...
+		return true;
+	}
+
+	private ServiceAudit saveAudit(ServiceAudit serviceAudit,int status){
+		if(serviceAudit.getStatus() == CommonConstant.AuditStatus.AUDIT_AGREE_STATUS){
+			serviceAudit.setStatus(status);
+		} else if(serviceAudit.getStatus() == CommonConstant.AuditStatus.AUDIT_DISAGREE_STATUS){
+			serviceAudit.setStatus(CommonConstant.ReturnExchangeStatus.AUDIT_FAIL_STATUS);
+		}
+		return serviceAudit;
+	}
+	
+	public ServiceAudit getServiceAuditByBean(ServiceAudit serviceAudit) {
+		ServiceAudit _serviceAudit = null;
+        try {
+            if (null != serviceAudit && null != serviceAudit.getServiceNo()) {
+            	_serviceAudit = serviceAuditManager.getServiceAuditByBean(serviceAudit);
+            } else {
+                LOG.warn("ServiceAuditServiceImpl#getServiceAuditByBean failed, param is illegal.");
+            }
+        } catch (Exception e) {
+            LOG.error("ServiceAuditServiceImpl#getServiceAuditByBean  has error.", e);
+        }
+        return _serviceAudit;
+	}
 }
 

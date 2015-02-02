@@ -110,4 +110,10 @@ public class ServiceAuditManagerImpl extends BaseManager implements ServiceAudit
     public boolean exist(ServiceAudit serviceAudit) {
         return serviceAuditDao.exist(serviceAudit);
     }
+    /**
+     * {@inheritDoc}
+     */
+	public ServiceAudit getServiceAuditByBean(ServiceAudit serviceAudit) {
+		return serviceAuditDao.getServiceAuditByBean(serviceAudit);
+	}
 }

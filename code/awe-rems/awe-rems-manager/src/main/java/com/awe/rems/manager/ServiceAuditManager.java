@@ -75,7 +75,12 @@ public interface ServiceAuditManager {
      * @return 对象信息
      */
     public ServiceAudit getServiceAuditById(Long id);
-
+    /**
+     * 根据Bean获取对象
+     * @param serviceAudit
+     * @return
+     */
+    public ServiceAudit getServiceAuditByBean(ServiceAudit serviceAudit);
 
     /**
      * 判断是否存在
