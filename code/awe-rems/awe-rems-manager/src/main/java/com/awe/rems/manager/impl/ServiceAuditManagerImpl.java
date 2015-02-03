@@ -2,15 +2,21 @@ package com.awe.rems.manager.impl;
 
 import java.util.List;
 
-import com.hbird.common.manager.BaseManager;
-import com.hbird.common.utils.page.PageUtil;
-import com.awe.rems.domain.ServiceAudit;
-import com.awe.rems.domain.query.ServiceAuditQuery;
-import com.awe.rems.dao.ServiceAuditDao;
-import com.awe.rems.manager.ServiceAuditManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.awe.rems.dao.RefundDao;
+import com.awe.rems.dao.ReturnExchangeDao;
+import com.awe.rems.dao.ServiceAuditDao;
+import com.awe.rems.domain.Refund;
+import com.awe.rems.domain.ReturnExchange;
+import com.awe.rems.domain.ServiceAudit;
+import com.awe.rems.domain.constant.CommonConstant;
+import com.awe.rems.domain.query.RefundQuery;
+import com.awe.rems.domain.query.ServiceAuditQuery;
+import com.awe.rems.manager.ServiceAuditManager;
+import com.hbird.common.manager.BaseManager;
+import com.hbird.common.utils.page.PageUtil;
 
 /**
  * ServiceAuditManager接口的实现类
@@ -24,7 +30,11 @@ public class ServiceAuditManagerImpl extends BaseManager implements ServiceAudit
 	
     @Autowired
     private ServiceAuditDao serviceAuditDao;
-
+    @Autowired
+    private ReturnExchangeDao returnExchangeDao;
+    @Autowired
+    private RefundDao refundDao;
+    
     /**
      * {@inheritDoc}
      */
@@ -115,5 +125,41 @@ public class ServiceAuditManagerImpl extends BaseManager implements ServiceAudit
      */
 	public ServiceAudit getServiceAuditByBean(ServiceAudit serviceAudit) {
 		return serviceAuditDao.getServiceAuditByBean(serviceAudit);
+	}
+	/**
+     * {@inheritDoc}
+     */
+	public boolean audit(ServiceAudit serviceAudit) {
+		boolean auditRet = insert(serviceAudit);
+		if(auditRet && serviceAudit.getStatus() == CommonConstant.ReturnExchangeStatus.REFUND_SUBMIT_STATUS){
+			Refund refund = new Refund();
+			refund.setBusinessName(serviceAudit.getBusinessName());
+			refund.setBusinessNo(serviceAudit.getBusinessNo());
+			refund.setOrderNo(serviceAudit.getOrderNo());
+			refund.setReturnExchangeId(serviceAudit.getReturnExchangeId());
+			refund.setStatus(serviceAudit.getStatus());
+			refund.setServiceNo(serviceAudit.getServiceNo());
+			refund.setUpdateUser(serviceAudit.getUpdateUser());
+			refund.setCreateUser(serviceAudit.getCreateUser());
+			refund.setUpdateUserId(serviceAudit.getUpdateUserId());
+			refund.setCreateUserId(serviceAudit.getCreateUserId());
+			refund.setUserId(serviceAudit.getUserId());
+			refundDao.insert(refund);
+		}
+		if(auditRet && (serviceAudit.getStatus() == CommonConstant.ReturnExchangeStatus.COMPLETE_STATUS
+				|| serviceAudit.getStatus() == CommonConstant.ReturnExchangeStatus.AUDIT_FAIL_STATUS)){
+			RefundQuery queryBean = new RefundQuery();
+			queryBean.setServiceNo(serviceAudit.getServiceNo());
+			Refund refund = refundDao.getRefundByBean(queryBean);
+			boolean ret = refundDao.update(refund);
+		}
+		if(auditRet && (serviceAudit.getStatus() == CommonConstant.ReturnExchangeStatus.AUDIT_SUCCESS_STATUS
+				|| serviceAudit.getStatus() == CommonConstant.ReturnExchangeStatus.REFUND_SUBMIT_STATUS
+				|| serviceAudit.getStatus() == CommonConstant.ReturnExchangeStatus.COMPLETE_STATUS
+				|| serviceAudit.getStatus() == CommonConstant.ReturnExchangeStatus.AUDIT_FAIL_STATUS)){
+			ReturnExchange returnExchange = returnExchangeDao.getReturnExchangeByServiceNo(serviceAudit.getServiceNo());
+			boolean ret = returnExchangeDao.update(returnExchange);
+		}
+		return auditRet;
 	}
 }

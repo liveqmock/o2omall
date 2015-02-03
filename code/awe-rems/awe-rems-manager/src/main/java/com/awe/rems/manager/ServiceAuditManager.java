@@ -89,4 +89,10 @@ public interface ServiceAuditManager {
      * @return
      */
     public boolean exist(ServiceAudit serviceAudit);
+    /**
+     * 审核
+     * @param serviceAudit
+     * @return
+     */
+    public boolean audit(ServiceAudit serviceAudit);
 }
