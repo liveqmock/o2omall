@@ -37,4 +37,14 @@ public class CommonConstant {
     	public final static int X = 3;
 	
     }
+    /**
+     * 审核状态：通过\驳回
+     *
+     */
+    public static class AuditStatus{
+    	/**通过*/
+    	public final static int AUDIT_AGREE_STATUS = 10;
+    	/**驳回*/
+    	public final static int AUDIT_DISAGREE_STATUS = 20;
+    }
 }

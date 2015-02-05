@@ -82,7 +82,13 @@
             where id = #{_parameter} and yn = 1
         </if>
     </select>
-
+    <!-- 根据Bean获取对象信息 -->
+	<select id="getServiceAuditByBean" resultMap="ServiceAuditMap" parameterType="ServiceAudit">
+        <if test="_parameter != null">
+            select <include refid="serviceAuditColumns"/> from service_audit
+            where service_no = #{serviceNo} and yn = 1
+        </if>
+    </select>
     <!-- 根据查询Bean获取数据集合，不带翻页 -->
     <select id="queryServiceAuditList" resultMap="ServiceAuditMap"
             parameterType="com.awe.rems.domain.query.ServiceAuditQuery">
@@ -99,7 +105,7 @@
 
     <!-- 根据查询Bean查询-判断是否存在 -->
     <select id="exist" resultType="java.lang.Integer" parameterType="ServiceAudit">
-        select count(1) from service_audit where yn = 1 and group_name = #{groupName,jdbcType=VARCHAR}
+        select count(1) from service_audit where yn = 1 and service_no = #{serviceNo}
     </select>
 
     <!-- 根据查询Bean获取集合总数 -->

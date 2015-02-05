@@ -27,6 +27,7 @@
 			calculateTotalAmount();
 			calculateTotalCount();
 		});
+		init();
     }); 
 	/**
 	 * @description:提交当前选中商品去结算
@@ -37,10 +38,19 @@
 	function goSettlement(){
 		$('input[name="productchk"]:checked').each(function () {
 			var _value = $(this).val();
-			var valueArray = _value.split('|');
-			//alert(valueArray[0]);alert(valueArray[1]);
-			skuJson = "{\"skuNo\":" + "\"" + valueArray[0] + "\","  + "\"skuCount\":" + valueArray[1] +"}";
-			parameters.push(jQuery.parseJSON(skuJson));
+			skuNoCountArray.push(_value);
+		 });
+		
+		$("[id^='C-']").each(function(index){
+			var _value = $(this).attr("id");
+			var valueArray = _value.split('-');
+			for(var i in skuNoCountArray){
+				if(skuNoCountArray[i]==valueArray[1]){
+					skuJson = "{\"skuNo\":" + "\"" + skuNoCountArray[i] + "\","  + "\"skuCount\":" + parseInt($(this).val()) +"}";
+					//alert(skuJson);
+					parameters.push(jQuery.parseJSON(skuJson));
+				}
+			}
 		});
 		$("#parameters").val(JSON.stringify(parameters));
 		$("#cartForm").attr("action", "#springUrl('')/orderinfo/info");
@@ -70,31 +80,7 @@
             } 
          }); 
 	}
-	/**
-	 * @description:计算商品总件数
-	 * @author:zyq
-	 * @date:2015-1-12
-	 * @version:1.0.0.0
-	 */
-	function calculateTotalCount(){
-		$("#totalCount").html();
-	}
-	/**
-	 * @description:计算商品总金额
-	 * @author:zyq
-	 * @date:2015-1-12
-	 * @version:1.0.0.0
-	 */
-	function calculateTotalAmount(){
-		$('input[name="productchk"]:checked').each(function () {
-        	$(this).attr("checked", !$(this).attr("checked"));  
-        });  
-		$("[id=pricetd]").each(function(index){
-			totalAmount = parseInt(totalAmount) + parseInt($(this).html());
-		});
-		alert(totalAmount);
-		$("#totalAmount").html();
-	}
+	
 	
 	/**
 	 * @description:加商品数量
@@ -106,6 +92,7 @@
 		var currentSkuCount = $("#C-"+skuNo).val();
 		currentSkuCount ++;
 		//alert(skuNo);alert(currentSkuCount);
+		
 		jQuery.ajax({ 
             type:"POST", 
             url:"#springUrl('')/cart/updateCart", 
@@ -113,8 +100,11 @@
             data:{skuNo:skuNo,skuCount:currentSkuCount},
             success:function(data){ 
 				$("#C-"+skuNo).val(currentSkuCount);
+				calculateTotalAmount();
+				calculateTotalCount();
             } 
          }); 
+		
 	}
 	/**
 	 * @description:减商品数量
@@ -138,8 +128,11 @@
             data:{skuNo:skuNo,skuCount:currentSkuCount},
             success:function(data){ 
 				$("#C-"+skuNo).val(currentSkuCount);
+				calculateTotalAmount();
+				calculateTotalCount();
             } 
          }); 
+		
 	}
 	/**
 	 * @description:选中行的金额计算
@@ -158,7 +151,8 @@
 			var valueArray = _value.split('|');
 			for(var i in skuNoCountArray){
 				if(skuNoCountArray[i]==valueArray[1]){
-					totalAmount = parseInt(totalAmount) + parseInt($(this).html());
+					//alert($(this).html());
+					totalAmount = parseInt(totalAmount) + parseInt($(this).html()) * parseFloat($("#C-"+valueArray[1]).val());
 					//alert("amount:::"+totalAmount);
 				}
 			}
@@ -204,6 +198,13 @@
 		skuNoCountArray = [];
 	}
 	
+	function init(){
+		$('input:checkbox').each(function () {
+			$(this).attr("checked", !$(this).attr("checked"));  
+		}); 
+		calculateTotalAmount();
+		calculateTotalCount();
+	}
 </script>
 <!---------------------- 我的购物车  ----------------------> 
     </script>
@@ -230,7 +231,7 @@
                         <td class="tcenter"><input type="checkbox" name="productchk" value="$!item.skuNo"/></td>
                         <td><a href="#springUrl('')/shopping/product_details?skuNo='$!skuNo'" ><img class="my_cat_img" src="#springUrl('')/static/images/m-img2.jpg" /></a></td>
                         <td><p><a href="#springUrl('')/shopping/product_details?productNo=$!item.productNo&currentSkuNo=$!item.skuNo">$!item.skuName</a></p></td>
-                        <td id="pricetd|$!item.skuNo">¥$!item.salePrice</td>
+                        <td>¥<span id="pricetd|$!item.skuNo">$!item.salePrice</span></td>
                         <td class="tcenter"><div class="buynum"><a href="#" class="reduce ml20" onclick="lower('$!item.skuNo');">-</a><input type="text" id="C-$!item.skuNo" value="$!item.skuCount"/><a href="#" class="reduce"  onclick="upper('$!item.skuNo');">+</a></div></td>
                         <td class="tcenter"><a href="#" class="del" onclick="deleteProduct('$!item.skuNo');">删除</a></td>
                       </tr>

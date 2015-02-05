@@ -1,12 +1,13 @@
 package com.awe.rems.dao.impl;
 
-import com.hbird.common.dao.mybatis.BaseDao;
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
 import com.awe.rems.dao.ServiceAuditDao;
 import com.awe.rems.domain.ServiceAudit;
 import com.awe.rems.domain.query.ServiceAuditQuery;
-
-import java.util.List;
-import org.springframework.stereotype.Repository;
+import com.hbird.common.dao.mybatis.BaseDao;
 
 /**
  * ServiceAuditDAO实现类<br/>
@@ -70,4 +71,10 @@ public class ServiceAuditDaoImpl extends BaseDao implements ServiceAuditDao {
         int count = (Integer) queryForObject(namespace +".exist", serviceAudit);
         return count > 0;
     }
+    /**
+     * {@inheritDoc}
+     */
+	public ServiceAudit getServiceAuditByBean(ServiceAudit serviceAudit) {
+		return (ServiceAudit) queryForObject(namespace +".getServiceAuditByBean", serviceAudit);
+	}
 }

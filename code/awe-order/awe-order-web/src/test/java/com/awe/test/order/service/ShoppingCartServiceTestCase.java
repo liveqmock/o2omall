@@ -8,11 +8,12 @@ import org.springframework.util.Assert;
 
 import com.awe.order.domain.ShoppingCart;
 import com.awe.order.domain.query.ShoppingCartQuery;
+import com.awe.order.manager.ShoppingCartManager;
 import com.awe.order.service.ShoppingCartService;
 import com.awe.order.utils.exceptions.ExistedException;
-import com.hbird.common.utils.page.PageUtil;
 import com.awe.test.base.BaseTransactionTestCase;
 import com.awe.test.base.TestConstants;
+import com.hbird.common.utils.page.PageUtil;
 
 /**
  * ShoppingCartService单元测试
@@ -31,7 +32,8 @@ public class ShoppingCartServiceTestCase extends BaseTransactionTestCase {
 
     @Autowired
     private ShoppingCartService shoppingCartService;
-
+    @Autowired
+    private ShoppingCartManager ShoppingCartManager;
     /**
      * 测试插入数据-成功
      */
@@ -179,12 +181,20 @@ public class ShoppingCartServiceTestCase extends BaseTransactionTestCase {
     public void testQueryList() {
         Assert.notNull(shoppingCartService);
         ShoppingCartQuery queryBean = new ShoppingCartQuery();
-        Long userId = null; //TODO 初始化
+        Long userId = 1L; //TODO 初始化
         queryBean.setUserId(userId);
-        String skuNo = null; //TODO 初始化
-        queryBean.setSkuNo(skuNo);
+        String skuNo = "10000000000001"; //TODO 初始化
+        //queryBean.setSkuNo(skuNo);
         List<ShoppingCart> list = shoppingCartService.queryShoppingCartList(queryBean);
         Assert.notEmpty(list);
         logger.info("list size = " + list.size());
+    }
+    @Test
+    public void getShoppingCart(){
+    	ShoppingCart shoppingCart = new ShoppingCart();
+    	shoppingCart.setSkuNo("10000000000001");
+    	shoppingCart.setUserId(1L);
+    	ShoppingCart sc = ShoppingCartManager.getShoppingCart(shoppingCart);
+    	Assert.notNull(sc);
     }
 }

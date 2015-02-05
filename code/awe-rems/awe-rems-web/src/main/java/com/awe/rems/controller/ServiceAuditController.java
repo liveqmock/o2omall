@@ -232,8 +232,11 @@ public class ServiceAuditController extends BaseController {
     	}
     	try {
     		serviceAudit.setUserId(UserContext.get().getUserId());
-    		
-    		if(serviceAuditService.update(serviceAudit)){
+    		serviceAudit.setUpdateUserId(UserContext.get().getUserId());
+    		serviceAudit.setCreateUserId(UserContext.get().getUserId());
+    		serviceAudit.setUpdateUser(UserContext.get().getCnName());
+    		serviceAudit.setCreateUser(UserContext.get().getCnName());
+    		if(serviceAuditService.audit(serviceAudit)){
     			return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "审核成功!");
     		}else{
     			return WrapMapper.wrap(Wrapper.ERROR_CODE, "审核失败!");

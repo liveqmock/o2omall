@@ -67,5 +67,16 @@ public interface ServiceAuditService {
      * @return 对象信息
      */
     public ServiceAudit getServiceAuditById(Long id);
-
+    /**
+     * 根据Bean获取对象信息
+     * @param serviceAudit
+     * @return
+     */
+    public ServiceAudit getServiceAuditByBean(ServiceAudit serviceAudit);
+    /**
+     * 退换货审核
+     * @param serviceAudit
+     * @return
+     */
+    public boolean audit(ServiceAudit serviceAudit);
 }
