@@ -144,27 +144,37 @@ public class ServiceAuditServiceImpl implements ServiceAuditService {
     }
 
 	public boolean audit(ServiceAudit serviceAudit) {
+		boolean ret = false;
 		if(null == serviceAudit.getStatus() || null == serviceAudit.getServiceNo()){
 			LOG.warn("ServiceAuditServiceImpl#audit failed, serviceAudit`s status or serviceNo is null");
 			return false;
 		}
 		//ServiceAudit _serviceAudit = getServiceAuditByBean(serviceAudit);
-		ReturnExchange returnExchange = returnExchangeManager.getReturnExchangeByServiceNo(serviceAudit.getServiceNo());
-		switch (returnExchange.getServiceAuditStatus()) {
-		case CommonConstant.ReturnExchangeStatus.USER_SUBMIT_STATUS:
-			serviceAudit = saveAudit(serviceAudit,CommonConstant.ReturnExchangeStatus.AUDIT_SUCCESS_STATUS);
-			break;
-		case CommonConstant.ReturnExchangeStatus.AUDIT_SUCCESS_STATUS:
-			serviceAudit = saveAudit(serviceAudit,CommonConstant.ReturnExchangeStatus.REFUND_SUBMIT_STATUS);
-			break;
-		case CommonConstant.ReturnExchangeStatus.REFUND_SUBMIT_STATUS:
-			serviceAudit = saveAudit(serviceAudit,CommonConstant.ReturnExchangeStatus.COMPLETE_STATUS);
-			break;
-		case CommonConstant.ReturnExchangeStatus.COMPLETE_STATUS:
-			break;
+		try {
+			ReturnExchange returnExchange = returnExchangeManager.getReturnExchangeByServiceNo(serviceAudit.getServiceNo());
+			switch (returnExchange.getServiceAuditStatus()) {
+			case CommonConstant.ReturnExchangeStatus.USER_SUBMIT_STATUS:
+				serviceAudit = saveAudit(serviceAudit,CommonConstant.ReturnExchangeStatus.AUDIT_SUCCESS_STATUS);
+				break;
+			case CommonConstant.ReturnExchangeStatus.AUDIT_SUCCESS_STATUS:
+				serviceAudit = saveAudit(serviceAudit,CommonConstant.ReturnExchangeStatus.REFUND_SUBMIT_STATUS);
+				break;
+			case CommonConstant.ReturnExchangeStatus.REFUND_SUBMIT_STATUS:
+				serviceAudit = saveAudit(serviceAudit,CommonConstant.ReturnExchangeStatus.COMPLETE_STATUS);
+				break;
+			case CommonConstant.ReturnExchangeStatus.COMPLETE_STATUS:
+				break;
+			}
+			serviceAudit.setBusinessName(returnExchange.getBusinessName());
+			serviceAudit.setBusinessNo(returnExchange.getBusinessNo());
+			serviceAudit.setOrderNo(returnExchange.getOrderNo());
+			serviceAudit.setReturnExchangeId(returnExchange.getId());
+			ret = serviceAuditManager.audit(serviceAudit);
+		} catch (Exception e) {
+			LOG.error("ServiceAuditServiceImpl#audit has error.", e);
 		}
-		//todo...
-		return true;
+		
+		return ret;
 	}
 
 	private ServiceAudit saveAudit(ServiceAudit serviceAudit,int status){

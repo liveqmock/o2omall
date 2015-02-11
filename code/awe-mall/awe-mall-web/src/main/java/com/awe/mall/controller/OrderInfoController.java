@@ -50,6 +50,7 @@ public class OrderInfoController extends BaseController{
 	private static final String VIEW_order_info = "orderinfo";
 	private static final String VIEW_order_submit = "submit_order";
 	private static final String VIEW_pay_submit = "submit_pay";
+	private static final String VIEW_MY_ADDRESS = "deliveryAddress";
 	
 	@Autowired
 	private UserAddressService userAddressService;
@@ -150,6 +151,8 @@ public class OrderInfoController extends BaseController{
             return WrapMapper.error();
         }
     }
+	
+	 
 	 
 	 
 	 /**
@@ -290,5 +293,19 @@ public class OrderInfoController extends BaseController{
 			}
 			return VIEW_WORKSPACE + VIEW_pay_submit;
 	} 
+	 
 	
+	/**
+	 *  我的质料--收货地址
+	 * Date:2015年2月4日下午3:48:39
+	 * user:js
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "myAddressView",method = { RequestMethod.POST, RequestMethod.GET })
+	public String myAddressView(Model model){
+		LOG.info("-- welcome to myAddress index --");
+		//-----根据userId查询用户地址信息
+		return "myorder/" + VIEW_MY_ADDRESS;
+	}
 }
