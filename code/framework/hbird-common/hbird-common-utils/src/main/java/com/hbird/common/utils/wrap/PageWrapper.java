@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.hbird.common.utils.wrap;
 
 import com.hbird.common.utils.page.PageUtil;
@@ -8,10 +5,6 @@ import com.hbird.common.utils.page.PageUtil;
 /**
  * 支持数据分页的包装类
  * 
- * @author ljz
- * 
- */
-/**
  * @author ljz
  * 
  * @param <T>
